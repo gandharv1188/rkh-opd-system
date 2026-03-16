@@ -1470,27 +1470,45 @@
   }
 
   async function connectSB() {
+    if (sbConnected) return; // already connected
     if (!SB)
-      SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
-    if (!KEY) KEY = document.getElementById("sb-key").value.trim();
-    if (!SB || !KEY) return;
+      SB =
+        document.getElementById("sb-url")?.value?.trim()?.replace(/\/$/, "") ||
+        "";
+    if (!KEY) KEY = document.getElementById("sb-key")?.value?.trim() || "";
+    if (!SB || !KEY) {
+      console.warn("connectSB: no SB or KEY");
+      return;
+    }
+    console.log("connectSB: attempting", SB.slice(0, 30) + "...");
     try {
-      const r = await q("formulary", "?select=id&limit=1");
+      document.getElementById("conn-label").textContent = "Connecting…";
+      document.getElementById("conn-dot").style.background = "#f0ad4e";
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+      const r = await fetch(SB + "/rest/v1/formulary?select=id&limit=1", {
+        headers: { apikey: KEY, Authorization: "Bearer " + KEY },
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
       if (r.ok) {
         sbConnected = true;
         document.getElementById("conn-dot").style.background = "#1a6b3a";
         document.getElementById("conn-label").textContent = "Connected";
         document.getElementById("conn-btn").style.borderColor = "#1a6b3a";
         document.getElementById("conn-btn").style.color = "#1a6b3a";
-        document.getElementById("sb-hint").style.display = "none";
+        console.log("connectSB: success");
         preloadKnowledge();
-      } else throw new Error((await r.json()).message || "Failed");
+      } else {
+        throw new Error("HTTP " + r.status);
+      }
     } catch (e) {
       sbConnected = false;
       document.getElementById("conn-dot").style.background = "#8b1a1a";
-      document.getElementById("conn-label").textContent = "Connect";
+      document.getElementById("conn-label").textContent = "Retry";
       document.getElementById("conn-btn").style.borderColor = "#8b1a1a";
       document.getElementById("conn-btn").style.color = "#8b1a1a";
+      console.error("connectSB failed:", e.message);
     }
   }
 
