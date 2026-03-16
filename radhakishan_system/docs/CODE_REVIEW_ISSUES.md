@@ -127,12 +127,9 @@ Added `visits(patient_id, visit_date desc)`, `vaccinations(patient_id, vaccine_n
 **Description:** No audit trail of who viewed/edited patient records. NABH IMS chapter recommends this.
 **Status:** DEFERRED to production. For POC, the `updated_at` timestamps and Supabase's built-in Postgres logs provide a minimal audit trail. A dedicated `audit_log` table with action type, user, timestamp, affected table/row, and before/after values should be created when the system moves to production with real patient data.
 
-### D-11. No developmental screening table
+### ~~D-11. No developmental screening table~~ → RESOLVED (R32)
 
-**Severity:** LOW
-**Location:** Schema
-**Description:** Developmental assessment results live only inside `prescriptions.generated_json`, making them unqueryable. The clinical rules require developmental screening at every visit.
-**Fix:** Create a `developmental_screenings` table for structured storage.
+Created `developmental_screenings` table with tool_used, domain-specific fields (gross_motor, fine_motor, language, social, cognitive), overall_result, red_flags array, referral_needed, referral_to. Includes RLS, indexes, and updated_at trigger.
 
 ### D-12. Skill describes only 3 of 6 dosing methods
 

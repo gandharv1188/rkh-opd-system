@@ -383,7 +383,48 @@ create index idx_growth_patient      on growth_records(patient_id);
 create index idx_growth_patient_date on growth_records(patient_id, recorded_date desc);
 
 -- ============================================================
--- 8. ROW LEVEL SECURITY
+-- 8. DEVELOPMENTAL SCREENINGS
+-- Structured storage for developmental assessments, separate
+-- from prescriptions.generated_json for queryability.
+-- ============================================================
+create table developmental_screenings (
+  id              serial primary key,
+  patient_id      text not null references patients(id) on delete restrict,
+  visit_id        uuid references visits(id),
+  screening_date  date default current_date,
+
+  -- Tool used
+  tool_used       text,
+  -- e.g. 'TDSC' | 'DDST-II' | 'M-CHAT-R' | 'HINE' | 'ASQ' | 'LEST' | 'IAP Card'
+
+  -- Findings
+  gross_motor     text,
+  fine_motor      text,
+  language        text,
+  social          text,
+  cognitive       text,
+  overall_result  text,
+  -- e.g. 'Normal' | 'Suspect' | 'Delayed' | 'At risk'
+
+  -- Red flags
+  red_flags       text[],
+  -- e.g. {'No social smile by 3mo', 'No babbling by 9mo'}
+
+  -- Action
+  referral_needed boolean default false,
+  referral_to     text,
+  -- e.g. 'Developmental Pediatrician' | 'Speech Therapy' | 'Neurology'
+  notes           text,
+
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
+);
+
+create index idx_devscreen_patient on developmental_screenings(patient_id);
+create index idx_devscreen_date    on developmental_screenings(patient_id, screening_date desc);
+
+-- ============================================================
+-- 9. ROW LEVEL SECURITY
 -- Enabled on all tables. Current policy: authenticated users
 -- have full access. Per-doctor policies to be added when
 -- Supabase Auth is configured with doctor logins.
@@ -395,6 +436,7 @@ alter table visits enable row level security;
 alter table prescriptions enable row level security;
 alter table vaccinations enable row level security;
 alter table growth_records enable row level security;
+alter table developmental_screenings enable row level security;
 
 -- Policy: authenticated users can perform all operations
 -- Replace with per-doctor policies in production
@@ -412,9 +454,11 @@ create policy "authenticated_full_access" on vaccinations
   for all using (auth.role() = 'authenticated');
 create policy "authenticated_full_access" on growth_records
   for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on developmental_screenings
+  for all using (auth.role() = 'authenticated');
 
 -- ============================================================
--- 9. UPDATED_AT TRIGGER
+-- 10. UPDATED_AT TRIGGER
 -- Automatically updates the updated_at column on any change
 -- ============================================================
 create or replace function update_updated_at()
@@ -453,9 +497,13 @@ create trigger trg_growth_records_updated
   before update on growth_records
   for each row execute function update_updated_at();
 
+create trigger trg_devscreenings_updated
+  before update on developmental_screenings
+  for each row execute function update_updated_at();
+
 -- ============================================================
 -- DONE — schema is ready
--- Tables created: formulary, standard_prescriptions, patients,
+-- Tables created: formulary, doctors, standard_prescriptions, patients,
 --                 visits, prescriptions, vaccinations,
 --                 growth_records
 -- ============================================================
