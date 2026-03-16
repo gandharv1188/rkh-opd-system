@@ -346,11 +346,17 @@
       rgba(26, 26, 20, 0.06) var(--lh)
     );
     background-size: 100% var(--lh);
-    padding: 14px 22px 14px;
     flex: 1;
+    position: relative;
     overflow: hidden;
   }
   .pad-ta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px 22px;
     width: 100%;
     height: 100%;
     background: transparent;
@@ -1214,7 +1220,6 @@
       <textarea
         class="pad-ta"
         id="pad-ta"
-        rows="10"
         placeholder="e.g.  Arjun, 8 months, 7.2 kg boy. Fever 3 days, pulling at left ear, runny nose. No known allergy. Vaccinations up to date. TM dull left side. Diagnosis: acute otitis media. Add paracetamol for fever."
       ></textarea>
     </div>
