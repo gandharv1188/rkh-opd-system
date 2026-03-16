@@ -219,7 +219,51 @@ Doctor signs off
 
 → Print / save
 
-## 3.3 Knowledge Base Architecture
+## 3.3 Skill Prompt Architecture
+
+### Current Approach: Project Custom Instructions
+
+The prescription generation logic is delivered as a Claude.ai **Project Custom Instructions** prompt (file: `skill/radhakishan_prescription_skill.md`, v2026.2). This prompt is pasted into the project's Custom Instructions field and is automatically loaded into every conversation within the "Radhakishan Hospital Rx" project.
+
+This approach was chosen over the newer Claude Skills system (`.claude/skills/SKILL.md` with YAML frontmatter) because:
+
+1. **Always-on loading:** Every conversation in this project is a prescription — there is no scenario where the skill should _not_ load. Skills are designed for selective/dynamic activation, which is unnecessary here.
+2. **Single project:** The system currently serves one hospital with one project. Cross-project reusability is not needed yet.
+3. **Simplicity:** Plain markdown pasted into a text box — no ZIP packaging, no YAML frontmatter, no directory structure required.
+
+### Production Migration: Claude Skills Format
+
+When the system needs to be shared with other hospitals or packaged for distribution, the prompt should be converted to the Agent Skills Open Standard format:
+
+```
+radhakishan-prescription-skill/
+├── SKILL.md          (YAML frontmatter + core workflow instructions, <500 lines)
+├── references/
+│   ├── iap_2024_schedule.md
+│   ├── nhm_uip_schedule.md
+│   ├── dosing_methods.md
+│   ├── safety_checks.md
+│   ├── standard_prescriptions.md
+│   └── growth_charts.md
+├── assets/
+│   └── prescription_json_schema.json
+└── scripts/
+    └── (future: validation scripts)
+```
+
+This enables progressive disclosure — the core SKILL.md stays under 500 lines and references external files only when needed, reducing context window usage.
+
+### Artifact Navigation Guidance
+
+Claude.ai artifacts cannot be programmatically opened, switched, or controlled from the conversation. The user must manually click on the artifact they want to use. To guide the doctor through the multi-artifact workflow, the skill prompt includes navigation cues in its responses:
+
+- After Step 1 (confirming patient): "Open the **Prescription Pad** artifact and select your patient."
+- After Step 2 (generating JSON): "Copy this JSON and paste it into the **Prescription Pad** → **Paste JSON** button."
+- After sign-off: "Click **Send to Output** in the Prescription Pad to view the printable prescription in the **Prescription Output** artifact."
+
+These are text-based cues only — Claude cannot switch artifacts programmatically. This is a platform limitation that would be resolved in a standalone app (SDK migration).
+
+## 3.4 Knowledge Base Architecture
 
 A critical architectural decision was how to store the clinical knowledge base (formulary and standard prescriptions). Three options were considered:
 

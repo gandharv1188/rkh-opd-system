@@ -54,6 +54,10 @@ After the doctor replies with their selection, generate the complete JSON as def
 
 **Output the JSON directly — no markdown code fences, no preamble, no commentary.** Just the raw JSON object.
 
+After outputting the JSON, add this navigation cue on a new line:
+
+> **Next:** Copy this JSON → open the **Prescription Pad** artifact → click **Paste JSON** → **Load Prescription** → review and sign off. After sign-off, click **Send to Output** to view the printable A4 prescription.
+
 ### Chat naming
 
 After Step 1 (confirming the patient), set the conversation title to: **[Patient Name] — [UHID]**
