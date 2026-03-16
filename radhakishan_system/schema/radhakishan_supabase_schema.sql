@@ -28,7 +28,7 @@ create table formulary (
   id                          uuid default gen_random_uuid() primary key,
 
   -- Identity
-  generic_name                text not null,
+  generic_name                text not null unique,
   drug_class                  text,
   category                    text,
   brand_names                 text[],

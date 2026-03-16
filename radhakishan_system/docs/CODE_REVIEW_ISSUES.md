@@ -108,12 +108,9 @@ Added `NOT NULL` to `visits.patient_id`, `prescriptions.visit_id`, and `prescrip
 
 Added CHECK constraints: visits (weight 0.3-200kg, height 20-220cm, HC 15-60cm, MUAC 5-30cm, temp 85-110F, HR 20-300, RR 5-120, SpO2 0-100%, triage 0-15), patients (GA 22-44wks, birth weight 0.3-6.0kg).
 
-### D-7. `formulary.generic_name` not UNIQUE
+### ~~D-7. `formulary.generic_name` not UNIQUE~~ → RESOLVED (R29)
 
-**Severity:** MAJOR for production
-**Location:** Schema — `formulary` table
-**Description:** Nothing prevents duplicate drug entries for the same generic name, causing ambiguity during prescription generation.
-**Fix:** Add a UNIQUE constraint on `generic_name`.
+Added `UNIQUE` constraint to `formulary.generic_name`.
 
 ### D-8. Missing `updated_at` on visits, vaccinations, growth_records
 
