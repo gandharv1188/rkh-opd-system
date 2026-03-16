@@ -236,7 +236,7 @@ create index idx_patients_active on patients(is_active);
 -- ============================================================
 create table visits (
   id              uuid default gen_random_uuid() primary key,
-  patient_id      text references patients(id) on delete restrict,
+  patient_id      text not null references patients(id) on delete restrict,
 
   visit_date      date not null default current_date,
   doctor_id       text,
@@ -277,8 +277,8 @@ create table prescriptions (
   id              text primary key,
   -- Format: RX-XXXXXXXX
 
-  visit_id        uuid references visits(id) on delete restrict,
-  patient_id      text references patients(id) on delete restrict,
+  visit_id        uuid not null references visits(id) on delete restrict,
+  patient_id      text not null references patients(id) on delete restrict,
 
   -- Full generated prescription JSON (as produced by AI)
   generated_json  jsonb not null,

@@ -100,12 +100,9 @@ Added `known_allergies text[]` to patients schema. Registration form has comma-s
 
 Created `doctors` table with id, full_name, degree, registration_no, specialisation. Seeded with Dr. Lokender Goyal and Dr. Swati Goyal. FK enforcement deferred to production. Noted in specification Section 12.4.
 
-### D-5. Missing NOT NULL constraints on critical foreign keys
+### ~~D-5. Missing NOT NULL constraints on critical foreign keys~~ → RESOLVED (R27)
 
-**Severity:** MAJOR for production
-**Location:** Schema — `visits.patient_id`, `prescriptions.visit_id`, `prescriptions.patient_id`
-**Description:** These FK columns allow NULL, permitting orphan records (visits without patients, prescriptions without visits).
-**Fix:** Add `NOT NULL` to these columns.
+Added `NOT NULL` to `visits.patient_id`, `prescriptions.visit_id`, and `prescriptions.patient_id`.
 
 ### D-6. No CHECK constraints on medical data ranges
 
