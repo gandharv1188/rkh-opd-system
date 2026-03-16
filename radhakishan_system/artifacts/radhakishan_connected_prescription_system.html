@@ -1410,12 +1410,14 @@
     { hi: "6 घंटे से पेशाब न आना", en: "No urine for 6+ hours" },
     { hi: "अत्यधिक नींद / प्रतिक्रिया न करना", en: "Excessive sleepiness" },
   ];
-  document.getElementById("hdr-date").textContent =
-    new Date().toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
+  try {
+    document.getElementById("hdr-date").textContent =
+      new Date().toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+  } catch (e) {}
 
   /* ===== SUPABASE ===== */
   function q(t, p = "", m = "GET", b = null) {
@@ -1774,7 +1776,7 @@
       if (el) el.style.display = "none";
     });
     const el = document.getElementById("view-" + v);
-    if (el) el.style.display = "block";
+    if (el) el.style.display = v === "pad" ? "flex" : "block";
     document.getElementById("tab-pad").className =
       "tab" + (v === "pad" ? " active" : "");
     document.getElementById("tab-rx").className =
@@ -2570,17 +2572,12 @@
     showCopiedToast,
   });
 
-  // Auto-connect on page load — try immediately and retry if needed
-  if (
-    document.readyState === "complete" ||
-    document.readyState === "interactive"
-  ) {
-    connectSB();
-  } else {
-    document.addEventListener("DOMContentLoaded", () => connectSB());
-  }
-  // Retry after 2s in case first attempt failed silently
+  // Auto-connect on page load
+  window.addEventListener("load", () => connectSB());
   setTimeout(() => {
     if (!sbConnected) connectSB();
-  }, 2000);
+  }, 1000);
+  setTimeout(() => {
+    if (!sbConnected) connectSB();
+  }, 3000);
 </script>
