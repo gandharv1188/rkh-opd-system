@@ -173,8 +173,11 @@ create index idx_stdpx_active on standard_prescriptions(active);
 -- 3. PATIENTS
 -- ============================================================
 create table patients (
-  id              text primary key,
-  -- Format: PED-XXXXXX or NEO-XXXXXX
+  id              text primary key
+    check (id ~ '^RKH-\d{11}$'),
+  -- Format: RKH-YYMM##### (prefix + 11 digits)
+  -- YY = FY start year, YY = FY end year, MM = month, ##### = sequential
+  -- Example: RKH-25260300001 = FY 2025-26, March, patient #00001
 
   name            text not null,
   dob             date,

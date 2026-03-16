@@ -377,7 +377,7 @@ Search patients, view complete clinical history, register new patients, and load
 
 **Key features**
 
-- Live search by name, UHID (RH-Axxxxxx format), or phone number
+- Live search by name, UHID (RKH-YYMM##### format, e.g. RKH-25260300001), or phone number
 
 - New patient registration with auto-generated UHID
 
@@ -1010,7 +1010,7 @@ Migrate from Claude.ai to a full SDK-based application when ANY of these conditi
 | SAM           | Severe Acute Malnutrition (WHZ \< -3 SD OR MUAC \< 11.5cm)                                                            |
 | SGA           | Small for Gestational Age                                                                                             |
 | TDSC          | Trivandrum Development Screening Chart                                                                                |
-| UHID          | Unique Health Identification Number (format: RH-Axxxxxx)                                                              |
+| UHID          | Unique Health Identification Number (format: RKH-YYMM#####, e.g. RKH-25260300001)                                     |
 | UIP           | Universal Immunization Programme (Government of India — free vaccines)                                                |
 | WAZ           | Weight-for-Age Z-score                                                                                                |
 | WHZ           | Weight-for-Height Z-score (or BMI-for-Age in older children)                                                          |

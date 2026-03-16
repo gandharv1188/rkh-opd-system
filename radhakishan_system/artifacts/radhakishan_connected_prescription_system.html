@@ -1271,6 +1271,37 @@
     if (b) o.body = JSON.stringify(b);
     return fetch(SB + "/rest/v1/" + t + p, o);
   }
+
+  async function generateUHID() {
+    // Format: RKH-YYMM##### — Indian financial year (April-March)
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    const year = now.getFullYear();
+    const fyStart = month >= 4 ? year % 100 : (year - 1) % 100;
+    const fyEnd = fyStart + 1;
+    const mm = String(month).padStart(2, "0");
+    const numPart =
+      String(fyStart).padStart(2, "0") + String(fyEnd).padStart(2, "0") + mm;
+    const prefix = "RKH-" + numPart;
+    let nextSeq = 1;
+    try {
+      const res = await q(
+        "patients",
+        `?select=id&id=like.${encodeURIComponent(prefix)}*&order=id.desc&limit=1`,
+      );
+      if (res.ok) {
+        const rows = await res.json();
+        if (rows.length > 0) {
+          const lastSeq = parseInt(rows[0].id.slice(10), 10);
+          if (!isNaN(lastSeq)) nextSeq = lastSeq + 1;
+        }
+      }
+    } catch (e) {
+      console.warn("UHID sequence lookup failed, using 00001", e);
+    }
+    return prefix + String(nextSeq).padStart(5, "0");
+  }
+
   async function connectSB() {
     SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
     KEY = document.getElementById("sb-key").value.trim();
@@ -1594,7 +1625,7 @@
         .replace(/```\n?/g, "")
         .trim();
       rxData = JSON.parse(raw);
-      renderReview();
+      await renderReview();
       showView("rx");
     } catch (e) {
       clearInterval(t);
@@ -1701,7 +1732,7 @@ Return ONLY valid JSON — no markdown, no preamble:
   const FW = { 1: "once", 2: "twice", 3: "three times", 4: "four times" };
   const FH = { 1: "एक बार", 2: "दो बार", 3: "तीन बार", 4: "चार बार" };
 
-  function renderReview() {
+  async function renderReview() {
     const r = rxData;
     const today = new Date().toLocaleDateString("en-IN", {
       day: "2-digit",
@@ -1709,9 +1740,7 @@ Return ONLY valid JSON — no markdown, no preamble:
       year: "numeric",
     });
     const uhid =
-      r.patient.uhid ||
-      selectedPatient?.id ||
-      "RH-" + Date.now().toString().slice(-6);
+      r.patient.uhid || selectedPatient?.id || (await generateUHID());
     let h = "";
 
     h += `<div class="pt-strip">
@@ -1974,10 +2003,7 @@ Return ONLY valid JSON — no markdown, no preamble:
       let patientId = selectedPatient?.id;
       if (!patientId && rxData.patient.name) {
         // Register new patient on the fly
-        patientId =
-          "RH-" +
-          rxData.patient.name[0].toUpperCase() +
-          Math.floor(Math.random() * 900000 + 100000);
+        patientId = await generateUHID();
         await q("patients", "", "POST", {
           id: patientId,
           name: rxData.patient.name,

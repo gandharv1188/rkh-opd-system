@@ -51,7 +51,7 @@ Everything lives under `radhakishan_system/`:
 | ------------------------ | -------------------------------------------------------------------------------------------------------- |
 | `formulary`              | Drug monographs with JSONB fields: formulations, dosing_bands, renal_bands, interactions, administration |
 | `standard_prescriptions` | ICD-10 keyed protocols with first_line_drugs, investigations, counselling                                |
-| `patients`               | Demographics, UHID format RH-{initial}{6 digits}, neonatal fields (GA, birth weight)                     |
+| `patients`               | Demographics, UHID format RKH-YYMM##### (e.g. RKH-25260300001), neonatal fields (GA, birth weight)       |
 | `visits`                 | Per-visit anthropometry, vitals, diagnoses, clinical notes, raw dictation                                |
 | `prescriptions`          | Generated Rx JSON, approval status, PDF URL, QR data, versioning                                         |
 | `vaccinations`           | Per-patient vaccination history (IAP 2024 schedule)                                                      |

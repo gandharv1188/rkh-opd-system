@@ -126,7 +126,7 @@ dose_basis values: `per_kg` | `per_m2` | `per_dose`
 ## Table: patients
 
 ```
-id              TEXT PRIMARY KEY    Format: RH-A123456
+id              TEXT PRIMARY KEY    Format: RKH-YYMM##### (e.g. RKH-25260300001)
 name            TEXT
 dob             DATE
 sex             TEXT               Male / Female

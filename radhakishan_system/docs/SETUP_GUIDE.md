@@ -142,7 +142,7 @@ Patients are registered:
 - **Automatically** — when a new prescription is signed off without a selected patient
 - **Manually** — via Patient Lookup → "+ New patient"
 
-UHID format: RH-A123456 (Hospital prefix + first initial + 6 digits)
+UHID format: RKH-YYMM##### (e.g. RKH-25260300001 — FY start + FY end + month + 5-digit sequential)
 
 ---
 

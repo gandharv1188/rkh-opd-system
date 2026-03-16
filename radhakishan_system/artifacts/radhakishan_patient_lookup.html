@@ -1067,7 +1067,7 @@
       alert("Connect to Supabase first.");
       return;
     }
-    const id = generateUHID(name);
+    const id = await generateUHID();
     const payload = {
       id,
       name,
@@ -1114,10 +1114,37 @@
     }
   }
 
-  function generateUHID(name) {
-    const prefix = (name.trim()[0] || "X").toUpperCase();
-    const rand = Math.floor(Math.random() * 900000) + 100000;
-    return "RH-" + prefix + rand;
+  async function generateUHID() {
+    // Format: RKH-YYMM##### where YY=FY start, YY=FY end, MM=month, #####=sequential
+    // Indian financial year: April (current year) to March (next year)
+    const now = new Date();
+    const month = now.getMonth() + 1; // 1-12
+    const year = now.getFullYear();
+    const fyStart = month >= 4 ? year % 100 : (year - 1) % 100;
+    const fyEnd = fyStart + 1;
+    const mm = String(month).padStart(2, "0");
+    const numPart =
+      String(fyStart).padStart(2, "0") + String(fyEnd).padStart(2, "0") + mm;
+    const prefix = "RKH-" + numPart;
+
+    // Query Supabase for the max existing ID with this prefix
+    let nextSeq = 1;
+    try {
+      const res = await q(
+        "patients",
+        `?select=id&id=like.${encodeURIComponent(prefix)}*&order=id.desc&limit=1`,
+      );
+      if (res.ok) {
+        const rows = await res.json();
+        if (rows.length > 0) {
+          const lastSeq = parseInt(rows[0].id.slice(10), 10); // "RKH-" (4) + YYMM (6) = 10
+          if (!isNaN(lastSeq)) nextSeq = lastSeq + 1;
+        }
+      }
+    } catch (e) {
+      console.warn("UHID sequence lookup failed, using 00001", e);
+    }
+    return prefix + String(nextSeq).padStart(5, "0");
   }
 
   function calcAge(dob) {
