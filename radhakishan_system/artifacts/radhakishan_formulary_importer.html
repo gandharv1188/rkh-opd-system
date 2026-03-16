@@ -1,0 +1,1407 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  :root {
+    --blue: #1e3a6b;
+    --blue-lt: #e8edf8;
+    --blue-mid: #2d5aa0;
+    --green: #1a5c35;
+    --green-lt: #e8f4ed;
+    --red: #8b1a1a;
+    --red-lt: #fdf0f0;
+    --amber: #7a4a00;
+    --amber-lt: #fef8e8;
+    --ink: #1a1a14;
+    --ink2: #3d3d30;
+    --ink3: #7a7a60;
+    --bg: #f8f7f1;
+    --bg2: #fff;
+    --bg3: #eeeadb;
+    --bdr: rgba(26, 26, 20, 0.1);
+    --bdr2: rgba(26, 26, 20, 0.18);
+    --r: 6px;
+    --r2: 10px;
+  }
+  body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13px;
+  }
+  .app {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+  }
+
+  .hdr {
+    background: var(--blue);
+    color: #fff;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hdr h1 {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .hdr p {
+    font-size: 11px;
+    opacity: 0.65;
+    margin-top: 2px;
+  }
+  .conn-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cdot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f87171;
+  }
+  .cdot.ok {
+    background: #4ade80;
+  }
+  .cst {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+
+  .section {
+    padding: 16px 20px;
+    border-bottom: 0.5px solid var(--bdr2);
+  }
+  .sec-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 10px;
+  }
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .ff label {
+    display: block;
+    font-size: 10px;
+    color: var(--ink3);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .ff input {
+    width: 100%;
+    padding: 7px 9px;
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    background: var(--bg2);
+    font-size: 12px;
+    color: var(--ink);
+    outline: none;
+    font-family: inherit;
+  }
+  .ff input:focus {
+    border-color: var(--blue);
+  }
+  .ff input[type="password"] {
+    letter-spacing: 0.1em;
+  }
+
+  .ta {
+    width: 100%;
+    min-height: 200px;
+    padding: 10px;
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    background: var(--bg2);
+    font-size: 12px;
+    color: var(--ink);
+    font-family: "Courier New", monospace;
+    outline: none;
+    resize: vertical;
+    line-height: 1.5;
+  }
+  .ta:focus {
+    border-color: var(--blue);
+  }
+  .ta.err {
+    border-color: var(--red);
+  }
+  .ta.ok {
+    border-color: var(--green);
+  }
+
+  .ib {
+    background: var(--blue-lt);
+    border: 0.5px solid rgba(30, 58, 107, 0.2);
+    border-radius: var(--r);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--blue-mid);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .wb {
+    background: var(--amber-lt);
+    border: 0.5px solid rgba(122, 74, 0, 0.2);
+    border-radius: var(--r);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--amber);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .eb {
+    background: var(--red-lt);
+    border: 0.5px solid rgba(139, 26, 26, 0.2);
+    border-radius: var(--r);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--red);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .sb {
+    background: var(--green-lt);
+    border: 0.5px solid rgba(26, 92, 53, 0.2);
+    border-radius: var(--r);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .btn {
+    padding: 9px 20px;
+    border-radius: var(--r);
+    border: 0.5px solid var(--bdr2);
+    background: var(--bg2);
+    font-size: 13px;
+    color: var(--ink2);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.12s;
+  }
+  .btn:hover {
+    background: var(--bg3);
+  }
+  .btn.primary {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .btn.primary:hover {
+    background: var(--blue-mid);
+  }
+  .btn.success {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
+  .btn.success:hover {
+    background: #1e6b3e;
+  }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* Preview table */
+  .preview-wrap {
+    overflow-x: auto;
+    margin-top: 12px;
+  }
+  .ptbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+  .ptbl th {
+    padding: 6px 10px;
+    text-align: left;
+    background: var(--bg3);
+    border-bottom: 0.5px solid var(--bdr2);
+    font-weight: 600;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .ptbl td {
+    padding: 6px 10px;
+    border-bottom: 0.5px solid var(--bdr);
+    vertical-align: top;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ptbl tr:hover td {
+    background: var(--bg);
+  }
+  .ptbl tr.invalid td {
+    background: var(--red-lt);
+  }
+  .ptbl tr.valid td:first-child::before {
+    content: "✓ ";
+    color: var(--green);
+  }
+  .ptbl tr.invalid td:first-child::before {
+    content: "✗ ";
+    color: var(--red);
+  }
+
+  /* Progress */
+  .prog-wrap {
+    margin-top: 12px;
+  }
+  .prog-bar-bg {
+    background: var(--bg3);
+    border-radius: 99px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .prog-bar {
+    background: var(--blue);
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.3s;
+    width: 0;
+  }
+  .prog-text {
+    font-size: 11px;
+    color: var(--ink3);
+    margin-top: 6px;
+  }
+
+  /* Log */
+  .log {
+    background: #1a1a14;
+    color: #e8e8e0;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    padding: 12px;
+    border-radius: var(--r);
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+    line-height: 1.7;
+  }
+  .log .ok {
+    color: #4ade80;
+  }
+  .log .err {
+    color: #f87171;
+  }
+  .log .info {
+    color: #93c5fd;
+  }
+  .log .warn {
+    color: #fbbf24;
+  }
+
+  /* Sample */
+  .sample-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .sample-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r2);
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .sample-card:hover {
+    border-color: var(--blue);
+    background: var(--blue-lt);
+  }
+  .sample-card h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+  .sample-card p {
+    font-size: 11px;
+    color: var(--ink3);
+    line-height: 1.5;
+  }
+</style>
+
+<div class="app">
+  <div class="hdr">
+    <div>
+      <h1>Formulary Import Tool</h1>
+      <p>Bulk-import drugs from JSON into Supabase · Radhakishan Hospital</p>
+    </div>
+    <div class="conn-row">
+      <div class="cdot" id="cdot"></div>
+      <span class="cst" id="cst">Not connected</span>
+    </div>
+  </div>
+
+  <!-- STEP 1: Connect -->
+  <div class="section">
+    <div class="sec-title">Step 1 — Connect to Supabase</div>
+    <div class="grid2" style="margin-bottom: 10px">
+      <div class="ff">
+        <label>Supabase URL</label
+        ><input id="sb-url" placeholder="https://xxxx.supabase.co" />
+      </div>
+      <div class="ff">
+        <label>Anon / Service Key</label
+        ><input id="sb-key" type="password" placeholder="eyJhbGc…" />
+      </div>
+    </div>
+    <button class="btn primary" onclick="connect()">Test connection</button>
+  </div>
+
+  <!-- STEP 2: JSON input -->
+  <div class="section">
+    <div class="sec-title">Step 2 — Paste your JSON data</div>
+    <div class="ib">
+      Paste your drug data as a JSON array. The importer accepts
+      <strong>any reasonable JSON structure</strong> — it will auto-detect field
+      names and map them to the schema. Supported formats: flat object array,
+      nested object, MIMS export, IAP formulary export, or the Radhakishan
+      custom format. <br /><br />
+      Minimum required per drug: <code>generic_name</code> or
+      <code>name</code> or <code>drug</code>. Everything else is optional and
+      will be mapped if found.
+    </div>
+    <div id="paste-err" class="eb" style="display: none"></div>
+    <textarea
+      class="ta"
+      id="json-input"
+      placeholder='Paste your JSON array here, e.g.:
+[
+  {
+    "name": "AMOXICILLIN",
+    "class": "Beta-lactam antibiotic",
+    "category": "Antibiotics",
+    "brands": ["Novamox", "Amoxil"],
+    "dose": "40-90 mg/kg/day",
+    "formulations": [...],
+    ...
+  }
+]'
+    ></textarea>
+    <div
+      style="
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      "
+    >
+      <button class="btn primary" onclick="parseJSON()">
+        Parse &amp; preview
+      </button>
+      <button class="btn" onclick="loadSampleFormat()">
+        Show accepted format
+      </button>
+      <button class="btn" onclick="loadSampleData()">Load sample data</button>
+      <span
+        id="parse-status"
+        style="font-size: 12px; color: var(--ink3)"
+      ></span>
+    </div>
+  </div>
+
+  <!-- STEP 3: Preview -->
+  <div class="section" id="preview-section" style="display: none">
+    <div class="sec-title">Step 3 — Preview &amp; validate</div>
+    <div id="preview-msg"></div>
+    <div class="preview-wrap">
+      <table class="ptbl" id="preview-tbl">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Generic name</th>
+            <th>Category</th>
+            <th>Dosing bands</th>
+            <th>Formulations</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="preview-body"></tbody>
+      </table>
+    </div>
+    <div style="margin-top: 12px" class="btns">
+      <button class="btn success" id="import-btn" onclick="startImport()">
+        Import all to Supabase
+      </button>
+      <button class="btn" onclick="importValidOnly()">Import valid only</button>
+      <button
+        class="btn"
+        onclick="
+          document.getElementById('preview-section').style.display = 'none'
+        "
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Progress -->
+  <div class="section" id="progress-section" style="display: none">
+    <div class="sec-title">Step 4 — Importing</div>
+    <div class="prog-wrap">
+      <div class="prog-bar-bg"><div class="prog-bar" id="prog-bar"></div></div>
+      <div class="prog-text" id="prog-text">Starting import…</div>
+    </div>
+    <div class="log" id="import-log"></div>
+    <div id="import-result" style="margin-top: 10px"></div>
+  </div>
+
+  <!-- Accepted format reference -->
+  <div class="section" id="format-section" style="display: none">
+    <div class="sec-title">Accepted JSON format reference</div>
+    <div class="wb">
+      Field names are flexible — the importer recognises common aliases. Any
+      unrecognised fields are stored in <code>notes</code>. All fields except
+      <code>generic_name</code> are optional.
+    </div>
+    <div class="sample-grid">
+      <div class="sample-card" onclick="loadFormatExample('minimal')">
+        <h4>Minimal format</h4>
+        <p>Just drug name + category. Useful for quickly seeding a list.</p>
+      </div>
+      <div class="sample-card" onclick="loadFormatExample('standard')">
+        <h4>Standard format</h4>
+        <p>
+          Name + formulations + dose + brands. The most common import format.
+        </p>
+      </div>
+      <div class="sample-card" onclick="loadFormatExample('full')">
+        <h4>Full monograph format</h4>
+        <p>
+          Complete entry with dosing bands, safety, interactions,
+          administration.
+        </p>
+      </div>
+      <div class="sample-card" onclick="loadFormatExample('flat')">
+        <h4>Flat dose string format</h4>
+        <p>
+          If your data has dose as a string like "40-90 mg/kg/day", the importer
+          will parse it automatically.
+        </p>
+      </div>
+    </div>
+    <textarea
+      class="ta"
+      id="format-ta"
+      style="margin-top: 12px; min-height: 280px"
+      readonly
+    ></textarea>
+  </div>
+</div>
+
+<script>
+  let SB = "",
+    KEY = "",
+    parsedDrugs = [];
+
+  /* ===== Connection ===== */
+  async function connect() {
+    SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
+    KEY = document.getElementById("sb-key").value.trim();
+    if (!SB || !KEY) {
+      alert("Enter Supabase URL and key.");
+      return;
+    }
+    try {
+      const r = await sbq("formulary", "?select=id&limit=1");
+      if (r.ok) {
+        setConn(true);
+      } else throw new Error((await r.json()).message || "Failed");
+    } catch (e) {
+      setConn(false);
+      alert("Connection failed: " + e.message);
+    }
+  }
+  function setConn(ok) {
+    document.getElementById("cdot").className = "cdot" + (ok ? " ok" : "");
+    document.getElementById("cst").textContent = ok ? "Connected" : "Failed";
+  }
+  function sbq(t, q = "", m = "GET", b = null) {
+    const o = {
+      method: m,
+      headers: {
+        apikey: KEY,
+        Authorization: "Bearer " + KEY,
+        "Content-Type": "application/json",
+        Prefer: m === "POST" ? "return=representation" : "",
+      },
+    };
+    if (b) o.body = JSON.stringify(b);
+    return fetch(SB + "/rest/v1/" + t + q, o);
+  }
+
+  /* ===== Parse ===== */
+  function parseJSON() {
+    const raw = document.getElementById("json-input").value.trim();
+    const ta = document.getElementById("json-input");
+    const err = document.getElementById("paste-err");
+    err.style.display = "none";
+    ta.className = "ta";
+    if (!raw) {
+      err.textContent = "Please paste JSON data first.";
+      err.style.display = "block";
+      return;
+    }
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (e) {
+      ta.className = "ta err";
+      err.textContent = "Invalid JSON: " + e.message;
+      err.style.display = "block";
+      return;
+    }
+    if (!Array.isArray(data) && typeof data === "object") {
+      // Try to find an array inside
+      const arr = Object.values(data).find((v) => Array.isArray(v));
+      if (arr) data = arr;
+      else data = [data];
+    }
+    if (!Array.isArray(data) || !data.length) {
+      err.textContent = "No array of drugs found in the JSON.";
+      err.style.display = "block";
+      return;
+    }
+    ta.className = "ta ok";
+    parsedDrugs = data.map((d, i) => mapDrug(d, i));
+    document.getElementById("parse-status").textContent =
+      `✓ ${parsedDrugs.length} drugs parsed`;
+    renderPreview();
+    document.getElementById("preview-section").style.display = "block";
+    document
+      .getElementById("preview-section")
+      .scrollIntoView({ behavior: "smooth" });
+  }
+
+  /* ===== Field mapping ===== */
+  function mapDrug(d, idx) {
+    const get = (...keys) => {
+      for (const k of keys) {
+        if (d[k] !== undefined && d[k] !== null && d[k] !== "") return d[k];
+      }
+      return null;
+    };
+    const arr = (v) => {
+      if (!v) return [];
+      if (Array.isArray(v)) return v;
+      if (typeof v === "string")
+        return v
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+      return [String(v)];
+    };
+
+    const name = (
+      get(
+        "generic_name",
+        "name",
+        "drug_name",
+        "drug",
+        "generic",
+        "medicine_name",
+        "GENERIC_NAME",
+        "NAME",
+      ) || ""
+    )
+      .toString()
+      .trim()
+      .toUpperCase();
+
+    // Parse dose string like "40-90 mg/kg/day ÷ 3" or "15 mg/kg/dose q6h"
+    const rawDose = get(
+      "dose",
+      "dosage",
+      "dose_range",
+      "standard_dose",
+      "pediatric_dose",
+      "dose_mg_kg",
+    );
+    let doseBands = get("dosing_bands", "dose_bands", "bands");
+    if (!doseBands && rawDose) {
+      doseBands = [parseDoseString(String(rawDose))];
+    } else if (doseBands && !Array.isArray(doseBands)) {
+      doseBands = [doseBands];
+    }
+
+    // Parse formulations
+    let forms = get(
+      "formulations",
+      "formulation",
+      "forms",
+      "available_forms",
+      "preparations",
+    );
+    if (forms && !Array.isArray(forms)) forms = [forms];
+    if (!forms) {
+      // Try to build from flat fields
+      const cq = get("concentration", "conc", "concentration_mg", "strength");
+      const form = get("form", "dosage_form", "formulation_type");
+      if (cq || form)
+        forms = [
+          {
+            form: form || "syrup",
+            conc_qty: parseFloat(cq) || null,
+            conc_unit: "mg",
+            per_qty: 5,
+            per_unit: "ml",
+            route: "oral",
+          },
+        ];
+    }
+    if (Array.isArray(forms)) {
+      forms = forms.map((f) => {
+        if (typeof f === "string") return parseFormString(f);
+        return {
+          form: f.form || f.type || f.dosage_form || "syrup",
+          conc_qty:
+            parseFloat(
+              f.conc_qty || f.concentration || f.strength || f.mg || 0,
+            ) || null,
+          conc_unit: f.conc_unit || f.unit || "mg",
+          per_qty: parseFloat(f.per_qty || f.per || f.per_ml || 5) || null,
+          per_unit: f.per_unit || f.volume_unit || "ml",
+          route: f.route || "oral",
+          indian_brand: f.indian_brand || f.brand || f.brands || "",
+        };
+      });
+    }
+
+    const mapped = {
+      generic_name: name,
+      drug_class:
+        get(
+          "drug_class",
+          "class",
+          "pharmacological_class",
+          "type",
+          "drug_type",
+          "classification",
+        ) || null,
+      category: mapCategory(
+        get("category", "drug_category", "group", "therapeutic_class"),
+      ),
+      brand_names: arr(
+        get(
+          "brand_names",
+          "brands",
+          "brand",
+          "trade_names",
+          "trade_name",
+          "indian_brands",
+        ),
+      ),
+      therapeutic_use: arr(
+        get("therapeutic_use", "uses", "indications", "indication", "used_for"),
+      ),
+      licensed_in_children: String(
+        get("licensed", "licensed_in_children", "paediatric_licence") || "true",
+      ),
+      unlicensed_note: get("unlicensed_note", "off_label_note") || null,
+      formulations: forms || null,
+      dosing_bands: doseBands || null,
+      renal_adjustment_required: !!get(
+        "renal_adjustment",
+        "renal_dose_adjustment",
+        "gfr_adjustment",
+      ),
+      renal_bands: get("renal_bands", "gfr_bands") || null,
+      hepatic_adjustment_required: !!get(
+        "hepatic_adjustment",
+        "liver_adjustment",
+      ),
+      hepatic_note: get("hepatic_note", "liver_note") || null,
+      black_box_warnings: arr(
+        get("black_box", "black_box_warnings", "bbw", "boxed_warnings"),
+      ),
+      contraindications: arr(
+        get("contraindications", "contraindicated", "ci", "cautions"),
+      ),
+      cross_reactions: arr(
+        get("cross_reactions", "cross_reactivity", "allergy_cross"),
+      ),
+      interactions: get("interactions", "drug_interactions") || null,
+      monitoring_parameters: arr(
+        get("monitoring", "monitoring_parameters", "tdm", "monitor"),
+      ),
+      pediatric_specific_warnings: arr(
+        get("pediatric_warnings", "paediatric_warnings", "ped_warnings"),
+      ),
+      food_instructions: get("food", "food_instructions", "take_with") || null,
+      storage_instructions:
+        get("storage", "store_at", "storage_instructions") || null,
+      pregnancy_category:
+        get("pregnancy", "pregnancy_category", "fda_category") || null,
+      lactation_safe: String(
+        get("lactation", "lactation_safe", "breastfeeding") || "",
+      ),
+      reference_source: arr(
+        get("reference", "source", "references", "ref", "guideline_source"),
+      ),
+      notes: get("notes", "clinical_notes", "prescriber_notes", "note") || null,
+      active: true,
+      _raw: d,
+      _idx: idx,
+      _valid: !!name,
+    };
+    return mapped;
+  }
+
+  function parseDoseString(s) {
+    // Handle: "40-90 mg/kg/day ÷ 3" or "15 mg/kg/dose q6h" or "400mg single dose"
+    const band = {
+      method: "weight",
+      age_band: "all",
+      dose_unit: "mg",
+      is_per_day: true,
+      rounding_rule: "0.5ml",
+    };
+    const rangeMatch = s.match(/(\d+\.?\d*)\s*[-–to]\s*(\d+\.?\d*)/);
+    const singleMatch = s.match(/(\d+\.?\d*)\s*(mg|mcg|units?|g|mmol)/i);
+    if (rangeMatch) {
+      band.dose_min_qty = parseFloat(rangeMatch[1]);
+      band.dose_max_qty = parseFloat(rangeMatch[2]);
+    } else if (singleMatch) {
+      band.dose_min_qty = parseFloat(singleMatch[1]);
+      band.dose_unit = singleMatch[2].toLowerCase();
+    }
+    const unitMatch = s.match(/(mg|mcg|g|units?|mmol|mEq)/i);
+    if (unitMatch)
+      band.dose_unit = unitMatch[1].toLowerCase().replace("units", "units");
+    if (
+      s.toLowerCase().includes("/dose") ||
+      s.toLowerCase().includes("per dose")
+    )
+      band.is_per_day = false;
+    const freqMatch = s.match(
+      /÷\s*(\d+)|(\d+)\s*times?|q(\d+)h|every\s*(\d+)\s*h/i,
+    );
+    if (freqMatch) {
+      const f =
+        parseInt(freqMatch[1] || freqMatch[2] || 0) ||
+        (freqMatch[3] ? Math.round(24 / parseInt(freqMatch[3])) : 0) ||
+        (freqMatch[4] ? Math.round(24 / parseInt(freqMatch[4])) : 0);
+      if (f) band.frequency_per_day = f;
+    }
+    const bsaMatch = s.match(/mg\/m/i);
+    if (bsaMatch) band.method = "bsa";
+    return band;
+  }
+
+  function parseFormString(s) {
+    // Handle strings like "Syrup 125mg/5ml" or "Tab 500mg"
+    const f = {
+      form: "syrup",
+      conc_qty: null,
+      conc_unit: "mg",
+      per_qty: 5,
+      per_unit: "ml",
+      route: "oral",
+    };
+    if (/tab|tablet/i.test(s)) {
+      f.form = "tablet";
+      f.per_qty = 1;
+      f.per_unit = "tablet";
+      f.rounding_rule = "quarter_tab";
+    } else if (/drop/i.test(s)) {
+      f.form = "drops";
+      f.per_qty = 1;
+      f.per_unit = "ml";
+    } else if (/cap/i.test(s)) {
+      f.form = "capsule";
+      f.per_qty = 1;
+      f.per_unit = "capsule";
+    } else if (/inj|injection|iv|im/i.test(s)) {
+      f.form = "injection";
+      f.route = "iv";
+    }
+    const m = s.match(/(\d+\.?\d*)\s*(mg|mcg|g|units?)/i);
+    if (m) {
+      f.conc_qty = parseFloat(m[1]);
+      f.conc_unit = m[2].toLowerCase();
+    }
+    const pm = s.match(/\/\s*(\d+\.?\d*)\s*(ml|tablet|dose)/i);
+    if (pm) {
+      f.per_qty = parseFloat(pm[1]);
+      f.per_unit = pm[2].toLowerCase();
+    }
+    return f;
+  }
+
+  const CAT_MAP = {
+    antibiotic: "Antibiotics",
+    penicillin: "Antibiotics",
+    cephalosporin: "Antibiotics",
+    macrolide: "Antibiotics",
+    analgesic: "Analgesics",
+    antipyretic: "Analgesics",
+    nsaid: "Analgesics",
+    bronchodilator: "Bronchodilators",
+    "beta-agonist": "Bronchodilators",
+    antiviral: "Antivirals",
+    antiparasitic: "Antiparasitics",
+    anthelmintic: "Antiparasitics",
+    vitamin: "Vitamins",
+    supplement: "Vitamins",
+    steroid: "Corticosteroids",
+    corticosteroid: "Corticosteroids",
+    antihistamine: "Antihistamines",
+    antifungal: "Antifungals",
+    antifungal: "Antifungals",
+    gi: "GI",
+    gastro: "GI",
+    antacid: "GI",
+    probiotic: "GI",
+    neonatal: "Neonatal",
+    oncology: "Oncology",
+    chemotherapy: "Oncology",
+    anticoagulant: "Anticoagulants",
+    heparin: "Anticoagulants",
+    antiepileptic: "Antiepileptics",
+    anticonvulsant: "Antiepileptics",
+    cardiovascular: "Cardiovascular",
+    cardiac: "Cardiovascular",
+  };
+  function mapCategory(raw) {
+    if (!raw) return null;
+    const rl = String(raw).toLowerCase();
+    for (const [k, v] of Object.entries(CAT_MAP)) {
+      if (rl.includes(k)) return v;
+    }
+    return raw;
+  }
+
+  /* ===== Render preview ===== */
+  function renderPreview() {
+    const valid = parsedDrugs.filter((d) => d._valid).length;
+    const invalid = parsedDrugs.length - valid;
+    document.getElementById("preview-msg").innerHTML =
+      `<div class="${invalid ? "wb" : "sb"}" style="margin-bottom:8px">
+      <strong>${parsedDrugs.length} drugs ready to import</strong> — 
+      ${valid} valid, ${invalid} with issues (missing name).
+      ${invalid ? "Invalid rows shown in red — they will be skipped." : ""}
+    </div>`;
+    const tb = document.getElementById("preview-body");
+    tb.innerHTML = parsedDrugs
+      .map((d, i) => {
+        const bands = Array.isArray(d.dosing_bands) ? d.dosing_bands : [];
+        const forms = Array.isArray(d.formulations) ? d.formulations : [];
+        const bandSummary =
+          bands
+            .map(
+              (b) =>
+                `${b.dose_min_qty || "?"}${b.dose_max_qty ? "–" + b.dose_max_qty : ""} ${b.dose_unit || "mg"}/${b.method === "bsa" ? "m²" : "kg"}`,
+            )
+            .join(", ") || "—";
+        const formSummary =
+          forms
+            .map((f) => `${f.form} ${f.conc_qty || "?"}${f.conc_unit || "mg"}`)
+            .join(", ") || "—";
+        return `<tr class="${d._valid ? "valid" : "invalid"}">
+      <td>${i + 1}</td>
+      <td title="${d.generic_name}">${d.generic_name || "(missing name)"}</td>
+      <td>${d.category || "—"}</td>
+      <td title="${bandSummary}" style="max-width:140px">${bandSummary}</td>
+      <td title="${formSummary}" style="max-width:140px">${formSummary}</td>
+      <td>${d._valid ? '<span style="color:var(--green)">✓ Ready</span>' : '<span style="color:var(--red)">✗ No name</span>'}</td>
+    </tr>`;
+      })
+      .join("");
+  }
+
+  /* ===== Import ===== */
+  async function startImport() {
+    importDrugs(parsedDrugs.filter((d) => d._valid));
+  }
+  async function importValidOnly() {
+    importDrugs(parsedDrugs.filter((d) => d._valid));
+  }
+
+  async function importDrugs(drugs) {
+    if (!SB || !KEY) {
+      alert("Connect to Supabase first.");
+      return;
+    }
+    if (!drugs.length) {
+      alert("No valid drugs to import.");
+      return;
+    }
+    document.getElementById("preview-section").style.display = "none";
+    document.getElementById("progress-section").style.display = "block";
+    document
+      .getElementById("progress-section")
+      .scrollIntoView({ behavior: "smooth" });
+    const log = document.getElementById("import-log");
+    log.innerHTML = "";
+    let ok = 0,
+      fail = 0,
+      skip = 0;
+    function addLog(msg, type = "info") {
+      const span = document.createElement("div");
+      span.className = type;
+      span.textContent = msg;
+      log.appendChild(span);
+      log.scrollTop = log.scrollHeight;
+    }
+    addLog(`Starting import of ${drugs.length} drugs…`, "info");
+
+    for (let i = 0; i < drugs.length; i++) {
+      const d = drugs[i];
+      const pct = Math.round(((i + 1) / drugs.length) * 100);
+      document.getElementById("prog-bar").style.width = pct + "%";
+      document.getElementById("prog-text").textContent =
+        `Importing ${i + 1} of ${drugs.length} — ${d.generic_name}`;
+
+      // Remove internal fields
+      const payload = { ...d };
+      delete payload._raw;
+      delete payload._idx;
+      delete payload._valid;
+
+      try {
+        // Check if already exists
+        const check = await sbq(
+          "formulary",
+          `?generic_name=eq.${encodeURIComponent(d.generic_name)}&select=id&active=eq.true`,
+        );
+        const existing = await check.json();
+        if (existing && existing.length) {
+          // Update existing
+          const r = await sbq(
+            "formulary",
+            "?id=eq." + existing[0].id,
+            "PATCH",
+            { ...payload, updated_at: new Date().toISOString() },
+          );
+          if (r.ok) {
+            ok++;
+            addLog(`✓ Updated: ${d.generic_name}`, "ok");
+          } else {
+            const e = await r.json();
+            throw new Error(e.message);
+          }
+        } else {
+          // Insert new
+          const r = await sbq("formulary", "", "POST", payload);
+          if (r.ok) {
+            ok++;
+            addLog(`✓ Inserted: ${d.generic_name}`, "ok");
+          } else {
+            const e = await r.json();
+            throw new Error(e.message);
+          }
+        }
+      } catch (e) {
+        fail++;
+        addLog(`✗ Failed: ${d.generic_name} — ${e.message}`, "err");
+      }
+      // Small delay to avoid rate limiting
+      await new Promise((res) => setTimeout(res, 120));
+    }
+
+    document.getElementById("prog-bar").style.width = "100%";
+    document.getElementById("prog-text").textContent = "Import complete.";
+    addLog(`─────────────────────────`, "info");
+    addLog(`Done: ${ok} imported, ${fail} failed, ${skip} skipped`, "info");
+    document.getElementById("import-result").innerHTML =
+      `<div class="${fail ? "wb" : "sb"}">
+      Import complete: <strong>${ok} drugs added/updated</strong>${fail ? `, ${fail} failed — check log above` : ""}.
+      ${ok ? "<br>Head to the Formulary Manager to review and enrich the imported data." : ""}
+    </div>`;
+  }
+
+  /* ===== Sample data ===== */
+  const SAMPLE_DRUGS = [
+    {
+      generic_name: "AMOXICILLIN",
+      drug_class: "Beta-lactam antibiotic",
+      category: "Antibiotics",
+      brand_names: ["Novamox", "Amoxil", "Mox", "Wymox"],
+      therapeutic_use: [
+        "Acute otitis media",
+        "Community acquired pneumonia",
+        "UTI",
+        "Streptococcal pharyngitis",
+      ],
+      formulations: [
+        {
+          form: "syrup",
+          conc_qty: 125,
+          conc_unit: "mg",
+          per_qty: 5,
+          per_unit: "ml",
+          route: "oral",
+          indian_brand: "Novamox 125mg/5ml",
+        },
+        {
+          form: "syrup",
+          conc_qty: 250,
+          conc_unit: "mg",
+          per_qty: 5,
+          per_unit: "ml",
+          route: "oral",
+          indian_brand: "Ranbaxy Amoxil 250mg/5ml",
+        },
+        {
+          form: "tablet",
+          conc_qty: 500,
+          conc_unit: "mg",
+          per_qty: 1,
+          per_unit: "tablet",
+          route: "oral",
+        },
+      ],
+      dosing_bands: [
+        {
+          indication: "AOM / severe infections",
+          age_band: "child",
+          method: "weight",
+          dose_min_qty: 80,
+          dose_max_qty: 90,
+          dose_unit: "mg",
+          is_per_day: true,
+          frequency_per_day: 3,
+          duration_days: 7,
+          max_single_qty: 500,
+          max_single_unit: "mg",
+          rounding_rule: "0.5ml",
+          notes: "High-dose AOM protocol per IAP 2024",
+        },
+        {
+          indication: "Standard infections",
+          age_band: "child",
+          method: "weight",
+          dose_min_qty: 40,
+          dose_max_qty: 50,
+          dose_unit: "mg",
+          is_per_day: true,
+          frequency_per_day: 3,
+          duration_days: 7,
+          max_single_qty: 500,
+          max_single_unit: "mg",
+          rounding_rule: "0.5ml",
+          notes: "Standard dose for URTI, mild infections",
+        },
+      ],
+      contraindications: [
+        "Penicillin hypersensitivity",
+        "Infectious mononucleosis (rash risk)",
+      ],
+      cross_reactions: ["Cephalosporins (1-2% risk if penicillin allergy)"],
+      food_instructions: "Give after meals to reduce GI upset",
+      reference_source: ["IAP Drug Formulary 2024", "BNFC 2025-26"],
+    },
+    {
+      generic_name: "PARACETAMOL",
+      drug_class: "Analgesic / antipyretic",
+      category: "Analgesics",
+      brand_names: ["Calpol", "Tylenol", "Panadol", "Metacin"],
+      formulations: [
+        {
+          form: "syrup",
+          conc_qty: 120,
+          conc_unit: "mg",
+          per_qty: 5,
+          per_unit: "ml",
+          route: "oral",
+          indian_brand: "Calpol 120mg/5ml",
+        },
+        {
+          form: "syrup",
+          conc_qty: 250,
+          conc_unit: "mg",
+          per_qty: 5,
+          per_unit: "ml",
+          route: "oral",
+          indian_brand: "Calpol 250mg/5ml",
+        },
+        {
+          form: "tablet",
+          conc_qty: 500,
+          conc_unit: "mg",
+          per_qty: 1,
+          per_unit: "tablet",
+          route: "oral",
+        },
+      ],
+      dosing_bands: [
+        {
+          indication: "Fever / pain",
+          age_band: "all",
+          method: "weight",
+          dose_min_qty: 15,
+          dose_max_qty: 15,
+          dose_unit: "mg",
+          is_per_day: false,
+          frequency_per_day: 4,
+          duration_days: 3,
+          max_single_qty: 1000,
+          max_single_unit: "mg",
+          max_daily_qty: 4000,
+          max_daily_unit: "mg",
+          rounding_rule: "0.5ml",
+          notes: "PRN only. Do not give if temp < 38°C. Max 4 doses/day.",
+        },
+      ],
+      contraindications: ["Hepatic failure", "G6PD deficiency (high doses)"],
+      monitoring_parameters: [
+        "LFTs if prolonged use",
+        "Signs of hepatotoxicity",
+      ],
+      notes:
+        "Avoid in severe hepatic impairment. Do not exceed max daily dose.",
+      reference_source: ["IAP Drug Formulary 2024"],
+    },
+    {
+      generic_name: "GENTAMICIN",
+      drug_class: "Aminoglycoside antibiotic",
+      category: "Antibiotics",
+      brand_names: ["Garamycin", "Gentakind"],
+      formulations: [
+        {
+          form: "injection",
+          conc_qty: 10,
+          conc_unit: "mg",
+          per_qty: 1,
+          per_unit: "ml",
+          route: "iv",
+          indian_brand: "Gentakind 40mg/2ml ampoule",
+        },
+        {
+          form: "injection",
+          conc_qty: 40,
+          conc_unit: "mg",
+          per_qty: 2,
+          per_unit: "ml",
+          route: "iv",
+        },
+      ],
+      dosing_bands: [
+        {
+          indication: "Neonatal sepsis — preterm <32wks",
+          age_band: "neonate-preterm",
+          method: "weight",
+          dose_min_qty: 2.5,
+          dose_max_qty: 2.5,
+          dose_unit: "mg",
+          is_per_day: false,
+          frequency_per_day: 1,
+          duration_days: 7,
+          rounding_rule: "0.1ml",
+          notes:
+            "Once daily dosing. q36h if GA<30wks. Check levels after 3rd dose.",
+        },
+        {
+          indication: "Neonatal sepsis — term",
+          age_band: "neonate",
+          method: "weight",
+          dose_min_qty: 4,
+          dose_max_qty: 5,
+          dose_unit: "mg",
+          is_per_day: false,
+          frequency_per_day: 1,
+          duration_days: 7,
+          rounding_rule: "0.1ml",
+          notes:
+            "Once daily dosing. Check trough level <1 mg/L before 3rd dose.",
+        },
+        {
+          indication: "Paediatric infections",
+          age_band: "child",
+          method: "weight",
+          dose_min_qty: 7.5,
+          dose_max_qty: 7.5,
+          dose_unit: "mg",
+          is_per_day: true,
+          frequency_per_day: 3,
+          duration_days: 7,
+          rounding_rule: "0.1ml",
+          notes: "Divided q8h. Check levels if >7 days.",
+        },
+      ],
+      renal_adjustment_required: true,
+      renal_bands: [
+        {
+          gfr_min: 0,
+          gfr_max: 30,
+          action: "extend_interval",
+          note: "Extend to q24-48h. Monitor serum levels.",
+        },
+        {
+          gfr_min: 30,
+          gfr_max: 60,
+          action: "extend_interval",
+          note: "Extend to q12-18h. Monitor levels.",
+        },
+      ],
+      monitoring_parameters: [
+        "Serum gentamicin trough (<1 mg/L) and peak (6-10 mg/L)",
+        "Renal function (creatinine, urea)",
+        "Audiology if >10 days use",
+      ],
+      black_box_warnings: [
+        "Nephrotoxicity — monitor renal function",
+        "Ototoxicity — irreversible hearing loss with prolonged use",
+      ],
+      contraindications: [
+        "Myasthenia gravis",
+        "Known aminoglycoside hypersensitivity",
+      ],
+      administration: [
+        {
+          route: "iv",
+          reconstitution: "Ready to use (10mg/ml or 40mg/ml)",
+          dilution: "Dilute dose in NS to 10ml. Infuse over 30 min.",
+          infusion_rate: "Infuse over 30 minutes. Do NOT give as IV bolus.",
+        },
+      ],
+      reference_source: [
+        "British Neonatal Formulary 2024",
+        "BNFC 2025-26",
+        "Lexicomp",
+      ],
+    },
+  ];
+
+  function loadSampleData() {
+    document.getElementById("json-input").value = JSON.stringify(
+      SAMPLE_DRUGS,
+      null,
+      2,
+    );
+    document.getElementById("parse-status").textContent = "";
+  }
+
+  const FORMAT_EXAMPLES = {
+    minimal: `[
+  { "name": "IBUPROFEN", "category": "Analgesics" },
+  { "name": "AZITHROMYCIN", "category": "Antibiotics" }
+]`,
+    standard: `[
+  {
+    "generic_name": "CETIRIZINE",
+    "category": "Antihistamines",
+    "brands": ["Zyrtec", "Alerid", "Cetrizet"],
+    "dose": "0.25 mg/kg/day",
+    "formulations": [
+      "Syrup 5mg/5ml",
+      "Tablet 10mg"
+    ],
+    "contraindications": "Severe renal impairment",
+    "notes": "Single daily dose. May cause sedation."
+  }
+]`,
+    full: `[
+  {
+    "generic_name": "PHENOBARBITONE",
+    "drug_class": "Barbiturate antiepileptic",
+    "category": "Antiepileptics",
+    "brand_names": ["Luminal", "Gardenal"],
+    "therapeutic_use": ["Neonatal seizures", "Epilepsy", "Status epilepticus"],
+    "licensed_in_children": "true",
+    "formulations": [
+      {
+        "form": "injection",
+        "conc_qty": 200,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "ml",
+        "route": "iv",
+        "indian_brand": "Gardenal 200mg/ml"
+      },
+      {
+        "form": "tablet",
+        "conc_qty": 30,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "oral"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Neonatal seizures — loading dose",
+        "age_band": "neonate",
+        "method": "weight",
+        "dose_min_qty": 20,
+        "dose_max_qty": 40,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "rounding_rule": "0.1ml",
+        "notes": "Loading dose IV over 20 min. May repeat 10-20 mg/kg if seizures persist."
+      },
+      {
+        "indication": "Neonatal maintenance",
+        "age_band": "neonate",
+        "method": "weight",
+        "dose_min_qty": 3,
+        "dose_max_qty": 5,
+        "dose_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "rounding_rule": "0.1ml",
+        "notes": "Start 12-24h after loading dose."
+      }
+    ],
+    "monitoring_parameters": [
+      "Serum phenobarbitone levels (target 15-40 mg/L)",
+      "Respiratory rate and oxygen saturation",
+      "Blood pressure"
+    ],
+    "reference_source": ["British Neonatal Formulary", "IAP Neonatal Protocol 2024"]
+  }
+]`,
+    flat: `[
+  {
+    "name": "SALBUTAMOL",
+    "class": "Beta-2 agonist bronchodilator",
+    "category": "Bronchodilators",
+    "brands": "Ventolin, Asthalin, Aerocort",
+    "dose": "0.1-0.15 mg/kg/dose q4-6h PRN",
+    "concentration": "2mg/5ml syrup",
+    "contraindications": "Hypersensitivity to salbutamol",
+    "notes": "Use spacer with MDI. Nebulisation: 2.5mg (0.5ml of 0.5% solution) in 2.5ml NS q20min x3 for acute asthma."
+  }
+]`,
+  };
+
+  function loadSampleFormat() {
+    document.getElementById("format-section").style.display =
+      document.getElementById("format-section").style.display === "none"
+        ? "block"
+        : "none";
+  }
+  function loadFormatExample(key) {
+    document.getElementById("format-ta").value = FORMAT_EXAMPLES[key] || "";
+  }
+</script>

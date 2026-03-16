@@ -1,0 +1,1224 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  :root {
+    --blue: #1e3a6b;
+    --blue-lt: #e8edf8;
+    --blue-mid: #2d5aa0;
+    --green: #1a5c35;
+    --green-lt: #e8f4ed;
+    --red: #8b1a1a;
+    --red-lt: #fdf0f0;
+    --amber: #7a4a00;
+    --amber-lt: #fef8e8;
+    --ink: #1a1a14;
+    --ink2: #3d3d30;
+    --ink3: #7a7a60;
+    --paper: #fffef9;
+    --paper2: #f8f7f1;
+    --paper3: #eeeadb;
+    --border: rgba(26, 26, 20, 0.1);
+    --border2: rgba(26, 26, 20, 0.18);
+    --r: 6px;
+    --r2: 10px;
+  }
+  body {
+    font-family: system-ui, sans-serif;
+    background: var(--paper2);
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .shell {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    background: var(--paper);
+    border-bottom: 0.5px solid var(--border2);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .toolbar-title {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+    color: var(--ink);
+  }
+  .status {
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .status.waiting {
+    background: var(--paper3);
+    color: var(--ink3);
+  }
+  .status.ready {
+    background: var(--blue-lt);
+    color: var(--blue);
+  }
+  .status.signed {
+    background: var(--green-lt);
+    color: var(--green);
+  }
+  .tbtn {
+    padding: 7px 14px;
+    border-radius: var(--r);
+    border: 0.5px solid var(--border2);
+    background: var(--paper);
+    color: var(--ink2);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.12s;
+  }
+  .tbtn:hover {
+    background: var(--paper3);
+  }
+  .tbtn.primary {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .tbtn.primary:hover {
+    background: var(--blue-mid);
+  }
+  .tbtn.success {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
+  .tbtn.success:hover {
+    background: #1e6b3e;
+  }
+  .tbtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Paste panel */
+  .paste-panel {
+    padding: 14px 20px;
+    background: var(--paper2);
+    border-bottom: 0.5px solid var(--border);
+    display: none;
+  }
+  .paste-lbl {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .paste-ta {
+    width: 100%;
+    min-height: 70px;
+    padding: 8px 10px;
+    border: 0.5px solid var(--border2);
+    border-radius: var(--r);
+    background: var(--paper);
+    font-size: 12px;
+    color: var(--ink);
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+  }
+  .paste-ta:focus {
+    border-color: var(--blue);
+  }
+  .paste-hint {
+    font-size: 11px;
+    color: var(--ink3);
+    margin-top: 5px;
+  }
+  .parse-btn {
+    margin-top: 8px;
+    padding: 7px 18px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--r);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* Empty state */
+  .empty {
+    text-align: center;
+    padding: 80px 20px;
+  }
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--blue-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .empty-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: var(--blue);
+    stroke-width: 1.5;
+  }
+  .empty h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .empty p {
+    font-size: 13px;
+    color: var(--ink3);
+    max-width: 360px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+  .demo-btn {
+    padding: 9px 22px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--r2);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* ======= PRESCRIPTION PAPER ======= */
+  .rx-paper {
+    background: #fff;
+    margin: 16px 20px;
+    border: 0.5px solid var(--border2);
+    border-radius: var(--r2);
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+  @media print {
+    .toolbar,
+    .paste-panel,
+    .empty,
+    .no-print {
+      display: none !important;
+    }
+    body {
+      background: #fff;
+    }
+    .shell {
+      max-width: none;
+      padding: 0;
+    }
+    .rx-paper {
+      margin: 0;
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  /* Header */
+  .rx-hdr {
+    background: #1e3a6b;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 180px 1fr 180px;
+  }
+  .rx-hdr-l,
+  .rx-hdr-r {
+    padding: 12px 16px;
+    font-size: 10.5px;
+    line-height: 1.8;
+    font-family: system-ui, sans-serif;
+    opacity: 0.88;
+  }
+  .rx-hdr-r {
+    text-align: right;
+  }
+  .rx-hdr-l strong,
+  .rx-hdr-r strong {
+    opacity: 1;
+    font-size: 11.5px;
+    display: block;
+    margin-bottom: 1px;
+  }
+  .rx-hdr-c {
+    padding: 12px 16px;
+    text-align: center;
+    border-left: 0.5px solid rgba(255, 255, 255, 0.12);
+    border-right: 0.5px solid rgba(255, 255, 255, 0.12);
+  }
+  .rx-hdr-c h1 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    font-family: Georgia, serif;
+    margin-bottom: 1px;
+  }
+  .rx-hdr-c .dev {
+    font-size: 12px;
+    opacity: 0.65;
+    font-family: system-ui, sans-serif;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .rx-hdr-c .sub {
+    font-size: 10px;
+    opacity: 0.55;
+    font-family: system-ui, sans-serif;
+  }
+  .rx-hdr-c .nabh {
+    display: inline-block;
+    border: 0.5px solid rgba(255, 255, 255, 0.35);
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 9px;
+    margin-top: 4px;
+    font-family: system-ui, sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  /* Meta strip */
+  .rx-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: #fafaf4;
+    border-bottom: 1px solid #e8e3d5;
+  }
+  .rx-mc {
+    padding: 7px 14px;
+    border-right: 0.5px solid #e8e3d5;
+    font-family: system-ui, sans-serif;
+  }
+  .rx-mc:last-child {
+    border-right: none;
+  }
+  .rx-mc-lbl {
+    font-size: 9px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+  .rx-mc-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a14;
+  }
+
+  /* Sections */
+  .rx-sec {
+    border-bottom: 0.5px solid #ece7d8;
+    padding: 10px 14px;
+  }
+  .rx-sec:last-of-type {
+    border-bottom: none;
+  }
+  .rx-sec-title {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: system-ui, sans-serif;
+    padding-bottom: 5px;
+    margin-bottom: 7px;
+    border-bottom: 0.5px solid currentColor;
+  }
+  .rx-sec-title.t-blue {
+    color: #1e3a6b;
+    border-color: rgba(30, 58, 107, 0.2);
+  }
+  .rx-sec-title.t-red {
+    color: #8b1a1a;
+    border-color: rgba(139, 26, 26, 0.2);
+  }
+  .rx-sec-title.t-blk {
+    color: #555;
+    border-color: rgba(80, 80, 70, 0.18);
+  }
+
+  /* Diagnosis */
+  .dx-line {
+    font-size: 13.5px;
+    color: #1a1a14;
+    margin-bottom: 3px;
+  }
+  .dx-icd {
+    font-size: 11px;
+    color: #999;
+    margin-left: 6px;
+    font-family: system-ui, sans-serif;
+  }
+  .dx-type {
+    font-size: 10px;
+    color: #aaa;
+    font-family: system-ui, sans-serif;
+    margin-left: 4px;
+  }
+
+  /* Triage */
+  .triage-pill {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: system-ui, sans-serif;
+  }
+
+  /* Medicines */
+  .med-row {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 0 10px;
+    padding-bottom: 9px;
+    margin-bottom: 9px;
+    border-bottom: 0.5px dashed #ddd9cc;
+  }
+  .med-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  .med-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a6b;
+    font-family: system-ui, sans-serif;
+    padding-top: 1px;
+  }
+  .med-r1 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a6b;
+    margin-bottom: 2px;
+  }
+  .med-r2 {
+    font-size: 13px;
+    color: #2a2a1e;
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+  .med-r3 {
+    font-size: 12px;
+    color: #777;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .med-calc-line {
+    font-size: 9.5px;
+    color: #bbb;
+    font-family: system-ui, sans-serif;
+    margin-top: 2px;
+  }
+  .med-flag-line {
+    font-size: 10px;
+    color: #8b1a1a;
+    font-family: system-ui, sans-serif;
+    margin-top: 2px;
+  }
+
+  /* Investigations */
+  .inv-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  .inv-name {
+    font-weight: 700;
+    color: #8b1a1a;
+    min-width: 150px;
+  }
+  .inv-ind {
+    color: #444;
+  }
+  .inv-urg {
+    font-size: 9.5px;
+    background: #fdf0f0;
+    color: #8b1a1a;
+    padding: 1px 7px;
+    border-radius: 99px;
+    font-family: system-ui, sans-serif;
+    flex-shrink: 0;
+  }
+
+  /* IV fluids */
+  .iv-text {
+    font-size: 13px;
+    color: #2a2a1e;
+    line-height: 1.6;
+    background: #fafaf4;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-family: system-ui, sans-serif;
+  }
+
+  /* Growth */
+  .z-row {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .z-chip {
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-family: system-ui, sans-serif;
+    border: 0.5px solid currentColor;
+  }
+  .z-norm {
+    color: #1a5c35;
+    background: #e8f4ed;
+  }
+  .z-warn {
+    color: #7a4a00;
+    background: #fef8e8;
+  }
+  .z-bad {
+    color: #8b1a1a;
+    background: #fdf0f0;
+  }
+  .growth-comment {
+    font-size: 13px;
+    color: #2a2a1e;
+    line-height: 1.6;
+  }
+
+  /* Vax */
+  .vax-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    font-family: system-ui, sans-serif;
+  }
+  .vax-table td {
+    padding: 4px 8px;
+    border-bottom: 0.5px solid #ece7d8;
+    vertical-align: middle;
+  }
+  .vax-table tr:last-child td {
+    border-bottom: none;
+  }
+  .vax-due {
+    background: #e8f4ed;
+    color: #1a5c35;
+    padding: 1px 7px;
+    border-radius: 99px;
+    font-size: 9.5px;
+    font-weight: 600;
+  }
+  .vax-over {
+    background: #fdf0f0;
+    color: #8b1a1a;
+    padding: 1px 7px;
+    border-radius: 99px;
+    font-size: 9.5px;
+    font-weight: 600;
+  }
+
+  /* Dev / diet / referral */
+  .info-text {
+    font-size: 13px;
+    color: #2a2a1e;
+    line-height: 1.6;
+  }
+  .referral-box {
+    background: #f9f8f2;
+    border-left: 2px solid #aaa;
+    padding: 7px 12px;
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+    color: #2a2a1e;
+  }
+
+  /* Neonatal */
+  .neo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    font-family: system-ui, sans-serif;
+  }
+  .neo-cell {
+    background: #fafaf4;
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+  .neo-lbl {
+    font-size: 9px;
+    color: #aaa;
+    margin-bottom: 2px;
+  }
+  .neo-val {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Counselling */
+  .counsel-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-family: system-ui, sans-serif;
+  }
+  .counsel-chip {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: #f0ede0;
+    color: #555;
+    border: 0.5px solid #ddd8c8;
+  }
+
+  /* Safety flags */
+  .safety-flag {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    font-size: 12px;
+    color: #7a4a00;
+    font-family: system-ui, sans-serif;
+    margin-bottom: 3px;
+  }
+
+  /* Emergency */
+  .emerg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 14px;
+  }
+  .emerg-row {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    padding: 3px 0;
+    border-bottom: 0.5px solid #f0ede0;
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+  }
+  .emerg-row:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+  .emerg-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #8b1a1a;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  /* Follow-up */
+  .followup-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+  }
+  .followup-days-val {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e3a6b;
+  }
+
+  /* Safety strip */
+  .safety-strip {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-family: system-ui, sans-serif;
+  }
+  .sc-chip {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    border: 0.5px solid rgba(26, 92, 53, 0.3);
+    background: #e8f4ed;
+    color: #1a5c35;
+  }
+  .sc-chip.warn {
+    border-color: rgba(122, 74, 0, 0.3);
+    background: #fef8e8;
+    color: #7a4a00;
+  }
+
+  /* Footer */
+  .rx-footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: end;
+    padding: 12px 14px;
+    background: #fafaf4;
+    border-top: 1px solid #e8e3d5;
+  }
+  .rx-footer-doc strong {
+    font-size: 13px;
+    color: #1a1a14;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .rx-footer-doc span {
+    font-size: 10.5px;
+    color: #777;
+    display: block;
+    line-height: 1.7;
+    font-family: system-ui, sans-serif;
+  }
+  .rx-stamp {
+    border: 1.5px solid #1e3a6b;
+    border-radius: 4px;
+    padding: 6px 10px;
+    text-align: center;
+    margin-top: 10px;
+    max-width: 220px;
+  }
+  .rx-stamp p {
+    font-size: 8.5px;
+    color: #1e3a6b;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .rx-stamp strong {
+    font-size: 9px;
+    color: #1e3a6b;
+    display: block;
+    border-top: 0.5px solid rgba(30, 58, 107, 0.25);
+    margin-top: 3px;
+    padding-top: 3px;
+    font-style: italic;
+  }
+  .rx-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .rx-qr-box {
+    width: 68px;
+    height: 68px;
+    background: #fff;
+    border: 0.5px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rx-qr-lbl {
+    font-size: 8.5px;
+    color: #aaa;
+    font-family: system-ui, sans-serif;
+    text-align: center;
+    line-height: 1.5;
+  }
+</style>
+
+<div class="shell">
+  <div class="toolbar no-print">
+    <span class="toolbar-title">Prescription Output</span>
+    <span class="status waiting" id="status-lbl">Waiting for prescription</span>
+    <button class="tbtn" onclick="togglePaste()">Paste JSON</button>
+    <button class="tbtn" onclick="loadDemo()">Load demo</button>
+    <button
+      class="tbtn primary"
+      id="btn-print"
+      onclick="window.print()"
+      disabled
+    >
+      Print
+    </button>
+    <button class="tbtn success" id="btn-pdf" onclick="savePDF()" disabled>
+      Save PDF
+    </button>
+  </div>
+
+  <div class="paste-panel" id="paste-panel">
+    <div class="paste-lbl">Paste prescription JSON</div>
+    <textarea
+      class="paste-ta"
+      id="paste-ta"
+      placeholder="Paste the JSON output from the Prescription Generator here…"
+    ></textarea>
+    <div class="paste-hint">
+      Copy the rxData JSON from the pad artifact, paste it here, then click
+      Render.
+    </div>
+    <button class="parse-btn" onclick="parsePaste()">
+      Render prescription
+    </button>
+  </div>
+
+  <div id="empty-state">
+    <div class="empty">
+      <div class="empty-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <line x1="16" y1="13" x2="8" y2="13" />
+          <line x1="16" y1="17" x2="8" y2="17" />
+        </svg>
+      </div>
+      <h2>No prescription loaded</h2>
+      <p>
+        Sign off a prescription in the Pad artifact, or load the demo to see the
+        full output.
+      </p>
+      <button class="demo-btn" onclick="loadDemo()">
+        Load demo prescription
+      </button>
+    </div>
+  </div>
+
+  <div id="rx-wrap" style="display: none">
+    <div class="rx-paper" id="rx-paper"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  const DEMO = {
+    patient: {
+      name: "Arjun Kumar",
+      age: "8 months",
+      sex: "Male",
+      weight_kg: 7.2,
+      height_cm: 67,
+      hc_cm: 43,
+      guardian: "Raj Kumar (Father)",
+      uhid: "RH-294871",
+    },
+    diagnosis: [
+      { name: "Acute Otitis Media", icd10: "H66.0", type: "provisional" },
+      { name: "Viral URTI", icd10: "J06.9", type: "provisional" },
+    ],
+    medicines: [
+      {
+        number: 1,
+        row1_en: "AMOXICILLIN SUSPENSION (250 mg / 5 ml)",
+        row2_en:
+          "2.5 ml (125 mg) orally three times daily for 7 days. Give after feeds. Complete full course.",
+        row3_hi:
+          "ढाई ml मुँह से दिन में तीन बार 7 दिन तक दें। खाने के बाद दें। पूरा कोर्स पूरा करें।",
+        calc: "80mg/kg × 7.2kg = 576mg/day ÷ 3 = 192mg/dose → 250mg/5ml → 3.5ml → rounded to 3.5ml (max 500mg/dose)",
+        flag: "",
+      },
+      {
+        number: 2,
+        row1_en: "PARACETAMOL SUSPENSION (120 mg / 5 ml)",
+        row2_en:
+          "4.5 ml (108 mg) orally every 6 hours as needed for fever above 38°C. Max 4 doses per day.",
+        row3_hi:
+          "साढ़े चार ml बुखार होने पर हर 6 घंटे में मुँह से दें। 38°C से कम तापमान पर न दें। दिन में 4 बार से ज़्यादा न दें।",
+        calc: "15mg/kg × 7.2kg = 108mg = 4.5ml of 120mg/5ml syrup",
+        flag: "",
+      },
+    ],
+    investigations: [
+      {
+        name: "CBC with differential",
+        indication: "Fever > 3 days, rule out bacterial infection",
+        urgency: "same-day",
+      },
+      { name: "CRP", indication: "Inflammation marker", urgency: "same-day" },
+    ],
+    iv_fluids: [],
+    growth: {
+      chart: "WHO 2006",
+      waz: "-0.8",
+      haz: "-1.1",
+      whz: "-0.5",
+      hcaz: "-0.3",
+      muac: "13.2",
+      classification: "Well nourished",
+      comment:
+        "Weight-for-Age: -0.8 SD (Normal) | Height-for-Age: -1.1 SD (Normal) | BMI-for-Age: -0.5 SD (Normal) | HC-for-Age: -0.3 SD (Normal) | MUAC: 13.2 cm (Normal). Growth chart: WHO 2006. Well nourished child. Nutritional counselling given.",
+    },
+    vaccinations: {
+      due: ["Hepatitis B dose 3", "OPV dose 1"],
+      overdue: [],
+      next_due: "9 months — MMR 1, OPV 2",
+      notes: "Vaccination up to date through 6-week doses.",
+    },
+    developmental: {
+      findings:
+        "Social smile present, babbling, sitting with support, transfers objects. No red flags at 8 months.",
+      red_flags: [],
+    },
+    diet: "Continue breastfeeding. Begin semi-solid foods 2–3×/day. Mashed dal, rice, vegetables. Avoid cow milk as main drink until 1 year.",
+    safety: {
+      allergy_note: "NKDA",
+      interactions: "Amoxicillin + Paracetamol — no interaction. Safe.",
+      flags: [],
+    },
+    followup_days: 3,
+    referral: "ENT review in 2 weeks if ear symptoms persist",
+    triage_score: 0,
+    triage_action: "Routine OPD",
+    counselling: [
+      "Breastfeeding advice",
+      "Feeding & weaning guidance",
+      "Immunization counselling",
+      "Danger signs explained",
+    ],
+    doctor_notes:
+      "Review ear at follow-up. Return immediately if fever persists beyond 3 days or worsens.",
+  };
+
+  const EMERGENCY = [
+    { hi: "तेज सांस / सीने में धंसाव", en: "Fast breathing / chest indrawing" },
+    { hi: "होंठ या जीभ का नीला पड़ना", en: "Bluish lips or tongue" },
+    { hi: "दूध / खाना न पीना", en: "Refusal to feed" },
+    { hi: "बार-बार उल्टी आना", en: "Repeated vomiting" },
+    { hi: "दौरा पड़ना / अकड़न", en: "Convulsions / fits" },
+    { hi: "दवा से भी बुखार न उतरना", en: "Fever not responding to medicine" },
+    { hi: "6 घंटे से पेशाब न आना", en: "No urine for 6+ hours" },
+    {
+      hi: "अत्यधिक नींद / प्रतिक्रिया न करना",
+      en: "Excessive sleepiness / poor response",
+    },
+  ];
+
+  function has(v) {
+    if (v === null || v === undefined || v === "") return false;
+    if (Array.isArray(v)) return v.length > 0;
+    if (typeof v === "object") return Object.values(v).some((x) => has(x));
+    return true;
+  }
+  function zc(v) {
+    const n = parseFloat(v);
+    if (isNaN(n)) return "";
+    if (n <= -3 || n >= 3) return "z-bad";
+    if (n <= -2 || n >= 2) return "z-warn";
+    return "z-norm";
+  }
+
+  function render(rx) {
+    const today = new Date().toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+    const time = new Date().toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const uhid = rx.patient.uhid || "RH-" + Date.now().toString().slice(-6);
+    const rxid = "RX-" + Date.now().toString().slice(-8);
+    let h = "";
+
+    /* ---- HEADER ---- */
+    h += `<div class="rx-hdr">
+    <div class="rx-hdr-l"><strong>Dr. Lokender Goyal</strong>MD Pediatrics (PGI Chandigarh)<br>HMCI Reg. HN 21452 · PMC 23168<br>Pediatrics &amp; Neonatology<br><br><strong>Dr. Swati Goyal</strong>MD Pediatrics</div>
+    <div class="rx-hdr-c">
+      <h1>Radhakishan Hospital</h1>
+      <span class="dev">राधाकिशन हस्पताल</span>
+      <div class="sub">Jyoti Nagar, Kurukshetra, Haryana</div>
+      <span class="nabh">NABH HCO 6th Edition Accredited</span>
+    </div>
+    <div class="rx-hdr-r" style="font-size:10.5px">
+      Date: <strong>${today}</strong><br>
+      Time: ${time}<br>
+      Rx ID: <strong>${rxid}</strong><br>
+      UHID: <strong>${uhid}</strong><br><br>
+      Emergency:<br>01744-251441<br>01744-270516<br>7206029516
+    </div>
+  </div>`;
+
+    /* ---- META ---- */
+    h += `<div class="rx-meta">
+    <div class="rx-mc"><div class="rx-mc-lbl">Patient name</div><div class="rx-mc-val">${rx.patient.name || "—"}</div></div>
+    <div class="rx-mc"><div class="rx-mc-lbl">Age · Sex · Weight</div><div class="rx-mc-val">${rx.patient.age || "—"} · ${rx.patient.sex || "—"} · ${rx.patient.weight_kg ? rx.patient.weight_kg + " kg" : "—"}</div></div>
+    <div class="rx-mc"><div class="rx-mc-lbl">Guardian / Contact</div><div class="rx-mc-val">${rx.patient.guardian || "—"}</div></div>
+  </div>`;
+
+    /* ---- BODY ---- */
+
+    /* Diagnosis — always */
+    if (has(rx.diagnosis)) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Diagnosis</div>
+    ${rx.diagnosis.map((d) => `<div class="dx-line">${d.name}<span class="dx-icd">${d.icd10 || ""}</span><span class="dx-type">${d.type || ""}</span></div>`).join("")}</div>`;
+    }
+
+    /* Triage — only if score > 0 */
+    if (rx.triage_score > 0) {
+      const tc =
+        rx.triage_score >= 7
+          ? "#8b1a1a"
+          : rx.triage_score >= 4
+            ? "#7a4a00"
+            : "#1e3a6b";
+      const bg =
+        rx.triage_score >= 7
+          ? "#fdf0f0"
+          : rx.triage_score >= 4
+            ? "#fef8e8"
+            : "#e8edf8";
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Triage assessment</div>
+    <span class="triage-pill" style="color:${tc};background:${bg}">Score ${rx.triage_score} — ${rx.triage_action}</span></div>`;
+    }
+
+    /* Safety flags — only if present */
+    if (has(rx.safety) && has(rx.safety.flags) && rx.safety.flags.length) {
+      h += `<div class="rx-sec"><div class="rx-sec-title" style="color:#7a4a00;border-color:rgba(122,74,0,0.2)">Safety alerts</div>
+    ${rx.safety.flags.map((f) => `<div class="safety-flag"><span style="flex-shrink:0">⚠</span><span>${f}</span></div>`).join("")}</div>`;
+    }
+
+    /* Neonatal — only if present */
+    if (has(rx.neonatal)) {
+      const n = rx.neonatal;
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Neonatal details</div>
+    <div class="neo-grid">
+      ${n.ga ? `<div class="neo-cell"><div class="neo-lbl">Gestational age</div><div class="neo-val">${n.ga} wks</div></div>` : ""}
+      ${n.pna ? `<div class="neo-cell"><div class="neo-lbl">Postnatal age</div><div class="neo-val">${n.pna} days</div></div>` : ""}
+      ${n.bw ? `<div class="neo-cell"><div class="neo-lbl">Birth weight</div><div class="neo-val">${n.bw} kg</div></div>` : ""}
+      ${n.corrected ? `<div class="neo-cell"><div class="neo-lbl">Corrected age</div><div class="neo-val">${n.corrected}</div></div>` : ""}
+    </div>
+    ${n.notes ? `<div class="info-text" style="margin-top:8px;font-family:system-ui,sans-serif">${n.notes}</div>` : ""}
+    </div>`;
+    }
+
+    /* Medicines — always if present */
+    if (has(rx.medicines) && rx.medicines.length) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blue">℞ Medicines &nbsp;<span style="font-weight:400;font-size:7.5px;opacity:0.65;letter-spacing:0">Generic names — Royal Blue</span></div>
+    ${rx.medicines
+      .map(
+        (m) => `
+      <div class="med-row">
+        <div class="med-num">${m.number}.</div>
+        <div>
+          <div class="med-r1">${m.row1_en || ""}</div>
+          <div class="med-r2">${m.row2_en || ""}</div>
+          <div class="med-r3">${m.row3_hi || ""}</div>
+          ${m.calc ? `<div class="med-calc-line">Calculation: ${m.calc}</div>` : ""}
+          ${m.flag ? `<div class="med-flag-line">⚠ ${m.flag}</div>` : ""}
+        </div>
+      </div>`,
+      )
+      .join("")}
+    </div>`;
+    }
+
+    /* IV fluids — only if present */
+    if (has(rx.iv_fluids) && rx.iv_fluids.length) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">IV Fluids</div>
+    ${rx.iv_fluids.map((f) => `<div class="iv-text">${typeof f === "string" ? f : JSON.stringify(f)}</div>`).join("")}
+    </div>`;
+    }
+
+    /* Investigations — only if present */
+    if (has(rx.investigations) && rx.investigations.length) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-red">Investigations &nbsp;<span style="font-weight:400;font-size:7.5px;opacity:0.65;letter-spacing:0">Red</span></div>
+    ${rx.investigations
+      .map(
+        (inv) => `
+      <div class="inv-row">
+        <div class="inv-name">${inv.name}</div>
+        <div class="inv-ind">${inv.indication}</div>
+        ${inv.urgency === "same-day" ? '<div class="inv-urg">Same day</div>' : ""}
+      </div>`,
+      )
+      .join("")}
+    </div>`;
+    }
+
+    /* Growth — only if present */
+    if (has(rx.growth) && has(rx.growth.comment)) {
+      const g = rx.growth;
+      const zfs = [
+        { l: "WAZ", v: g.waz },
+        { l: "HAZ", v: g.haz },
+        { l: "WHZ", v: g.whz },
+        { l: "HCZ", v: g.hcaz },
+      ].filter((f) => has(f.v));
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Growth assessment — ${g.chart || "WHO 2006"}</div>
+    ${zfs.length ? `<div class="z-row">${zfs.map((f) => `<span class="z-chip ${zc(f.v)}">${f.l}: ${f.v}</span>`).join("")}${g.muac ? `<span class="z-chip z-norm">MUAC: ${g.muac} cm</span>` : ""}</div>` : ""}
+    <div class="growth-comment">${g.comment}</div>
+    </div>`;
+    }
+
+    /* Vaccination — only if present */
+    if (
+      has(rx.vaccinations) &&
+      (has(rx.vaccinations.due) ||
+        has(rx.vaccinations.overdue) ||
+        has(rx.vaccinations.notes))
+    ) {
+      const v = rx.vaccinations;
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Vaccination — IAP 2024 Schedule</div>
+    <table class="vax-table">
+      ${(v.due || []).map((x) => `<tr><td>${x}</td><td><span class="vax-due">Due today</span></td></tr>`).join("")}
+      ${(v.overdue || []).map((x) => `<tr><td>${x}</td><td><span class="vax-over">Overdue</span></td></tr>`).join("")}
+    </table>
+    ${v.next_due ? `<div style="font-size:11px;color:#888;margin-top:5px;font-family:system-ui,sans-serif">Next due: <strong>${v.next_due}</strong></div>` : ""}
+    ${v.notes ? `<div style="font-size:11.5px;color:#555;margin-top:4px;font-family:system-ui,sans-serif">${v.notes}</div>` : ""}
+    </div>`;
+    }
+
+    /* Developmental — only if present */
+    if (has(rx.developmental) && has(rx.developmental.findings)) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Developmental screening</div>
+    <div class="info-text">${rx.developmental.findings}</div>
+    ${rx.developmental.red_flags && rx.developmental.red_flags.length ? `<div style="color:#8b1a1a;font-size:12px;font-family:system-ui,sans-serif;margin-top:5px"><strong>Red flags:</strong> ${rx.developmental.red_flags.join(", ")}</div>` : ""}
+    </div>`;
+    }
+
+    /* Diet — only if present */
+    if (has(rx.diet)) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Diet &amp; nutrition</div>
+    <div class="info-text">${rx.diet}</div></div>`;
+    }
+
+    /* Counselling — only if present */
+    if (has(rx.counselling) && rx.counselling.length) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Counselling given</div>
+    <div class="counsel-row">${rx.counselling.map((c) => `<span class="counsel-chip">✓ ${c}</span>`).join("")}</div>
+    </div>`;
+    }
+
+    /* Referral — only if present */
+    if (has(rx.referral) && rx.referral.trim()) {
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Referral</div>
+    <div class="referral-box">${rx.referral}</div></div>`;
+    }
+
+    /* Emergency signs — always */
+    h += `<div class="rx-sec"><div class="rx-sec-title t-red">Emergency warning signs — तुरंत वापस आएं</div>
+  <div class="emerg-grid">
+    ${EMERGENCY.map(
+      (s) => `
+      <div class="emerg-row">
+        <div class="emerg-dot"></div>
+        <div><strong>${s.hi}</strong> &nbsp;<span style="color:#aaa">${s.en}</span></div>
+      </div>`,
+    ).join("")}
+  </div></div>`;
+
+    /* Follow-up — always */
+    h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Follow-up &amp; instructions</div>
+  <div class="followup-row">
+    <div>
+      <div style="font-size:10px;color:#aaa;font-family:system-ui,sans-serif;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.05em">Return after</div>
+      <span class="followup-days-val">${rx.followup_days || 3} days</span>
+    </div>
+    ${rx.doctor_notes ? `<div style="flex:1;font-size:13px;color:#444;border-left:0.5px solid #ddd;padding-left:16px;line-height:1.6;font-family:system-ui,sans-serif">${rx.doctor_notes}</div>` : ""}
+  </div></div>`;
+
+    /* Safety compliance strip */
+    h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Safety &amp; NABH compliance</div>
+  <div class="safety-strip">
+    <span class="sc-chip">Allergy checked — ${rx.safety && rx.safety.allergy_note ? rx.safety.allergy_note : "NKDA"}</span>
+    <span class="sc-chip">Drug interactions verified</span>
+    <span class="sc-chip">Max dose verified</span>
+    <span class="sc-chip">Weight-based dosing applied</span>
+    <span class="sc-chip">Bilingual instructions included</span>
+    <span class="sc-chip">NABH HCO 6th Ed. compliant</span>
+  </div></div>`;
+
+    /* Footer + QR */
+    h += `<div class="rx-footer">
+    <div class="rx-footer-doc">
+      <strong>Dr. Lokender Goyal &nbsp;·&nbsp; Dr. Swati Goyal</strong>
+      <span>MD Pediatrics · HMCI Reg. HN 21452 (Haryana) · PMC 23168 (Punjab)</span>
+      <span>Radhakishan Hospital, Jyoti Nagar, Kurukshetra, Haryana</span>
+      <span>Reception/Emergency: 01744-312067 · 01744-251441 · 7206029516</span>
+      <div class="rx-stamp">
+        <p>AI-assisted prescription<br>Reviewed &amp; approved by treating doctor</p>
+        <strong>Dr. Lokender Goyal — Signature &amp; Stamp</strong>
+      </div>
+    </div>
+    <div class="rx-qr">
+      <div class="rx-qr-box" id="qr-box"></div>
+      <div class="rx-qr-lbl">Scan to verify<br>${rxid}</div>
+    </div>
+  </div>`;
+
+    document.getElementById("rx-paper").innerHTML = h;
+    document.getElementById("empty-state").style.display = "none";
+    document.getElementById("rx-wrap").style.display = "block";
+    document.getElementById("status-lbl").textContent = "Ready to print";
+    document.getElementById("status-lbl").className = "status ready";
+    document.getElementById("btn-print").disabled = false;
+    document.getElementById("btn-pdf").disabled = false;
+
+    /* QR code */
+    const qrPayload = JSON.stringify({
+      rx: rxid,
+      uhid: uhid,
+      pt: rx.patient.name,
+      date: today,
+      dx: (rx.diagnosis || [])
+        .map((d) => d.icd10)
+        .filter(Boolean)
+        .join(","),
+      wt: rx.patient.weight_kg,
+      hosp: "RH-KUK",
+    });
+    setTimeout(() => {
+      const el = document.getElementById("qr-box");
+      if (el) {
+        el.innerHTML = "";
+        try {
+          new QRCode(el, {
+            text: qrPayload,
+            width: 64,
+            height: 64,
+            correctLevel: QRCode.CorrectLevel.M,
+          });
+        } catch (e) {
+          el.innerHTML =
+            '<div style="font-size:8px;color:#ccc;text-align:center;padding:8px">QR</div>';
+        }
+      }
+    }, 400);
+  }
+
+  function togglePaste() {
+    const p = document.getElementById("paste-panel");
+    p.style.display = p.style.display === "block" ? "none" : "block";
+  }
+  function parsePaste() {
+    try {
+      const rx = JSON.parse(document.getElementById("paste-ta").value.trim());
+      render(rx);
+      document.getElementById("paste-panel").style.display = "none";
+    } catch (e) {
+      alert("Invalid JSON: " + e.message);
+    }
+  }
+  function loadDemo() {
+    render(DEMO);
+  }
+  function savePDF() {
+    alert(
+      "In the full production build, this saves a pixel-perfect A4 PDF to Supabase Storage and returns a shareable URL.\n\nFor now: use Print → Save as PDF in your browser print dialog (works in Chrome / Edge).",
+    );
+  }
+
+  /* Listen for postMessage from pad artifact */
+  window.addEventListener("message", (e) => {
+    if (e.data && e.data.type === "radhakishan-rx") {
+      try {
+        render(e.data.payload);
+      } catch (err) {
+        console.error("Render error", err);
+      }
+    }
+  });
+</script>

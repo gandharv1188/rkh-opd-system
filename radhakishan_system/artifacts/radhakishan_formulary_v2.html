@@ -1,0 +1,1979 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  :root {
+    --blue: #1e3a6b;
+    --blue-lt: #e8edf8;
+    --blue-mid: #2d5aa0;
+    --green: #1a5c35;
+    --green-lt: #e8f4ed;
+    --red: #8b1a1a;
+    --red-lt: #fdf0f0;
+    --amber: #7a4a00;
+    --amber-lt: #fef8e8;
+    --purple: #4a1a6b;
+    --purple-lt: #f0e8f8;
+    --ink: #1a1a14;
+    --ink2: #3d3d30;
+    --ink3: #7a7a60;
+    --bg: #f8f7f1;
+    --bg2: #fff;
+    --bg3: #eeeadb;
+    --bdr: rgba(26, 26, 20, 0.1);
+    --bdr2: rgba(26, 26, 20, 0.18);
+    --r: 6px;
+    --r2: 10px;
+  }
+  body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13px;
+  }
+  .app {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+  }
+
+  .hdr {
+    background: var(--blue);
+    color: #fff;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .hdr-info h1 {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .hdr-info p {
+    font-size: 11px;
+    opacity: 0.65;
+    margin-top: 2px;
+  }
+  .conn-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cdot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f87171;
+  }
+  .cdot.ok {
+    background: #4ade80;
+  }
+  .cst {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+  .hbtn {
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 0.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 99px;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .cfg {
+    background: var(--blue-lt);
+    border-bottom: 1px solid rgba(30, 58, 107, 0.15);
+    padding: 12px 20px;
+    display: none;
+  }
+  .cfg-g {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .fl label {
+    display: block;
+    font-size: 10px;
+    color: var(--ink3);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .fl input {
+    width: 100%;
+    padding: 7px 9px;
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    background: #fff;
+    font-size: 12px;
+    color: var(--ink);
+    outline: none;
+    font-family: inherit;
+  }
+  .fl input:focus {
+    border-color: var(--blue);
+  }
+
+  .content {
+    padding: 16px 20px;
+  }
+  .topbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .srch {
+    flex: 1;
+    position: relative;
+  }
+  .srch input {
+    width: 100%;
+    padding: 8px 10px 8px 30px;
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    background: var(--bg2);
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    font-family: inherit;
+  }
+  .srch input:focus {
+    border-color: var(--blue);
+  }
+  .srch-ic {
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink3);
+    font-size: 14px;
+    pointer-events: none;
+  }
+  .addbtn {
+    padding: 8px 16px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--r);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .addbtn:hover {
+    background: var(--blue-mid);
+  }
+
+  .cat-tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .ct {
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 0.5px solid var(--bdr2);
+    background: var(--bg2);
+    font-size: 11px;
+    color: var(--ink3);
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+  .ct.on {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+
+  .tbl-wrap {
+    background: var(--bg2);
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r2);
+    overflow: hidden;
+  }
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .tbl th {
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--bg);
+    border-bottom: 0.5px solid var(--bdr2);
+    white-space: nowrap;
+  }
+  .tbl td {
+    padding: 9px 12px;
+    border-bottom: 0.5px solid var(--bdr);
+    vertical-align: top;
+  }
+  .tbl tr:last-child td {
+    border-bottom: none;
+  }
+  .tbl tr:hover td {
+    background: var(--bg);
+  }
+  .dn {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .dm {
+    font-size: 11px;
+    color: var(--ink3);
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+  .bk {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 500;
+    margin: 1px 1px 1px 0;
+  }
+  .bk-blue {
+    background: var(--blue-lt);
+    color: var(--blue);
+  }
+  .bk-green {
+    background: var(--green-lt);
+    color: var(--green);
+  }
+  .bk-red {
+    background: var(--red-lt);
+    color: var(--red);
+  }
+  .bk-amber {
+    background: var(--amber-lt);
+    color: var(--amber);
+  }
+  .bk-purple {
+    background: var(--purple-lt);
+    color: var(--purple);
+  }
+  .bk-gray {
+    background: var(--bg3);
+    color: var(--ink3);
+  }
+  .ra {
+    display: flex;
+    gap: 5px;
+  }
+  .rb {
+    padding: 4px 10px;
+    border-radius: 99px;
+    border: 0.5px solid var(--bdr2);
+    background: none;
+    font-size: 11px;
+    color: var(--ink2);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .rb:hover {
+    background: var(--bg3);
+  }
+  .rb.dl {
+    color: var(--red);
+  }
+  .rb.dl:hover {
+    background: var(--red-lt);
+  }
+  .er td {
+    text-align: center;
+    padding: 40px !important;
+    color: var(--ink3);
+    font-style: italic;
+  }
+  .lr td {
+    text-align: center;
+    padding: 24px !important;
+  }
+  .mr {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--bdr2);
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 6px;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Overlay */
+  .ov {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 200;
+    justify-content: flex-end;
+  }
+  .ov.open {
+    display: flex;
+  }
+  .drw {
+    width: 660px;
+    max-width: 96vw;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .drw-hdr {
+    padding: 14px 20px;
+    background: var(--blue);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .drw-hdr h2 {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .drw-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    opacity: 0.8;
+    padding: 0 4px;
+  }
+  .drw-close:hover {
+    opacity: 1;
+  }
+
+  /* Drawer tabs */
+  .drw-tabs {
+    display: flex;
+    background: var(--bg3);
+    border-bottom: 0.5px solid var(--bdr2);
+    flex-shrink: 0;
+  }
+  .dt {
+    padding: 9px 16px;
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: var(--ink3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    font-family: inherit;
+    transition: all 0.1s;
+  }
+  .dt.on {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+    background: var(--bg2);
+  }
+
+  .drw-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+  }
+  .drw-footer {
+    padding: 12px 20px;
+    border-top: 0.5px solid var(--bdr);
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    background: #fff;
+  }
+
+  /* Form elements */
+  .fs {
+    margin-bottom: 16px;
+  }
+  .fs-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 0.5px solid var(--bdr);
+  }
+  .fg {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .fg.g2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fg.g3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .fg.g4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .ff label {
+    display: block;
+    font-size: 10px;
+    color: var(--ink3);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .ff input,
+  .ff select,
+  .ff textarea {
+    width: 100%;
+    padding: 7px 8px;
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    background: var(--bg);
+    font-size: 12px;
+    color: var(--ink);
+    outline: none;
+    font-family: inherit;
+  }
+  .ff input:focus,
+  .ff select:focus,
+  .ff textarea:focus {
+    border-color: var(--blue);
+    background: #fff;
+  }
+  .ff textarea {
+    resize: vertical;
+    min-height: 48px;
+    line-height: 1.5;
+  }
+  .ff input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+  }
+
+  /* Tag input */
+  .ti-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 5px 8px;
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    background: var(--bg);
+    min-height: 34px;
+    cursor: text;
+    align-items: center;
+  }
+  .ti-wrap:focus-within {
+    border-color: var(--blue);
+    background: #fff;
+  }
+  .tag {
+    background: var(--blue-lt);
+    color: var(--blue);
+    padding: 2px 7px;
+    border-radius: 99px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .tag button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--blue);
+    font-size: 12px;
+    line-height: 1;
+    padding: 0;
+  }
+  .ti {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 12px;
+    color: var(--ink);
+    flex: 1;
+    min-width: 80px;
+    font-family: inherit;
+  }
+
+  /* Repeating rows */
+  .rr {
+    background: var(--bg);
+    border: 0.5px solid var(--bdr);
+    border-radius: var(--r2);
+    padding: 12px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .rr-hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .rr-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink2);
+  }
+  .rm-btn {
+    background: none;
+    border: none;
+    color: var(--red);
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0 2px;
+  }
+  .add-row-btn {
+    padding: 6px 12px;
+    background: none;
+    border: 0.5px dashed var(--bdr2);
+    border-radius: var(--r);
+    font-size: 12px;
+    color: var(--ink3);
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+    text-align: left;
+    margin-top: 4px;
+  }
+  .add-row-btn:hover {
+    background: var(--bg3);
+    color: var(--ink2);
+  }
+
+  /* Dose method highlight */
+  .method-highlight {
+    background: var(--amber-lt);
+    border: 0.5px solid rgba(122, 74, 0, 0.2);
+    border-radius: var(--r);
+    padding: 8px 10px;
+    font-size: 11px;
+    color: var(--amber);
+    margin-top: 6px;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Save/cancel */
+  .sv-btn {
+    flex: 1;
+    padding: 9px;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: var(--r);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .sv-btn:hover {
+    background: #1e6b3e;
+  }
+  .sv-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .cn-btn {
+    padding: 9px 14px;
+    background: none;
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    font-size: 13px;
+    color: var(--ink2);
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .eb {
+    background: var(--red-lt);
+    border: 0.5px solid rgba(139, 26, 26, 0.2);
+    border-radius: var(--r);
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .ib {
+    background: var(--blue-lt);
+    border: 0.5px solid rgba(30, 58, 107, 0.2);
+    border-radius: var(--r);
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--blue-mid);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: #fff;
+    padding: 9px 20px;
+    border-radius: 99px;
+    font-size: 13px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  .toast.on {
+    opacity: 1;
+  }
+
+  /* Monograph view */
+  .mono-section {
+    margin-bottom: 16px;
+    border-bottom: 0.5px solid var(--bdr);
+    padding-bottom: 12px;
+  }
+  .mono-section:last-child {
+    border-bottom: none;
+  }
+  .mono-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 8px;
+  }
+  .mono-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 4px 12px;
+    font-size: 12px;
+  }
+  .mono-lbl {
+    color: var(--ink3);
+  }
+  .mono-val {
+    color: var(--ink2);
+  }
+  .dose-band {
+    background: var(--bg);
+    border: 0.5px solid var(--bdr);
+    border-radius: var(--r);
+    padding: 10px 12px;
+    margin-bottom: 6px;
+  }
+  .dose-band-hdr {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .db-method {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 99px;
+  }
+  .db-method.weight {
+    background: var(--blue-lt);
+    color: var(--blue);
+  }
+  .db-method.bsa {
+    background: var(--purple-lt);
+    color: var(--purple);
+  }
+  .db-method.fixed {
+    background: var(--green-lt);
+    color: var(--green);
+  }
+  .db-method.gfr {
+    background: var(--amber-lt);
+    color: var(--amber);
+  }
+  .db-method.infusion {
+    background: var(--red-lt);
+    color: var(--red);
+  }
+  .db-method.age {
+    background: var(--bg3);
+    color: var(--ink3);
+  }
+  .dose-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .dose-meta {
+    font-size: 11px;
+    color: var(--ink3);
+    line-height: 1.6;
+  }
+</style>
+
+<div class="app">
+  <div class="hdr">
+    <div class="hdr-info">
+      <h1>Formulary Manager — Radhakishan Hospital</h1>
+      <p>Pediatric &amp; Neonatal Drug Database · Supabase-backed</p>
+    </div>
+    <div class="conn-row">
+      <div class="cdot" id="cdot"></div>
+      <span class="cst" id="cst">Not connected</span>
+      <button class="hbtn" onclick="toggleCfg()">Configure DB</button>
+    </div>
+  </div>
+
+  <div class="cfg" id="cfg">
+    <div class="cfg-g">
+      <div class="fl">
+        <label>Supabase URL</label
+        ><input id="sb-url" placeholder="https://xxxx.supabase.co" />
+      </div>
+      <div class="fl">
+        <label>Anon Key</label
+        ><input id="sb-key" type="password" placeholder="eyJhbGc…" />
+      </div>
+    </div>
+    <div style="display: flex; gap: 8px">
+      <button class="addbtn" onclick="connectDB()">Connect &amp; test</button>
+      <button
+        style="
+          padding: 8px 14px;
+          background: none;
+          border: 0.5px solid var(--bdr2);
+          border-radius: var(--r);
+          font-size: 12px;
+          cursor: pointer;
+          font-family: inherit;
+        "
+        onclick="toggleCfg()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="srch">
+        <span class="srch-ic">⌕</span>
+        <input
+          id="srch"
+          placeholder="Search by drug name, class, brand, indication…"
+          oninput="filterDrugs(this.value)"
+        />
+      </div>
+      <button class="addbtn" onclick="openDrawer()">+ Add drug</button>
+    </div>
+
+    <div class="cat-tabs" id="cat-tabs">
+      <div class="ct on" onclick="filterCat('')" data-cat="">All</div>
+      <div class="ct" onclick="filterCat('Antibiotics')" data-cat="Antibiotics">
+        Antibiotics
+      </div>
+      <div class="ct" onclick="filterCat('Analgesics')" data-cat="Analgesics">
+        Analgesics
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Bronchodilators')"
+        data-cat="Bronchodilators"
+      >
+        Bronchodilators
+      </div>
+      <div class="ct" onclick="filterCat('Antivirals')" data-cat="Antivirals">
+        Antivirals
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Antiparasitics')"
+        data-cat="Antiparasitics"
+      >
+        Antiparasitics
+      </div>
+      <div class="ct" onclick="filterCat('Vitamins')" data-cat="Vitamins">
+        Vitamins/Suppl
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Corticosteroids')"
+        data-cat="Corticosteroids"
+      >
+        Steroids
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Antihistamines')"
+        data-cat="Antihistamines"
+      >
+        Antihistamines
+      </div>
+      <div class="ct" onclick="filterCat('GI')" data-cat="GI">GI Agents</div>
+      <div class="ct" onclick="filterCat('Neonatal')" data-cat="Neonatal">
+        Neonatal
+      </div>
+      <div class="ct" onclick="filterCat('Oncology')" data-cat="Oncology">
+        Oncology
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Anticoagulants')"
+        data-cat="Anticoagulants"
+      >
+        Anticoagulants
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Drug</th>
+            <th>Dosing bands</th>
+            <th>Formulations</th>
+            <th>Safety</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr class="lr">
+            <td colspan="5">
+              <div class="mr"></div>
+              <div style="font-size: 11px; color: var(--ink3)">
+                Connect Supabase to load formulary
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DRAWER -->
+  <div class="ov" id="ov" onclick="if (event.target === this) closeDrawer();">
+    <div class="drw" onclick="event.stopPropagation()">
+      <div class="drw-hdr">
+        <h2 id="drw-title">Add drug</h2>
+        <button class="drw-close" onclick="closeDrawer()">×</button>
+      </div>
+      <div class="drw-tabs" id="drw-tabs">
+        <button class="dt on" onclick="showDrwTab(0)">Identity</button>
+        <button class="dt" onclick="showDrwTab(1)">Formulations</button>
+        <button class="dt" onclick="showDrwTab(2)">Dosing bands</button>
+        <button class="dt" onclick="showDrwTab(3)">Safety</button>
+        <button class="dt" onclick="showDrwTab(4)">Admin &amp; notes</button>
+      </div>
+
+      <div class="drw-body" id="drw-body">
+        <div id="drw-err" class="eb" style="display: none"></div>
+
+        <!-- TAB 0: Identity -->
+        <div id="dtab-0">
+          <div class="ib">
+            Enter the drug's identity, classification and therapeutic use. Use
+            the generic name in CAPITALS as it will appear on the prescription.
+          </div>
+          <div class="fs">
+            <div class="fs-title">Drug identity</div>
+            <div class="fg g2">
+              <div class="ff">
+                <label>Generic name *</label
+                ><input
+                  id="d-name"
+                  placeholder="e.g. AMOXICILLIN"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+              <div class="ff">
+                <label>Drug class</label
+                ><input
+                  id="d-class"
+                  placeholder="e.g. Beta-lactam antibiotic"
+                />
+              </div>
+            </div>
+            <div class="fg g2">
+              <div class="ff">
+                <label>Category *</label>
+                <select id="d-cat">
+                  <option value="">Select…</option>
+                  <option>Antibiotics</option>
+                  <option>Analgesics</option>
+                  <option>Bronchodilators</option>
+                  <option>Antivirals</option>
+                  <option>Antiparasitics</option>
+                  <option>Vitamins</option>
+                  <option>Corticosteroids</option>
+                  <option>Antihistamines</option>
+                  <option>GI</option>
+                  <option>Antifungals</option>
+                  <option>Antiepileptics</option>
+                  <option>Anticoagulants</option>
+                  <option>Oncology</option>
+                  <option>Neonatal</option>
+                  <option>Cardiovascular</option>
+                  <option>Endocrine</option>
+                  <option>Immunosuppressants</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="ff">
+                <label>Licensed in children</label>
+                <select id="d-licensed">
+                  <option value="true">Yes — licensed</option>
+                  <option value="partial">Partial / age-restricted</option>
+                  <option value="false">Unlicensed (off-label)</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg">
+              <div class="ff">
+                <label>Indian brand names (comma-separated)</label
+                ><input
+                  id="d-brands"
+                  placeholder="e.g. Novamox, Amoxil, Mox, Wymox"
+                />
+              </div>
+            </div>
+            <div class="ff">
+              <label>Therapeutic uses (press Enter after each)</label>
+              <div
+                class="ti-wrap"
+                id="d-uses-wrap"
+                onclick="document.getElementById('d-uses-i').focus()"
+              >
+                <input
+                  class="ti"
+                  id="d-uses-i"
+                  placeholder="e.g. Acute otitis media…"
+                  onkeydown="addTag(event, 'd-uses')"
+                />
+              </div>
+            </div>
+            <div class="ff" style="margin-top: 8px">
+              <label>Unlicensed use note</label>
+              <input
+                id="d-ulic"
+                placeholder="e.g. Used off-label in neonates < 1 month per IAP protocol"
+              />
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Pregnancy &amp; lactation</div>
+            <div class="fg g3">
+              <div class="ff">
+                <label>Pregnancy category</label>
+                <select id="d-preg">
+                  <option value="">Unknown</option>
+                  <option>A</option>
+                  <option>B</option>
+                  <option>C</option>
+                  <option>D</option>
+                  <option>X</option>
+                </select>
+              </div>
+              <div class="ff">
+                <label>Safe in lactation</label>
+                <select id="d-lact">
+                  <option value="">Unknown</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No / avoid</option>
+                  <option value="caution">Use with caution</option>
+                </select>
+              </div>
+              <div class="ff">
+                <label>Reference source</label
+                ><input
+                  id="d-ref"
+                  placeholder="e.g. IAP 2024, BNFC, Lexicomp"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 1: Formulations -->
+        <div id="dtab-1" style="display: none">
+          <div class="ib">
+            Add each available formulation separately. Use Indian market
+            concentrations (MIMS). Separate the quantity and unit clearly — e.g.
+            concentration is <strong>120</strong> mg per <strong>5</strong> ml,
+            not "120mg/5ml" as a combined string.
+          </div>
+          <div id="forms-list"></div>
+          <button class="add-row-btn" onclick="addForm()">
+            + Add formulation
+          </button>
+        </div>
+
+        <!-- TAB 2: Dosing bands -->
+        <div id="dtab-2" style="display: none">
+          <div class="ib">
+            Each dosing band defines the dose for a specific
+            <strong>age group</strong>, <strong>indication</strong>, and
+            <strong>calculation method</strong>. A drug can have multiple bands
+            — e.g. a neonatal band (by GA) + a paediatric band (by weight), or a
+            standard band + a high-dose band for severe infections. <br /><br />
+            <strong>Calculation methods:</strong> Weight (mg/kg · mcg/kg ·
+            units/kg · mmol/kg) · BSA (mg/m²) · Fixed dose · GFR-based
+            (Calvert/Schwartz) · Continuous infusion (mcg/kg/min) · Age-based
+            (neonatal GA tiers)
+          </div>
+          <div id="bands-list"></div>
+          <button class="add-row-btn" onclick="addBand()">
+            + Add dosing band
+          </button>
+        </div>
+
+        <!-- TAB 3: Safety -->
+        <div id="dtab-3" style="display: none">
+          <div class="fs">
+            <div class="fs-title">Black box warnings</div>
+            <div
+              class="ti-wrap"
+              id="d-bb-wrap"
+              onclick="document.getElementById('d-bb-i').focus()"
+            >
+              <input
+                class="ti"
+                id="d-bb-i"
+                placeholder="e.g. Risk of anaphylaxis — have resuscitation equipment available"
+                onkeydown="addTag(event, 'd-bb')"
+              />
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Contraindications</div>
+            <div
+              class="ti-wrap"
+              id="d-ci-wrap"
+              onclick="document.getElementById('d-ci-i').focus()"
+            >
+              <input
+                class="ti"
+                id="d-ci-i"
+                placeholder="e.g. Penicillin hypersensitivity, renal failure (GFR<10)"
+                onkeydown="addTag(event, 'd-ci')"
+              />
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Cross-reactions</div>
+            <div
+              class="ti-wrap"
+              id="d-cr-wrap"
+              onclick="document.getElementById('d-cr-i').focus()"
+            >
+              <input
+                class="ti"
+                id="d-cr-i"
+                placeholder="e.g. Cephalosporins (1-2% risk if penicillin allergy)"
+                onkeydown="addTag(event, 'd-cr')"
+              />
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Key drug interactions</div>
+            <div id="ints-list"></div>
+            <button class="add-row-btn" onclick="addInt()">
+              + Add interaction
+            </button>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Monitoring parameters</div>
+            <div
+              class="ti-wrap"
+              id="d-mon-wrap"
+              onclick="document.getElementById('d-mon-i').focus()"
+            >
+              <input
+                class="ti"
+                id="d-mon-i"
+                placeholder="e.g. Renal function, serum levels (if aminoglycoside)"
+                onkeydown="addTag(event, 'd-mon')"
+              />
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Pediatric-specific warnings</div>
+            <div
+              class="ti-wrap"
+              id="d-pw-wrap"
+              onclick="document.getElementById('d-pw-i').focus()"
+            >
+              <input
+                class="ti"
+                id="d-pw-i"
+                placeholder="e.g. Avoid aspirin < 16yr (Reye's syndrome risk)"
+                onkeydown="addTag(event, 'd-pw')"
+              />
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Renal dose adjustment</div>
+            <div class="fg" style="margin-bottom: 8px">
+              <div class="ff">
+                <label
+                  ><input type="checkbox" id="d-renal-req" /> Renal dose
+                  adjustment required</label
+                >
+              </div>
+            </div>
+            <div id="renal-bands-list"></div>
+            <button class="add-row-btn" onclick="addRenalBand()">
+              + Add GFR band
+            </button>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Hepatic dose adjustment</div>
+            <div class="fg" style="margin-bottom: 8px">
+              <div class="ff">
+                <label
+                  ><input type="checkbox" id="d-hep-req" /> Hepatic dose
+                  adjustment required</label
+                >
+              </div>
+            </div>
+            <div class="ff">
+              <textarea
+                id="d-hep-note"
+                placeholder="e.g. Reduce dose by 50% in severe hepatic impairment (Child-Pugh C). Avoid in fulminant hepatic failure."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: Admin & Notes -->
+        <div id="dtab-4" style="display: none">
+          <div class="fs">
+            <div class="fs-title">Administration instructions</div>
+            <div id="admin-list"></div>
+            <button class="add-row-btn" onclick="addAdmin()">
+              + Add administration route
+            </button>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Food &amp; storage</div>
+            <div class="fg g2">
+              <div class="ff">
+                <label>Food instructions</label
+                ><input
+                  id="d-food"
+                  placeholder="e.g. Give after meals to reduce GI upset"
+                />
+              </div>
+              <div class="ff">
+                <label>Storage</label
+                ><input
+                  id="d-stor"
+                  placeholder="e.g. Store at 2–8°C, protect from light"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Clinical notes for prescribers</div>
+            <div class="ff">
+              <textarea
+                id="d-notes"
+                rows="4"
+                placeholder="e.g. Use high-dose protocol (80–90 mg/kg/day) for AOM per IAP 2024. Standard dose (40–50 mg/kg/day) for other respiratory infections. Complete full course. In penicillin allergy with anaphylaxis — DO NOT use cephalosporins."
+              ></textarea>
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Reference &amp; review</div>
+            <div class="fg g2">
+              <div class="ff">
+                <label>Primary reference</label
+                ><input
+                  id="d-src"
+                  placeholder="e.g. IAP Drug Formulary 2024, BNFC 2025-26, Lexicomp"
+                />
+              </div>
+              <div class="ff">
+                <label>Last reviewed</label
+                ><input type="date" id="d-reviewed" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drw-footer">
+        <button class="cn-btn" onclick="closeDrawer()">Cancel</button>
+        <button class="sv-btn" id="sv-btn" onclick="saveDrug()">
+          Save to Supabase
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+  /* ===== State ===== */
+  let SB = "",
+    KEY = "",
+    drugs = [],
+    editId = null,
+    curCat = "",
+    curDrwTab = 0;
+  let tags = {};
+  let formCnt = 0,
+    bandCnt = 0,
+    intCnt = 0,
+    renalCnt = 0,
+    adminCnt = 0;
+
+  /* ===== DB ===== */
+  function toggleCfg() {
+    const c = document.getElementById("cfg");
+    c.style.display = c.style.display === "block" ? "none" : "block";
+  }
+  async function connectDB() {
+    SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
+    KEY = document.getElementById("sb-key").value.trim();
+    if (!SB || !KEY) {
+      alert("Enter URL and key");
+      return;
+    }
+    try {
+      const r = await sbq("formulary", "?select=id&limit=1");
+      if (r.ok) {
+        setConn(true);
+        toggleCfg();
+        loadDrugs();
+      } else throw new Error((await r.json()).message || "Failed");
+    } catch (e) {
+      setConn(false);
+      alert("Connection failed: " + e.message);
+    }
+  }
+  function setConn(ok) {
+    document.getElementById("cdot").className = "cdot" + (ok ? " ok" : "");
+    document.getElementById("cst").textContent = ok ? "Connected" : "Failed";
+  }
+  function sbq(t, q = "", m = "GET", b = null) {
+    const o = {
+      method: m,
+      headers: {
+        apikey: KEY,
+        Authorization: "Bearer " + KEY,
+        "Content-Type": "application/json",
+        Prefer: m === "POST" ? "return=representation" : "",
+      },
+    };
+    if (b) o.body = JSON.stringify(b);
+    return fetch(SB + "/rest/v1/" + t + q, o);
+  }
+
+  /* ===== Load & render ===== */
+  async function loadDrugs() {
+    if (!KEY) return;
+    document.getElementById("tbody").innerHTML =
+      '<tr class="lr"><td colspan="5"><div class="mr"></div></td></tr>';
+    try {
+      const r = await sbq(
+        "formulary",
+        "?select=*&order=generic_name.asc&active=eq.true",
+      );
+      if (!r.ok) throw new Error((await r.json()).message);
+      drugs = await r.json();
+      renderTable(drugs);
+    } catch (e) {
+      document.getElementById("tbody").innerHTML =
+        `<tr class="er"><td colspan="5">Error: ${e.message}</td></tr>`;
+    }
+  }
+
+  function renderTable(data) {
+    const tb = document.getElementById("tbody");
+    if (!data.length) {
+      tb.innerHTML =
+        '<tr class="er"><td colspan="5">No drugs yet. Add your first drug entry.</td></tr>';
+      return;
+    }
+    tb.innerHTML = data
+      .map((d) => {
+        const bands = Array.isArray(d.dosing_bands) ? d.dosing_bands : [];
+        const forms = Array.isArray(d.formulations) ? d.formulations : [];
+        const bandHtml = bands
+          .slice(0, 3)
+          .map((b) => {
+            const m = b.method || "weight";
+            const qty =
+              b.dose_min_qty && b.dose_max_qty
+                ? `${b.dose_min_qty}–${b.dose_max_qty}`
+                : b.dose_min_qty || b.dose_max_qty || "?";
+            const unit = b.dose_unit || "mg";
+            const basis =
+              {
+                weight: "kg",
+                bsa: "m²",
+                fixed: "dose",
+                gfr: "GFR",
+                infusion: "kg/min",
+                age: "age",
+              }[m] || m;
+            return `<span class="bk bk-blue" style="font-size:9.5px">${qty} ${unit}/${basis}${b.age_band && b.age_band !== "all" ? " (" + b.age_band + ")" : ""}</span>`;
+          })
+          .join(" ");
+        const formHtml = forms
+          .map(
+            (f) =>
+              `<span class="bk bk-green" style="font-size:9.5px">${f.form} ${f.conc_qty}${f.conc_unit}/${f.per_qty}${f.per_unit}</span>`,
+          )
+          .join(" ");
+        const bb = (d.black_box_warnings || []).length
+          ? `<span class="bk bk-red">⚠ Black box</span>`
+          : "";
+        const ci = (d.contraindications || []).length
+          ? `<span class="bk bk-amber">${d.contraindications.length} CI</span>`
+          : "";
+        const ren = d.renal_adjustment_required
+          ? `<span class="bk bk-purple">Renal adj.</span>`
+          : "";
+        return `<tr>
+      <td>
+        <div class="dn">${d.generic_name}</div>
+        <div class="dm">${d.drug_class || ""} · ${d.category || ""}</div>
+        ${(d.brand_names || []).length ? `<div class="dm">${d.brand_names.slice(0, 3).join(", ")}</div>` : ""}
+        <div class="dm" style="margin-top:2px">${d.licensed_in_children === "false" ? '<span class="bk bk-amber">Unlicensed</span>' : d.licensed_in_children === "partial" ? '<span class="bk bk-amber">Partial licence</span>' : ""}</div>
+      </td>
+      <td>${bandHtml || '<span style="color:var(--ink3);font-size:11px">No bands defined</span>'}</td>
+      <td>${formHtml || '<span style="color:var(--ink3);font-size:11px">No formulations</span>'}</td>
+      <td>${bb}${ci}${ren}</td>
+      <td><div class="ra">
+        <button class="rb" onclick="viewDrug('${d.id}')">View</button>
+        <button class="rb" onclick="editDrug('${d.id}')">Edit</button>
+        <button class="rb dl" onclick="deleteDrug('${d.id}')">Delete</button>
+      </div></td>
+    </tr>`;
+      })
+      .join("");
+  }
+
+  function filterDrugs(q) {
+    const ql = q.toLowerCase();
+    let f = drugs;
+    if (curCat) f = f.filter((d) => (d.category || "").includes(curCat));
+    if (q)
+      f = f.filter(
+        (d) =>
+          d.generic_name.toLowerCase().includes(ql) ||
+          (d.drug_class || "").toLowerCase().includes(ql) ||
+          (d.brand_names || []).some((b) => b.toLowerCase().includes(ql)) ||
+          (d.therapeutic_use || []).some((t) => t.toLowerCase().includes(ql)),
+      );
+    renderTable(f);
+  }
+  function filterCat(cat) {
+    curCat = cat;
+    document
+      .querySelectorAll(".ct")
+      .forEach((el) => el.classList.toggle("on", el.dataset.cat === cat));
+    filterDrugs(document.getElementById("srch").value);
+  }
+
+  /* ===== Tags ===== */
+  function addTag(e, key) {
+    if (
+      e.key !== "Enter" &&
+      e.key !== "," &&
+      !(e.key === "Backspace" && !e.target.value)
+    )
+      return;
+    if (e.key === "Backspace") {
+      if ((tags[key] || []).length) {
+        tags[key].pop();
+        renderTags(key);
+      }
+      return;
+    }
+    e.preventDefault();
+    const v = e.target.value.trim().replace(/,$/, "");
+    if (v) {
+      if (!tags[key]) tags[key] = [];
+      if (!tags[key].includes(v)) tags[key].push(v);
+      renderTags(key);
+    }
+    e.target.value = "";
+  }
+  function renderTags(key) {
+    const wrap = document.getElementById(key + "-wrap");
+    const inp = document.getElementById(key + "-i");
+    if (!wrap || !inp) return;
+    wrap.querySelectorAll(".tag").forEach((t) => t.remove());
+    (tags[key] || []).forEach((t, i) => {
+      const el = document.createElement("span");
+      el.className = "tag";
+      el.innerHTML = `${t}<button onclick="removeTag('${key}',${i})">×</button>`;
+      wrap.insertBefore(el, inp);
+    });
+  }
+  function removeTag(key, i) {
+    tags[key].splice(i, 1);
+    renderTags(key);
+  }
+  function getTags(key) {
+    return tags[key] || [];
+  }
+
+  /* ===== Drawer tabs ===== */
+  function showDrwTab(n) {
+    curDrwTab = n;
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("dtab-" + i).style.display =
+        i === n ? "block" : "none";
+      document.querySelectorAll(".dt")[i].className =
+        "dt" + (i === n ? " on" : "");
+    }
+  }
+
+  /* ===== Formulations ===== */
+  function addForm(d) {
+    const id = "f" + formCnt++;
+    const el = document.createElement("div");
+    el.className = "rr";
+    el.id = id;
+    el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Formulation</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
+  <div class="fg g4" style="margin-bottom:8px">
+    <div class="ff"><label>Form *</label>
+      <select id="${id}-form">
+        <option value="syrup">Syrup / suspension</option><option value="drops">Oral drops</option>
+        <option value="tablet">Tablet</option><option value="capsule">Capsule</option>
+        <option value="injection">Injection (IV/IM)</option><option value="inhaler">Inhaler / MDI</option>
+        <option value="nebulisation">Nebulisation</option><option value="sachet">Sachet</option>
+        <option value="cream">Cream / ointment</option><option value="suppository">Suppository</option>
+        <option value="nasal">Nasal drops / spray</option><option value="eye">Eye drops</option>
+      </select>
+    </div>
+    <div class="ff"><label>Concentration qty *</label><input type="number" id="${id}-cq" placeholder="e.g. 120" step="any"></div>
+    <div class="ff"><label>Unit *</label>
+      <select id="${id}-cu">
+        <option value="mg">mg</option><option value="mcg">mcg (μg)</option><option value="g">g</option>
+        <option value="units">units (IU)</option><option value="mmol">mmol</option><option value="mEq">mEq</option>
+        <option value="mg/ml">mg/ml (concentration given)</option>
+      </select>
+    </div>
+    <div class="ff"><label>Per qty *</label><input type="number" id="${id}-pq" placeholder="e.g. 5" step="any"></div>
+  </div>
+  <div class="fg g3">
+    <div class="ff"><label>Per unit</label>
+      <select id="${id}-pu"><option value="ml">ml</option><option value="tablet">tablet</option><option value="capsule">capsule</option><option value="dose">dose</option><option value="actuation">actuation</option></select>
+    </div>
+    <div class="ff"><label>Route</label>
+      <select id="${id}-rt">
+        <option value="oral">Oral</option><option value="iv">IV</option><option value="im">IM</option>
+        <option value="sc">Subcutaneous</option><option value="inhaled">Inhaled</option>
+        <option value="topical">Topical</option><option value="rectal">Rectal</option>
+        <option value="nasal">Nasal</option><option value="ophthalmic">Ophthalmic</option>
+      </select>
+    </div>
+    <div class="ff"><label>Indian brand / note</label><input id="${id}-ib" placeholder="e.g. Syrup 125mg/5ml — Novamox, Ranmoxy"></div>
+  </div>`;
+    document.getElementById("forms-list").appendChild(el);
+    if (d) {
+      document.getElementById(id + "-form").value = d.form || "syrup";
+      document.getElementById(id + "-cq").value = d.conc_qty || "";
+      document.getElementById(id + "-cu").value = d.conc_unit || "mg";
+      document.getElementById(id + "-pq").value = d.per_qty || "";
+      document.getElementById(id + "-pu").value = d.per_unit || "ml";
+      document.getElementById(id + "-rt").value = d.route || "oral";
+      document.getElementById(id + "-ib").value = d.indian_brand || "";
+    }
+  }
+  function getForms() {
+    return Array.from(document.getElementById("forms-list").children)
+      .map((r) => {
+        const id = r.id;
+        return {
+          form: v(id + "-form"),
+          conc_qty: n(id + "-cq"),
+          conc_unit: v(id + "-cu"),
+          per_qty: n(id + "-pq"),
+          per_unit: v(id + "-pu"),
+          route: v(id + "-rt"),
+          indian_brand: v(id + "-ib"),
+        };
+      })
+      .filter((f) => f.conc_qty);
+  }
+
+  /* ===== Dosing bands ===== */
+  const METHOD_EXPLAIN = {
+    weight: "Quantity × patient weight (kg) = dose. e.g. 15 mg × 8 kg = 120 mg",
+    bsa: "Quantity × BSA (m²) = dose. BSA = √(Ht×Wt/3600). e.g. 100 mg/m² × 0.45 m² = 45 mg",
+    fixed:
+      "Fixed dose regardless of weight. Used for age-band dosing (e.g. 400 mg single dose >2yr)",
+    gfr: "Dose adjusted per GFR (Schwartz formula for children). Used for aminoglycosides, vancomycin, carboplatin etc.",
+    infusion:
+      "Continuous IV infusion rate. Quantity × weight × 60 = dose/hr. e.g. 0.1 mcg/kg/min",
+    age: "Age-band specific flat dose. Used when weight is unavailable or not appropriate (e.g. neonatal GA tiers)",
+  };
+
+  function addBand(d) {
+    const id = "b" + bandCnt++;
+    const el = document.createElement("div");
+    el.className = "rr";
+    el.id = id;
+    el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Dosing band</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
+  <div class="fg g3" style="margin-bottom:8px">
+    <div class="ff"><label>Indication / use</label><input id="${id}-ind" placeholder="e.g. AOM, severe infection"></div>
+    <div class="ff"><label>Age band</label>
+      <select id="${id}-ab"><option value="all">All ages</option><option value="neonate">Neonate (0–28 days)</option><option value="infant">Infant (1–12 months)</option><option value="child">Child (1–12 years)</option><option value="adolescent">Adolescent (12–18 years)</option><option value="neonate-preterm">Preterm neonate</option></select>
+    </div>
+    <div class="ff"><label>Calculation method *</label>
+      <select id="${id}-meth" onchange="updateMethodHelp('${id}')">
+        <option value="weight">Weight-based (per kg)</option>
+        <option value="bsa">BSA-based (per m²)</option>
+        <option value="fixed">Fixed dose</option>
+        <option value="gfr">GFR-adjusted</option>
+        <option value="infusion">Continuous infusion</option>
+        <option value="age">Age-band flat dose</option>
+      </select>
+    </div>
+  </div>
+  <div id="${id}-mhelp" class="method-highlight" style="margin-bottom:8px">${METHOD_EXPLAIN.weight}</div>
+  <div class="fg g4" style="margin-bottom:8px">
+    <div class="ff"><label>Dose min qty *</label><input type="number" id="${id}-dmin" placeholder="e.g. 40" step="any"></div>
+    <div class="ff"><label>Dose max qty</label><input type="number" id="${id}-dmax" placeholder="e.g. 90" step="any"></div>
+    <div class="ff"><label>Dose unit *</label>
+      <select id="${id}-du">
+        <option value="mg">mg</option><option value="mcg">mcg (μg)</option><option value="g">g</option>
+        <option value="units">units (IU)</option><option value="mmol">mmol</option><option value="mEq">mEq</option>
+        <option value="nanomol">nanomol</option>
+      </select>
+    </div>
+    <div class="ff"><label>Per day or per dose?</label>
+      <select id="${id}-pd"><option value="day">Per day (then ÷ freq)</option><option value="dose">Per dose (direct)</option></select>
+    </div>
+  </div>
+  <div class="fg g4" style="margin-bottom:8px">
+    <div class="ff"><label>Frequency (×/day)</label><input type="number" id="${id}-freq" placeholder="e.g. 3"></div>
+    <div class="ff"><label>OR interval (hrs)</label><input type="number" id="${id}-intv" placeholder="e.g. 8"></div>
+    <div class="ff"><label>Duration (days)</label><input type="number" id="${id}-dur" placeholder="e.g. 7"></div>
+    <div class="ff"><label>Duration note</label><input id="${id}-durnote" placeholder="e.g. Complete full course"></div>
+  </div>
+  <div class="fg g4" style="margin-bottom:8px">
+    <div class="ff"><label>Max single qty</label><input type="number" id="${id}-ms" placeholder="e.g. 500" step="any"></div>
+    <div class="ff"><label>Max single unit</label>
+      <select id="${id}-msu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option></select>
+    </div>
+    <div class="ff"><label>Max daily qty</label><input type="number" id="${id}-md" placeholder="e.g. 3000" step="any"></div>
+    <div class="ff"><label>Max daily unit</label>
+      <select id="${id}-mdu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option></select>
+    </div>
+  </div>
+  <div class="fg g3" style="margin-bottom:8px">
+    <div class="ff"><label>Loading dose qty</label><input type="number" id="${id}-ld" placeholder="e.g. 20" step="any"></div>
+    <div class="ff"><label>Loading dose unit</label>
+      <select id="${id}-ldu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="units">units</option><option value="mg/kg">mg/kg</option><option value="mcg/kg">mcg/kg</option></select>
+    </div>
+    <div class="ff"><label>Rounding rule</label>
+      <select id="${id}-rnd">
+        <option value="0.5ml">Nearest 0.5 ml (syrup)</option>
+        <option value="0.1ml">Nearest 0.1 ml (drops/injection)</option>
+        <option value="quarter_tab">Nearest ¼ tablet</option>
+        <option value="whole_unit">Nearest whole unit (insulin/heparin)</option>
+        <option value="exact">Exact (oncology/specialist)</option>
+      </select>
+    </div>
+  </div>
+  <div class="ff"><label>Band-specific notes</label><input id="${id}-note" placeholder="e.g. High-dose protocol for severe AOM; standard dose for URTI. Avoid in renal impairment without dose adjustment."></div>`;
+    document.getElementById("bands-list").appendChild(el);
+    if (d) {
+      [
+        "ind",
+        "ab",
+        "meth",
+        "du",
+        "pd",
+        "freq",
+        "intv",
+        "dur",
+        "durnote",
+        "ms",
+        "msu",
+        "md",
+        "mdu",
+        "ldu",
+        "rnd",
+        "note",
+      ].forEach((k) => {
+        const el = document.getElementById(id + "-" + k);
+        if (el) el.value = d[k] || el.value;
+      });
+      ["dmin", "dmax", "ms", "md", "ld"].forEach((k) => {
+        const el = document.getElementById(id + "-" + k);
+        if (el) el.value = d[k] || "";
+      });
+      updateMethodHelp(id);
+    }
+  }
+  function updateMethodHelp(id) {
+    const m = document.getElementById(id + "-meth")?.value || "weight";
+    const h = document.getElementById(id + "-mhelp");
+    if (h) h.textContent = METHOD_EXPLAIN[m] || "";
+  }
+  function getBands() {
+    return Array.from(document.getElementById("bands-list").children)
+      .map((r) => {
+        const id = r.id;
+        return {
+          indication: v(id + "-ind"),
+          age_band: v(id + "-ab"),
+          method: v(id + "-meth"),
+          dose_min_qty: n(id + "-dmin"),
+          dose_max_qty: n(id + "-dmax"),
+          dose_unit: v(id + "-du"),
+          is_per_day: v(id + "-pd") === "day",
+          frequency_per_day: n(id + "-freq"),
+          interval_hours: n(id + "-intv"),
+          duration_days: n(id + "-dur"),
+          duration_note: v(id + "-durnote"),
+          max_single_qty: n(id + "-ms"),
+          max_single_unit: v(id + "-msu"),
+          max_daily_qty: n(id + "-md"),
+          max_daily_unit: v(id + "-mdu"),
+          loading_dose_qty: n(id + "-ld"),
+          loading_dose_unit: v(id + "-ldu"),
+          rounding_rule: v(id + "-rnd"),
+          notes: v(id + "-note"),
+        };
+      })
+      .filter((b) => b.dose_min_qty || b.dose_max_qty);
+  }
+
+  /* ===== Interactions ===== */
+  function addInt(d) {
+    const id = "i" + intCnt++;
+    const el = document.createElement("div");
+    el.className = "rr";
+    el.id = id;
+    el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Interaction</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
+  <div class="fg g3">
+    <div class="ff"><label>Drug / class</label><input id="${id}-dr" placeholder="e.g. Warfarin" value="${d ? d.drug || "" : ""}"></div>
+    <div class="ff"><label>Severity</label>
+      <select id="${id}-sv">${["black_box", "major", "moderate", "minor"].map((s) => `<option value="${s}"${d && d.severity === s ? " selected" : ""}>${s.replace("_", " ")}</option>`).join("")}</select>
+    </div>
+    <div class="ff"><label>Effect / mechanism</label><input id="${id}-ef" placeholder="e.g. Increased bleeding risk — avoid combination" value="${d ? d.effect || "" : ""}"></div>
+  </div>`;
+    document.getElementById("ints-list").appendChild(el);
+  }
+  function getInts() {
+    return Array.from(document.getElementById("ints-list").children)
+      .map((r) => {
+        const id = r.id;
+        const dr = v(id + "-dr");
+        if (!dr) return null;
+        return { drug: dr, severity: v(id + "-sv"), effect: v(id + "-ef") };
+      })
+      .filter(Boolean);
+  }
+
+  /* ===== Renal bands ===== */
+  function addRenalBand(d) {
+    const id = "r" + renalCnt++;
+    const el = document.createElement("div");
+    el.className = "rr";
+    el.id = id;
+    el.innerHTML = `<div class="rr-hdr"><span class="rr-title">GFR band</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
+  <div class="fg g4">
+    <div class="ff"><label>GFR min (ml/min/1.73m²)</label><input type="number" id="${id}-gmin" placeholder="e.g. 30" value="${d ? d.gfr_min || "" : ""}"></div>
+    <div class="ff"><label>GFR max</label><input type="number" id="${id}-gmax" placeholder="e.g. 60" value="${d ? d.gfr_max || "" : ""}"></div>
+    <div class="ff"><label>Action</label>
+      <select id="${id}-act">${["reduce_dose", "extend_interval", "reduce_and_extend", "avoid", "no_adjustment"].map((a) => `<option value="${a}"${d && d.action === a ? " selected" : ""}>${a.replace(/_/g, " ")}</option>`).join("")}</select>
+    </div>
+    <div class="ff"><label>Adjusted dose note</label><input id="${id}-note" placeholder="e.g. Reduce dose by 50%; extend to q12h" value="${d ? d.note || "" : ""}"></div>
+  </div>`;
+    document.getElementById("renal-bands-list").appendChild(el);
+  }
+  function getRenalBands() {
+    return Array.from(document.getElementById("renal-bands-list").children)
+      .map((r) => {
+        const id = r.id;
+        return {
+          gfr_min: n(id + "-gmin"),
+          gfr_max: n(id + "-gmax"),
+          action: v(id + "-act"),
+          note: v(id + "-note"),
+        };
+      })
+      .filter((b) => b.gfr_min !== null || b.gfr_max !== null);
+  }
+
+  /* ===== Admin ===== */
+  function addAdmin(d) {
+    const id = "a" + adminCnt++;
+    const el = document.createElement("div");
+    el.className = "rr";
+    el.id = id;
+    el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Administration</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
+  <div class="fg g2" style="margin-bottom:8px">
+    <div class="ff"><label>Route</label>
+      <select id="${id}-rt"><option value="oral">Oral</option><option value="iv">IV infusion</option><option value="iv_bolus">IV bolus</option><option value="im">IM</option><option value="sc">Subcutaneous</option><option value="inhaled">Inhaled</option><option value="rectal">Rectal</option></select>
+    </div>
+    <div class="ff"><label>Reconstitution</label><input id="${id}-rec" placeholder="e.g. Dissolve vial in 10ml WFI → 100mg/ml" value="${d ? d.reconstitution || "" : ""}"></div>
+  </div>
+  <div class="fg g2">
+    <div class="ff"><label>Dilution</label><input id="${id}-dil" placeholder="e.g. Dilute in 50ml NS for IV infusion" value="${d ? d.dilution || "" : ""}"></div>
+    <div class="ff"><label>Infusion rate / compatibility</label><input id="${id}-inf" placeholder="e.g. Infuse over 30 min; incompatible with Ca²⁺ solutions" value="${d ? d.infusion_rate || "" : ""}"></div>
+  </div>`;
+    document.getElementById("admin-list").appendChild(el);
+    if (d) document.getElementById(id + "-rt").value = d.route || "oral";
+  }
+  function getAdmins() {
+    return Array.from(document.getElementById("admin-list").children)
+      .map((r) => {
+        const id = r.id;
+        return {
+          route: v(id + "-rt"),
+          reconstitution: v(id + "-rec"),
+          dilution: v(id + "-dil"),
+          infusion_rate: v(id + "-inf"),
+        };
+      })
+      .filter((a) => a.reconstitution || a.dilution || a.infusion_rate);
+  }
+
+  /* ===== Open/close drawer ===== */
+  function openDrawer(id) {
+    editId = id || null;
+    document.getElementById("drw-title").textContent = id
+      ? "Edit drug"
+      : "Add drug";
+    document.getElementById("drw-err").style.display = "none";
+    clearForm();
+    if (id) {
+      const d = drugs.find((x) => x.id === id);
+      if (d) populate(d);
+    }
+    document.getElementById("ov").classList.add("open");
+    showDrwTab(0);
+  }
+  function editDrug(id) {
+    openDrawer(id);
+  }
+  function closeDrawer() {
+    document.getElementById("ov").classList.remove("open");
+  }
+
+  function clearForm() {
+    [
+      "d-name",
+      "d-class",
+      "d-brands",
+      "d-ulic",
+      "d-food",
+      "d-stor",
+      "d-notes",
+      "d-src",
+      "d-hep-note",
+    ].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.value = "";
+    });
+    ["d-cat", "d-licensed", "d-preg", "d-lact"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.selectedIndex = 0;
+    });
+    document.getElementById("d-reviewed").value = "";
+    document.getElementById("d-renal-req").checked = false;
+    document.getElementById("d-hep-req").checked = false;
+    ["d-uses", "d-bb", "d-ci", "d-cr", "d-mon", "d-pw"].forEach((k) => {
+      tags[k] = [];
+      renderTags(k);
+    });
+    [
+      "forms-list",
+      "bands-list",
+      "ints-list",
+      "renal-bands-list",
+      "admin-list",
+    ].forEach((id) => (document.getElementById(id).innerHTML = ""));
+    formCnt = bandCnt = intCnt = renalCnt = adminCnt = 0;
+  }
+
+  function populate(d) {
+    sv("d-name", d.generic_name || "");
+    sv("d-class", d.drug_class || "");
+    sv("d-brands", (d.brand_names || []).join(", "));
+    sv("d-cat", d.category || "");
+    sv("d-licensed", String(d.licensed_in_children));
+    sv("d-ulic", d.unlicensed_note || "");
+    sv("d-preg", d.pregnancy_category || "");
+    sv("d-lact", String(d.lactation_safe));
+    sv("d-ref", d.reference_source || "");
+    sv("d-hep-note", d.hepatic_note || "");
+    sv("d-food", d.food_instructions || "");
+    sv("d-stor", d.storage_instructions || "");
+    sv("d-notes", d.notes || "");
+    sv("d-src", (d.reference_source || []).join(", "));
+    if (d.last_reviewed_date)
+      document.getElementById("d-reviewed").value = d.last_reviewed_date;
+    document.getElementById("d-renal-req").checked =
+      !!d.renal_adjustment_required;
+    document.getElementById("d-hep-req").checked =
+      !!d.hepatic_adjustment_required;
+    ["uses", "bb", "ci", "cr", "mon", "pw"].forEach((k) => {
+      const key = "d-" + k;
+      const src = {
+        uses: d.therapeutic_use,
+        bb: d.black_box_warnings,
+        ci: d.contraindications,
+        cr: d.cross_reactions,
+        mon: d.monitoring_parameters,
+        pw: d.pediatric_specific_warnings,
+      }[k];
+      tags[key] = Array.isArray(src) ? [...src] : [];
+      renderTags(key);
+    });
+    (d.formulations || []).forEach((f) => addForm(f));
+    (d.dosing_bands || []).forEach((b) => addBand(b));
+    (d.interactions || []).forEach((i) => addInt(i));
+    (d.renal_bands || []).forEach((r) => addRenalBand(r));
+    (d.administration || []).forEach((a) => addAdmin(a));
+  }
+
+  /* ===== Save ===== */
+  async function saveDrug() {
+    const name = document.getElementById("d-name").value.trim();
+    if (!name) {
+      showTab(0);
+      showErr("Generic name is required.");
+      return;
+    }
+    const brands = document
+      .getElementById("d-brands")
+      .value.split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const payload = {
+      generic_name: name,
+      drug_class: v("d-class"),
+      category: v("d-cat"),
+      brand_names: brands,
+      therapeutic_use: getTags("d-uses"),
+      licensed_in_children: v("d-licensed"),
+      unlicensed_note: v("d-ulic"),
+      pregnancy_category: v("d-preg"),
+      lactation_safe: v("d-lact"),
+      formulations: getForms(),
+      dosing_bands: getBands(),
+      interactions: getInts(),
+      black_box_warnings: getTags("d-bb"),
+      contraindications: getTags("d-ci"),
+      cross_reactions: getTags("d-cr"),
+      monitoring_parameters: getTags("d-mon"),
+      pediatric_specific_warnings: getTags("d-pw"),
+      renal_adjustment_required: document.getElementById("d-renal-req").checked,
+      renal_bands: getRenalBands(),
+      hepatic_adjustment_required: document.getElementById("d-hep-req").checked,
+      hepatic_note: v("d-hep-note"),
+      administration: getAdmins(),
+      food_instructions: v("d-food"),
+      storage_instructions: v("d-stor"),
+      notes: v("d-notes"),
+      reference_source: v("d-src")
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      last_reviewed_date: document.getElementById("d-reviewed").value || null,
+      updated_at: new Date().toISOString(),
+    };
+    const btn = document.getElementById("sv-btn");
+    btn.textContent = "Saving…";
+    btn.disabled = true;
+    document.getElementById("drw-err").style.display = "none";
+    try {
+      let r;
+      if (editId) {
+        r = await sbq("formulary", "?id=eq." + editId, "PATCH", payload);
+      } else {
+        r = await sbq("formulary", "", "POST", { ...payload, active: true });
+      }
+      if (!r.ok) throw new Error((await r.json()).message || "Save failed");
+      closeDrawer();
+      showToast("Drug saved successfully");
+      loadDrugs();
+    } catch (e) {
+      showErr("Error: " + e.message);
+    }
+    btn.textContent = "Save to Supabase";
+    btn.disabled = false;
+  }
+
+  /* ===== Delete ===== */
+  async function deleteDrug(id) {
+    if (!confirm("Remove this drug from the formulary?")) return;
+    const r = await sbq("formulary", "?id=eq." + id, "PATCH", {
+      active: false,
+      updated_at: new Date().toISOString(),
+    });
+    if (r.ok) {
+      showToast("Drug removed");
+      loadDrugs();
+    }
+  }
+
+  /* ===== View monograph ===== */
+  function viewDrug(id) {
+    const d = drugs.find((x) => x.id === id);
+    if (!d) return;
+    openDrawer(id);
+  }
+
+  /* ===== Helpers ===== */
+  function v(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  }
+  function n(id) {
+    const el = document.getElementById(id);
+    if (!el || !el.value) return null;
+    const x = parseFloat(el.value);
+    return isNaN(x) ? null : x;
+  }
+  function sv(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  }
+  function showErr(msg) {
+    const e = document.getElementById("drw-err");
+    e.textContent = msg;
+    e.style.display = "block";
+  }
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("on");
+    setTimeout(() => t.classList.remove("on"), 2500);
+  }
+  function showTab(n) {
+    showDrwTab(n);
+  }
+</script>
