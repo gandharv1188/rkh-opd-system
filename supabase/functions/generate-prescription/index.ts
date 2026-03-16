@@ -89,17 +89,22 @@ const tools = [
   {
     name: "get_standard_rx",
     description:
-      "Look up hospital-approved standard prescription protocols by diagnosis name or ICD-10 code. Returns first_line_drugs with doses, second_line_drugs, recommended investigations, counselling points, referral and hospitalisation criteria. ALWAYS call this when a diagnosis is provided.",
+      "Look up hospital-approved standard prescription protocols. ALWAYS use ICD-10 code as the primary lookup — it is exact and unambiguous. Fall back to diagnosis name only if you don't know the ICD-10 code. Returns first_line_drugs with doses, second_line_drugs, recommended investigations, counselling points, referral and hospitalisation criteria. ALWAYS call this when a diagnosis is provided.",
     input_schema: {
       type: "object",
       properties: {
-        query: {
+        icd10: {
           type: "string",
           description:
-            "Diagnosis name (e.g. 'Acute Otitis Media') or ICD-10 code (e.g. 'H66.90'). Partial match supported.",
+            "ICD-10 code (e.g. 'H66.90', 'J06.9', 'A09'). PREFERRED — use this as the primary lookup key.",
+        },
+        name: {
+          type: "string",
+          description:
+            "Standard medical diagnosis name (e.g. 'Acute Otitis Media'). Use only as fallback if ICD-10 code is unknown. Use proper medical terminology, not colloquial terms.",
         },
       },
-      required: ["query"],
+      required: [],
     },
   },
 ];
@@ -143,18 +148,51 @@ async function executeGetFormulary(drugNames: string[]): Promise<string> {
   }
 }
 
-async function executeGetStandardRx(query: string): Promise<string> {
+async function executeGetStandardRx(
+  icd10?: string,
+  name?: string,
+): Promise<string> {
+  const select =
+    "icd10,diagnosis_name,first_line_drugs,second_line_drugs,investigations,counselling,referral_criteria,hospitalisation_criteria,notes,duration_days_default";
+  const headers = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
+
   try {
-    const enc = encodeURIComponent(query.trim());
-    const url = `${SUPABASE_URL}/rest/v1/standard_prescriptions?or=(icd10.ilike.%25${enc}%25,diagnosis_name.ilike.%25${enc}%25)&active=eq.true&select=icd10,diagnosis_name,first_line_drugs,second_line_drugs,investigations,counselling,referral_criteria,hospitalisation_criteria,notes,duration_days_default&limit=5`;
-    const res = await fetch(url, {
-      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
-    });
-    if (!res.ok) return `Standard Rx query error: HTTP ${res.status}`;
-    const protocols = await res.json();
-    if (!protocols.length)
-      return `No hospital protocol found for "${query}". Use standard clinical guidelines.`;
-    return JSON.stringify(protocols, null, 2);
+    // Strategy 1: Exact ICD-10 match (preferred — unambiguous)
+    if (icd10) {
+      const enc = encodeURIComponent(icd10.trim());
+      const url = `${SUPABASE_URL}/rest/v1/standard_prescriptions?icd10=eq.${enc}&active=eq.true&select=${select}&limit=5`;
+      const res = await fetch(url, { headers });
+      if (res.ok) {
+        const protocols = await res.json();
+        if (protocols.length) return JSON.stringify(protocols, null, 2);
+      }
+      // Try partial ICD-10 match (e.g. "H66" matches "H66.90")
+      const url2 = `${SUPABASE_URL}/rest/v1/standard_prescriptions?icd10=ilike.${enc}%25&active=eq.true&select=${select}&limit=5`;
+      const res2 = await fetch(url2, { headers });
+      if (res2.ok) {
+        const protocols2 = await res2.json();
+        if (protocols2.length) return JSON.stringify(protocols2, null, 2);
+      }
+    }
+
+    // Strategy 2: Diagnosis name match (fallback)
+    if (name) {
+      const enc = encodeURIComponent(name.trim());
+      const url = `${SUPABASE_URL}/rest/v1/standard_prescriptions?diagnosis_name=ilike.%25${enc}%25&active=eq.true&select=${select}&limit=5`;
+      const res = await fetch(url, { headers });
+      if (res.ok) {
+        const protocols = await res.json();
+        if (protocols.length) return JSON.stringify(protocols, null, 2);
+      }
+    }
+
+    const searched = [
+      icd10 ? `ICD-10: ${icd10}` : "",
+      name ? `Name: ${name}` : "",
+    ]
+      .filter(Boolean)
+      .join(", ");
+    return `No hospital protocol found for ${searched}. Use standard clinical guidelines.`;
   } catch (e) {
     return `Standard Rx query error: ${e.message}`;
   }
@@ -171,7 +209,7 @@ async function executeTool(
     case "get_formulary":
       return await executeGetFormulary(input.drug_names);
     case "get_standard_rx":
-      return await executeGetStandardRx(input.query);
+      return await executeGetStandardRx(input.icd10, input.name);
     default:
       return `Unknown tool: ${name}`;
   }

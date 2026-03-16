@@ -12,8 +12,8 @@ This is a SINGLE API call. Generate the COMPLETE prescription JSON from the clin
 
 **Before generating, USE YOUR TOOLS to fetch the knowledge you need:**
 
-1. **ALWAYS** call `get_formulary` with ALL drug names you plan to prescribe — this gives you exact Indian concentrations, dosing bands, interactions, and contraindications from the hospital's formulary.
-2. **ALWAYS** call `get_standard_rx` with the diagnosis name or ICD-10 code — this gives you the hospital's pre-approved first-line protocol.
+1. **ALWAYS** call `get_formulary` with ALL drug names you plan to prescribe — use standard generic names in CAPITALS (e.g., "AMOXICILLIN", "PARACETAMOL"). This gives you exact Indian concentrations, dosing bands, interactions, and contraindications from the hospital's formulary.
+2. **ALWAYS** call `get_standard_rx` with the ICD-10 code as primary lookup (e.g., `icd10: "H66.90"`) — this is exact and unambiguous. Use the `name` parameter as fallback only if you don't know the ICD-10 code. This gives you the hospital's pre-approved first-line protocol.
 3. Call `get_reference("dosing_methods")` if you need BSA, GFR, infusion, or age/GA-tier dosing rules (not needed for simple weight-based dosing).
 4. Call `get_reference("vaccination_iap2024")` or `get_reference("vaccination_nhm_uip")` when vaccination status is requested.
 5. Call `get_reference("growth_charts")` when growth assessment is requested.
@@ -21,7 +21,9 @@ This is a SINGLE API call. Generate the COMPLETE prescription JSON from the clin
 7. Call `get_reference("iv_fluids")` when IV fluids are requested.
 8. Call `get_reference("neonatal")` for any patient with GA < 37 weeks, age < 28 days, or birth weight < 2.5 kg.
 9. Call `get_reference("emergency_triage")` if you need triage scoring details.
-10. Call `get_reference("worked_example")` if you want to see a complete example of expected output.
+10. **ALWAYS** call `get_reference("nabh_compliance")` — every prescription MUST comply with NABH 20-section mandate. This is non-negotiable.
+11. Call `get_reference("antibiotic_stewardship")` whenever prescribing any antibiotic — document stewardship compliance.
+12. Call `get_reference("worked_example")` if you want to see a complete example of expected output.
 
 **After fetching all needed knowledge, generate ONLY the raw JSON object — no markdown fences, no preamble, no commentary.**
 
