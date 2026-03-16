@@ -1095,7 +1095,7 @@
       <h1>Radhakishan Hospital</h1>
       <span class="dev">राधाकिशन हस्पताल</span>
       <div class="sub">Jyoti Nagar, Kurukshetra, Haryana</div>
-      <span class="nabh">NABH 6th Ed. Accredited</span>
+      <span class="nabh">NABH Accredited</span>
     </div>
     <div class="hdr-r">
       Pediatrics &amp; Neonatology<br />01744-251441 · 7206029516<br /><span
@@ -1925,6 +1925,10 @@
       if (data.error) throw new Error(data.error);
 
       rxData = data.prescription;
+      // Inject UHID from selected patient if available
+      if (selectedPatient?.id && rxData.patient) {
+        rxData.patient.uhid = selectedPatient.id;
+      }
       await renderReview();
       showView("rx");
     } catch (e) {
@@ -2061,6 +2065,17 @@
   </div>`;
 
     // VITALS
+    // CHIEF COMPLAINTS
+    if (r.chief_complaints) {
+      h += `<div class="rv-sec"><div class="rv-hdr">Chief Complaints</div><div style="font-size:13px" contenteditable="true" spellcheck="false">${esc(r.chief_complaints)}</div></div>`;
+    }
+
+    // CLINICAL HISTORY
+    if (r.clinical_history) {
+      h += `<div class="rv-sec"><div class="rv-hdr">History</div><div style="font-size:13px" contenteditable="true" spellcheck="false">${esc(r.clinical_history)}</div></div>`;
+    }
+
+    // VITALS
     const vitals = r.vitals || {};
     const vItems = [];
     if (vitals.temp_f) vItems.push("Temp: " + esc(vitals.temp_f) + "°F");
@@ -2076,16 +2091,6 @@
     if (r.patient.hc_cm) vItems.push("HC: " + esc(r.patient.hc_cm) + " cm");
     if (vItems.length) {
       h += `<div class="rv-sec"><div class="rv-hdr">Vitals</div><div style="display:flex;flex-wrap:wrap;gap:8px">${vItems.map((v) => `<span style="background:var(--blue-lt);padding:3px 10px;border-radius:4px;font-size:12px">${v}</span>`).join("")}</div></div>`;
-    }
-
-    // CHIEF COMPLAINTS
-    if (r.chief_complaints) {
-      h += `<div class="rv-sec"><div class="rv-hdr">Chief Complaints</div><div style="font-size:13px" contenteditable="true" spellcheck="false">${esc(r.chief_complaints)}</div></div>`;
-    }
-
-    // CLINICAL HISTORY
-    if (r.clinical_history) {
-      h += `<div class="rv-sec"><div class="rv-hdr">History</div><div style="font-size:13px" contenteditable="true" spellcheck="false">${esc(r.clinical_history)}</div></div>`;
     }
 
     // EXAMINATION
@@ -2545,16 +2550,30 @@
     const uhid = r.patient?.uhid || selectedPatient?.id || "";
 
     let h = "";
-    // Header
+    // Header — doctor left, hospital center, emergency right
     h += `<div class="hdr">
       <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMCI Reg. HN 21452 · PMC 23168<br>Pediatrics &amp; Neonatology</div>
       <div class="hdr-c"><h1>Radhakishan Hospital</h1><div class="hdr-hi">राधाकिशन हस्पताल</div><div class="hdr-sub">Jyoti Nagar, Kurukshetra, Haryana</div><span class="nabh-badge">NABH Accredited</span></div>
-      <div class="hdr-r">Date: <strong>${esc(today)}</strong><br>Time: ${esc(time)}<br>Rx: <strong>${esc(rxId || "")}</strong><br>UHID: <strong>${esc(uhid)}</strong><br><br>Emergency:<br>01744-251441<br>7206029516</div>
+      <div class="hdr-r">Emergency:<br>01744-251441<br>01744-270516<br>7206029516</div>
+    </div>`;
+    // Info strip — date, Rx ID, UHID, patient details all in one row
+    h += `<div class="info-strip">
+      <div><span class="info-lbl">Date</span> ${esc(today)}, ${esc(time)}</div>
+      <div><span class="info-lbl">Rx ID</span> ${esc(rxId || "")}</div>
+      <div><span class="info-lbl">UHID</span> <strong>${esc(uhid)}</strong></div>
     </div>`;
     // Patient meta
-    h += `<div class="meta"><div class="meta-item"><span class="meta-lbl">Patient</span><span class="meta-val">${esc(r.patient?.name || "")}</span></div>
+    h += `<div class="meta">
+      <div class="meta-item"><span class="meta-lbl">Patient</span><span class="meta-val">${esc(r.patient?.name || "")}</span></div>
       <div class="meta-item"><span class="meta-lbl">Age · Sex · Weight</span><span class="meta-val">${esc(r.patient?.age || "")} · ${esc(r.patient?.sex || "")} · ${r.patient?.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
-      <div class="meta-item"><span class="meta-lbl">Guardian</span><span class="meta-val">${esc(r.patient?.guardian || "")}</span></div></div>`;
+      <div class="meta-item"><span class="meta-lbl">Guardian</span><span class="meta-val">${esc(r.patient?.guardian || "")}</span></div>
+    </div>`;
+    // Chief complaints first
+    if (r.chief_complaints)
+      h += `<div class="sec"><div class="sec-title">Chief Complaints</div><div>${esc(r.chief_complaints)}</div></div>`;
+    // History
+    if (r.clinical_history)
+      h += `<div class="sec"><div class="sec-title">History</div><div>${esc(r.clinical_history)}</div></div>`;
     // Vitals
     const pVitals = r.vitals || {};
     const pVItems = [];
@@ -2571,11 +2590,7 @@
     if (pVItems.length) {
       h += `<div class="sec"><div class="sec-title">Vitals</div><div>${pVItems.join(" &nbsp;·&nbsp; ")}</div></div>`;
     }
-    // Chief complaints, History, Examination
-    if (r.chief_complaints)
-      h += `<div class="sec"><div class="sec-title">Chief Complaints</div><div>${esc(r.chief_complaints)}</div></div>`;
-    if (r.clinical_history)
-      h += `<div class="sec"><div class="sec-title">History</div><div>${esc(r.clinical_history)}</div></div>`;
+    // Examination
     if (r.examination)
       h += `<div class="sec"><div class="sec-title">Examination</div><div>${esc(r.examination)}</div></div>`;
     // Provisional Diagnosis
@@ -2655,9 +2670,18 @@
     h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs — तुरंत वापस आएं</div><div class="emerg-grid">${EMERGENCY.map((s) => `<div><strong>${esc(s.hi)}</strong><br><span>${esc(s.en)}</span></div>`).join("")}</div></div>`;
     // Follow-up
     h += `<div class="sec"><div class="sec-title">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
-    // Footer
+    // Footer with QR
+    const qrData = encodeURIComponent(
+      JSON.stringify({
+        uhid: uhid,
+        pt: (r.patient?.name || "").slice(0, 30),
+        dob: r.patient?.dob || "",
+        sex: (r.patient?.sex || "").slice(0, 1),
+      }),
+    );
     h += `<div class="footer">
       <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics · HMCI HN 21452 · PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
+      <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to re-register</div></div>
       <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: ✓<br>Max dose: ✓<br>NABH: ✓</div>
     </div>`;
 
@@ -2698,9 +2722,12 @@
       .emerg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 11px; }
       .emerg-grid strong { font-family: 'Noto Sans Devanagari', system-ui, sans-serif; }
       .emerg-grid span { color: #666; }
-      .footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 8px; border-top: 2px solid #1e3a6b; font-size: 10px; }
-      .footer-doc { line-height: 1.6; }
+      .info-strip { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #ddd; margin-bottom: 6px; font-size: 11px; color: #555; }
+      .info-lbl { font-size: 8px; color: #999; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
+      .footer { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 12px; padding-top: 8px; border-top: 2px solid #1e3a6b; font-size: 10px; gap: 12px; }
+      .footer-doc { line-height: 1.6; flex: 1; }
       .footer-doc em { color: #999; font-size: 9px; }
+      .footer-qr { flex-shrink: 0; text-align: center; }
       .footer-safety { text-align: right; color: #1a6b3a; font-size: 10px; line-height: 1.8; }
     </style></head><body>${h}</body></html>`);
     w.document.close();
