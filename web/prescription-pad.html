@@ -2491,6 +2491,10 @@
       @page { size: A4; margin: 10mm; }
       body { background: #fff; padding: 0; margin: 0; }
       .app, .tabs, .pt-bar, .signoff, .voice-bar, .mods, .gen-wrap, .pad-hint, .cfg-bar, .lined, .mic-btn, .mic-st { display: none !important; }
+      /* Hide interactive elements in print */
+      button, .adj-btn, .ep-apply, .back-btn, .sign-btn, .save-link-btn { display: none !important; }
+      .dose-adj, .dose-adj-row, .signoff, .save-links, .ep { display: none !important; }
+      [contenteditable] { border: none !important; outline: none !important; }
       .review-wrap { padding: 16px; max-width: 100%; }
       .rv-sec { break-inside: avoid; }
       .med-card { break-inside: avoid; }
