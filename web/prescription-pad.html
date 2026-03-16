@@ -1090,52 +1090,61 @@
     padding: 2px 18px 6px;
     background: var(--blue-lt);
   }
-  .dose-strip {
-    display: flex;
-    align-items: stretch;
-    margin-top: 4px;
-    border: 1px solid #e0dfd8;
-    border-radius: 6px;
-    overflow: hidden;
-    font-size: 10px;
-    color: #1e3a6b;
-  }
-  .dose-slot {
-    flex: 1;
+  .dose-sidebar {
+    flex-shrink: 0;
+    width: 80px;
     text-align: center;
-    padding: 4px 6px;
-    border-right: 1px solid #e0dfd8;
+    font-size: 9px;
+    color: #1e3a6b;
+    border-left: 1px dashed rgba(30, 58, 107, 0.15);
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
   }
-  .dose-slot:last-of-type {
-    border-right: none;
-  }
-  .dose-slot-time svg {
-    width: 20px;
-    height: 20px;
+  .dose-sidebar svg {
+    width: 14px;
+    height: 14px;
     stroke: #1e3a6b;
     fill: none;
     stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
+    vertical-align: middle;
   }
-  .dose-slot-label {
-    font-size: 9px;
-    color: #888;
-    display: block;
-    margin-top: 1px;
-  }
-  .dose-slot-qty {
-    font-weight: 600;
-    font-size: 11px;
-    margin: 2px 0;
+  .ds-times {
     display: flex;
     justify-content: center;
-    gap: 2px;
+    gap: 4px;
+  }
+  .ds-time {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    font-size: 7px;
+    color: #888;
+  }
+  .ds-time svg {
+    width: 16px;
+    height: 16px;
+  }
+  .ds-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .ds-dim {
+    font-weight: 400;
+    font-size: 8px;
+    color: #888;
   }
   .dose-pill {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #1e3a6b;
     display: inline-block;
@@ -1147,39 +1156,6 @@
   .dose-pill-quarter {
     background: conic-gradient(#1e3a6b 0deg 90deg, transparent 90deg 360deg);
     border: 1px solid #1e3a6b;
-  }
-  .dose-meta {
-    padding: 4px 8px;
-    background: #f8f7f1;
-    font-size: 9px;
-    color: #666;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 55px;
-    text-align: center;
-    border-left: 1px solid #e0dfd8;
-  }
-  .dose-strip-prn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 4px;
-    padding: 4px 10px;
-    border: 1px solid #e0dfd8;
-    border-radius: 6px;
-    font-size: 10px;
-    color: #1e3a6b;
-    background: #fdf8f0;
-  }
-  .dose-strip-prn svg {
-    width: 18px;
-    height: 18px;
-    stroke: #b8860b;
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
   }
 </style>
 
@@ -2235,8 +2211,8 @@
             <div contenteditable="true" spellcheck="false" class="med-r" id="${pid}-r2">${esc(m.row2_en)}</div>
             <div contenteditable="true" spellcheck="false" class="med-r r3" id="${pid}-r3">${esc(m.row3_hi)}</div>
             <div class="med-flag" id="${pid}-flag" style="${m.flag ? "" : "display:none"}">${m.flag ? "⚠ " + esc(m.flag) : ""}</div>
-            ${renderPictogram(m)}
           </div>
+          ${renderPictogram(m)}
           <button class="adj-btn" onclick="toggleEP('${pid}',${idx})">Adjust dose</button>
         </div>
         <div class="ep" id="${pid}-ep">
@@ -2728,7 +2704,7 @@
     if (r.medicines?.length) {
       h += `<div class="sec"><div class="sec-title blue">℞ Medicines</div>`;
       r.medicines.forEach((m) => {
-        h += `<div class="med"><div class="med-r1">${esc(m.number)}. ${esc(m.row1_en || "")}</div><div class="med-r2">${esc(m.row2_en || "")}</div><div class="med-r3">${esc(m.row3_hi || "")}</div>${m.flag ? `<div class="med-flag">⚠ ${esc(m.flag)}</div>` : ""}${renderPictogram(m)}</div>`;
+        h += `<div class="med"><div class="med-text"><div class="med-r1">${esc(m.number)}. ${esc(m.row1_en || "")}</div><div class="med-r2">${esc(m.row2_en || "")}</div><div class="med-r3">${esc(m.row3_hi || "")}</div>${m.flag ? `<div class="med-flag">⚠ ${esc(m.flag)}</div>` : ""}</div>${renderPictogram(m)}</div>`;
       });
       h += `</div>`;
     }
@@ -2840,7 +2816,17 @@
       .sec-title.red { color: #8b1a1a; border-color: rgba(139,26,26,0.2); }
       .dx { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
       .icd { font-size: 11px; color: #888; font-weight: 400; }
-      .med { margin-bottom: 10px; padding-left: 10px; border-left: 3px solid #1e3a6b; break-inside: avoid; }
+      .med { margin-bottom: 10px; padding-left: 10px; border-left: 3px solid #1e3a6b; break-inside: avoid; display: flex; align-items: flex-start; gap: 8px; }
+      .med-text { flex: 1; }
+      .dose-sidebar { flex-shrink:0; width:70px; text-align:center; font-size:8px; color:#1e3a6b; border-left:1px dashed rgba(30,58,107,0.2); padding-left:6px; display:flex; flex-direction:column; justify-content:center; gap:1px; }
+      .dose-sidebar svg { width:12px; height:12px; stroke:#1e3a6b; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; vertical-align:middle; }
+      .ds-times { display:flex; justify-content:center; gap:3px; }
+      .ds-time { display:flex; flex-direction:column; align-items:center; font-size:6px; color:#888; }
+      .ds-time svg { width:13px; height:13px; }
+      .ds-row { display:flex; align-items:center; justify-content:center; gap:2px; font-size:9px; font-weight:600; }
+      .ds-dim { font-weight:400; font-size:7px; color:#888; }
+      .dose-pill { width:7px; height:7px; border-radius:50%; background:#1e3a6b; display:inline-block; }
+      .dose-pill-half { background:linear-gradient(90deg,#1e3a6b 50%,transparent 50%); border:1px solid #1e3a6b; }
       .med-r1 { font-size: 14px; font-weight: 700; color: #1e3a6b; }
       .med-r2 { font-size: 12px; color: #1e3a6b; margin-top: 2px; }
       .med-r3 { font-family: 'Noto Sans Devanagari', system-ui, sans-serif; font-size: 12px; color: #555; font-style: italic; margin-top: 2px; }
@@ -2858,18 +2844,7 @@
       .footer-doc em { color: #999; font-size: 9px; }
       .footer-qr { flex-shrink: 0; text-align: center; }
       .footer-safety { text-align: right; color: #1a6b3a; font-size: 10px; line-height: 1.8; }
-      .dose-strip { display:flex; align-items:stretch; margin-top:4px; border:1px solid #ccc; border-radius:4px; overflow:hidden; font-size:9px; color:#1e3a6b; }
-      .dose-slot { flex:1; text-align:center; padding:3px 4px; border-right:1px solid #ccc; }
-      .dose-slot:last-of-type { border-right:none; }
-      .dose-slot-time svg { width:16px; height:16px; stroke:#1e3a6b; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
-      .dose-slot-label { font-size:8px; color:#888; display:block; }
-      .dose-slot-qty { font-weight:600; font-size:10px; margin:1px 0; display:flex; justify-content:center; gap:2px; align-items:center; }
-      .dose-pill { width:8px; height:8px; border-radius:50%; background:#1e3a6b; display:inline-block; }
-      .dose-pill-half { background:linear-gradient(90deg,#1e3a6b 50%,transparent 50%); border:1px solid #1e3a6b; }
-      .dose-pill-quarter { background:conic-gradient(#1e3a6b 0deg 90deg,transparent 90deg 360deg); border:1px solid #1e3a6b; }
-      .dose-meta { padding:3px 6px; background:#f8f7f1; font-size:8px; color:#666; display:flex; flex-direction:column; justify-content:center; min-width:45px; text-align:center; border-left:1px solid #ccc; }
-      .dose-strip-prn { display:flex; align-items:center; gap:6px; margin-top:4px; padding:3px 8px; border:1px solid #ccc; border-radius:4px; font-size:9px; color:#1e3a6b; background:#fdf8f0; }
-      .dose-strip-prn svg { width:14px; height:14px; stroke:#b8860b; fill:none; stroke-width:1.5; }
+      .dose-strip-prn svg { fill:#b8860b; stroke:#b8860b; }
       .dose-meta svg { width:12px; height:12px; stroke:#666; fill:none; stroke-width:1.5; }
     </style></head><body>${h}</body></html>`);
     w.document.close();
@@ -2971,39 +2946,29 @@
     const p = m.pictogram;
     if (!p) return "";
 
-    // PRN layout
+    let h = '<div class="dose-sidebar">';
+
     if (p.prn) {
-      return `<div class="dose-strip-prn">
-      ${DOSE_SVG.prn}
-      <span style="font-weight:600">ज़रूरत पर</span>
-      <span>${renderDoseIcon(p)}</span>
-      <span style="font-weight:600">${esc(p.dose_display || "")}</span>
-      ${p.max_per_day ? `<span style="color:#888">अधिकतम ${p.max_per_day} बार/दिन</span>` : ""}
-      ${p.special === "fever_only" ? '<span style="color:#b8860b">बुखार होने पर ही</span>' : ""}
-    </div>`;
+      // PRN: lightning + dose + max
+      h += `<div class="ds-row">${DOSE_SVG.prn}<span>ज़रूरत पर</span></div>`;
+      h += `<div class="ds-row">${renderDoseIcon(p)} ${esc(p.dose_display || "")}</div>`;
+      if (p.max_per_day)
+        h += `<div class="ds-row ds-dim">≤${p.max_per_day}×/दिन</div>`;
+    } else {
+      // Scheduled: time icons row + dose + duration
+      h += `<div class="ds-times">`;
+      (p.times || []).forEach((t) => {
+        h += `<div class="ds-time">${DOSE_SVG[t] || ""}<span>${TIME_LABELS[t] || ""}</span></div>`;
+      });
+      h += `</div>`;
+      h += `<div class="ds-row">${renderDoseIcon(p)} ${esc(p.dose_display || "")}</div>`;
+      if (p.duration_days)
+        h += `<div class="ds-row ds-dim">${p.duration_days} दिन</div>`;
+      if (p.with_food) h += `<div class="ds-row ds-dim">भोजन के बाद</div>`;
+      if (p.special === "empty_stomach")
+        h += `<div class="ds-row ds-dim">खाली पेट</div>`;
     }
 
-    // Scheduled layout
-    let h = '<div class="dose-strip">';
-    (p.times || []).forEach((t) => {
-      h += `<div class="dose-slot">
-      <div class="dose-slot-time">${DOSE_SVG[t] || ""}</div>
-      <div class="dose-slot-label">${TIME_LABELS[t] || t}</div>
-      <div class="dose-slot-qty">${renderDoseIcon(p)}</div>
-      <div style="font-size:9px;color:#555">${esc(p.dose_display || "")}</div>
-    </div>`;
-    });
-    // Meta column
-    const metaParts = [];
-    if (p.duration_days) metaParts.push(`${p.duration_days} दिन`);
-    if (p.with_food)
-      metaParts.push(
-        `<span style="display:inline-flex;align-items:center;gap:2px">${DOSE_SVG.food} भोजन के बाद</span>`,
-      );
-    if (p.special === "empty_stomach") metaParts.push("खाली पेट");
-    if (metaParts.length) {
-      h += `<div class="dose-meta">${metaParts.join("<br>")}</div>`;
-    }
     h += "</div>";
     return h;
   }
