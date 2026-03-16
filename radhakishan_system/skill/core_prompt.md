@@ -80,7 +80,19 @@ Generate this exact structure. Field names MUST match exactly.
       "concentration_per_ml": 0,
       "max_dose_single_mg": 0,
       "formulation": "syrup|drops|tablet|injection|inhaler|topical",
-      "method": "weight|bsa|fixed|gfr|infusion|age"
+      "method": "weight|bsa|fixed|gfr|infusion|age",
+      "pictogram": {
+        "form": "syrup|tablet|drops|injection|inhaler|topical",
+        "dose_display": "4 ml",
+        "dose_qty": 1,
+        "dose_fraction": "null|half|quarter",
+        "times": ["morning", "afternoon", "evening"],
+        "prn": false,
+        "max_per_day": null,
+        "duration_days": 7,
+        "with_food": true,
+        "special": null
+      }
     }
   ],
   "investigations": [
@@ -151,6 +163,17 @@ Generate this exact structure. Field names MUST match exactly.
 - `neonatal`: Include ONLY for neonates/preterms. Null for older children.
 - `medicines[].calc`: ALWAYS include dose calculation working.
 - `medicines[].flag`: Empty string if no concern.
+- `medicines[].pictogram`: ALWAYS include. Visual dosing guide for low-literacy patients.
+  - `form`: matches `formulation` field
+  - `dose_display`: human-readable dose per administration (e.g., "4 ml", "1 tab", "2 puffs", "3 drops")
+  - `dose_qty`: number of units per dose (1, 2, etc.). For syrups, this is ml.
+  - `dose_fraction`: null for whole doses, "half" for ½ tablet, "quarter" for ¼ tablet
+  - `times`: array of time slots — use: "morning", "afternoon", "evening", "bedtime". Map from frequency: OD→["morning"], BD→["morning","evening"], TDS→["morning","afternoon","evening"], QID→["morning","afternoon","evening","bedtime"], q6h→["morning","afternoon","evening","bedtime"], q8h→["morning","afternoon","bedtime"], nocte→["bedtime"]
+  - `prn`: true for as-needed medicines (e.g., paracetamol PRN). When true, `times` should be empty.
+  - `max_per_day`: for PRN medicines, max doses per day (e.g., 4 for paracetamol)
+  - `duration_days`: number of days. null for PRN or ongoing.
+  - `with_food`: true if should be taken with/after food
+  - `special`: null or a short string like "fever_only", "empty_stomach"
 - Optional sections (growth, vaccinations, developmental, investigations, iv_fluids, diet, referral): Include when requested in the INCLUDE SECTIONS instruction. Never return null for a requested section.
 - `counselling`: Array of strings.
 - `referral`: Top-level string. Empty string if none.

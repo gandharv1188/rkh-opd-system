@@ -1090,6 +1090,97 @@
     padding: 2px 18px 6px;
     background: var(--blue-lt);
   }
+  .dose-strip {
+    display: flex;
+    align-items: stretch;
+    margin-top: 4px;
+    border: 1px solid #e0dfd8;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 10px;
+    color: #1e3a6b;
+  }
+  .dose-slot {
+    flex: 1;
+    text-align: center;
+    padding: 4px 6px;
+    border-right: 1px solid #e0dfd8;
+  }
+  .dose-slot:last-of-type {
+    border-right: none;
+  }
+  .dose-slot-time svg {
+    width: 20px;
+    height: 20px;
+    stroke: #1e3a6b;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .dose-slot-label {
+    font-size: 9px;
+    color: #888;
+    display: block;
+    margin-top: 1px;
+  }
+  .dose-slot-qty {
+    font-weight: 600;
+    font-size: 11px;
+    margin: 2px 0;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    align-items: center;
+  }
+  .dose-pill {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1e3a6b;
+    display: inline-block;
+  }
+  .dose-pill-half {
+    background: linear-gradient(90deg, #1e3a6b 50%, transparent 50%);
+    border: 1px solid #1e3a6b;
+  }
+  .dose-pill-quarter {
+    background: conic-gradient(#1e3a6b 0deg 90deg, transparent 90deg 360deg);
+    border: 1px solid #1e3a6b;
+  }
+  .dose-meta {
+    padding: 4px 8px;
+    background: #f8f7f1;
+    font-size: 9px;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 55px;
+    text-align: center;
+    border-left: 1px solid #e0dfd8;
+  }
+  .dose-strip-prn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    padding: 4px 10px;
+    border: 1px solid #e0dfd8;
+    border-radius: 6px;
+    font-size: 10px;
+    color: #1e3a6b;
+    background: #fdf8f0;
+  }
+  .dose-strip-prn svg {
+    width: 18px;
+    height: 18px;
+    stroke: #b8860b;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 </style>
 
 <div class="app">
@@ -2144,6 +2235,7 @@
             <div contenteditable="true" spellcheck="false" class="med-r" id="${pid}-r2">${esc(m.row2_en)}</div>
             <div contenteditable="true" spellcheck="false" class="med-r r3" id="${pid}-r3">${esc(m.row3_hi)}</div>
             <div class="med-flag" id="${pid}-flag" style="${m.flag ? "" : "display:none"}">${m.flag ? "⚠ " + esc(m.flag) : ""}</div>
+            ${renderPictogram(m)}
           </div>
           <button class="adj-btn" onclick="toggleEP('${pid}',${idx})">Adjust dose</button>
         </div>
@@ -2636,7 +2728,7 @@
     if (r.medicines?.length) {
       h += `<div class="sec"><div class="sec-title blue">℞ Medicines</div>`;
       r.medicines.forEach((m) => {
-        h += `<div class="med"><div class="med-r1">${esc(m.number)}. ${esc(m.row1_en || "")}</div><div class="med-r2">${esc(m.row2_en || "")}</div><div class="med-r3">${esc(m.row3_hi || "")}</div>${m.flag ? `<div class="med-flag">⚠ ${esc(m.flag)}</div>` : ""}</div>`;
+        h += `<div class="med"><div class="med-r1">${esc(m.number)}. ${esc(m.row1_en || "")}</div><div class="med-r2">${esc(m.row2_en || "")}</div><div class="med-r3">${esc(m.row3_hi || "")}</div>${m.flag ? `<div class="med-flag">⚠ ${esc(m.flag)}</div>` : ""}${renderPictogram(m)}</div>`;
       });
       h += `</div>`;
     }
@@ -2766,6 +2858,19 @@
       .footer-doc em { color: #999; font-size: 9px; }
       .footer-qr { flex-shrink: 0; text-align: center; }
       .footer-safety { text-align: right; color: #1a6b3a; font-size: 10px; line-height: 1.8; }
+      .dose-strip { display:flex; align-items:stretch; margin-top:4px; border:1px solid #ccc; border-radius:4px; overflow:hidden; font-size:9px; color:#1e3a6b; }
+      .dose-slot { flex:1; text-align:center; padding:3px 4px; border-right:1px solid #ccc; }
+      .dose-slot:last-of-type { border-right:none; }
+      .dose-slot-time svg { width:16px; height:16px; stroke:#1e3a6b; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+      .dose-slot-label { font-size:8px; color:#888; display:block; }
+      .dose-slot-qty { font-weight:600; font-size:10px; margin:1px 0; display:flex; justify-content:center; gap:2px; align-items:center; }
+      .dose-pill { width:8px; height:8px; border-radius:50%; background:#1e3a6b; display:inline-block; }
+      .dose-pill-half { background:linear-gradient(90deg,#1e3a6b 50%,transparent 50%); border:1px solid #1e3a6b; }
+      .dose-pill-quarter { background:conic-gradient(#1e3a6b 0deg 90deg,transparent 90deg 360deg); border:1px solid #1e3a6b; }
+      .dose-meta { padding:3px 6px; background:#f8f7f1; font-size:8px; color:#666; display:flex; flex-direction:column; justify-content:center; min-width:45px; text-align:center; border-left:1px solid #ccc; }
+      .dose-strip-prn { display:flex; align-items:center; gap:6px; margin-top:4px; padding:3px 8px; border:1px solid #ccc; border-radius:4px; font-size:9px; color:#1e3a6b; background:#fdf8f0; }
+      .dose-strip-prn svg { width:14px; height:14px; stroke:#b8860b; fill:none; stroke-width:1.5; }
+      .dose-meta svg { width:12px; height:12px; stroke:#666; fill:none; stroke-width:1.5; }
     </style></head><body>${h}</body></html>`);
     w.document.close();
     setTimeout(() => w.print(), 600);
@@ -2835,6 +2940,100 @@
     el.style.height = el.scrollHeight + "px";
   }
 
+  // ===== DOSING PICTOGRAM ICONS (inline SVG) =====
+  const DOSE_SVG = {
+    // Sunrise - half circle with rays rising over horizon
+    morning: `<svg viewBox="0 0 24 24"><path d="M12 2v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M20 12h2"/><path d="M19.07 4.93l-1.41 1.41"/><path d="M2 12h2"/><path d="M12 8a4 4 0 0 1 4 4"/><path d="M12 8a4 4 0 0 0-4 4"/><line x1="2" y1="16" x2="22" y2="16"/></svg>`,
+    // Full sun - circle with rays
+    afternoon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>`,
+    // Sunset - half circle descending below horizon
+    evening: `<svg viewBox="0 0 24 24"><path d="M12 10a4 4 0 0 1 4 4"/><path d="M12 10a4 4 0 0 0-4 4"/><line x1="2" y1="14" x2="22" y2="14"/><path d="M12 10v8"/><path d="M4.93 3.93l1.41 1.41"/><path d="M19.07 3.93l-1.41 1.41"/><path d="M12 2v2"/></svg>`,
+    // Crescent moon with star
+    bedtime: `<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/><path d="M19 3l.5 1.5L21 5l-1.5.5L19 7l-.5-1.5L17 5l1.5-.5z"/></svg>`,
+    // Lightning bolt - PRN/as needed
+    prn: `<svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 10 10-12h-9l1-10z" fill="#b8860b" stroke="#b8860b"/></svg>`,
+    // Measuring spoon
+    spoon: `<svg viewBox="0 0 24 24"><path d="M15 3C15 5.21 13.21 7 11 7H8C5.79 7 4 5.21 4 3"/><path d="M4 3h11"/><path d="M8 7v14"/><path d="M6 21h5"/></svg>`,
+    // Droplet
+    drop: `<svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+    // Food/plate
+    food: `<svg viewBox="0 0 24 24"><path d="M3 11h18"/><path d="M5 11a7 7 0 0 1 14 0"/><path d="M7 17h10"/><path d="M9 21h6"/></svg>`,
+  };
+
+  const TIME_LABELS = {
+    morning: "सुबह",
+    afternoon: "दोपहर",
+    evening: "शाम",
+    bedtime: "रात",
+  };
+
+  function renderPictogram(m) {
+    const p = m.pictogram;
+    if (!p) return "";
+
+    // PRN layout
+    if (p.prn) {
+      return `<div class="dose-strip-prn">
+      ${DOSE_SVG.prn}
+      <span style="font-weight:600">ज़रूरत पर</span>
+      <span>${renderDoseIcon(p)}</span>
+      <span style="font-weight:600">${esc(p.dose_display || "")}</span>
+      ${p.max_per_day ? `<span style="color:#888">अधिकतम ${p.max_per_day} बार/दिन</span>` : ""}
+      ${p.special === "fever_only" ? '<span style="color:#b8860b">बुखार होने पर ही</span>' : ""}
+    </div>`;
+    }
+
+    // Scheduled layout
+    let h = '<div class="dose-strip">';
+    (p.times || []).forEach((t) => {
+      h += `<div class="dose-slot">
+      <div class="dose-slot-time">${DOSE_SVG[t] || ""}</div>
+      <div class="dose-slot-label">${TIME_LABELS[t] || t}</div>
+      <div class="dose-slot-qty">${renderDoseIcon(p)}</div>
+      <div style="font-size:9px;color:#555">${esc(p.dose_display || "")}</div>
+    </div>`;
+    });
+    // Meta column
+    const metaParts = [];
+    if (p.duration_days) metaParts.push(`${p.duration_days} दिन`);
+    if (p.with_food)
+      metaParts.push(
+        `<span style="display:inline-flex;align-items:center;gap:2px">${DOSE_SVG.food} भोजन के बाद</span>`,
+      );
+    if (p.special === "empty_stomach") metaParts.push("खाली पेट");
+    if (metaParts.length) {
+      h += `<div class="dose-meta">${metaParts.join("<br>")}</div>`;
+    }
+    h += "</div>";
+    return h;
+  }
+
+  function renderDoseIcon(p) {
+    if (p.form === "syrup") return DOSE_SVG.spoon;
+    if (p.form === "drops") {
+      const count = p.dose_qty || 1;
+      return new Array(Math.min(count, 5))
+        .fill(
+          `<span style="display:inline-block;width:8px;height:8px">${DOSE_SVG.drop}</span>`,
+        )
+        .join("");
+    }
+    if (p.form === "tablet" || p.form === "capsule") {
+      let pills = "";
+      const qty = p.dose_qty || 1;
+      for (let i = 0; i < Math.floor(qty); i++)
+        pills += '<span class="dose-pill"></span>';
+      if (p.dose_fraction === "half")
+        pills += '<span class="dose-pill dose-pill-half"></span>';
+      if (p.dose_fraction === "quarter")
+        pills += '<span class="dose-pill dose-pill-quarter"></span>';
+      return pills || '<span class="dose-pill"></span>';
+    }
+    if (p.form === "inhaler")
+      return `<span style="font-size:10px">${p.dose_display || ""}</span>`;
+    return `<span style="font-size:10px">${esc(p.dose_display || "")}</span>`;
+  }
+
   // Expose functions to window for onclick/oninput handlers (Claude.ai sandbox compatibility)
   Object.assign(window, {
     connectSB,
@@ -2852,6 +3051,8 @@
     resetPad,
     applyDose,
     liveCalc,
+    renderPictogram,
+    renderDoseIcon,
   });
 
   // Auto-connect on page load
