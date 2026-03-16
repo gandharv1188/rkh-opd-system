@@ -145,19 +145,13 @@ Created `developmental_screenings` table with tool_used, domain-specific fields 
 **Description:** Anyone with page access and Supabase credentials can sign prescriptions as any doctor. The doctor selector is a simple dropdown.
 **Fix:** Add at minimum a PIN-based sign-off for production.
 
-### D-14. `sex` column and other enums unconstrained
+### ~~D-14. `sex` column and other enums unconstrained~~ → RESOLVED (R33)
 
-**Severity:** LOW
-**Location:** Schema — `patients.sex`, `formulary.licensed_in_children`, `vaccinations.free_or_paid`
-**Description:** These text columns accept any value. Documented valid values are not enforced by CHECK constraints.
-**Fix:** Add CHECK constraints for each.
+Added CHECK constraints: `patients.sex` in (Male, Female, Other), `formulary.licensed_in_children` in (true, partial, false), `vaccinations.free_or_paid` in (free_uip, paid).
 
-### D-15. JSONB fields lack basic type validation
+### ~~D-15. JSONB fields lack basic type validation~~ → RESOLVED (R34)
 
-**Severity:** LOW
-**Location:** Schema — all JSONB columns
-**Description:** No CHECK that JSONB array fields actually contain arrays (e.g., `formulations`, `dosing_bands`, `interactions`). Malformed structures silently accepted.
-**Fix:** Add `CHECK (jsonb_typeof(column) = 'array')` where applicable.
+Added `CHECK (col is null or jsonb_typeof(col) = 'array'|'object')` to all 14 JSONB columns: formulary (formulations, dosing_bands, renal_bands, interactions, administration), standard_prescriptions (first_line_drugs, second_line_drugs, investigations), visits (diagnosis_codes), prescriptions (medicines, investigations, vaccinations, growth, qr_data).
 
 ### D-16. QR code payload may exceed capacity
 

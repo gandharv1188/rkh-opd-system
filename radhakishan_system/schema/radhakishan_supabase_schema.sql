@@ -33,8 +33,8 @@ create table formulary (
   category                    text,
   brand_names                 text[],
   therapeutic_use             text[],
-  licensed_in_children        text default 'true',
-  -- values: 'true' | 'partial' | 'false'
+  licensed_in_children        text default 'true'
+    check (licensed_in_children in ('true', 'partial', 'false')),
   unlicensed_note             text,
 
   -- Formulations
@@ -48,7 +48,7 @@ create table formulary (
   --   route: oral|iv|im|sc|inhaled|topical|rectal|nasal|ophthalmic
   --   indian_brand: string (e.g. "Novamox 125mg/5ml")
   -- }
-  formulations                jsonb,
+  formulations                jsonb check (formulations is null or jsonb_typeof(formulations) = 'array'),
 
   -- Dosing bands
   -- Each entry: {
@@ -74,7 +74,7 @@ create table formulary (
   --   rounding_rule: 0.5ml|0.1ml|quarter_tab|whole_unit|exact
   --   notes: string
   -- }
-  dosing_bands                jsonb,
+  dosing_bands                jsonb check (dosing_bands is null or jsonb_typeof(dosing_bands) = 'array'),
 
   -- Renal adjustment
   renal_adjustment_required   boolean default false,
@@ -83,7 +83,7 @@ create table formulary (
   --   action: reduce_dose|extend_interval|reduce_and_extend|avoid|no_adjustment
   --   note: string
   -- }
-  renal_bands                 jsonb,
+  renal_bands                 jsonb check (renal_bands is null or jsonb_typeof(renal_bands) = 'array'),
 
   -- Hepatic adjustment
   hepatic_adjustment_required boolean default false,
@@ -94,13 +94,13 @@ create table formulary (
   contraindications           text[],
   cross_reactions             text[],
   -- Each entry: {drug, severity: black_box|major|moderate|minor, effect}
-  interactions                jsonb,
+  interactions                jsonb check (interactions is null or jsonb_typeof(interactions) = 'array'),
   monitoring_parameters       text[],
   pediatric_specific_warnings text[],
 
   -- Administration
   -- Each entry: {route, reconstitution, dilution, infusion_rate, compatibility_note}
-  administration              jsonb,
+  administration              jsonb check (administration is null or jsonb_typeof(administration) = 'array'),
   food_instructions           text,
   storage_instructions        text,
 
@@ -172,12 +172,12 @@ create table standard_prescriptions (
   --   is_per_day: boolean, frequency_per_day: number
   --   duration_days: number, route: string, notes: string
   -- }
-  first_line_drugs      jsonb,
-  second_line_drugs     jsonb,
+  first_line_drugs      jsonb check (first_line_drugs is null or jsonb_typeof(first_line_drugs) = 'array'),
+  second_line_drugs     jsonb check (second_line_drugs is null or jsonb_typeof(second_line_drugs) = 'array'),
 
   -- Investigations to order with this diagnosis
   -- Each entry: {name, indication, urgency: same-day|routine}
-  investigations        jsonb,
+  investigations        jsonb check (investigations is null or jsonb_typeof(investigations) = 'array'),
 
   duration_days_default integer,
   counselling           text[],
@@ -209,7 +209,7 @@ create table patients (
 
   name            text not null,
   dob             date,
-  sex             text,
+  sex             text check (sex in ('Male', 'Female', 'Other')),
   guardian_name   text,
   guardian_relation text,
   contact_phone   text,
@@ -256,7 +256,7 @@ create table visits (
 
   -- Clinical
   chief_complaints    text,
-  diagnosis_codes     jsonb,
+  diagnosis_codes     jsonb check (diagnosis_codes is null or jsonb_typeof(diagnosis_codes) = 'array'),
   -- [{icd10, name, type: provisional|final}]
   clinical_notes      text,
   triage_score        integer check (triage_score between 0 and 15),
@@ -286,10 +286,10 @@ create table prescriptions (
   generated_json  jsonb not null,
 
   -- Individual sections for querying
-  medicines       jsonb,
-  investigations  jsonb,
-  vaccinations    jsonb,
-  growth          jsonb,
+  medicines       jsonb check (medicines is null or jsonb_typeof(medicines) = 'array'),
+  investigations  jsonb check (investigations is null or jsonb_typeof(investigations) = 'array'),
+  vaccinations    jsonb check (vaccinations is null or jsonb_typeof(vaccinations) = 'object'),
+  growth          jsonb check (growth is null or jsonb_typeof(growth) = 'object'),
 
   -- Approval
   approved_by     text,
@@ -299,7 +299,7 @@ create table prescriptions (
   -- Output
   pdf_url         text,
   -- Supabase Storage URL
-  qr_data         jsonb,
+  qr_data         jsonb check (qr_data is null or jsonb_typeof(qr_data) = 'object'),
   -- {rx_id, uhid, pt_name, date, dx_codes, hash}
 
   -- Versions (if doctor edits after AI generation)
@@ -330,8 +330,7 @@ create table vaccinations (
   given_by        text,
   -- doctor / nurse name
   visit_id        uuid references visits(id),
-  free_or_paid    text,
-  -- 'free_uip' | 'paid'
+  free_or_paid    text check (free_or_paid in ('free_uip', 'paid')),
   route           text,
   site            text,
 
