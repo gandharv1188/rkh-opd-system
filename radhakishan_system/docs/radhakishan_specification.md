@@ -141,67 +141,81 @@ The system has four layers:
 | Knowledge Base   | Supabase (PostgreSQL + JSONB)         | Formulary, standard protocols, patient records |
 | File Storage     | Supabase Storage                      | Prescription files (PDF/text)                  |
 
-## 3.2 Data Flow — Single Prescription
+## 3.2 Data Flow — Complete Patient Visit
 
-Doctor opens Prescription Pad
+### Stage 1: Reception (Patient Registration Artifact)
+
+Patient arrives at reception desk
+
+→ **New patient:** Reception registers demographics (name, DOB, sex, guardian, phone, blood group, allergies). UHID auto-generated (RKH-YYMM#####).
+
+→ **Returning patient:** Reception searches by name/UHID/phone OR scans QR code from previous prescription. QR payload (UHID, name, DOB, sex) auto-fills search → patient loaded for revisit.
+
+→ Vaccination history entered from card (optional — dropdown with common vaccines + date)
+
+→ Neonatal details if applicable (GA, birth weight)
+
+→ Visit created: date, assigned doctor, visit type (new/follow-up/vaccination/emergency)
+
+→ OPD token printed with UHID, name, doctor, visit details
+
+### Stage 2: Nurse Station (Patient Registration Artifact — continued)
+
+Nurse weighs and measures the child
+
+→ Vitals captured: weight (kg), height (cm), head circumference, MUAC, temperature (°F), heart rate, respiratory rate, SpO₂
+
+→ Chief complaints recorded (what parent reports)
+
+→ All data saved to the visit record in Supabase
+
+### Stage 3: Doctor OPD (Prescription Pad Artifact + Claude.ai Conversation)
+
+Doctor opens Prescription Pad, selects patient
 
 → Supabase credentials entered once (session-persisted)
 
 → System pre-loads formulary + standard Rx protocols into memory cache
 
-Doctor selects patient (optional) OR types from scratch
+→ On patient selection: fetches today's visit (created by reception/nurse)
 
-→ Patient search: live query to Supabase patients table
+→ **Visit info panel** displays: allergies (RED), nurse-captured vitals (pills), chief complaints, assigned doctor auto-selected
 
-→ If selected: name/age/sex pre-filled in pad
+→ Clinical note textarea pre-filled with: name, age, weight, sex, allergy status, chief complaints, temperature
 
-Doctor dictates or types clinical note
+Doctor dictates or types additional clinical findings
 
-→ Voice: Web Speech API (Chrome, en-IN locale)
+→ Voice: Web Speech API (Chrome, en-IN locale) / Text: direct keyboard entry
 
-→ Text: direct keyboard entry
+→ Doctor sends clinical note to Claude.ai conversation (via "Send to Chat" button which copies prompt with formulary context to clipboard, or types directly in conversation)
 
-→ Optional sections toggled: investigations / growth / vaccination / etc.
+Claude.ai generates prescription (using Project Custom Instructions = Skill)
 
-Doctor clicks Generate
+→ **Step 1:** Claude confirms patient/diagnosis, presents numbered options for additional sections (investigations, growth, vaccination, etc.)
 
-→ System scans note for drug names → fetches matching formulary entries
+→ **Step 2:** After doctor selects, Claude generates structured JSON prescription with dose calculations, safety checks, Hindi translations
 
-→ System scans note for diagnosis → fetches matching standard Rx protocol
+→ Conversation named: "[Patient Name] — [UHID]"
 
-→ Claude API call:
+Doctor pastes JSON into Prescription Pad (via "Paste JSON" or postMessage)
 
-system: Radhakishan Skill (all clinical rules)
-
-\+ formulary context (relevant drugs only)
-
-\+ standard Rx context (matched protocol)
-
-user: Doctor's full clinical note
-
-→ Returns: structured JSON prescription
-
-Doctor reviews generated prescription
-
-→ Every line directly editable (contenteditable)
+→ Prescription rendered for review — every line directly editable (contenteditable)
 
 → 'Adjust dose' panel: change weight/dose/freq → live recalculation
 
-→ Row 2 (English) and Row 3 (Hindi) both auto-update on dose change
-
 Doctor signs off
 
-→ Supabase: patient record created/updated
+→ Supabase: patient record updated (if new data)
 
-→ Supabase: visit record created (weight, vitals, diagnosis, raw note)
+→ Supabase: visit record updated (diagnosis, clinical notes, raw dictation)
 
 → Supabase: prescription record saved (full JSON + approval)
 
 → Supabase: growth record saved (if Z-scores present)
 
-→ Supabase Storage: prescription file uploaded
+→ Supabase Storage: prescription file uploaded to `prescriptions` bucket
 
-→ postMessage → Output artifact renders PDF with QR code
+→ postMessage → Output artifact renders A4 prescription with QR code
 
 → Print / save
 
@@ -299,7 +313,7 @@ The formulary table stores drug monographs in a structure that reflects real-wor
 
 # 5. Artifacts — Complete Inventory
 
-The system comprises 6 Claude.ai artifacts. Each artifact is a self-contained HTML/JS application that runs in the browser and communicates with Supabase via fetch().
+The system comprises 7 Claude.ai artifacts. Each artifact is a self-contained HTML/JS application that runs in the browser and communicates with Supabase via fetch().
 
 ## 5.1 Artifact 01 — Prescription Pad (Primary Clinical Tool)
 
@@ -315,15 +329,21 @@ The main doctor-facing tool. The doctor's only required action is to write or di
 
 - Voice dictation via Web Speech API (Chrome, en-IN locale)
 
-- Patient search — live query to Supabase patients table
+- Patient search — live query to Supabase patients table (filtered by is_active)
 
-- Auto-fills pad with patient demographics on selection
+- On patient selection: fetches today's visit from Supabase and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO₂), chief complaints, and known allergies (RED highlight)
 
-- 8 optional module sections (toggle-able): Investigations, Vaccination update, Growth & nutrition, Developmental screening, Diet prescription, IV fluids, Referral, Neonatal details
+- Pre-fills clinical note textarea with patient context + vitals + allergy status + chief complaints from nurse
+
+- Auto-selects the doctor assigned at registration
+
+- Dual-mode prescription input: "Send to Chat" (copies prompt with formulary context to clipboard for Claude.ai conversation) OR "Paste JSON" (receives Claude's JSON response)
+
+- Auto-receives prescription JSON via postMessage (`radhakishan-rx-json` type)
 
 - Supabase pre-load: formulary + standard Rx loaded into memory at session start
 
-- At generate time: note scanned for drug names + diagnosis → relevant entries injected as Claude API context
+- Optional module sections now handled in the Claude.ai conversation workflow (Claude presents numbered options after confirming diagnosis)
 
 - Smart inline dose adjustment: change weight/mg-per-kg/frequency → live recalculation → Row 2 (English) and Row 3 (Hindi) both auto-update
 
@@ -351,7 +371,7 @@ Renders the final signed prescription as a formatted A4 document with full Radha
 
 - Full hospital letterhead (blue header, NABH badge, doctor details, emergency contacts)
 
-- QR code generated client-side (qrcodejs CDN library) encoding: Rx ID, UHID, patient name, date, diagnosis ICD-10 codes, hospital identifier
+- QR code generated client-side (qrcodejs CDN library) encoding: UHID, patient name (max 30 chars), DOB, sex initial — designed for patient re-registration on next visit via QR scan at reception
 
 - Print-optimised CSS: hides UI chrome, A4 @page margins, colour-correct (blue medicines, red investigations)
 
@@ -393,7 +413,41 @@ Search patients, view complete clinical history, register new patients, and load
 
 READ/WRITE: patients | READ: visits, prescriptions, growth_records, vaccinations
 
-## 5.4 Artifact 04 — Formulary Manager
+## 5.4 Artifact 04 — Patient Registration (Reception & Nursing Station)
+
+**Identifier**
+
+radhakishan_patient_registration
+
+**Purpose**
+
+Used at the reception desk and nurse station before the patient sees the doctor. Handles new patient registration, returning patient revisit (including QR scan), vitals capture, vaccination history entry, and visit creation.
+
+**Key features**
+
+- **Search:** Live search by name, UHID, or phone number (filtered by is_active)
+
+- **QR Scanner:** Opens rear camera (html5-qrcode library) to scan QR code from previous prescription. QR payload (UHID, name, DOB, sex) auto-loads patient for revisit. If patient not in database, pre-fills new registration form from QR data.
+
+- **New patient registration:** Demographics (name, DOB, sex, guardian, phone, blood group, address), known allergies (comma-separated), neonatal details (GA, birth weight). Only name is mandatory. UHID auto-generated (RKH-YYMM#####).
+
+- **Returning patient revisit:** On selection, form pre-fills with existing data. Reception can update any changed fields (new phone, updated allergies, etc.)
+
+- **Nurse station vitals:** Weight (kg), height (cm), head circumference, MUAC, temperature (°F), heart rate, respiratory rate, SpO₂. These are captured before the doctor sees the patient and are available in the Prescription Pad's visit info panel.
+
+- **Chief complaints:** Free-text field for what the parent/patient reports at reception
+
+- **Vaccination history:** Quick-entry with dropdown (BCG, OPV, Pentavalent, IPV, PCV, Rotavirus, MR, MMR, DPT, Hep A, Varicella, TCV, Influenza, HPV, Td, Tdap) + dose number + date
+
+- **Visit creation:** Select doctor (Dr. Lokender / Dr. Swati), visit type (new/follow-up/vaccination/emergency), date
+
+- **OPD token:** After save, displays a printable token with UHID, name, age, vitals, doctor, allergy status
+
+**Supabase tables**
+
+READ/WRITE: patients, visits, vaccinations
+
+## 5.5 Artifact 05 — Formulary Manager (Admin)
 
 **Identifier**
 
@@ -414,7 +468,7 @@ Admin/pharmacist tool for adding and editing drug monographs. Full BNFC/Lexicomp
 | Safety        | Black box warnings, contraindications, cross-reactions, interactions (with severity), monitoring parameters, renal bands (GFR tiers), hepatic adjustment |
 | Admin & Notes | Reconstitution, dilution, infusion rate, food instructions, storage, clinical notes, reference sources                                                   |
 
-## 5.5 Artifact 05 — Formulary Import Tool
+## 5.6 Artifact 06 — Formulary Import Tool (Admin)
 
 **Identifier**
 
@@ -440,7 +494,7 @@ Bulk-import drug data from any JSON format into the Supabase formulary table.
 
 - Sample data loader with 3 complete reference entries (Amoxicillin, Paracetamol, Gentamicin)
 
-## 5.6 Artifact 06 — Standard Prescriptions Manager
+## 5.7 Artifact 07 — Standard Prescriptions Manager (Admin)
 
 **Identifier**
 
@@ -686,7 +740,11 @@ Used for 6 months to 5 years: \< 11.5cm = SAM (immediate intervention) | 11.5-12
 
 - No walking by 18 months
 
-# 10. IAP 2024 Vaccination Schedule
+# 10. Vaccination Schedules (IAP 2024 + NHM-UIP)
+
+The system supports both the **IAP 2024 ACVIP** schedule (recommended, includes paid vaccines) and the **NHM Universal Immunisation Programme** schedule (government free). The doctor specifies which schedule to use; default is IAP 2024. The skill prompt contains both schedules with a comparison table and Haryana-specific notes (Rotavirus & PCV free under UIP, JE not endemic, HPV state programme 2026-27).
+
+## 10.1 IAP 2024 ACVIP Schedule
 
 |               |                                                                                                   |               |                |
 | ------------- | ------------------------------------------------------------------------------------------------- | ------------- | -------------- |

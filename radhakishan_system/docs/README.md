@@ -17,46 +17,52 @@ Built on Claude.ai artifacts + Supabase backend.
 ## Architecture
 
 ```
-Claude.ai Artifacts (browser UI)
-        ↕ HTTPS fetch()
-Supabase Database + Storage (backend)
-        ↕
-Claude API (prescription generation)
+Reception (Patient Registration artifact)
+        ↓ registers patient, captures vitals, creates visit
+Supabase Database + Storage (PostgreSQL, 10 tables)
+        ↑ ↓ HTTPS fetch()
+Doctor OPD (Prescription Pad + Claude.ai conversation)
+        ↓ doctor dictates → Claude generates JSON → artifact renders
+Prescription Output (A4 print with QR code)
 ```
 
 ---
 
-## Artifacts Built (10 total)
+## Artifacts (7 total)
 
-### Core Clinical Tools
+### Clinical Workflow
 
-| #   | Artifact                | Purpose                                                     |
-| --- | ----------------------- | ----------------------------------------------------------- |
-| 01  | **Prescription Pad**    | Main doctor tool — dictate/type, generate, edit, sign off   |
-| 02  | **Prescription Output** | Modular PDF rendering, QR code, print-ready A4              |
-| 03  | **Patient Lookup**      | Search patients, view history, reuse previous prescriptions |
+| #   | Artifact                 | User         | Purpose                                                                 |
+| --- | ------------------------ | ------------ | ----------------------------------------------------------------------- |
+| 01  | **Patient Registration** | Reception    | Register patients, QR scan, vitals, vaccination history, visit creation |
+| 02  | **Prescription Pad**     | Doctor       | Clinical note, view nurse data, paste AI-generated JSON, sign off       |
+| 03  | **Prescription Output**  | Doctor/Print | A4 prescription with letterhead, QR code, bilingual content             |
+| 04  | **Patient Lookup**       | Doctor       | Search patients, view history, growth trends, reuse Rx                  |
 
-### Knowledge Base Management
+### Knowledge Base Management (Admin)
 
-| #   | Artifact                           | Purpose                                         |
-| --- | ---------------------------------- | ----------------------------------------------- |
-| 04  | **Formulary Manager**              | Full drug monograph editor — all dosing methods |
-| 05  | **Formulary Import Tool**          | Bulk JSON import with field auto-mapping        |
-| 06  | **Standard Prescriptions Manager** | ICD-10 keyed diagnosis protocols                |
+| #   | Artifact                           | Purpose                                                 |
+| --- | ---------------------------------- | ------------------------------------------------------- |
+| 05  | **Formulary Manager**              | Drug monograph editor — 530 drugs, all 6 dosing methods |
+| 06  | **Formulary Import Tool**          | Bulk JSON import with field auto-mapping                |
+| 07  | **Standard Prescriptions Manager** | ICD-10 keyed diagnosis protocols — 446 diagnoses        |
 
 ---
 
-## Supabase Schema (7 tables)
+## Supabase Schema (10 tables)
 
-| Table                    | Purpose                                              |
-| ------------------------ | ---------------------------------------------------- |
-| `formulary`              | Drug monographs — formulations, dosing bands, safety |
-| `standard_prescriptions` | ICD-10 keyed prescription protocols                  |
-| `patients`               | Patient demographics and neonatal details            |
-| `visits`                 | Every OPD visit with anthropometry and vitals        |
-| `prescriptions`          | Generated prescriptions with approval status         |
-| `vaccinations`           | Vaccination history per patient                      |
-| `growth_records`         | WHO Z-scores and growth measurements per visit       |
+| Table                      | Purpose                                              | Rows |
+| -------------------------- | ---------------------------------------------------- | ---- |
+| `formulary`                | Drug monographs — formulations, dosing bands, safety | 530  |
+| `doctors`                  | Doctor credentials and registration numbers          | 2    |
+| `standard_prescriptions`   | ICD-10 keyed prescription protocols                  | 446  |
+| `patients`                 | Demographics, UHID, allergies, soft-delete           | —    |
+| `visits`                   | Per-visit vitals, diagnoses, clinical notes          | —    |
+| `prescriptions`            | Generated prescriptions with approval status         | —    |
+| `vaccinations`             | Vaccination history (IAP 2024 + NHM-UIP)             | —    |
+| `growth_records`           | WHO Z-scores and growth measurements                 | —    |
+| `developmental_screenings` | Structured developmental assessments by domain       | —    |
+| Storage: `prescriptions`   | Public bucket for prescription files                 | —    |
 
 ---
 
