@@ -2052,8 +2052,7 @@
       month: "short",
       year: "numeric",
     });
-    const uhid =
-      r.patient.uhid || selectedPatient?.id || (await generateUHID());
+    const uhid = selectedPatient?.id || "";
     let h = "";
 
     h += `<div class="pt-strip">
@@ -2547,8 +2546,7 @@
       hour: "2-digit",
       minute: "2-digit",
     });
-    const uhid =
-      r.patient?.uhid || selectedPatient?.id || rxData?.patient?.uhid || "—";
+    const uhid = selectedPatient?.id || "";
 
     let h = "";
     // Header — doctor left, hospital center, emergency right
