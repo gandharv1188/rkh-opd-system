@@ -825,6 +825,18 @@ A `doctors` table stores credentials for all doctors (ID, full name, degree, reg
 - Link `doctors.id` to Supabase Auth user IDs for per-doctor RLS policies
 - Add PIN-based or password-based sign-off before prescription approval
 
+## 12.5 Audit Log (Production)
+
+**POC (current):** No dedicated audit log table. The `updated_at` timestamps on all tables and Supabase's built-in Postgres logs provide a minimal audit trail. The `prescriptions` table stores `version` and `edit_notes` for tracking post-approval edits.
+
+**Production (future):** Create a dedicated `audit_log` table to satisfy NABH IMS requirements:
+
+- Fields: `id`, `timestamp`, `user_id` (doctor), `action` (view/create/update/delete), `table_name`, `record_id`, `before_value` (JSONB), `after_value` (JSONB), `ip_address`
+- Populated via Supabase database triggers on INSERT/UPDATE/DELETE for all clinical tables (patients, visits, prescriptions, vaccinations, growth_records)
+- Read-only — no UPDATE or DELETE allowed on audit_log itself
+- Retention policy: minimum 5 years per NABH medical records requirements
+- Queryable by doctor, patient, date range for compliance audits
+
 # 13. Technology Stack
 
 |                 |                                   |                                      |
