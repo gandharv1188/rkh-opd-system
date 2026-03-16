@@ -112,26 +112,20 @@ Added CHECK constraints: visits (weight 0.3-200kg, height 20-220cm, HC 15-60cm, 
 
 Added `UNIQUE` constraint to `formulary.generic_name`.
 
-### D-8. Missing `updated_at` on visits, vaccinations, growth_records
+### ~~D-8. Missing `updated_at` on visits, vaccinations, growth_records~~ → RESOLVED (R30)
 
-**Severity:** MEDIUM
-**Location:** Schema — 3 tables
-**Description:** These tables have `created_at` but no `updated_at` column or trigger, unlike other mutable tables.
-**Fix:** Add `updated_at` columns and triggers.
+Added `updated_at timestamptz default now()` and update triggers to all three tables.
 
-### D-9. Missing composite indexes
+### ~~D-9. Missing composite indexes~~ → RESOLVED (R31)
 
-**Severity:** LOW (performance at scale)
-**Location:** Schema
-**Description:** Missing composite indexes on `visits(patient_id, visit_date)`, `growth_records(patient_id, recorded_date)`, `vaccinations(patient_id, vaccine_name)`. Individual indexes exist but common query patterns need composites.
-**Fix:** Add composite indexes.
+Added `visits(patient_id, visit_date desc)`, `vaccinations(patient_id, vaccine_name)`, `growth_records(patient_id, recorded_date desc)`.
 
 ### D-10. No audit log table
 
 **Severity:** MEDIUM for NABH production compliance
 **Location:** Schema
 **Description:** No audit trail of who viewed/edited patient records. NABH IMS chapter recommends this.
-**Fix:** Create an `audit_log` table for production deployment.
+**Status:** DEFERRED to production. For POC, the `updated_at` timestamps and Supabase's built-in Postgres logs provide a minimal audit trail. A dedicated `audit_log` table with action type, user, timestamp, affected table/row, and before/after values should be created when the system moves to production with real patient data.
 
 ### D-11. No developmental screening table
 

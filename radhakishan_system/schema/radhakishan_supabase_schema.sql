@@ -264,11 +264,13 @@ create table visits (
   -- Doctor's raw dictation (saved for audit)
   raw_dictation       text,
 
-  created_at      timestamptz default now()
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
 );
 
-create index idx_visits_patient  on visits(patient_id);
-create index idx_visits_date     on visits(visit_date);
+create index idx_visits_patient      on visits(patient_id);
+create index idx_visits_date         on visits(visit_date);
+create index idx_visits_patient_date on visits(patient_id, visit_date desc);
 
 -- ============================================================
 -- 5. PRESCRIPTIONS
@@ -333,11 +335,13 @@ create table vaccinations (
   route           text,
   site            text,
 
-  created_at      timestamptz default now()
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
 );
 
-create index idx_vax_patient on vaccinations(patient_id);
-create index idx_vax_due     on vaccinations(next_due_date);
+create index idx_vax_patient      on vaccinations(patient_id);
+create index idx_vax_due          on vaccinations(next_due_date);
+create index idx_vax_patient_name on vaccinations(patient_id, vaccine_name);
 
 -- ============================================================
 -- 7. GROWTH RECORDS
@@ -371,10 +375,12 @@ create table growth_records (
   classification  text,
   -- e.g. 'Well nourished' | 'MAM' | 'SAM' | 'Underweight'
 
-  created_at      timestamptz default now()
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
 );
 
-create index idx_growth_patient on growth_records(patient_id);
+create index idx_growth_patient      on growth_records(patient_id);
+create index idx_growth_patient_date on growth_records(patient_id, recorded_date desc);
 
 -- ============================================================
 -- 8. ROW LEVEL SECURITY
@@ -433,6 +439,18 @@ create trigger trg_patients_updated
 
 create trigger trg_prescriptions_updated
   before update on prescriptions
+  for each row execute function update_updated_at();
+
+create trigger trg_visits_updated
+  before update on visits
+  for each row execute function update_updated_at();
+
+create trigger trg_vaccinations_updated
+  before update on vaccinations
+  for each row execute function update_updated_at();
+
+create trigger trg_growth_records_updated
+  before update on growth_records
   for each row execute function update_updated_at();
 
 -- ============================================================
