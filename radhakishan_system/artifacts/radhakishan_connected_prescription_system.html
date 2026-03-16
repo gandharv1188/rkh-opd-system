@@ -1925,6 +1925,7 @@
       if (data.error) throw new Error(data.error);
 
       rxData = data.prescription;
+      console.log("AI Response JSON:", JSON.stringify(rxData, null, 2));
       // Inject UHID from selected patient if available
       if (selectedPatient?.id && rxData.patient) {
         rxData.patient.uhid = selectedPatient.id;
