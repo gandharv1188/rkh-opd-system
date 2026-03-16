@@ -1185,17 +1185,12 @@
     document.getElementById("btn-pdf").disabled = false;
 
     /* QR code */
+    // QR payload: minimal data for patient re-registration on next visit
     const qrPayload = JSON.stringify({
-      rx: rxid,
       uhid: uhid,
-      pt: rx.patient.name,
-      date: today,
-      dx: (rx.diagnosis || [])
-        .map((d) => d.icd10)
-        .filter(Boolean)
-        .join(","),
-      wt: rx.patient.weight_kg,
-      hosp: "RH-KUK",
+      pt: (rx.patient.name || "").slice(0, 30),
+      dob: rx.patient.dob || "",
+      sex: (rx.patient.sex || "").slice(0, 1),
     });
     setTimeout(() => {
       const el = document.getElementById("qr-box");

@@ -153,12 +153,9 @@ Added CHECK constraints: `patients.sex` in (Male, Female, Other), `formulary.lic
 
 Added `CHECK (col is null or jsonb_typeof(col) = 'array'|'object')` to all 14 JSONB columns: formulary (formulations, dosing_bands, renal_bands, interactions, administration), standard_prescriptions (first_line_drugs, second_line_drugs, investigations), visits (diagnosis_codes), prescriptions (medicines, investigations, vaccinations, growth, qr_data).
 
-### D-16. QR code payload may exceed capacity
+### ~~D-16. QR code payload may exceed capacity~~ → RESOLVED (R35)
 
-**Severity:** LOW
-**Location:** `radhakishan_prescription_output_v2.html` — QR generation
-**Description:** QR payload is raw JSON with patient name, diagnoses, etc. With many diagnoses and long names, it could exceed QR capacity at correction level M / 64px.
-**Fix:** Truncate payload or switch to a URL-based verification link.
+Trimmed QR payload to re-registration essentials only: UHID, patient name (max 30 chars), DOB, sex initial. Removed diagnosis, weight, date, hospital code. Well within QR capacity.
 
 ### D-17. CDN dependency for QR code library
 
