@@ -2168,6 +2168,28 @@
     showDrwTab(n);
   }
 
+  // Expose functions for sandboxed iframe onclick/oninput/onchange handlers
+  Object.assign(window, {
+    toggleCfg,
+    connectDB,
+    filterDrugs,
+    filterCat,
+    openDrawer,
+    closeDrawer,
+    showDrwTab,
+    saveDrug,
+    viewDrug,
+    editDrug,
+    deleteDrug,
+    addForm,
+    addBand,
+    addInt,
+    addRenalBand,
+    addAdmin,
+    removeTag,
+    updateMethodHelp,
+  });
+
   // Auto-connect on page load
   setTimeout(() => connectDB(), 500);
 </script>

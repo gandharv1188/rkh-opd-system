@@ -1260,6 +1260,20 @@
     }
   });
 
+  // Expose functions for sandboxed iframe onclick/oninput handlers
+  Object.assign(window, {
+    toggleCfg,
+    connectDB,
+    searchPatients,
+    toggleNewForm,
+    registerPatient,
+    toggleCard,
+    switchTab,
+    startNewVisit,
+    reusePrescription,
+    showRxDetail,
+  });
+
   // Auto-connect on page load
   setTimeout(() => connectDB(), 500);
 </script>

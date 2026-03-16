@@ -1426,6 +1426,17 @@
     document.getElementById("format-ta").value = FORMAT_EXAMPLES[key] || "";
   }
 
+  // Expose functions for sandboxed iframe onclick handlers
+  Object.assign(window, {
+    connect,
+    parseJSON,
+    loadSampleFormat,
+    loadSampleData,
+    startImport,
+    importValidOnly,
+    loadFormatExample,
+  });
+
   // Auto-connect on page load
   setTimeout(() => connect(), 500);
 </script>

@@ -2517,6 +2517,28 @@ ${fullNote}`;
     setTimeout(() => t.classList.remove("on"), 2500);
   }
 
+  // Expose functions to window for onclick/oninput handlers (Claude.ai sandbox compatibility)
+  Object.assign(window, {
+    connectSB,
+    togglePtSearch,
+    searchPt,
+    selectPatient,
+    clearPatient,
+    toggleVoice,
+    sendToChat,
+    togglePasteArea,
+    loadPastedJSON,
+    toggleMod,
+    toggleEP,
+    showView,
+    signOff,
+    printRx,
+    resetPad,
+    applyDose,
+    liveCalc,
+    showCopiedToast,
+  });
+
   // Auto-connect on page load
   setTimeout(() => connectSB(), 500);
 </script>

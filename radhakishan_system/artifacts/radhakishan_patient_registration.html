@@ -1192,6 +1192,21 @@
     }
   }
 
+  // Expose functions for sandboxed iframe onclick/oninput handlers
+  Object.assign(window, {
+    toggleCfg,
+    connectSB,
+    debounceSearch,
+    startQrScan,
+    stopQrScan,
+    showNewPatientForm,
+    selectPatient,
+    addVaxRow,
+    cancelForm,
+    saveAndCreateVisit,
+    resetAll,
+  });
+
   // Auto-connect on page load
   setTimeout(() => connectSB(), 500);
 </script>

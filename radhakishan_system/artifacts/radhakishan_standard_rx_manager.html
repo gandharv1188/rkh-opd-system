@@ -1532,6 +1532,25 @@
     setTimeout(() => t.classList.remove("on"), 2500);
   }
 
+  // Expose functions for sandboxed iframe onclick/oninput handlers
+  Object.assign(window, {
+    toggleCfg,
+    connectDB,
+    filterList,
+    filterCat,
+    openDrawer,
+    closeDrawer,
+    showTab,
+    save,
+    edit,
+    del,
+    addDrug,
+    addInv,
+    rmTag,
+    searchICD,
+    selectICD,
+  });
+
   // Auto-connect on page load
   setTimeout(() => connectDB(), 500);
 </script>

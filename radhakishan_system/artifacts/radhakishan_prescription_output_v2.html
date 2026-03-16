@@ -1243,4 +1243,12 @@
       }
     }
   });
+
+  // Expose functions for sandboxed iframe onclick handlers
+  Object.assign(window, {
+    togglePaste,
+    loadDemo,
+    parsePaste,
+    savePDF,
+  });
 </script>
