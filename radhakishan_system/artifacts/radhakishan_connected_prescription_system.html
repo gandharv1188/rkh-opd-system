@@ -1161,7 +1161,6 @@
       </button>
       <select class="doctor-select" id="doctor-sel">
         <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
-        <option value="DR-SWATI">Dr. Swati Goyal</option>
       </select>
     </div>
 
@@ -2070,7 +2069,7 @@
   </div>`;
 
     h += `<div class="auth-block">
-    <div><div class="auth-name">Dr. Lokender Goyal · Dr. Swati Goyal</div>
+    <div><div class="auth-name">Dr. Lokender Goyal</div>
     <div class="auth-meta">MD Pediatrics · HMCI HN 21452 (Haryana) · PMC 23168 (Punjab)<br>Radhakishan Hospital, Jyoti Nagar, Kurukshetra · 01744-251441 · 7206029516</div>
     <div style="font-size:11px;color:var(--ink3);font-style:italic;margin-top:3px">AI-generated draft — awaiting doctor approval</div></div>
     <div style="text-align:right;color:var(--ink3)"><div>Allergy: ${esc(r.safety?.allergy_note) || "NKDA"}</div><div>Interactions ✓</div><div>Max dose ✓</div><div>NABH ✓</div></div>
@@ -2355,7 +2354,7 @@
             `Diagnosis: ${(r.diagnosis || []).map((d) => d.name).join(", ")}\n\n` +
             `MEDICINES:\n${meds}\n\n` +
             `Follow-up: ${r.followup_days || 3} days\n` +
-            `Dr. Lokender Goyal & Dr. Swati Goyal | Radhakishan Hospital, Kurukshetra`,
+            `Dr. Lokender Goyal | Radhakishan Hospital, Kurukshetra`,
         ],
         { type: "text/plain" },
       );
@@ -2425,7 +2424,7 @@
   <div class="sub">राधाकिशन हस्पताल · Jyoti Nagar, Kurukshetra · NABH Accredited</div>
   <div class="meta">
     <div><strong>${esc(r.patient.name) || "Patient"}</strong> · ${esc(r.patient.age)} · ${esc(r.patient.sex)} · ${esc(r.patient.weight_kg)}kg<br>UHID: ${esc(rxId)}</div>
-    <div style="text-align:right">${today}<br>Dr. Lokender Goyal / Dr. Swati Goyal</div>
+    <div style="text-align:right">${today}<br>Dr. Lokender Goyal</div>
   </div>
   <div class="dx">Diagnosis: ${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "")).join(" · ")}</div>
   <div class="sec-title">℞ Medicines</div>

@@ -10,7 +10,7 @@ A complete AI-assisted OPD prescription system for pediatric and neonatal patien
 Built on Claude.ai artifacts + Supabase backend.
 
 **Hospital:** Radhakishan Hospital, Jyoti Nagar, Kurukshetra, Haryana — NABH HCO 6th Edition Accredited
-**Doctors:** Dr. Lokender Goyal (MD Pediatrics, PGI Chandigarh) · Dr. Swati Goyal (MD Pediatrics)
+**Doctors:** Dr. Lokender Goyal (MD Pediatrics, PGI Chandigarh) (MD Pediatrics)
 
 ---
 

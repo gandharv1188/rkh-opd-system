@@ -156,7 +156,7 @@ Morning:
 
 For each patient:
 1. Search patient by name or UHID (or leave blank for new)
-2. Select doctor name (Dr. Lokender / Dr. Swati)
+2. Select doctor name (Dr. Lokender Goyal)
 3. Dictate or type clinical note
 4. Tick any optional sections needed (investigations, growth, etc.)
 5. Click Generate

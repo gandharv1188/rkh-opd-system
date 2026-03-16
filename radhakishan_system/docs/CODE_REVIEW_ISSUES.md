@@ -98,7 +98,7 @@ Added `known_allergies text[]` to patients schema. Registration form has comma-s
 
 ### ~~D-4. No `doctors` reference table~~ → RESOLVED (R26)
 
-Created `doctors` table with id, full_name, degree, registration_no, specialisation. Seeded with Dr. Lokender Goyal and Dr. Swati Goyal. FK enforcement deferred to production. Noted in specification Section 12.4.
+Created `doctors` table with id, full_name, degree, registration_no, specialisation. Seeded with Dr. Lokender Goyal. FK enforcement deferred to production. Noted in specification Section 12.4.
 
 ### ~~D-5. Missing NOT NULL constraints on critical foreign keys~~ → RESOLVED (R27)
 

@@ -51,7 +51,7 @@ Everything lives under `radhakishan_system/`:
 | Table                           | Purpose                                                                                                                                |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `formulary`                     | Drug monographs (530 drugs) with JSONB: formulations, dosing_bands, renal_bands, interactions, administration. UNIQUE on generic_name. |
-| `doctors`                       | Reference table with credentials. Seeded with Dr. Lokender Goyal and Dr. Swati Goyal.                                                  |
+| `doctors`                       | Reference table with credentials. Seeded with Dr. Lokender Goyal.                                                                      |
 | `standard_prescriptions`        | 446 ICD-10 keyed protocols with first_line_drugs, investigations, guideline_changes                                                    |
 | `patients`                      | Demographics, UHID (RKH-YYMM#####), known_allergies text[], blood_group, is_active soft-delete                                         |
 | `visits`                        | Per-visit vitals, diagnoses, clinical notes, raw dictation. NOT NULL on patient_id.                                                    |

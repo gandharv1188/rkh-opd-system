@@ -5,7 +5,6 @@ version: "2026 Edition"
 date: "March 2026"
 authors:
   - "Dr. Lokender Goyal, MD Pediatrics (PGI Chandigarh), HMCI Reg. HN 21452"
-  - "Dr. Swati Goyal, MD Pediatrics"
 hospital: "Radhakishan Hospital, Jyoti Nagar, Kurukshetra, Haryana"
 accreditation: "NABH HCO 6th Edition"
 status: "Production-ready for pilot deployment"
@@ -25,7 +24,6 @@ Version 2026 | March 2026
 
 Dr. Lokender Goyal, MD Pediatrics (PGI Chandigarh) · HMCI Reg. HN 21452
 
-Dr. Swati Goyal, MD Pediatrics · Pediatrics & Neonatology
 
 > **CONFIDENTIAL — FOR AUTHORIZED USE ONLY**
 
@@ -483,7 +481,7 @@ Used at the reception desk and nurse station before the patient sees the doctor.
 
 - **Vaccination history:** Quick-entry with dropdown (BCG, OPV, Pentavalent, IPV, PCV, Rotavirus, MR, MMR, DPT, Hep A, Varicella, TCV, Influenza, HPV, Td, Tdap) + dose number + date
 
-- **Visit creation:** Select doctor (Dr. Lokender / Dr. Swati), visit type (new/follow-up/vaccination/emergency), date
+- **Visit creation:** Select doctor (Dr. Lokender Goyal), visit type (new/follow-up/vaccination/emergency), date
 
 - **OPD token:** After save, displays a printable token with UHID, name, age, vitals, doctor, allergy status
 
@@ -916,7 +914,7 @@ Every antibiotic prescription must verify: clinically indicated, site of infecti
 
 ## 12.4 Doctors Reference Table
 
-A `doctors` table stores credentials for all doctors (ID, full name, degree, registration number, specialisation). Seeded with Dr. Lokender Goyal and Dr. Swati Goyal.
+A `doctors` table stores credentials for all doctors (ID, full name, degree, registration number, specialisation). Seeded with Dr. Lokender Goyal.
 
 **POC (current):** The table exists as a reference but is not FK-enforced. The artifacts use free-text `doctor_id` values (e.g., `'DR-LOKENDER'`) in visits, prescriptions, and vaccinations. The doctor selector dropdown in the Prescription Pad is hardcoded.
 
@@ -1181,4 +1179,4 @@ _End of Specification Document_
 
 Radhakishan Hospital, Jyoti Nagar, Kurukshetra, Haryana · NABH Accredited
 
-Dr. Lokender Goyal & Dr. Swati Goyal · Edition 2026
+Dr. Lokender Goyal · Edition 2026

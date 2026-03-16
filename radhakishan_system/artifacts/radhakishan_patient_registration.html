@@ -818,7 +818,6 @@
           <div class="ff"><label>Doctor</label>
             <select id="f-doctor">
               <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
-              <option value="DR-SWATI">Dr. Swati Goyal</option>
             </select>
           </div>
           <div class="ff"><label>Visit Type</label>
@@ -1022,10 +1021,7 @@
       }
 
       // Show success ticket
-      const doctor =
-        document.getElementById("f-doctor").value === "DR-LOKENDER"
-          ? "Dr. Lokender Goyal"
-          : "Dr. Swati Goyal";
+      const doctor = "Dr. Lokender Goyal";
       const visitType = document.getElementById("f-visit-type").value;
       document.getElementById("form-area").innerHTML = "";
       document.getElementById("status-bar").style.display = "none";

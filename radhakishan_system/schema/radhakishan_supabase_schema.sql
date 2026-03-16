@@ -134,7 +134,7 @@ create index idx_formulary_use     on formulary using gin(therapeutic_use);
 -- ============================================================
 create table doctors (
   id              text primary key,
-  -- e.g. 'DR-LOKENDER', 'DR-SWATI'
+  -- e.g. 'DR-LOKENDER'
   full_name       text not null,
   degree          text,
   registration_no text,
@@ -145,10 +145,9 @@ create table doctors (
   created_at      timestamptz default now()
 );
 
--- Seed the two doctors
+-- Seed doctor
 insert into doctors (id, full_name, degree, registration_no, specialisation) values
-  ('DR-LOKENDER', 'Dr. Lokender Goyal', 'MD Pediatrics (PGI Chandigarh)', 'HMCI HN 21452 / PMC 23168', 'Pediatrics & Neonatology'),
-  ('DR-SWATI', 'Dr. Swati Goyal', 'MD Pediatrics', null, 'Pediatrics & Neonatology');
+  ('DR-LOKENDER', 'Dr. Lokender Goyal', 'MD Pediatrics (PGI Chandigarh)', 'HMCI HN 21452 / PMC 23168', 'Pediatrics & Neonatology');
 
 -- ============================================================
 -- 3. STANDARD PRESCRIPTIONS
@@ -242,7 +241,7 @@ create table visits (
 
   visit_date      date not null default current_date,
   doctor_id       text,
-  -- 'DR-LOKENDER' | 'DR-SWATI' etc.
+  -- 'DR-LOKENDER' etc.
 
   -- Anthropometry at this visit
   weight_kg       numeric check (weight_kg between 0.3 and 200),

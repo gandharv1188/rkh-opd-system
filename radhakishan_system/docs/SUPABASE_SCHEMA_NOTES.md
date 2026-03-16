@@ -145,7 +145,7 @@ birth_weight_kg NUMERIC           Neonatal only
 id              UUID (auto)
 patient_id      TEXT → patients.id
 visit_date      DATE
-doctor_id       TEXT               DR-LOKENDER / DR-SWATI
+doctor_id       TEXT               DR-LOKENDER
 weight_kg       NUMERIC
 height_cm       NUMERIC
 hc_cm           NUMERIC

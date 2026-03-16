@@ -208,4 +208,4 @@
 ---
 
 _Radhakishan Hospital | Department of Pediatrics & Neonatology | Edition 2026_
-_Approved by: Dr. Lokender Goyal (HN 21452) & Dr. Swati Goyal_
+_Approved by: Dr. Lokender Goyal (HN 21452)_
