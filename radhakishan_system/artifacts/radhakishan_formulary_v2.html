@@ -1566,6 +1566,16 @@
     const el = document.createElement("div");
     el.className = "rr";
     el.id = id;
+    // Preserve extra fields not in the form UI (ga_weeks, loading_dose_basis, maintenance)
+    if (d) {
+      el.dataset.extra = JSON.stringify({
+        ga_weeks_min: d.ga_weeks_min ?? null,
+        ga_weeks_max: d.ga_weeks_max ?? null,
+        loading_dose_basis: d.loading_dose_basis ?? null,
+        maintenance_dose_qty: d.maintenance_dose_qty ?? null,
+        maintenance_dose_unit: d.maintenance_dose_unit ?? null,
+      });
+    }
     el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Dosing band</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
   <div class="fg g3" style="margin-bottom:8px">
     <div class="ff"><label>Indication / use</label><input id="${id}-ind" placeholder="e.g. AOM, severe infection"></div>
@@ -1715,6 +1725,8 @@
           loading_dose_unit: v(id + "-ldu"),
           rounding_rule: v(id + "-rnd"),
           notes: v(id + "-note"),
+          // Merge preserved extra fields that have no UI inputs
+          ...(r.dataset.extra ? JSON.parse(r.dataset.extra) : {}),
         };
       })
       .filter((b) => b.dose_min_qty || b.dose_max_qty);

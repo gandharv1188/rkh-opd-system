@@ -816,7 +816,9 @@
             .slice(0, 2)
             .toUpperCase(),
         );
-        const age = p.dob ? esc(calcAge(p.dob)) : "Age unknown";
+        const age = p.dob
+          ? esc(calcAge(p.dob, p.gestational_age_weeks))
+          : "Age unknown";
         const guardian = p.guardian_name
           ? `${esc(p.guardian_name)}${p.guardian_relation ? " (" + esc(p.guardian_relation) + ")" : ""}`
           : null;
@@ -870,14 +872,14 @@
     container.innerHTML = '<div class="ring" style="margin:16px auto"></div>';
     try {
       const [vRes, rxRes, grRes] = await Promise.all([
-        q("visits", `?patient_id=eq.${pid}&order=visit_date.desc&limit=20`),
+        q("visits", `?patient_id=eq.${pid}&order=visit_date.desc&limit=50`),
         q(
           "prescriptions",
-          `?patient_id=eq.${pid}&order=created_at.desc&limit=10`,
+          `?patient_id=eq.${pid}&order=created_at.desc&limit=50`,
         ),
         q(
           "growth_records",
-          `?patient_id=eq.${pid}&order=recorded_date.desc&limit=10`,
+          `?patient_id=eq.${pid}&order=recorded_date.desc&limit=50`,
         ),
       ]);
       const visits = vRes.ok ? await vRes.json() : [];
@@ -892,10 +894,13 @@
   function renderDetail(pid, container, visits, rxs, growths) {
     const tab = openCardTab[pid] || 0;
     const safePid = esc(pid);
+    const vLabel = visits.length >= 50 ? "50+" : visits.length;
+    const rxLabel = rxs.length >= 50 ? "50+" : rxs.length;
+    const grLabel = growths.length >= 50 ? "50+" : growths.length;
     let h = `<div class="pt-tabs">
-    <button class="ptt ${tab === 0 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',0)">Visits (${visits.length})</button>
-    <button class="ptt ${tab === 1 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',1)">Prescriptions (${rxs.length})</button>
-    <button class="ptt ${tab === 2 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',2)">Growth (${growths.length})</button>
+    <button class="ptt ${tab === 0 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',0)">Visits (${vLabel})</button>
+    <button class="ptt ${tab === 1 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',1)">Prescriptions (${rxLabel})</button>
+    <button class="ptt ${tab === 2 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',2)">Growth (${grLabel})</button>
   </div>`;
 
     if (tab === 0) {
@@ -981,7 +986,7 @@
           <span class="growth-date">${formatDate(g.recorded_date)}</span>
           <span style="font-size:12px;font-weight:500;color:var(--ink)">${g.weight_kg ? esc(g.weight_kg) + "kg" : ""} ${g.height_cm ? esc(g.height_cm) + "cm" : ""}</span>
           ${zfields.map((f) => `<span class="z-chip ${zc(f.v)}">${esc(f.l)}: ${esc(f.v)}</span>`).join("")}
-          ${g.muac_cm ? `<span class="z-chip z-ok">MUAC: ${esc(g.muac_cm)}cm</span>` : ""}
+          ${g.muac_cm ? `<span class="z-chip ${parseFloat(g.muac_cm) < 11.5 ? "z-bad" : parseFloat(g.muac_cm) < 12.5 ? "z-warn" : "z-ok"}">MUAC: ${esc(g.muac_cm)}cm</span>` : ""}
           <span style="font-size:11px;color:var(--ink3)">${esc(g.classification) || ""}</span>
         </div>`;
           })
@@ -1005,7 +1010,7 @@
         type: "radhakishan-load-patient",
         payload: { patient_id: pid, mode: "new_visit" },
       },
-      "*",
+      "https://claude.ai",
     );
     setTimeout(() => {
       alert(
@@ -1028,7 +1033,7 @@
           type: "radhakishan-rx-template",
           payload: { rxData: data, patient_id: rx.patient_id },
         },
-        "*",
+        "https://claude.ai",
       );
       showToast("Prescription loaded as template in pad");
     } catch (e) {
@@ -1092,6 +1097,7 @@
         parseFloat(document.getElementById("np-ga").value) || null,
       birth_weight_kg:
         parseFloat(document.getElementById("np-bw").value) || null,
+      blood_group: document.getElementById("np-bg").value || null,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
@@ -1159,22 +1165,43 @@
     return prefix + String(nextSeq).padStart(5, "0");
   }
 
-  function calcAge(dob) {
+  function calcAge(dob, gaWeeks) {
     if (!dob) return "";
     const d = new Date(dob),
       now = new Date();
+    const days = Math.floor((now - d) / 86400000);
+    if (days < 0) return "";
+    if (days < 28) return days + " days";
     let y = now.getFullYear() - d.getFullYear(),
-      m = now.getMonth() - d.getMonth();
+      m = now.getMonth() - d.getMonth(),
+      dd = now.getDate() - d.getDate();
+    if (dd < 0) {
+      m--;
+    }
     if (m < 0) {
       y--;
       m += 12;
     }
-    const days = Math.floor((now - d) / 86400000);
-    if (days < 0) return "";
-    if (days < 28) return days + " days";
-    if (y === 0) return m + " months";
-    if (y < 2) return y + " yr " + m + " mo";
-    return y + " years";
+    let age;
+    if (y === 0) age = m + " months";
+    else if (y < 2) age = y + " yr " + m + " mo";
+    else age = y + " years";
+    // Corrected age for preterms (GA < 37 weeks, until 2 years chronological)
+    if (gaWeeks && gaWeeks < 37 && y < 2) {
+      const corrWeeks = 40 - gaWeeks;
+      const corrDays = days - corrWeeks * 7;
+      if (corrDays > 0) {
+        const corrMonths = Math.floor(corrDays / 30.44);
+        const corrYears = Math.floor(corrMonths / 12);
+        const corrMo = corrMonths % 12;
+        let corrAge;
+        if (corrDays < 28) corrAge = corrDays + " days";
+        else if (corrYears === 0) corrAge = corrMo + " months";
+        else corrAge = corrYears + " yr " + corrMo + " mo";
+        age += " (corrected: " + corrAge + ")";
+      }
+    }
+    return age;
   }
 
   function formatDate(d) {

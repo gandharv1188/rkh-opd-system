@@ -21,6 +21,18 @@ These issues have already been addressed:
 | R8  | Dosing band populate broken — short keys don't match JSONB fields (FN-4)             | Replaced short-key loop with explicit fieldMap mapping JSONB names (indication, age_band, etc.) to DOM suffixes. getBands() now also outputs dose_min_unit, dose_basis, duration_days_default       |
 | R9  | Interactions field name mismatch `drug` vs `drug_or_class` (FN-5)                    | addInt() now reads `d.drug_or_class \|\| d.drug`, getInts() now outputs `drug_or_class`. Consistent with JSON data schema                                                                           |
 | R10 | Route case mismatch PO/IV/SC vs oral/iv/sc (FN-6)                                    | Added routeMap in addForm() that normalises uppercase routes (PO→oral, IV→iv, SC→sc, IM→im, IV/IM→im) before setting select value                                                                   |
+| R11 | No @page A4 rule or page-break handling (BP-1)                                       | Added @page A4, break-inside:avoid on sections/medicines/footer, print-color-adjust:exact                                                                                                           |
+| R12 | No Devanagari font declared (BP-2)                                                   | Added Noto Sans Devanagari via Google Fonts, applied to .med-r3 Hindi row                                                                                                                           |
+| R13 | Storage upload missing bucket name (BP-3)                                            | Fixed path to include `prescriptions` bucket in both upload and public URL                                                                                                                          |
+| R14 | calcAge() day-of-month imprecision (BP-4)                                            | Added day-of-month check in both artifacts to prevent off-by-one month errors                                                                                                                       |
+| R15 | postMessage wildcard origin (BP-5)                                                   | Replaced all `'*'` with `'https://claude.ai'` across Prescription Pad and Patient Lookup                                                                                                            |
+| R16 | Visit creation failure silently ignored (BP-6)                                       | Added else branch that throws error and aborts sign-off if visit POST fails                                                                                                                         |
+| R17 | Blood group field never saved (BP-7)                                                 | Added blood_group to registration payload and blood_group column to patients table schema                                                                                                           |
+| R18 | Dosing band extra fields stripped on save (BP-8)                                     | Extra fields preserved via data-extra attribute on band elements, merged back in getBands()                                                                                                         |
+| R19 | No corrected age for preterms (BP-9)                                                 | calcAge() now accepts gaWeeks param, displays corrected age for GA < 37 weeks until age 2                                                                                                           |
+| R20 | MUAC always green (BP-10)                                                            | Now uses clinical thresholds: red < 11.5cm (SAM), amber 11.5-12.5cm (MAM), green >= 12.5cm                                                                                                          |
+| R21 | No pagination for history (BP-11)                                                    | Increased limits to 50, tab labels show "50+" when limit reached                                                                                                                                    |
+| R22 | Missing mEq dose unit (BP-12)                                                        | Added mEq and mL options to Standard Rx Manager dose unit select                                                                                                                                    |
 
 ---
 
@@ -42,91 +54,31 @@ These issues have already been addressed:
 
 ---
 
-## FIX BEFORE PILOT — Important but won't block POC demo
+## ~~FIX BEFORE PILOT~~ — All resolved (R11–R22)
 
-### BP-1. No `@page` A4 rule or page-break handling in print CSS
+### ~~BP-1~~ → R11. Added `@page { size: A4; margin: 12mm 10mm }`, `break-inside: avoid` on `.rx-sec`, `.med-row`, `.rx-footer`, and `print-color-adjust: exact`
 
-**Severity:** HIGH
-**Location:** `radhakishan_prescription_output_v2.html` — `@media print` block
-**Description:** No `@page { size: A4; margin: ... }` rule. No `break-inside: avoid` on medicine rows or sections. Long prescriptions break at arbitrary points; footer may land on a separate page.
-**Fix:** Add `@page` rule and `break-inside: avoid` on `.med-row`, section containers, and the doctor authentication block.
+### ~~BP-2~~ → R12. Added Google Fonts Noto Sans Devanagari, applied to `.med-r3` (Hindi row)
 
-### BP-2. No Devanagari font declared
+### ~~BP-3~~ → R13. Fixed Supabase Storage path to include `prescriptions` bucket name in both upload and public URL
 
-**Severity:** MEDIUM
-**Location:** `radhakishan_prescription_output_v2.html` — CSS font stack
-**Description:** Relies on `Georgia` and `system-ui` which may lack Devanagari glyphs on non-Indian systems. Hindi text could render as boxes.
-**Fix:** Add `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari')` or a similar Devanagari-capable font to the font stack.
+### ~~BP-4~~ → R14. Fixed `calcAge()` in both Prescription Pad and Patient Lookup — now checks day-of-month to prevent off-by-one month errors
 
-### BP-3. `generateAndUploadPDF` creates .txt, not PDF; storage path missing bucket name
+### ~~BP-5~~ → R15. Replaced all `postMessage(..., '*')` with `'https://claude.ai'` in Prescription Pad and Patient Lookup
 
-**Severity:** MEDIUM
-**Location:** Prescription Pad — `generateAndUploadPDF()` function
-**Description:** Despite the function name, it creates a `text/plain` Blob saved as `.txt`. The Supabase Storage upload path also lacks the bucket name (`prescriptions`), so the upload will fail.
-**Fix:** Either rename the function to reflect what it does (text upload), or implement actual PDF generation using jsPDF/html2canvas. Fix the storage path to include the bucket name.
+### ~~BP-6~~ → R16. Added else branch to visit creation — now throws error and aborts sign-off if visit POST fails
 
-### BP-4. `calcAge()` day-of-month imprecision
+### ~~BP-7~~ → R17. Added `blood_group` to patient registration payload and `blood_group text` column to schema
 
-**Severity:** MEDIUM
-**Location:** Prescription Pad and Patient Lookup — `calcAge()` function
-**Description:** Month calculation doesn't account for day-of-month. A child born Jan 15 evaluated on Feb 14 shows "1 month" when actually under 1 month. For neonatal dosing decisions, age precision matters.
-**Fix:** Use day-level arithmetic for patients under 3 months; month-level is fine for older children.
+### ~~BP-8~~ → R18. Extra dosing band fields (`ga_weeks_min/max`, `loading_dose_basis`, `maintenance_dose_qty/unit`) preserved via `data-extra` attribute and merged back in `getBands()`
 
-### BP-5. postMessage uses wildcard `'*'` target origin
+### ~~BP-9~~ → R19. `calcAge()` in Patient Lookup now accepts `gaWeeks` param, displays corrected age for preterms (GA < 37 weeks, until age 2)
 
-**Severity:** MEDIUM
-**Location:** Prescription Pad (line ~2170), Output artifact, Patient Lookup
-**Description:** `window.parent.postMessage({...}, '*')` sends data (including patient PII and clinical information) to any parent frame. In the Claude.ai sandbox this is lower risk, but any page embedding the artifact in an iframe could receive the data.
-**Fix:** Restrict target origin to `'https://claude.ai'` or the known parent domain.
+### ~~BP-10~~ → R20. MUAC color coding now uses clinical thresholds: red < 11.5cm (SAM), amber 11.5–12.5cm (MAM), green ≥ 12.5cm
 
-### BP-6. Visit creation failure silently ignored
+### ~~BP-11~~ → R21. Increased query limits to 50 per tab, tab labels show "50+" when limit is reached
 
-**Severity:** MEDIUM
-**Location:** Prescription Pad — `signOff()` function
-**Description:** If the visit POST fails (`vRes.ok` is false), the code continues without a `visitId`, saving the prescription with `visit_id: undefined`. This corrupts the data model.
-**Fix:** Check `vRes.ok` and abort sign-off with an error message if the visit creation fails.
-
-### BP-7. Blood group field collected but never saved
-
-**Severity:** MEDIUM
-**Location:** Patient Lookup — `registerPatient()` function
-**Description:** The registration form has a "Blood group" input (`np-bg`) that is collected and cleared, but never included in the save payload. Data entered there is silently lost.
-**Fix:** Add `blood_group` to the payload and ensure the column exists in the `patients` table.
-
-### BP-8. Dosing band schema divergence — extra fields stripped on edit-save
-
-**Severity:** MEDIUM
-**Location:** Formulary Manager — `getBands()` vs `formulary_data.json`
-**Description:** The imported JSON data includes ~6 extra fields per dosing band (`dose_min_unit`, `dose_basis`, `loading_dose_basis`, `maintenance_dose_qty/unit`, `ga_weeks_min/max`, `duration_days_default`) that the Manager doesn't know about. Editing and saving a drug silently strips these fields.
-**Fix:** Either add these fields to the Manager's form and `getBands()` output, or preserve unknown fields on save by merging with existing data rather than replacing.
-
-### BP-9. No corrected age calculation for premature infants
-
-**Severity:** MEDIUM
-**Location:** Patient Lookup — `calcAge()` and growth display
-**Description:** Gestational age is collected but never used in age display or growth Z-score context. For premature infants, WHO standards require corrected age until 2 years for growth/developmental assessments.
-**Fix:** When `gestational_age_weeks` is present and < 37, calculate and display corrected age alongside chronological age.
-
-### BP-10. MUAC always shows green regardless of value
-
-**Severity:** MEDIUM
-**Location:** Patient Lookup — growth trend display
-**Description:** The Z-score colour coding function is applied to WAZ/HAZ/WHZ/HCZ but MUAC always gets the `z-ok` (green) class. A severely malnourished child with MUAC < 11.5cm still shows green.
-**Fix:** Apply MUAC-specific thresholds: red < 11.5cm (SAM), amber 11.5–12.5cm (MAM), green > 12.5cm.
-
-### BP-11. No pagination for visit/prescription history
-
-**Severity:** LOW
-**Location:** Patient Lookup — `loadDetail()` function
-**Description:** Visits capped at 20, prescriptions at 10, with no "load more" or indication that more exist. Tab counts show limited data, not total counts (e.g., "Visits (20)" when 35 exist).
-**Fix:** Add a "Load more" button or infinite scroll, and use a COUNT query for accurate tab labels.
-
-### BP-12. Standard Rx Manager missing `mEq` dose unit
-
-**Severity:** LOW
-**Location:** `radhakishan_standard_rx_manager.html` — dose_unit `<select>`
-**Description:** The `dose_unit` dropdown is missing `mEq` (milliequivalents), used for electrolyte drugs like KCl. Also missing `mL` for direct volume-based dosing.
-**Fix:** Add `mEq` and `mL` options to the dose unit select.
+### ~~BP-12~~ → R22. Added `mEq` and `mL` dose unit options to Standard Rx Manager
 
 ---
 

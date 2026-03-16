@@ -190,6 +190,8 @@ create table patients (
   guardian_relation text,
   contact_phone   text,
 
+  blood_group     text,
+
   -- Neonatal fields
   gestational_age_weeks numeric,
   birth_weight_kg       numeric,

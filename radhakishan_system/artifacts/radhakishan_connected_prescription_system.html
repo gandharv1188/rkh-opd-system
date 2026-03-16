@@ -2138,6 +2138,11 @@ ${fullNote}`;
       if (vRes.ok) {
         const vData = await vRes.json();
         visitId = Array.isArray(vData) ? vData[0]?.id : vData?.id;
+      } else {
+        const vErr = await vRes.json().catch(() => ({}));
+        throw new Error(
+          "Visit creation failed: " + (vErr.message || vRes.status),
+        );
       }
 
       // 3. Save prescription record
@@ -2245,19 +2250,22 @@ ${fullNote}`;
         { type: "text/plain" },
       );
 
-      const filename = `prescriptions/${patientId}/${rxId}.txt`;
-      const uploadRes = await fetch(`${SB}/storage/v1/object/${filename}`, {
-        method: "POST",
-        headers: {
-          apikey: KEY,
-          Authorization: "Bearer " + KEY,
-          "Content-Type": "text/plain",
-          "x-upsert": "true",
+      const filepath = `${patientId}/${rxId}.txt`;
+      const uploadRes = await fetch(
+        `${SB}/storage/v1/object/prescriptions/${filepath}`,
+        {
+          method: "POST",
+          headers: {
+            apikey: KEY,
+            Authorization: "Bearer " + KEY,
+            "Content-Type": "text/plain",
+            "x-upsert": "true",
+          },
+          body: blob,
         },
-        body: blob,
-      });
+      );
       if (uploadRes.ok) {
-        return `${SB}/storage/v1/object/public/${filename}`;
+        return `${SB}/storage/v1/object/public/prescriptions/${filepath}`;
       }
       return null;
     } catch (e) {
@@ -2274,7 +2282,7 @@ ${fullNote}`;
     <div style="color:var(--ink3);font-size:13px;margin-bottom:4px">Rx ID: <strong>${esc(rxId)}</strong></div>
     ${saved ? `<div style="color:var(--ink3);font-size:12px">Patient record, visit, and prescription saved. Growth record updated.</div>` : '<div style="color:var(--ink3);font-size:12px">Not connected to Supabase — prescription not saved to database.</div>'}
     <div class="save-links">
-      <button class="save-link-btn primary" onclick="window.parent.postMessage({type:'radhakishan-rx',payload:rxData},'*');showToast('Sent to Output artifact')">Send to Output →</button>
+      <button class="save-link-btn primary" onclick="window.parent.postMessage({type:'radhakishan-rx',payload:rxData},'https://claude.ai');showToast('Sent to Output artifact')">Send to Output →</button>
       <button class="save-link-btn" onclick="printRx()">Print now</button>
       ${pdfUrl ? `<a href="${esc(pdfUrl)}" target="_blank" class="save-link-btn">View saved file</a>` : ""}
       <button class="save-link-btn" onclick="resetPad()">New prescription</button>
@@ -2346,14 +2354,19 @@ ${fullNote}`;
     if (!dob) return "";
     const d = new Date(dob),
       n = new Date();
+    const days = Math.floor((n - d) / 86400000);
+    if (days < 0) return "";
+    if (days < 28) return days + " days";
     let y = n.getFullYear() - d.getFullYear(),
-      m = n.getMonth() - d.getMonth();
+      m = n.getMonth() - d.getMonth(),
+      dd = n.getDate() - d.getDate();
+    if (dd < 0) {
+      m--;
+    }
     if (m < 0) {
       y--;
       m += 12;
     }
-    const days = Math.floor((n - d) / 86400000);
-    if (days < 28) return days + " days";
     if (y === 0) return m + " months";
     if (y < 2) return y + " yr " + m + " mo";
     return y + " years";

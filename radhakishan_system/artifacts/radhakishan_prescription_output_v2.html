@@ -1,3 +1,7 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap"
+/>
 <style>
   * {
     box-sizing: border-box;
@@ -209,6 +213,10 @@
     overflow: hidden;
     font-family: Georgia, "Times New Roman", serif;
   }
+  @page {
+    size: A4;
+    margin: 12mm 10mm;
+  }
   @media print {
     .toolbar,
     .paste-panel,
@@ -218,6 +226,8 @@
     }
     body {
       background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
     .shell {
       max-width: none;
@@ -227,6 +237,15 @@
       margin: 0;
       border: none;
       border-radius: 0;
+    }
+    .rx-sec {
+      break-inside: avoid;
+    }
+    .med-row {
+      break-inside: avoid;
+    }
+    .rx-footer {
+      break-inside: avoid;
     }
   }
 
@@ -413,10 +432,12 @@
     line-height: 1.5;
   }
   .med-r3 {
+    font-family: "Noto Sans Devanagari", system-ui, sans-serif;
     font-size: 12px;
     color: #777;
     font-style: italic;
     line-height: 1.5;
+    lang: hi;
   }
   .med-calc-line {
     font-size: 9.5px;
