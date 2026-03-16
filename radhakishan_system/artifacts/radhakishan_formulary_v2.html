@@ -787,6 +787,17 @@
       <button class="addbtn" onclick="openDrawer()">+ Add drug</button>
     </div>
 
+    <div
+      style="
+        font-size: 10px;
+        color: var(--ink3);
+        padding: 0 18px 2px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      "
+    >
+      Drug class
+    </div>
     <div class="cat-tabs" id="cat-tabs">
       <div class="ct on" onclick="filterCat('')" data-cat="">All</div>
       <div class="ct" onclick="filterCat('Antibiotics')" data-cat="Antibiotics">
@@ -829,12 +840,15 @@
       >
         Antihistamines
       </div>
-      <div class="ct" onclick="filterCat('GI')" data-cat="GI">GI Agents</div>
-      <div class="ct" onclick="filterCat('Neonatal')" data-cat="Neonatal">
-        Neonatal
+      <div class="ct" onclick="filterCat('Antifungals')" data-cat="Antifungals">
+        Antifungals
       </div>
-      <div class="ct" onclick="filterCat('Oncology')" data-cat="Oncology">
-        Oncology
+      <div
+        class="ct"
+        onclick="filterCat('Antiepileptics')"
+        data-cat="Antiepileptics"
+      >
+        Antiepileptics
       </div>
       <div
         class="ct"
@@ -842,6 +856,88 @@
         data-cat="Anticoagulants"
       >
         Anticoagulants
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Immunosuppressants')"
+        data-cat="Immunosuppressants"
+      >
+        Immunosuppressants
+      </div>
+      <div class="ct" onclick="filterCat('Oncology')" data-cat="Oncology">
+        Oncology
+      </div>
+    </div>
+    <div
+      style="
+        font-size: 10px;
+        color: var(--ink3);
+        padding: 4px 18px 2px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      "
+    >
+      Clinical specialty
+    </div>
+    <div class="cat-tabs">
+      <div class="ct" onclick="filterCat('Respiratory')" data-cat="Respiratory">
+        Respiratory
+      </div>
+      <div class="ct" onclick="filterCat('ENT')" data-cat="ENT">ENT</div>
+      <div class="ct" onclick="filterCat('GI')" data-cat="GI">GI</div>
+      <div
+        class="ct"
+        onclick="filterCat('Cardiovascular')"
+        data-cat="Cardiovascular"
+      >
+        Cardiovascular
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Neurological')"
+        data-cat="Neurological"
+      >
+        Neurological
+      </div>
+      <div class="ct" onclick="filterCat('Endocrine')" data-cat="Endocrine">
+        Endocrine
+      </div>
+      <div class="ct" onclick="filterCat('Infectious')" data-cat="Infectious">
+        Infectious
+      </div>
+      <div class="ct" onclick="filterCat('Skin')" data-cat="Skin">Skin</div>
+      <div class="ct" onclick="filterCat('Neonatology')" data-cat="Neonatology">
+        Neonatology
+      </div>
+      <div class="ct" onclick="filterCat('Haematology')" data-cat="Haematology">
+        Haematology
+      </div>
+      <div class="ct" onclick="filterCat('Renal')" data-cat="Renal">Renal</div>
+      <div
+        class="ct"
+        onclick="filterCat('Rheumatology')"
+        data-cat="Rheumatology"
+      >
+        Rheumatology
+      </div>
+      <div class="ct" onclick="filterCat('Allergy')" data-cat="Allergy">
+        Allergy
+      </div>
+      <div class="ct" onclick="filterCat('Pain/Fever')" data-cat="Pain/Fever">
+        Pain/Fever
+      </div>
+      <div class="ct" onclick="filterCat('Emergency')" data-cat="Emergency">
+        Emergency
+      </div>
+      <div
+        class="ct"
+        onclick="filterCat('Developmental')"
+        data-cat="Developmental"
+      >
+        Developmental
+      </div>
+      <div class="ct" onclick="filterCat('Surgical')" data-cat="Surgical">
+        Surgical
       </div>
     </div>
 
@@ -918,23 +1014,40 @@
                 <label>Category *</label>
                 <select id="d-cat">
                   <option value="">Select…</option>
-                  <option>Antibiotics</option>
-                  <option>Analgesics</option>
-                  <option>Bronchodilators</option>
-                  <option>Antivirals</option>
-                  <option>Antiparasitics</option>
-                  <option>Vitamins</option>
-                  <option>Corticosteroids</option>
-                  <option>Antihistamines</option>
-                  <option>GI</option>
-                  <option>Antifungals</option>
-                  <option>Antiepileptics</option>
-                  <option>Anticoagulants</option>
-                  <option>Oncology</option>
-                  <option>Neonatal</option>
-                  <option>Cardiovascular</option>
-                  <option>Endocrine</option>
-                  <option>Immunosuppressants</option>
+                  <optgroup label="Drug class">
+                    <option>Antibiotics</option>
+                    <option>Analgesics</option>
+                    <option>Bronchodilators</option>
+                    <option>Antivirals</option>
+                    <option>Antiparasitics</option>
+                    <option>Vitamins</option>
+                    <option>Corticosteroids</option>
+                    <option>Antihistamines</option>
+                    <option>Antifungals</option>
+                    <option>Antiepileptics</option>
+                    <option>Anticoagulants</option>
+                    <option>Immunosuppressants</option>
+                    <option>Oncology</option>
+                  </optgroup>
+                  <optgroup label="Clinical specialty">
+                    <option>Respiratory</option>
+                    <option>ENT</option>
+                    <option>GI</option>
+                    <option>Cardiovascular</option>
+                    <option>Neurological</option>
+                    <option>Endocrine</option>
+                    <option>Infectious</option>
+                    <option>Skin</option>
+                    <option>Neonatology</option>
+                    <option>Haematology</option>
+                    <option>Renal</option>
+                    <option>Rheumatology</option>
+                    <option>Allergy</option>
+                    <option>Pain/Fever</option>
+                    <option>Emergency</option>
+                    <option>Developmental</option>
+                    <option>Surgical</option>
+                  </optgroup>
                   <option>Other</option>
                 </select>
               </div>

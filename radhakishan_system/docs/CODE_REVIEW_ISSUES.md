@@ -161,12 +161,9 @@ Trimmed QR payload to re-registration essentials only: UHID, patient name (max 3
 
 Library is only 9 KB. Noted for production inline bundling. POC uses CDN with existing fallback. See specification Section 12.6.
 
-### D-18. Missing categories in Formulary Manager filter tabs
+### ~~D-18. Missing categories in Formulary Manager filter tabs~~ → RESOLVED (R36)
 
-**Severity:** LOW
-**Location:** `radhakishan_formulary_v2.html` — category tabs and dropdown
-**Description:** Several categories in the JSON data (Rheumatology, Neurological, Infectious, Respiratory, Dermatology, Hematology) have no matching filter tab or dropdown option.
-**Fix:** Add missing categories to both the filter tabs and the category dropdown.
+Split filter tabs into two rows: Drug class (14 tabs: Antibiotics, Analgesics, etc.) and Clinical specialty (17 tabs: Respiratory, ENT, GI, etc.). Dropdown grouped with `<optgroup>` for both sets. All categories from formulary data now have matching tabs.
 
 ### D-19. No NABH accreditation number on prescriptions
 
