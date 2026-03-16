@@ -1190,22 +1190,22 @@
     </div>
 
     <div class="mods">
-      <div class="mod-lbl">Optional sections</div>
+      <div class="mod-lbl">Include in prescription</div>
       <div class="mod-chips">
-        <div class="mod-chip" id="chip-inv" onclick="toggleMod('inv')">
+        <div class="mod-chip on" id="chip-inv" onclick="toggleMod('inv')">
           <span class="chip-dot"></span>Investigations
         </div>
-        <div class="mod-chip" id="chip-vax" onclick="toggleMod('vax')">
-          <span class="chip-dot"></span>Vaccination update
+        <div class="mod-chip on" id="chip-vax" onclick="toggleMod('vax')">
+          <span class="chip-dot"></span>Vaccination
         </div>
-        <div class="mod-chip" id="chip-growth" onclick="toggleMod('growth')">
-          <span class="chip-dot"></span>Growth &amp; nutrition
+        <div class="mod-chip on" id="chip-growth" onclick="toggleMod('growth')">
+          <span class="chip-dot"></span>Growth
         </div>
         <div class="mod-chip" id="chip-dev" onclick="toggleMod('dev')">
-          <span class="chip-dot"></span>Developmental screening
+          <span class="chip-dot"></span>Development
         </div>
         <div class="mod-chip" id="chip-diet" onclick="toggleMod('diet')">
-          <span class="chip-dot"></span>Diet prescription
+          <span class="chip-dot"></span>Diet
         </div>
         <div class="mod-chip" id="chip-iv" onclick="toggleMod('iv')">
           <span class="chip-dot"></span>IV fluids
@@ -1214,11 +1214,10 @@
           <span class="chip-dot"></span>Referral
         </div>
         <div class="mod-chip" id="chip-neo" onclick="toggleMod('neo')">
-          <span class="chip-dot"></span>Neonatal details
+          <span class="chip-dot"></span>Neonatal
         </div>
       </div>
     </div>
-    <div class="extra-mods" id="extra-mods"></div>
 
     <div class="gen-wrap">
       <button class="gen-btn" id="gen-btn" onclick="generatePrescription()">
@@ -1670,32 +1669,30 @@
       "Listening — speak naturally…";
   }
 
-  /* ===== MODULES ===== */
+  /* ===== MODULES (checkbox toggles, no text areas) ===== */
+  // Pre-select common sections
+  activeMods.add("inv");
+  activeMods.add("vax");
+  activeMods.add("growth");
+
   function toggleMod(k) {
     activeMods.has(k) ? activeMods.delete(k) : activeMods.add(k);
     document
       .getElementById("chip-" + k)
       .classList.toggle("on", activeMods.has(k));
-    renderMods();
   }
-  function renderMods() {
-    const el = document.getElementById("extra-mods");
-    el.innerHTML = activeMods.size
-      ? [...activeMods]
-          .map(
-            (k) =>
-              `<div class="mod-block"><div class="mod-block-title">${MODS[k].l}</div><textarea id="mod-${k}" placeholder="${MODS[k].p}" rows="2"></textarea></div>`,
-          )
-          .join("")
-      : "";
-  }
-  function modData() {
-    let s = "";
-    activeMods.forEach((k) => {
-      const el = document.getElementById("mod-" + k);
-      if (el && el.value.trim()) s += `\n[${MODS[k].l}]: ${el.value.trim()}`;
-    });
-    return s;
+  function getSelectedSections() {
+    const sectionNames = {
+      inv: "investigations",
+      vax: "vaccination status",
+      growth: "growth assessment",
+      dev: "developmental screening",
+      diet: "diet & nutrition",
+      iv: "IV fluids",
+      ref: "referral",
+      neo: "neonatal details",
+    };
+    return [...activeMods].map((k) => sectionNames[k]).filter(Boolean);
   }
 
   /* ===== VIEW SWITCHING ===== */
@@ -1775,11 +1772,16 @@
       alert("Please write or dictate a clinical note first.");
       return;
     }
-    const mods = modData();
-    const fullNote = note + (mods ? "\n\nADDITIONAL DETAILS:" + mods : "");
+    // Add selected sections instruction to the note
+    const sections = getSelectedSections();
+    const sectionsNote = sections.length
+      ? "\n\nINCLUDE THESE SECTIONS (use clinical note details if mentioned, otherwise populate with age-appropriate normal defaults): " +
+        sections.join(", ")
+      : "";
+    const fullNote = note + sectionsNote;
 
-    const formularyCtx = buildFormularyContext(fullNote);
-    const stdRxCtx = buildStdRxContext(fullNote);
+    const formularyCtx = buildFormularyContext(note);
+    const stdRxCtx = buildStdRxContext(note);
 
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];

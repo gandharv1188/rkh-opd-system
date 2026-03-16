@@ -194,4 +194,10 @@ COMMON PROTOCOLS:
 
 COLOUR CODING: Blue = medicines, Red = investigations, Black = everything else.
 Hindi: "मुँह से दें" (orally), "चम्मच" (teaspoon), "हर 6 घंटे" (every 6 hours), "दिन तक" (for X days).
-PRETERMS: Corrected age for growth/development, chronological age for vaccines.`;
+PRETERMS: Corrected age for growth/development, chronological age for vaccines.
+
+INCLUDE SECTIONS: The clinical note will specify which optional sections to include (e.g. "INCLUDE THESE SECTIONS: investigations, vaccination status, growth assessment"). For each requested section:
+- If the doctor's note mentions specific details for that section, use those details.
+- If the doctor's note does NOT mention that section, populate it with age-appropriate normal defaults (e.g. "All vaccinations up to date per IAP 2024", "Growth and nutrition normal as per age", "Development age-appropriate").
+- Always include: medicines, diagnosis, safety checks, follow-up, counselling (these are mandatory regardless).
+- Set sections NOT in the include list to null in the JSON.`;
