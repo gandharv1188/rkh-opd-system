@@ -464,6 +464,8 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+
 <div class="main">
   <div class="search-wrap">
     <input
@@ -471,7 +473,46 @@
       placeholder="Search patient by name, UHID, or phone number…"
       oninput="debounceSearch(this.value)"
     />
+    <button onclick="startQrScan()" style="background: var(--green)">
+      Scan QR
+    </button>
     <button onclick="showNewPatientForm()">+ New Patient</button>
+  </div>
+  <div id="qr-scanner-area" style="display: none; margin-bottom: 16px">
+    <div
+      style="
+        background: #fff;
+        border: 1px solid var(--brd);
+        border-radius: var(--r2);
+        padding: 12px;
+        text-align: center;
+      "
+    >
+      <div
+        id="qr-reader"
+        style="width: 100%; max-width: 400px; margin: 0 auto"
+      ></div>
+      <div
+        id="qr-status"
+        style="font-size: 12px; color: var(--ink3); margin-top: 8px"
+      >
+        Point camera at the QR code on the previous prescription
+      </div>
+      <button
+        onclick="stopQrScan()"
+        style="
+          margin-top: 8px;
+          padding: 6px 16px;
+          background: var(--bg2);
+          border: 1px solid var(--brd);
+          border-radius: var(--r);
+          cursor: pointer;
+          font-size: 12px;
+        "
+      >
+        Cancel scan
+      </button>
+    </div>
   </div>
 
   <div id="results"></div>
@@ -1052,5 +1093,93 @@
     t.textContent = msg;
     t.classList.add("show");
     setTimeout(() => t.classList.remove("show"), 3000);
+  }
+
+  // ===== QR Scanner =====
+  let qrScanner = null;
+
+  function startQrScan() {
+    if (!window.Html5Qrcode) {
+      alert("QR scanner library not loaded. Check internet connection.");
+      return;
+    }
+    document.getElementById("qr-scanner-area").style.display = "block";
+    document.getElementById("qr-status").textContent = "Starting camera…";
+    qrScanner = new Html5Qrcode("qr-reader");
+    qrScanner
+      .start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        (decodedText) => {
+          // QR scanned successfully
+          stopQrScan();
+          handleQrResult(decodedText);
+        },
+        () => {}, // ignore scan failures (no QR in frame yet)
+      )
+      .catch((err) => {
+        document.getElementById("qr-status").textContent =
+          "Camera error: " + err;
+      });
+  }
+
+  function stopQrScan() {
+    if (qrScanner) {
+      qrScanner.stop().catch(() => {});
+      qrScanner.clear();
+      qrScanner = null;
+    }
+    document.getElementById("qr-scanner-area").style.display = "none";
+  }
+
+  async function handleQrResult(text) {
+    try {
+      const data = JSON.parse(text);
+      if (data.uhid) {
+        // Search for patient by UHID
+        showToast("QR scanned — looking up " + data.uhid);
+        document.getElementById("srch").value = data.uhid;
+        if (connected) {
+          const r = await q(
+            "patients",
+            `?id=eq.${encodeURIComponent(data.uhid)}&is_active=eq.true`,
+          );
+          if (r.ok) {
+            const pts = await r.json();
+            if (pts.length) {
+              selectPatient(JSON.stringify(pts[0]));
+              showToast(
+                "Patient found: " + pts[0].name + " — creating revisit",
+              );
+              return;
+            }
+          }
+        }
+        // Patient not found in DB — pre-fill new registration from QR data
+        showNewPatientForm();
+        if (data.pt) document.getElementById("f-name").value = data.pt;
+        if (data.dob) document.getElementById("f-dob").value = data.dob;
+        if (data.sex) {
+          const sexMap = { M: "Male", F: "Female", O: "Other" };
+          document.getElementById("f-sex").value = sexMap[data.sex] || "";
+        }
+        document.getElementById("f-uhid").value =
+          data.uhid + " (from QR — will verify)";
+        showToast(
+          "Patient not in database — pre-filled from QR for new registration",
+        );
+      } else {
+        showToast("QR code does not contain patient data");
+      }
+    } catch (e) {
+      // Not JSON — try as plain UHID string
+      if (text.startsWith("RKH-")) {
+        document.getElementById("srch").value = text;
+        doSearch(text);
+        showToast("QR scanned — searching for " + text);
+      } else {
+        showToast("Unrecognised QR code format");
+      }
+    }
   }
 </script>
