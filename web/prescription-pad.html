@@ -2344,9 +2344,6 @@
       return;
     }
 
-    document.getElementById("view-rx").style.display = "none";
-    document.getElementById("save-status").style.display = "block";
-
     try {
       const today = new Date().toISOString().split("T")[0];
       const doctor = document.getElementById("doctor-sel").value;
@@ -2456,11 +2453,7 @@
 
       showSaveSuccess(pdfUrl, true);
     } catch (e) {
-      document.getElementById("save-status").style.display = "none";
-      document.getElementById("view-rx").style.display = "block";
-      document.getElementById("err-txt").textContent =
-        "Save error: " + e.message;
-      showView("error");
+      alert("Save error: " + e.message);
       btn.disabled = false;
       btn.textContent = "Doctor approved — sign & save";
     }
@@ -2521,18 +2514,40 @@
   }
 
   function showSaveSuccess(pdfUrl, saved) {
-    document.getElementById("save-status").style.display = "block";
-    document.getElementById("view-rx").style.display = "none";
-    document.getElementById("save-inner").innerHTML = `
-    <div class="save-done">✓ Prescription ${saved ? "saved to Supabase" : "generated"}</div>
-    <div style="color:var(--ink3);font-size:13px;margin-bottom:4px">Rx ID: <strong>${esc(rxId)}</strong></div>
-    ${saved ? `<div style="color:var(--ink3);font-size:12px">Patient record, visit, and prescription saved. Growth record updated.</div>` : '<div style="color:var(--ink3);font-size:12px">Not connected to Supabase — prescription not saved to database.</div>'}
-    <div class="save-links">
-      <button class="save-link-btn primary" onclick="window.parent.postMessage({type:'radhakishan-rx',payload:rxData},'https://claude.ai');showToast('Sent to Output artifact')">Send to Output →</button>
-      <button class="save-link-btn" onclick="printRx()">Print now</button>
-      ${pdfUrl ? `<a href="${esc(pdfUrl)}" target="_blank" class="save-link-btn">View saved file</a>` : ""}
-      <button class="save-link-btn" onclick="resetPad()">New prescription</button>
-    </div>`;
+    // Keep prescription visible — add success banner at top of review
+    const wrap = document.getElementById("review-wrap");
+    const banner = document.createElement("div");
+    banner.style.cssText =
+      "background:#e8f4ed;border:1px solid #1a6b3a;border-radius:8px;padding:12px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px";
+    banner.innerHTML = `
+      <div>
+        <div style="color:#1a6b3a;font-weight:700;font-size:14px">✓ Prescription ${saved ? "saved" : "generated"} — ${esc(rxId)}</div>
+        ${saved ? '<div style="color:#555;font-size:11px;margin-top:2px">Patient record, visit, and prescription saved to Supabase.</div>' : ""}
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="save-link-btn" onclick="printRx()" style="padding:8px 16px;background:var(--blue);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px">Print now</button>
+        <button class="save-link-btn" onclick="resetPad()" style="padding:8px 16px;background:var(--bg);border:1px solid var(--bdr2);border-radius:6px;cursor:pointer;font-size:13px">New prescription</button>
+      </div>`;
+    wrap.insertBefore(banner, wrap.firstChild);
+
+    // Disable editing — remove contenteditable
+    wrap.querySelectorAll("[contenteditable]").forEach((el) => {
+      el.removeAttribute("contenteditable");
+      el.style.outline = "none";
+      el.style.border = "none";
+    });
+
+    // Hide the sign-off buttons
+    const signoff = document.querySelector(".signoff");
+    if (signoff) signoff.style.display = "none";
+
+    // Hide adjust dose buttons
+    wrap
+      .querySelectorAll(".adj-btn, .ep, .ep-apply")
+      .forEach((el) => (el.style.display = "none"));
+
+    // Auto-open print dialog
+    setTimeout(() => printRx(), 800);
   }
 
   function printRx() {
