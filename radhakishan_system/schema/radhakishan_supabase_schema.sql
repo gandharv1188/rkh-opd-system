@@ -185,6 +185,8 @@ create table standard_prescriptions (
   hospitalisation_criteria text,
   notes                 text,
   source                text,
+  guideline_changes     text,
+  -- Recent guideline updates relevant to this diagnosis
   last_reviewed_date    date,
 
   active                boolean default true,
