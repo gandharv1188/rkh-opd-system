@@ -2601,17 +2601,51 @@
       h += `<div class="sec"><div class="sec-title">Growth Assessment — ${esc(r.growth.chart || "WHO 2006")}</div><div>${esc(r.growth.comment)}</div></div>`;
     }
     // Vaccination
-    if (r.vaccinations?.due?.length || r.vaccinations?.overdue?.length) {
-      h += `<div class="sec"><div class="sec-title">Vaccination</div>`;
+    if (
+      r.vaccinations &&
+      (r.vaccinations.due?.length ||
+        r.vaccinations.overdue?.length ||
+        r.vaccinations.notes)
+    ) {
+      h += `<div class="sec"><div class="sec-title">Vaccination${r.vaccinations.schedule_used ? " — " + esc(r.vaccinations.schedule_used) : ""}</div>`;
       (r.vaccinations.due || []).forEach((v) => {
         h += `<div>✓ ${esc(v)} — <strong>Due</strong></div>`;
       });
       (r.vaccinations.overdue || []).forEach((v) => {
         h += `<div style="color:#8b1a1a">⚠ ${esc(v)} — <strong>Overdue</strong></div>`;
       });
+      if (r.vaccinations.next_due)
+        h += `<div style="margin-top:4px">Next due: <strong>${esc(r.vaccinations.next_due)}</strong></div>`;
       if (r.vaccinations.notes)
         h += `<div style="font-size:11px;color:#666;margin-top:4px">${esc(r.vaccinations.notes)}</div>`;
       h += `</div>`;
+    }
+    // Neonatal
+    if (r.neonatal) {
+      const n = r.neonatal;
+      h += `<div class="sec"><div class="sec-title">Neonatal Details</div><div>`;
+      if (n.ga) h += `GA: ${esc(n.ga)} &nbsp; `;
+      if (n.pna) h += `PNA: ${esc(n.pna)} &nbsp; `;
+      if (n.bw) h += `Birth wt: ${esc(n.bw)} &nbsp; `;
+      if (n.corrected) h += `Corrected age: ${esc(n.corrected)} &nbsp; `;
+      h += `</div>`;
+      if (n.notes) h += `<div style="margin-top:4px">${esc(n.notes)}</div>`;
+      h += `</div>`;
+    }
+    // Developmental
+    if (r.developmental?.findings) {
+      h += `<div class="sec"><div class="sec-title">Developmental Screening${r.developmental.tool_used ? " — " + esc(r.developmental.tool_used) : ""}</div><div>${esc(r.developmental.findings)}</div>`;
+      if (r.developmental.red_flags?.length)
+        h += `<div style="color:#8b1a1a;margin-top:4px"><strong>Red flags:</strong> ${r.developmental.red_flags.map((f) => esc(f)).join(", ")}</div>`;
+      h += `</div>`;
+    }
+    // Diet
+    if (r.diet) {
+      h += `<div class="sec"><div class="sec-title">Diet & Nutrition</div><div>${esc(r.diet)}</div></div>`;
+    }
+    // Referral
+    if (r.referral && r.referral.trim()) {
+      h += `<div class="sec"><div class="sec-title">Referral</div><div>${esc(r.referral)}</div></div>`;
     }
     // Counselling
     if (r.counselling?.length) {
