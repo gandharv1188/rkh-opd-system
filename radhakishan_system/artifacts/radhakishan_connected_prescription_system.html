@@ -257,6 +257,52 @@
     line-height: 1;
     padding: 0;
   }
+  .visit-info {
+    background: var(--bg);
+    border: 1px solid var(--bdr2);
+    border-radius: var(--r);
+    padding: 10px 14px;
+    margin: 8px 18px 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink2);
+  }
+  .visit-info .vi-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .visit-info .vi-label {
+    font-weight: 600;
+    color: var(--ink3);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    min-width: 60px;
+  }
+  .visit-info .vi-val {
+    color: var(--ink);
+  }
+  .visit-info .vi-allergy {
+    color: #8b1a1a;
+    font-weight: 600;
+  }
+  .visit-info .vi-vitals {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .visit-info .vi-vital {
+    background: var(--blue-lt);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  .visit-info .vi-complaint {
+    font-style: italic;
+    color: var(--ink);
+  }
   .doctor-select {
     padding: 6px 9px;
     border: 0.5px solid var(--bdr2);
@@ -1117,6 +1163,8 @@
       </select>
     </div>
 
+    <div id="visit-info-panel"></div>
+
     <div class="pad-hint">
       Write or dictate freely — name, age, weight, complaints, diagnosis. AI
       handles everything else.
@@ -1482,7 +1530,7 @@
       res.style.display = "block";
     } catch (e) {}
   }
-  function selectPatient(pJson) {
+  async function selectPatient(pJson) {
     const p = JSON.parse(pJson);
     selectedPatient = p;
     const chip = document.getElementById("pt-chip-wrap");
@@ -1491,20 +1539,93 @@
     document.getElementById("pt-results").style.display = "none";
     document.getElementById("pt-search-wrap").style.display = "none";
     document.getElementById("pt-btn-label").textContent = "Change patient";
-    // Pre-fill pad with patient context
+
+    // Fetch today's visit (created by reception/nurse)
+    const today = new Date().toISOString().split("T")[0];
+    let visit = null;
+    try {
+      const vr = await q(
+        "visits",
+        `?patient_id=eq.${encodeURIComponent(p.id)}&visit_date=eq.${today}&order=created_at.desc&limit=1`,
+      );
+      if (vr.ok) {
+        const visits = await vr.json();
+        if (visits.length) visit = visits[0];
+      }
+    } catch (e) {
+      console.warn("Visit fetch failed", e);
+    }
+
+    // Build visit info panel
+    const panel = document.getElementById("visit-info-panel");
+    let vi = "";
+
+    // Allergies (from patient record)
+    if (p.known_allergies && p.known_allergies.length) {
+      vi += `<div class="vi-row"><span class="vi-allergy">ALLERGY: ${p.known_allergies.map((a) => esc(a)).join(", ")}</span></div>`;
+    }
+
+    if (visit) {
+      // Vitals captured by nurse
+      const vitals = [];
+      if (visit.weight_kg) vitals.push(`Wt: ${esc(visit.weight_kg)} kg`);
+      if (visit.height_cm) vitals.push(`Ht: ${esc(visit.height_cm)} cm`);
+      if (visit.hc_cm) vitals.push(`HC: ${esc(visit.hc_cm)} cm`);
+      if (visit.muac_cm) vitals.push(`MUAC: ${esc(visit.muac_cm)} cm`);
+      if (visit.temp_f) vitals.push(`Temp: ${esc(visit.temp_f)}°F`);
+      if (visit.hr_per_min) vitals.push(`HR: ${esc(visit.hr_per_min)}/min`);
+      if (visit.rr_per_min) vitals.push(`RR: ${esc(visit.rr_per_min)}/min`);
+      if (visit.spo2_pct) vitals.push(`SpO₂: ${esc(visit.spo2_pct)}%`);
+
+      if (vitals.length) {
+        vi += `<div class="vi-row"><span class="vi-label">Vitals</span><div class="vi-vitals">${vitals.map((v) => `<span class="vi-vital">${v}</span>`).join("")}</div></div>`;
+      }
+      if (visit.chief_complaints) {
+        vi += `<div class="vi-row"><span class="vi-label">Complaints</span><span class="vi-complaint">${esc(visit.chief_complaints)}</span></div>`;
+      }
+      if (visit.doctor_id) {
+        // Auto-select the doctor assigned at registration
+        const docSel = document.getElementById("doctor-sel");
+        if (docSel) docSel.value = visit.doctor_id;
+      }
+    }
+
+    if (vi) {
+      panel.innerHTML = `<div class="visit-info">${vi}</div>`;
+    } else {
+      panel.innerHTML = "";
+    }
+
+    // Pre-fill pad with patient context + nurse-captured data
     const existing = document.getElementById("pad-ta").value.trim();
     if (!existing) {
       let ctx = `${p.name}, `;
       if (p.dob) ctx += calcAge(p.dob) + ", ";
+      if (visit && visit.weight_kg) ctx += visit.weight_kg + " kg, ";
+      else if (p.weight_kg) ctx += p.weight_kg + " kg, ";
       if (p.sex) ctx += p.sex + ". ";
       if (p.guardian_name) ctx += `Guardian: ${p.guardian_name}. `;
+      if (p.known_allergies && p.known_allergies.length) {
+        ctx += `ALLERGY: ${p.known_allergies.join(", ")}. `;
+      } else {
+        ctx += "NKDA. ";
+      }
+      if (visit && visit.chief_complaints) {
+        ctx += `Chief complaints: ${visit.chief_complaints}. `;
+      }
+      if (visit && visit.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
       document.getElementById("pad-ta").value = ctx;
     }
-    showToast(`Patient loaded: ${p.name}`);
+    showToast(
+      visit
+        ? `Patient loaded with today's visit data`
+        : `Patient loaded: ${p.name}`,
+    );
   }
   function clearPatient() {
     selectedPatient = null;
     document.getElementById("pt-chip-wrap").innerHTML = "";
+    document.getElementById("visit-info-panel").innerHTML = "";
     document.getElementById("pt-btn-label").textContent = "Select patient";
   }
   document.addEventListener("click", (e) => {

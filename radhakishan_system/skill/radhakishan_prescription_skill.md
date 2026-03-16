@@ -54,6 +54,13 @@ After the doctor replies with their selection, generate the complete JSON as def
 
 **Output the JSON directly — no markdown code fences, no preamble, no commentary.** Just the raw JSON object.
 
+### Chat naming
+
+After Step 1 (confirming the patient), set the conversation title to: **[Patient Name] — [UHID]**
+Example: `Arjun Kumar — RKH-25260300001`
+If UHID is not provided, use: **[Patient Name] — [Age] [Sex]**
+Example: `Arjun Kumar — 8mo M`
+
 ### Handling edits after generation
 
 If the doctor says "change dose of medicine 2" or "remove investigation" or "add vaccination", modify only the requested parts of the JSON and output the complete updated JSON.
