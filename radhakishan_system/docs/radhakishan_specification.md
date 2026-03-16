@@ -715,6 +715,12 @@ Every prescription must complete all three checks before finalisation:
 
 - If allergy present: STOP, choose alternative, document in RED on prescription
 
+**Allergy storage:** The `patients` table stores `known_allergies` as a text array (e.g., `{'Penicillin', 'Sulfa drugs'}`). This is displayed in RED in patient search results and should be included in every prescription generation prompt.
+
+**POC (current):** Simple text array — the doctor enters comma-separated allergy names during patient registration. Displayed on the patient card. Claude uses this information during prescription generation to check for conflicts.
+
+**Production (future):** Upgrade to structured JSONB: `[{"drug": "Penicillin", "reaction": "Anaphylaxis", "severity": "severe", "date_reported": "2026-01-15"}]`. This enables automated cross-reaction checking, severity-based alerts, and audit history of when allergies were reported.
+
 **Check 2: Cross-Reaction**
 
 |                     |                                               |                |                                                |

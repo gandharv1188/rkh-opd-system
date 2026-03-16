@@ -191,6 +191,8 @@ create table patients (
   contact_phone   text,
 
   blood_group     text,
+  known_allergies text[],
+  -- e.g. {'Penicillin', 'Sulfa drugs', 'Peanuts'} or empty
 
   -- Neonatal fields
   gestational_age_weeks numeric,

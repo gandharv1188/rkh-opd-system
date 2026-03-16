@@ -92,12 +92,9 @@ RLS enabled on all 7 tables with `auth.role() = 'authenticated'` policy. Per-doc
 
 Changed all FKs to `ON DELETE RESTRICT`. Added `is_active boolean default true` to patients table. Patient search queries in both Prescription Pad and Patient Lookup now filter by `is_active=eq.true`.
 
-### D-3. No `known_allergies` column on patients table
+### ~~D-3. No `known_allergies` column on patients table~~ → RESOLVED (R25)
 
-**Severity:** MAJOR for production
-**Location:** Schema — `patients` table
-**Description:** The clinical rules mandate allergy checks at every visit, but there's no persistent column to store a patient's allergy history. Currently allergies are only captured per-visit in the AI prompt.
-**Fix:** Add `known_allergies text[]` to `patients` and display/check it in the Prescription Pad.
+Added `known_allergies text[]` to patients schema. Registration form has comma-separated allergy input. Patient cards display allergies in RED. Production upgrade to structured JSONB noted in specification Section 11.1.
 
 ### D-4. No `doctors` reference table
 

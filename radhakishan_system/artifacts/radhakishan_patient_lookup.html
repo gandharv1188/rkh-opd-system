@@ -685,6 +685,13 @@
         <div class="ff">
           <label>Blood group</label><input id="np-bg" placeholder="e.g. B+" />
         </div>
+        <div class="ff" style="grid-column: 1 / -1">
+          <label>Known allergies (comma-separated)</label
+          ><input
+            id="np-allergy"
+            placeholder="e.g. Penicillin, Sulfa drugs — leave blank if NKDA"
+          />
+        </div>
       </div>
       <div class="form-btns">
         <button class="sv-btn" onclick="registerPatient()">
@@ -829,7 +836,7 @@
           <div class="rc-avatar">${initials}</div>
           <div>
             <div class="rc-name">${esc(p.name)}</div>
-            <div class="rc-meta">${age} · ${esc(p.sex) || "—"}${guardian ? " · " + guardian : ""}</div>
+            <div class="rc-meta">${age} · ${esc(p.sex) || "—"}${guardian ? " · " + guardian : ""}${p.known_allergies && p.known_allergies.length ? ' · <span style="color:#8b1a1a;font-weight:500">ALLERGY: ' + p.known_allergies.map((a) => esc(a)).join(", ") + "</span>" : ""}</div>
           </div>
         </div>
         <span class="rc-uhid">${safeId}</span>
@@ -1098,6 +1105,13 @@
       birth_weight_kg:
         parseFloat(document.getElementById("np-bw").value) || null,
       blood_group: document.getElementById("np-bg").value || null,
+      known_allergies: document.getElementById("np-allergy").value.trim()
+        ? document
+            .getElementById("np-allergy")
+            .value.split(",")
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : null,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
@@ -1119,6 +1133,7 @@
         "np-ga",
         "np-bw",
         "np-bg",
+        "np-allergy",
       ].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.value = "";
