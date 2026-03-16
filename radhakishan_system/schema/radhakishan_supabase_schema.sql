@@ -219,8 +219,8 @@ create table patients (
   -- e.g. {'Penicillin', 'Sulfa drugs', 'Peanuts'} or empty
 
   -- Neonatal fields
-  gestational_age_weeks numeric,
-  birth_weight_kg       numeric,
+  gestational_age_weeks numeric check (gestational_age_weeks between 22 and 44),
+  birth_weight_kg       numeric check (birth_weight_kg between 0.3 and 6.0),
 
   is_active       boolean default true,
 
@@ -243,23 +243,23 @@ create table visits (
   -- 'DR-LOKENDER' | 'DR-SWATI' etc.
 
   -- Anthropometry at this visit
-  weight_kg       numeric,
-  height_cm       numeric,
-  hc_cm           numeric,
-  muac_cm         numeric,
+  weight_kg       numeric check (weight_kg between 0.3 and 200),
+  height_cm       numeric check (height_cm between 20 and 220),
+  hc_cm           numeric check (hc_cm between 15 and 60),
+  muac_cm         numeric check (muac_cm between 5 and 30),
 
   -- Vitals
-  temp_f          numeric,
-  hr_per_min      integer,
-  rr_per_min      integer,
-  spo2_pct        numeric,
+  temp_f          numeric check (temp_f between 85 and 110),
+  hr_per_min      integer check (hr_per_min between 20 and 300),
+  rr_per_min      integer check (rr_per_min between 5 and 120),
+  spo2_pct        numeric check (spo2_pct between 0 and 100),
 
   -- Clinical
   chief_complaints    text,
   diagnosis_codes     jsonb,
   -- [{icd10, name, type: provisional|final}]
   clinical_notes      text,
-  triage_score        integer,
+  triage_score        integer check (triage_score between 0 and 15),
 
   -- Doctor's raw dictation (saved for audit)
   raw_dictation       text,

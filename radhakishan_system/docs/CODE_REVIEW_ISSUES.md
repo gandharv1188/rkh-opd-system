@@ -104,12 +104,9 @@ Created `doctors` table with id, full_name, degree, registration_no, specialisat
 
 Added `NOT NULL` to `visits.patient_id`, `prescriptions.visit_id`, and `prescriptions.patient_id`.
 
-### D-6. No CHECK constraints on medical data ranges
+### ~~D-6. No CHECK constraints on medical data ranges~~ → RESOLVED (R28)
 
-**Severity:** MAJOR for production
-**Location:** Schema — `visits` table
-**Description:** No range validation on `weight_kg`, `height_cm`, `temp_f`, `hr_per_min`, `rr_per_min`, `spo2_pct`, `triage_score`. Negative weights or impossible SpO2 values would be accepted.
-**Fix:** Add CHECK constraints with clinically valid ranges.
+Added CHECK constraints: visits (weight 0.3-200kg, height 20-220cm, HC 15-60cm, MUAC 5-30cm, temp 85-110F, HR 20-300, RR 5-120, SpO2 0-100%, triage 0-15), patients (GA 22-44wks, birth weight 0.3-6.0kg).
 
 ### D-7. `formulary.generic_name` not UNIQUE
 
