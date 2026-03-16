@@ -1627,6 +1627,16 @@
     selectedPatient = p;
     const visit = p.visit;
 
+    // Reset section chips to defaults (clear patient-specific auto-selections)
+    activeMods.clear();
+    activeMods.add("inv");
+    activeMods.add("vax");
+    activeMods.add("growth");
+    document.querySelectorAll(".mod-chip").forEach((el) => {
+      const k = el.id.replace("chip-", "");
+      el.classList.toggle("on", activeMods.has(k));
+    });
+
     // Build medical info panel
     const panel = document.getElementById("pt-info-panel");
     let vi = "";
@@ -1682,6 +1692,21 @@
       ctx += `Chief complaints: ${visit.chief_complaints}. `;
     if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
     document.getElementById("pad-ta").value = ctx;
+
+    // Auto-activate Neonatal chip if age < 28 days OR preterm OR low birth weight
+    let isNeonatal = false;
+    if (p.dob) {
+      const ageDays = Math.floor((new Date() - new Date(p.dob)) / 86400000);
+      if (ageDays < 28) isNeonatal = true;
+    }
+    if (p.gestational_age_weeks && p.gestational_age_weeks < 37)
+      isNeonatal = true;
+    if (p.birth_weight_kg && p.birth_weight_kg < 2.5) isNeonatal = true;
+    if (isNeonatal && !activeMods.has("neo")) {
+      activeMods.add("neo");
+      const chip = document.getElementById("chip-neo");
+      if (chip) chip.classList.add("on");
+    }
   }
 
   function clearPatient() {
