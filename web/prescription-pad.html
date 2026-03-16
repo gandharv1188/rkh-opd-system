@@ -1134,12 +1134,42 @@
   </div>
 
   <!-- TABS -->
-  <div class="tabs">
+  <div class="tabs" style="display: flex; align-items: center">
     <button class="tab active" id="tab-pad" onclick="showView('pad')">
       Prescription pad
     </button>
     <button class="tab" id="tab-rx" onclick="showView('rx')">
       Review &amp; edit
+    </button>
+    <span style="flex: 1"></span>
+    <button
+      id="conn-btn"
+      onclick="connectSB()"
+      style="
+        padding: 4px 12px;
+        border-radius: 99px;
+        font-size: 11px;
+        border: 1px solid var(--bdr2);
+        background: var(--bg);
+        color: var(--ink3);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-right: 12px;
+      "
+    >
+      <span
+        id="conn-dot"
+        style="
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #ccc;
+          display: inline-block;
+        "
+      ></span>
+      <span id="conn-label">Connecting…</span>
     </button>
   </div>
 
@@ -1229,19 +1259,37 @@
       class="voice-bar"
       style="display: flex; align-items: center; justify-content: space-between"
     >
-      <div style="display: flex; align-items: center; gap: 8px">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex: 1;
+          min-width: 0;
+        "
+      >
         <button class="mic-btn" id="mic-btn" onclick="toggleVoice()">
           <span class="mic-dot"></span> Dictate
         </button>
-        <span class="mic-st" id="mic-st">Tap to dictate, or type above</span>
+        <span
+          class="mic-st"
+          id="mic-st"
+          style="
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          "
+          >Tap to dictate, or type above</span
+        >
       </div>
       <button
         class="gen-btn"
         id="gen-btn"
         onclick="generatePrescription()"
-        style="width: auto; padding: 10px 24px"
+        style="width: auto; padding: 8px 16px; font-size: 13px; flex-shrink: 0"
       >
-        Generate Prescription
+        Generate
       </button>
     </div>
   </div>
@@ -1428,17 +1476,19 @@
       const r = await q("formulary", "?select=id&limit=1");
       if (r.ok) {
         sbConnected = true;
-        document.getElementById("cdot").className = "cdot ok";
-        document.getElementById("cst").textContent =
-          "Connected · Formulary & history active";
+        document.getElementById("conn-dot").style.background = "#1a6b3a";
+        document.getElementById("conn-label").textContent = "Connected";
+        document.getElementById("conn-btn").style.borderColor = "#1a6b3a";
+        document.getElementById("conn-btn").style.color = "#1a6b3a";
         document.getElementById("sb-hint").style.display = "none";
         preloadKnowledge();
       } else throw new Error((await r.json()).message || "Failed");
     } catch (e) {
       sbConnected = false;
-      document.getElementById("cdot").className = "cdot";
-      document.getElementById("cst").textContent =
-        "Connection failed: " + e.message;
+      document.getElementById("conn-dot").style.background = "#8b1a1a";
+      document.getElementById("conn-label").textContent = "Connect";
+      document.getElementById("conn-btn").style.borderColor = "#8b1a1a";
+      document.getElementById("conn-btn").style.color = "#8b1a1a";
     }
   }
 
