@@ -1661,24 +1661,21 @@
       panel.innerHTML = `<div class="visit-info"><div class="vi-row" style="color:var(--ink3)">No visit data captured yet for today</div></div>`;
     }
 
-    // Pre-fill pad with patient context + nurse-captured data
-    const existing = document.getElementById("pad-ta").value.trim();
-    if (!existing) {
-      let ctx = `${p.name}, `;
-      if (p.dob) ctx += calcAge(p.dob) + ", ";
-      if (visit?.weight_kg) ctx += visit.weight_kg + " kg, ";
-      if (p.sex) ctx += p.sex + ". ";
-      if (p.guardian_name) ctx += `Guardian: ${p.guardian_name}. `;
-      if (p.known_allergies?.length) {
-        ctx += `ALLERGY: ${p.known_allergies.join(", ")}. `;
-      } else {
-        ctx += "NKDA. ";
-      }
-      if (visit?.chief_complaints)
-        ctx += `Chief complaints: ${visit.chief_complaints}. `;
-      if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
-      document.getElementById("pad-ta").value = ctx;
+    // Pre-fill pad with patient context + nurse-captured data (always replace)
+    let ctx = `${p.name}, `;
+    if (p.dob) ctx += calcAge(p.dob) + ", ";
+    if (visit?.weight_kg) ctx += visit.weight_kg + " kg, ";
+    if (p.sex) ctx += p.sex + ". ";
+    if (p.guardian_name) ctx += `Guardian: ${p.guardian_name}. `;
+    if (p.known_allergies?.length) {
+      ctx += `ALLERGY: ${p.known_allergies.join(", ")}. `;
+    } else {
+      ctx += "NKDA. ";
     }
+    if (visit?.chief_complaints)
+      ctx += `Chief complaints: ${visit.chief_complaints}. `;
+    if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
+    document.getElementById("pad-ta").value = ctx;
   }
 
   function clearPatient() {
