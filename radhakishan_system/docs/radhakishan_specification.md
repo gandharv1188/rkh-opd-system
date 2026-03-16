@@ -747,6 +747,12 @@ Every prescription must complete all three checks before finalisation:
 
 Every antibiotic prescription must verify: clinically indicated, site of infection documented, fever pattern documented, prior antibiotic in past 30 days asked, allergy checked, culture sent before starting (where relevant), narrowest appropriate antibiotic chosen, review date at 48-72 hours documented, parents counselled against unnecessary antibiotic use.
 
+## 11.4 Safety Check Implementation
+
+**POC (current):** All safety checks (allergy, cross-reaction, drug interactions, max dose verification) are performed by Claude AI during prescription generation. The AI outputs detailed findings in a structured `safety_checks` object within the prescription JSON — not blanket pass/fail booleans, but specific results for each check (e.g., which drugs were compared, what max dose was used, whether any interaction was found and what action was taken). The `overall_status` field is set to `"SAFE"` or `"REVIEW REQUIRED"`. The Prescription Pad artifact renders these findings for the doctor to review before sign-off.
+
+**Production (future):** Client-side verification will independently cross-reference prescribed drugs against the formulary's `interactions`, `contraindications`, `black_box_warnings`, and `max_single_qty` / `max_daily_qty` values. This provides a second layer of validation — if the AI misses something, the client-side check catches it. The two results are compared and any disagreement is flagged.
+
 # 12. NABH Compliance
 
 ## 12.1 Chapters Covered

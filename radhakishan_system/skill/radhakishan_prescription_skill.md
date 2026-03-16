@@ -124,14 +124,21 @@ Always return a JSON object with this exact structure:
     "personalised": ""
   },
   "safety_checks": {
-    "allergy_checked": true,
-    "cross_reaction_checked": true,
-    "interaction_checked": true,
-    "max_dose_verified": true,
-    "gfr_considered": true,
-    "weight_recalculated": true,
-    "antibiotic_stewardship": true,
-    "parents_counselled": true
+    "allergy_status": "NKDA | ALLERGY: [drug] — [reaction]",
+    "cross_reaction_risk": "none | [specific risk and action taken]",
+    "interactions_found": "none | [drug1 + drug2 → effect — action taken]",
+    "max_dose_check": [
+      {
+        "drug": "DRUG NAME",
+        "calculated_dose_mg": 0,
+        "max_allowed_mg": 0,
+        "status": "PASS | FLAGGED — [reason]"
+      }
+    ],
+    "gfr_relevant": false,
+    "gfr_action": "",
+    "antibiotic_stewardship": "not applicable | [justification for antibiotic choice]",
+    "overall_status": "SAFE | REVIEW REQUIRED"
   },
   "flags": [],
   "counselling": {
@@ -299,11 +306,14 @@ These are first-line evidence-based prescriptions. Doctor MUST review and may mo
 
 ## SECTION 8: DRUG SAFETY CHECKS (Mandatory — check all three)
 
+**CRITICAL: You MUST perform these checks and report specific findings in the `safety_checks` object. Do NOT output blanket "true" values. Report what you actually checked and found.**
+
 ### Allergy Check
 
 - Ask at every visit. Document NKDA or allergy clearly.
 - If allergy present: STOP, choose alternative, document ALLERGY: [drug] — [reaction] in RED
 - If no allergy: document 'No known drug allergy (NKDA)'
+- **Output:** `allergy_status` must be `"NKDA"` or `"ALLERGY: [drug] — [reaction]"`
 
 ### Cross-Reaction Check
 
@@ -315,6 +325,8 @@ These are first-line evidence-based prescriptions. Doctor MUST review and may mo
 | Aspirin/NSAIDs  | Other NSAIDs                         | Moderate | Avoid all NSAIDs if urticaria/bronchospasm |
 | Cephalosporins  | Carbapenems                          | ~1%      | Usually safe; document and monitor         |
 
+- **Output:** `cross_reaction_risk` must state `"none"` or the specific risk found and action taken
+
 ### Drug Interaction Check (Critical Examples)
 
 - Erythromycin + Theophylline → Theophylline toxicity (adjust dose)
@@ -325,6 +337,26 @@ These are first-line evidence-based prescriptions. Doctor MUST review and may mo
 - Ceftriaxone + Calcium-containing solutions → precipitation (use separate lines)
 - Ciprofloxacin + milk → reduced absorption (counsel parents)
 - Phenytoin + milk feeds in neonates → reduced levels (space doses)
+
+- **Output:** `interactions_found` must state `"none"` or list each interaction found with the action taken
+
+### Max Dose Verification (Mandatory for every medicine)
+
+For EACH medicine in the prescription, you MUST:
+
+1. State the calculated dose in mg
+2. State the published maximum single dose in mg (from formulary or standard references)
+3. Compare and report PASS or FLAGGED
+4. If FLAGGED: cap at the maximum dose and note this in the medicine's `flag` field
+
+- **Output:** `max_dose_check` array must have one entry per medicine with `drug`, `calculated_dose_mg`, `max_allowed_mg`, and `status`
+
+### Overall Safety Status
+
+Set `overall_status` to:
+
+- `"SAFE"` — all checks passed, no flags
+- `"REVIEW REQUIRED"` — any allergy concern, interaction found, or dose flagged. The doctor MUST review the specific findings before signing off
 
 ---
 

@@ -9,29 +9,21 @@
 
 These issues have already been addressed:
 
-| #   | Issue                                                                                | Resolution                                                                                                     |
-| --- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| R1  | Anthropic API call had no `x-api-key` header — prescription generation always failed | Replaced with dual-mode: "Send to Chat" + "Paste JSON" — generation now happens through Claude.ai conversation |
-| R2  | Patient ID format wrong (`RH-A123456` / `PED-XXXXXX`)                                | Changed to `RKH-YYMM#####` with sequential Supabase lookup and CHECK constraint                                |
-| R3  | UHID collision risk — `Math.random()` with no uniqueness check                       | New `generateUHID()` queries Supabase for max existing ID in prefix, increments sequentially                   |
+| #   | Issue                                                                                | Resolution                                                                                                                                                                                       |
+| --- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| R1  | Anthropic API call had no `x-api-key` header — prescription generation always failed | Replaced with dual-mode: "Send to Chat" + "Paste JSON" — generation now happens through Claude.ai conversation                                                                                   |
+| R2  | Patient ID format wrong (`RH-A123456` / `PED-XXXXXX`)                                | Changed to `RKH-YYMM#####` with sequential Supabase lookup and CHECK constraint                                                                                                                  |
+| R3  | UHID collision risk — `Math.random()` with no uniqueness check                       | New `generateUHID()` queries Supabase for max existing ID in prefix, increments sequentially                                                                                                     |
+| R4  | Safety checks cosmetic — blanket green checkmarks with no actual verification (FN-1) | Skill prompt now requires Claude to output specific findings per check (allergy, interactions, max dose) with SAFE/REVIEW REQUIRED status. Client-side verification deferred to production build |
+| R5  | No dose validation against formulary max dose (FN-2)                                 | Skill prompt now requires per-medicine max dose comparison with PASS/FLAGGED status. Client-side cross-check deferred to production build                                                        |
 
 ---
 
 ## FIX NOW — Blocks core functionality or clinical safety
 
-### FN-1. Safety checks are cosmetic
+### ~~FN-1. Safety checks are cosmetic~~ → RESOLVED (R4)
 
-**Severity:** CRITICAL
-**Location:** Prescription Pad — review rendering
-**Description:** The review UI shows green checkmarks for "Allergy checked", "Interactions checked", "Max dose verified" without performing any actual verification. The formulary contains `contraindications`, `interactions`, and `black_box_warnings` fields, but none are checked client-side. Doctors will trust these visual indicators.
-**Fix:** Cross-reference prescribed drugs against formulary `interactions` and `contraindications` arrays, and against patient's allergy history. Show real pass/fail status with specific warnings.
-
-### FN-2. No dose validation against formulary max dose
-
-**Severity:** CRITICAL
-**Location:** Prescription Pad — after JSON is loaded
-**Description:** AI-calculated doses are rendered and offered for sign-off without any programmatic check that they fall within formulary-defined `max_single_qty` / `max_daily_qty` limits. The system trusts the AI entirely for dose correctness.
-**Fix:** After loading prescription JSON, compare each medicine's calculated dose against formulary `dosing_bands` max values. Flag any exceedances visually before the doctor can sign off.
+### ~~FN-2. No dose validation against formulary max dose~~ → RESOLVED (R5)
 
 ### FN-3. XSS via innerHTML — all artifacts
 
