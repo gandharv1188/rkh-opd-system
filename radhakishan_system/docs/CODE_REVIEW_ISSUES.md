@@ -18,6 +18,9 @@ These issues have already been addressed:
 | R5  | No dose validation against formulary max dose (FN-2)                                 | Skill prompt now requires per-medicine max dose comparison with PASS/FLAGGED status. Client-side cross-check deferred to production build                                                           |
 | R6  | XSS via innerHTML in all 6 artifacts (FN-3)                                          | Added `esc()` HTML-escaping function to all 6 artifacts; all dynamic data (patient names, AI content, diagnoses, medicines, etc.) now escaped before innerHTML insertion                            |
 | R7  | Schema missing `hospitalisation_criteria` and `last_reviewed_date` columns (FN-7)    | Added both columns to schema. Also relaxed `icd10` from NOT NULL to nullable (some diagnoses lack codes). Extracted 446 diagnoses from pediatric guidelines into `standard_prescriptions_data.json` |
+| R8  | Dosing band populate broken — short keys don't match JSONB fields (FN-4)             | Replaced short-key loop with explicit fieldMap mapping JSONB names (indication, age_band, etc.) to DOM suffixes. getBands() now also outputs dose_min_unit, dose_basis, duration_days_default       |
+| R9  | Interactions field name mismatch `drug` vs `drug_or_class` (FN-5)                    | addInt() now reads `d.drug_or_class \|\| d.drug`, getInts() now outputs `drug_or_class`. Consistent with JSON data schema                                                                           |
+| R10 | Route case mismatch PO/IV/SC vs oral/iv/sc (FN-6)                                    | Added routeMap in addForm() that normalises uppercase routes (PO→oral, IV→iv, SC→sc, IM→im, IV/IM→im) before setting select value                                                                   |
 
 ---
 
@@ -29,26 +32,11 @@ These issues have already been addressed:
 
 ### ~~FN-3. XSS via innerHTML — all artifacts~~ → RESOLVED (R6)
 
-### FN-4. Dosing band populate broken in Formulary Manager
+### ~~FN-4. Dosing band populate broken in Formulary Manager~~ → RESOLVED (R8)
 
-**Severity:** HIGH
-**Location:** `radhakishan_formulary_v2.html` — `addBand()` / populate loop
-**Description:** The populate loop uses short key names (`ind`, `ab`, `meth`, `du`, etc.) that don't match the actual JSONB field names (`indication`, `age_band`, `method`, `dose_unit`). Editing any existing drug shows blank dosing bands. The Formulary Manager is effectively unable to edit dosing data after import.
-**Fix:** Map short DOM IDs to actual JSONB field names in the populate function, or rename the DOM element IDs to match the data fields.
+### ~~FN-5. Interactions field name mismatch between Importer and Manager~~ → RESOLVED (R9)
 
-### FN-5. Interactions field name mismatch between Importer and Manager
-
-**Severity:** HIGH
-**Location:** Formulary Manager vs Importer vs `formulary_data.json`
-**Description:** The JSON data and Importer use `drug_or_class` for the interaction drug field. The Manager uses `drug`. Editing an imported drug shows blank interaction drug names. The schema comment also says `drug`.
-**Fix:** Standardise on one field name across all three. Either update the Manager to read/write `drug_or_class`, or normalise the data on import to use `drug`.
-
-### FN-6. Route case mismatch — data vs Manager
-
-**Severity:** HIGH
-**Location:** Formulary Manager formulation populate
-**Description:** Imported data uses uppercase route values (`PO`, `IV`, `SC`, `IV/IM`). The Manager's `<select>` options use lowercase (`oral`, `iv`, `im`, `sc`). Populating an imported drug's formulations shows wrong route selections.
-**Fix:** Normalise routes on import to lowercase, or add case-insensitive matching in the populate function.
+### ~~FN-6. Route case mismatch — data vs Manager~~ → RESOLVED (R10)
 
 ### ~~FN-7. Schema missing columns used by Standard Rx Manager~~ → RESOLVED (R7)
 

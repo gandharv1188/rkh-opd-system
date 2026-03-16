@@ -1517,7 +1517,18 @@
       document.getElementById(id + "-cu").value = d.conc_unit || "mg";
       document.getElementById(id + "-pq").value = d.per_qty || "";
       document.getElementById(id + "-pu").value = d.per_unit || "ml";
-      document.getElementById(id + "-rt").value = d.route || "oral";
+      // Normalise route: data may use PO/IV/SC/IM, select uses oral/iv/sc/im
+      const routeMap = {
+        PO: "oral",
+        IV: "iv",
+        IM: "im",
+        SC: "sc",
+        "IV/IM": "im",
+      };
+      const route = d.route
+        ? routeMap[d.route.toUpperCase()] || d.route.toLowerCase()
+        : "oral";
+      document.getElementById(id + "-rt").value = route;
       document.getElementById(id + "-ib").value = d.indian_brand || "";
     }
   }
@@ -1621,30 +1632,43 @@
   <div class="ff"><label>Band-specific notes</label><input id="${id}-note" placeholder="e.g. High-dose protocol for severe AOM; standard dose for URTI. Avoid in renal impairment without dose adjustment."></div>`;
     document.getElementById("bands-list").appendChild(el);
     if (d) {
-      [
-        "ind",
-        "ab",
-        "meth",
-        "du",
-        "pd",
-        "freq",
-        "intv",
-        "dur",
-        "durnote",
-        "ms",
-        "msu",
-        "md",
-        "mdu",
-        "ldu",
-        "rnd",
-        "note",
-      ].forEach((k) => {
-        const el = document.getElementById(id + "-" + k);
-        if (el) el.value = d[k] || el.value;
+      // Map JSONB field names → DOM suffixes
+      const fieldMap = {
+        ind: d.indication,
+        ab: d.age_band,
+        meth: d.method,
+        du: d.dose_unit || d.dose_min_unit,
+        pd:
+          d.is_per_day === true
+            ? "day"
+            : d.is_per_day === false
+              ? "dose"
+              : d.is_per_day || "",
+        freq: d.frequency_per_day,
+        intv: d.interval_hours,
+        dur: d.duration_days || d.duration_days_default,
+        durnote: d.duration_note,
+        msu: d.max_single_unit,
+        mdu: d.max_daily_unit,
+        ldu: d.loading_dose_unit,
+        rnd: d.rounding_rule,
+        note: d.notes,
+      };
+      Object.entries(fieldMap).forEach(([suffix, val]) => {
+        const el = document.getElementById(id + "-" + suffix);
+        if (el && val != null && val !== "") el.value = val;
       });
-      ["dmin", "dmax", "ms", "md", "ld"].forEach((k) => {
-        const el = document.getElementById(id + "-" + k);
-        if (el) el.value = d[k] || "";
+      // Numeric fields
+      const numMap = {
+        dmin: d.dose_min_qty,
+        dmax: d.dose_max_qty,
+        ms: d.max_single_qty,
+        md: d.max_daily_qty,
+        ld: d.loading_dose_qty,
+      };
+      Object.entries(numMap).forEach(([suffix, val]) => {
+        const el = document.getElementById(id + "-" + suffix);
+        if (el) el.value = val != null ? val : "";
       });
       updateMethodHelp(id);
     }
@@ -1658,17 +1682,30 @@
     return Array.from(document.getElementById("bands-list").children)
       .map((r) => {
         const id = r.id;
+        const du = v(id + "-du");
+        const method = v(id + "-meth");
+        const basisMap = {
+          weight: "per_kg",
+          bsa: "per_m2",
+          fixed: "per_dose",
+          gfr: "per_kg",
+          infusion: "per_kg",
+          age: "per_dose",
+        };
         return {
           indication: v(id + "-ind"),
           age_band: v(id + "-ab"),
-          method: v(id + "-meth"),
+          method: method,
           dose_min_qty: n(id + "-dmin"),
+          dose_min_unit: du,
+          dose_basis: basisMap[method] || "per_kg",
           dose_max_qty: n(id + "-dmax"),
-          dose_unit: v(id + "-du"),
+          dose_max_unit: du,
+          dose_unit: du,
           is_per_day: v(id + "-pd") === "day",
           frequency_per_day: n(id + "-freq"),
           interval_hours: n(id + "-intv"),
-          duration_days: n(id + "-dur"),
+          duration_days_default: n(id + "-dur"),
           duration_note: v(id + "-durnote"),
           max_single_qty: n(id + "-ms"),
           max_single_unit: v(id + "-msu"),
@@ -1691,7 +1728,7 @@
     el.id = id;
     el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Interaction</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
   <div class="fg g3">
-    <div class="ff"><label>Drug / class</label><input id="${id}-dr" placeholder="e.g. Warfarin" value="${d ? esc(d.drug || "") : ""}"></div>
+    <div class="ff"><label>Drug / class</label><input id="${id}-dr" placeholder="e.g. Warfarin" value="${d ? esc(d.drug_or_class || d.drug || "") : ""}"></div>
     <div class="ff"><label>Severity</label>
       <select id="${id}-sv">${["black_box", "major", "moderate", "minor"].map((s) => `<option value="${s}"${d && d.severity === s ? " selected" : ""}>${s.replace("_", " ")}</option>`).join("")}</select>
     </div>
@@ -1705,7 +1742,11 @@
         const id = r.id;
         const dr = v(id + "-dr");
         if (!dr) return null;
-        return { drug: dr, severity: v(id + "-sv"), effect: v(id + "-ef") };
+        return {
+          drug_or_class: dr,
+          severity: v(id + "-sv"),
+          effect: v(id + "-ef"),
+        };
       })
       .filter(Boolean);
   }
