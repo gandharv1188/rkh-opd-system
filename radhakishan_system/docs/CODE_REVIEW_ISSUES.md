@@ -169,12 +169,9 @@ Split filter tabs into two rows: Drug class (14 tabs: Antibiotics, Analgesics, e
 
 Header changed to "NABH Accredited". Actual certificate number to be added when available.
 
-### D-20. Voice dictation missing `onerror` handler
+### ~~D-20. Voice dictation missing `onerror` handler~~ → RESOLVED (R37)
 
-**Severity:** LOW
-**Location:** Prescription Pad — SpeechRecognition setup
-**Description:** No `onerror` handler for permission denied, network errors, or "not-allowed" errors. The UI may get stuck in recording state.
-**Fix:** Add `recog.onerror` handler that resets the UI state and shows an appropriate message.
+Added `recog.onerror` handler that resets mic button UI and shows specific messages for not-allowed, no-speech, network, and aborted errors.
 
 ---
 

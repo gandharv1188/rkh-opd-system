@@ -1550,6 +1550,21 @@
       document.getElementById("mic-st").textContent =
         "Tap to dictate, or type above";
     };
+    recog.onerror = (e) => {
+      isRec = false;
+      document.getElementById("mic-btn").className = "mic-btn";
+      document.getElementById("mic-btn").innerHTML =
+        '<span class="mic-dot"></span> Dictate';
+      const msgs = {
+        "not-allowed":
+          "Microphone permission denied. Allow microphone access in browser settings.",
+        "no-speech": "No speech detected. Try again.",
+        network: "Network error — check your internet connection.",
+        aborted: "Dictation stopped.",
+      };
+      document.getElementById("mic-st").textContent =
+        msgs[e.error] || "Voice error: " + e.error;
+    };
     recog.start();
     isRec = true;
     document.getElementById("mic-btn").className = "mic-btn rec";
