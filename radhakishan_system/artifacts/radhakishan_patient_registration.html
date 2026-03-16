@@ -484,7 +484,7 @@
     <button onclick="startQrScan()" style="background: var(--green)">
       Scan QR
     </button>
-    <button onclick="showNewPatientForm()">+ New Patient</button>
+    <button id="new-btn" onclick="showNewPatientForm()">Clear Form</button>
   </div>
   <div id="qr-scanner-area" style="display: none; margin-bottom: 16px">
     <div
@@ -574,7 +574,8 @@
       document.getElementById("conn-status").textContent = "Connected";
       document.getElementById("conn-status").style.color = "#7ec49a";
       document.getElementById("cfg").style.display = "none";
-      showToast("Connected to Supabase");
+      // Show empty form on connect
+      if (!document.getElementById("f-name")) showNewPatientForm();
     } catch (e) {
       alert("Connection failed: " + e.message);
     }

@@ -1176,37 +1176,30 @@
   <!-- PAD VIEW -->
   <div id="view-pad">
     <!-- Patient selector -->
-    <div class="pt-bar">
-      <div id="pt-chip-wrap"></div>
-      <div class="pt-search" id="pt-search-wrap" style="display: none">
-        <span class="pt-search-ic">⌕</span>
-        <input
-          id="pt-srch"
-          placeholder="Search patient by name or UHID…"
-          oninput="searchPt(this.value)"
-          autocomplete="off"
-        />
-        <div class="pt-results" id="pt-results" style="display: none"></div>
-      </div>
-      <button
+    <div
+      class="pt-bar"
+      style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"
+    >
+      <select
+        id="pt-dropdown"
+        onchange="onPatientSelect(this.value)"
         style="
-          padding: 6px 12px;
-          background: none;
-          border: 0.5px solid var(--bdr2);
-          border-radius: 99px;
-          font-size: 12px;
-          color: var(--ink2);
-          cursor: pointer;
+          flex: 1;
+          min-width: 200px;
+          padding: 6px 10px;
+          border-radius: 6px;
+          border: 1px solid var(--bdr2);
+          font-size: 13px;
           font-family: inherit;
         "
-        onclick="togglePtSearch()"
       >
-        <span id="pt-btn-label">Select patient</span>
-      </button>
+        <option value="">— Select patient —</option>
+      </select>
       <select class="doctor-select" id="doctor-sel">
         <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
       </select>
     </div>
+    <div id="pt-info-panel"></div>
 
     <div id="visit-info-panel"></div>
 
@@ -1499,6 +1492,7 @@
         document.getElementById("conn-btn").style.color = "#1a6b3a";
         console.log("connectSB: success");
         preloadKnowledge();
+        loadTodayPatients();
       } else {
         throw new Error("HTTP " + r.status);
       }
@@ -1557,73 +1551,78 @@
     }
   }
 
-  /* ===== PATIENT SEARCH ===== */
-  let ptTimer = null;
-  function togglePtSearch() {
-    const w = document.getElementById("pt-search-wrap");
-    w.style.display = w.style.display === "none" ? "flex" : "none";
-    if (w.style.display !== "none") document.getElementById("pt-srch").focus();
-  }
-  function searchPt(val) {
-    clearTimeout(ptTimer);
-    document.getElementById("pt-results").style.display = "none";
-    if (!val || val.length < 2 || !sbConnected) return;
-    ptTimer = setTimeout(() => doPtSearch(val), 300);
-  }
-  async function doPtSearch(val) {
-    const enc = encodeURIComponent(val);
-    try {
-      const r = await q(
-        "patients",
-        `?is_active=eq.true&or=(name.ilike.*${enc}*,id.ilike.*${enc}*)&order=name.asc&limit=8`,
-      );
-      if (!r.ok) return;
-      const pts = await r.json();
-      const res = document.getElementById("pt-results");
-      if (!pts.length) {
-        res.style.display = "none";
-        return;
-      }
-      res.innerHTML = pts
-        .map(
-          (
-            p,
-          ) => `<div class="pt-result-item" onclick="selectPatient(${JSON.stringify(JSON.stringify(p))})">
-      <strong>${esc(p.name)}</strong> · <span style="color:var(--ink3)">${esc(p.id)}</span> · ${esc(calcAge(p.dob))}
-    </div>`,
-        )
-        .join("");
-      res.style.display = "block";
-    } catch (e) {}
-  }
-  async function selectPatient(pJson) {
-    const p = JSON.parse(pJson);
-    selectedPatient = p;
-    const chip = document.getElementById("pt-chip-wrap");
-    chip.innerHTML = `<div class="pt-chip"><strong>${esc(p.name)}</strong> <span style="color:var(--ink3);font-size:11px">${esc(p.id)} · ${esc(calcAge(p.dob))}</span><button onclick="clearPatient()">×</button></div>`;
-    document.getElementById("pt-srch").value = "";
-    document.getElementById("pt-results").style.display = "none";
-    document.getElementById("pt-search-wrap").style.display = "none";
-    document.getElementById("pt-btn-label").textContent = "Change patient";
-
-    // Fetch today's visit (created by reception/nurse)
+  /* ===== PATIENT DROPDOWN (today's visits) ===== */
+  let todayPatients = [];
+  async function loadTodayPatients() {
+    if (!sbConnected) return;
     const today = new Date().toISOString().split("T")[0];
-    let visit = null;
     try {
       const vr = await q(
         "visits",
-        `?patient_id=eq.${encodeURIComponent(p.id)}&visit_date=eq.${today}&order=created_at.desc&limit=1`,
+        `?visit_date=eq.${today}&select=patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,chief_complaints,doctor_id,created_at&order=created_at.asc`,
       );
-      if (vr.ok) {
-        const visits = await vr.json();
-        if (visits.length) visit = visits[0];
+      if (!vr.ok) return;
+      const visits = await vr.json();
+      if (!visits.length) {
+        todayPatients = [];
+        updateDropdown();
+        return;
       }
+      const ids = [...new Set(visits.map((v) => v.patient_id))];
+      const pr = await q(
+        "patients",
+        `?id=in.(${ids.map((i) => encodeURIComponent(i)).join(",")})&is_active=eq.true`,
+      );
+      if (!pr.ok) return;
+      const patients = await pr.json();
+      const pMap = {};
+      patients.forEach((p) => {
+        pMap[p.id] = p;
+      });
+      todayPatients = [];
+      const seen = new Set();
+      for (let i = visits.length - 1; i >= 0; i--) {
+        const v = visits[i];
+        if (seen.has(v.patient_id)) continue;
+        seen.add(v.patient_id);
+        const p = pMap[v.patient_id];
+        if (p) todayPatients.unshift({ ...p, visit: v });
+      }
+      updateDropdown();
+      console.log("Today's patients:", todayPatients.length);
     } catch (e) {
-      console.warn("Visit fetch failed", e);
+      console.warn("loadTodayPatients:", e);
     }
+  }
 
-    // Build visit info panel
-    const panel = document.getElementById("visit-info-panel");
+  function updateDropdown() {
+    const sel = document.getElementById("pt-dropdown");
+    if (!sel) return;
+    sel.innerHTML =
+      '<option value="">— Select patient (' +
+      todayPatients.length +
+      " today) —</option>";
+    todayPatients.forEach((p, i) => {
+      const age = calcAge(p.dob);
+      const allergy = p.known_allergies?.length
+        ? " ⚠ " + p.known_allergies.join(", ")
+        : "";
+      sel.innerHTML += `<option value="${i}">${i + 1}. ${esc(p.name)} — ${esc(p.id)} · ${esc(age)} · ${esc(p.sex || "")}${allergy}</option>`;
+    });
+  }
+
+  async function onPatientSelect(idx) {
+    if (idx === "") {
+      clearPatient();
+      return;
+    }
+    const p = todayPatients[parseInt(idx)];
+    if (!p) return;
+    selectedPatient = p;
+    const visit = p.visit;
+
+    // Build medical info panel
+    const panel = document.getElementById("pt-info-panel");
     let vi = "";
 
     // Allergies (from patient record)
@@ -1659,7 +1658,7 @@
     if (vi) {
       panel.innerHTML = `<div class="visit-info">${vi}</div>`;
     } else {
-      panel.innerHTML = "";
+      panel.innerHTML = `<div class="visit-info"><div class="vi-row" style="color:var(--ink3)">No visit data captured yet for today</div></div>`;
     }
 
     // Pre-fill pad with patient context + nurse-captured data
@@ -1667,37 +1666,29 @@
     if (!existing) {
       let ctx = `${p.name}, `;
       if (p.dob) ctx += calcAge(p.dob) + ", ";
-      if (visit && visit.weight_kg) ctx += visit.weight_kg + " kg, ";
-      else if (p.weight_kg) ctx += p.weight_kg + " kg, ";
+      if (visit?.weight_kg) ctx += visit.weight_kg + " kg, ";
       if (p.sex) ctx += p.sex + ". ";
       if (p.guardian_name) ctx += `Guardian: ${p.guardian_name}. `;
-      if (p.known_allergies && p.known_allergies.length) {
+      if (p.known_allergies?.length) {
         ctx += `ALLERGY: ${p.known_allergies.join(", ")}. `;
       } else {
         ctx += "NKDA. ";
       }
-      if (visit && visit.chief_complaints) {
+      if (visit?.chief_complaints)
         ctx += `Chief complaints: ${visit.chief_complaints}. `;
-      }
-      if (visit && visit.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
+      if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
       document.getElementById("pad-ta").value = ctx;
     }
-    showToast(
-      visit
-        ? `Patient loaded with today's visit data`
-        : `Patient loaded: ${p.name}`,
-    );
   }
+
   function clearPatient() {
     selectedPatient = null;
-    document.getElementById("pt-chip-wrap").innerHTML = "";
-    document.getElementById("visit-info-panel").innerHTML = "";
-    document.getElementById("pt-btn-label").textContent = "Select patient";
+    const panel = document.getElementById("pt-info-panel");
+    if (panel) panel.innerHTML = "";
+    const dd = document.getElementById("pt-dropdown");
+    if (dd) dd.value = "";
+    document.getElementById("pad-ta").value = "";
   }
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest("#pt-search-wrap"))
-      document.getElementById("pt-results").style.display = "none";
-  });
 
   /* ===== VOICE ===== */
   function toggleVoice() {
@@ -2758,9 +2749,10 @@
     rxId = null;
     selectedPatient = null;
     document.getElementById("pad-ta").value = "";
-    document.getElementById("pt-chip-wrap").innerHTML = "";
-    document.getElementById("visit-info-panel").innerHTML = "";
-    document.getElementById("pt-btn-label").textContent = "Select patient";
+    const ptPanel = document.getElementById("pt-info-panel");
+    if (ptPanel) ptPanel.innerHTML = "";
+    const dd = document.getElementById("pt-dropdown");
+    if (dd) dd.value = "";
     const ss = document.getElementById("save-status");
     if (ss) ss.style.display = "none";
     // Reset generate button
@@ -2813,10 +2805,9 @@
   // Expose functions to window for onclick/oninput handlers (Claude.ai sandbox compatibility)
   Object.assign(window, {
     connectSB,
-    togglePtSearch,
-    searchPt,
-    selectPatient,
+    onPatientSelect,
     clearPatient,
+    loadTodayPatients,
     toggleVoice,
     generatePrescription,
     toggleMod,
