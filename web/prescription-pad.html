@@ -1498,7 +1498,7 @@
       const [fr, sr] = await Promise.all([
         q(
           "formulary",
-          "?select=generic_name,dosing_bands,formulations,contraindications,interactions,black_box_warnings,max_dose_single_mg,notes&active=eq.true",
+          "?select=generic_name,dosing_bands,formulations,contraindications,interactions,black_box_warnings,notes&active=eq.true",
         ),
         q(
           "standard_prescriptions",
@@ -1519,7 +1519,8 @@
       if (sr.ok) {
         const stds = await sr.json();
         stds.forEach((s) => {
-          stdRxCache[s.icd10.toUpperCase()] = s;
+          if (s.icd10) stdRxCache[s.icd10.toUpperCase()] = s;
+          if (s.diagnosis_name) stdRxCache[s.diagnosis_name.toUpperCase()] = s;
         });
         console.log(
           "Standard Rx loaded:",
@@ -1527,9 +1528,10 @@
           "protocols",
         );
       }
-      document.getElementById("sb-hint").style.display = "block";
-      document.getElementById("sb-hint").textContent =
-        `✓ ${Object.keys(formularyCache).length} drugs and ${Object.keys(stdRxCache).length} standard protocols loaded from Supabase`;
+      // Log to console only, don't show to doctor
+      console.log(
+        `✓ ${Object.keys(formularyCache).length} drugs and ${Object.keys(stdRxCache).length} standard protocols loaded`,
+      );
     } catch (e) {
       console.warn("Preload partial:", e.message);
     }
