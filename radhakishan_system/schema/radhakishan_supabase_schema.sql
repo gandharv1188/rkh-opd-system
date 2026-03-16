@@ -134,7 +134,8 @@ create index idx_formulary_use     on formulary using gin(therapeutic_use);
 create table standard_prescriptions (
   id                    uuid default gen_random_uuid() primary key,
 
-  icd10                 text not null unique,
+  icd10                 text unique,
+  -- Nullable: some diagnoses may not have an ICD-10 code assigned yet
   diagnosis_name        text not null,
   category              text,
   severity              text default 'any',
@@ -156,8 +157,10 @@ create table standard_prescriptions (
   duration_days_default integer,
   counselling           text[],
   referral_criteria     text,
+  hospitalisation_criteria text,
   notes                 text,
   source                text,
+  last_reviewed_date    date,
 
   active                boolean default true,
   created_at            timestamptz default now(),

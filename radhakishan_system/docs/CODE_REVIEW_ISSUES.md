@@ -9,14 +9,15 @@
 
 These issues have already been addressed:
 
-| #   | Issue                                                                                | Resolution                                                                                                                                                                                       |
-| --- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| R1  | Anthropic API call had no `x-api-key` header — prescription generation always failed | Replaced with dual-mode: "Send to Chat" + "Paste JSON" — generation now happens through Claude.ai conversation                                                                                   |
-| R2  | Patient ID format wrong (`RH-A123456` / `PED-XXXXXX`)                                | Changed to `RKH-YYMM#####` with sequential Supabase lookup and CHECK constraint                                                                                                                  |
-| R3  | UHID collision risk — `Math.random()` with no uniqueness check                       | New `generateUHID()` queries Supabase for max existing ID in prefix, increments sequentially                                                                                                     |
-| R4  | Safety checks cosmetic — blanket green checkmarks with no actual verification (FN-1) | Skill prompt now requires Claude to output specific findings per check (allergy, interactions, max dose) with SAFE/REVIEW REQUIRED status. Client-side verification deferred to production build |
-| R5  | No dose validation against formulary max dose (FN-2)                                 | Skill prompt now requires per-medicine max dose comparison with PASS/FLAGGED status. Client-side cross-check deferred to production build                                                        |
-| R6  | XSS via innerHTML in all 6 artifacts (FN-3)                                          | Added `esc()` HTML-escaping function to all 6 artifacts; all dynamic data (patient names, AI content, diagnoses, medicines, etc.) now escaped before innerHTML insertion                         |
+| #   | Issue                                                                                | Resolution                                                                                                                                                                                          |
+| --- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| R1  | Anthropic API call had no `x-api-key` header — prescription generation always failed | Replaced with dual-mode: "Send to Chat" + "Paste JSON" — generation now happens through Claude.ai conversation                                                                                      |
+| R2  | Patient ID format wrong (`RH-A123456` / `PED-XXXXXX`)                                | Changed to `RKH-YYMM#####` with sequential Supabase lookup and CHECK constraint                                                                                                                     |
+| R3  | UHID collision risk — `Math.random()` with no uniqueness check                       | New `generateUHID()` queries Supabase for max existing ID in prefix, increments sequentially                                                                                                        |
+| R4  | Safety checks cosmetic — blanket green checkmarks with no actual verification (FN-1) | Skill prompt now requires Claude to output specific findings per check (allergy, interactions, max dose) with SAFE/REVIEW REQUIRED status. Client-side verification deferred to production build    |
+| R5  | No dose validation against formulary max dose (FN-2)                                 | Skill prompt now requires per-medicine max dose comparison with PASS/FLAGGED status. Client-side cross-check deferred to production build                                                           |
+| R6  | XSS via innerHTML in all 6 artifacts (FN-3)                                          | Added `esc()` HTML-escaping function to all 6 artifacts; all dynamic data (patient names, AI content, diagnoses, medicines, etc.) now escaped before innerHTML insertion                            |
+| R7  | Schema missing `hospitalisation_criteria` and `last_reviewed_date` columns (FN-7)    | Added both columns to schema. Also relaxed `icd10` from NOT NULL to nullable (some diagnoses lack codes). Extracted 446 diagnoses from pediatric guidelines into `standard_prescriptions_data.json` |
 
 ---
 
@@ -49,18 +50,7 @@ These issues have already been addressed:
 **Description:** Imported data uses uppercase route values (`PO`, `IV`, `SC`, `IV/IM`). The Manager's `<select>` options use lowercase (`oral`, `iv`, `im`, `sc`). Populating an imported drug's formulations shows wrong route selections.
 **Fix:** Normalise routes on import to lowercase, or add case-insensitive matching in the populate function.
 
-### FN-7. Schema missing columns used by Standard Rx Manager
-
-**Severity:** HIGH
-**Location:** `radhakishan_supabase_schema.sql` — `standard_prescriptions` table
-**Description:** The Standard Rx Manager saves `hospitalisation_criteria` and `last_reviewed_date` fields, but these columns don't exist in the `standard_prescriptions` table. Saves will silently lose this data or fail.
-**Fix:** Add to schema:
-
-```sql
-ALTER TABLE standard_prescriptions
-  ADD COLUMN hospitalisation_criteria text,
-  ADD COLUMN last_reviewed_date date;
-```
+### ~~FN-7. Schema missing columns used by Standard Rx Manager~~ → RESOLVED (R7)
 
 ---
 
