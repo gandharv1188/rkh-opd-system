@@ -1202,5 +1202,15 @@
   });
 
   // Auto-connect on page load
-  setTimeout(() => connectSB(), 500);
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    connectSB();
+  } else {
+    document.addEventListener("DOMContentLoaded", () => connectSB());
+  }
+  setTimeout(() => {
+    if (!connected) connectSB();
+  }, 2000);
 </script>

@@ -1273,5 +1273,13 @@
   });
 
   // Auto-connect on page load
-  setTimeout(() => connectDB(), 500);
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    connectDB();
+  } else {
+    document.addEventListener("DOMContentLoaded", () => connectDB());
+  }
+  setTimeout(() => connectDB(), 2000);
 </script>

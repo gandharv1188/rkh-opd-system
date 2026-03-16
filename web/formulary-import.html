@@ -1436,5 +1436,13 @@
   });
 
   // Auto-connect on page load
-  setTimeout(() => connect(), 500);
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    connect();
+  } else {
+    document.addEventListener("DOMContentLoaded", () => connect());
+  }
+  setTimeout(() => connect(), 2000);
 </script>

@@ -2570,6 +2570,17 @@
     showCopiedToast,
   });
 
-  // Auto-connect on page load
-  setTimeout(() => connectSB(), 500);
+  // Auto-connect on page load — try immediately and retry if needed
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    connectSB();
+  } else {
+    document.addEventListener("DOMContentLoaded", () => connectSB());
+  }
+  // Retry after 2s in case first attempt failed silently
+  setTimeout(() => {
+    if (!sbConnected) connectSB();
+  }, 2000);
 </script>
