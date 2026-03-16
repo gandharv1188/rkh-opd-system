@@ -1,6 +1,6 @@
 [
   {
-    "icd10": null,
+    "icd10": "J18.9",
     "diagnosis_name": "Pneumonia (CAP)",
     "category": "Respiratory",
     "severity": "any",
@@ -29,7 +29,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "J45.901",
     "diagnosis_name": "Asthma - acute exacerbation",
     "category": "Respiratory",
     "severity": "any",
@@ -63,7 +63,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "J05.0",
     "diagnosis_name": "Croup",
     "category": "Respiratory",
     "severity": "any",
@@ -92,7 +92,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "J21.0",
     "diagnosis_name": "Bronchiolitis (RSV/viral)",
     "category": "Respiratory",
     "severity": "any",
@@ -121,7 +121,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "H66.90",
     "diagnosis_name": "Acute otitis media",
     "category": "ENT",
     "severity": "any",
@@ -150,7 +150,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "J02.0",
     "diagnosis_name": "Streptococcal pharyngitis (GAS)",
     "category": "ENT",
     "severity": "any",
@@ -179,7 +179,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "A09",
     "diagnosis_name": "Gastroenteritis and dehydration",
     "category": "GI",
     "severity": "any",
@@ -213,7 +213,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "K59.04",
     "diagnosis_name": "Functional constipation",
     "category": "GI",
     "severity": "any",
@@ -237,7 +237,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "L20.9",
     "diagnosis_name": "Atopic dermatitis (eczema)",
     "category": "Skin",
     "severity": "any",
@@ -276,7 +276,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "L01.0",
     "diagnosis_name": "Impetigo",
     "category": "Skin",
     "severity": "any",
@@ -305,7 +305,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "N39.0",
     "diagnosis_name": "Urinary tract infection (UTI)",
     "category": "Infectious",
     "severity": "any",
@@ -339,7 +339,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "B50.9",
     "diagnosis_name": "Malaria (P. falciparum)",
     "category": "Infectious",
     "severity": "any",
@@ -368,7 +368,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "R56.00",
     "diagnosis_name": "Febrile seizures",
     "category": "Neurological",
     "severity": "any",
@@ -402,7 +402,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "F90.9",
     "diagnosis_name": "ADHD",
     "category": "Neurological",
     "severity": "any",
@@ -436,7 +436,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "E10.9",
     "diagnosis_name": "Type 1 diabetes insulin therapy",
     "category": "Endocrine",
     "severity": "any",
@@ -465,7 +465,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "I10",
     "diagnosis_name": "Paediatric hypertension",
     "category": "Cardiovascular",
     "severity": "any",
@@ -499,7 +499,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "M30.3",
     "diagnosis_name": "Kawasaki disease",
     "category": "Cardiovascular",
     "severity": "any",
@@ -533,7 +533,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "J30.9",
     "diagnosis_name": "Allergic rhinitis",
     "category": "Allergy",
     "severity": "any",
@@ -567,7 +567,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "T78.2",
     "diagnosis_name": "Anaphylaxis",
     "category": "Allergy",
     "severity": "any",
@@ -601,7 +601,7 @@
     "active": true
   },
   {
-    "icd10": null,
+    "icd10": "R50.9",
     "diagnosis_name": "Fever and mild to moderate pain",
     "category": "Pain/Fever",
     "severity": "any",
