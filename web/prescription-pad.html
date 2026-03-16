@@ -2547,7 +2547,8 @@
       hour: "2-digit",
       minute: "2-digit",
     });
-    const uhid = r.patient?.uhid || selectedPatient?.id || "";
+    const uhid =
+      r.patient?.uhid || selectedPatient?.id || rxData?.patient?.uhid || "—";
 
     let h = "";
     // Header — doctor left, hospital center, emergency right
@@ -2681,8 +2682,8 @@
     );
     h += `<div class="footer">
       <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics · HMCI HN 21452 · PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
-      <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to re-register</div></div>
       <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: ✓<br>Max dose: ✓<br>NABH: ✓</div>
+      <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to re-register</div></div>
     </div>`;
 
     const w = window.open("", "_blank");
