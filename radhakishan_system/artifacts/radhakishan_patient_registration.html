@@ -1,0 +1,1056 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  :root {
+    --blue: #1e3a6b;
+    --blue-lt: #e8edf8;
+    --blue-mid: #2d5aa0;
+    --ink: #1a1a14;
+    --ink2: #555;
+    --ink3: #999;
+    --bg: #f8f7f4;
+    --bg2: #eeecea;
+    --brd: #ddd;
+    --r: 6px;
+    --r2: 8px;
+    --red: #8b1a1a;
+    --green: #1a6b3a;
+    --amber: #7a5200;
+  }
+  body {
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .hdr {
+    background: var(--blue);
+    color: #fff;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hdr-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .hdr-sub {
+    font-size: 11px;
+    opacity: 0.6;
+  }
+  .hdr-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .cfg-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: var(--r);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .cfg-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Config panel */
+  .cfg {
+    display: none;
+    background: var(--bg2);
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--brd);
+  }
+  .cfg-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .cfg-row input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--brd);
+    border-radius: var(--r);
+    font-size: 13px;
+  }
+  .cfg-row button {
+    padding: 8px 16px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--r);
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .cfg-status {
+    font-size: 12px;
+    color: var(--ink3);
+  }
+
+  /* Main layout */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  /* Search bar */
+  .search-wrap {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .search-wrap input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--brd);
+    border-radius: var(--r2);
+    font-size: 14px;
+    background: #fff;
+  }
+  .search-wrap input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(30, 58, 107, 0.08);
+  }
+  .search-wrap button {
+    padding: 10px 18px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--r2);
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* Action buttons */
+  .actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .act-btn {
+    padding: 10px 18px;
+    border: 1px solid var(--brd);
+    border-radius: var(--r2);
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .act-btn:hover {
+    background: var(--bg2);
+  }
+  .act-btn.primary {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .act-btn.primary:hover {
+    background: var(--blue-mid);
+  }
+  .act-btn.green {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
+
+  /* Search results */
+  .results {
+    margin-bottom: 16px;
+  }
+  .pt-card {
+    background: #fff;
+    border: 1px solid var(--brd);
+    border-radius: var(--r2);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .pt-card:hover {
+    border-color: var(--blue);
+  }
+  .pt-name {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .pt-meta {
+    font-size: 12px;
+    color: var(--ink2);
+    margin-top: 2px;
+  }
+  .pt-allergy {
+    color: var(--red);
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .pt-uhid {
+    font-size: 11px;
+    color: var(--ink3);
+    float: right;
+    font-family: monospace;
+  }
+
+  /* Form sections */
+  .form-section {
+    background: #fff;
+    border: 1px solid var(--brd);
+    border-radius: var(--r2);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .fs-hdr {
+    padding: 10px 16px;
+    background: var(--bg2);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    border-bottom: 1px solid var(--brd);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .fs-hdr .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--blue-lt);
+    color: var(--blue);
+    font-weight: 500;
+  }
+  .fs-hdr .badge.req {
+    background: #fde8e8;
+    color: var(--red);
+  }
+  .fs-body {
+    padding: 14px 16px;
+  }
+  .fg {
+    display: grid;
+    gap: 10px;
+  }
+  .fg2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fg3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .fg4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .ff {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .ff label {
+    font-size: 11px;
+    color: var(--ink2);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .ff input,
+  .ff select,
+  .ff textarea {
+    padding: 8px;
+    border: 1px solid var(--brd);
+    border-radius: var(--r);
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .ff input:focus,
+  .ff select:focus,
+  .ff textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+  }
+  .ff textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  /* Vaccine quick-entry */
+  .vax-grid {
+    display: grid;
+    grid-template-columns: 1fr 80px 110px;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .vax-grid input {
+    padding: 6px 8px;
+    border: 1px solid var(--brd);
+    border-radius: var(--r);
+    font-size: 12px;
+  }
+  .vax-grid select {
+    padding: 6px;
+    border: 1px solid var(--brd);
+    border-radius: var(--r);
+    font-size: 12px;
+  }
+  .vax-hdr {
+    font-size: 10px;
+    color: var(--ink3);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .add-vax-btn {
+    padding: 6px 12px;
+    background: var(--bg2);
+    border: 1px solid var(--brd);
+    border-radius: var(--r);
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .rm-btn {
+    background: none;
+    border: none;
+    color: var(--red);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 6px;
+  }
+
+  /* Status bar */
+  .status-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--blue);
+    color: #fff;
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    z-index: 50;
+  }
+  .status-bar button {
+    padding: 8px 20px;
+    background: #fff;
+    color: var(--blue);
+    border: none;
+    border-radius: var(--r);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .status-bar button:hover {
+    background: var(--blue-lt);
+  }
+  .status-bar button.green-btn {
+    background: var(--green);
+    color: #fff;
+  }
+  .status-bar button.green-btn:hover {
+    opacity: 0.9;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: var(--r2);
+    font-size: 14px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .toast.show {
+    opacity: 1;
+  }
+
+  /* Visit ticket */
+  .ticket {
+    background: #fff;
+    border: 2px solid var(--blue);
+    border-radius: var(--r2);
+    padding: 20px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .ticket-uhid {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--blue);
+    font-family: monospace;
+    letter-spacing: 0.05em;
+  }
+  .ticket-name {
+    font-size: 16px;
+    margin-top: 4px;
+  }
+  .ticket-meta {
+    font-size: 12px;
+    color: var(--ink2);
+    margin-top: 4px;
+  }
+  .ticket-visit {
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--ink3);
+  }
+  .ring {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--brd);
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 20px auto;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (max-width: 600px) {
+    .fg2,
+    .fg3,
+    .fg4 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="hdr">
+  <div>
+    <div class="hdr-title">Radhakishan Hospital — Patient Registration</div>
+    <div class="hdr-sub">Reception & Nursing Station</div>
+  </div>
+  <div class="hdr-right">
+    <span class="cfg-status" id="conn-status">Not connected</span>
+    <button class="cfg-btn" onclick="toggleCfg()">Supabase</button>
+  </div>
+</div>
+
+<div class="cfg" id="cfg">
+  <div class="cfg-row">
+    <input id="sb-url" placeholder="Supabase URL (https://xxx.supabase.co)" />
+    <input id="sb-key" placeholder="Anon key (eyJ...)" />
+    <button onclick="connectSB()">Connect</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="search-wrap">
+    <input
+      id="srch"
+      placeholder="Search patient by name, UHID, or phone number…"
+      oninput="debounceSearch(this.value)"
+    />
+    <button onclick="showNewPatientForm()">+ New Patient</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="form-area"></div>
+  <div id="ticket-area"></div>
+</div>
+
+<div class="status-bar" id="status-bar" style="display: none">
+  <span id="status-text">Ready</span>
+  <div style="display: flex; gap: 8px">
+    <button onclick="cancelForm()">Cancel</button>
+    <button class="green-btn" id="save-btn" onclick="saveAndCreateVisit()">
+      Save & Create Visit
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
+  let SB = "",
+    KEY = "",
+    connected = false;
+  let currentPatient = null; // null = new patient, object = existing
+  let searchTimer = null;
+  let vaxRows = 0;
+
+  function toggleCfg() {
+    const c = document.getElementById("cfg");
+    c.style.display = c.style.display === "block" ? "none" : "block";
+  }
+
+  async function connectSB() {
+    SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
+    KEY = document.getElementById("sb-key").value.trim();
+    if (!SB || !KEY) {
+      alert("Enter Supabase URL and anon key.");
+      return;
+    }
+    try {
+      const r = await q("formulary", "?select=count&limit=0");
+      if (!r.ok) throw new Error("Connection failed");
+      connected = true;
+      document.getElementById("conn-status").textContent = "Connected";
+      document.getElementById("conn-status").style.color = "#7ec49a";
+      document.getElementById("cfg").style.display = "none";
+      showToast("Connected to Supabase");
+    } catch (e) {
+      alert("Connection failed: " + e.message);
+    }
+  }
+
+  function q(t, p = "", m = "GET", b = null) {
+    const o = {
+      method: m,
+      headers: {
+        apikey: KEY,
+        Authorization: "Bearer " + KEY,
+        "Content-Type": "application/json",
+        Prefer:
+          m === "POST"
+            ? "return=representation"
+            : m === "PATCH"
+              ? "return=representation"
+              : "",
+      },
+    };
+    if (b) o.body = JSON.stringify(b);
+    return fetch(SB + "/rest/v1/" + t + p, o);
+  }
+
+  // ===== UHID Generation =====
+  async function generateUHID() {
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    const year = now.getFullYear();
+    const fyStart = month >= 4 ? year % 100 : (year - 1) % 100;
+    const fyEnd = fyStart + 1;
+    const mm = String(month).padStart(2, "0");
+    const numPart =
+      String(fyStart).padStart(2, "0") + String(fyEnd).padStart(2, "0") + mm;
+    const prefix = "RKH-" + numPart;
+    let nextSeq = 1;
+    try {
+      const res = await q(
+        "patients",
+        `?select=id&id=like.${encodeURIComponent(prefix)}*&order=id.desc&limit=1`,
+      );
+      if (res.ok) {
+        const rows = await res.json();
+        if (rows.length > 0) {
+          const lastSeq = parseInt(rows[0].id.slice(10), 10);
+          if (!isNaN(lastSeq)) nextSeq = lastSeq + 1;
+        }
+      }
+    } catch (e) {
+      console.warn("UHID lookup failed", e);
+    }
+    return prefix + String(nextSeq).padStart(5, "0");
+  }
+
+  // ===== Search =====
+  function debounceSearch(val) {
+    clearTimeout(searchTimer);
+    if (val.length < 2) {
+      document.getElementById("results").innerHTML = "";
+      return;
+    }
+    searchTimer = setTimeout(() => doSearch(val), 300);
+  }
+
+  async function doSearch(val) {
+    if (!connected) {
+      document.getElementById("results").innerHTML =
+        '<div class="empty">Connect to Supabase first</div>';
+      return;
+    }
+    document.getElementById("results").innerHTML = '<div class="ring"></div>';
+    try {
+      const enc = encodeURIComponent(val);
+      const r = await q(
+        "patients",
+        `?is_active=eq.true&or=(name.ilike.*${enc}*,id.ilike.*${enc}*,contact_phone.ilike.*${enc}*)&order=name.asc&limit=20`,
+      );
+      if (!r.ok) throw new Error("Search failed");
+      const pts = await r.json();
+      if (!pts.length) {
+        document.getElementById("results").innerHTML =
+          '<div class="empty">No patients found. Click "+ New Patient" to register.</div>';
+        return;
+      }
+      document.getElementById("results").innerHTML = pts
+        .map((p) => {
+          const allergy =
+            p.known_allergies && p.known_allergies.length
+              ? '<div class="pt-allergy">ALLERGY: ' +
+                p.known_allergies.map((a) => esc(a)).join(", ") +
+                "</div>"
+              : "";
+          const age = p.dob ? esc(calcAge(p.dob)) : "";
+          return `<div class="pt-card" onclick="selectPatient(${esc(JSON.stringify(JSON.stringify(p)))})">
+          <span class="pt-uhid">${esc(p.id)}</span>
+          <div class="pt-name">${esc(p.name)}</div>
+          <div class="pt-meta">${age}${age ? " · " : ""}${esc(p.sex || "")}${p.guardian_name ? " · " + esc(p.guardian_name) : ""}${p.contact_phone ? " · " + esc(p.contact_phone) : ""}</div>
+          ${allergy}
+        </div>`;
+        })
+        .join("");
+    } catch (e) {
+      document.getElementById("results").innerHTML =
+        '<div class="empty">Error: ' + esc(e.message) + "</div>";
+    }
+  }
+
+  // ===== Select existing patient for revisit =====
+  function selectPatient(json) {
+    currentPatient = JSON.parse(json);
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("srch").value = "";
+    renderForm(currentPatient);
+  }
+
+  // ===== New patient form =====
+  function showNewPatientForm() {
+    currentPatient = null;
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("srch").value = "";
+    renderForm(null);
+  }
+
+  // ===== Render the full registration form =====
+  function renderForm(patient) {
+    const isNew = !patient;
+    const p = patient || {};
+    vaxRows = 0;
+
+    let h = "";
+
+    // Section 1: Demographics
+    h += `<div class="form-section">
+      <div class="fs-hdr">Demographics <span class="badge req">Required</span></div>
+      <div class="fs-body">
+        <div class="fg fg2" style="margin-bottom:10px">
+          <div class="ff"><label>Full Name *</label><input id="f-name" value="${esc(p.name || "")}" placeholder="Patient full name" ${!isNew ? "" : "autofocus"} /></div>
+          <div class="ff"><label>UHID</label><input id="f-uhid" value="${esc(p.id || "Auto-generated")}" readonly style="background:#f0f0f0;color:var(--ink3)" /></div>
+        </div>
+        <div class="fg fg4" style="margin-bottom:10px">
+          <div class="ff"><label>Date of Birth</label><input type="date" id="f-dob" value="${esc(p.dob || "")}" /></div>
+          <div class="ff"><label>Sex</label>
+            <select id="f-sex">
+              <option value="">Select</option>
+              <option value="Male" ${p.sex === "Male" ? "selected" : ""}>Male</option>
+              <option value="Female" ${p.sex === "Female" ? "selected" : ""}>Female</option>
+              <option value="Other" ${p.sex === "Other" ? "selected" : ""}>Other</option>
+            </select>
+          </div>
+          <div class="ff"><label>Blood Group</label><input id="f-bg" value="${esc(p.blood_group || "")}" placeholder="e.g. B+" /></div>
+          <div class="ff"><label>Phone</label><input id="f-phone" value="${esc(p.contact_phone || "")}" placeholder="e.g. 9876543210" /></div>
+        </div>
+        <div class="fg fg3">
+          <div class="ff"><label>Guardian Name</label><input id="f-guard" value="${esc(p.guardian_name || "")}" placeholder="Father/Mother name" /></div>
+          <div class="ff"><label>Relation</label>
+            <select id="f-rel">
+              <option value="">Select</option>
+              <option value="Father" ${p.guardian_relation === "Father" ? "selected" : ""}>Father</option>
+              <option value="Mother" ${p.guardian_relation === "Mother" ? "selected" : ""}>Mother</option>
+              <option value="Grandparent" ${p.guardian_relation === "Grandparent" ? "selected" : ""}>Grandparent</option>
+              <option value="Other" ${p.guardian_relation === "Other" ? "selected" : ""}>Other</option>
+            </select>
+          </div>
+          <div class="ff"><label>Address</label><input id="f-addr" value="" placeholder="Village/City, District" /></div>
+        </div>
+      </div>
+    </div>`;
+
+    // Section 2: Neonatal (show if age < 2 years or new patient)
+    h += `<div class="form-section">
+      <div class="fs-hdr">Neonatal Details <span class="badge">If applicable</span></div>
+      <div class="fs-body">
+        <div class="fg fg3">
+          <div class="ff"><label>Gestational Age (weeks)</label><input type="number" id="f-ga" step="0.5" value="${p.gestational_age_weeks || ""}" placeholder="e.g. 36" /></div>
+          <div class="ff"><label>Birth Weight (kg)</label><input type="number" id="f-bw" step="0.01" value="${p.birth_weight_kg || ""}" placeholder="e.g. 2.5" /></div>
+          <div class="ff"><label>Birth Date/Time Notes</label><input id="f-birth-notes" value="" placeholder="e.g. LSCS, cried immediately" /></div>
+        </div>
+      </div>
+    </div>`;
+
+    // Section 3: Allergies
+    h += `<div class="form-section">
+      <div class="fs-hdr">Known Allergies</div>
+      <div class="fs-body">
+        <div class="ff">
+          <label>Drug / Food / Other Allergies (comma-separated)</label>
+          <input id="f-allergy" value="${p.known_allergies ? p.known_allergies.join(", ") : ""}" placeholder="e.g. Penicillin, Sulfa drugs — leave blank if NKDA (no known allergy)" />
+        </div>
+      </div>
+    </div>`;
+
+    // Section 4: Vitals & Measurements (Nurse station)
+    h += `<div class="form-section">
+      <div class="fs-hdr">Vitals & Measurements <span class="badge">Nurse station</span></div>
+      <div class="fs-body">
+        <div class="fg fg4" style="margin-bottom:10px">
+          <div class="ff"><label>Weight (kg) *</label><input type="number" id="f-wt" step="0.1" placeholder="e.g. 7.2" /></div>
+          <div class="ff"><label>Height/Length (cm)</label><input type="number" id="f-ht" step="0.1" placeholder="e.g. 67" /></div>
+          <div class="ff"><label>Head Circumference (cm)</label><input type="number" id="f-hc" step="0.1" placeholder="e.g. 43" /></div>
+          <div class="ff"><label>MUAC (cm)</label><input type="number" id="f-muac" step="0.1" placeholder="e.g. 13.5" /></div>
+        </div>
+        <div class="fg fg4">
+          <div class="ff"><label>Temperature (°F)</label><input type="number" id="f-temp" step="0.1" placeholder="e.g. 99.4" /></div>
+          <div class="ff"><label>Heart Rate (/min)</label><input type="number" id="f-hr" placeholder="e.g. 120" /></div>
+          <div class="ff"><label>Respiratory Rate (/min)</label><input type="number" id="f-rr" placeholder="e.g. 28" /></div>
+          <div class="ff"><label>SpO₂ (%)</label><input type="number" id="f-spo2" step="0.1" placeholder="e.g. 98" /></div>
+        </div>
+      </div>
+    </div>`;
+
+    // Section 5: Chief complaints
+    h += `<div class="form-section">
+      <div class="fs-hdr">Chief Complaints</div>
+      <div class="fs-body">
+        <div class="ff">
+          <label>What the parent/patient reports</label>
+          <textarea id="f-complaints" placeholder="e.g. Fever 3 days, cough, not eating well"></textarea>
+        </div>
+      </div>
+    </div>`;
+
+    // Section 6: Vaccination history (quick entry)
+    h += `<div class="form-section">
+      <div class="fs-hdr">Vaccination History <span class="badge">Optional — from card</span></div>
+      <div class="fs-body">
+        <div class="vax-grid">
+          <div class="vax-hdr">Vaccine</div>
+          <div class="vax-hdr">Dose #</div>
+          <div class="vax-hdr">Date Given</div>
+        </div>
+        <div id="vax-list"></div>
+        <button class="add-vax-btn" onclick="addVaxRow()">+ Add vaccine record</button>
+      </div>
+    </div>`;
+
+    // Section 7: Visit details
+    h += `<div class="form-section">
+      <div class="fs-hdr">Visit Details <span class="badge req">Required</span></div>
+      <div class="fs-body">
+        <div class="fg fg3">
+          <div class="ff"><label>Visit Date</label><input type="date" id="f-visit-date" value="${new Date().toISOString().split("T")[0]}" /></div>
+          <div class="ff"><label>Doctor</label>
+            <select id="f-doctor">
+              <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
+              <option value="DR-SWATI">Dr. Swati Goyal</option>
+            </select>
+          </div>
+          <div class="ff"><label>Visit Type</label>
+            <select id="f-visit-type">
+              <option value="new">New consultation</option>
+              <option value="followup">Follow-up</option>
+              <option value="vaccination">Vaccination only</option>
+              <option value="emergency">Emergency</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    h += '<div style="height:70px"></div>'; // spacer for status bar
+
+    document.getElementById("form-area").innerHTML = h;
+    document.getElementById("ticket-area").innerHTML = "";
+    document.getElementById("status-bar").style.display = "flex";
+    document.getElementById("status-text").textContent = isNew
+      ? "New Patient Registration"
+      : "Revisit — " + esc(p.name) + " (" + esc(p.id) + ")";
+  }
+
+  // ===== Vaccine row =====
+  function addVaxRow(name, dose, date) {
+    const id = "vax-" + vaxRows++;
+    const el = document.createElement("div");
+    el.className = "vax-grid";
+    el.id = id;
+    el.innerHTML = `
+      <select id="${id}-name" style="font-size:12px">
+        <option value="">Select vaccine…</option>
+        <option ${name === "BCG" ? "selected" : ""}>BCG</option>
+        <option ${name === "OPV" ? "selected" : ""}>OPV</option>
+        <option ${name === "Hepatitis B" ? "selected" : ""}>Hepatitis B</option>
+        <option ${name === "Pentavalent" ? "selected" : ""}>Pentavalent</option>
+        <option ${name === "IPV" ? "selected" : ""}>IPV</option>
+        <option ${name === "PCV" ? "selected" : ""}>PCV</option>
+        <option ${name === "Rotavirus" ? "selected" : ""}>Rotavirus</option>
+        <option ${name === "MR" ? "selected" : ""}>MR</option>
+        <option ${name === "MMR" ? "selected" : ""}>MMR</option>
+        <option ${name === "DPT Booster" ? "selected" : ""}>DPT Booster</option>
+        <option ${name === "Hep A" ? "selected" : ""}>Hep A</option>
+        <option ${name === "Varicella" ? "selected" : ""}>Varicella</option>
+        <option ${name === "TCV" ? "selected" : ""}>TCV</option>
+        <option ${name === "Influenza" ? "selected" : ""}>Influenza</option>
+        <option ${name === "HPV" ? "selected" : ""}>HPV</option>
+        <option ${name === "Td" ? "selected" : ""}>Td</option>
+        <option ${name === "Tdap" ? "selected" : ""}>Tdap</option>
+        <option value="other">Other…</option>
+      </select>
+      <input type="number" id="${id}-dose" value="${dose || ""}" placeholder="#" min="0" max="10" />
+      <div style="display:flex;gap:4px;align-items:center">
+        <input type="date" id="${id}-date" value="${date || ""}" style="flex:1" />
+        <button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button>
+      </div>`;
+    document.getElementById("vax-list").appendChild(el);
+  }
+
+  // ===== Save & Create Visit =====
+  async function saveAndCreateVisit() {
+    const name = document.getElementById("f-name").value.trim();
+    if (!name) {
+      alert("Patient name is required.");
+      return;
+    }
+    if (!connected) {
+      alert("Connect to Supabase first.");
+      return;
+    }
+
+    const btn = document.getElementById("save-btn");
+    btn.disabled = true;
+    btn.textContent = "Saving…";
+
+    try {
+      let patientId;
+
+      if (currentPatient) {
+        // Revisit — update patient if any fields changed
+        patientId = currentPatient.id;
+        const updates = {};
+        const fields = {
+          name: "f-name",
+          dob: "f-dob",
+          sex: "f-sex",
+          blood_group: "f-bg",
+          contact_phone: "f-phone",
+          guardian_name: "f-guard",
+          guardian_relation: "f-rel",
+          gestational_age_weeks: "f-ga",
+          birth_weight_kg: "f-bw",
+        };
+        for (const [col, elId] of Object.entries(fields)) {
+          const val = document.getElementById(elId).value.trim();
+          if (val && val !== (currentPatient[col] || "").toString()) {
+            updates[col] =
+              col === "gestational_age_weeks" || col === "birth_weight_kg"
+                ? parseFloat(val) || null
+                : val || null;
+          }
+        }
+        // Allergies
+        const allergyVal = document.getElementById("f-allergy").value.trim();
+        const newAllergies = allergyVal
+          ? allergyVal
+              .split(",")
+              .map((s) => s.trim())
+              .filter(Boolean)
+          : null;
+        const oldAllergies = currentPatient.known_allergies;
+        if (JSON.stringify(newAllergies) !== JSON.stringify(oldAllergies)) {
+          updates.known_allergies = newAllergies;
+        }
+
+        if (Object.keys(updates).length > 0) {
+          updates.updated_at = new Date().toISOString();
+          const ur = await q(
+            `patients?id=eq.${encodeURIComponent(patientId)}`,
+            "",
+            "PATCH",
+            updates,
+          );
+          if (!ur.ok)
+            throw new Error("Patient update failed: " + (await ur.text()));
+        }
+      } else {
+        // New patient
+        patientId = await generateUHID();
+        const allergyVal = document.getElementById("f-allergy").value.trim();
+        const payload = {
+          id: patientId,
+          name,
+          dob: document.getElementById("f-dob").value || null,
+          sex: document.getElementById("f-sex").value || null,
+          blood_group: document.getElementById("f-bg").value || null,
+          contact_phone: document.getElementById("f-phone").value || null,
+          guardian_name: document.getElementById("f-guard").value || null,
+          guardian_relation: document.getElementById("f-rel").value || null,
+          gestational_age_weeks:
+            parseFloat(document.getElementById("f-ga").value) || null,
+          birth_weight_kg:
+            parseFloat(document.getElementById("f-bw").value) || null,
+          known_allergies: allergyVal
+            ? allergyVal
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean)
+            : null,
+          is_active: true,
+        };
+        const pr = await q("patients", "", "POST", payload);
+        if (!pr.ok)
+          throw new Error("Registration failed: " + (await pr.text()));
+      }
+
+      // Create visit
+      const visitPayload = {
+        patient_id: patientId,
+        visit_date: document.getElementById("f-visit-date").value,
+        doctor_id: document.getElementById("f-doctor").value,
+        weight_kg: parseFloat(document.getElementById("f-wt").value) || null,
+        height_cm: parseFloat(document.getElementById("f-ht").value) || null,
+        hc_cm: parseFloat(document.getElementById("f-hc").value) || null,
+        muac_cm: parseFloat(document.getElementById("f-muac").value) || null,
+        temp_f: parseFloat(document.getElementById("f-temp").value) || null,
+        hr_per_min: parseInt(document.getElementById("f-hr").value) || null,
+        rr_per_min: parseInt(document.getElementById("f-rr").value) || null,
+        spo2_pct: parseFloat(document.getElementById("f-spo2").value) || null,
+        chief_complaints:
+          document.getElementById("f-complaints").value.trim() || null,
+      };
+      const vr = await q("visits", "", "POST", visitPayload);
+      if (!vr.ok)
+        throw new Error("Visit creation failed: " + (await vr.text()));
+      const visitData = await vr.json();
+      const visitId = Array.isArray(visitData) ? visitData[0].id : visitData.id;
+
+      // Save vaccination records
+      const vaxList = document.getElementById("vax-list");
+      if (vaxList) {
+        const rows = vaxList.children;
+        for (const row of rows) {
+          const vName = row.querySelector("select")?.value;
+          const vDose =
+            parseInt(row.querySelector('input[type="number"]')?.value) || null;
+          const vDate = row.querySelector('input[type="date"]')?.value || null;
+          if (vName && vName !== "other") {
+            await q("vaccinations", "", "POST", {
+              patient_id: patientId,
+              visit_id: visitId,
+              vaccine_name: vName,
+              dose_number: vDose,
+              date_given: vDate,
+              given_by: document.getElementById("f-doctor").value,
+              free_or_paid: "free_uip",
+            });
+          }
+        }
+      }
+
+      // Show success ticket
+      const doctor =
+        document.getElementById("f-doctor").value === "DR-LOKENDER"
+          ? "Dr. Lokender Goyal"
+          : "Dr. Swati Goyal";
+      const visitType = document.getElementById("f-visit-type").value;
+      document.getElementById("form-area").innerHTML = "";
+      document.getElementById("status-bar").style.display = "none";
+      document.getElementById("ticket-area").innerHTML = `
+        <div class="ticket">
+          <div style="font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Radhakishan Hospital — OPD Token</div>
+          <div class="ticket-uhid">${esc(patientId)}</div>
+          <div class="ticket-name">${esc(name)}</div>
+          <div class="ticket-meta">
+            ${document.getElementById("f-dob").value ? esc(calcAge(document.getElementById("f-dob").value)) + " · " : ""}
+            ${esc(document.getElementById("f-sex").value || "")}
+            ${document.getElementById("f-wt").value ? " · " + esc(document.getElementById("f-wt").value) + " kg" : ""}
+            ${document.getElementById("f-phone").value ? " · " + esc(document.getElementById("f-phone").value) : ""}
+          </div>
+          <div class="ticket-visit">Visit created: ${esc(document.getElementById("f-visit-date").value)} · ${esc(doctor)} · ${esc(visitType)}</div>
+          ${allergyVal && allergyVal.trim() ? '<div style="color:var(--red);font-weight:600;margin-top:6px">ALLERGY: ' + esc(document.getElementById("f-allergy").value) + "</div>" : '<div style="color:var(--green);margin-top:6px">NKDA</div>'}
+        </div>
+        <div style="text-align:center;margin-top:12px">
+          <button class="act-btn primary" onclick="window.print()">Print Token</button>
+          <button class="act-btn" onclick="resetAll()">Register Next Patient</button>
+        </div>`;
+      showToast(
+        currentPatient
+          ? "Visit created for " + name
+          : "Patient registered — " + patientId,
+      );
+    } catch (e) {
+      alert("Error: " + e.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Save & Create Visit";
+    }
+  }
+
+  function cancelForm() {
+    document.getElementById("form-area").innerHTML = "";
+    document.getElementById("status-bar").style.display = "none";
+    currentPatient = null;
+  }
+
+  function resetAll() {
+    document.getElementById("form-area").innerHTML = "";
+    document.getElementById("ticket-area").innerHTML = "";
+    document.getElementById("status-bar").style.display = "none";
+    document.getElementById("srch").value = "";
+    document.getElementById("results").innerHTML = "";
+    currentPatient = null;
+  }
+
+  function calcAge(dob) {
+    if (!dob) return "";
+    const d = new Date(dob),
+      now = new Date();
+    const days = Math.floor((now - d) / 86400000);
+    if (days < 0) return "";
+    if (days < 28) return days + " days";
+    let y = now.getFullYear() - d.getFullYear(),
+      m = now.getMonth() - d.getMonth(),
+      dd = now.getDate() - d.getDate();
+    if (dd < 0) m--;
+    if (m < 0) {
+      y--;
+      m += 12;
+    }
+    if (y === 0) return m + " months";
+    if (y < 2) return y + " yr " + m + " mo";
+    return y + " years";
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 3000);
+  }
+</script>
