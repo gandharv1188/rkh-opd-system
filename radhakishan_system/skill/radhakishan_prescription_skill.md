@@ -104,6 +104,15 @@ Generate this exact structure. Field names MUST match exactly — the rendering 
     "corrected": "string (e.g. '2 months corrected')",
     "notes": "string (e.g. 'On EBM + top feeds, stable vitals')"
   },
+  "vitals": {
+    "temp_f": "string or null",
+    "hr_per_min": "string or null",
+    "rr_per_min": "string or null",
+    "spo2_pct": "string or null"
+  },
+  "chief_complaints": "string (what the patient/parent reports)",
+  "clinical_history": "string (relevant history extracted from doctor's note)",
+  "examination": "string (clinical examination findings from doctor's note)",
   "diagnosis": [
     {
       "name": "string (full diagnosis name)",
@@ -194,8 +203,13 @@ Generate this exact structure. Field names MUST match exactly — the rendering 
 
 **Important field rules:**
 
+- `vitals`: Extract from the doctor's note. If vitals are mentioned (temp, HR, RR, SpO2), populate them. Set fields to `null` if not mentioned.
+- `chief_complaints`: What the patient/parent reports (e.g., "Fever 3 days, pulling at left ear, runny nose"). Extract from the note.
+- `clinical_history`: Relevant medical history (e.g., "Fever for 3 days, progressive ear pulling, associated rhinorrhea. No vomiting, no rash, no seizures. Feeding reduced."). Expand from the note into a proper clinical narrative.
+- `examination`: Physical exam findings (e.g., "Febrile to touch. Left TM dull and bulging. Right TM normal. Throat congested. Chest clear. Abdomen soft."). Extract and structure from the note.
+- `diagnosis[].type`: Use "provisional" unless the doctor explicitly says "confirmed" or "final".
 - `neonatal`: Include ONLY for neonates/preterms. Set to `null` for older children.
-- `growth`, `vaccinations`, `developmental`, `investigations`, `iv_fluids`: Include only if doctor selected them. Set to `null` or empty array if not selected.
+- `growth`, `vaccinations`, `developmental`, `investigations`, `iv_fluids`: Include when the doctor's INCLUDE SECTIONS instruction requests them. When included but doctor doesn't mention specifics, populate with age-appropriate defaults (e.g., "Growth normal for age", "All vaccinations up to date per IAP 2024 for 8 months"). **ALWAYS populate these sections when requested — never return null for a requested section.**
 - `diet`: Single string, not an object. Combine age guide and personalised advice.
 - `counselling`: Array of strings like `["Breastfeeding advice given", "Danger signs explained", "ORS preparation demonstrated"]`.
 - `referral`: Top-level string. Empty string if none.
@@ -819,6 +833,15 @@ Document as: `"Antibiotic stewardship: [justification for choice]"` in `safety` 
     "hc_cm": null,
     "guardian": ""
   },
+  "vitals": {
+    "temp_f": "101.2",
+    "hr_per_min": null,
+    "rr_per_min": null,
+    "spo2_pct": null
+  },
+  "chief_complaints": "Fever for 3 days, pulling at left ear, irritable, decreased appetite",
+  "clinical_history": "8-month-old male presenting with fever for 3 days (measured up to 101.2°F), progressive left ear pulling, associated irritability and decreased appetite. No vomiting, no diarrhoea, no rash, no seizures. No prior episodes. No recent antibiotic use.",
+  "examination": "Febrile to touch. Left tympanic membrane bulging and erythematous. Right TM normal. Throat mildly congested. Chest clear bilaterally. Abdomen soft, non-tender. No rash. Well hydrated.",
   "neonatal": null,
   "diagnosis": [
     { "name": "Acute Otitis Media", "icd10": "H66.90", "type": "provisional" }

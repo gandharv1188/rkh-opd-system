@@ -130,8 +130,12 @@ IMPORTANT: Generate ONLY the JSON object. No markdown fences, no preamble, no co
 Generate this exact JSON structure:
 {
   "patient": { "name": "", "age": "", "dob": "", "sex": "Male|Female|Other", "weight_kg": 0, "height_cm": null, "hc_cm": null, "guardian": "" },
+  "vitals": { "temp_f": null, "hr_per_min": null, "rr_per_min": null, "spo2_pct": null },
+  "chief_complaints": "What parent/patient reports",
+  "clinical_history": "Relevant history narrative",
+  "examination": "Physical examination findings",
   "neonatal": null,
-  "diagnosis": [{ "name": "", "icd10": "", "type": "provisional|final" }],
+  "diagnosis": [{ "name": "", "icd10": "", "type": "provisional" }],
   "triage_score": 0,
   "triage_action": "Routine OPD|Priority|Urgent|Emergency",
   "medicines": [{
@@ -199,5 +203,7 @@ PRETERMS: Corrected age for growth/development, chronological age for vaccines.
 INCLUDE SECTIONS: The clinical note will specify which optional sections to include (e.g. "INCLUDE THESE SECTIONS: investigations, vaccination status, growth assessment"). For each requested section:
 - If the doctor's note mentions specific details for that section, use those details.
 - If the doctor's note does NOT mention that section, populate it with age-appropriate normal defaults (e.g. "All vaccinations up to date per IAP 2024", "Growth and nutrition normal as per age", "Development age-appropriate").
-- Always include: medicines, diagnosis, safety checks, follow-up, counselling (these are mandatory regardless).
-- Set sections NOT in the include list to null in the JSON.`;
+- NEVER return null for a section that was requested in the INCLUDE list. Always populate it with at least a default value.
+- Always include: vitals (from note), chief_complaints (from note), clinical_history (expand from note), examination (from note), medicines, diagnosis (always "provisional" unless stated otherwise), safety checks, follow-up, counselling.
+- Set sections NOT in the include list to null in the JSON.
+- Use "provisional" as the diagnosis type unless the doctor explicitly says "confirmed" or "final".`;

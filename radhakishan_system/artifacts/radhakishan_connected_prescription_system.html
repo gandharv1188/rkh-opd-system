@@ -2055,10 +2055,43 @@
     h += `<div class="pt-strip">
     <div>
       <div class="pt-strip-name">${esc(r.patient.name) || "Patient"} <span class="pt-strip-meta">${esc(r.patient.age)} · ${esc(r.patient.sex)} · ${r.patient.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
-      <div class="pt-strip-dx">${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "")).join(" · ")}</div>
+      <div class="pt-strip-dx">Provisional Diagnosis: ${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "") + (d.type ? " [" + esc(d.type) + "]" : "")).join(" · ")}</div>
     </div>
     <div style="font-size:11px;color:var(--ink3);text-align:right">UHID: ${esc(uhid)}<br>${today}</div>
   </div>`;
+
+    // VITALS
+    const vitals = r.vitals || {};
+    const vItems = [];
+    if (vitals.temp_f) vItems.push("Temp: " + esc(vitals.temp_f) + "°F");
+    if (vitals.hr_per_min)
+      vItems.push("HR: " + esc(vitals.hr_per_min) + "/min");
+    if (vitals.rr_per_min)
+      vItems.push("RR: " + esc(vitals.rr_per_min) + "/min");
+    if (vitals.spo2_pct) vItems.push("SpO₂: " + esc(vitals.spo2_pct) + "%");
+    if (r.patient.weight_kg)
+      vItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
+    if (r.patient.height_cm)
+      vItems.push("Ht: " + esc(r.patient.height_cm) + " cm");
+    if (r.patient.hc_cm) vItems.push("HC: " + esc(r.patient.hc_cm) + " cm");
+    if (vItems.length) {
+      h += `<div class="rv-sec"><div class="rv-hdr">Vitals</div><div style="display:flex;flex-wrap:wrap;gap:8px">${vItems.map((v) => `<span style="background:var(--blue-lt);padding:3px 10px;border-radius:4px;font-size:12px">${v}</span>`).join("")}</div></div>`;
+    }
+
+    // CHIEF COMPLAINTS
+    if (r.chief_complaints) {
+      h += `<div class="rv-sec"><div class="rv-hdr">Chief Complaints</div><div style="font-size:13px" contenteditable="true" spellcheck="false">${esc(r.chief_complaints)}</div></div>`;
+    }
+
+    // CLINICAL HISTORY
+    if (r.clinical_history) {
+      h += `<div class="rv-sec"><div class="rv-hdr">History</div><div style="font-size:13px" contenteditable="true" spellcheck="false">${esc(r.clinical_history)}</div></div>`;
+    }
+
+    // EXAMINATION
+    if (r.examination) {
+      h += `<div class="rv-sec"><div class="rv-hdr">Examination</div><div style="font-size:13px" contenteditable="true" spellcheck="false">${esc(r.examination)}</div></div>`;
+    }
 
     if (has(r.safety?.flags))
       h += `<div class="rv-sec">${r.safety.flags.map((f) => `<div class="flag-row"><span style="flex-shrink:0">⚠</span><span>${esc(f)}</span></div>`).join("")}</div>`;
@@ -2522,8 +2555,31 @@
     h += `<div class="meta"><div class="meta-item"><span class="meta-lbl">Patient</span><span class="meta-val">${esc(r.patient?.name || "")}</span></div>
       <div class="meta-item"><span class="meta-lbl">Age · Sex · Weight</span><span class="meta-val">${esc(r.patient?.age || "")} · ${esc(r.patient?.sex || "")} · ${r.patient?.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
       <div class="meta-item"><span class="meta-lbl">Guardian</span><span class="meta-val">${esc(r.patient?.guardian || "")}</span></div></div>`;
-    // Diagnosis
-    h += `<div class="sec"><div class="sec-title">Diagnosis</div>${(r.diagnosis || []).map((d) => `<div class="dx">${esc(d.name)} <span class="icd">${esc(d.icd10 || "")}</span></div>`).join("")}</div>`;
+    // Vitals
+    const pVitals = r.vitals || {};
+    const pVItems = [];
+    if (pVitals.temp_f) pVItems.push("Temp: " + esc(pVitals.temp_f) + "°F");
+    if (pVitals.hr_per_min)
+      pVItems.push("HR: " + esc(pVitals.hr_per_min) + "/min");
+    if (pVitals.rr_per_min)
+      pVItems.push("RR: " + esc(pVitals.rr_per_min) + "/min");
+    if (pVitals.spo2_pct) pVItems.push("SpO₂: " + esc(pVitals.spo2_pct) + "%");
+    if (r.patient?.weight_kg)
+      pVItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
+    if (r.patient?.height_cm)
+      pVItems.push("Ht: " + esc(r.patient.height_cm) + " cm");
+    if (pVItems.length) {
+      h += `<div class="sec"><div class="sec-title">Vitals</div><div>${pVItems.join(" &nbsp;·&nbsp; ")}</div></div>`;
+    }
+    // Chief complaints, History, Examination
+    if (r.chief_complaints)
+      h += `<div class="sec"><div class="sec-title">Chief Complaints</div><div>${esc(r.chief_complaints)}</div></div>`;
+    if (r.clinical_history)
+      h += `<div class="sec"><div class="sec-title">History</div><div>${esc(r.clinical_history)}</div></div>`;
+    if (r.examination)
+      h += `<div class="sec"><div class="sec-title">Examination</div><div>${esc(r.examination)}</div></div>`;
+    // Provisional Diagnosis
+    h += `<div class="sec"><div class="sec-title">Provisional Diagnosis</div>${(r.diagnosis || []).map((d) => `<div class="dx">${esc(d.name)} <span class="icd">${esc(d.icd10 || "")}</span></div>`).join("")}</div>`;
     // Medicines
     if (r.medicines?.length) {
       h += `<div class="sec"><div class="sec-title blue">℞ Medicines</div>`;
