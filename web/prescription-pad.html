@@ -348,11 +348,11 @@
     background-size: 100% var(--lh);
     padding: 14px 22px 60px;
     flex: 1;
+    overflow-y: auto;
   }
   .pad-ta {
     width: 100%;
-    height: 100%;
-    min-height: 200px;
+    min-height: 100%;
     background: transparent;
     border: none;
     outline: none;
@@ -361,6 +361,7 @@
     color: var(--ink);
     line-height: var(--lh);
     resize: none;
+    overflow: hidden;
     caret-color: var(--blue);
   }
   .pad-ta::placeholder {
@@ -1214,6 +1215,7 @@
         class="pad-ta"
         id="pad-ta"
         rows="10"
+        oninput="autoGrow(this)"
         placeholder="e.g.  Arjun, 8 months, 7.2 kg boy. Fever 3 days, pulling at left ear, runny nose. No known allergy. Vaccinations up to date. TM dull left side. Diagnosis: acute otitis media. Add paracetamol for fever."
       ></textarea>
     </div>
@@ -1675,7 +1677,9 @@
     if (visit?.chief_complaints)
       ctx += `Chief complaints: ${visit.chief_complaints}. `;
     if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
-    document.getElementById("pad-ta").value = ctx;
+    const ta = document.getElementById("pad-ta");
+    ta.value = ctx;
+    autoGrow(ta);
   }
 
   function clearPatient() {
@@ -2799,12 +2803,18 @@
     setTimeout(() => t.classList.remove("on"), 2500);
   }
 
+  function autoGrow(el) {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }
+
   // Expose functions to window for onclick/oninput handlers (Claude.ai sandbox compatibility)
   Object.assign(window, {
     connectSB,
     onPatientSelect,
     clearPatient,
     loadTodayPatients,
+    autoGrow,
     toggleVoice,
     generatePrescription,
     toggleMod,
