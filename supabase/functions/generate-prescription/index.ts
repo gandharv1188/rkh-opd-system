@@ -1,14 +1,21 @@
 // Supabase Edge Function: generate-prescription
-// Fetches the full skill prompt from Supabase Storage at runtime,
-// then proxies the doctor's clinical note to Claude API.
+// Uses Claude tool_use for progressive disclosure — Claude fetches only
+// the clinical knowledge it needs via tools.
+//
+// Tools: get_reference, get_formulary, get_standard_rx
 //
 // Deploy: supabase functions deploy generate-prescription --project-ref ecywxuqhnlkjtdshpcbc
 // Set secret: supabase secrets set ANTHROPIC_API_KEY=sk-ant-xxx --project-ref ecywxuqhnlkjtdshpcbc
-//
-// To update the skill prompt: re-upload skill/radhakishan_prescription_skill.md
-// to Supabase Storage bucket "website" as "skill.md". No redeployment needed.
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+
+// ===== CONSTANTS =====
+
+const SUPABASE_URL = "https://ecywxuqhnlkjtdshpcbc.supabase.co";
+const ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg";
+const STORAGE_BASE = SUPABASE_URL + "/storage/v1/object/public/website/skill";
+const MAX_TOOL_LOOPS = 10;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -17,29 +24,333 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const SUPABASE_URL = "https://ecywxuqhnlkjtdshpcbc.supabase.co";
-const SKILL_URL = SUPABASE_URL + "/storage/v1/object/public/website/skill.md";
+// ===== CACHES =====
 
-// Cache the skill prompt in memory (survives across requests within same instance)
-let cachedSkill: string | null = null;
+const cache: Record<string, string> = {};
 
-// Single-shot override: prepended to the skill to replace the multi-step workflow
-const SINGLE_SHOT_OVERRIDE = `IMPORTANT OVERRIDE — SINGLE-SHOT MODE:
-This is a single API call, NOT a multi-step conversation. Ignore the Step 1 / Step 2 workflow.
-Generate the COMPLETE prescription JSON immediately from the clinical note provided.
-Output ONLY the raw JSON object — no markdown fences, no preamble, no commentary, no navigation cues.
-The clinical note will include an "INCLUDE THESE SECTIONS" instruction — follow it.
-`;
-
-async function loadSkill(): Promise<string> {
-  if (cachedSkill) return cachedSkill;
-  const res = await fetch(SKILL_URL);
-  if (!res.ok)
-    throw new Error("Failed to load skill prompt from storage: " + res.status);
-  cachedSkill = await res.text();
-  console.log("Skill loaded:", cachedSkill.length, "chars");
-  return cachedSkill;
+async function fetchCached(url: string, key: string): Promise<string> {
+  if (cache[key]) return cache[key];
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to fetch ${key}: HTTP ${res.status}`);
+  const text = await res.text();
+  cache[key] = text;
+  return text;
 }
+
+// ===== TOOL DEFINITIONS =====
+
+const REFERENCE_NAMES = [
+  "dosing_methods",
+  "standard_prescriptions",
+  "vaccination_iap2024",
+  "vaccination_nhm_uip",
+  "growth_charts",
+  "developmental",
+  "iv_fluids",
+  "neonatal",
+  "emergency_triage",
+  "nabh_compliance",
+  "antibiotic_stewardship",
+];
+
+const tools = [
+  {
+    name: "get_reference",
+    description: `Fetch a clinical reference document. Available references: ${REFERENCE_NAMES.join(", ")}, worked_example. Use this to get detailed clinical knowledge on specific topics before generating the prescription.`,
+    input_schema: {
+      type: "object",
+      properties: {
+        name: {
+          type: "string",
+          description:
+            "Reference name (e.g. 'dosing_methods', 'vaccination_iap2024', 'neonatal', 'worked_example')",
+        },
+      },
+      required: ["name"],
+    },
+  },
+  {
+    name: "get_formulary",
+    description:
+      "Look up drugs in the hospital formulary. Returns Indian formulations (concentrations), dosing_bands (dose ranges by age/weight/indication), interactions, contraindications, cross_reactions, renal_bands, and administration instructions. ALWAYS call this for every drug you plan to prescribe.",
+    input_schema: {
+      type: "object",
+      properties: {
+        drug_names: {
+          type: "array",
+          items: { type: "string" },
+          description:
+            "Array of generic drug names (e.g. ['AMOXICILLIN', 'PARACETAMOL']). Case-insensitive.",
+        },
+      },
+      required: ["drug_names"],
+    },
+  },
+  {
+    name: "get_standard_rx",
+    description:
+      "Look up hospital-approved standard prescription protocols by diagnosis name or ICD-10 code. Returns first_line_drugs with doses, second_line_drugs, recommended investigations, counselling points, referral and hospitalisation criteria. ALWAYS call this when a diagnosis is provided.",
+    input_schema: {
+      type: "object",
+      properties: {
+        query: {
+          type: "string",
+          description:
+            "Diagnosis name (e.g. 'Acute Otitis Media') or ICD-10 code (e.g. 'H66.90'). Partial match supported.",
+        },
+      },
+      required: ["query"],
+    },
+  },
+];
+
+// ===== TOOL EXECUTION =====
+
+async function executeGetReference(name: string): Promise<string> {
+  const pathMap: Record<string, string> = {};
+  for (const n of REFERENCE_NAMES) {
+    pathMap[n] = `${STORAGE_BASE}/references/${n}.md`;
+  }
+  pathMap["worked_example"] = `${STORAGE_BASE}/examples/worked_example.md`;
+
+  const url = pathMap[name];
+  if (!url) {
+    return `Unknown reference "${name}". Available: ${Object.keys(pathMap).join(", ")}`;
+  }
+  try {
+    return await fetchCached(url, "ref:" + name);
+  } catch (e) {
+    return `Error loading reference "${name}": ${e.message}`;
+  }
+}
+
+async function executeGetFormulary(drugNames: string[]): Promise<string> {
+  try {
+    const orFilter = drugNames
+      .map((d) => `generic_name.ilike.%25${encodeURIComponent(d.trim())}%25`)
+      .join(",");
+    const url = `${SUPABASE_URL}/rest/v1/formulary?or=(${orFilter})&select=generic_name,formulations,dosing_bands,interactions,contraindications,cross_reactions,black_box_warnings,renal_bands,administration,food_instructions,notes&active=eq.true`;
+    const res = await fetch(url, {
+      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
+    });
+    if (!res.ok) return `Formulary query error: HTTP ${res.status}`;
+    const drugs = await res.json();
+    if (!drugs.length)
+      return `No formulary entries found for: ${drugNames.join(", ")}. Use your clinical training knowledge for dosing.`;
+    return JSON.stringify(drugs, null, 2);
+  } catch (e) {
+    return `Formulary query error: ${e.message}`;
+  }
+}
+
+async function executeGetStandardRx(query: string): Promise<string> {
+  try {
+    const enc = encodeURIComponent(query.trim());
+    const url = `${SUPABASE_URL}/rest/v1/standard_prescriptions?or=(icd10.ilike.%25${enc}%25,diagnosis_name.ilike.%25${enc}%25)&active=eq.true&select=icd10,diagnosis_name,first_line_drugs,second_line_drugs,investigations,counselling,referral_criteria,hospitalisation_criteria,notes,duration_days_default&limit=5`;
+    const res = await fetch(url, {
+      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
+    });
+    if (!res.ok) return `Standard Rx query error: HTTP ${res.status}`;
+    const protocols = await res.json();
+    if (!protocols.length)
+      return `No hospital protocol found for "${query}". Use standard clinical guidelines.`;
+    return JSON.stringify(protocols, null, 2);
+  } catch (e) {
+    return `Standard Rx query error: ${e.message}`;
+  }
+}
+
+async function executeTool(
+  name: string,
+  input: Record<string, any>,
+): Promise<string> {
+  console.log(`  Tool: ${name}(${JSON.stringify(input)})`);
+  switch (name) {
+    case "get_reference":
+      return await executeGetReference(input.name);
+    case "get_formulary":
+      return await executeGetFormulary(input.drug_names);
+    case "get_standard_rx":
+      return await executeGetStandardRx(input.query);
+    default:
+      return `Unknown tool: ${name}`;
+  }
+}
+
+// ===== TOOL-USE LOOP =====
+
+interface ContentBlock {
+  type: string;
+  text?: string;
+  id?: string;
+  name?: string;
+  input?: Record<string, any>;
+}
+
+interface Message {
+  role: "user" | "assistant";
+  content: string | ContentBlock[];
+}
+
+async function toolUseLoop(
+  apiKey: string,
+  systemPrompt: string,
+  userMessage: string,
+): Promise<{
+  text: string;
+  totalInputTokens: number;
+  totalOutputTokens: number;
+  rounds: number;
+}> {
+  const messages: Message[] = [{ role: "user", content: userMessage }];
+  let totalInputTokens = 0;
+  let totalOutputTokens = 0;
+
+  for (let round = 1; round <= MAX_TOOL_LOOPS; round++) {
+    console.log(`Round ${round}: calling Claude API...`);
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 8192,
+        system: systemPrompt,
+        messages,
+        tools,
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(
+        err.error?.message || `Claude API error: ${response.status}`,
+      );
+    }
+
+    const data = await response.json();
+    totalInputTokens += data.usage?.input_tokens || 0;
+    totalOutputTokens += data.usage?.output_tokens || 0;
+
+    // Add assistant response to message history
+    messages.push({ role: "assistant", content: data.content });
+
+    if (data.stop_reason === "end_turn") {
+      // Extract text from final response
+      const text = data.content
+        .filter((b: ContentBlock) => b.type === "text")
+        .map((b: ContentBlock) => b.text || "")
+        .join("");
+      console.log(
+        `Completed in ${round} round(s). Tokens: ${totalInputTokens} in, ${totalOutputTokens} out.`,
+      );
+      return { text, totalInputTokens, totalOutputTokens, rounds: round };
+    }
+
+    if (data.stop_reason === "tool_use") {
+      const toolBlocks = data.content.filter(
+        (b: ContentBlock) => b.type === "tool_use",
+      );
+      if (!toolBlocks.length) {
+        // No tool calls despite tool_use stop reason — treat as end
+        const text = data.content
+          .filter((b: ContentBlock) => b.type === "text")
+          .map((b: ContentBlock) => b.text || "")
+          .join("");
+        return { text, totalInputTokens, totalOutputTokens, rounds: round };
+      }
+
+      console.log(`  ${toolBlocks.length} tool call(s) in round ${round}`);
+
+      // Execute all tools and collect results
+      const toolResults: any[] = [];
+      for (const block of toolBlocks) {
+        const result = await executeTool(block.name!, block.input!);
+        toolResults.push({
+          type: "tool_result",
+          tool_use_id: block.id,
+          content: result,
+        });
+      }
+
+      // Add tool results as user message
+      messages.push({ role: "user", content: toolResults });
+    } else {
+      // Unexpected stop reason (max_tokens, etc.)
+      console.warn(`Unexpected stop_reason: ${data.stop_reason}`);
+      const text = data.content
+        .filter((b: ContentBlock) => b.type === "text")
+        .map((b: ContentBlock) => b.text || "")
+        .join("");
+      return { text, totalInputTokens, totalOutputTokens, rounds: round };
+    }
+  }
+
+  throw new Error(`Tool-use loop exceeded ${MAX_TOOL_LOOPS} rounds`);
+}
+
+// ===== FALLBACK: Single-shot with full skill.md =====
+
+async function singleShotFallback(
+  apiKey: string,
+  userMessage: string,
+): Promise<string> {
+  console.log("Falling back to single-shot with full skill.md...");
+  const skillUrl = SUPABASE_URL + "/storage/v1/object/public/website/skill.md";
+  const skill = await fetchCached(skillUrl, "full-skill");
+  const systemPrompt =
+    "SINGLE-SHOT MODE: Generate the COMPLETE prescription JSON immediately. Output ONLY raw JSON.\n\n" +
+    skill;
+
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+    },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 8192,
+      system: systemPrompt,
+      messages: [{ role: "user", content: userMessage }],
+    }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(
+      err.error?.message || `Fallback API error: ${response.status}`,
+    );
+  }
+
+  const data = await response.json();
+  return data.content
+    .filter((b: any) => b.type === "text")
+    .map((b: any) => b.text)
+    .join("");
+}
+
+// ===== JSON EXTRACTION =====
+
+function extractJSON(raw: string): any {
+  let cleaned = raw
+    .replace(/```json\n?/g, "")
+    .replace(/```\n?/g, "")
+    .trim();
+  const start = cleaned.indexOf("{");
+  const end = cleaned.lastIndexOf("}");
+  if (start !== -1 && end !== -1) {
+    cleaned = cleaned.slice(start, end + 1);
+  }
+  return JSON.parse(cleaned);
+}
+
+// ===== MAIN HANDLER =====
 
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
@@ -69,72 +380,61 @@ serve(async (req: Request) => {
       );
     }
 
-    // Load the full skill prompt from Supabase Storage (cached after first load)
-    const skill = await loadSkill();
-    const systemPrompt = SINGLE_SHOT_OVERRIDE + "\n\n" + skill;
+    // Load core prompt from Storage (cached)
+    const corePrompt = await fetchCached(
+      STORAGE_BASE + "/core_prompt.md",
+      "core-prompt",
+    );
 
-    // Build the user message with context
+    // Build user message (same interface as before — client hints still accepted)
     let userMessage = clinical_note;
     if (formulary_context) {
       userMessage +=
-        "\n\nFORMULARY DATA (use these exact concentrations and dose ranges):\n" +
+        "\n\nFORMULARY HINTS (verify via get_formulary tool for exact data):\n" +
         formulary_context;
     }
     if (std_rx_context) {
-      userMessage += "\n\nSTANDARD PRESCRIPTION PROTOCOLS:\n" + std_rx_context;
+      userMessage +=
+        "\n\nPROTOCOL HINTS (verify via get_standard_rx tool for exact data):\n" +
+        std_rx_context;
     }
     if (patient_allergies && patient_allergies.length) {
       userMessage +=
         "\n\nKNOWN PATIENT ALLERGIES: " + patient_allergies.join(", ");
     }
 
-    // Call Claude API with the full skill as system prompt
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 8192,
-        system: systemPrompt,
-        messages: [{ role: "user", content: userMessage }],
-      }),
-    });
+    let rawText: string;
+    let meta: any = {};
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(
-        error.error?.message || `Claude API error: ${response.status}`,
+    try {
+      // Primary path: tool-use loop
+      const result = await toolUseLoop(
+        ANTHROPIC_API_KEY,
+        corePrompt,
+        userMessage,
       );
+      rawText = result.text;
+      meta = {
+        mode: "tool-use",
+        rounds: result.rounds,
+        input_tokens: result.totalInputTokens,
+        output_tokens: result.totalOutputTokens,
+      };
+    } catch (loopError: any) {
+      // Fallback: single-shot with full skill
+      console.warn("Tool-use loop failed:", loopError.message);
+      rawText = await singleShotFallback(ANTHROPIC_API_KEY, userMessage);
+      meta = { mode: "fallback-single-shot", error: loopError.message };
     }
 
-    const data = await response.json();
-    let raw = data.content
-      .filter((b: any) => b.type === "text")
-      .map((b: any) => b.text)
-      .join("");
+    const prescription = extractJSON(rawText);
 
-    // Extract JSON from response (Claude may add fences or commentary)
-    raw = raw
-      .replace(/```json\n?/g, "")
-      .replace(/```\n?/g, "")
-      .trim();
-    const jsonStart = raw.indexOf("{");
-    const jsonEnd = raw.lastIndexOf("}");
-    if (jsonStart !== -1 && jsonEnd !== -1) {
-      raw = raw.slice(jsonStart, jsonEnd + 1);
-    }
-
-    const prescription = JSON.parse(raw);
-
-    return new Response(JSON.stringify({ prescription, raw_response: data }), {
+    return new Response(JSON.stringify({ prescription, meta }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Edge Function error:", error.message);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
