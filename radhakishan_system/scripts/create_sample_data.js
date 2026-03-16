@@ -1,8 +1,25 @@
 #!/usr/bin/env node
-const SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co";
-const KEY =
-  process.argv[2] ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzYzNDY1NywiZXhwIjoyMDg5MjEwNjU3fQ.n1UDULMkpnch3i09onX5uE5YucBGhHqREDpHhL2zWEA";
+const fs = require("fs");
+const path = require("path");
+
+// Load .env file if it exists
+const envPath = path.join(__dirname, "..", "..", ".env");
+if (fs.existsSync(envPath)) {
+  fs.readFileSync(envPath, "utf8")
+    .split("\n")
+    .forEach((line) => {
+      const match = line.match(/^([^#=]+)=(.*)$/);
+      if (match) process.env[match[1].trim()] = match[2].trim();
+    });
+}
+
+const SB = process.argv[2] || process.env.SUPABASE_URL;
+const KEY = process.argv[3] || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!SB || !KEY) {
+  console.error("Missing credentials. Create .env file or pass as arguments.");
+  process.exit(1);
+}
 
 async function post(table, data) {
   const r = await fetch(`${SB}/rest/v1/${table}`, {

@@ -3,20 +3,34 @@
  * Radhakishan Hospital — Data Import Script
  * Imports formulary_data.json and standard_prescriptions_data.json into Supabase.
  *
- * Usage: node import_data.js <SUPABASE_URL> <SERVICE_ROLE_KEY>
+ * Usage: node import_data.js
+ * Reads credentials from .env file in project root, or pass as arguments:
+ *   node import_data.js <SUPABASE_URL> <SERVICE_ROLE_KEY>
  */
 
 const fs = require("fs");
 const path = require("path");
 
-const SB = process.argv[2];
-const KEY = process.argv[3];
+// Load .env file if it exists
+const envPath = path.join(__dirname, "..", "..", ".env");
+if (fs.existsSync(envPath)) {
+  fs.readFileSync(envPath, "utf8")
+    .split("\n")
+    .forEach((line) => {
+      const match = line.match(/^([^#=]+)=(.*)$/);
+      if (match) process.env[match[1].trim()] = match[2].trim();
+    });
+}
+
+const SB = process.argv[2] || process.env.SUPABASE_URL;
+const KEY = process.argv[3] || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!SB || !KEY) {
-  console.error("Usage: node import_data.js <SUPABASE_URL> <SERVICE_ROLE_KEY>");
+  console.error("Missing credentials. Either:");
   console.error(
-    "Example: node import_data.js https://xxx.supabase.co eyJhbG...",
+    "  1. Create .env file with SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY",
   );
+  console.error("  2. Pass as arguments: node import_data.js <URL> <KEY>");
   process.exit(1);
 }
 

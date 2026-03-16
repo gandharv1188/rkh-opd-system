@@ -1,0 +1,21 @@
+# Environment variables (credentials)
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+
+# Temporary files
+*.tmp
+*.bak
