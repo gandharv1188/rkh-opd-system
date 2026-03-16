@@ -127,7 +127,31 @@ create index idx_formulary_brands  on formulary using gin(brand_names);
 create index idx_formulary_use     on formulary using gin(therapeutic_use);
 
 -- ============================================================
--- 2. STANDARD PRESCRIPTIONS
+-- 2. DOCTORS
+-- Reference table for doctor credentials. Not FK-enforced yet
+-- (POC uses free-text doctor_id). FK constraints to be added
+-- in production when Supabase Auth is configured.
+-- ============================================================
+create table doctors (
+  id              text primary key,
+  -- e.g. 'DR-LOKENDER', 'DR-SWATI'
+  full_name       text not null,
+  degree          text,
+  registration_no text,
+  -- HMCI / PMC registration number
+  specialisation  text,
+  contact_phone   text,
+  is_active       boolean default true,
+  created_at      timestamptz default now()
+);
+
+-- Seed the two doctors
+insert into doctors (id, full_name, degree, registration_no, specialisation) values
+  ('DR-LOKENDER', 'Dr. Lokender Goyal', 'MD Pediatrics (PGI Chandigarh)', 'HMCI HN 21452 / PMC 23168', 'Pediatrics & Neonatology'),
+  ('DR-SWATI', 'Dr. Swati Goyal', 'MD Pediatrics', null, 'Pediatrics & Neonatology');
+
+-- ============================================================
+-- 3. STANDARD PRESCRIPTIONS
 -- Keyed by ICD-10 code. Used to pre-populate the prescription
 -- generator when a diagnosis is selected.
 -- ============================================================

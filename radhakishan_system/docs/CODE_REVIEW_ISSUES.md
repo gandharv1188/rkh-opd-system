@@ -96,12 +96,9 @@ Changed all FKs to `ON DELETE RESTRICT`. Added `is_active boolean default true` 
 
 Added `known_allergies text[]` to patients schema. Registration form has comma-separated allergy input. Patient cards display allergies in RED. Production upgrade to structured JSONB noted in specification Section 11.1.
 
-### D-4. No `doctors` reference table
+### ~~D-4. No `doctors` reference table~~ → RESOLVED (R26)
 
-**Severity:** MEDIUM
-**Location:** Schema — throughout
-**Description:** Doctor IDs appear as free text (`doctor_id`, `approved_by`, `given_by`). No validation, no credential storage, no protection against typos.
-**Fix:** Create a `doctors` table with name, degree, registration number, and use FK references.
+Created `doctors` table with id, full_name, degree, registration_no, specialisation. Seeded with Dr. Lokender Goyal and Dr. Swati Goyal. FK enforcement deferred to production. Noted in specification Section 12.4.
 
 ### D-5. Missing NOT NULL constraints on critical foreign keys
 

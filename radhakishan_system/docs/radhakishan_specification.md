@@ -812,6 +812,19 @@ Every antibiotic prescription must verify: clinically indicated, site of infecti
 - Audit logging of all access and modifications (NABH IMS requirement)
 - Consider Supabase Auth with email/password or OTP for doctor login
 
+## 12.4 Doctors Reference Table
+
+A `doctors` table stores credentials for all doctors (ID, full name, degree, registration number, specialisation). Seeded with Dr. Lokender Goyal and Dr. Swati Goyal.
+
+**POC (current):** The table exists as a reference but is not FK-enforced. The artifacts use free-text `doctor_id` values (e.g., `'DR-LOKENDER'`) in visits, prescriptions, and vaccinations. The doctor selector dropdown in the Prescription Pad is hardcoded.
+
+**Production (future):**
+
+- Add foreign key constraints from `visits.doctor_id`, `prescriptions.approved_by`, and `vaccinations.given_by` to `doctors.id`
+- Load the doctor dropdown dynamically from the `doctors` table
+- Link `doctors.id` to Supabase Auth user IDs for per-doctor RLS policies
+- Add PIN-based or password-based sign-off before prescription approval
+
 # 13. Technology Stack
 
 |                 |                                   |                                      |
