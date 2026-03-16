@@ -1461,7 +1461,7 @@
     try {
       const r = await q(
         "patients",
-        `?or=(name.ilike.*${enc}*,id.ilike.*${enc}*)&order=name.asc&limit=8`,
+        `?is_active=eq.true&or=(name.ilike.*${enc}*,id.ilike.*${enc}*)&order=name.asc&limit=8`,
       );
       if (!r.ok) return;
       const pts = await r.json();

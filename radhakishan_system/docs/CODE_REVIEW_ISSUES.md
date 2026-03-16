@@ -88,12 +88,9 @@ These issues have already been addressed:
 
 RLS enabled on all 7 tables with `auth.role() = 'authenticated'` policy. Per-doctor policies deferred to production. Note added to specification Section 12.3.
 
-### D-2. `ON DELETE CASCADE` on all foreign keys
+### ~~D-2. `ON DELETE CASCADE` on all foreign keys~~ → RESOLVED (R24)
 
-**Severity:** MAJOR for production
-**Location:** Schema — all FK definitions
-**Description:** Deleting a patient silently destroys all their visits, prescriptions, vaccinations, and growth records. For medical/legal audit requirements, records should be preserved.
-**Fix:** Change to `ON DELETE RESTRICT` and implement soft-delete with an `active` boolean flag.
+Changed all FKs to `ON DELETE RESTRICT`. Added `is_active boolean default true` to patients table. Patient search queries in both Prescription Pad and Patient Lookup now filter by `is_active=eq.true`.
 
 ### D-3. No `known_allergies` column on patients table
 

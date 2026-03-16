@@ -196,18 +196,21 @@ create table patients (
   gestational_age_weeks numeric,
   birth_weight_kg       numeric,
 
+  is_active       boolean default true,
+
   created_at      timestamptz default now(),
   updated_at      timestamptz default now()
 );
 
-create index idx_patients_name on patients(name);
+create index idx_patients_name   on patients(name);
+create index idx_patients_active on patients(is_active);
 
 -- ============================================================
 -- 4. VISITS
 -- ============================================================
 create table visits (
   id              uuid default gen_random_uuid() primary key,
-  patient_id      text references patients(id) on delete cascade,
+  patient_id      text references patients(id) on delete restrict,
 
   visit_date      date not null default current_date,
   doctor_id       text,
@@ -248,8 +251,8 @@ create table prescriptions (
   id              text primary key,
   -- Format: RX-XXXXXXXX
 
-  visit_id        uuid references visits(id) on delete cascade,
-  patient_id      text references patients(id) on delete cascade,
+  visit_id        uuid references visits(id) on delete restrict,
+  patient_id      text references patients(id) on delete restrict,
 
   -- Full generated prescription JSON (as produced by AI)
   generated_json  jsonb not null,
@@ -289,7 +292,7 @@ create index idx_rx_date     on prescriptions(created_at);
 -- ============================================================
 create table vaccinations (
   id              serial primary key,
-  patient_id      text references patients(id) on delete cascade,
+  patient_id      text references patients(id) on delete restrict,
 
   vaccine_name    text not null,
   dose_number     integer,
@@ -315,7 +318,7 @@ create index idx_vax_due     on vaccinations(next_due_date);
 -- ============================================================
 create table growth_records (
   id              serial primary key,
-  patient_id      text references patients(id) on delete cascade,
+  patient_id      text references patients(id) on delete restrict,
   visit_id        uuid references visits(id),
 
   recorded_date   date default current_date,

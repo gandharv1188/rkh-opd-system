@@ -786,7 +786,7 @@
       const enc = encodeURIComponent(val);
       const r = await q(
         "patients",
-        `?or=(name.ilike.*${enc}*,id.ilike.*${enc}*,contact_phone.ilike.*${enc}*)&order=name.asc&limit=20`,
+        `?is_active=eq.true&or=(name.ilike.*${enc}*,id.ilike.*${enc}*,contact_phone.ilike.*${enc}*)&order=name.asc&limit=20`,
       );
       if (!r.ok) throw new Error((await r.json()).message);
       const pts = await r.json();
