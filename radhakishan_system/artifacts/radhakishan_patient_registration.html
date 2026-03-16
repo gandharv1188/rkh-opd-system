@@ -880,19 +880,28 @@
 
   // ===== Save & Create Visit =====
   async function saveAndCreateVisit() {
-    const name = document.getElementById("f-name").value.trim();
+    console.log("saveAndCreateVisit called");
+    const nameEl = document.getElementById("f-name");
+    if (!nameEl) {
+      console.error("f-name element not found");
+      alert("Form not loaded. Please fill the form first.");
+      return;
+    }
+    const name = nameEl.value.trim();
     if (!name) {
       alert("Patient name is required.");
       return;
     }
     if (!connected) {
-      alert("Connect to Supabase first.");
+      alert("Not connected to database. Please wait or refresh.");
       return;
     }
 
     const btn = document.getElementById("save-btn");
-    btn.disabled = true;
-    btn.textContent = "Saving…";
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Saving…";
+    }
 
     try {
       let patientId;
@@ -913,7 +922,7 @@
           birth_weight_kg: "f-bw",
         };
         for (const [col, elId] of Object.entries(fields)) {
-          const val = document.getElementById(elId).value.trim();
+          const val = (document.getElementById(elId)?.value || "").trim();
           if (val && val !== (currentPatient[col] || "").toString()) {
             updates[col] =
               col === "gestational_age_weeks" || col === "birth_weight_kg"
@@ -922,7 +931,9 @@
           }
         }
         // Allergies
-        const allergyVal = document.getElementById("f-allergy").value.trim();
+        const allergyVal = (
+          document.getElementById("f-allergy")?.value || ""
+        ).trim();
         const newAllergies = allergyVal
           ? allergyVal
               .split(",")
@@ -948,20 +959,22 @@
       } else {
         // New patient
         patientId = await generateUHID();
-        const allergyVal = document.getElementById("f-allergy").value.trim();
+        const allergyVal = (
+          document.getElementById("f-allergy")?.value || ""
+        ).trim();
         const payload = {
           id: patientId,
           name,
-          dob: document.getElementById("f-dob").value || null,
-          sex: document.getElementById("f-sex").value || null,
-          blood_group: document.getElementById("f-bg").value || null,
-          contact_phone: document.getElementById("f-phone").value || null,
-          guardian_name: document.getElementById("f-guard").value || null,
-          guardian_relation: document.getElementById("f-rel").value || null,
+          dob: document.getElementById("f-dob")?.value || null,
+          sex: document.getElementById("f-sex")?.value || null,
+          blood_group: document.getElementById("f-bg")?.value || null,
+          contact_phone: document.getElementById("f-phone")?.value || null,
+          guardian_name: document.getElementById("f-guard")?.value || null,
+          guardian_relation: document.getElementById("f-rel")?.value || null,
           gestational_age_weeks:
-            parseFloat(document.getElementById("f-ga").value) || null,
+            parseFloat(document.getElementById("f-ga")?.value) || null,
           birth_weight_kg:
-            parseFloat(document.getElementById("f-bw").value) || null,
+            parseFloat(document.getElementById("f-bw")?.value) || null,
           known_allergies: allergyVal
             ? allergyVal
                 .split(",")
@@ -978,19 +991,23 @@
       // Create visit
       const visitPayload = {
         patient_id: patientId,
-        visit_date: document.getElementById("f-visit-date").value,
-        doctor_id: document.getElementById("f-doctor").value,
-        weight_kg: parseFloat(document.getElementById("f-wt").value) || null,
-        height_cm: parseFloat(document.getElementById("f-ht").value) || null,
-        hc_cm: parseFloat(document.getElementById("f-hc").value) || null,
-        muac_cm: parseFloat(document.getElementById("f-muac").value) || null,
-        temp_f: parseFloat(document.getElementById("f-temp").value) || null,
-        hr_per_min: parseInt(document.getElementById("f-hr").value) || null,
-        rr_per_min: parseInt(document.getElementById("f-rr").value) || null,
-        spo2_pct: parseFloat(document.getElementById("f-spo2").value) || null,
+        visit_date:
+          document.getElementById("f-visit-date")?.value ||
+          new Date().toISOString().split("T")[0],
+        doctor_id: document.getElementById("f-doctor")?.value || "DR-LOKENDER",
+        weight_kg: parseFloat(document.getElementById("f-wt")?.value) || null,
+        height_cm: parseFloat(document.getElementById("f-ht")?.value) || null,
+        hc_cm: parseFloat(document.getElementById("f-hc")?.value) || null,
+        muac_cm: parseFloat(document.getElementById("f-muac")?.value) || null,
+        temp_f: parseFloat(document.getElementById("f-temp")?.value) || null,
+        hr_per_min: parseInt(document.getElementById("f-hr")?.value) || null,
+        rr_per_min: parseInt(document.getElementById("f-rr")?.value) || null,
+        spo2_pct: parseFloat(document.getElementById("f-spo2")?.value) || null,
         chief_complaints:
-          document.getElementById("f-complaints").value.trim() || null,
+          (document.getElementById("f-complaints")?.value || "").trim() || null,
       };
+      console.log("Patient ID:", patientId);
+      console.log("Visit payload:", JSON.stringify(visitPayload, null, 2));
       const vr = await q("visits", "", "POST", visitPayload);
       if (!vr.ok)
         throw new Error("Visit creation failed: " + (await vr.text()));
@@ -1020,9 +1037,17 @@
         }
       }
 
-      // Show success ticket
+      // Save form values before clearing
       const doctor = "Dr. Lokender Goyal";
-      const visitType = document.getElementById("f-visit-type").value;
+      const visitType = document.getElementById("f-visit-type")?.value || "new";
+      const dob = document.getElementById("f-dob")?.value || "";
+      const sex = document.getElementById("f-sex")?.value || "";
+      const wt = document.getElementById("f-wt")?.value || "";
+      const phone = document.getElementById("f-phone")?.value || "";
+      const visitDate = document.getElementById("f-visit-date")?.value || "";
+      const allergyDisplay = document.getElementById("f-allergy")?.value || "";
+
+      // Show success ticket
       document.getElementById("form-area").innerHTML = "";
       document.getElementById("status-bar").style.display = "none";
       document.getElementById("ticket-area").innerHTML = `
@@ -1031,13 +1056,13 @@
           <div class="ticket-uhid">${esc(patientId)}</div>
           <div class="ticket-name">${esc(name)}</div>
           <div class="ticket-meta">
-            ${document.getElementById("f-dob").value ? esc(calcAge(document.getElementById("f-dob").value)) + " · " : ""}
-            ${esc(document.getElementById("f-sex").value || "")}
-            ${document.getElementById("f-wt").value ? " · " + esc(document.getElementById("f-wt").value) + " kg" : ""}
-            ${document.getElementById("f-phone").value ? " · " + esc(document.getElementById("f-phone").value) : ""}
+            ${dob ? esc(calcAge(dob)) + " · " : ""}
+            ${esc(sex)}
+            ${wt ? " · " + esc(wt) + " kg" : ""}
+            ${phone ? " · " + esc(phone) : ""}
           </div>
-          <div class="ticket-visit">Visit created: ${esc(document.getElementById("f-visit-date").value)} · ${esc(doctor)} · ${esc(visitType)}</div>
-          ${allergyVal && allergyVal.trim() ? '<div style="color:var(--red);font-weight:600;margin-top:6px">ALLERGY: ' + esc(document.getElementById("f-allergy").value) + "</div>" : '<div style="color:var(--green);margin-top:6px">NKDA</div>'}
+          <div class="ticket-visit">Visit created: ${esc(visitDate)} · ${esc(doctor)} · ${esc(visitType)}</div>
+          ${allergyDisplay.trim() ? '<div style="color:var(--red);font-weight:600;margin-top:6px">ALLERGY: ' + esc(allergyDisplay) + "</div>" : '<div style="color:var(--green);margin-top:6px">NKDA</div>'}
         </div>
         <div style="text-align:center;margin-top:12px">
           <button class="act-btn primary" onclick="window.print()">Print Token</button>
