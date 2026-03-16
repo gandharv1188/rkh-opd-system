@@ -1937,6 +1937,12 @@
       }
       await renderReview();
       showView("rx");
+      // Update generate button to show success
+      const genBtn = document.getElementById("gen-btn");
+      if (genBtn) {
+        genBtn.textContent = "✓ Prescription generated";
+        genBtn.style.background = "#1a6b3a";
+      }
     } catch (e) {
       clearInterval(t);
       document.getElementById("err-txt").textContent = "Error: " + e.message;
@@ -2519,37 +2525,29 @@
   }
 
   function showSaveSuccess(pdfUrl, saved) {
-    // Keep prescription visible — add success banner at top of review
     const wrap = document.getElementById("review-wrap");
-    const banner = document.createElement("div");
-    banner.style.cssText =
-      "background:#e8f4ed;border:1px solid #1a6b3a;border-radius:8px;padding:12px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px";
-    banner.innerHTML = `
-      <div>
-        <div style="color:#1a6b3a;font-weight:700;font-size:14px">✓ Prescription ${saved ? "saved" : "generated"} — ${esc(rxId)}</div>
-        ${saved ? '<div style="color:#555;font-size:11px;margin-top:2px">Patient record, visit, and prescription saved to Supabase.</div>' : ""}
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="save-link-btn" onclick="printRx()" style="padding:8px 16px;background:var(--blue);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px">Print now</button>
-        <button class="save-link-btn" onclick="resetPad()" style="padding:8px 16px;background:var(--bg);border:1px solid var(--bdr2);border-radius:6px;cursor:pointer;font-size:13px">New prescription</button>
-      </div>`;
-    wrap.insertBefore(banner, wrap.firstChild);
 
-    // Disable editing — remove contenteditable
+    // Disable editing
     wrap.querySelectorAll("[contenteditable]").forEach((el) => {
       el.removeAttribute("contenteditable");
       el.style.outline = "none";
       el.style.border = "none";
     });
-
-    // Hide the sign-off buttons
-    const signoff = document.querySelector(".signoff");
-    if (signoff) signoff.style.display = "none";
-
     // Hide adjust dose buttons
     wrap
       .querySelectorAll(".adj-btn, .ep, .ep-apply")
       .forEach((el) => (el.style.display = "none"));
+
+    // Replace signoff bar content with saved status + action buttons
+    const signoff = document.querySelector(".signoff");
+    if (signoff) {
+      signoff.innerHTML = `
+        <span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription saved — ${esc(rxId)}</span>
+        <div style="display:flex;gap:8px">
+          <button class="sign-btn" onclick="printRx()" style="background:var(--blue)">Print now</button>
+          <button class="back-btn" onclick="resetPad()">New prescription</button>
+        </div>`;
+    }
 
     // Auto-open print dialog
     setTimeout(() => printRx(), 800);
@@ -2758,13 +2756,28 @@
     rxData = null;
     visitId = null;
     rxId = null;
+    selectedPatient = null;
     document.getElementById("pad-ta").value = "";
-    document.getElementById("save-status").style.display = "none";
+    document.getElementById("pt-chip-wrap").innerHTML = "";
+    document.getElementById("visit-info-panel").innerHTML = "";
+    document.getElementById("pt-btn-label").textContent = "Select patient";
+    const ss = document.getElementById("save-status");
+    if (ss) ss.style.display = "none";
+    // Reset generate button
+    const genBtn = document.getElementById("gen-btn");
+    if (genBtn) {
+      genBtn.textContent = "Generate";
+      genBtn.style.background = "";
+    }
+    // Re-select default mods
     activeMods.clear();
-    document
-      .querySelectorAll(".mod-chip")
-      .forEach((el) => el.classList.remove("on"));
-    document.getElementById("extra-mods").innerHTML = "";
+    activeMods.add("inv");
+    activeMods.add("vax");
+    activeMods.add("growth");
+    document.querySelectorAll(".mod-chip").forEach((el) => {
+      const k = el.id.replace("chip-", "");
+      el.classList.toggle("on", activeMods.has(k));
+    });
     showView("pad");
   }
 
