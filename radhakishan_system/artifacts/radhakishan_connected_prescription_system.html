@@ -2088,7 +2088,13 @@
     }
     if (has(r.iv_fluids) && r.iv_fluids.length) {
       h += `<div class="rv-sec"><div class="rv-hdr">IV Fluids</div>
-    ${r.iv_fluids.map((f) => `<div class="info-block" contenteditable="true" spellcheck="false">${typeof f === "string" ? esc(f) : esc(JSON.stringify(f))}</div>`).join("")}
+    ${r.iv_fluids
+      .map((f) => {
+        if (typeof f === "string")
+          return `<div class="info-block" contenteditable="true" spellcheck="false">${esc(f)}</div>`;
+        return `<div class="info-block" contenteditable="true" spellcheck="false">${esc(f.fluid || "")}${f.volume_ml ? " — " + esc(f.volume_ml) + " ml" : ""}${f.rate_ml_hr ? " @ " + esc(f.rate_ml_hr) + " ml/hr" : ""}${f.additives ? " + " + esc(f.additives) : ""}${f.duration_hrs ? " × " + esc(f.duration_hrs) + " hrs" : ""}${f.monitoring ? "<br><small style='color:var(--ink3)'>" + esc(f.monitoring) + "</small>" : ""}</div>`;
+      })
+      .join("")}
     </div>`;
     }
     if (has(r.growth) && has(r.growth.comment)) {
@@ -2472,49 +2478,29 @@
   }
 
   function printRx() {
-    const r = rxData;
-    if (!r) return;
-    const today = new Date().toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
+    if (!rxData) return;
+    // Capture the full styled review content and print it
+    const reviewHtml = document.getElementById("review-wrap").innerHTML;
+    const styles = document.querySelector("style").textContent;
     const w = window.open("", "_blank");
-    w.document.write(`<!DOCTYPE html><html><head><title>Rx ${esc(rxId)}</title>
-  <style>body{font-family:'Times New Roman',serif;font-size:12px;padding:12mm;color:#1a1a14}
-  h1{font-size:18px;text-align:center;margin:0}
-  .sub{text-align:center;font-size:10px;color:#666;margin-bottom:8px}
-  .meta{display:flex;justify-content:space-between;margin-bottom:10px;font-size:11px;border-bottom:1px solid #ccc;padding-bottom:6px}
-  .dx{font-weight:bold;margin-bottom:8px}
-  .med{margin-bottom:8px;border-left:2px solid #1e3a6b;padding-left:8px}
-  .r1{font-weight:bold;color:#1e3a6b}
-  .r3{color:#777;font-style:italic;font-size:11px}
-  .sec{margin-top:8px;border-top:1px dashed #ddd;padding-top:6px}
-  .sec-title{font-size:9px;font-weight:bold;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
-  .footer{margin-top:16px;border-top:1px solid #ccc;padding-top:8px;display:flex;justify-content:space-between;font-size:10px}
-  @page{size:A4;margin:10mm}</style></head><body>
-  <h1>Radhakishan Hospital</h1>
-  <div class="sub">राधाकिशन हस्पताल · Jyoti Nagar, Kurukshetra · NABH Accredited</div>
-  <div class="meta">
-    <div><strong>${esc(r.patient.name) || "Patient"}</strong> · ${esc(r.patient.age)} · ${esc(r.patient.sex)} · ${esc(r.patient.weight_kg)}kg<br>UHID: ${esc(rxId)}</div>
-    <div style="text-align:right">${today}<br>Dr. Lokender Goyal</div>
-  </div>
-  <div class="dx">Diagnosis: ${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "")).join(" · ")}</div>
-  <div class="sec-title">℞ Medicines</div>
-  ${(r.medicines || []).map((m) => `<div class="med"><div class="r1">${esc(m.number)}. ${esc(m.row1_en)}</div><div>${esc(m.row2_en)}</div><div class="r3">${esc(m.row3_hi)}</div>${m.calc ? `<div style="font-size:9px;color:#aaa">${esc(m.calc)}</div>` : ""}</div>`).join("")}
-  ${(r.investigations || []).length ? `<div class="sec"><div class="sec-title" style="color:#8b1a1a">Investigations</div>${r.investigations.map((i) => `<div style="color:#8b1a1a"><strong>${esc(i.name)}</strong> — ${esc(i.indication)}</div>`).join("")}</div>` : ""}
-  ${r.growth?.comment ? `<div class="sec"><div class="sec-title">Growth Assessment</div><div>${esc(r.growth.comment)}</div></div>` : ""}
-  ${(r.vaccinations?.due || []).length ? `<div class="sec"><div class="sec-title">Vaccinations Due Today</div>${r.vaccinations.due.map((d) => esc(d)).join(", ")}</div>` : ""}
-  <div class="sec"><div class="sec-title" style="color:#8b1a1a">Emergency signs — तुरंत वापस आएं</div>
-  <div style="font-size:10px">${EMERGENCY.map((s) => `${esc(s.hi)} (${esc(s.en)})`).join(" · ")}</div></div>
-  <div class="sec">Follow-up after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div>
-  <div class="footer">
-    <div>Dr. Lokender Goyal · MD Pediatrics (PGI) · HMCI HN 21452<br>Radhakishan Hospital, Kurukshetra · 01744-251441</div>
-    <div style="text-align:right;font-style:italic;color:#999">AI-assisted · Doctor approved<br>Rx ID: ${esc(rxId)}</div>
-  </div>
-  </body></html>`);
+    w.document
+      .write(`<!DOCTYPE html><html><head><title>Rx ${esc(rxId || "")}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap">
+    <style>
+      ${styles}
+      @page { size: A4; margin: 10mm; }
+      body { background: #fff; padding: 0; margin: 0; }
+      .app, .tabs, .pt-bar, .signoff, .voice-bar, .mods, .gen-wrap, .pad-hint, .cfg-bar, .lined, .mic-btn, .mic-st { display: none !important; }
+      .review-wrap { padding: 16px; max-width: 100%; }
+      .rv-sec { break-inside: avoid; }
+      .med-card { break-inside: avoid; }
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    </style></head><body>
+    <div class="review-wrap">${reviewHtml}</div>
+    </body></html>`);
     w.document.close();
-    setTimeout(() => w.print(), 500);
+    setTimeout(() => w.print(), 600);
   }
 
   function resetPad() {
