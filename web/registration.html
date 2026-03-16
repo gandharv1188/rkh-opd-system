@@ -551,7 +551,8 @@
   let SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co",
     KEY =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg",
-    connected = false;
+    connected = false,
+    lastToken = null;
   let currentPatient = null; // null = new patient, object = existing
   let searchTimer = null;
   let vaxRows = 0;
@@ -1047,6 +1048,31 @@
       const visitDate = document.getElementById("f-visit-date")?.value || "";
       const allergyDisplay = document.getElementById("f-allergy")?.value || "";
 
+      // Store token data for printing
+      const age = dob ? calcAge(dob) : "";
+      const allergyText = allergyDisplay.trim() || "";
+      const qrPayload = encodeURIComponent(
+        JSON.stringify({
+          uhid: patientId,
+          pt: name.slice(0, 30),
+          dob: dob,
+          sex: sex.slice(0, 1),
+        }),
+      );
+      lastToken = {
+        patientId,
+        name,
+        age,
+        sex,
+        wt,
+        phone,
+        visitDate,
+        doctor,
+        visitType,
+        allergyText,
+        qrPayload,
+      };
+
       // Show success ticket
       document.getElementById("form-area").innerHTML = "";
       document.getElementById("status-bar").style.display = "none";
@@ -1056,16 +1082,17 @@
           <div class="ticket-uhid">${esc(patientId)}</div>
           <div class="ticket-name">${esc(name)}</div>
           <div class="ticket-meta">
-            ${dob ? esc(calcAge(dob)) + " · " : ""}
+            ${age ? esc(age) + " · " : ""}
             ${esc(sex)}
             ${wt ? " · " + esc(wt) + " kg" : ""}
             ${phone ? " · " + esc(phone) : ""}
           </div>
-          <div class="ticket-visit">Visit created: ${esc(visitDate)} · ${esc(doctor)} · ${esc(visitType)}</div>
-          ${allergyDisplay.trim() ? '<div style="color:var(--red);font-weight:600;margin-top:6px">ALLERGY: ' + esc(allergyDisplay) + "</div>" : '<div style="color:var(--green);margin-top:6px">NKDA</div>'}
+          <div class="ticket-visit">Visit: ${esc(visitDate)} · ${esc(doctor)} · ${esc(visitType)}</div>
+          ${allergyText ? '<div style="color:var(--red);font-weight:600;margin-top:6px">ALLERGY: ' + esc(allergyText) + "</div>" : '<div style="color:var(--green);margin-top:6px">NKDA</div>'}
+          <div style="text-align:center;margin-top:8px"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrPayload}" width="80" height="80" alt="QR"><div style="font-size:8px;color:#999">Scan for next visit</div></div>
         </div>
         <div style="text-align:center;margin-top:12px">
-          <button class="act-btn primary" onclick="window.print()">Print Token</button>
+          <button class="act-btn primary" onclick="printToken()">Print Token</button>
           <button class="act-btn" onclick="resetAll()">Register Next Patient</button>
         </div>`;
       showToast(
@@ -1085,6 +1112,49 @@
     document.getElementById("form-area").innerHTML = "";
     document.getElementById("status-bar").style.display = "none";
     currentPatient = null;
+  }
+
+  function printToken() {
+    if (!lastToken) return;
+    const t = lastToken;
+    const w = window.open("", "_blank");
+    w.document
+      .write(`<!DOCTYPE html><html><head><title>Token ${t.patientId}</title>
+    <style>
+      @page { size: 80mm 120mm; margin: 3mm; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: system-ui, Arial, sans-serif; font-size: 11px; color: #1a1a14; width: 74mm; }
+      .token { border: 1.5px solid #1e3a6b; border-radius: 6px; padding: 6mm 4mm; text-align: center; }
+      .hospital { font-size: 13px; font-weight: 700; color: #1e3a6b; margin-bottom: 2px; }
+      .hospital-hi { font-size: 9px; color: #888; margin-bottom: 4px; }
+      .uhid { font-size: 18px; font-weight: 800; color: #1e3a6b; letter-spacing: 0.05em; margin: 6px 0 2px; }
+      .name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+      .meta { font-size: 10px; color: #555; margin-bottom: 4px; }
+      .visit { font-size: 9px; color: #777; margin-bottom: 4px; }
+      .allergy { font-size: 11px; font-weight: 700; margin: 4px 0; }
+      .allergy.red { color: #8b1a1a; }
+      .allergy.green { color: #1a6b3a; }
+      .qr { margin-top: 6px; }
+      .qr-label { font-size: 7px; color: #999; margin-top: 2px; }
+      .cut { border-top: 1px dashed #ccc; margin: 4mm 0 0; padding-top: 2mm; font-size: 8px; color: #ccc; text-align: center; }
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    </style></head><body>
+    <div class="token">
+      <div class="hospital">Radhakishan Hospital</div>
+      <div class="hospital-hi">राधाकिशन हस्पताल · Kurukshetra</div>
+      <div class="uhid">${esc(t.patientId)}</div>
+      <div class="name">${esc(t.name)}</div>
+      <div class="meta">${t.age ? esc(t.age) + " · " : ""}${esc(t.sex)}${t.wt ? " · " + esc(t.wt) + " kg" : ""}${t.phone ? " · " + esc(t.phone) : ""}</div>
+      <div class="visit">${esc(t.visitDate)} · ${esc(t.doctor)} · ${esc(t.visitType)}</div>
+      <div class="allergy ${t.allergyText ? "red" : "green"}">${t.allergyText ? "⚠ ALLERGY: " + esc(t.allergyText) : "NKDA"}</div>
+      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${t.qrPayload}" width="100" height="100" alt="QR"></div>
+      <div class="qr-label">Scan for next visit</div>
+    </div>
+    <div class="cut">✂ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</div>
+    </body></html>`);
+    w.document.close();
+    setTimeout(() => w.print(), 500);
   }
 
   function resetAll() {
@@ -1223,6 +1293,7 @@
     addVaxRow,
     cancelForm,
     saveAndCreateVisit,
+    printToken,
     resetAll,
   });
 
