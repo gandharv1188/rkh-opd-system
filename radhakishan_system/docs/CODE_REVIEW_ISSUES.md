@@ -131,19 +131,16 @@ Added `visits(patient_id, visit_date desc)`, `vaccinations(patient_id, vaccine_n
 
 Created `developmental_screenings` table with tool_used, domain-specific fields (gross_motor, fine_motor, language, social, cognitive), overall_result, red_flags array, referral_needed, referral_to. Includes RLS, indexes, and updated_at trigger.
 
-### D-12. Skill describes only 3 of 6 dosing methods
+### ~~D-12. Skill describes only 3 of 6 dosing methods~~ → RESOLVED (R38)
 
-**Severity:** LOW
-**Location:** `radhakishan_prescription_skill.md` — Section 4
-**Description:** Only weight-based, BSA-based, and GFR-adjusted methods are described. Fixed dose, infusion rate, and age-based methods are supported in the schema and formulary but not documented in the skill prompt.
-**Fix:** Add sections for the remaining 3 methods.
+Complete skill rewrite (v2026.2). All 6 dosing methods now documented: weight-based, BSA, GFR-adjusted, fixed dose, infusion rate, age/GA-tier. Also fixed: JSON schema aligned with artifact field names, added neonatal object, NHM-UIP vaccination schedule alongside IAP 2024, complete worked example, edge case handling (missing weight, neonatal pathway, unknown allergies), XML-tagged structure, Hindi translation rules, 10 standard prescriptions (added febrile seizures + croup), hepatic/renal consideration, Haryana-specific vaccine notes.
 
-### D-13. No doctor authentication / PIN-based sign-off
+### D-13. No doctor authentication / PIN-based sign-off — DEFERRED
 
 **Severity:** MEDIUM for production
 **Location:** Prescription Pad
 **Description:** Anyone with page access and Supabase credentials can sign prescriptions as any doctor. The doctor selector is a simple dropdown.
-**Fix:** Add at minimum a PIN-based sign-off for production.
+**Status:** Deferred to production. Requires Supabase Auth integration (see specification Section 12.3 and 12.4).
 
 ### ~~D-14. `sex` column and other enums unconstrained~~ → RESOLVED (R33)
 
