@@ -744,12 +744,10 @@
   }
 
   async function connectDB() {
-    SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
-    KEY = document.getElementById("sb-key").value.trim();
-    if (!SB || !KEY) {
-      alert("Enter URL and key.");
-      return;
-    }
+    if (!SB)
+      SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
+    if (!KEY) KEY = document.getElementById("sb-key").value.trim();
+    if (!SB || !KEY) return;
     try {
       const r = await q("patients", "?select=id&limit=1");
       if (r.ok) {

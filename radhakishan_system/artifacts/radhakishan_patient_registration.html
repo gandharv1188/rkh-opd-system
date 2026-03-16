@@ -562,12 +562,10 @@
   }
 
   async function connectSB() {
-    SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
-    KEY = document.getElementById("sb-key").value.trim();
-    if (!SB || !KEY) {
-      alert("Enter Supabase URL and anon key.");
-      return;
-    }
+    if (!SB)
+      SB = document.getElementById("sb-url").value.trim().replace(/\/$/, "");
+    if (!KEY) KEY = document.getElementById("sb-key").value.trim();
+    if (!SB || !KEY) return;
     try {
       const r = await q("formulary", "?select=count&limit=0");
       if (!r.ok) throw new Error("Connection failed");
