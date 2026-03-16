@@ -366,11 +366,20 @@
     <div class="grid2" style="margin-bottom: 10px">
       <div class="ff">
         <label>Supabase URL</label
-        ><input id="sb-url" placeholder="https://xxxx.supabase.co" />
+        ><input
+          id="sb-url"
+          placeholder="https://xxxx.supabase.co"
+          value="https://ecywxuqhnlkjtdshpcbc.supabase.co"
+        />
       </div>
       <div class="ff">
         <label>Anon / Service Key</label
-        ><input id="sb-key" type="password" placeholder="eyJhbGc…" />
+        ><input
+          id="sb-key"
+          type="password"
+          placeholder="eyJhbGc…"
+          value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg"
+        />
       </div>
     </div>
     <button class="btn primary" onclick="connect()">Test connection</button>
@@ -527,8 +536,9 @@
     return d.innerHTML;
   }
 
-  let SB = "",
-    KEY = "",
+  let SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co",
+    KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg",
     parsedDrugs = [];
 
   /* ===== Connection ===== */
@@ -1415,4 +1425,7 @@
   function loadFormatExample(key) {
     document.getElementById("format-ta").value = FORMAT_EXAMPLES[key] || "";
   }
+
+  // Auto-connect on page load
+  setTimeout(() => connect(), 500);
 </script>

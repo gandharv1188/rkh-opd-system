@@ -748,11 +748,20 @@
     <div class="cfg-g">
       <div class="fl">
         <label>Supabase URL</label
-        ><input id="sb-url" placeholder="https://xxxx.supabase.co" />
+        ><input
+          id="sb-url"
+          placeholder="https://xxxx.supabase.co"
+          value="https://ecywxuqhnlkjtdshpcbc.supabase.co"
+        />
       </div>
       <div class="fl">
         <label>Anon Key</label
-        ><input id="sb-key" type="password" placeholder="eyJhbGc…" />
+        ><input
+          id="sb-key"
+          type="password"
+          placeholder="eyJhbGc…"
+          value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg"
+        />
       </div>
     </div>
     <div style="display: flex; gap: 8px">
@@ -1356,8 +1365,9 @@
   }
 
   /* ===== State ===== */
-  let SB = "",
-    KEY = "",
+  let SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co",
+    KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg",
     drugs = [],
     editId = null,
     curCat = "",
@@ -2157,4 +2167,7 @@
   function showTab(n) {
     showDrwTab(n);
   }
+
+  // Auto-connect on page load
+  setTimeout(() => connectDB(), 500);
 </script>

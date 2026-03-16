@@ -458,8 +458,16 @@
 
 <div class="cfg" id="cfg">
   <div class="cfg-row">
-    <input id="sb-url" placeholder="Supabase URL (https://xxx.supabase.co)" />
-    <input id="sb-key" placeholder="Anon key (eyJ...)" />
+    <input
+      id="sb-url"
+      placeholder="Supabase URL (https://xxx.supabase.co)"
+      value="https://ecywxuqhnlkjtdshpcbc.supabase.co"
+    />
+    <input
+      id="sb-key"
+      placeholder="Anon key (eyJ...)"
+      value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg"
+    />
     <button onclick="connectSB()">Connect</button>
   </div>
 </div>
@@ -540,8 +548,9 @@
     return d.innerHTML;
   }
 
-  let SB = "",
-    KEY = "",
+  let SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co",
+    KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg",
     connected = false;
   let currentPatient = null; // null = new patient, object = existing
   let searchTimer = null;
@@ -1182,4 +1191,7 @@
       }
     }
   }
+
+  // Auto-connect on page load
+  setTimeout(() => connectSB(), 500);
 </script>

@@ -1097,6 +1097,7 @@
       ><input
         id="sb-url"
         placeholder="https://xxxx.supabase.co"
+        value="https://ecywxuqhnlkjtdshpcbc.supabase.co"
         oninput="sbDirty = true"
       />
     </div>
@@ -1106,6 +1107,7 @@
         id="sb-key"
         type="password"
         placeholder="eyJhbGc…"
+        value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg"
         oninput="sbDirty = true"
       />
     </div>
@@ -1301,8 +1303,9 @@
 
 <script>
   /* ===== STATE ===== */
-  let SB = "",
-    KEY = "",
+  let SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co",
+    KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg",
     sbConnected = false,
     sbDirty = false;
   let selectedPatient = null,
@@ -2513,4 +2516,7 @@ ${fullNote}`;
     t.classList.add("on");
     setTimeout(() => t.classList.remove("on"), 2500);
   }
+
+  // Auto-connect on page load
+  setTimeout(() => connectSB(), 500);
 </script>
