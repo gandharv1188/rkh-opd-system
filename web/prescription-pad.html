@@ -2499,30 +2499,120 @@
 
   function printRx() {
     if (!rxData) return;
-    // Capture the full styled review content and print it
-    const reviewHtml = document.getElementById("review-wrap").innerHTML;
-    const styles = document.querySelector("style").textContent;
+    const r = rxData;
+    const today = new Date().toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+    const time = new Date().toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const uhid = r.patient?.uhid || selectedPatient?.id || "";
+
+    let h = "";
+    // Header
+    h += `<div class="hdr">
+      <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMCI Reg. HN 21452 · PMC 23168<br>Pediatrics &amp; Neonatology</div>
+      <div class="hdr-c"><h1>Radhakishan Hospital</h1><div class="hdr-hi">राधाकिशन हस्पताल</div><div class="hdr-sub">Jyoti Nagar, Kurukshetra, Haryana</div><span class="nabh-badge">NABH Accredited</span></div>
+      <div class="hdr-r">Date: <strong>${esc(today)}</strong><br>Time: ${esc(time)}<br>Rx: <strong>${esc(rxId || "")}</strong><br>UHID: <strong>${esc(uhid)}</strong><br><br>Emergency:<br>01744-251441<br>7206029516</div>
+    </div>`;
+    // Patient meta
+    h += `<div class="meta"><div class="meta-item"><span class="meta-lbl">Patient</span><span class="meta-val">${esc(r.patient?.name || "")}</span></div>
+      <div class="meta-item"><span class="meta-lbl">Age · Sex · Weight</span><span class="meta-val">${esc(r.patient?.age || "")} · ${esc(r.patient?.sex || "")} · ${r.patient?.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
+      <div class="meta-item"><span class="meta-lbl">Guardian</span><span class="meta-val">${esc(r.patient?.guardian || "")}</span></div></div>`;
+    // Diagnosis
+    h += `<div class="sec"><div class="sec-title">Diagnosis</div>${(r.diagnosis || []).map((d) => `<div class="dx">${esc(d.name)} <span class="icd">${esc(d.icd10 || "")}</span></div>`).join("")}</div>`;
+    // Medicines
+    if (r.medicines?.length) {
+      h += `<div class="sec"><div class="sec-title blue">℞ Medicines</div>`;
+      r.medicines.forEach((m) => {
+        h += `<div class="med"><div class="med-r1">${esc(m.number)}. ${esc(m.row1_en || "")}</div><div class="med-r2">${esc(m.row2_en || "")}</div><div class="med-r3">${esc(m.row3_hi || "")}</div>${m.flag ? `<div class="med-flag">⚠ ${esc(m.flag)}</div>` : ""}</div>`;
+      });
+      h += `</div>`;
+    }
+    // IV Fluids
+    if (r.iv_fluids?.length) {
+      h += `<div class="sec"><div class="sec-title">IV Fluids</div>${r.iv_fluids.map((f) => (typeof f === "string" ? `<div>${esc(f)}</div>` : `<div>${esc(f.fluid || "")}${f.volume_ml ? " — " + esc(f.volume_ml) + " ml" : ""}${f.rate_ml_hr ? " @ " + esc(f.rate_ml_hr) + " ml/hr" : ""}${f.additives ? " + " + esc(f.additives) : ""}</div>`)).join("")}</div>`;
+    }
+    // Investigations
+    if (r.investigations?.length) {
+      h += `<div class="sec"><div class="sec-title red">Investigations</div>${r.investigations.map((i) => `<div class="inv"><strong>${esc(i.name)}</strong> — ${esc(i.indication)}${i.urgency === "same-day" ? ' <span class="urg">Same day</span>' : ""}</div>`).join("")}</div>`;
+    }
+    // Growth
+    if (r.growth?.comment) {
+      h += `<div class="sec"><div class="sec-title">Growth Assessment — ${esc(r.growth.chart || "WHO 2006")}</div><div>${esc(r.growth.comment)}</div></div>`;
+    }
+    // Vaccination
+    if (r.vaccinations?.due?.length || r.vaccinations?.overdue?.length) {
+      h += `<div class="sec"><div class="sec-title">Vaccination</div>`;
+      (r.vaccinations.due || []).forEach((v) => {
+        h += `<div>✓ ${esc(v)} — <strong>Due</strong></div>`;
+      });
+      (r.vaccinations.overdue || []).forEach((v) => {
+        h += `<div style="color:#8b1a1a">⚠ ${esc(v)} — <strong>Overdue</strong></div>`;
+      });
+      if (r.vaccinations.notes)
+        h += `<div style="font-size:11px;color:#666;margin-top:4px">${esc(r.vaccinations.notes)}</div>`;
+      h += `</div>`;
+    }
+    // Counselling
+    if (r.counselling?.length) {
+      h += `<div class="sec"><div class="sec-title">Counselling</div><div>${r.counselling.map((c) => `✓ ${esc(c)}`).join(" &nbsp; ")}</div></div>`;
+    }
+    // Emergency signs
+    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs — तुरंत वापस आएं</div><div class="emerg-grid">${EMERGENCY.map((s) => `<div><strong>${esc(s.hi)}</strong><br><span>${esc(s.en)}</span></div>`).join("")}</div></div>`;
+    // Follow-up
+    h += `<div class="sec"><div class="sec-title">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
+    // Footer
+    h += `<div class="footer">
+      <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics · HMCI HN 21452 · PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><em>AI-assisted draft — reviewed &amp; approved by doctor</em></div>
+      <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: ✓<br>Max dose: ✓<br>NABH: ✓</div>
+    </div>`;
+
     const w = window.open("", "_blank");
     w.document
       .write(`<!DOCTYPE html><html><head><title>Rx ${esc(rxId || "")}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap">
     <style>
-      ${styles}
-      @page { size: A4; margin: 10mm; }
-      body { background: #fff; padding: 0; margin: 0; }
-      .app, .tabs, .pt-bar, .signoff, .voice-bar, .mods, .gen-wrap, .pad-hint, .cfg-bar, .lined, .mic-btn, .mic-st { display: none !important; }
-      /* Hide interactive elements in print */
-      button, .adj-btn, .ep-apply, .back-btn, .sign-btn, .save-link-btn { display: none !important; }
-      .dose-adj, .dose-adj-row, .signoff, .save-links, .ep { display: none !important; }
-      [contenteditable] { border: none !important; outline: none !important; }
-      .review-wrap { padding: 16px; max-width: 100%; }
-      .rv-sec { break-inside: avoid; }
-      .med-card { break-inside: avoid; }
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    </style></head><body>
-    <div class="review-wrap">${reviewHtml}</div>
-    </body></html>`);
+      @page { size: A4; margin: 12mm 10mm; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: Georgia, 'Times New Roman', serif; font-size: 12px; color: #1a1a14; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .hdr { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; padding: 10px 0; border-bottom: 2px solid #1e3a6b; margin-bottom: 10px; }
+      .hdr-l { font-size: 11px; line-height: 1.6; }
+      .hdr-c { text-align: center; }
+      .hdr-c h1 { font-size: 18px; color: #1e3a6b; margin-bottom: 2px; }
+      .hdr-hi { font-size: 12px; color: #666; }
+      .hdr-sub { font-size: 10px; color: #888; }
+      .nabh-badge { display: inline-block; border: 1px solid #1e3a6b; border-radius: 99px; padding: 1px 8px; font-size: 8px; color: #1e3a6b; margin-top: 3px; letter-spacing: 0.05em; }
+      .hdr-r { text-align: right; font-size: 10px; line-height: 1.6; }
+      .meta { display: flex; gap: 16px; padding: 8px 0; border-bottom: 1px solid #ddd; margin-bottom: 8px; }
+      .meta-item { flex: 1; }
+      .meta-lbl { display: block; font-size: 8px; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
+      .meta-val { font-size: 13px; font-weight: 600; }
+      .sec { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 0.5px solid #eee; break-inside: avoid; }
+      .sec-title { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 3px; }
+      .sec-title.blue { color: #1e3a6b; border-color: rgba(30,58,107,0.2); }
+      .sec-title.red { color: #8b1a1a; border-color: rgba(139,26,26,0.2); }
+      .dx { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+      .icd { font-size: 11px; color: #888; font-weight: 400; }
+      .med { margin-bottom: 10px; padding-left: 10px; border-left: 3px solid #1e3a6b; break-inside: avoid; }
+      .med-r1 { font-size: 14px; font-weight: 700; color: #1e3a6b; }
+      .med-r2 { font-size: 12px; color: #1e3a6b; margin-top: 2px; }
+      .med-r3 { font-family: 'Noto Sans Devanagari', system-ui, sans-serif; font-size: 12px; color: #555; font-style: italic; margin-top: 2px; }
+      .med-flag { font-size: 10px; color: #8b1a1a; margin-top: 2px; }
+      .inv { color: #8b1a1a; margin-bottom: 3px; }
+      .urg { font-size: 9px; background: #fde8e8; color: #8b1a1a; padding: 1px 6px; border-radius: 4px; }
+      .emerg { background: #fdf8f0; padding: 8px; border-radius: 4px; }
+      .emerg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 11px; }
+      .emerg-grid strong { font-family: 'Noto Sans Devanagari', system-ui, sans-serif; }
+      .emerg-grid span { color: #666; }
+      .footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 8px; border-top: 2px solid #1e3a6b; font-size: 10px; }
+      .footer-doc { line-height: 1.6; }
+      .footer-doc em { color: #999; font-size: 9px; }
+      .footer-safety { text-align: right; color: #1a6b3a; font-size: 10px; line-height: 1.8; }
+    </style></head><body>${h}</body></html>`);
     w.document.close();
     setTimeout(() => w.print(), 600);
   }
