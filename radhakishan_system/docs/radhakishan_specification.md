@@ -837,6 +837,12 @@ A `doctors` table stores credentials for all doctors (ID, full name, degree, reg
 - Retention policy: minimum 5 years per NABH medical records requirements
 - Queryable by doctor, patient, date range for compliance audits
 
+## 12.6 QR Code Library — Offline Consideration
+
+**POC (current):** The Prescription Output artifact loads qrcodejs (v1.0.0, ~9 KB minified) from cdnjs CDN. If the CDN is unavailable (offline clinic), QR generation silently fails and shows a "QR" text fallback. This is acceptable for the POC since internet connectivity is required for Supabase access anyway.
+
+**Production (future):** Bundle the qrcodejs library inline in the HTML artifact (only 9 KB). This ensures QR codes generate even if the CDN is temporarily unreachable. When migrating to a standalone React app, include `qrcode` as an npm dependency.
+
 # 13. Technology Stack
 
 |                 |                                   |                                      |

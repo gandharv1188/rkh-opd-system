@@ -157,12 +157,9 @@ Added `CHECK (col is null or jsonb_typeof(col) = 'array'|'object')` to all 14 JS
 
 Trimmed QR payload to re-registration essentials only: UHID, patient name (max 30 chars), DOB, sex initial. Removed diagnosis, weight, date, hospital code. Well within QR capacity.
 
-### D-17. CDN dependency for QR code library
+### ~~D-17. CDN dependency for QR code library~~ → NOTED (specification Section 12.6)
 
-**Severity:** LOW
-**Location:** `radhakishan_prescription_output_v2.html` — qrcodejs from cdnjs
-**Description:** If CDN is unavailable (offline clinic), QR generation silently fails.
-**Fix:** Bundle the library inline or provide a local fallback for offline use.
+Library is only 9 KB. Noted for production inline bundling. POC uses CDN with existing fallback. See specification Section 12.6.
 
 ### D-18. Missing categories in Formulary Manager filter tabs
 
