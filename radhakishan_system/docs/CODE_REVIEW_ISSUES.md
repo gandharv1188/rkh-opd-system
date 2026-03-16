@@ -165,12 +165,9 @@ Library is only 9 KB. Noted for production inline bundling. POC uses CDN with ex
 
 Split filter tabs into two rows: Drug class (14 tabs: Antibiotics, Analgesics, etc.) and Clinical specialty (17 tabs: Respiratory, ENT, GI, etc.). Dropdown grouped with `<optgroup>` for both sets. All categories from formulary data now have matching tabs.
 
-### D-19. No NABH accreditation number on prescriptions
+### D-19. No NABH accreditation number on prescriptions — DEFERRED
 
-**Severity:** LOW
-**Location:** `radhakishan_prescription_output_v2.html` — header
-**Description:** Shows "NABH HCO 6th Edition Accredited" text but not the actual accreditation certificate number, which NABH requires on clinical documents.
-**Fix:** Add the accreditation number to the header.
+Header changed to "NABH Accredited". Actual certificate number to be added when available.
 
 ### D-20. Voice dictation missing `onerror` handler
 
