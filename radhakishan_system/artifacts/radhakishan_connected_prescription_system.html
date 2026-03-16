@@ -437,8 +437,12 @@
     padding: 12px 18px;
     background: var(--bg2);
   }
+  .gen-btns {
+    display: flex;
+    gap: 8px;
+  }
   .gen-btn {
-    width: 100%;
+    flex: 1;
     padding: 12px;
     background: var(--blue);
     color: #fff;
@@ -459,6 +463,50 @@
   .gen-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+  }
+  .gen-btn.secondary {
+    background: var(--ink2);
+  }
+  .gen-btn.secondary:hover {
+    background: var(--ink1);
+  }
+  .paste-area {
+    margin-top: 10px;
+    display: none;
+  }
+  .paste-area textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 12px;
+    border: 1px solid var(--brd);
+    border-radius: var(--r2);
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  .paste-area .paste-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .copied-toast {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a6b3a;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .copied-toast.show {
+    opacity: 1;
   }
 
   /* Loading */
@@ -1123,17 +1171,45 @@
     <div class="extra-mods" id="extra-mods"></div>
 
     <div class="gen-wrap">
-      <button class="gen-btn" id="gen-btn" onclick="generate()">
-        Generate prescription
-      </button>
+      <div class="gen-btns">
+        <button class="gen-btn" id="gen-btn" onclick="sendToChat()">
+          Send to Chat
+        </button>
+        <button class="gen-btn secondary" onclick="togglePasteArea()">
+          Paste JSON
+        </button>
+      </div>
+      <div class="paste-area" id="paste-area">
+        <p style="font-size: 12px; color: var(--ink3); margin: 8px 0 4px">
+          Paste the prescription JSON from Claude's response:
+        </p>
+        <textarea
+          id="json-paste"
+          placeholder='{"patient":{...},"diagnosis":[...],"medicines":[...]}'
+        ></textarea>
+        <div class="paste-actions">
+          <button class="gen-btn" style="flex: 1" onclick="loadPastedJSON()">
+            Load Prescription
+          </button>
+          <button
+            class="gen-btn secondary"
+            style="flex: 0 0 auto; padding: 12px 18px"
+            onclick="togglePasteArea()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- LOADING -->
+  <div id="copied-toast" class="copied-toast"></div>
+
+  <!-- LOADING (kept for save operations) -->
   <div id="view-loading" style="display: none">
     <div class="loading">
       <div class="ring"></div>
-      <p class="load-msg" id="load-msg">Reading clinical note…</p>
+      <p class="load-msg" id="load-msg">Processing…</p>
     </div>
   </div>
 
@@ -1235,16 +1311,6 @@
     { hi: "6 घंटे से पेशाब न आना", en: "No urine for 6+ hours" },
     { hi: "अत्यधिक नींद / प्रतिक्रिया न करना", en: "Excessive sleepiness" },
   ];
-  const LOAD_MSGS = [
-    "Reading clinical note…",
-    "Fetching formulary from Supabase…",
-    "Loading standard protocol…",
-    "Calculating doses…",
-    "Writing bilingual instructions…",
-    "Running safety checks…",
-    "Finalising prescription…",
-  ];
-
   document.getElementById("hdr-date").textContent =
     new Date().toLocaleDateString("en-IN", {
       day: "2-digit",
@@ -1528,27 +1594,9 @@
       "tab" + (v === "rx" ? " active" : "");
   }
 
-  /* ===== GENERATE ===== */
-  async function generate() {
-    const note = document.getElementById("pad-ta").value.trim();
-    if (!note) {
-      alert("Please write or dictate a clinical note first.");
-      return;
-    }
-    const mods = modData();
-    const fullNote = note + (mods ? "\n\nADDITIONAL DETAILS:" + mods : "");
-    showView("loading");
-    let mi = 0;
-    const t = setInterval(() => {
-      document.getElementById("load-msg").textContent =
-        LOAD_MSGS[mi++ % LOAD_MSGS.length];
-    }, 1100);
-
-    // Build context from Supabase caches
+  /* ===== SEND TO CHAT (Option A) ===== */
+  function buildFormularyContext(fullNote) {
     let formularyContext = "";
-    let stdRxContext = "";
-
-    // Extract drug names mentioned in note and fetch their formulary entries
     const drugNames = Object.keys(formularyCache);
     const mentionedDrugs = drugNames.filter((d) =>
       fullNote.toUpperCase().includes(d),
@@ -1573,8 +1621,11 @@
         formularyContext += `${d}: ${forms}. Dose: ${bands}. ${f.notes || ""}\n`;
       });
     }
+    return formularyContext;
+  }
 
-    // Detect ICD-10 codes or diagnosis names mentioned in note
+  function buildStdRxContext(fullNote) {
+    let stdRxContext = "";
     const stdEntries = Object.values(stdRxCache);
     const matchedStd = stdEntries.filter(
       (s) =>
@@ -1596,67 +1647,116 @@
         stdRxContext += `${s.diagnosis_name} (${s.icd10}): First-line: ${drugs}. ${s.notes || ""}\n`;
       });
     }
+    return stdRxContext;
+  }
 
-    const systemPrompt = buildSystem(formularyContext, stdRxContext);
+  async function sendToChat() {
+    const note = document.getElementById("pad-ta").value.trim();
+    if (!note) {
+      alert("Please write or dictate a clinical note first.");
+      return;
+    }
+    const mods = modData();
+    const fullNote = note + (mods ? "\n\nADDITIONAL DETAILS:" + mods : "");
+
+    const formularyCtx = buildFormularyContext(fullNote);
+    const stdRxCtx = buildStdRxContext(fullNote);
+
+    // Build the prompt for the doctor to paste into the conversation
+    const prompt = `Generate prescription for this patient. Return ONLY valid JSON — no markdown fences, no preamble.
+${formularyCtx}${stdRxCtx}
+
+CLINICAL NOTE:
+${fullNote}`;
 
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 3500,
-          system: systemPrompt,
-          messages: [{ role: "user", content: fullNote }],
-        }),
-      });
-      clearInterval(t);
-      if (!res.ok) {
-        const e = await res.json();
-        throw new Error(e.error?.message || "API error " + res.status);
-      }
-      const data = await res.json();
-      let raw = data.content
-        .filter((b) => b.type === "text")
-        .map((b) => b.text)
-        .join("");
-      raw = raw
-        .replace(/```json\n?/g, "")
-        .replace(/```\n?/g, "")
-        .trim();
-      rxData = JSON.parse(raw);
-      await renderReview();
-      showView("rx");
+      await navigator.clipboard.writeText(prompt);
+      showCopiedToast("Copied to clipboard — paste in the chat below and send");
     } catch (e) {
-      clearInterval(t);
-      document.getElementById("err-txt").textContent = "Error: " + e.message;
-      showView("error");
+      // Fallback: show prompt for manual copy
+      const ta = document.getElementById("json-paste");
+      ta.value = prompt;
+      document.getElementById("paste-area").style.display = "block";
+      ta.select();
+      showCopiedToast(
+        "Could not auto-copy — select all and copy manually, then paste in chat",
+      );
     }
   }
 
-  function buildSystem(formularyCtx, stdRxCtx) {
-    return `You are the AI prescription assistant for Radhakishan Hospital, Jyoti Nagar, Kurukshetra (NABH HCO 6th Edition). Dr. Lokender Goyal MD Pediatrics (PGI) and Dr. Swati Goyal MD Pediatrics.
-
-Generate a complete NABH-compliant OPD prescription. Extract ALL clinical data from the doctor's note.
-
-MEDICINE FORMAT — 3 rows per medicine:
-- row1_en: GENERIC NAME IN CAPITALS (Indian concentration e.g. 120mg/5ml)
-- row2_en: Calculated dose with working shown (15mg/kg × 7.2kg=108mg=4.5ml) + route + frequency + duration + English instructions
-- row3_hi: Simple Hindi for parents
-- dose_mg_per_kg: number only
-- dose_per_day_divided: times per day
-- concentration_mg: mg per unit
-- concentration_per_ml: ml per unit
-- max_dose_single_mg: numeric cap
-- formulation: syrup|drops|tablet|injection
-- flag: safety concern or empty string
-
-DOSE RULES: Weight-based mg/kg. Syrups nearest 0.5ml. Drops 0.1ml. Tablets ¼. NEVER exceed max dose. Use Indian concentrations (Paracetamol 120mg/5ml or 250mg/5ml, Amoxicillin 125mg/5ml or 250mg/5ml, Ibuprofen 100mg/5ml).
-${formularyCtx}${stdRxCtx}
-
-Return ONLY valid JSON — no markdown, no preamble:
-{"patient":{"name":"","age":"","sex":"","weight_kg":null,"height_cm":null,"hc_cm":null,"guardian":"","uhid":""},"diagnosis":[{"name":"","icd10":"","type":"provisional"}],"medicines":[{"number":1,"row1_en":"","row2_en":"","row3_hi":"","dose_mg_per_kg":null,"dose_per_day_divided":null,"concentration_mg":null,"concentration_per_ml":null,"max_dose_single_mg":null,"formulation":"syrup","calc":"","flag":""}],"investigations":[{"name":"","indication":"","urgency":"routine"}],"iv_fluids":[],"growth":{"chart":"","waz":"","haz":"","whz":"","hcaz":"","muac":"","classification":"","comment":""},"vaccinations":{"due":[],"overdue":[],"next_due":"","notes":""},"developmental":{"findings":"","red_flags":[]},"diet":"","safety":{"allergy_note":"","interactions":"","flags":[]},"followup_days":3,"referral":"","triage_score":0,"triage_action":"Routine OPD","counselling":[],"doctor_notes":""}`;
+  /* ===== PASTE JSON (Option B) ===== */
+  function togglePasteArea() {
+    const el = document.getElementById("paste-area");
+    el.style.display = el.style.display === "none" ? "block" : "none";
+    if (el.style.display === "block") {
+      document.getElementById("json-paste").value = "";
+      document.getElementById("json-paste").focus();
+    }
   }
+
+  async function loadPastedJSON() {
+    const raw = document.getElementById("json-paste").value.trim();
+    if (!raw) {
+      alert("Please paste the prescription JSON first.");
+      return;
+    }
+    try {
+      const cleaned = raw
+        .replace(/```json\n?/g, "")
+        .replace(/```\n?/g, "")
+        .trim();
+      rxData = JSON.parse(cleaned);
+      document.getElementById("paste-area").style.display = "none";
+      await renderReview();
+      showView("rx");
+    } catch (e) {
+      alert(
+        "Invalid JSON: " +
+          e.message +
+          "\n\nMake sure you copied the complete JSON response from Claude.",
+      );
+    }
+  }
+
+  function showCopiedToast(msg) {
+    const el = document.getElementById("copied-toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    setTimeout(() => el.classList.remove("show"), 4000);
+  }
+
+  /* ===== AUTO-RECEIVE via postMessage ===== */
+  window.addEventListener("message", (e) => {
+    if (e.data && e.data.type === "radhakishan-rx-json") {
+      try {
+        let raw =
+          typeof e.data.payload === "string"
+            ? e.data.payload
+            : JSON.stringify(e.data.payload);
+        raw = raw
+          .replace(/```json\n?/g, "")
+          .replace(/```\n?/g, "")
+          .trim();
+        rxData = JSON.parse(raw);
+        renderReview().then(() => showView("rx"));
+        showCopiedToast("Prescription received from conversation");
+      } catch (err) {
+        console.error("Failed to load prescription from message", err);
+      }
+    }
+    // Also handle template loading from Patient Lookup
+    if (e.data && e.data.type === "radhakishan-rx-template") {
+      try {
+        rxData =
+          typeof e.data.payload === "string"
+            ? JSON.parse(e.data.payload)
+            : e.data.payload;
+        renderReview().then(() => showView("rx"));
+      } catch (err) {
+        console.error("Failed to load template", err);
+      }
+    }
+  });
 
   /* ===== RENDER REVIEW ===== */
   function zc(v) {
