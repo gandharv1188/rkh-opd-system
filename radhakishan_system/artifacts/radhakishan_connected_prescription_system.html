@@ -1948,7 +1948,7 @@
           .trim();
         rxData = JSON.parse(raw);
         renderReview().then(() => showView("rx"));
-        showCopiedToast("Prescription received from conversation");
+        console.log("Prescription received from conversation");
       } catch (err) {
         console.error("Failed to load prescription from message", err);
       }
@@ -2587,7 +2587,6 @@
     resetPad,
     applyDose,
     liveCalc,
-    showCopiedToast,
   });
 
   // Auto-connect on page load
