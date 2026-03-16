@@ -1267,6 +1267,13 @@
   let formularyCache = {},
     stdRxCache = {};
 
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
   const MODS = {
     inv: {
       l: "Investigations",
@@ -1468,7 +1475,7 @@
           (
             p,
           ) => `<div class="pt-result-item" onclick="selectPatient(${JSON.stringify(JSON.stringify(p))})">
-      <strong>${p.name}</strong> · <span style="color:var(--ink3)">${p.id}</span> · ${calcAge(p.dob)}
+      <strong>${esc(p.name)}</strong> · <span style="color:var(--ink3)">${esc(p.id)}</span> · ${esc(calcAge(p.dob))}
     </div>`,
         )
         .join("");
@@ -1479,7 +1486,7 @@
     const p = JSON.parse(pJson);
     selectedPatient = p;
     const chip = document.getElementById("pt-chip-wrap");
-    chip.innerHTML = `<div class="pt-chip"><strong>${p.name}</strong> <span style="color:var(--ink3);font-size:11px">${p.id} · ${calcAge(p.dob)}</span><button onclick="clearPatient()">×</button></div>`;
+    chip.innerHTML = `<div class="pt-chip"><strong>${esc(p.name)}</strong> <span style="color:var(--ink3);font-size:11px">${esc(p.id)} · ${esc(calcAge(p.dob))}</span><button onclick="clearPatient()">×</button></div>`;
     document.getElementById("pt-srch").value = "";
     document.getElementById("pt-results").style.display = "none";
     document.getElementById("pt-search-wrap").style.display = "none";
@@ -1845,14 +1852,14 @@ ${fullNote}`;
 
     h += `<div class="pt-strip">
     <div>
-      <div class="pt-strip-name">${r.patient.name || "Patient"} <span class="pt-strip-meta">${r.patient.age || ""} · ${r.patient.sex || ""} · ${r.patient.weight_kg ? r.patient.weight_kg + " kg" : ""}</span></div>
-      <div class="pt-strip-dx">${(r.diagnosis || []).map((d) => d.name + (d.icd10 ? " (" + d.icd10 + ")" : "")).join(" · ")}</div>
+      <div class="pt-strip-name">${esc(r.patient.name) || "Patient"} <span class="pt-strip-meta">${esc(r.patient.age)} · ${esc(r.patient.sex)} · ${r.patient.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
+      <div class="pt-strip-dx">${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "")).join(" · ")}</div>
     </div>
-    <div style="font-size:11px;color:var(--ink3);text-align:right">UHID: ${uhid}<br>${today}</div>
+    <div style="font-size:11px;color:var(--ink3);text-align:right">UHID: ${esc(uhid)}<br>${today}</div>
   </div>`;
 
     if (has(r.safety?.flags))
-      h += `<div class="rv-sec">${r.safety.flags.map((f) => `<div class="flag-row"><span style="flex-shrink:0">⚠</span><span>${f}</span></div>`).join("")}</div>`;
+      h += `<div class="rv-sec">${r.safety.flags.map((f) => `<div class="flag-row"><span style="flex-shrink:0">⚠</span><span>${esc(f)}</span></div>`).join("")}</div>`;
 
     // MEDICINES
     if (has(r.medicines)) {
@@ -1862,23 +1869,23 @@ ${fullNote}`;
         h += `<div class="med-card" id="${pid}">
         <div class="med-top">
           <div class="med-rows">
-            <div class="med-calc" id="${pid}-calc">${m.calc || ""}</div>
-            <div contenteditable="true" spellcheck="false" class="med-r r1" id="${pid}-r1">${m.row1_en || ""}</div>
-            <div contenteditable="true" spellcheck="false" class="med-r" id="${pid}-r2">${m.row2_en || ""}</div>
-            <div contenteditable="true" spellcheck="false" class="med-r r3" id="${pid}-r3">${m.row3_hi || ""}</div>
-            <div class="med-flag" id="${pid}-flag" style="${m.flag ? "" : "display:none"}">${m.flag ? "⚠ " + m.flag : ""}</div>
+            <div class="med-calc" id="${pid}-calc">${esc(m.calc)}</div>
+            <div contenteditable="true" spellcheck="false" class="med-r r1" id="${pid}-r1">${esc(m.row1_en)}</div>
+            <div contenteditable="true" spellcheck="false" class="med-r" id="${pid}-r2">${esc(m.row2_en)}</div>
+            <div contenteditable="true" spellcheck="false" class="med-r r3" id="${pid}-r3">${esc(m.row3_hi)}</div>
+            <div class="med-flag" id="${pid}-flag" style="${m.flag ? "" : "display:none"}">${m.flag ? "⚠ " + esc(m.flag) : ""}</div>
           </div>
           <button class="adj-btn" onclick="toggleEP('${pid}',${idx})">Adjust dose</button>
         </div>
         <div class="ep" id="${pid}-ep">
-          <div class="ep-title">Dose adjustment — ${(m.row1_en || "").split("(")[0].trim()}</div>
+          <div class="ep-title">Dose adjustment — ${esc((m.row1_en || "").split("(")[0].trim())}</div>
           <div class="ep-grid">
-            <div class="epf"><label>Weight (kg)</label><input type="number" step="0.1" id="${pid}-wt" value="${r.patient.weight_kg || ""}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>mg/kg/day</label><input type="number" step="0.5" id="${pid}-mgkg" value="${m.dose_mg_per_kg || ""}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Times/day</label><input type="number" id="${pid}-freq" value="${m.dose_per_day_divided || ""}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Conc. (mg)</label><input type="number" id="${pid}-cmg" value="${m.concentration_mg || ""}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Per (ml)</label><input type="number" id="${pid}-cml" value="${m.concentration_per_ml || 5}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Max single (mg)</label><input type="number" id="${pid}-max" value="${m.max_dose_single_mg || ""}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>Weight (kg)</label><input type="number" step="0.1" id="${pid}-wt" value="${esc(r.patient.weight_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>mg/kg/day</label><input type="number" step="0.5" id="${pid}-mgkg" value="${esc(m.dose_mg_per_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>Times/day</label><input type="number" id="${pid}-freq" value="${esc(m.dose_per_day_divided)}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>Conc. (mg)</label><input type="number" id="${pid}-cmg" value="${esc(m.concentration_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>Per (ml)</label><input type="number" id="${pid}-cml" value="${esc(m.concentration_per_ml || 5)}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>Max single (mg)</label><input type="number" id="${pid}-max" value="${esc(m.max_dose_single_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
           </div>
           <div class="ep-result" id="${pid}-res">Fill fields above to recalculate.</div>
           <div class="ep-warn" id="${pid}-warn"></div>
@@ -1894,12 +1901,12 @@ ${fullNote}`;
 
     if (has(r.investigations)) {
       h += `<div class="rv-sec"><div class="rv-hdr red">Investigations</div>
-    ${r.investigations.map((inv) => `<div class="inv-block" contenteditable="true" spellcheck="false"><strong>${inv.name}</strong> — ${inv.indication}${inv.urgency === "same-day" ? ' <span style="font-size:11px;color:var(--red)">(Same day)</span>' : ""}</div>`).join("")}
+    ${r.investigations.map((inv) => `<div class="inv-block" contenteditable="true" spellcheck="false"><strong>${esc(inv.name)}</strong> — ${esc(inv.indication)}${inv.urgency === "same-day" ? ' <span style="font-size:11px;color:var(--red)">(Same day)</span>' : ""}</div>`).join("")}
     </div>`;
     }
     if (has(r.iv_fluids) && r.iv_fluids.length) {
       h += `<div class="rv-sec"><div class="rv-hdr">IV Fluids</div>
-    ${r.iv_fluids.map((f) => `<div class="info-block" contenteditable="true" spellcheck="false">${typeof f === "string" ? f : JSON.stringify(f)}</div>`).join("")}
+    ${r.iv_fluids.map((f) => `<div class="info-block" contenteditable="true" spellcheck="false">${typeof f === "string" ? esc(f) : esc(JSON.stringify(f))}</div>`).join("")}
     </div>`;
     }
     if (has(r.growth) && has(r.growth.comment)) {
@@ -1910,9 +1917,9 @@ ${fullNote}`;
         { l: "WHZ", v: g.whz },
         { l: "HCZ", v: g.hcaz },
       ].filter((f) => has(f.v));
-      h += `<div class="rv-sec"><div class="rv-hdr">Growth · ${g.chart || "WHO 2006"}</div>
-    ${zfs.length ? `<div class="z-row">${zfs.map((f) => `<span class="z-chip ${zc(f.v)}">${f.l}: ${f.v}</span>`).join("")}${g.muac ? `<span class="z-chip z-ok">MUAC: ${g.muac}cm</span>` : ""}</div>` : ""}
-    <div class="info-block" contenteditable="true" spellcheck="false">${g.comment}</div>
+      h += `<div class="rv-sec"><div class="rv-hdr">Growth · ${esc(g.chart) || "WHO 2006"}</div>
+    ${zfs.length ? `<div class="z-row">${zfs.map((f) => `<span class="z-chip ${zc(f.v)}">${esc(f.l)}: ${esc(f.v)}</span>`).join("")}${g.muac ? `<span class="z-chip z-ok">MUAC: ${esc(g.muac)}cm</span>` : ""}</div>` : ""}
+    <div class="info-block" contenteditable="true" spellcheck="false">${esc(g.comment)}</div>
     </div>`;
     }
     if (
@@ -1921,42 +1928,42 @@ ${fullNote}`;
     ) {
       const v = r.vaccinations;
       h += `<div class="rv-sec"><div class="rv-hdr">Vaccination — IAP 2024</div>
-    ${(v.due || []).map((x) => `<div class="vax-row"><span>${x}</span><span class="vax-due">Due today</span></div>`).join("")}
-    ${(v.overdue || []).map((x) => `<div class="vax-row"><span>${x}</span><span class="vax-over">Overdue</span></div>`).join("")}
-    ${v.next_due ? `<div style="font-size:11px;color:var(--ink3);padding:5px 0;font-family:system-ui,sans-serif">Next due: ${v.next_due}</div>` : ""}
+    ${(v.due || []).map((x) => `<div class="vax-row"><span>${esc(x)}</span><span class="vax-due">Due today</span></div>`).join("")}
+    ${(v.overdue || []).map((x) => `<div class="vax-row"><span>${esc(x)}</span><span class="vax-over">Overdue</span></div>`).join("")}
+    ${v.next_due ? `<div style="font-size:11px;color:var(--ink3);padding:5px 0;font-family:system-ui,sans-serif">Next due: ${esc(v.next_due)}</div>` : ""}
     </div>`;
     }
     if (has(r.developmental) && has(r.developmental.findings)) {
       h += `<div class="rv-sec"><div class="rv-hdr">Developmental screening</div>
-    <div class="info-block" contenteditable="true" spellcheck="false">${r.developmental.findings}${r.developmental.red_flags?.length ? '<br><strong style="color:var(--red)">Red flags: </strong>' + r.developmental.red_flags.join(", ") : ""}</div>
+    <div class="info-block" contenteditable="true" spellcheck="false">${esc(r.developmental.findings)}${r.developmental.red_flags?.length ? '<br><strong style="color:var(--red)">Red flags: </strong>' + r.developmental.red_flags.map((rf) => esc(rf)).join(", ") : ""}</div>
     </div>`;
     }
     if (has(r.diet)) {
       h += `<div class="rv-sec"><div class="rv-hdr">Diet & nutrition</div>
-    <div class="info-block" contenteditable="true" spellcheck="false">${r.diet}</div></div>`;
+    <div class="info-block" contenteditable="true" spellcheck="false">${esc(r.diet)}</div></div>`;
     }
     if (has(r.referral)) {
       h += `<div class="rv-sec"><div class="rv-hdr">Referral</div>
-    <div class="info-block" contenteditable="true" spellcheck="false">${r.referral}</div></div>`;
+    <div class="info-block" contenteditable="true" spellcheck="false">${esc(r.referral)}</div></div>`;
     }
     if (has(r.counselling)) {
       h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div>
-    <div style="font-size:13px;color:var(--ink2);font-family:system-ui,sans-serif;line-height:2">${r.counselling.map((c) => `<span style="margin-right:14px">✓ ${c}</span>`).join("")}</div></div>`;
+    <div style="font-size:13px;color:var(--ink2);font-family:system-ui,sans-serif;line-height:2">${r.counselling.map((c) => `<span style="margin-right:14px">✓ ${esc(c)}</span>`).join("")}</div></div>`;
     }
     h += `<div class="rv-sec"><div class="rv-hdr red">Emergency warning signs — तुरंत वापस आएं</div>
   <div class="emerg-grid">${EMERGENCY.map((s) => `<div class="emerg-item"><div class="emerg-dot"></div><div><strong>${s.hi}</strong><br><span style="color:var(--ink3);font-size:11px">${s.en}</span></div></div>`).join("")}</div></div>`;
 
     h += `<div class="fu-bar">
     <div><div style="font-size:10px;color:var(--ink3);font-family:system-ui,sans-serif;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.05em">Return after</div>
-    <div style="display:flex;align-items:baseline;gap:4px"><input class="fu-edit" id="fu-days" type="number" value="${r.followup_days || 3}" min="1" max="90"> <span style="font-size:14px;color:var(--blue);font-weight:700">days</span></div></div>
-    ${r.doctor_notes ? `<div style="flex:1;font-size:13px;color:var(--ink2);border-left:0.5px solid var(--bdr);padding-left:14px;outline:none;font-family:system-ui,sans-serif" contenteditable="true" spellcheck="false">${r.doctor_notes}</div>` : ""}
+    <div style="display:flex;align-items:baseline;gap:4px"><input class="fu-edit" id="fu-days" type="number" value="${esc(r.followup_days || 3)}" min="1" max="90"> <span style="font-size:14px;color:var(--blue);font-weight:700">days</span></div></div>
+    ${r.doctor_notes ? `<div style="flex:1;font-size:13px;color:var(--ink2);border-left:0.5px solid var(--bdr);padding-left:14px;outline:none;font-family:system-ui,sans-serif" contenteditable="true" spellcheck="false">${esc(r.doctor_notes)}</div>` : ""}
   </div>`;
 
     h += `<div class="auth-block">
     <div><div class="auth-name">Dr. Lokender Goyal · Dr. Swati Goyal</div>
     <div class="auth-meta">MD Pediatrics · HMCI HN 21452 (Haryana) · PMC 23168 (Punjab)<br>Radhakishan Hospital, Jyoti Nagar, Kurukshetra · 01744-251441 · 7206029516</div>
     <div style="font-size:11px;color:var(--ink3);font-style:italic;margin-top:3px">AI-generated draft — awaiting doctor approval</div></div>
-    <div style="text-align:right;color:var(--ink3)"><div>Allergy: ${r.safety?.allergy_note || "NKDA"}</div><div>Interactions ✓</div><div>Max dose ✓</div><div>NABH ✓</div></div>
+    <div style="text-align:right;color:var(--ink3)"><div>Allergy: ${esc(r.safety?.allergy_note) || "NKDA"}</div><div>Interactions ✓</div><div>Max dose ✓</div><div>NABH ✓</div></div>
   </div>`;
 
     document.getElementById("review-wrap").innerHTML = h;
@@ -1999,7 +2006,7 @@ ${fullNote}`;
       maxS,
       m.formulation || "syrup",
     );
-    res.innerHTML = `<strong>${r.vol}</strong> per dose · ${freq}× daily<br><span style="font-size:11px;opacity:0.8">${r.calc}</span>`;
+    res.innerHTML = `<strong>${esc(r.vol)}</strong> per dose · ${freq}× daily<br><span style="font-size:11px;opacity:0.8">${esc(r.calc)}</span>`;
     if (r.capped) {
       warn.style.display = "block";
       warn.textContent =
@@ -2264,12 +2271,12 @@ ${fullNote}`;
     document.getElementById("view-rx").style.display = "none";
     document.getElementById("save-inner").innerHTML = `
     <div class="save-done">✓ Prescription ${saved ? "saved to Supabase" : "generated"}</div>
-    <div style="color:var(--ink3);font-size:13px;margin-bottom:4px">Rx ID: <strong>${rxId}</strong></div>
+    <div style="color:var(--ink3);font-size:13px;margin-bottom:4px">Rx ID: <strong>${esc(rxId)}</strong></div>
     ${saved ? `<div style="color:var(--ink3);font-size:12px">Patient record, visit, and prescription saved. Growth record updated.</div>` : '<div style="color:var(--ink3);font-size:12px">Not connected to Supabase — prescription not saved to database.</div>'}
     <div class="save-links">
       <button class="save-link-btn primary" onclick="window.parent.postMessage({type:'radhakishan-rx',payload:rxData},'*');showToast('Sent to Output artifact')">Send to Output →</button>
       <button class="save-link-btn" onclick="printRx()">Print now</button>
-      ${pdfUrl ? `<a href="${pdfUrl}" target="_blank" class="save-link-btn">View saved file</a>` : ""}
+      ${pdfUrl ? `<a href="${esc(pdfUrl)}" target="_blank" class="save-link-btn">View saved file</a>` : ""}
       <button class="save-link-btn" onclick="resetPad()">New prescription</button>
     </div>`;
   }
@@ -2283,7 +2290,7 @@ ${fullNote}`;
       year: "numeric",
     });
     const w = window.open("", "_blank");
-    w.document.write(`<!DOCTYPE html><html><head><title>Rx ${rxId}</title>
+    w.document.write(`<!DOCTYPE html><html><head><title>Rx ${esc(rxId)}</title>
   <style>body{font-family:'Times New Roman',serif;font-size:12px;padding:12mm;color:#1a1a14}
   h1{font-size:18px;text-align:center;margin:0}
   .sub{text-align:center;font-size:10px;color:#666;margin-bottom:8px}
@@ -2299,21 +2306,21 @@ ${fullNote}`;
   <h1>Radhakishan Hospital</h1>
   <div class="sub">राधाकिशन हस्पताल · Jyoti Nagar, Kurukshetra · NABH Accredited</div>
   <div class="meta">
-    <div><strong>${r.patient.name || "Patient"}</strong> · ${r.patient.age || ""} · ${r.patient.sex || ""} · ${r.patient.weight_kg || ""}kg<br>UHID: ${rxId}</div>
+    <div><strong>${esc(r.patient.name) || "Patient"}</strong> · ${esc(r.patient.age)} · ${esc(r.patient.sex)} · ${esc(r.patient.weight_kg)}kg<br>UHID: ${esc(rxId)}</div>
     <div style="text-align:right">${today}<br>Dr. Lokender Goyal / Dr. Swati Goyal</div>
   </div>
-  <div class="dx">Diagnosis: ${(r.diagnosis || []).map((d) => d.name + (d.icd10 ? " (" + d.icd10 + ")" : "")).join(" · ")}</div>
+  <div class="dx">Diagnosis: ${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "")).join(" · ")}</div>
   <div class="sec-title">℞ Medicines</div>
-  ${(r.medicines || []).map((m) => `<div class="med"><div class="r1">${m.number}. ${m.row1_en || ""}</div><div>${m.row2_en || ""}</div><div class="r3">${m.row3_hi || ""}</div>${m.calc ? `<div style="font-size:9px;color:#aaa">${m.calc}</div>` : ""}</div>`).join("")}
-  ${(r.investigations || []).length ? `<div class="sec"><div class="sec-title" style="color:#8b1a1a">Investigations</div>${r.investigations.map((i) => `<div style="color:#8b1a1a"><strong>${i.name}</strong> — ${i.indication}</div>`).join("")}</div>` : ""}
-  ${r.growth?.comment ? `<div class="sec"><div class="sec-title">Growth Assessment</div><div>${r.growth.comment}</div></div>` : ""}
-  ${(r.vaccinations?.due || []).length ? `<div class="sec"><div class="sec-title">Vaccinations Due Today</div>${r.vaccinations.due.join(", ")}</div>` : ""}
+  ${(r.medicines || []).map((m) => `<div class="med"><div class="r1">${esc(m.number)}. ${esc(m.row1_en)}</div><div>${esc(m.row2_en)}</div><div class="r3">${esc(m.row3_hi)}</div>${m.calc ? `<div style="font-size:9px;color:#aaa">${esc(m.calc)}</div>` : ""}</div>`).join("")}
+  ${(r.investigations || []).length ? `<div class="sec"><div class="sec-title" style="color:#8b1a1a">Investigations</div>${r.investigations.map((i) => `<div style="color:#8b1a1a"><strong>${esc(i.name)}</strong> — ${esc(i.indication)}</div>`).join("")}</div>` : ""}
+  ${r.growth?.comment ? `<div class="sec"><div class="sec-title">Growth Assessment</div><div>${esc(r.growth.comment)}</div></div>` : ""}
+  ${(r.vaccinations?.due || []).length ? `<div class="sec"><div class="sec-title">Vaccinations Due Today</div>${r.vaccinations.due.map((d) => esc(d)).join(", ")}</div>` : ""}
   <div class="sec"><div class="sec-title" style="color:#8b1a1a">Emergency signs — तुरंत वापस आएं</div>
-  <div style="font-size:10px">${EMERGENCY.map((s) => `${s.hi} (${s.en})`).join(" · ")}</div></div>
-  <div class="sec">Follow-up after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + r.doctor_notes : ""}</div>
+  <div style="font-size:10px">${EMERGENCY.map((s) => `${esc(s.hi)} (${esc(s.en)})`).join(" · ")}</div></div>
+  <div class="sec">Follow-up after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div>
   <div class="footer">
     <div>Dr. Lokender Goyal · MD Pediatrics (PGI) · HMCI HN 21452<br>Radhakishan Hospital, Kurukshetra · 01744-251441</div>
-    <div style="text-align:right;font-style:italic;color:#999">AI-assisted · Doctor approved<br>Rx ID: ${rxId}</div>
+    <div style="text-align:right;font-style:italic;color:#999">AI-assisted · Doctor approved<br>Rx ID: ${esc(rxId)}</div>
   </div>
   </body></html>`);
     w.document.close();

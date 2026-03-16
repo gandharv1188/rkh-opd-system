@@ -901,6 +901,12 @@
     if (typeof v === "object") return Object.values(v).some((x) => has(x));
     return true;
   }
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
   function zc(v) {
     const n = parseFloat(v);
     if (isNaN(n)) return "";
@@ -936,16 +942,16 @@
       Date: <strong>${today}</strong><br>
       Time: ${time}<br>
       Rx ID: <strong>${rxid}</strong><br>
-      UHID: <strong>${uhid}</strong><br><br>
+      UHID: <strong>${esc(uhid)}</strong><br><br>
       Emergency:<br>01744-251441<br>01744-270516<br>7206029516
     </div>
   </div>`;
 
     /* ---- META ---- */
     h += `<div class="rx-meta">
-    <div class="rx-mc"><div class="rx-mc-lbl">Patient name</div><div class="rx-mc-val">${rx.patient.name || "—"}</div></div>
-    <div class="rx-mc"><div class="rx-mc-lbl">Age · Sex · Weight</div><div class="rx-mc-val">${rx.patient.age || "—"} · ${rx.patient.sex || "—"} · ${rx.patient.weight_kg ? rx.patient.weight_kg + " kg" : "—"}</div></div>
-    <div class="rx-mc"><div class="rx-mc-lbl">Guardian / Contact</div><div class="rx-mc-val">${rx.patient.guardian || "—"}</div></div>
+    <div class="rx-mc"><div class="rx-mc-lbl">Patient name</div><div class="rx-mc-val">${esc(rx.patient.name || "—")}</div></div>
+    <div class="rx-mc"><div class="rx-mc-lbl">Age · Sex · Weight</div><div class="rx-mc-val">${esc(rx.patient.age || "—")} · ${esc(rx.patient.sex || "—")} · ${rx.patient.weight_kg ? esc(rx.patient.weight_kg) + " kg" : "—"}</div></div>
+    <div class="rx-mc"><div class="rx-mc-lbl">Guardian / Contact</div><div class="rx-mc-val">${esc(rx.patient.guardian || "—")}</div></div>
   </div>`;
 
     /* ---- BODY ---- */
@@ -953,7 +959,7 @@
     /* Diagnosis — always */
     if (has(rx.diagnosis)) {
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Diagnosis</div>
-    ${rx.diagnosis.map((d) => `<div class="dx-line">${d.name}<span class="dx-icd">${d.icd10 || ""}</span><span class="dx-type">${d.type || ""}</span></div>`).join("")}</div>`;
+    ${rx.diagnosis.map((d) => `<div class="dx-line">${esc(d.name)}<span class="dx-icd">${esc(d.icd10 || "")}</span><span class="dx-type">${esc(d.type || "")}</span></div>`).join("")}</div>`;
     }
 
     /* Triage — only if score > 0 */
@@ -971,13 +977,13 @@
             ? "#fef8e8"
             : "#e8edf8";
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Triage assessment</div>
-    <span class="triage-pill" style="color:${tc};background:${bg}">Score ${rx.triage_score} — ${rx.triage_action}</span></div>`;
+    <span class="triage-pill" style="color:${tc};background:${bg}">Score ${rx.triage_score} — ${esc(rx.triage_action)}</span></div>`;
     }
 
     /* Safety flags — only if present */
     if (has(rx.safety) && has(rx.safety.flags) && rx.safety.flags.length) {
       h += `<div class="rx-sec"><div class="rx-sec-title" style="color:#7a4a00;border-color:rgba(122,74,0,0.2)">Safety alerts</div>
-    ${rx.safety.flags.map((f) => `<div class="safety-flag"><span style="flex-shrink:0">⚠</span><span>${f}</span></div>`).join("")}</div>`;
+    ${rx.safety.flags.map((f) => `<div class="safety-flag"><span style="flex-shrink:0">⚠</span><span>${esc(f)}</span></div>`).join("")}</div>`;
     }
 
     /* Neonatal — only if present */
@@ -985,12 +991,12 @@
       const n = rx.neonatal;
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Neonatal details</div>
     <div class="neo-grid">
-      ${n.ga ? `<div class="neo-cell"><div class="neo-lbl">Gestational age</div><div class="neo-val">${n.ga} wks</div></div>` : ""}
-      ${n.pna ? `<div class="neo-cell"><div class="neo-lbl">Postnatal age</div><div class="neo-val">${n.pna} days</div></div>` : ""}
-      ${n.bw ? `<div class="neo-cell"><div class="neo-lbl">Birth weight</div><div class="neo-val">${n.bw} kg</div></div>` : ""}
-      ${n.corrected ? `<div class="neo-cell"><div class="neo-lbl">Corrected age</div><div class="neo-val">${n.corrected}</div></div>` : ""}
+      ${n.ga ? `<div class="neo-cell"><div class="neo-lbl">Gestational age</div><div class="neo-val">${esc(n.ga)} wks</div></div>` : ""}
+      ${n.pna ? `<div class="neo-cell"><div class="neo-lbl">Postnatal age</div><div class="neo-val">${esc(n.pna)} days</div></div>` : ""}
+      ${n.bw ? `<div class="neo-cell"><div class="neo-lbl">Birth weight</div><div class="neo-val">${esc(n.bw)} kg</div></div>` : ""}
+      ${n.corrected ? `<div class="neo-cell"><div class="neo-lbl">Corrected age</div><div class="neo-val">${esc(n.corrected)}</div></div>` : ""}
     </div>
-    ${n.notes ? `<div class="info-text" style="margin-top:8px;font-family:system-ui,sans-serif">${n.notes}</div>` : ""}
+    ${n.notes ? `<div class="info-text" style="margin-top:8px;font-family:system-ui,sans-serif">${esc(n.notes)}</div>` : ""}
     </div>`;
     }
 
@@ -1003,11 +1009,11 @@
       <div class="med-row">
         <div class="med-num">${m.number}.</div>
         <div>
-          <div class="med-r1">${m.row1_en || ""}</div>
-          <div class="med-r2">${m.row2_en || ""}</div>
-          <div class="med-r3">${m.row3_hi || ""}</div>
-          ${m.calc ? `<div class="med-calc-line">Calculation: ${m.calc}</div>` : ""}
-          ${m.flag ? `<div class="med-flag-line">⚠ ${m.flag}</div>` : ""}
+          <div class="med-r1">${esc(m.row1_en || "")}</div>
+          <div class="med-r2">${esc(m.row2_en || "")}</div>
+          <div class="med-r3">${esc(m.row3_hi || "")}</div>
+          ${m.calc ? `<div class="med-calc-line">Calculation: ${esc(m.calc)}</div>` : ""}
+          ${m.flag ? `<div class="med-flag-line">⚠ ${esc(m.flag)}</div>` : ""}
         </div>
       </div>`,
       )
@@ -1018,7 +1024,7 @@
     /* IV fluids — only if present */
     if (has(rx.iv_fluids) && rx.iv_fluids.length) {
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">IV Fluids</div>
-    ${rx.iv_fluids.map((f) => `<div class="iv-text">${typeof f === "string" ? f : JSON.stringify(f)}</div>`).join("")}
+    ${rx.iv_fluids.map((f) => `<div class="iv-text">${esc(typeof f === "string" ? f : JSON.stringify(f))}</div>`).join("")}
     </div>`;
     }
 
@@ -1029,8 +1035,8 @@
       .map(
         (inv) => `
       <div class="inv-row">
-        <div class="inv-name">${inv.name}</div>
-        <div class="inv-ind">${inv.indication}</div>
+        <div class="inv-name">${esc(inv.name)}</div>
+        <div class="inv-ind">${esc(inv.indication)}</div>
         ${inv.urgency === "same-day" ? '<div class="inv-urg">Same day</div>' : ""}
       </div>`,
       )
@@ -1047,9 +1053,9 @@
         { l: "WHZ", v: g.whz },
         { l: "HCZ", v: g.hcaz },
       ].filter((f) => has(f.v));
-      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Growth assessment — ${g.chart || "WHO 2006"}</div>
-    ${zfs.length ? `<div class="z-row">${zfs.map((f) => `<span class="z-chip ${zc(f.v)}">${f.l}: ${f.v}</span>`).join("")}${g.muac ? `<span class="z-chip z-norm">MUAC: ${g.muac} cm</span>` : ""}</div>` : ""}
-    <div class="growth-comment">${g.comment}</div>
+      h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Growth assessment — ${esc(g.chart || "WHO 2006")}</div>
+    ${zfs.length ? `<div class="z-row">${zfs.map((f) => `<span class="z-chip ${zc(f.v)}">${esc(f.l)}: ${esc(f.v)}</span>`).join("")}${g.muac ? `<span class="z-chip z-norm">MUAC: ${esc(g.muac)} cm</span>` : ""}</div>` : ""}
+    <div class="growth-comment">${esc(g.comment)}</div>
     </div>`;
     }
 
@@ -1063,39 +1069,39 @@
       const v = rx.vaccinations;
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Vaccination — IAP 2024 Schedule</div>
     <table class="vax-table">
-      ${(v.due || []).map((x) => `<tr><td>${x}</td><td><span class="vax-due">Due today</span></td></tr>`).join("")}
-      ${(v.overdue || []).map((x) => `<tr><td>${x}</td><td><span class="vax-over">Overdue</span></td></tr>`).join("")}
+      ${(v.due || []).map((x) => `<tr><td>${esc(x)}</td><td><span class="vax-due">Due today</span></td></tr>`).join("")}
+      ${(v.overdue || []).map((x) => `<tr><td>${esc(x)}</td><td><span class="vax-over">Overdue</span></td></tr>`).join("")}
     </table>
-    ${v.next_due ? `<div style="font-size:11px;color:#888;margin-top:5px;font-family:system-ui,sans-serif">Next due: <strong>${v.next_due}</strong></div>` : ""}
-    ${v.notes ? `<div style="font-size:11.5px;color:#555;margin-top:4px;font-family:system-ui,sans-serif">${v.notes}</div>` : ""}
+    ${v.next_due ? `<div style="font-size:11px;color:#888;margin-top:5px;font-family:system-ui,sans-serif">Next due: <strong>${esc(v.next_due)}</strong></div>` : ""}
+    ${v.notes ? `<div style="font-size:11.5px;color:#555;margin-top:4px;font-family:system-ui,sans-serif">${esc(v.notes)}</div>` : ""}
     </div>`;
     }
 
     /* Developmental — only if present */
     if (has(rx.developmental) && has(rx.developmental.findings)) {
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Developmental screening</div>
-    <div class="info-text">${rx.developmental.findings}</div>
-    ${rx.developmental.red_flags && rx.developmental.red_flags.length ? `<div style="color:#8b1a1a;font-size:12px;font-family:system-ui,sans-serif;margin-top:5px"><strong>Red flags:</strong> ${rx.developmental.red_flags.join(", ")}</div>` : ""}
+    <div class="info-text">${esc(rx.developmental.findings)}</div>
+    ${rx.developmental.red_flags && rx.developmental.red_flags.length ? `<div style="color:#8b1a1a;font-size:12px;font-family:system-ui,sans-serif;margin-top:5px"><strong>Red flags:</strong> ${esc(rx.developmental.red_flags.join(", "))}</div>` : ""}
     </div>`;
     }
 
     /* Diet — only if present */
     if (has(rx.diet)) {
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Diet &amp; nutrition</div>
-    <div class="info-text">${rx.diet}</div></div>`;
+    <div class="info-text">${esc(rx.diet)}</div></div>`;
     }
 
     /* Counselling — only if present */
     if (has(rx.counselling) && rx.counselling.length) {
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Counselling given</div>
-    <div class="counsel-row">${rx.counselling.map((c) => `<span class="counsel-chip">✓ ${c}</span>`).join("")}</div>
+    <div class="counsel-row">${rx.counselling.map((c) => `<span class="counsel-chip">✓ ${esc(c)}</span>`).join("")}</div>
     </div>`;
     }
 
     /* Referral — only if present */
     if (has(rx.referral) && rx.referral.trim()) {
       h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Referral</div>
-    <div class="referral-box">${rx.referral}</div></div>`;
+    <div class="referral-box">${esc(rx.referral)}</div></div>`;
     }
 
     /* Emergency signs — always */
@@ -1117,13 +1123,13 @@
       <div style="font-size:10px;color:#aaa;font-family:system-ui,sans-serif;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.05em">Return after</div>
       <span class="followup-days-val">${rx.followup_days || 3} days</span>
     </div>
-    ${rx.doctor_notes ? `<div style="flex:1;font-size:13px;color:#444;border-left:0.5px solid #ddd;padding-left:16px;line-height:1.6;font-family:system-ui,sans-serif">${rx.doctor_notes}</div>` : ""}
+    ${rx.doctor_notes ? `<div style="flex:1;font-size:13px;color:#444;border-left:0.5px solid #ddd;padding-left:16px;line-height:1.6;font-family:system-ui,sans-serif">${esc(rx.doctor_notes)}</div>` : ""}
   </div></div>`;
 
     /* Safety compliance strip */
     h += `<div class="rx-sec"><div class="rx-sec-title t-blk">Safety &amp; NABH compliance</div>
   <div class="safety-strip">
-    <span class="sc-chip">Allergy checked — ${rx.safety && rx.safety.allergy_note ? rx.safety.allergy_note : "NKDA"}</span>
+    <span class="sc-chip">Allergy checked — ${esc(rx.safety && rx.safety.allergy_note ? rx.safety.allergy_note : "NKDA")}</span>
     <span class="sc-chip">Drug interactions verified</span>
     <span class="sc-chip">Max dose verified</span>
     <span class="sc-chip">Weight-based dosing applied</span>
@@ -1145,7 +1151,7 @@
     </div>
     <div class="rx-qr">
       <div class="rx-qr-box" id="qr-box"></div>
-      <div class="rx-qr-lbl">Scan to verify<br>${rxid}</div>
+      <div class="rx-qr-lbl">Scan to verify<br>${esc(rxid)}</div>
     </div>
   </div>`;
 

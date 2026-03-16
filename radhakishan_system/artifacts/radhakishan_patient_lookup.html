@@ -709,6 +709,13 @@
 </div>
 
 <script>
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
   let SB = "",
     KEY = "",
     openCardId = null,
@@ -788,7 +795,7 @@
       renderResults(pts);
     } catch (e) {
       document.getElementById("results").innerHTML =
-        `<div class="empty-state"><h3>Search error</h3><p>${e.message}</p></div>`;
+        `<div class="empty-state"><h3>Search error</h3><p>${esc(e.message)}</p></div>`;
     }
   }
 
@@ -801,29 +808,32 @@
     }
     wrap.innerHTML = pts
       .map((p) => {
-        const initials = (p.name || "?")
-          .split(" ")
-          .map((w) => w[0])
-          .join("")
-          .slice(0, 2)
-          .toUpperCase();
-        const age = p.dob ? calcAge(p.dob) : "Age unknown";
+        const initials = esc(
+          (p.name || "?")
+            .split(" ")
+            .map((w) => w[0])
+            .join("")
+            .slice(0, 2)
+            .toUpperCase(),
+        );
+        const age = p.dob ? esc(calcAge(p.dob)) : "Age unknown";
         const guardian = p.guardian_name
-          ? `${p.guardian_name}${p.guardian_relation ? " (" + p.guardian_relation + ")" : ""}`
+          ? `${esc(p.guardian_name)}${p.guardian_relation ? " (" + esc(p.guardian_relation) + ")" : ""}`
           : null;
-        return `<div class="result-card" id="card-${p.id}" onclick="toggleCard('${p.id}')">
+        const safeId = esc(p.id);
+        return `<div class="result-card" id="card-${safeId}" onclick="toggleCard('${safeId}')">
       <div class="rc-hdr">
         <div class="rc-main">
           <div class="rc-avatar">${initials}</div>
           <div>
-            <div class="rc-name">${p.name}</div>
-            <div class="rc-meta">${age} · ${p.sex || "—"}${guardian ? " · " + guardian : ""}</div>
+            <div class="rc-name">${esc(p.name)}</div>
+            <div class="rc-meta">${age} · ${esc(p.sex) || "—"}${guardian ? " · " + guardian : ""}</div>
           </div>
         </div>
-        <span class="rc-uhid">${p.id}</span>
-        <span class="rc-chev" id="chev-${p.id}">▾</span>
+        <span class="rc-uhid">${safeId}</span>
+        <span class="rc-chev" id="chev-${safeId}">▾</span>
       </div>
-      <div class="pt-detail" id="detail-${p.id}"></div>
+      <div class="pt-detail" id="detail-${safeId}"></div>
     </div>`;
       })
       .join("");
@@ -875,16 +885,17 @@
       const growths = grRes.ok ? await grRes.json() : [];
       renderDetail(pid, container, visits, rxs, growths);
     } catch (e) {
-      container.innerHTML = `<div class="eb" style="margin:12px">${e.message}</div>`;
+      container.innerHTML = `<div class="eb" style="margin:12px">${esc(e.message)}</div>`;
     }
   }
 
   function renderDetail(pid, container, visits, rxs, growths) {
     const tab = openCardTab[pid] || 0;
+    const safePid = esc(pid);
     let h = `<div class="pt-tabs">
-    <button class="ptt ${tab === 0 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${pid}',0)">Visits (${visits.length})</button>
-    <button class="ptt ${tab === 1 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${pid}',1)">Prescriptions (${rxs.length})</button>
-    <button class="ptt ${tab === 2 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${pid}',2)">Growth (${growths.length})</button>
+    <button class="ptt ${tab === 0 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',0)">Visits (${visits.length})</button>
+    <button class="ptt ${tab === 1 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',1)">Prescriptions (${rxs.length})</button>
+    <button class="ptt ${tab === 2 ? "on" : ""}" onclick="event.stopPropagation();switchTab('${safePid}',2)">Growth (${growths.length})</button>
   </div>`;
 
     if (tab === 0) {
@@ -895,19 +906,19 @@
           .map((v) => {
             const dxNames =
               (v.diagnosis_codes || [])
-                .map((d) => d.name || d.icd10)
+                .map((d) => esc(d.name || d.icd10))
                 .join(", ") || "No diagnosis recorded";
             return `<div class="visit-row">
           <div class="visit-date">${formatDate(v.visit_date)}</div>
           <div class="visit-dx">${dxNames}</div>
-          <div class="visit-wt">${v.weight_kg ? v.weight_kg + " kg" : ""}</div>
+          <div class="visit-wt">${v.weight_kg ? esc(v.weight_kg) + " kg" : ""}</div>
           <span class="v-badge">Visit</span>
         </div>`;
           })
           .join("");
       }
       h += `<div style="margin-top:10px">
-      <button onclick="event.stopPropagation();startNewVisit('${pid}')"
+      <button onclick="event.stopPropagation();startNewVisit('${safePid}')"
         style="padding:8px 16px;background:var(--blue);color:#fff;border:none;border-radius:var(--r);font-size:12px;cursor:pointer;font-family:inherit">
         + Start new prescription for this patient
       </button>
@@ -922,20 +933,21 @@
           .map((rx) => {
             const meds = (rx.medicines || rx.generated_json?.medicines || [])
               .slice(0, 3)
-              .map((m) => (m.row1_en || "").split("(")[0].trim())
+              .map((m) => esc((m.row1_en || "").split("(")[0].trim()))
               .filter(Boolean)
               .join(" · ");
+            const safeRxId = esc(rx.id);
             return `<div class="rx-row" onclick="event.stopPropagation()">
           <div class="rx-row-hdr">
-            <span class="rx-id">${rx.id}</span>
+            <span class="rx-id">${safeRxId}</span>
             <span class="rx-date">${formatDate(rx.created_at?.split("T")[0])}</span>
             ${rx.is_approved ? '<span class="rx-approved">Approved</span>' : ""}
           </div>
           <div class="rx-meds">${meds || "No medicines recorded"}</div>
           <div class="rx-actions">
-            ${rx.pdf_url ? `<button class="rxa" onclick="window.open('${rx.pdf_url}')">View file</button>` : ""}
-            <button class="rxa" onclick="showRxDetail('${rx.id}')">View details</button>
-            <button class="rxa primary" onclick="reusePrescription('${rx.id}')">Reuse as template</button>
+            ${rx.pdf_url ? `<button class="rxa" onclick="window.open('${esc(rx.pdf_url)}')">View file</button>` : ""}
+            <button class="rxa" onclick="showRxDetail('${safeRxId}')">View details</button>
+            <button class="rxa primary" onclick="reusePrescription('${safeRxId}')">Reuse as template</button>
           </div>
         </div>`;
           })
@@ -967,10 +979,10 @@
             ].filter((f) => f.v !== null && f.v !== undefined);
             return `<div class="growth-row">
           <span class="growth-date">${formatDate(g.recorded_date)}</span>
-          <span style="font-size:12px;font-weight:500;color:var(--ink)">${g.weight_kg ? g.weight_kg + "kg" : ""} ${g.height_cm ? g.height_cm + "cm" : ""}</span>
-          ${zfields.map((f) => `<span class="z-chip ${zc(f.v)}">${f.l}: ${f.v}</span>`).join("")}
-          ${g.muac_cm ? `<span class="z-chip z-ok">MUAC: ${g.muac_cm}cm</span>` : ""}
-          <span style="font-size:11px;color:var(--ink3)">${g.classification || ""}</span>
+          <span style="font-size:12px;font-weight:500;color:var(--ink)">${g.weight_kg ? esc(g.weight_kg) + "kg" : ""} ${g.height_cm ? esc(g.height_cm) + "cm" : ""}</span>
+          ${zfields.map((f) => `<span class="z-chip ${zc(f.v)}">${esc(f.l)}: ${esc(f.v)}</span>`).join("")}
+          ${g.muac_cm ? `<span class="z-chip z-ok">MUAC: ${esc(g.muac_cm)}cm</span>` : ""}
+          <span style="font-size:11px;color:var(--ink3)">${esc(g.classification) || ""}</span>
         </div>`;
           })
           .join("");

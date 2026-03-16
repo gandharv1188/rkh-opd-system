@@ -519,6 +519,14 @@
 </div>
 
 <script>
+  /* ===== XSS helper ===== */
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
   let SB = "",
     KEY = "",
     parsedDrugs = [];
@@ -919,19 +927,22 @@
           bands
             .map(
               (b) =>
-                `${b.dose_min_qty || "?"}${b.dose_max_qty ? "–" + b.dose_max_qty : ""} ${b.dose_unit || "mg"}/${b.method === "bsa" ? "m²" : "kg"}`,
+                `${b.dose_min_qty || "?"}${b.dose_max_qty ? "–" + b.dose_max_qty : ""} ${esc(b.dose_unit || "mg")}/${b.method === "bsa" ? "m²" : "kg"}`,
             )
             .join(", ") || "—";
         const formSummary =
           forms
-            .map((f) => `${f.form} ${f.conc_qty || "?"}${f.conc_unit || "mg"}`)
+            .map(
+              (f) =>
+                `${esc(f.form)} ${esc(f.conc_qty || "?")}${esc(f.conc_unit || "mg")}`,
+            )
             .join(", ") || "—";
         return `<tr class="${d._valid ? "valid" : "invalid"}">
       <td>${i + 1}</td>
-      <td title="${d.generic_name}">${d.generic_name || "(missing name)"}</td>
-      <td>${d.category || "—"}</td>
-      <td title="${bandSummary}" style="max-width:140px">${bandSummary}</td>
-      <td title="${formSummary}" style="max-width:140px">${formSummary}</td>
+      <td title="${esc(d.generic_name)}">${esc(d.generic_name) || "(missing name)"}</td>
+      <td>${esc(d.category) || "—"}</td>
+      <td title="${esc(bandSummary)}" style="max-width:140px">${bandSummary}</td>
+      <td title="${esc(formSummary)}" style="max-width:140px">${formSummary}</td>
       <td>${d._valid ? '<span style="color:var(--green)">✓ Ready</span>' : '<span style="color:var(--red)">✗ No name</span>'}</td>
     </tr>`;
       })

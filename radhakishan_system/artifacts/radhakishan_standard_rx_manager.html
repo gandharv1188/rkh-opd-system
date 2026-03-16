@@ -925,6 +925,13 @@
 </div>
 
 <script>
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
   const ICD10 = [
     {
       c: "Respiratory",
@@ -1143,7 +1150,7 @@
       render(data);
     } catch (e) {
       document.getElementById("tbody").innerHTML =
-        `<tr class="er"><td colspan="6">Error: ${e.message}</td></tr>`;
+        `<tr class="er"><td colspan="6">Error: ${esc(e.message)}</td></tr>`;
     }
   }
 
@@ -1157,17 +1164,17 @@
     tb.innerHTML = rows
       .map((d) => {
         const fl = (d.first_line_drugs || [])
-          .map((x) => `<span class="bk bk-blue">${x.drug}</span>`)
+          .map((x) => `<span class="bk bk-blue">${esc(x.drug)}</span>`)
           .join(" ");
         return `<tr>
-      <td><span class="bk bk-green" style="font-size:11px">${d.icd10}</span></td>
-      <td><div class="dn">${d.diagnosis_name}</div><div class="dm">${d.category || ""} · ${d.severity || "any severity"}</div></td>
+      <td><span class="bk bk-green" style="font-size:11px">${esc(d.icd10)}</span></td>
+      <td><div class="dn">${esc(d.diagnosis_name)}</div><div class="dm">${esc(d.category || "")} · ${esc(d.severity || "any severity")}</div></td>
       <td>${fl || '<span style="color:var(--ink3);font-size:11px">—</span>'}</td>
-      <td>${d.duration_days_default ? d.duration_days_default + " days" : "—"}</td>
-      <td>${d.source ? `<span class="bk bk-amber" style="font-size:10px">${d.source}</span>` : "—"}</td>
+      <td>${d.duration_days_default ? esc(d.duration_days_default) + " days" : "—"}</td>
+      <td>${d.source ? `<span class="bk bk-amber" style="font-size:10px">${esc(d.source)}</span>` : "—"}</td>
       <td><div class="ra">
-        <button class="rb" onclick="edit('${d.id}')">Edit</button>
-        <button class="rb dl" onclick="del('${d.id}')">Delete</button>
+        <button class="rb" onclick="edit('${esc(d.id)}')">Edit</button>
+        <button class="rb dl" onclick="del('${esc(d.id)}')">Delete</button>
       </div></td>
     </tr>`;
       })
@@ -1211,7 +1218,7 @@
     res.innerHTML = hits
       .map(
         (d) =>
-          `<div class="dx-item" onclick="selectICD('${d.i}','${d.d.replace(/'/g, "\\'")}','${d.c}')"><div class="dx-name">${d.d}</div><div class="dx-meta">${d.i} · ${d.c}</div></div>`,
+          `<div class="dx-item" onclick="selectICD('${esc(d.i)}','${esc(d.d.replace(/'/g, "\\'"))}','${esc(d.c)}')"><div class="dx-name">${esc(d.d)}</div><div class="dx-meta">${esc(d.i)} · ${esc(d.c)}</div></div>`,
       )
       .join("");
     res.style.display = "block";
@@ -1306,13 +1313,13 @@
     el.id = id;
     el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Drug ${n + 1}</span><button class="rm" onclick="document.getElementById('${id}').remove()">×</button></div>
   <div class="fg g2" style="margin-bottom:8px">
-    <div class="ff"><label>Drug name * (must match formulary)</label><input id="${id}-drug" placeholder="e.g. AMOXICILLIN" oninput="this.value=this.value.toUpperCase()" value="${d ? d.drug || "" : ""}"></div>
+    <div class="ff"><label>Drug name * (must match formulary)</label><input id="${id}-drug" placeholder="e.g. AMOXICILLIN" oninput="this.value=this.value.toUpperCase()" value="${d ? esc(d.drug || "") : ""}"></div>
     <div class="ff"><label>Route</label>
       <select id="${id}-rt"><option value="oral">Oral</option><option value="iv">IV</option><option value="im">IM</option><option value="sc">SC</option><option value="inhaled">Inhaled</option><option value="topical">Topical</option></select>
     </div>
   </div>
   <div class="fg g4" style="margin-bottom:8px">
-    <div class="ff"><label>Dose qty</label><input type="number" id="${id}-dq" placeholder="e.g. 80" step="any" value="${d ? d.dose_qty || "" : ""}"></div>
+    <div class="ff"><label>Dose qty</label><input type="number" id="${id}-dq" placeholder="e.g. 80" step="any" value="${d ? esc(d.dose_qty || "") : ""}"></div>
     <div class="ff"><label>Dose unit</label>
       <select id="${id}-du"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option><option value="mmol">mmol</option></select>
     </div>
@@ -1324,9 +1331,9 @@
     </div>
   </div>
   <div class="fg g3">
-    <div class="ff"><label>Frequency (/day)</label><input type="number" id="${id}-freq" placeholder="e.g. 3" value="${d ? d.frequency_per_day || "" : ""}"></div>
-    <div class="ff"><label>Duration (days)</label><input type="number" id="${id}-dur" placeholder="e.g. 7" value="${d ? d.duration_days || "" : ""}"></div>
-    <div class="ff"><label>Notes</label><input id="${id}-note" placeholder="e.g. High-dose AOM protocol" value="${d ? d.notes || "" : ""}"></div>
+    <div class="ff"><label>Frequency (/day)</label><input type="number" id="${id}-freq" placeholder="e.g. 3" value="${d ? esc(d.frequency_per_day || "") : ""}"></div>
+    <div class="ff"><label>Duration (days)</label><input type="number" id="${id}-dur" placeholder="e.g. 7" value="${d ? esc(d.duration_days || "") : ""}"></div>
+    <div class="ff"><label>Notes</label><input id="${id}-note" placeholder="e.g. High-dose AOM protocol" value="${d ? esc(d.notes || "") : ""}"></div>
   </div>`;
     document.getElementById(listId).appendChild(el);
     if (d) {
@@ -1370,8 +1377,8 @@
     el.id = id;
     el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Investigation</span><button class="rm" onclick="document.getElementById('${id}').remove()">×</button></div>
   <div class="fg g3">
-    <div class="ff"><label>Test name *</label><input id="${id}-n" placeholder="e.g. CBC with differential" value="${d ? d.name || "" : ""}"></div>
-    <div class="ff"><label>Indication</label><input id="${id}-i" placeholder="e.g. Fever > 3 days, rule out bacterial infection" value="${d ? d.indication || "" : ""}"></div>
+    <div class="ff"><label>Test name *</label><input id="${id}-n" placeholder="e.g. CBC with differential" value="${d ? esc(d.name || "") : ""}"></div>
+    <div class="ff"><label>Indication</label><input id="${id}-i" placeholder="e.g. Fever > 3 days, rule out bacterial infection" value="${d ? esc(d.indication || "") : ""}"></div>
     <div class="ff"><label>Urgency</label>
       <select id="${id}-u"><option value="same-day"${d && d.urgency === "same-day" ? " selected" : ""}>Same day</option><option value="routine"${d && d.urgency === "routine" ? " selected" : ""}>Routine</option><option value="urgent"${d && d.urgency === "urgent" ? " selected" : ""}>Urgent</option></select>
     </div>
@@ -1416,7 +1423,7 @@
     (tags[key] || []).forEach((t, i) => {
       const el = document.createElement("span");
       el.className = "tag";
-      el.innerHTML = `${t}<button onclick="rmTag('${key}',${i})">×</button>`;
+      el.innerHTML = `${esc(t)}<button onclick="rmTag('${esc(key)}',${i})">×</button>`;
       wrap.insertBefore(el, inp);
     });
   }
@@ -1474,7 +1481,8 @@
       showToast("Protocol saved");
       load();
     } catch (e) {
-      document.getElementById("drw-err").textContent = "Error: " + e.message;
+      document.getElementById("drw-err").textContent =
+        "Error: " + (e.message || "Save failed");
       document.getElementById("drw-err").style.display = "block";
     }
     btn.textContent = "Save to Supabase";

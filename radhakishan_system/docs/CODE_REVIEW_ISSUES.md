@@ -16,6 +16,7 @@ These issues have already been addressed:
 | R3  | UHID collision risk — `Math.random()` with no uniqueness check                       | New `generateUHID()` queries Supabase for max existing ID in prefix, increments sequentially                                                                                                     |
 | R4  | Safety checks cosmetic — blanket green checkmarks with no actual verification (FN-1) | Skill prompt now requires Claude to output specific findings per check (allergy, interactions, max dose) with SAFE/REVIEW REQUIRED status. Client-side verification deferred to production build |
 | R5  | No dose validation against formulary max dose (FN-2)                                 | Skill prompt now requires per-medicine max dose comparison with PASS/FLAGGED status. Client-side cross-check deferred to production build                                                        |
+| R6  | XSS via innerHTML in all 6 artifacts (FN-3)                                          | Added `esc()` HTML-escaping function to all 6 artifacts; all dynamic data (patient names, AI content, diagnoses, medicines, etc.) now escaped before innerHTML insertion                         |
 
 ---
 
@@ -25,20 +26,7 @@ These issues have already been addressed:
 
 ### ~~FN-2. No dose validation against formulary max dose~~ → RESOLVED (R5)
 
-### FN-3. XSS via innerHTML — all artifacts
-
-**Severity:** CRITICAL
-**Location:** All 6 artifacts — every `innerHTML` assignment with dynamic data
-**Description:** Patient names, AI-generated content, diagnosis names, medicine rows, investigation names, and other user/AI data are interpolated directly into `innerHTML` via template literals without HTML escaping. A patient name like `<img onerror=alert(1)>` or malformed AI output containing HTML would execute arbitrary JavaScript with access to Supabase credentials in memory.
-**Fix:** Add an `escapeHtml()` utility function and apply it to every dynamic value before `innerHTML` insertion:
-
-```javascript
-function esc(s) {
-  const d = document.createElement("div");
-  d.textContent = s;
-  return d.innerHTML;
-}
-```
+### ~~FN-3. XSS via innerHTML — all artifacts~~ → RESOLVED (R6)
 
 ### FN-4. Dosing band populate broken in Formulary Manager
 

@@ -1234,6 +1234,14 @@
 </div>
 
 <script>
+  /* ===== XSS helper ===== */
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
   /* ===== State ===== */
   let SB = "",
     KEY = "",
@@ -1305,7 +1313,7 @@
       renderTable(drugs);
     } catch (e) {
       document.getElementById("tbody").innerHTML =
-        `<tr class="er"><td colspan="5">Error: ${e.message}</td></tr>`;
+        `<tr class="er"><td colspan="5">Error: ${esc(e.message)}</td></tr>`;
     }
   }
 
@@ -1328,7 +1336,7 @@
               b.dose_min_qty && b.dose_max_qty
                 ? `${b.dose_min_qty}–${b.dose_max_qty}`
                 : b.dose_min_qty || b.dose_max_qty || "?";
-            const unit = b.dose_unit || "mg";
+            const unit = esc(b.dose_unit || "mg");
             const basis =
               {
                 weight: "kg",
@@ -1337,14 +1345,14 @@
                 gfr: "GFR",
                 infusion: "kg/min",
                 age: "age",
-              }[m] || m;
-            return `<span class="bk bk-blue" style="font-size:9.5px">${qty} ${unit}/${basis}${b.age_band && b.age_band !== "all" ? " (" + b.age_band + ")" : ""}</span>`;
+              }[m] || esc(m);
+            return `<span class="bk bk-blue" style="font-size:9.5px">${esc(qty)} ${unit}/${basis}${b.age_band && b.age_band !== "all" ? " (" + esc(b.age_band) + ")" : ""}</span>`;
           })
           .join(" ");
         const formHtml = forms
           .map(
             (f) =>
-              `<span class="bk bk-green" style="font-size:9.5px">${f.form} ${f.conc_qty}${f.conc_unit}/${f.per_qty}${f.per_unit}</span>`,
+              `<span class="bk bk-green" style="font-size:9.5px">${esc(f.form)} ${esc(f.conc_qty)}${esc(f.conc_unit)}/${esc(f.per_qty)}${esc(f.per_unit)}</span>`,
           )
           .join(" ");
         const bb = (d.black_box_warnings || []).length
@@ -1358,18 +1366,25 @@
           : "";
         return `<tr>
       <td>
-        <div class="dn">${d.generic_name}</div>
-        <div class="dm">${d.drug_class || ""} · ${d.category || ""}</div>
-        ${(d.brand_names || []).length ? `<div class="dm">${d.brand_names.slice(0, 3).join(", ")}</div>` : ""}
+        <div class="dn">${esc(d.generic_name)}</div>
+        <div class="dm">${esc(d.drug_class || "")} · ${esc(d.category || "")}</div>
+        ${
+          (d.brand_names || []).length
+            ? `<div class="dm">${d.brand_names
+                .slice(0, 3)
+                .map((b) => esc(b))
+                .join(", ")}</div>`
+            : ""
+        }
         <div class="dm" style="margin-top:2px">${d.licensed_in_children === "false" ? '<span class="bk bk-amber">Unlicensed</span>' : d.licensed_in_children === "partial" ? '<span class="bk bk-amber">Partial licence</span>' : ""}</div>
       </td>
       <td>${bandHtml || '<span style="color:var(--ink3);font-size:11px">No bands defined</span>'}</td>
       <td>${formHtml || '<span style="color:var(--ink3);font-size:11px">No formulations</span>'}</td>
       <td>${bb}${ci}${ren}</td>
       <td><div class="ra">
-        <button class="rb" onclick="viewDrug('${d.id}')">View</button>
-        <button class="rb" onclick="editDrug('${d.id}')">Edit</button>
-        <button class="rb dl" onclick="deleteDrug('${d.id}')">Delete</button>
+        <button class="rb" onclick="viewDrug('${esc(d.id)}')">View</button>
+        <button class="rb" onclick="editDrug('${esc(d.id)}')">Edit</button>
+        <button class="rb dl" onclick="deleteDrug('${esc(d.id)}')">Delete</button>
       </div></td>
     </tr>`;
       })
@@ -1430,7 +1445,7 @@
     (tags[key] || []).forEach((t, i) => {
       const el = document.createElement("span");
       el.className = "tag";
-      el.innerHTML = `${t}<button onclick="removeTag('${key}',${i})">×</button>`;
+      el.innerHTML = `${esc(t)}<button onclick="removeTag('${esc(key)}',${i})">×</button>`;
       wrap.insertBefore(el, inp);
     });
   }
@@ -1676,11 +1691,11 @@
     el.id = id;
     el.innerHTML = `<div class="rr-hdr"><span class="rr-title">Interaction</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
   <div class="fg g3">
-    <div class="ff"><label>Drug / class</label><input id="${id}-dr" placeholder="e.g. Warfarin" value="${d ? d.drug || "" : ""}"></div>
+    <div class="ff"><label>Drug / class</label><input id="${id}-dr" placeholder="e.g. Warfarin" value="${d ? esc(d.drug || "") : ""}"></div>
     <div class="ff"><label>Severity</label>
       <select id="${id}-sv">${["black_box", "major", "moderate", "minor"].map((s) => `<option value="${s}"${d && d.severity === s ? " selected" : ""}>${s.replace("_", " ")}</option>`).join("")}</select>
     </div>
-    <div class="ff"><label>Effect / mechanism</label><input id="${id}-ef" placeholder="e.g. Increased bleeding risk — avoid combination" value="${d ? d.effect || "" : ""}"></div>
+    <div class="ff"><label>Effect / mechanism</label><input id="${id}-ef" placeholder="e.g. Increased bleeding risk — avoid combination" value="${d ? esc(d.effect || "") : ""}"></div>
   </div>`;
     document.getElementById("ints-list").appendChild(el);
   }
@@ -1703,12 +1718,12 @@
     el.id = id;
     el.innerHTML = `<div class="rr-hdr"><span class="rr-title">GFR band</span><button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button></div>
   <div class="fg g4">
-    <div class="ff"><label>GFR min (ml/min/1.73m²)</label><input type="number" id="${id}-gmin" placeholder="e.g. 30" value="${d ? d.gfr_min || "" : ""}"></div>
-    <div class="ff"><label>GFR max</label><input type="number" id="${id}-gmax" placeholder="e.g. 60" value="${d ? d.gfr_max || "" : ""}"></div>
+    <div class="ff"><label>GFR min (ml/min/1.73m²)</label><input type="number" id="${id}-gmin" placeholder="e.g. 30" value="${d ? esc(d.gfr_min || "") : ""}"></div>
+    <div class="ff"><label>GFR max</label><input type="number" id="${id}-gmax" placeholder="e.g. 60" value="${d ? esc(d.gfr_max || "") : ""}"></div>
     <div class="ff"><label>Action</label>
       <select id="${id}-act">${["reduce_dose", "extend_interval", "reduce_and_extend", "avoid", "no_adjustment"].map((a) => `<option value="${a}"${d && d.action === a ? " selected" : ""}>${a.replace(/_/g, " ")}</option>`).join("")}</select>
     </div>
-    <div class="ff"><label>Adjusted dose note</label><input id="${id}-note" placeholder="e.g. Reduce dose by 50%; extend to q12h" value="${d ? d.note || "" : ""}"></div>
+    <div class="ff"><label>Adjusted dose note</label><input id="${id}-note" placeholder="e.g. Reduce dose by 50%; extend to q12h" value="${d ? esc(d.note || "") : ""}"></div>
   </div>`;
     document.getElementById("renal-bands-list").appendChild(el);
   }
@@ -1737,11 +1752,11 @@
     <div class="ff"><label>Route</label>
       <select id="${id}-rt"><option value="oral">Oral</option><option value="iv">IV infusion</option><option value="iv_bolus">IV bolus</option><option value="im">IM</option><option value="sc">Subcutaneous</option><option value="inhaled">Inhaled</option><option value="rectal">Rectal</option></select>
     </div>
-    <div class="ff"><label>Reconstitution</label><input id="${id}-rec" placeholder="e.g. Dissolve vial in 10ml WFI → 100mg/ml" value="${d ? d.reconstitution || "" : ""}"></div>
+    <div class="ff"><label>Reconstitution</label><input id="${id}-rec" placeholder="e.g. Dissolve vial in 10ml WFI → 100mg/ml" value="${d ? esc(d.reconstitution || "") : ""}"></div>
   </div>
   <div class="fg g2">
-    <div class="ff"><label>Dilution</label><input id="${id}-dil" placeholder="e.g. Dilute in 50ml NS for IV infusion" value="${d ? d.dilution || "" : ""}"></div>
-    <div class="ff"><label>Infusion rate / compatibility</label><input id="${id}-inf" placeholder="e.g. Infuse over 30 min; incompatible with Ca²⁺ solutions" value="${d ? d.infusion_rate || "" : ""}"></div>
+    <div class="ff"><label>Dilution</label><input id="${id}-dil" placeholder="e.g. Dilute in 50ml NS for IV infusion" value="${d ? esc(d.dilution || "") : ""}"></div>
+    <div class="ff"><label>Infusion rate / compatibility</label><input id="${id}-inf" placeholder="e.g. Infuse over 30 min; incompatible with Ca²⁺ solutions" value="${d ? esc(d.infusion_rate || "") : ""}"></div>
   </div>`;
     document.getElementById("admin-list").appendChild(el);
     if (d) document.getElementById(id + "-rt").value = d.route || "oral";
