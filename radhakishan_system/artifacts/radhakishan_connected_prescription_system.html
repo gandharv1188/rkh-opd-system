@@ -1898,18 +1898,23 @@
     }, 1500);
 
     try {
+      const payload = {
+        clinical_note: fullNote,
+        formulary_context: formularyCtx,
+        std_rx_context: stdRxCtx,
+        patient_allergies: allergies,
+      };
+      console.log(
+        "Prompt sent to AI (excluding skill):",
+        JSON.stringify(payload, null, 2),
+      );
       const res = await fetch(SB + "/functions/v1/generate-prescription", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + KEY,
         },
-        body: JSON.stringify({
-          clinical_note: fullNote,
-          formulary_context: formularyCtx,
-          std_rx_context: stdRxCtx,
-          patient_allergies: allergies,
-        }),
+        body: JSON.stringify(payload),
       });
 
       clearInterval(t);
