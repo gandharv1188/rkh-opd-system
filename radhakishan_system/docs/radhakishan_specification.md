@@ -789,6 +789,23 @@ Every antibiotic prescription must verify: clinically indicated, site of infecti
 
 - Parents counselled on side effects of new medicines
 
+## 12.3 Row Level Security and Access Control
+
+**POC (current):** Row Level Security (RLS) is enabled on all 7 tables with a single policy: `auth.role() = 'authenticated'` grants full access. This means:
+
+- Anonymous/unauthenticated requests are blocked
+- Any authenticated Supabase user has full read/write access to all tables
+- The anon key alone cannot access data — Supabase Auth must be configured and users must sign in
+- **Prerequisite:** Supabase Auth must be set up with at least one user (doctor login) before the artifacts can connect. Until then, the artifacts should use the service_role key for development/testing only.
+
+**Production (future):** Replace the blanket authenticated policy with per-doctor row-level policies:
+
+- Each doctor sees only their own patients and prescriptions (filtered by `doctor_id`)
+- Formulary and standard prescriptions remain readable by all authenticated doctors
+- Admin role for data management (formulary editing, protocol management)
+- Audit logging of all access and modifications (NABH IMS requirement)
+- Consider Supabase Auth with email/password or OTP for doctor login
+
 # 13. Technology Stack
 
 |                 |                                   |                                      |

@@ -348,16 +348,35 @@ create table growth_records (
 create index idx_growth_patient on growth_records(patient_id);
 
 -- ============================================================
--- 8. ROW LEVEL SECURITY (enable after testing)
--- Uncomment when ready to restrict access
+-- 8. ROW LEVEL SECURITY
+-- Enabled on all tables. Current policy: authenticated users
+-- have full access. Per-doctor policies to be added when
+-- Supabase Auth is configured with doctor logins.
 -- ============================================================
--- alter table formulary enable row level security;
--- alter table standard_prescriptions enable row level security;
--- alter table patients enable row level security;
--- alter table visits enable row level security;
--- alter table prescriptions enable row level security;
--- alter table vaccinations enable row level security;
--- alter table growth_records enable row level security;
+alter table formulary enable row level security;
+alter table standard_prescriptions enable row level security;
+alter table patients enable row level security;
+alter table visits enable row level security;
+alter table prescriptions enable row level security;
+alter table vaccinations enable row level security;
+alter table growth_records enable row level security;
+
+-- Policy: authenticated users can perform all operations
+-- Replace with per-doctor policies in production
+create policy "authenticated_full_access" on formulary
+  for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on standard_prescriptions
+  for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on patients
+  for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on visits
+  for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on prescriptions
+  for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on vaccinations
+  for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on growth_records
+  for all using (auth.role() = 'authenticated');
 
 -- ============================================================
 -- 9. UPDATED_AT TRIGGER

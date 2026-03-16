@@ -84,12 +84,9 @@ These issues have already been addressed:
 
 ## DEFER — Production concerns, not POC blockers
 
-### D-1. Row Level Security entirely disabled
+### ~~D-1. Row Level Security entirely disabled~~ → RESOLVED (R23)
 
-**Severity:** CRITICAL for production
-**Location:** `radhakishan_supabase_schema.sql` — lines 344-351 (commented out)
-**Description:** All RLS statements are commented out. Any client with the anon key has full read/write access to all patient data. Acceptable for POC with controlled access, but a data privacy concern for production.
-**Fix:** Enable RLS on all tables and create policies before production deployment with real patient data.
+RLS enabled on all 7 tables with `auth.role() = 'authenticated'` policy. Per-doctor policies deferred to production. Note added to specification Section 12.3.
 
 ### D-2. `ON DELETE CASCADE` on all foreign keys
 
