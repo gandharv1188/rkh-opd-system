@@ -2363,11 +2363,12 @@
   let vadAnalyser = null;
   let isSpeaking = false;
   let silenceStart = 0;
-  const VAD_THRESHOLD = 15; // energy threshold (0-255), below = silence
+  const VAD_THRESHOLD = 25; // energy threshold (0-255), below = silence. 25 suits hospital OPD ambient noise.
   const SILENCE_SEND_MS = 1500; // send after 1.5s silence (natural pause)
   const MAX_CHUNK_MS = 15000; // max 15s even if still speaking
   const MIN_BLOB_BYTES = 4000; // skip blobs under 4KB (silence-only)
   let chunkStartTime = 0;
+  let chunkHadSpeech = false; // tracks if any speech was detected in current chunk
 
   function toggleVoice() {
     if (isRec) {
@@ -2417,6 +2418,7 @@
 
           if (energy > VAD_THRESHOLD) {
             isSpeaking = true;
+            chunkHadSpeech = true;
             silenceStart = 0;
             document.getElementById("mic-st").textContent =
               "Listening — speak naturally…";
@@ -2509,6 +2511,7 @@
     if (!micStream) return;
     audioChunks = [];
     chunkStartTime = Date.now();
+    chunkHadSpeech = false;
     const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
       ? "audio/webm;codecs=opus"
       : "audio/webm";
@@ -2520,9 +2523,15 @@
       if (audioChunks.length === 0) return;
       const blob = new Blob(audioChunks, { type: mimeType });
       audioChunks = [];
+      if (!chunkHadSpeech) {
+        console.log(
+          `Voice: skipped chunk — no speech detected (${blob.size} bytes, ${((Date.now() - chunkStartTime) / 1000).toFixed(1)}s)`,
+        );
+        return;
+      }
       if (blob.size < MIN_BLOB_BYTES) {
         console.log(
-          `Voice: skipped silent chunk (${blob.size} bytes < ${MIN_BLOB_BYTES})`,
+          `Voice: skipped tiny chunk (${blob.size} bytes < ${MIN_BLOB_BYTES})`,
         );
         return;
       }
