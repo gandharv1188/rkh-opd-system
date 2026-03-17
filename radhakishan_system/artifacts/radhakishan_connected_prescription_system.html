@@ -1990,6 +1990,110 @@
     return h;
   }
 
+  // ===== CLINICAL TRACKING: Growth Trend, Labs, Vaccination Status =====
+
+  async function loadGrowthTrend(patientId) {
+    if (!sbConnected) return "";
+    try {
+      const r = await q(
+        "visits",
+        `?patient_id=eq.${encodeURIComponent(patientId)}&weight_kg=not.is.null&order=visit_date.desc&limit=6&select=visit_date,weight_kg,height_cm,hc_cm`,
+      );
+      if (!r.ok) return "";
+      const rows = await r.json();
+      if (rows.length < 2) return ""; // Need at least 2 visits for trend
+      rows.reverse(); // Chronological order
+
+      const wtTrend = rows.map((r) => r.weight_kg).filter(Boolean);
+      const htTrend = rows.map((r) => r.height_cm).filter(Boolean);
+      const arrow = (arr) =>
+        arr.length < 2
+          ? "→"
+          : arr[arr.length - 1] > arr[arr.length - 2]
+            ? "↑"
+            : arr[arr.length - 1] < arr[arr.length - 2]
+              ? "↓"
+              : "→";
+
+      let h =
+        '<div class="vi-row"><span class="vi-label">Growth</span><div style="font-size:11px">';
+      if (wtTrend.length)
+        h += `<span>Wt: ${wtTrend.join("→")} kg <strong style="color:${arrow(wtTrend) === "↑" ? "var(--green)" : "var(--red)"}">${arrow(wtTrend)}</strong></span>`;
+      if (htTrend.length)
+        h += ` <span style="margin-left:8px">Ht: ${htTrend.join("→")} cm <strong>${arrow(htTrend)}</strong></span>`;
+
+      // Fetch latest Z-scores
+      const zr = await q(
+        "growth_records",
+        `?patient_id=eq.${encodeURIComponent(patientId)}&order=recorded_date.desc&limit=1&select=waz,haz,classification`,
+      );
+      if (zr.ok) {
+        const zrows = await zr.json();
+        if (zrows.length && zrows[0].waz) {
+          const z = zrows[0];
+          h += ` <span style="margin-left:8px;color:var(--ink3)">WAZ: ${z.waz} ${z.classification ? "(" + esc(z.classification) + ")" : ""}</span>`;
+        }
+      }
+      h += "</div></div>";
+      return h;
+    } catch (e) {
+      console.warn("loadGrowthTrend:", e.message);
+      return "";
+    }
+  }
+
+  async function loadRecentLabs(patientId) {
+    if (!sbConnected) return "";
+    try {
+      const r = await q(
+        "lab_results",
+        `?patient_id=eq.${encodeURIComponent(patientId)}&order=test_date.desc&limit=8&select=test_name,value,unit,flag,test_date`,
+      );
+      if (!r.ok) return "";
+      const labs = await r.json();
+      if (!labs.length) return "";
+      const items = labs.map((l) => {
+        const flagIcon =
+          l.flag === "low"
+            ? "↓"
+            : l.flag === "high"
+              ? "↑"
+              : l.flag === "critical"
+                ? "⚠"
+                : "";
+        const color = l.flag && l.flag !== "normal" ? "color:var(--red)" : "";
+        return `<span style="${color}">${esc(l.test_name)}: ${esc(l.value)}${flagIcon} ${esc(l.unit || "")}</span>`;
+      });
+      return `<div class="vi-row"><span class="vi-label">Labs</span><div style="font-size:11px;display:flex;flex-wrap:wrap;gap:6px">${items.join(" | ")}</div></div>`;
+    } catch (e) {
+      console.warn("loadRecentLabs:", e.message);
+      return "";
+    }
+  }
+
+  async function loadVaxStatus(patientId, dob) {
+    if (!sbConnected || !dob) return "";
+    try {
+      const r = await q(
+        "vaccinations",
+        `?patient_id=eq.${encodeURIComponent(patientId)}&date_given=not.is.null&select=vaccine_name,dose_number,date_given&order=date_given.desc`,
+      );
+      if (!r.ok) return "";
+      const vaxList = await r.json();
+      const givenCount = vaxList.length;
+      if (!givenCount) return "";
+      const latest = vaxList[0];
+      const latestDate = new Date(latest.date_given).toLocaleDateString(
+        "en-IN",
+        { day: "2-digit", month: "short" },
+      );
+      return `<div class="vi-row"><span class="vi-label">Vaccines</span><div style="font-size:11px">${givenCount} doses recorded · Last: ${esc(latest.vaccine_name)} Dose ${latest.dose_number} (${latestDate})</div></div>`;
+    } catch (e) {
+      console.warn("loadVaxStatus:", e.message);
+      return "";
+    }
+  }
+
   async function onPatientSelect(idx) {
     if (idx === "") {
       clearPatient();
@@ -2042,6 +2146,14 @@
         if (docSel) docSel.value = visit.doctor_id;
       }
     }
+
+    // Load growth trend, recent labs, vaccination status
+    const [growthHtml, labsHtml, vaxHtml] = await Promise.all([
+      loadGrowthTrend(p.id),
+      loadRecentLabs(p.id),
+      loadVaxStatus(p.id, p.dob),
+    ]);
+    vi += growthHtml + labsHtml + vaxHtml;
 
     if (vi) {
       panel.innerHTML = `<div class="visit-info">${vi}</div>`;
@@ -2882,9 +2994,25 @@
         });
       }
 
-      // 5. Save vaccinations if any given today
-      if (has(rxData.vaccinations?.due)) {
-        // These are due — record when actually given (stub for now)
+      // 5. Save vaccinations given today
+      if (has(rxData.vaccinations?.given_today)) {
+        for (const vax of rxData.vaccinations.given_today) {
+          await q("vaccinations", "", "POST", {
+            patient_id: patientId,
+            visit_id: visitId,
+            vaccine_name: vax.vaccine_name || vax,
+            dose_number: vax.dose_number || null,
+            date_given: today,
+            route: vax.route || null,
+            site: vax.site || null,
+            given_by: doctor,
+            free_or_paid: vax.free_or_paid || "paid",
+          });
+        }
+        console.log(
+          "Vaccinations saved:",
+          rxData.vaccinations.given_today.length,
+        );
       }
 
       // 6. Generate PDF and upload to Supabase Storage
@@ -3372,6 +3500,9 @@
     clearHistoryTabs,
     loadHistoryTabs,
     renderHistoryRx,
+    loadGrowthTrend,
+    loadRecentLabs,
+    loadVaxStatus,
   });
 
   // Auto-connect on page load

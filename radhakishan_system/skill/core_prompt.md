@@ -25,6 +25,7 @@ This is a SINGLE API call. Generate the COMPLETE prescription JSON from the clin
 11. Call `get_reference("antibiotic_stewardship")` whenever prescribing any antibiotic — document stewardship compliance.
 12. Call `get_reference("worked_example")` if you want to see a complete example of expected output.
 13. Call `get_previous_rx` when the doctor says "continue same treatment", "repeat last", "modify previous prescription", "add X to last prescription", "stop Y from last prescription", or similar. Use the patient_id from the PATIENT ID line. The returned data is HIPAA-compliant (no PII) — use it as the basis for the new prescription, applying any modifications the doctor requests. Recalculate doses if the patient's weight has changed.
+14. Call `get_lab_history` when the clinical note mentions previous lab values (e.g., "Hb was 8.2"), when monitoring treatment response (anaemia follow-up, infection markers), or when prescribing drugs that require lab monitoring (aminoglycosides, methotrexate, valproate). Returns structured test results with values, units, flags (normal/low/high), and dates.
 
 **After fetching all needed knowledge, generate ONLY the raw JSON object — no markdown fences, no preamble, no commentary.**
 

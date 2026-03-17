@@ -386,6 +386,37 @@ create index idx_growth_patient      on growth_records(patient_id);
 create index idx_growth_patient_date on growth_records(patient_id, recorded_date desc);
 
 -- ============================================================
+-- 7b. LAB RESULTS
+-- Structured lab/investigation results for trend analysis
+-- ============================================================
+create table lab_results (
+  id              serial primary key,
+  patient_id      text not null references patients(id) on delete restrict,
+  visit_id        uuid references visits(id),
+
+  test_name       text not null,
+  test_category   text,
+  -- 'Hematology', 'Biochemistry', 'Microbiology', 'Imaging'
+  value           text not null,
+  value_numeric   numeric,
+  unit            text,
+  reference_range text,
+  flag            text check (flag in ('normal', 'low', 'high', 'critical', 'abnormal')),
+
+  test_date       date not null default current_date,
+  lab_name        text,
+  source          text default 'manual' check (source in ('manual', 'ai_extracted', 'upload')),
+  notes           text,
+
+  created_at      timestamptz default now(),
+  updated_at      timestamptz default now()
+);
+
+create index idx_lab_patient      on lab_results(patient_id);
+create index idx_lab_patient_date on lab_results(patient_id, test_date desc);
+create index idx_lab_test         on lab_results(test_name);
+
+-- ============================================================
 -- 8. DEVELOPMENTAL SCREENINGS
 -- Structured storage for developmental assessments, separate
 -- from prescriptions.generated_json for queryability.

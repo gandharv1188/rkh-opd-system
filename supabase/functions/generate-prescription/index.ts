@@ -127,6 +127,27 @@ const tools = [
       required: ["patient_id"],
     },
   },
+  {
+    name: "get_lab_history",
+    description:
+      "Fetch the patient's recent lab test results. Use when clinical note mentions previous lab values, when monitoring treatment response (e.g., Hb trend for anaemia), or when prescribing drugs requiring monitoring (aminoglycosides, methotrexate). Returns test name, value, unit, flag (normal/low/high), and date.",
+    input_schema: {
+      type: "object",
+      properties: {
+        patient_id: {
+          type: "string",
+          description: "Patient UHID (e.g., 'RKH-25260300001')",
+        },
+        test_names: {
+          type: "array",
+          items: { type: "string" },
+          description:
+            "Optional: specific tests to filter (e.g., ['Hemoglobin', 'S. Creatinine']). Omit for all recent results.",
+        },
+      },
+      required: ["patient_id"],
+    },
+  },
 ];
 
 // ===== TOOL EXECUTION =====
@@ -288,8 +309,34 @@ async function executeTool(
       return await executeGetStandardRx(input.icd10, input.name);
     case "get_previous_rx":
       return await executeGetPreviousRx(input.patient_id, input.limit);
+    case "get_lab_history":
+      return await executeGetLabHistory(input.patient_id, input.test_names);
     default:
       return `Unknown tool: ${name}`;
+  }
+}
+
+async function executeGetLabHistory(
+  patientId: string,
+  testNames?: string[],
+): Promise<string> {
+  try {
+    let url = `${SUPABASE_URL}/rest/v1/lab_results?patient_id=eq.${encodeURIComponent(patientId)}&order=test_date.desc&limit=20&select=test_name,value,value_numeric,unit,reference_range,flag,test_date,notes`;
+    if (testNames && testNames.length) {
+      const filter = testNames
+        .map((t) => `test_name.ilike.%25${encodeURIComponent(t)}%25`)
+        .join(",");
+      url += `&or=(${filter})`;
+    }
+    const res = await fetch(url, {
+      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
+    });
+    if (!res.ok) return `Lab history query error: HTTP ${res.status}`;
+    const labs = await res.json();
+    if (!labs.length) return `No lab results found for patient ${patientId}.`;
+    return JSON.stringify(labs, null, 2);
+  } catch (e) {
+    return `Lab history query error: ${e.message}`;
   }
 }
 

@@ -689,6 +689,16 @@
     document.getElementById("results").innerHTML = "";
     document.getElementById("srch").value = "";
     renderForm(currentPatient);
+    // Fetch existing vaccinations for returning patient and render checklist
+    if (currentPatient.dob) {
+      q(
+        "vaccinations",
+        `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&date_given=not.is.null&select=vaccine_name,dose_number,date_given`,
+      )
+        .then((r) => (r.ok ? r.json() : []))
+        .then((vaxList) => renderVaxChecklist(currentPatient.dob, vaxList))
+        .catch(() => renderVaxChecklist(currentPatient.dob, []));
+    }
   }
 
   // ===== New patient form =====
@@ -797,17 +807,18 @@
       </div>
     </div>`;
 
-    // Section 6: Vaccination history (quick entry)
+    // Section 6: Vaccination history (age-based checklist)
+    const ageMonths = isNew
+      ? 0
+      : p.dob
+        ? Math.floor((new Date() - new Date(p.dob)) / (86400000 * 30.44))
+        : 0;
     h += `<div class="form-section">
-      <div class="fs-hdr">Vaccination History <span class="badge">Optional — from card</span></div>
+      <div class="fs-hdr">Vaccination History <span class="badge">From vaccination card</span></div>
       <div class="fs-body">
-        <div class="vax-grid">
-          <div class="vax-hdr">Vaccine</div>
-          <div class="vax-hdr">Dose #</div>
-          <div class="vax-hdr">Date Given</div>
-        </div>
-        <div id="vax-list"></div>
-        <button class="add-vax-btn" onclick="addVaxRow()">+ Add vaccine record</button>
+        <div id="vax-checklist"></div>
+        <button type="button" onclick="addVaxRow()" style="margin-top:6px;padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">+ Add unlisted vaccine</button>
+        <div id="vax-manual-list"></div>
       </div>
     </div>`;
 
@@ -834,18 +845,30 @@
       </div>
     </div>`;
 
-    // Section 8: External clinical notes (lab results, outside doctor notes)
+    // Section 8: Lab Results & External Notes
     h += `<div class="form-section">
-      <div class="fs-hdr">External Records <span class="badge">Optional — lab results, outside notes</span></div>
+      <div class="fs-hdr">Lab Results & External Records <span class="badge">Optional</span></div>
       <div class="fs-body">
-        <div class="ff">
-          <label>Clinical notes / Lab results / External doctor's findings</label>
-          <textarea id="f-ext-notes" rows="4" placeholder="e.g. Hb 8.2 g/dl (dated 10 Mar), S. Ferritin 12 ng/ml. Dr. XYZ advised iron supplements. CBC from City Lab attached."></textarea>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:end;margin-bottom:8px">
+          <div class="ff" style="flex:2;min-width:150px"><label>Test</label>
+            <select id="f-lab-test" onchange="onLabTestSelect()" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px">
+              <option value="">Select test…</option>
+              ${COMMON_LABS.map((g) => '<optgroup label="' + g.cat + '">' + g.tests.map((t) => '<option value="' + t.name + '" data-unit="' + t.unit + '" data-ref="' + t.ref + '">' + t.name + "</option>").join("") + "</optgroup>").join("")}
+              <option value="__custom">Other (type manually)</option>
+            </select>
+          </div>
+          <div class="ff" style="flex:1;min-width:80px"><label>Value</label><input id="f-lab-val" placeholder="e.g. 8.2" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" /></div>
+          <div class="ff" style="flex:0.5;min-width:60px"><label>Unit</label><input id="f-lab-unit" readonly style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:#f5f5f0" /></div>
+          <div class="ff" style="flex:0.8;min-width:100px"><label>Date</label><input type="date" id="f-lab-date" value="${new Date().toISOString().split("T")[0]}" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" /></div>
+          <button type="button" onclick="addLabEntry()" style="padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--green);color:#fff;cursor:pointer;font-size:12px;height:28px">+ Add</button>
+        </div>
+        <div id="lab-entries" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px"></div>
+        <div class="ff" style="margin-top:4px">
+          <label>Additional clinical notes / external records</label>
+          <textarea id="f-ext-notes" rows="3" placeholder="e.g. Dr. XYZ advised iron supplements. Previous hospital discharge summary available."></textarea>
           <div style="margin-top:4px;display:flex;gap:6px;align-items:center">
-            <button type="button" onclick="toggleExtDictation()" id="ext-mic-btn" style="padding:4px 10px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">
-              🎤 Dictate
-            </button>
-            <span id="ext-mic-status" style="font-size:10px;color:var(--ink3)">Click to dictate lab results or notes</span>
+            <button type="button" onclick="toggleExtDictation()" id="ext-mic-btn" style="padding:4px 10px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">🎤 Dictate</button>
+            <span id="ext-mic-status" style="font-size:10px;color:var(--ink3)">Click to dictate notes</span>
           </div>
         </div>
       </div>
@@ -868,9 +891,175 @@
     document.getElementById("status-text").textContent = isNew
       ? "New Patient Registration"
       : "Revisit — " + esc(p.name) + " (" + esc(p.id) + ")";
+
+    // Render vaccination checklist based on DOB
+    if (p.dob && isNew) {
+      renderVaxChecklist(p.dob, []);
+    }
+    // Re-render checklist when DOB changes
+    const dobEl = document.getElementById("f-dob");
+    if (dobEl)
+      dobEl.addEventListener("change", () =>
+        renderVaxChecklist(dobEl.value, existingVax),
+      );
   }
 
-  // ===== Vaccine row =====
+  // ===== IAP Vaccination Schedule Checklist =====
+  const IAP_SCHEDULE = [
+    {
+      age: "Birth",
+      mo: 0,
+      vax: [
+        { n: "BCG", d: 1 },
+        { n: "OPV", d: 0 },
+        { n: "Hepatitis B", d: 1 },
+      ],
+    },
+    {
+      age: "6 weeks",
+      mo: 1.5,
+      vax: [
+        { n: "Pentavalent", d: 1 },
+        { n: "OPV", d: 1 },
+        { n: "IPV", d: 1 },
+        { n: "Rotavirus", d: 1 },
+        { n: "PCV", d: 1 },
+      ],
+    },
+    {
+      age: "10 weeks",
+      mo: 2.5,
+      vax: [
+        { n: "Pentavalent", d: 2 },
+        { n: "OPV", d: 2 },
+        { n: "Rotavirus", d: 2 },
+      ],
+    },
+    {
+      age: "14 weeks",
+      mo: 3.5,
+      vax: [
+        { n: "Pentavalent", d: 3 },
+        { n: "OPV", d: 3 },
+        { n: "IPV", d: 2 },
+        { n: "Rotavirus", d: 3 },
+        { n: "PCV", d: 2 },
+      ],
+    },
+    {
+      age: "6 months",
+      mo: 6,
+      vax: [
+        { n: "OPV", d: 1 },
+        { n: "Hepatitis B", d: 3 },
+      ],
+    },
+    {
+      age: "9 months",
+      mo: 9,
+      vax: [
+        { n: "MR/MMR", d: 1 },
+        { n: "OPV", d: 2 },
+      ],
+    },
+    { age: "12 months", mo: 12, vax: [{ n: "Hepatitis A", d: 1 }] },
+    {
+      age: "15 months",
+      mo: 15,
+      vax: [
+        { n: "PCV Booster", d: 1 },
+        { n: "MMR", d: 2 },
+        { n: "Varicella", d: 1 },
+      ],
+    },
+    {
+      age: "16-18 months",
+      mo: 17,
+      vax: [
+        { n: "DPT Booster", d: 1 },
+        { n: "IPV Booster", d: 1 },
+      ],
+    },
+    { age: "18 months", mo: 18, vax: [{ n: "Hepatitis A", d: 2 }] },
+    {
+      age: "4-6 years",
+      mo: 54,
+      vax: [
+        { n: "DPT Booster", d: 2 },
+        { n: "OPV Booster", d: 1 },
+        { n: "Varicella", d: 2 },
+      ],
+    },
+    { age: "9-14 years", mo: 120, vax: [{ n: "HPV", d: 1 }] },
+    { age: "10-12 years", mo: 132, vax: [{ n: "Tdap", d: 1 }] },
+  ];
+
+  let existingVax = []; // Populated for returning patients
+
+  function renderVaxChecklist(dob, existingVaxList) {
+    existingVax = existingVaxList || [];
+    const container = document.getElementById("vax-checklist");
+    if (!container) return;
+    if (!dob) {
+      container.innerHTML =
+        '<div style="color:var(--ink3);font-size:11px">Enter DOB to show age-based vaccination checklist</div>';
+      return;
+    }
+
+    const ageMonths = Math.floor(
+      (new Date() - new Date(dob)) / (86400000 * 30.44),
+    );
+    const isGiven = (name, dose) =>
+      existingVax.some(
+        (v) => v.vaccine_name === name && v.dose_number === dose,
+      );
+
+    let h = '<div style="font-size:11px">';
+    for (const milestone of IAP_SCHEDULE) {
+      if (milestone.mo > ageMonths + 3) break; // Show up to next milestone
+      const isPast = milestone.mo <= ageMonths;
+      h += `<div style="margin-bottom:6px;padding:4px 0;border-bottom:1px solid #f0f0ea">
+        <div style="font-size:10px;font-weight:600;color:${isPast ? "var(--ink2)" : "var(--blue)"};margin-bottom:2px">${milestone.age}${!isPast ? " (upcoming)" : ""}</div>`;
+      for (const v of milestone.vax) {
+        const given = isGiven(v.n, v.d);
+        const key = `vax-${v.n}-${v.d}`.replace(/[^a-zA-Z0-9-]/g, "_");
+        const overdue = isPast && !given;
+        h += `<label style="display:flex;align-items:center;gap:6px;padding:1px 0;font-size:11px;${overdue ? "color:var(--red)" : ""}">
+          <input type="checkbox" id="${key}" data-vax="${esc(v.n)}" data-dose="${v.d}" ${given ? "checked disabled" : ""} style="margin:0" />
+          ${esc(v.n)} — Dose ${v.d}
+          ${given ? '<span style="color:var(--green);font-size:10px">✓</span>' : ""}
+          ${overdue ? '<span style="font-size:9px;color:var(--red)">OVERDUE</span>' : ""}
+          ${!given ? '<input type="date" id="' + key + '-date" style="margin-left:auto;padding:1px 4px;border:1px solid var(--brd);border-radius:var(--r);font-size:10px;width:110px" />' : ""}
+        </label>`;
+      }
+      h += "</div>";
+    }
+    h += "</div>";
+    container.innerHTML = h;
+  }
+
+  function getCheckedVaccines() {
+    const checked = [];
+    document
+      .querySelectorAll(
+        '#vax-checklist input[type="checkbox"]:checked:not(:disabled)',
+      )
+      .forEach((cb) => {
+        const name = cb.dataset.vax;
+        const dose = parseInt(cb.dataset.dose);
+        const dateEl = document.getElementById(cb.id + "-date");
+        const date = dateEl?.value || null;
+        if (name)
+          checked.push({
+            vaccine_name: name,
+            dose_number: dose,
+            date_given: date,
+          });
+      });
+    return checked;
+  }
+
+  // ===== Vaccine row (manual additions) =====
   function addVaxRow(name, dose, date) {
     const id = "vax-" + vaxRows++;
     const el = document.createElement("div");
@@ -903,7 +1092,10 @@
         <input type="date" id="${id}-date" value="${date || ""}" style="flex:1" />
         <button class="rm-btn" onclick="document.getElementById('${id}').remove()">×</button>
       </div>`;
-    document.getElementById("vax-list").appendChild(el);
+    const target =
+      document.getElementById("vax-manual-list") ||
+      document.getElementById("vax-list");
+    if (target) target.appendChild(el);
   }
 
   // ===== Save & Create Visit =====
@@ -1061,6 +1253,27 @@
       const visitData = await vr.json();
       const visitId = Array.isArray(visitData) ? visitData[0].id : visitData.id;
 
+      // Save structured lab results
+      const labs = getLabEntries();
+      if (labs.length) {
+        for (const lab of labs) {
+          await q("lab_results", "", "POST", {
+            patient_id: patientId,
+            visit_id: visitId,
+            test_name: lab.test_name,
+            test_category: lab.cat,
+            value: lab.value,
+            value_numeric: parseFloat(lab.value) || null,
+            unit: lab.unit,
+            reference_range: lab.ref,
+            flag: lab.flag,
+            test_date: lab.test_date,
+            source: "manual",
+          });
+        }
+        console.log("Lab results saved:", labs.length);
+      }
+
       // Upload attached documents to Supabase Storage
       const uploadedDocs = await uploadDocuments(patientId, visitId);
       if (uploadedDocs.length) {
@@ -1082,10 +1295,28 @@
         console.log("Documents uploaded:", uploadedDocs.length);
       }
 
-      // Save vaccination records
-      const vaxList = document.getElementById("vax-list");
-      if (vaxList) {
-        const rows = vaxList.children;
+      // Save vaccination records from checklist
+      const newVax = getCheckedVaccines();
+      for (const v of newVax) {
+        await q("vaccinations", "", "POST", {
+          patient_id: patientId,
+          visit_id: visitId,
+          vaccine_name: v.vaccine_name,
+          dose_number: v.dose_number,
+          date_given:
+            v.date_given ||
+            document.getElementById("f-visit-date")?.value ||
+            new Date().toISOString().split("T")[0],
+          given_by: document.getElementById("f-doctor")?.value || "DR-LOKENDER",
+          free_or_paid: "free_uip",
+        });
+      }
+      if (newVax.length) console.log("Vaccinations saved:", newVax.length);
+
+      // Save manual vaccine rows if any
+      const manualVaxList = document.getElementById("vax-manual-list");
+      if (manualVaxList) {
+        const rows = manualVaxList.children;
         for (const row of rows) {
           const vName = row.querySelector("select")?.value;
           const vDose =
@@ -1098,7 +1329,8 @@
               vaccine_name: vName,
               dose_number: vDose,
               date_given: vDate,
-              given_by: document.getElementById("f-doctor").value,
+              given_by:
+                document.getElementById("f-doctor")?.value || "DR-LOKENDER",
               free_or_paid: "free_uip",
             });
           }
@@ -1298,6 +1530,183 @@
     { value: "diet_chart", label: "Diet / Nutrition Chart" },
     { value: "other", label: "Other Document" },
   ];
+
+  const COMMON_LABS = [
+    {
+      cat: "Hematology",
+      tests: [
+        { name: "Hemoglobin", unit: "g/dL", ref: "11.5-14.5" },
+        { name: "TLC (WBC)", unit: "cells/cumm", ref: "5000-15000" },
+        { name: "Platelet Count", unit: "lakh/cumm", ref: "1.5-4.0" },
+        { name: "Reticulocyte Count", unit: "%", ref: "0.5-2.0" },
+        { name: "ESR", unit: "mm/hr", ref: "0-20" },
+        { name: "Peripheral Smear", unit: "", ref: "" },
+      ],
+    },
+    {
+      cat: "Biochemistry",
+      tests: [
+        { name: "S. Ferritin", unit: "ng/mL", ref: "12-150" },
+        { name: "S. Iron", unit: "mcg/dL", ref: "50-120" },
+        { name: "TIBC", unit: "mcg/dL", ref: "250-400" },
+        { name: "Bilirubin (Total)", unit: "mg/dL", ref: "0.2-1.0" },
+        { name: "Bilirubin (Direct)", unit: "mg/dL", ref: "0-0.3" },
+        { name: "SGPT/ALT", unit: "U/L", ref: "7-56" },
+        { name: "SGOT/AST", unit: "U/L", ref: "10-40" },
+        { name: "Blood Urea", unit: "mg/dL", ref: "15-40" },
+        { name: "S. Creatinine", unit: "mg/dL", ref: "0.3-0.7" },
+        { name: "CRP", unit: "mg/L", ref: "0-6" },
+        { name: "Blood Sugar (F)", unit: "mg/dL", ref: "70-100" },
+        { name: "Blood Sugar (R)", unit: "mg/dL", ref: "70-140" },
+        { name: "S. Calcium", unit: "mg/dL", ref: "8.5-10.5" },
+        { name: "S. Albumin", unit: "g/dL", ref: "3.5-5.0" },
+        { name: "Vit D (25-OH)", unit: "ng/mL", ref: "30-100" },
+        { name: "TSH", unit: "mIU/L", ref: "0.5-5.0" },
+        { name: "Free T4", unit: "ng/dL", ref: "0.8-1.8" },
+        { name: "S. Electrolytes (Na)", unit: "mEq/L", ref: "135-145" },
+        { name: "S. Electrolytes (K)", unit: "mEq/L", ref: "3.5-5.0" },
+      ],
+    },
+    {
+      cat: "Microbiology",
+      tests: [
+        { name: "Blood Culture", unit: "", ref: "No growth" },
+        { name: "Urine Culture", unit: "", ref: "No growth" },
+        { name: "Urine Routine", unit: "", ref: "" },
+        { name: "Stool Routine", unit: "", ref: "" },
+        { name: "Widal Test", unit: "", ref: "Negative" },
+        { name: "Dengue NS1", unit: "", ref: "Negative" },
+        { name: "Malaria Antigen", unit: "", ref: "Negative" },
+        { name: "Rapid Strep Test", unit: "", ref: "Negative" },
+        { name: "Mantoux/TB Gold", unit: "", ref: "Negative" },
+      ],
+    },
+    {
+      cat: "Imaging",
+      tests: [
+        { name: "X-Ray Chest", unit: "", ref: "" },
+        { name: "USG Abdomen", unit: "", ref: "" },
+        { name: "USG KUB", unit: "", ref: "" },
+        { name: "CT Scan", unit: "", ref: "" },
+        { name: "ECHO", unit: "", ref: "" },
+      ],
+    },
+  ];
+  let labEntries = [];
+
+  function onLabTestSelect() {
+    const sel = document.getElementById("f-lab-test");
+    const opt = sel?.selectedOptions[0];
+    document.getElementById("f-lab-unit").value = opt?.dataset?.unit || "";
+    if (sel.value === "__custom") {
+      const name = prompt("Enter test name:");
+      if (name) {
+        sel.value = "";
+        document.getElementById("f-lab-unit").value = "";
+        document.getElementById("f-lab-unit").removeAttribute("readonly");
+      }
+    }
+  }
+
+  function addLabEntry() {
+    const sel = document.getElementById("f-lab-test");
+    const testName = sel.value === "__custom" ? "Custom" : sel.value;
+    if (!testName) {
+      alert("Select a test first.");
+      return;
+    }
+    const val = document.getElementById("f-lab-val")?.value?.trim();
+    if (!val) {
+      alert("Enter the result value.");
+      return;
+    }
+    const unit = document.getElementById("f-lab-unit")?.value || "";
+    const date =
+      document.getElementById("f-lab-date")?.value ||
+      new Date().toISOString().split("T")[0];
+    const opt = sel.selectedOptions[0];
+    const ref = opt?.dataset?.ref || "";
+
+    // Auto-compute flag
+    let flag = "normal";
+    const num = parseFloat(val);
+    if (ref && !isNaN(num)) {
+      const parts = ref.split("-").map((s) => parseFloat(s.trim()));
+      if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+        if (num < parts[0]) flag = "low";
+        else if (num > parts[1]) flag = "high";
+      }
+    }
+    if (
+      ref &&
+      (ref.toLowerCase().includes("negative") ||
+        ref.toLowerCase().includes("no growth"))
+    ) {
+      if (
+        val.toLowerCase().includes("positive") ||
+        val.toLowerCase().includes("growth")
+      )
+        flag = "abnormal";
+    }
+
+    const entry = {
+      test_name: testName,
+      value: val,
+      unit,
+      ref,
+      flag,
+      test_date: date,
+      cat: sel.selectedOptions[0]?.parentElement?.label || "",
+    };
+    labEntries.push(entry);
+    renderLabEntries();
+
+    // Clear inputs
+    sel.value = "";
+    document.getElementById("f-lab-val").value = "";
+    document.getElementById("f-lab-unit").value = "";
+    document.getElementById("f-lab-unit").setAttribute("readonly", "");
+  }
+
+  function removeLabEntry(idx) {
+    labEntries.splice(idx, 1);
+    renderLabEntries();
+  }
+
+  function renderLabEntries() {
+    const container = document.getElementById("lab-entries");
+    if (!container) return;
+    container.innerHTML = labEntries
+      .map((l, i) => {
+        const flagColor =
+          l.flag === "low" || l.flag === "high"
+            ? "var(--red)"
+            : l.flag === "abnormal" || l.flag === "critical"
+              ? "var(--red)"
+              : "var(--green)";
+        const flagIcon =
+          l.flag === "low"
+            ? "↓"
+            : l.flag === "high"
+              ? "↑"
+              : l.flag === "abnormal"
+                ? "⚠"
+                : "✓";
+        const d = new Date(l.test_date).toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+        });
+        return `<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:var(--bg2);border:1px solid var(--brd);border-radius:99px;font-size:11px">
+        <strong>${esc(l.test_name)}</strong>: ${esc(l.value)} ${esc(l.unit)} <span style="color:${flagColor}">${flagIcon}</span> <span style="color:var(--ink3)">(${d})</span>
+        <button type="button" onclick="removeLabEntry(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:12px;padding:0 2px">×</button>
+      </span>`;
+      })
+      .join("");
+  }
+
+  function getLabEntries() {
+    return labEntries;
+  }
 
   let docUploadCount = 0;
   function addDocUpload() {
@@ -1552,7 +1961,12 @@
     showNewPatientForm,
     selectPatient,
     addVaxRow,
+    renderVaxChecklist,
+    getCheckedVaccines,
     toggleExtDictation,
+    onLabTestSelect,
+    addLabEntry,
+    removeLabEntry,
     addDocUpload,
     cancelForm,
     saveAndCreateVisit,
