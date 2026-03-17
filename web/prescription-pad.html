@@ -2351,11 +2351,23 @@
   }
 
   /* ===== VOICE (GPT-4o Transcribe primary, Web Speech API fallback) ===== */
-  let voiceEngine = null; // "ai" or "web" — set on first use
+  // Cost optimization: client-side VAD skips silence, persistent mic stream,
+  // minimum blob size threshold to avoid sending empty/silent chunks.
+  let voiceEngine = null; // "ai" or "web"
   let mediaRecorder = null;
   let audioChunks = [];
   let chunkTimer = null;
-  let aiTranscribeFailed = false; // sticky flag: if AI fails once, stay on Web Speech for session
+  let aiTranscribeFailed = false; // sticky: if AI fails, stay on Web Speech
+  let micStream = null; // persistent — no re-acquisition per chunk
+  let audioCtx = null; // for VAD
+  let vadAnalyser = null;
+  let isSpeaking = false;
+  let silenceStart = 0;
+  const VAD_THRESHOLD = 15; // energy threshold (0-255), below = silence
+  const SILENCE_SEND_MS = 1500; // send after 1.5s silence (natural pause)
+  const MAX_CHUNK_MS = 15000; // max 15s even if still speaking
+  const MIN_BLOB_BYTES = 4000; // skip blobs under 4KB (silence-only)
+  let chunkStartTime = 0;
 
   function toggleVoice() {
     if (isRec) {
@@ -2366,10 +2378,9 @@
   }
 
   async function startVoice() {
-    // Try AI transcription first (unless it already failed this session)
     if (!aiTranscribeFailed) {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        micStream = await navigator.mediaDevices.getUserMedia({
           audio: {
             echoCancellation: true,
             noiseSuppression: true,
@@ -2382,86 +2393,68 @@
         audioChunks = [];
         updateMicUI(true, "AI");
 
-        // Use webm/opus — widely supported, good compression
-        const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-          ? "audio/webm;codecs=opus"
-          : "audio/webm";
-        mediaRecorder = new MediaRecorder(stream, { mimeType });
+        // VAD via Web Audio API
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioCtx.createMediaStreamSource(micStream);
+        vadAnalyser = audioCtx.createAnalyser();
+        vadAnalyser.fftSize = 512;
+        vadAnalyser.smoothingTimeConstant = 0.3;
+        source.connect(vadAnalyser);
 
-        mediaRecorder.ondataavailable = (e) => {
-          if (e.data.size > 0) audioChunks.push(e.data);
-        };
+        startRecordingChunk();
 
-        mediaRecorder.onstop = async () => {
-          stream.getTracks().forEach((t) => t.stop());
-          if (audioChunks.length === 0) return;
-          const blob = new Blob(audioChunks, { type: mimeType });
-          audioChunks = [];
-          await sendToAITranscribe(blob);
-        };
-
-        // Collect data every 1 second for smooth stopping
-        mediaRecorder.start(1000);
-
-        // Auto-send chunks every 12 seconds for progressive transcription
+        // VAD loop: monitor energy, send chunks on speech pauses
+        chunkStartTime = Date.now();
+        silenceStart = 0;
+        isSpeaking = false;
         chunkTimer = setInterval(() => {
-          if (mediaRecorder && mediaRecorder.state === "recording") {
-            mediaRecorder.stop();
-            // Restart recording for next chunk
-            setTimeout(() => {
-              if (isRec) {
-                audioChunks = [];
-                try {
-                  navigator.mediaDevices
-                    .getUserMedia({
-                      audio: {
-                        echoCancellation: true,
-                        noiseSuppression: true,
-                        autoGainControl: true,
-                        sampleRate: 16000,
-                      },
-                    })
-                    .then((newStream) => {
-                      const newMime = MediaRecorder.isTypeSupported(
-                        "audio/webm;codecs=opus",
-                      )
-                        ? "audio/webm;codecs=opus"
-                        : "audio/webm";
-                      mediaRecorder = new MediaRecorder(newStream, {
-                        mimeType: newMime,
-                      });
-                      mediaRecorder.ondataavailable = (ev) => {
-                        if (ev.data.size > 0) audioChunks.push(ev.data);
-                      };
-                      mediaRecorder.onstop = async () => {
-                        newStream.getTracks().forEach((t) => t.stop());
-                        if (audioChunks.length === 0) return;
-                        const b = new Blob(audioChunks, { type: newMime });
-                        audioChunks = [];
-                        await sendToAITranscribe(b);
-                      };
-                      mediaRecorder.start(1000);
-                    });
-                } catch (_) {
-                  /* ignore restart errors */
-                }
-              }
-            }, 100);
-          }
-        }, 12000);
+          if (!isRec || !vadAnalyser) return;
+          const buf = new Uint8Array(vadAnalyser.frequencyBinCount);
+          vadAnalyser.getByteFrequencyData(buf);
+          const energy = buf.reduce((a, b) => a + b, 0) / buf.length;
+          const now = Date.now();
+          const chunkAge = now - chunkStartTime;
 
-        return; // AI mode started successfully
+          if (energy > VAD_THRESHOLD) {
+            isSpeaking = true;
+            silenceStart = 0;
+            document.getElementById("mic-st").textContent =
+              "Listening — speak naturally…";
+          } else {
+            if (isSpeaking && silenceStart === 0) silenceStart = now;
+            if (!isSpeaking && silenceStart === 0) silenceStart = now;
+          }
+
+          const silenceDuration = silenceStart > 0 ? now - silenceStart : 0;
+          const shouldSend =
+            (isSpeaking && silenceDuration >= SILENCE_SEND_MS) ||
+            chunkAge >= MAX_CHUNK_MS;
+
+          if (
+            shouldSend &&
+            mediaRecorder &&
+            mediaRecorder.state === "recording"
+          ) {
+            mediaRecorder.stop();
+            isSpeaking = false;
+            silenceStart = 0;
+            setTimeout(() => {
+              if (isRec && micStream) startRecordingChunk();
+            }, 50);
+          }
+        }, 150);
+
+        return;
       } catch (err) {
         console.warn(
           "AI dictation unavailable, falling back to Web Speech:",
           err.message,
         );
         aiTranscribeFailed = true;
-        // Fall through to Web Speech API
       }
     }
 
-    // Fallback: Web Speech API (Chrome only)
+    // Fallback: Web Speech API
     if (
       !("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
     ) {
@@ -2489,7 +2482,6 @@
     };
     recog.onend = () => {
       if (!isRec) return;
-      // Auto-restart for continuous dictation
       try {
         recog.start();
       } catch (_) {
@@ -2513,18 +2505,53 @@
     updateMicUI(true, "Web");
   }
 
+  function startRecordingChunk() {
+    if (!micStream) return;
+    audioChunks = [];
+    chunkStartTime = Date.now();
+    const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+      ? "audio/webm;codecs=opus"
+      : "audio/webm";
+    mediaRecorder = new MediaRecorder(micStream, { mimeType });
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) audioChunks.push(e.data);
+    };
+    mediaRecorder.onstop = async () => {
+      if (audioChunks.length === 0) return;
+      const blob = new Blob(audioChunks, { type: mimeType });
+      audioChunks = [];
+      if (blob.size < MIN_BLOB_BYTES) {
+        console.log(
+          `Voice: skipped silent chunk (${blob.size} bytes < ${MIN_BLOB_BYTES})`,
+        );
+        return;
+      }
+      console.log(
+        `Voice: sending ${blob.size} bytes (${((Date.now() - chunkStartTime) / 1000).toFixed(1)}s)`,
+      );
+      await sendToAITranscribe(blob);
+    };
+    mediaRecorder.start(500);
+  }
+
   function stopVoice() {
     isRec = false;
     if (chunkTimer) {
       clearInterval(chunkTimer);
       chunkTimer = null;
     }
-    if (
-      voiceEngine === "ai" &&
-      mediaRecorder &&
-      mediaRecorder.state === "recording"
-    ) {
-      mediaRecorder.stop(); // triggers onstop → sends final chunk
+    if (voiceEngine === "ai") {
+      if (mediaRecorder && mediaRecorder.state === "recording")
+        mediaRecorder.stop();
+      if (micStream) {
+        micStream.getTracks().forEach((t) => t.stop());
+        micStream = null;
+      }
+      if (audioCtx) {
+        audioCtx.close().catch(() => {});
+        audioCtx = null;
+        vadAnalyser = null;
+      }
     }
     if (voiceEngine === "web" && recog) {
       try {
@@ -2538,7 +2565,6 @@
     const statusEl = document.getElementById("mic-st");
     statusEl.textContent = "Transcribing…";
     try {
-      // Build patient context for the prompt
       let patientCtx = "";
       if (selectedPatient) {
         const p = selectedPatient;
@@ -2548,28 +2574,24 @@
         if (p.chief_complaints)
           patientCtx += `, complaints: ${p.chief_complaints}`;
       }
-
       const fd = new FormData();
       fd.append("audio", audioBlob, "dictation.webm");
       if (patientCtx) fd.append("patient_context", patientCtx);
-      fd.append("language", "en"); // or "hi" or omit for auto-detect
+      fd.append("language", "en");
 
       const res = await fetch(SB + "/functions/v1/transcribe-audio", {
         method: "POST",
         headers: { Authorization: "Bearer " + KEY },
         body: fd,
       });
-
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
         if (err.fallback) {
-          // API not configured or failed — switch to Web Speech for this session
           console.warn(
             "AI transcription unavailable, switching to Web Speech fallback",
           );
           aiTranscribeFailed = true;
           statusEl.textContent = "Switched to browser dictation";
-          // If still recording, restart with Web Speech
           if (isRec) {
             stopVoice();
             setTimeout(() => startVoice(), 300);
@@ -2578,11 +2600,13 @@
         }
         throw new Error(err.error || `HTTP ${res.status}`);
       }
-
       const data = await res.json();
       if (data.text) {
         const ta = document.getElementById("pad-ta");
         ta.value = (ta.value + " " + data.text).trim();
+        console.log(
+          `Voice: transcribed "${data.text.substring(0, 80)}..." (${data.engine})`,
+        );
       }
       statusEl.textContent = isRec
         ? "Listening — speak naturally…"
