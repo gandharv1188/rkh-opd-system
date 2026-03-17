@@ -22,7 +22,7 @@ Web App (GitHub Pages: rx.radhakishanhospital.com)
   │                       └── Returns prescription JSON
   ├── Registration → Edge Function (generate-visit-summary)
   │                  └── AI clinical summary for returning patients
-  ├── Prescription Output → Print (A4 with QR)
+  ├── Print Station → Supabase (today's approved Rx) → Print (A4 with QR)
   └── Patient Lookup → Supabase
 ```
 
@@ -32,7 +32,7 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 
 - **`web/`** — 8 HTML files deployed to GitHub Pages (the live app):
   - `index.html` — Landing page with navigation cards
-  - `registration.html`, `prescription-pad.html`, `prescription-output.html`, `patient-lookup.html`, `formulary.html`, `formulary-import.html`, `standard-rx.html`
+  - `registration.html`, `prescription-pad.html`, `prescription-output.html` (Print Station), `patient-lookup.html`, `formulary.html`, `formulary-import.html`, `standard-rx.html`
 
 - **`radhakishan_system/artifacts/`** — 7 source HTML files (canonical versions, copied to `web/` on deploy)
 
@@ -56,27 +56,27 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 
 ## Workflow (3-Stage)
 
-1. **Reception** (Registration page): Register patient → capture demographics, allergies → structured lab entry (COMMON_LABS: 39 pediatric tests in 4 categories — Hematology, Biochemistry, Microbiology, Imaging — with auto-unit and auto-flag, saved to `lab_results`) → smart IAP vaccination checklist (IAP_SCHEDULE: 13 milestones birth–12yr, age-based display, pre-checks existing records, OVERDUE labels) → enter external records (free-text + document uploads to `documents` bucket) → create visit with vitals + chief complaints → AI visit summary generated for returning patients (stored in `visits.visit_summary`)
+1. **Reception** (Registration page): Sticky header with search + Scan QR + Clear Form. Register patient → capture demographics, allergies → structured lab entry (COMMON_LABS: 39 pediatric tests in 4 categories — Hematology, Biochemistry, Microbiology, Imaging — with auto-unit and auto-flag, saved to `lab_results`; returning patients see previous results as read-only pills) → smart neonatal section (hidden by default, auto-shows when DOB < 90 days, fields: GA, birth weight, time of birth) → smart IAP vaccination checklist (IAP_SCHEDULE: 13 milestones birth–12yr, age-based display, pre-checks existing records, OVERDUE labels) → enter external records (free-text + document uploads to `documents` bucket) → create visit with vitals + chief complaints → AI visit summary generated for returning patients (stored in `visits.visit_summary`). Section order: Demographics → Visit Details → Chief Complaints → Neonatal → Allergies → Vitals → Vaccination → Labs → Documents.
 2. **Nurse station** (same page): Weight, height, HC, MUAC, temp, HR, RR, SpO2
-3. **Doctor OPD** (Prescription Pad): Search patient in combo box (name/UHID/guardian/token) → view nurse-captured data + visit summary + growth trends (loadGrowthTrend: weight/height history with trend arrows + WAZ) + recent labs (loadRecentLabs: flagged results from lab_results table) + vaccination status (loadVaxStatus: dose count summary) → select NHM or IAP vaccination schedule → review previous Rx history tabs → type/dictate clinical note → click Generate → Edge Function calls Claude (5-tool loop incl. get_lab_history) → prescription renders → review, edit → sign off (saves vaccinations given_today) → print auto-opens
+3. **Doctor OPD** (Prescription Pad): Search patient in combo box (name/UHID/guardian/token) → view nurse-captured data + visit summary + growth trends (loadGrowthTrend: weight/height history with trend arrows + WAZ) + recent labs (loadRecentLabs: flagged results from lab_results table) + vaccination status (loadVaxStatus: dose count summary) → select NHM or IAP vaccination schedule → review previous Rx history tabs → type/dictate clinical note (auto-saves to `visits.raw_dictation` with debounce; save indicator in tab bar) → click Generate → Edge Function calls Claude (5-tool loop incl. get_lab_history) → prescription renders → review, edit → sign off (saves vaccinations given_today) → print auto-opens. Re-selecting a "done" patient auto-loads their saved prescription (read-only).
 
 ## Supabase Schema (10 Tables)
 
-| Table                           | Purpose                                                                                              |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `formulary`                     | 530 drugs with JSONB: formulations, dosing_bands, renal_bands, interactions. UNIQUE on generic_name. |
-| `doctors`                       | Seeded with Dr. Lokender Goyal.                                                                      |
-| `standard_prescriptions`        | 446 ICD-10 keyed protocols with first_line_drugs, investigations                                     |
-| `patients`                      | Demographics, UHID (RKH-YYMM#####), known_allergies text[], is_active                                |
-| `visits`                        | Per-visit vitals, diagnoses, clinical notes, visit_summary (AI). NOT NULL on patient_id.             |
-| `prescriptions`                 | Generated Rx JSON, approval status. NOT NULL on visit_id + patient_id.                               |
-| `vaccinations`                  | Per-patient vaccination history (IAP 2024 + NHM-UIP)                                                 |
-| `growth_records`                | WHO Z-scores (WAZ, HAZ, WHZ, HCZ)                                                                    |
-| `lab_results`                   | Structured lab results: test_name, value, unit, flag (normal/low/high/critical), test_category       |
-| `developmental_screenings`      | Assessments by domain                                                                                |
-| Storage: `website` bucket       | Skill files (.md) + web pages                                                                        |
-| Storage: `prescriptions` bucket | Prescription text files                                                                              |
-| Storage: `documents` bucket     | Uploaded external records (lab reports, imaging, discharge summaries, etc.)                          |
+| Table                           | Purpose                                                                                                              |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `formulary`                     | 530 drugs with JSONB: formulations, dosing_bands, renal_bands, interactions. UNIQUE on generic_name.                 |
+| `doctors`                       | Seeded with Dr. Lokender Goyal.                                                                                      |
+| `standard_prescriptions`        | 446 ICD-10 keyed protocols with first_line_drugs, investigations                                                     |
+| `patients`                      | Demographics, UHID (RKH-YYMM#####), known_allergies text[], is_active                                                |
+| `visits`                        | Per-visit vitals, diagnoses, clinical notes, raw_dictation (auto-saved), visit_summary (AI). NOT NULL on patient_id. |
+| `prescriptions`                 | Generated Rx JSON, approval status. NOT NULL on visit_id + patient_id.                                               |
+| `vaccinations`                  | Per-patient vaccination history (IAP 2024 + NHM-UIP)                                                                 |
+| `growth_records`                | WHO Z-scores (WAZ, HAZ, WHZ, HCZ)                                                                                    |
+| `lab_results`                   | Structured lab results: test_name, value, unit, flag (normal/low/high/critical), test_category                       |
+| `developmental_screenings`      | Assessments by domain                                                                                                |
+| Storage: `website` bucket       | Skill files (.md) + web pages                                                                                        |
+| Storage: `prescriptions` bucket | Prescription text files                                                                                              |
+| Storage: `documents` bucket     | Uploaded external records (lab reports, imaging, discharge summaries, etc.)                                          |
 
 RLS enabled with anon_full_access policy for POC. ON DELETE RESTRICT. CHECK constraints on medical ranges.
 
@@ -92,6 +92,10 @@ RLS enabled with anon_full_access policy for POC. ON DELETE RESTRICT. CHECK cons
 - **Safety checks**: allergy_note, interactions, per-medicine max_dose_check, overall_status (SAFE/REVIEW REQUIRED).
 - **NABH compliance**: Mandatory on every prescription. Claude always fetches nabh_compliance reference.
 - **ICD-10 primary**: Standard prescription lookup uses ICD-10 code first, diagnosis name as fallback.
+- **Sticky headers**: All pages use `position:sticky` headers — home page header, registration header bar (search + buttons), prescription pad hospital header + tabs bar, print station toolbar.
+- **Print layout**: Comfortable spacing — page margins 12mm 10mm, body font 12px, line-height 1.5, section margins 10px, medicine font r1 14px / r2-r3 12px, emergency grid 2 columns. Hospital name "Radhakishan Hospital" centered in print header (.hdr-l/.hdr-r 30% + .hdr-c 40% centered).
+- **Auto-save notes**: Doctor's note auto-saves to `visits.raw_dictation` (debounced 3s + every 30s). Save indicator in tab bar: "Editing..." → "Saving..." → "Saved HH:MM" → "Save failed".
+- **Print Station**: Prescription Output is a standalone print station — auto-loads today's approved Rx from Supabase, search/filter by patient name/UHID/Rx ID, renders identical output to Prescription Pad's printRx().
 - **XSS protection**: `esc()` function on every dynamic innerHTML value.
 - **Patient IDs**: Format RKH-YYMM##### (Indian financial year).
 - **QR code payload**: Minimal re-registration data (UHID, name, DOB, sex initial).
@@ -104,7 +108,7 @@ Each page is a single self-contained HTML file with inline CSS and JavaScript. T
 - Web Speech API for voice dictation (Chrome only, `en-IN` locale)
 - CDN libraries: html5-qrcode (QR scanning), Noto Sans Devanagari (Hindi font)
 - Inline SVG for medication pictograms (no external images)
-- Browser print API for A4 output with `@page` rules
+- Browser print API for A4 output with `@page` rules and comfortable spacing
 
 When editing, maintain the self-contained nature. After editing an artifact in `radhakishan_system/artifacts/`, copy it to `web/` with the clean filename. All dynamic data must be wrapped in `esc()` before innerHTML insertion.
 

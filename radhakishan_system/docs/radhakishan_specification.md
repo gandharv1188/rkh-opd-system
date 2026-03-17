@@ -131,7 +131,7 @@ After validating the clinical workflow with real doctors, the system was migrate
 Web App (GitHub Pages — web/ directory)
   ├── Patient Registration  → Supabase (patients, visits, vaccinations)
   ├── Prescription Pad      → Edge Function → Claude API (tool_use) → Supabase
-  ├── Prescription Output   → Print (A4 with QR code)
+  ├── Print Station         → Supabase (today's approved Rx) → Print (A4 with QR code)
   ├── Patient Lookup        → Supabase (patients, visits, prescriptions, growth)
   └── Admin Tools           → Supabase (formulary, standard_prescriptions)
 ```
@@ -233,7 +233,7 @@ Doctor signs off
 
 → Supabase Storage: prescription file uploaded to `prescriptions` bucket
 
-→ Print auto-opens: A4 prescription with hospital letterhead, compact layout, QR code in footer, "Digitally Signed" label
+→ Print auto-opens: A4 prescription with hospital letterhead (centered), comfortable spacing, QR code in footer, "Digitally Signed" label. Also available from the standalone Print Station.
 
 ## 3.3 Skill Prompt Architecture — Progressive Disclosure via Tool Use
 
@@ -423,41 +423,51 @@ The main doctor-facing tool. The doctor's only required action is to type a clin
 
 - Smart inline dose adjustment: change weight/mg-per-kg/frequency → live recalculation → Row 2 (English) and Row 3 (Hindi) both auto-update
 
+- **Auto-save notes**: Doctor's note auto-saves to `visits.raw_dictation`. Debounced: 3 seconds after typing stops + every 30 seconds. Save indicator in tab bar (next to Connected button) shows state: "Editing..." (gray) → "Saving..." (gray) → "✓ Saved HH:MM AM" (green) → "Save failed" (red). Saves on patient switch/clear. Restored from `raw_dictation` when re-selecting the same patient. Hidden when no patient selected.
+
+- **Reload saved prescriptions**: When the doctor re-selects a "done" patient (has today's approved Rx), the prescription auto-loads into the Review & Edit view (read-only). Shows "✓ Prescription saved — RX-XXX" with Print, View note, and New prescription buttons. Original note available in pad textarea.
+
 - Sign-off saves to: visits, prescriptions, growth_records, vaccinations (given_today) tables + Supabase Storage
 
-- Print auto-opens after sign-off: A4 prescription with hospital letterhead, compact layout, QR code in footer
+- Print auto-opens after sign-off: A4 prescription with hospital letterhead, comfortable layout, QR code in footer
+
+- **Sticky header**: Hospital header + tabs bar use `position:sticky` so they remain visible while scrolling
 
 **Supabase tables**
 
 READ: formulary, standard_prescriptions, patients, visits, growth_records, lab_results, vaccinations | WRITE: visits, prescriptions, growth_records, vaccinations, Storage
 
-## 5.2 Prescription Output (Print Renderer)
+## 5.2 Print Station (Prescription Output)
 
 **File:** `web/radhakishan_prescription_output_v2.html`
 
 **Purpose**
 
-Renders the final signed prescription as a proper A4 document with hospital letterhead, compact layout fitting all sections on one page, QR code in footer, and "Digitally Signed" label.
+Standalone print station that auto-loads today's approved prescriptions from Supabase. Designed for a dedicated print terminal — reception or nurse can print prescriptions without accessing the doctor's Prescription Pad.
 
 **Key features**
 
-- Rebuilt compact A4 layout — all sections fit on one page
+- **Auto-connects to Supabase** on page load and fetches today's approved prescriptions
 
-- Full hospital letterhead (blue header, NABH badge, Dr. Lokender Goyal details, emergency contacts)
+- **Search input**: Filter by patient name, UHID, or Rx ID
 
-- Clinical sections: vitals, chief complaints, clinical history, examination, "Provisional Diagnosis"
+- **Prescription dropdown**: Shows numbered list: "1. Patient Name — Diagnosis (time)"
 
-- Medicines with dosing pictograms matching the review screen
+- **Identical rendering**: Renders the exact same prescription as the Prescription Pad's `printRx()` — hospital header (centered), clinical sections, medicines with pictograms, QR code, footer
 
-- QR code in footer encoding: UHID, patient name (max 30 chars), DOB, sex initial
+- **Connection status indicator**: Shows Supabase connection state
 
-- Print-optimised CSS: hides UI chrome, A4 @page margins, colour-correct (blue medicines, red investigations)
+- **Refresh button**: Reloads newly signed prescriptions without page refresh
 
-- "Digitally Signed" label in doctor authentication block
+- **Print button**: Calls `window.print()` for A4 output
+
+- **Sticky toolbar**: Search, dropdown, and action buttons remain visible while scrolling
+
+- **Comfortable print spacing**: Page margins 12mm 10mm, body font 12px with line-height 1.5, section margins 10px, medicine font r1 14px / r2-r3 12px, emergency grid 2 columns — matches Prescription Pad print output
 
 **Sections rendered (conditional)**
 
-Always: hospital header, patient meta strip, clinical sections, diagnosis, medicines (3-row bilingual), emergency warning signs (bilingual), follow-up, safety compliance strip, doctor authentication + QR code
+Always: hospital header (centered), patient meta strip, clinical sections, diagnosis, medicines (3-row bilingual with pictograms), emergency warning signs (bilingual), follow-up, safety compliance strip, doctor authentication + QR code
 
 Conditional: triage score, safety flags, neonatal details, IV fluids, investigations (RED), growth assessment (Z-scores), vaccination status, developmental screening, diet, counselling given, referral
 
@@ -497,15 +507,21 @@ Used at the reception desk and nurse station before the patient sees the doctor.
 
 **Key features**
 
+- **Sticky header bar**: Search input, Scan QR button, and Clear Form button are in a sticky header that remains visible while scrolling through the form
+
 - **Form shows on page load** — no need to click "New Patient" to start registration
 
-- **Search:** Live search by name, UHID, or phone number (filtered by is_active)
+- **Search:** Live search by name, UHID, or phone number (filtered by is_active) — in the sticky header bar
 
 - **QR Scanner:** Opens rear camera (html5-qrcode library) to scan QR code from previous prescription. QR payload (UHID, name, DOB, sex) auto-loads patient for revisit. If patient not in database, pre-fills new registration form from QR data.
 
-- **New patient registration:** Demographics (name, DOB, sex, guardian, phone, blood group, address), known allergies (comma-separated), neonatal details (GA, birth weight). Only name is mandatory. UHID auto-generated (RKH-YYMM#####).
+- **Section order**: Demographics → Visit Details → Chief Complaints → Neonatal → Allergies → Vitals → Vaccination → Labs → Documents
 
-- **Returning patient revisit:** On selection, form pre-fills with existing data. Reception can update any changed fields (new phone, updated allergies, etc.)
+- **New patient registration:** Demographics (name, DOB, sex, guardian, phone, blood group, address), known allergies (comma-separated), neonatal details (GA, birth weight, time of birth). Only name is mandatory. UHID auto-generated (RKH-YYMM#####).
+
+- **Returning patient revisit:** On selection, form pre-fills with existing data. Reception can update any changed fields (new phone, updated allergies, etc.). Previous lab results pre-filled as read-only pills. Allergies and vaccination checklist also pre-filled.
+
+- **Smart neonatal section**: Hidden by default; auto-shows when DOB < 90 days. Fields: gestational age (GA), birth weight, time of birth, notes. No duplicate birth date field.
 
 - **Nurse station vitals:** Weight (kg), height (cm), head circumference, MUAC, temperature (°F), heart rate, respiratory rate, SpO2. These are captured before the doctor sees the patient and are available in the Prescription Pad's visit info panel.
 
@@ -971,24 +987,24 @@ A `doctors` table stores credentials for all doctors (ID, full name, degree, reg
 
 ## 12.6 QR Code Library — Offline Consideration
 
-The Prescription Output page loads qrcodejs (v1.0.0, ~9 KB minified) from cdnjs CDN. If the CDN is unavailable (offline clinic), QR generation silently fails and shows a "QR" text fallback. This is acceptable since internet connectivity is required for Supabase access anyway. Future improvement: bundle qrcodejs inline (only 9 KB) for resilience against CDN downtime.
+The Print Station page loads qrcodejs (v1.0.0, ~9 KB minified) from cdnjs CDN. If the CDN is unavailable (offline clinic), QR generation silently fails and shows a "QR" text fallback. This is acceptable since internet connectivity is required for Supabase access anyway. Future improvement: bundle qrcodejs inline (only 9 KB) for resilience against CDN downtime.
 
 # 13. Technology Stack
 
-|                 |                                |                                       |
-| --------------- | ------------------------------ | ------------------------------------- |
-| **Component**   | **Technology**                 | **Version / Details**                 |
-| UI Framework    | Standalone HTML/CSS/JS         | Self-contained files in `web/`        |
-| Hosting         | GitHub Pages                   | gandharv1188.github.io/rkh-opd-system |
-| CI/CD           | GitHub Actions                 | Deploys `web/` directory on push      |
-| Custom Domain   | CNAME                          | rx.radhakishanhospital.com            |
-| AI Model        | Claude Sonnet                  | claude-sonnet-4-20250514 via tool_use |
-| AI Integration  | Supabase Edge Functions (Deno) | `generate-prescription/index.ts`      |
-| Database        | Supabase (PostgreSQL)          | Free tier → Pro (\$25/mo)             |
-| File Storage    | Supabase Storage               | Prescriptions + skill prompt files    |
-| Voice Dictation | Web Speech API                 | Chrome browser only, en-IN locale     |
-| QR Code         | qrcodejs 1.0.0                 | CDN: cdnjs.cloudflare.com             |
-| Print Output    | Browser print API              | A4 @page rules, compact layout        |
+|                 |                                |                                                                                     |
+| --------------- | ------------------------------ | ----------------------------------------------------------------------------------- |
+| **Component**   | **Technology**                 | **Version / Details**                                                               |
+| UI Framework    | Standalone HTML/CSS/JS         | Self-contained files in `web/`                                                      |
+| Hosting         | GitHub Pages                   | gandharv1188.github.io/rkh-opd-system                                               |
+| CI/CD           | GitHub Actions                 | Deploys `web/` directory on push                                                    |
+| Custom Domain   | CNAME                          | rx.radhakishanhospital.com                                                          |
+| AI Model        | Claude Sonnet                  | claude-sonnet-4-20250514 via tool_use                                               |
+| AI Integration  | Supabase Edge Functions (Deno) | `generate-prescription/index.ts`                                                    |
+| Database        | Supabase (PostgreSQL)          | Free tier → Pro (\$25/mo)                                                           |
+| File Storage    | Supabase Storage               | Prescriptions + skill prompt files                                                  |
+| Voice Dictation | Web Speech API                 | Chrome browser only, en-IN locale                                                   |
+| QR Code         | qrcodejs 1.0.0                 | CDN: cdnjs.cloudflare.com                                                           |
+| Print Output    | Browser print API              | A4 @page rules, comfortable spacing (12mm 10mm margins, 12px body, 1.5 line-height) |
 
 ## 13.1 Supabase Integration Pattern
 
