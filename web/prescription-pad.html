@@ -1690,7 +1690,7 @@
     try {
       const vr = await q(
         "visits",
-        `?visit_date=eq.${today}&select=patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,chief_complaints,doctor_id,visit_summary,created_at&order=created_at.asc`,
+        `?visit_date=eq.${today}&select=id,patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,chief_complaints,doctor_id,visit_summary,raw_dictation,created_at&order=created_at.asc`,
       );
       if (!vr.ok) return;
       const visits = await vr.json();
@@ -2094,6 +2094,41 @@
     }
   }
 
+  // ===== AUTO-SAVE NOTE =====
+  let autoSaveTimer = null;
+  let autoSaveVisitId = null;
+
+  function setupAutoSave(visitId) {
+    if (autoSaveTimer) clearInterval(autoSaveTimer);
+    autoSaveVisitId = visitId;
+    if (!visitId || !sbConnected) return;
+    const ta = document.getElementById("pad-ta");
+    if (!ta) return;
+    // Save on input, debounced 3 seconds
+    let saveTimeout = null;
+    ta.addEventListener("input", () => {
+      if (saveTimeout) clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => saveNote(), 3000);
+    });
+    // Also save every 30 seconds if there's content
+    autoSaveTimer = setInterval(() => saveNote(), 30000);
+  }
+
+  async function saveNote() {
+    if (!autoSaveVisitId || !sbConnected) return;
+    const ta = document.getElementById("pad-ta");
+    const note = ta?.value?.trim();
+    if (!note) return;
+    try {
+      await q(`visits?id=eq.${autoSaveVisitId}`, "", "PATCH", {
+        raw_dictation: note,
+        updated_at: new Date().toISOString(),
+      });
+    } catch (e) {
+      console.warn("Auto-save failed:", e.message);
+    }
+  }
+
   async function onPatientSelect(idx) {
     if (idx === "") {
       clearPatient();
@@ -2161,25 +2196,77 @@
       panel.innerHTML = `<div class="visit-info"><div class="vi-row" style="color:var(--ink3)">No visit data captured yet for today</div></div>`;
     }
 
-    // Pre-fill pad with patient context + nurse-captured data (always replace)
-    let ctx = `${p.name}, `;
-    if (p.dob) ctx += calcAge(p.dob) + ", ";
-    if (visit?.weight_kg) ctx += visit.weight_kg + " kg, ";
-    if (p.sex) ctx += p.sex + ". ";
-    if (p.guardian_name) ctx += `Guardian: ${p.guardian_name}. `;
-    if (p.known_allergies?.length) {
-      ctx += `ALLERGY: ${p.known_allergies.join(", ")}. `;
+    // Check if doctor has a saved note from earlier (raw_dictation)
+    const savedNote = visit?.raw_dictation;
+    if (
+      savedNote &&
+      typeof savedNote === "string" &&
+      !savedNote.startsWith("[")
+    ) {
+      // Restore the saved note (raw_dictation is a string, not JSON array from doc uploads)
+      document.getElementById("pad-ta").value = savedNote;
     } else {
-      ctx += "NKDA. ";
+      // Pre-fill pad with patient context + nurse-captured data
+      let ctx = `${p.name}, `;
+      if (p.dob) ctx += calcAge(p.dob) + ", ";
+      if (visit?.weight_kg) ctx += visit.weight_kg + " kg, ";
+      if (p.sex) ctx += p.sex + ". ";
+      if (p.guardian_name) ctx += `Guardian: ${p.guardian_name}. `;
+      if (p.known_allergies?.length) {
+        ctx += `ALLERGY: ${p.known_allergies.join(", ")}. `;
+      } else {
+        ctx += "NKDA. ";
+      }
+      if (visit?.chief_complaints)
+        ctx += `Chief complaints: ${visit.chief_complaints}. `;
+      if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
+      // Append previous visit summary (generated at registration for returning patients)
+      if (visit?.visit_summary) ctx += "\n\n" + visit.visit_summary;
+      document.getElementById("pad-ta").value = ctx;
     }
-    if (visit?.chief_complaints)
-      ctx += `Chief complaints: ${visit.chief_complaints}. `;
-    if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
 
-    // Append previous visit summary (generated at registration for returning patients)
-    if (visit?.visit_summary) ctx += "\n\n" + visit.visit_summary;
+    // If patient already has today's prescription, load it into review
+    if (p.done) {
+      try {
+        const today = new Date().toISOString().split("T")[0];
+        const rxr = await q(
+          "prescriptions",
+          `?patient_id=eq.${encodeURIComponent(p.id)}&is_approved=eq.true&created_at=gte.${today}&order=created_at.desc&limit=1&select=id,generated_json`,
+        );
+        if (rxr.ok) {
+          const rxList = await rxr.json();
+          if (rxList.length) {
+            rxData = rxList[0].generated_json;
+            rxId = rxList[0].id;
+            if (selectedPatient?.id && rxData.patient)
+              rxData.patient.uhid = selectedPatient.id;
+            await renderReview();
+            showView("rx");
+            // Disable editing on reloaded prescription
+            const wrap = document.getElementById("review-wrap");
+            wrap?.querySelectorAll("[contenteditable]").forEach((el) => {
+              el.removeAttribute("contenteditable");
+            });
+            wrap?.querySelectorAll(".adj-btn, .ep, .ep-apply").forEach((el) => {
+              el.style.display = "none";
+            });
+            const signoff = document.querySelector(".signoff");
+            if (signoff)
+              signoff.innerHTML = `<span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription saved — ${esc(rxId)}</span>
+              <div style="display:flex;gap:8px">
+                <button class="sign-btn" onclick="printRx()" style="background:var(--blue)">Print now</button>
+                <button class="back-btn" onclick="showView('pad')">View note</button>
+                <button class="back-btn" onclick="resetPad()">New prescription</button>
+              </div>`;
+          }
+        }
+      } catch (e) {
+        console.warn("Load saved Rx:", e.message);
+      }
+    }
 
-    document.getElementById("pad-ta").value = ctx;
+    // Start auto-save for the note
+    setupAutoSave(visit?.id);
 
     // Auto-activate Neonatal chip if age < 28 days OR preterm OR low birth weight
     let isNeonatal = false;
@@ -2200,6 +2287,13 @@
   }
 
   function clearPatient() {
+    // Save note before clearing
+    if (autoSaveVisitId) saveNote();
+    if (autoSaveTimer) {
+      clearInterval(autoSaveTimer);
+      autoSaveTimer = null;
+    }
+    autoSaveVisitId = null;
     clearHistoryTabs();
     selectedPatient = null;
     const panel = document.getElementById("pt-info-panel");
