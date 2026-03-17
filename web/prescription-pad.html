@@ -617,9 +617,15 @@
     border-bottom: 0.5px solid var(--bdr);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
-    flex-wrap: wrap;
+  }
+  .pt-strip > div:first-child {
+    flex: 1;
+    min-width: 0;
+  }
+  .pt-strip > div:last-child {
+    flex-shrink: 0;
   }
   .pt-strip-name {
     font-size: 14px;
@@ -630,9 +636,11 @@
     color: var(--ink3);
   }
   .pt-strip-dx {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--blue);
     margin-top: 2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* Medicine cards */
@@ -2734,7 +2742,7 @@
         const bands = (f.dosing_bands || [])
           .map(
             (b) =>
-              `${b.dose_min_qty || "?"}${b.dose_max_qty ? "–" + b.dose_max_qty : ""}${b.dose_unit}/${b.is_per_day ? "day" : "dose"} ÷${b.frequency_per_day || "?"}×`,
+              `${b.dose_min_qty || "?"}${b.dose_max_qty ? "–" + b.dose_max_qty : ""}${b.dose_min_unit || b.dose_max_unit || "mg"}/${b.dose_basis || (b.is_per_day ? "day" : "dose")} ÷${b.frequency_per_day || "?"}× (${b.age_band || "all"})`,
           )
           .join("; ");
         formularyContext += `${d}: ${forms}. Dose: ${bands}. ${f.notes || ""}\n`;
@@ -2758,10 +2766,7 @@
         "\n\nSTANDARD PRESCRIPTION PROTOCOLS (pre-approved for this hospital):\n";
       matchedStd.slice(0, 3).forEach((s) => {
         const drugs = (s.first_line_drugs || [])
-          .map(
-            (d) =>
-              `${d.drug} ${d.dose_qty}${d.dose_unit}/${d.dose_basis} ÷${d.frequency_per_day || "?"}× for ${d.duration_days || "?"} days`,
-          )
+          .map((d) => `${d.drug}${d.notes ? " (" + d.notes + ")" : ""}`)
           .join(", ");
         stdRxContext += `${s.diagnosis_name} (${s.icd10}): First-line: ${drugs}. ${s.notes || ""}\n`;
       });
@@ -3874,12 +3879,8 @@
   function renderDoseIcon(p) {
     if (p.form === "syrup") return DOSE_SVG.spoon;
     if (p.form === "drops") {
-      const count = Math.max(1, Math.round(p.dose_qty || 1));
-      return new Array(Math.min(count, 5))
-        .fill(
-          `<span style="display:inline-block;width:8px;height:8px">${DOSE_SVG.drop}</span>`,
-        )
-        .join("");
+      // For drops, show the dose amount text instead of trying to render individual drop icons
+      return `<span style="font-size:11px">${DOSE_SVG.drop} ${esc(p.dose_display || "")}</span>`;
     }
     if (p.form === "tablet" || p.form === "capsule") {
       let pills = "";
