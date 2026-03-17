@@ -670,6 +670,7 @@
       <div><span class="info-lbl">Date</span> ${esc(rxDate)}, ${esc(rxTime)}</div>
       <div><span class="info-lbl">Rx ID</span> ${esc(rxId || "")}</div>
       <div><span class="info-lbl">UHID</span> <strong>${esc(uhid || "")}</strong></div>
+      ${r.patient?.abha_number ? '<div><span style="color:#2980b9;font-size:10px;font-weight:600">ABDM \u2713</span></div>' : ""}
     </div>`;
     // Patient meta
     h += `<div class="meta">
@@ -792,7 +793,7 @@
     );
     h += `<div class="footer">
       <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics \u00b7 HMCI HN 21452 \u00b7 PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 \u00b7 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
-      <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: \u2713<br>Max dose: \u2713<br>NABH: \u2713</div>
+      <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: \u2713<br>Max dose: \u2713<br>NABH: \u2713${r.patient?.abha_number ? "<br>ABDM: " + esc(r.patient.abha_number) : ""}</div>
       <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to re-register</div></div>
     </div>`;
 

@@ -2188,6 +2188,18 @@
       vi += `<div class="vi-row"><span class="vi-allergy">ALLERGY: ${p.known_allergies.map((a) => esc(a)).join(", ")}</span></div>`;
     }
 
+    // ABDM status
+    if (p.abha_number) {
+      vi +=
+        '<div class="vi-row" style="margin-bottom:6px"><span style="font-size:11px;color:var(--ink3)">ABHA:</span> <span style="font-size:12px;font-weight:600">' +
+        esc(p.abha_number) +
+        "</span>";
+      if (p.abha_verified)
+        vi +=
+          ' <span style="color:#27ae60;font-size:11px">\u2713 Verified</span>';
+      vi += "</div>";
+    }
+
     if (visit) {
       // Vitals captured by nurse
       const vitals = [];
@@ -3151,6 +3163,61 @@
         });
       }
 
+      // ===== ABDM: Generate FHIR bundles + create care context =====
+      try {
+        const fhirRes = await fetch(SB + "/functions/v1/generate-fhir-bundle", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + KEY,
+          },
+          body: JSON.stringify({
+            type: "OPConsultation",
+            patient_id: patientId,
+            visit_id: visitId,
+            prescription_id: rxId,
+          }),
+        });
+        if (fhirRes.ok) {
+          const fhirData = await fhirRes.json();
+          // Save FHIR bundle to prescription record
+          await q(
+            `prescriptions?id=eq.${encodeURIComponent(rxId)}`,
+            "",
+            "PATCH",
+            {
+              fhir_bundle: fhirData.bundle,
+            },
+          );
+          // Create care context for ABDM linking
+          await q("abdm_care_contexts", "", "POST", {
+            patient_id: patientId,
+            visit_id: visitId,
+            prescription_id: rxId,
+            care_context_ref: "RKH-CC-" + rxId,
+            display_text:
+              "OPD Visit - " +
+              new Date().toLocaleDateString("en-IN", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              }),
+            record_types: ["OPConsultation", "Prescription"],
+            linked: !!selectedPatient?.abha_verified,
+            linked_at: selectedPatient?.abha_verified
+              ? new Date().toISOString()
+              : null,
+          });
+          console.log(
+            "FHIR bundle generated and care context created for",
+            rxId,
+          );
+        }
+      } catch (fhirErr) {
+        console.warn("FHIR bundle generation (non-blocking):", fhirErr.message);
+        // Non-blocking — prescription is already saved; FHIR can be regenerated later
+      }
+
       showSaveSuccess(pdfUrl, true);
     } catch (e) {
       alert("Save error: " + e.message);
@@ -3388,7 +3455,7 @@
     );
     h += `<div class="footer">
       <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics · HMCI HN 21452 · PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
-      <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: ✓<br>Max dose: ✓<br>NABH: ✓</div>
+      <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: ✓<br>Max dose: ✓<br>NABH: ✓${selectedPatient?.abha_number ? '<br><span style="font-size:10px;color:#2980b9">ABDM: ' + esc(selectedPatient.abha_number) + (selectedPatient.abha_verified ? " \u2713" : "") + "</span>" : ""}</div>
       <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to re-register</div></div>
     </div>`;
 

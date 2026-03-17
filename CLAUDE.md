@@ -34,8 +34,6 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
   - `index.html` — Landing page with navigation cards
   - `registration.html`, `prescription-pad.html`, `prescription-output.html` (Print Station), `patient-lookup.html`, `formulary.html`, `formulary-import.html`, `standard-rx.html`
 
-- **`radhakishan_system/artifacts/`** — 7 source HTML files (canonical versions, copied to `web/` on deploy)
-
 - **`radhakishan_system/skill/`** — AI prompt system (progressive disclosure):
   - `radhakishan_prescription_skill.md` — Original full skill (933 lines, reference artifact — NOT used at runtime)
   - `core_prompt.md` — Lean core prompt (~250 lines) loaded every API call
@@ -45,9 +43,13 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 
 - **`supabase/functions/generate-prescription/`** — Edge Function (Deno/TypeScript) with tool_use loop (5 tools: `get_reference`, `get_formulary`, `get_standard_rx`, `get_previous_rx`, `get_lab_history`)
 - **`supabase/functions/generate-visit-summary/`** — Edge Function: AI clinical summary for returning patients at registration
+- **`supabase/functions/generate-fhir-bundle/`** — Edge Function: ABDM FHIR R4 Bundle generator (OPConsultation, Prescription, DiagnosticReport, ImmunizationRecord)
+- **`supabase/functions/abdm-identity/`** — Edge Function: ABHA verify, create, Scan & Share
+- **`supabase/functions/abdm-hip-*/`** — 4 Edge Functions: HIP callbacks (discover, link, consent, data-transfer)
+- **`supabase/functions/abdm-hiu-*/`** — 2 Edge Functions: HIU services (consent-request, data-receive)
 
-- **`radhakishan_system/schema/`** — Supabase DDL (10 tables)
-- **`radhakishan_system/data/`** — 530 drugs + 446 diagnosis protocols (JSON)
+- **`radhakishan_system/schema/`** — Supabase DDL: `radhakishan_supabase_schema.sql` (base, 10 tables) + `abdm_schema.sql` (ABDM extension)
+- **`radhakishan_system/data/`** — 530 drugs + 446 diagnosis protocols (JSON) + LOINC/SNOMED mappings
 - **`radhakishan_system/scripts/`** — Node.js import scripts + `create_sample_data.js` (20 patients, 20 visits, 8 with past Rx history; auto-scrubs and reseeds)
 - **`radhakishan_system/docs/`** — Specification, setup guide, clinical rules, code review issues
 
@@ -60,20 +62,22 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 2. **Nurse station** (same page): Weight, height, HC, MUAC, temp, HR, RR, SpO2
 3. **Doctor OPD** (Prescription Pad): Search patient in combo box (name/UHID/guardian/token) → view nurse-captured data + visit summary + growth trends (loadGrowthTrend: weight/height history with trend arrows + WAZ) + recent labs (loadRecentLabs: flagged results from lab_results table) + vaccination status (loadVaxStatus: dose count summary) → select NHM or IAP vaccination schedule → review previous Rx history tabs → type/dictate clinical note (auto-saves to `visits.raw_dictation` with debounce; save indicator in tab bar) → click Generate → Edge Function calls Claude (5-tool loop incl. get_lab_history) → prescription renders → review, edit → sign off (saves vaccinations given_today) → print auto-opens. Re-selecting a "done" patient auto-loads their saved prescription (read-only).
 
-## Supabase Schema (10 Tables)
+## Supabase Schema (12 Tables)
 
 | Table                           | Purpose                                                                                                              |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `formulary`                     | 530 drugs with JSONB: formulations, dosing_bands, renal_bands, interactions. UNIQUE on generic_name.                 |
-| `doctors`                       | Seeded with Dr. Lokender Goyal.                                                                                      |
-| `standard_prescriptions`        | 446 ICD-10 keyed protocols with first_line_drugs, investigations                                                     |
-| `patients`                      | Demographics, UHID (RKH-YYMM#####), known_allergies text[], is_active                                                |
+| `formulary`                     | 530 drugs with JSONB: formulations, dosing_bands, renal_bands, interactions. UNIQUE on generic_name. + snomed_code   |
+| `doctors`                       | Seeded with Dr. Lokender Goyal. + hpr_id (Health Professional Registry)                                              |
+| `standard_prescriptions`        | 446 ICD-10 keyed protocols with first_line_drugs, investigations. + snomed_code                                      |
+| `patients`                      | Demographics, UHID (RKH-YYMM#####), known_allergies text[], is_active. + ABHA fields (abha_number, abha_verified)    |
 | `visits`                        | Per-visit vitals, diagnoses, clinical notes, raw_dictation (auto-saved), visit_summary (AI). NOT NULL on patient_id. |
-| `prescriptions`                 | Generated Rx JSON, approval status. NOT NULL on visit_id + patient_id.                                               |
+| `prescriptions`                 | Generated Rx JSON, approval status, fhir_bundle (JSONB). NOT NULL on visit_id + patient_id.                          |
 | `vaccinations`                  | Per-patient vaccination history (IAP 2024 + NHM-UIP)                                                                 |
 | `growth_records`                | WHO Z-scores (WAZ, HAZ, WHZ, HCZ)                                                                                    |
-| `lab_results`                   | Structured lab results: test_name, value, unit, flag (normal/low/high/critical), test_category                       |
+| `lab_results`                   | Structured lab results: test_name, value, unit, flag, test_category. + loinc_code, snomed_code                       |
 | `developmental_screenings`      | Assessments by domain                                                                                                |
+| `abdm_care_contexts`            | ABDM care context tracking: links visits/prescriptions to ABDM for health record sharing (HIP)                       |
+| `abdm_consent_artefacts`        | ABDM consent artefacts: patient consent for health data sharing (HIP/HIU)                                            |
 | Storage: `website` bucket       | Skill files (.md) + web pages                                                                                        |
 | Storage: `prescriptions` bucket | Prescription text files                                                                                              |
 | Storage: `documents` bucket     | Uploaded external records (lab reports, imaging, discharge summaries, etc.)                                          |
@@ -110,11 +114,14 @@ Each page is a single self-contained HTML file with inline CSS and JavaScript. T
 - Inline SVG for medication pictograms (no external images)
 - Browser print API for A4 output with `@page` rules and comfortable spacing
 
-When editing, maintain the self-contained nature. After editing an artifact in `radhakishan_system/artifacts/`, copy it to `web/` with the clean filename. All dynamic data must be wrapped in `esc()` before innerHTML insertion.
+When editing, maintain the self-contained nature. Edit files directly in `web/`. All dynamic data must be wrapped in `esc()` before innerHTML insertion.
 
 ## Deployment
 
 - **Web app**: Push to `main` → GitHub Actions deploys `web/` to GitHub Pages
-- **Edge Functions**: `supabase functions deploy generate-prescription --project-ref ecywxuqhnlkjtdshpcbc` and `supabase functions deploy generate-visit-summary --project-ref ecywxuqhnlkjtdshpcbc`
+- **Edge Functions**: `npx supabase functions deploy <name> --project-ref ecywxuqhnlkjtdshpcbc`
+  - Core: `generate-prescription`, `generate-visit-summary`
+  - ABDM: `generate-fhir-bundle`, `abdm-identity`, `abdm-hip-discover`, `abdm-hip-link`, `abdm-hip-consent`, `abdm-hip-data-transfer`, `abdm-hiu-consent-request`, `abdm-hiu-data-receive`
+- **Schema migrations**: `npx supabase db query --linked -f <file.sql>`
 - **Skill files**: Upload to Supabase Storage `website/skill/` prefix (cached by Edge Function)
-- **Secrets**: `ANTHROPIC_API_KEY` set via `supabase secrets set`
+- **Secrets**: `ANTHROPIC_API_KEY` set via `supabase secrets set`. ABDM: `ABDM_CLIENT_ID`, `ABDM_CLIENT_SECRET`, `ABDM_GATEWAY_URL`

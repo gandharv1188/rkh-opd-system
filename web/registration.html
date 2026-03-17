@@ -821,6 +821,18 @@
           <div class="ff"><label>Blood Group</label><input id="f-bg" value="${esc(p.blood_group || "")}" placeholder="e.g. B+" /></div>
           <div class="ff"><label>Phone</label><input id="f-phone" value="${esc(p.contact_phone || "")}" placeholder="e.g. 9876543210" /></div>
         </div>
+        <div class="fg fg3" style="margin-bottom:10px">
+          <div class="ff"><label>ABHA Number</label>
+            <div style="display:flex;gap:6px">
+              <input id="f-abha" value="${esc(p.abha_number || "")}" placeholder="14-digit ABHA ID" style="flex:1" />
+              <button type="button" onclick="verifyAbha()" style="padding:4px 10px;font-size:11px;background:var(--blue-mid);color:#fff;border:none;border-radius:4px;cursor:pointer" title="Verify ABHA number with ABDM">Verify</button>
+            </div>
+          </div>
+          <div class="ff"><label>ABHA Address</label><input id="f-abha-addr" value="${esc(p.abha_address || "")}" placeholder="e.g. patient@abdm" /></div>
+          <div class="ff" id="abha-status-ff" style="display:flex;align-items:flex-end;padding-bottom:6px">
+            ${p.abha_verified ? '<span style="color:#27ae60;font-size:12px">&#10003; ABHA Verified</span>' : '<span style="color:var(--ink3);font-size:11px">Not verified</span>'}
+          </div>
+        </div>
         <div class="fg fg3">
           <div class="ff"><label>Guardian Name</label><input id="f-guard" value="${esc(p.guardian_name || "")}" placeholder="Father/Mother name" /></div>
           <div class="ff"><label>Relation</label>
@@ -947,7 +959,7 @@
           <div class="ff" style="flex:2;min-width:150px"><label>Test</label>
             <select id="f-lab-test" onchange="onLabTestSelect()" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px">
               <option value="">Select test…</option>
-              ${COMMON_LABS.map((g) => '<optgroup label="' + g.cat + '">' + g.tests.map((t) => '<option value="' + t.name + '" data-unit="' + t.unit + '" data-ref="' + t.ref + '">' + t.name + "</option>").join("") + "</optgroup>").join("")}
+              ${COMMON_LABS.map((g) => '<optgroup label="' + g.cat + '">' + g.tests.map((t) => '<option value="' + t.name + '" data-unit="' + t.unit + '" data-ref="' + t.ref + '" data-loinc="' + (t.loinc || "") + '">' + t.name + "</option>").join("") + "</optgroup>").join("")}
               <option value="__custom">Other (type manually)</option>
             </select>
           </div>
@@ -1243,6 +1255,8 @@
           guardian_relation: "f-rel",
           gestational_age_weeks: "f-ga",
           birth_weight_kg: "f-bw",
+          abha_number: "f-abha",
+          abha_address: "f-abha-addr",
         };
         for (const [col, elId] of Object.entries(fields)) {
           const val = (document.getElementById(elId)?.value || "").trim();
@@ -1304,6 +1318,11 @@
                 .map((s) => s.trim())
                 .filter(Boolean)
             : null,
+          abha_number:
+            (document.getElementById("f-abha")?.value || "").trim() || null,
+          abha_address:
+            (document.getElementById("f-abha-addr")?.value || "").trim() ||
+            null,
           is_active: true,
         };
         const pr = await q("patients", "", "POST", payload);
@@ -1371,6 +1390,7 @@
             reference_range: lab.ref,
             flag: lab.flag,
             test_date: lab.test_date,
+            loinc_code: lab.loinc || null,
             source: "manual",
           });
         }
@@ -1638,60 +1658,135 @@
     {
       cat: "Hematology",
       tests: [
-        { name: "Hemoglobin", unit: "g/dL", ref: "11.5-14.5" },
-        { name: "TLC (WBC)", unit: "cells/cumm", ref: "5000-15000" },
-        { name: "Platelet Count", unit: "lakh/cumm", ref: "1.5-4.0" },
-        { name: "Reticulocyte Count", unit: "%", ref: "0.5-2.0" },
-        { name: "ESR", unit: "mm/hr", ref: "0-20" },
-        { name: "Peripheral Smear", unit: "", ref: "" },
+        { name: "Hemoglobin", unit: "g/dL", ref: "11.5-14.5", loinc: "718-7" },
+        {
+          name: "TLC (WBC)",
+          unit: "cells/cumm",
+          ref: "5000-15000",
+          loinc: "6690-2",
+        },
+        {
+          name: "Platelet Count",
+          unit: "lakh/cumm",
+          ref: "1.5-4.0",
+          loinc: "777-3",
+        },
+        {
+          name: "Reticulocyte Count",
+          unit: "%",
+          ref: "0.5-2.0",
+          loinc: "4679-7",
+        },
+        { name: "ESR", unit: "mm/hr", ref: "0-20", loinc: "4537-7" },
+        { name: "Peripheral Smear", unit: "", ref: "", loinc: "34994-4" },
       ],
     },
     {
       cat: "Biochemistry",
       tests: [
-        { name: "S. Ferritin", unit: "ng/mL", ref: "12-150" },
-        { name: "S. Iron", unit: "mcg/dL", ref: "50-120" },
-        { name: "TIBC", unit: "mcg/dL", ref: "250-400" },
-        { name: "Bilirubin (Total)", unit: "mg/dL", ref: "0.2-1.0" },
-        { name: "Bilirubin (Direct)", unit: "mg/dL", ref: "0-0.3" },
-        { name: "SGPT/ALT", unit: "U/L", ref: "7-56" },
-        { name: "SGOT/AST", unit: "U/L", ref: "10-40" },
-        { name: "Blood Urea", unit: "mg/dL", ref: "15-40" },
-        { name: "S. Creatinine", unit: "mg/dL", ref: "0.3-0.7" },
-        { name: "CRP", unit: "mg/L", ref: "0-6" },
-        { name: "Blood Sugar (F)", unit: "mg/dL", ref: "70-100" },
-        { name: "Blood Sugar (R)", unit: "mg/dL", ref: "70-140" },
-        { name: "S. Calcium", unit: "mg/dL", ref: "8.5-10.5" },
-        { name: "S. Albumin", unit: "g/dL", ref: "3.5-5.0" },
-        { name: "Vit D (25-OH)", unit: "ng/mL", ref: "30-100" },
-        { name: "TSH", unit: "mIU/L", ref: "0.5-5.0" },
-        { name: "Free T4", unit: "ng/dL", ref: "0.8-1.8" },
-        { name: "S. Electrolytes (Na)", unit: "mEq/L", ref: "135-145" },
-        { name: "S. Electrolytes (K)", unit: "mEq/L", ref: "3.5-5.0" },
+        { name: "S. Ferritin", unit: "ng/mL", ref: "12-150", loinc: "2276-4" },
+        { name: "S. Iron", unit: "mcg/dL", ref: "50-120", loinc: "2498-4" },
+        { name: "TIBC", unit: "mcg/dL", ref: "250-400", loinc: "2500-7" },
+        {
+          name: "Bilirubin (Total)",
+          unit: "mg/dL",
+          ref: "0.2-1.0",
+          loinc: "1975-2",
+        },
+        {
+          name: "Bilirubin (Direct)",
+          unit: "mg/dL",
+          ref: "0-0.3",
+          loinc: "1968-7",
+        },
+        { name: "SGPT/ALT", unit: "U/L", ref: "7-56", loinc: "1742-6" },
+        { name: "SGOT/AST", unit: "U/L", ref: "10-40", loinc: "1920-8" },
+        { name: "Blood Urea", unit: "mg/dL", ref: "15-40", loinc: "3094-0" },
+        {
+          name: "S. Creatinine",
+          unit: "mg/dL",
+          ref: "0.3-0.7",
+          loinc: "2160-0",
+        },
+        { name: "CRP", unit: "mg/L", ref: "0-6", loinc: "1988-5" },
+        {
+          name: "Blood Sugar (F)",
+          unit: "mg/dL",
+          ref: "70-100",
+          loinc: "1558-6",
+        },
+        {
+          name: "Blood Sugar (R)",
+          unit: "mg/dL",
+          ref: "70-140",
+          loinc: "2345-7",
+        },
+        {
+          name: "S. Calcium",
+          unit: "mg/dL",
+          ref: "8.5-10.5",
+          loinc: "17861-6",
+        },
+        { name: "S. Albumin", unit: "g/dL", ref: "3.5-5.0", loinc: "1751-7" },
+        {
+          name: "Vit D (25-OH)",
+          unit: "ng/mL",
+          ref: "30-100",
+          loinc: "1989-3",
+        },
+        { name: "TSH", unit: "mIU/L", ref: "0.5-5.0", loinc: "3016-3" },
+        { name: "Free T4", unit: "ng/dL", ref: "0.8-1.8", loinc: "3024-7" },
+        {
+          name: "S. Electrolytes (Na)",
+          unit: "mEq/L",
+          ref: "135-145",
+          loinc: "2951-2",
+        },
+        {
+          name: "S. Electrolytes (K)",
+          unit: "mEq/L",
+          ref: "3.5-5.0",
+          loinc: "2823-3",
+        },
       ],
     },
     {
       cat: "Microbiology",
       tests: [
-        { name: "Blood Culture", unit: "", ref: "No growth" },
-        { name: "Urine Culture", unit: "", ref: "No growth" },
-        { name: "Urine Routine", unit: "", ref: "" },
-        { name: "Stool Routine", unit: "", ref: "" },
-        { name: "Widal Test", unit: "", ref: "Negative" },
-        { name: "Dengue NS1", unit: "", ref: "Negative" },
-        { name: "Malaria Antigen", unit: "", ref: "Negative" },
-        { name: "Rapid Strep Test", unit: "", ref: "Negative" },
-        { name: "Mantoux/TB Gold", unit: "", ref: "Negative" },
+        { name: "Blood Culture", unit: "", ref: "No growth", loinc: "600-7" },
+        { name: "Urine Culture", unit: "", ref: "No growth", loinc: "630-4" },
+        { name: "Urine Routine", unit: "", ref: "", loinc: "24356-8" },
+        { name: "Stool Routine", unit: "", ref: "", loinc: "56875-8" },
+        { name: "Widal Test", unit: "", ref: "Negative", loinc: "5765-4" },
+        { name: "Dengue NS1", unit: "", ref: "Negative", loinc: "75377-2" },
+        {
+          name: "Malaria Antigen",
+          unit: "",
+          ref: "Negative",
+          loinc: "51587-0",
+        },
+        {
+          name: "Rapid Strep Test",
+          unit: "",
+          ref: "Negative",
+          loinc: "78012-2",
+        },
+        {
+          name: "Mantoux/TB Gold",
+          unit: "",
+          ref: "Negative",
+          loinc: "71774-4",
+        },
       ],
     },
     {
       cat: "Imaging",
       tests: [
-        { name: "X-Ray Chest", unit: "", ref: "" },
-        { name: "USG Abdomen", unit: "", ref: "" },
-        { name: "USG KUB", unit: "", ref: "" },
-        { name: "CT Scan", unit: "", ref: "" },
-        { name: "ECHO", unit: "", ref: "" },
+        { name: "X-Ray Chest", unit: "", ref: "", loinc: "36643-5" },
+        { name: "USG Abdomen", unit: "", ref: "", loinc: "24531-6" },
+        { name: "USG KUB", unit: "", ref: "", loinc: "24957-3" },
+        { name: "CT Scan", unit: "", ref: "", loinc: "30799-1" },
+        { name: "ECHO", unit: "", ref: "", loinc: "34552-0" },
       ],
     },
   ];
@@ -1760,6 +1855,7 @@
       flag,
       test_date: date,
       cat: sel.selectedOptions[0]?.parentElement?.label || "",
+      loinc: opt?.dataset?.loinc || null,
     };
     labEntries.push(entry);
     renderLabEntries();
@@ -2076,6 +2172,39 @@
     printToken,
     resetAll,
   });
+
+  // ===== ABDM ABHA Verification =====
+  async function verifyAbha() {
+    const abhaNum = (document.getElementById("f-abha")?.value || "").trim();
+    if (!abhaNum) {
+      toast("Enter ABHA number first", "warn");
+      return;
+    }
+    const statusEl = document.getElementById("abha-status-ff");
+    statusEl.innerHTML =
+      '<span style="color:var(--blue);font-size:11px">Verifying...</span>';
+    try {
+      // TODO: Call abdm-identity Edge Function when deployed
+      // For now, mark as verified locally if format looks valid (14 digits with hyphens)
+      const cleaned = abhaNum.replace(/[^0-9]/g, "");
+      if (cleaned.length !== 14) {
+        statusEl.innerHTML =
+          '<span style="color:#e74c3c;font-size:11px">Invalid ABHA format (need 14 digits)</span>';
+        return;
+      }
+      // Placeholder: will call ABDM sandbox API via Edge Function
+      statusEl.innerHTML =
+        '<span style="color:#f39c12;font-size:11px">ABHA recorded (verification pending ABDM sandbox)</span>';
+      toast(
+        "ABHA number recorded. Full verification requires ABDM sandbox integration.",
+        "info",
+      );
+    } catch (e) {
+      statusEl.innerHTML =
+        '<span style="color:#e74c3c;font-size:11px">Verification failed</span>';
+      toast("ABHA verification error: " + e.message, "err");
+    }
+  }
 
   // Auto-connect on page load
   if (
