@@ -825,7 +825,7 @@
       const todayISO = new Date().toISOString().slice(0, 10);
       const res = await q(
         "prescriptions",
-        `?select=id,patient_id,visit_id,rx_json,status,created_at&status=eq.approved&created_at=gte.${todayISO}T00:00:00&order=created_at.desc`,
+        `?select=id,patient_id,visit_id,generated_json,is_approved,created_at&is_approved=eq.true&created_at=gte.${todayISO}T00:00:00&order=created_at.desc`,
       );
       if (!res.ok) {
         showToast("Failed to load prescriptions");
@@ -867,7 +867,9 @@
       " today) --</option>";
     rows.forEach((r, i) => {
       const rxJson =
-        typeof r.rx_json === "string" ? JSON.parse(r.rx_json) : r.rx_json;
+        typeof r.generated_json === "string"
+          ? JSON.parse(r.generated_json)
+          : r.generated_json;
       const ptName = r._patient_name || rxJson?.patient?.name || "Unknown";
       const time = new Date(r.created_at).toLocaleTimeString("en-IN", {
         hour: "2-digit",
@@ -891,7 +893,9 @@
     }
     const filtered = allRxRows.filter((r) => {
       const rxJson =
-        typeof r.rx_json === "string" ? JSON.parse(r.rx_json) : r.rx_json;
+        typeof r.generated_json === "string"
+          ? JSON.parse(r.generated_json)
+          : r.generated_json;
       const ptName = (
         r._patient_name ||
         rxJson?.patient?.name ||
@@ -928,7 +932,9 @@
     if (term) {
       rows = allRxRows.filter((r) => {
         const rxJson =
-          typeof r.rx_json === "string" ? JSON.parse(r.rx_json) : r.rx_json;
+          typeof r.generated_json === "string"
+            ? JSON.parse(r.generated_json)
+            : r.generated_json;
         const ptName = (
           r._patient_name ||
           rxJson?.patient?.name ||
@@ -947,7 +953,9 @@
 
   function renderRx(row) {
     const rxJson =
-      typeof row.rx_json === "string" ? JSON.parse(row.rx_json) : row.rx_json;
+      typeof row.generated_json === "string"
+        ? JSON.parse(row.generated_json)
+        : row.generated_json;
     // Inject date/time from the record
     const created = new Date(row.created_at);
     rxJson._rx_date = created.toLocaleDateString("en-IN", {
