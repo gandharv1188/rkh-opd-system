@@ -161,7 +161,11 @@ Patient arrives at reception desk
 
 → Neonatal details if applicable (GA, birth weight)
 
+→ External records: free-text notes (with voice dictation) + document uploads (15 category tags, max 10MB, stored in `documents` bucket)
+
 → Visit created: date, assigned doctor, visit type (new/follow-up/vaccination/emergency)
+
+→ For returning patients: `generate-visit-summary` Edge Function produces AI clinical summary (~200 words) from past prescriptions, stored in `visits.visit_summary`
 
 → OPD token printed with UHID, name, doctor, visit details
 
@@ -179,15 +183,17 @@ Nurse weighs and measures the child
 
 Doctor opens Prescription Pad — auto-connects to Supabase (credentials hardcoded)
 
-→ Patient dropdown shows all patients with visits created today (numbered list)
+→ **Searchable patient combo box** replaces simple dropdown — type-ahead search across patient name, UHID, guardian name, and token number. Shows chief complaint preview per patient. "Consultation Completed" section at bottom for patients already seen today. Clear (×) button after selection.
 
-→ Doctor selects patient from dropdown
+→ Doctor selects patient from combo box
 
 → On selection: fetches today's visit and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO2), chief complaints, and known allergies (RED highlight)
 
 → Clinical note textarea pre-filled with: name, age, weight, sex, allergy status, chief complaints, temperature
 
-→ Section chips available: Neonatal (auto-activates for age < 28 days, GA < 37 weeks, or birth weight < 2.5 kg), Growth, Vaccination, Development
+→ Section chips available: Neonatal (auto-activates for age < 28 days, GA < 37 weeks, or birth weight < 2.5 kg), Growth, NHM Vacc. / IAP Vacc. (split, mutually exclusive), Development
+
+→ Previous prescription history: up to 5 past approved prescriptions shown as date tabs (read-only)
 
 Doctor types clinical note and clicks **Generate**
 
@@ -262,13 +268,14 @@ skill/
 
 ### Tool Definitions
 
-The Edge Function defines 3 tools for Claude:
+The Edge Function defines 4 tools for Claude:
 
-| **Tool**                       | **Parameters**          | **Returns**                                       |
-| ------------------------------ | ----------------------- | ------------------------------------------------- |
-| `get_reference(name)`          | Reference file name     | Full markdown content from `skill/references/`    |
-| `get_formulary(drug_names)`    | Array of drug names     | Formulary entries from Supabase `formulary` table |
-| `get_standard_rx(icd10, name)` | ICD-10 code and/or name | Standard prescription protocol from Supabase DB   |
+| **Tool**                       | **Parameters**          | **Returns**                                                 |
+| ------------------------------ | ----------------------- | ----------------------------------------------------------- |
+| `get_reference(name)`          | Reference file name     | Full markdown content from `skill/references/`              |
+| `get_formulary(drug_names)`    | Array of drug names     | Formulary entries from Supabase `formulary` table           |
+| `get_standard_rx(icd10, name)` | ICD-10 code and/or name | Standard prescription protocol from Supabase DB             |
+| `get_previous_rx(patient_id)`  | Patient UUID            | Past prescriptions (PII-stripped) for "continue same" cases |
 
 ### How It Works
 
@@ -301,16 +308,16 @@ The clinical knowledge base (530 drug formulary entries, 446 diagnosis protocols
 
 ## 4.1 Tables Overview
 
-|                        |                                                                      |                                                               |
-| ---------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------- |
-| **Table**              | **Purpose**                                                          | **Key Relationships**                                         |
-| formulary              | Drug monographs — all dosing methods, safety, formulations           | Referenced by prescription generator at runtime               |
-| standard_prescriptions | ICD-10 keyed diagnosis protocols                                     | Referenced by prescription generator at runtime               |
-| patients               | Patient demographics, neonatal details                               | Parent of visits, prescriptions, vaccinations, growth_records |
-| visits                 | Per-visit clinical data — vitals, anthropometry, diagnosis, raw note | Child of patients, parent of prescriptions                    |
-| prescriptions          | Full generated prescription JSON + approval status + PDF URL         | Child of visits and patients                                  |
-| vaccinations           | Vaccination history per patient                                      | Child of patients                                             |
-| growth_records         | WHO Z-scores and measurements per visit                              | Child of patients and visits                                  |
+|                        |                                                                                                                           |                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Table**              | **Purpose**                                                                                                               | **Key Relationships**                                         |
+| formulary              | Drug monographs — all dosing methods, safety, formulations                                                                | Referenced by prescription generator at runtime               |
+| standard_prescriptions | ICD-10 keyed diagnosis protocols                                                                                          | Referenced by prescription generator at runtime               |
+| patients               | Patient demographics, neonatal details                                                                                    | Parent of visits, prescriptions, vaccinations, growth_records |
+| visits                 | Per-visit clinical data — vitals, anthropometry, diagnosis, raw note, visit_summary (AI-generated for returning patients) | Child of patients, parent of prescriptions                    |
+| prescriptions          | Full generated prescription JSON + approval status + PDF URL                                                              | Child of visits and patients                                  |
+| vaccinations           | Vaccination history per patient                                                                                           | Child of patients                                             |
+| growth_records         | WHO Z-scores and measurements per visit                                                                                   | Child of patients and visits                                  |
 
 ## 4.2 Formulary Table — Critical Design Decisions
 
@@ -388,13 +395,17 @@ The main doctor-facing tool. The doctor's only required action is to type a clin
 
 - Auto-connects to Supabase on page load (credentials hardcoded, config panel hidden)
 
-- Patient dropdown showing all patients with visits created today (numbered list — not a search box)
+- **Searchable patient combo box** — type-ahead input searching patient name, UHID, guardian name, token number. Shows chief complaint preview per patient. "Consultation Completed" section at bottom for patients already seen today. Clear (×) button after selection.
 
-- On patient selection: fetches today's visit and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO2), chief complaints, and known allergies (RED highlight)
+- On patient selection: fetches today's visit and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO2), chief complaints, known allergies (RED highlight), and AI-generated visit summary (for returning patients)
 
 - Pre-fills clinical note textarea with patient context + vitals + allergy status + chief complaints from nurse
 
-- Section chips: Neonatal (auto-activates when age < 28 days, GA < 37 weeks, or birth weight < 2.5 kg), Growth, Vaccination, Development
+- Section chips: Neonatal (auto-activates when age < 28 days, GA < 37 weeks, or birth weight < 2.5 kg), Growth, Development
+
+- **Split vaccination buttons**: "NHM Vacc." and "IAP Vacc." replace the single Vaccination chip. Mutually exclusive — only one schedule active at a time. Neither pre-selected; doctor explicitly chooses.
+
+- **Previous prescription history tabs**: Up to 5 past approved prescriptions shown as date tabs. Read-only view identical to signed-off prescription (no editing). Includes neonatal details when applicable. Tabs clear on patient switch.
 
 - **Generate button** calls Supabase Edge Function → Claude API with tool_use → returns structured prescription JSON
 
@@ -498,11 +509,15 @@ Used at the reception desk and nurse station before the patient sees the doctor.
 
 - **OPD token:** After save, prints as 80mm sticker with QR code containing UHID, name, age, vitals, doctor, allergy status
 
+- **External records**: Free-text area with voice dictation for lab results, external doctor notes. Document upload with 15 category tags (Lab Investigation Report, Radiology/Imaging, Previous Prescription, Discharge Summary, Referral Letter, Vaccination Card, Growth Chart, Insurance/TPA, Consent Form, Birth Certificate, Allergy/Medical Alert Card, Surgical Notes, Developmental Report, Diet Chart, Other). Each upload: category dropdown + date + description + file (max 10MB). Files stored in Supabase Storage `documents` bucket. Metadata saved in `clinical_notes` and `raw_dictation`.
+
+- **AI-generated visit summary**: For returning patients, the `generate-visit-summary` Edge Function calls Claude to produce a clinical summary (~200 words) from past prescriptions. Stored in `visits.visit_summary`. Shown on Prescription Pad textarea when patient selected. New patients skip this step (cost saving).
+
 - **Clear Form** button resets all fields for next patient
 
 **Supabase tables**
 
-READ/WRITE: patients, visits, vaccinations
+READ/WRITE: patients, visits, vaccinations | WRITE: Storage (`documents` bucket)
 
 ## 5.5 Formulary Manager (Admin)
 
@@ -1002,7 +1017,7 @@ const response = await fetch(SB_URL + "/functions/v1/generate-prescription", {
 });
 ```
 
-The Edge Function (`supabase/functions/generate-prescription/index.ts`) handles the Claude API call with tool use loop, loading the core prompt and resolving tool calls server-side.
+The Edge Function (`supabase/functions/generate-prescription/index.ts`) handles the Claude API call with tool use loop (4 tools including `get_previous_rx`), loading the core prompt and resolving tool calls server-side. A second Edge Function (`generate-visit-summary`) produces AI clinical summaries for returning patients at registration time.
 
 # 14. Setup Instructions
 
@@ -1046,19 +1061,23 @@ The Edge Function (`supabase/functions/generate-prescription/index.ts`) handles 
 
 16. Open Standard Prescriptions Manager → add/review diagnosis protocols
 
-## 14.5 First Test
+## 14.5 Sample Data for Testing
 
-17. Open Prescription Pad (auto-connects to Supabase)
+17. Run `node scripts/create_sample_data.js` to populate test data: 20 patients covering full pediatric spectrum (neonatal to adolescent), 20 visits with diverse chief complaints, 8 returning patients with past prescriptions. Script auto-scrubs and reseeds — safe to run daily for testing.
 
-18. Register a test patient via Patient Registration → create visit
+## 14.6 First Test
 
-19. In Prescription Pad, select patient from today's dropdown
+18. Open Prescription Pad (auto-connects to Supabase)
 
-20. Type: 'Fever 3 days, left ear pain. Diagnosis: acute otitis media.'
+19. Register a test patient via Patient Registration → create visit (or use sample data from 14.5)
 
-21. Click Generate → Verify Amoxicillin + Paracetamol with correct doses + Hindi Row 3 + pictograms
+20. In Prescription Pad, search for patient in combo box
 
-22. Sign off → Verify print output and record in Supabase Table Editor
+21. Type: 'Fever 3 days, left ear pain. Diagnosis: acute otitis media.'
+
+22. Click Generate → Verify Amoxicillin + Paracetamol with correct doses + Hindi Row 3 + pictograms
+
+23. Sign off → Verify print output and record in Supabase Table Editor
 
 # 15. Migration Status & Future Roadmap
 
@@ -1072,7 +1091,7 @@ The system has been fully migrated from Claude.ai artifacts to a standalone web 
 | AI generation            | Claude.ai conversation + skill prompt  | Supabase Edge Function + Claude API (tool_use)  |
 | Prompt loading           | Monolithic Project Custom Instructions | Core prompt + progressive tool-based disclosure |
 | Supabase credentials     | Manual entry each session              | Hardcoded, auto-connect on load                 |
-| Patient selection        | Search box                             | Dropdown of today's visits                      |
+| Patient selection        | Search box                             | Searchable combo box (name/UHID/guardian/token) |
 | Doctor selection         | Dr. Lokender Goyal + Dr. Swati Goyal   | Dr. Lokender Goyal only                         |
 | Inter-page communication | postMessage via Claude.ai parent frame | Direct navigation / print API                   |
 
@@ -1080,16 +1099,17 @@ All clinical knowledge (prompts, formulary, protocols, schema) transferred with 
 
 ## 15.2 Future Expansion Plans
 
-| **Feature**                    | **Priority** | **Notes**                                           |
-| ------------------------------ | ------------ | --------------------------------------------------- |
-| Multi-specialty support        | High         | Extend beyond pediatrics (general medicine, OB-GYN) |
-| Mobile app (ward rounds)       | Medium       | React Native, shared logic with web                 |
-| HIS / EMR integration          | Medium       | HL7 FHIR or custom API                              |
-| Legal digital signature (DSC)  | Medium       | PKI-based sign-off for prescriptions                |
-| Multi-doctor concurrent access | Medium       | Per-doctor RLS, Supabase Auth                       |
-| Offline mode                   | Low          | Service worker + IndexedDB for clinic downtime      |
-| Voice (Whisper API)            | Low          | Better Hindi accuracy than Web Speech API           |
-| Server-side PDF (Puppeteer)    | Low          | Pixel-perfect, replaces browser print               |
+| **Feature**                      | **Priority** | **Notes**                                                                                                                                                                                                                                                                                                                   |
+| -------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Multi-specialty support          | High         | Extend beyond pediatrics (general medicine, OB-GYN)                                                                                                                                                                                                                                                                         |
+| Mobile app (ward rounds)         | Medium       | React Native, shared logic with web                                                                                                                                                                                                                                                                                         |
+| HIS / EMR integration            | Medium       | HL7 FHIR or custom API                                                                                                                                                                                                                                                                                                      |
+| Legal digital signature (DSC)    | Medium       | PKI-based sign-off for prescriptions                                                                                                                                                                                                                                                                                        |
+| Multi-doctor concurrent access   | Medium       | Per-doctor RLS, Supabase Auth                                                                                                                                                                                                                                                                                               |
+| Offline mode                     | Low          | Service worker + IndexedDB for clinic downtime                                                                                                                                                                                                                                                                              |
+| Voice (Whisper API)              | Low          | Better Hindi accuracy than Web Speech API                                                                                                                                                                                                                                                                                   |
+| Server-side PDF (Puppeteer)      | Low          | Pixel-perfect, replaces browser print                                                                                                                                                                                                                                                                                       |
+| Document image enhancement + OCR | Medium       | OpenCV.js (perspective correction, edge detection, adaptive thresholding, deskew) + jscanify (lightweight edge detection) + Tesseract.js v6 (English + Hindi OCR). Pipeline: upload → auto-detect edges → perspective correct → enhance → binarize → OCR. Runs in background after receptionist uploads document. DEFERRED. |
 
 # 16. Reference Sources
 

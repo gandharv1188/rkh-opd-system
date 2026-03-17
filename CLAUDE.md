@@ -11,13 +11,16 @@ AI-assisted pediatric OPD prescription system for Radhakishan Hospital (NABH acc
 ```
 Web App (GitHub Pages: rx.radhakishanhospital.com)
   ├── Registration Page → Supabase (patients, visits)
-  ├── Prescription Pad → Supabase Edge Function
+  ├── Prescription Pad → Supabase Edge Function (generate-prescription)
   │                       ├── Loads core_prompt.md from Storage
-  │                       ├── Claude API with 3 tools:
+  │                       ├── Claude API with 4 tools:
   │                       │   ├── get_reference(name) → Storage .md files
   │                       │   ├── get_formulary(drug_names) → Supabase REST
-  │                       │   └── get_standard_rx(icd10, name) → Supabase REST
+  │                       │   ├── get_standard_rx(icd10, name) → Supabase REST
+  │                       │   └── get_previous_rx(patient_id) → PII-stripped past Rx
   │                       └── Returns prescription JSON
+  ├── Registration → Edge Function (generate-visit-summary)
+  │                  └── AI clinical summary for returning patients
   ├── Prescription Output → Print (A4 with QR)
   └── Patient Lookup → Supabase
 ```
@@ -39,11 +42,12 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
   - `examples/worked_example.md` — Complete Arjun AOM case
   - All skill files also uploaded to Supabase Storage (`website/skill/` prefix)
 
-- **`supabase/functions/generate-prescription/`** — Edge Function (Deno/TypeScript) with tool_use loop
+- **`supabase/functions/generate-prescription/`** — Edge Function (Deno/TypeScript) with tool_use loop (4 tools incl. `get_previous_rx`)
+- **`supabase/functions/generate-visit-summary/`** — Edge Function: AI clinical summary for returning patients at registration
 
 - **`radhakishan_system/schema/`** — Supabase DDL (10 tables)
 - **`radhakishan_system/data/`** — 530 drugs + 446 diagnosis protocols (JSON)
-- **`radhakishan_system/scripts/`** — Node.js import scripts
+- **`radhakishan_system/scripts/`** — Node.js import scripts + `create_sample_data.js` (20 patients, 20 visits, 8 with past Rx history; auto-scrubs and reseeds)
 - **`radhakishan_system/docs/`** — Specification, setup guide, clinical rules, code review issues
 
 - **`.github/workflows/deploy-pages.yml`** — GitHub Actions deploys `web/` to GitHub Pages
@@ -51,9 +55,9 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 
 ## Workflow (3-Stage)
 
-1. **Reception** (Registration page): Register patient → capture demographics, allergies → create visit with vitals + chief complaints
+1. **Reception** (Registration page): Register patient → capture demographics, allergies → enter external records (free-text + document uploads to `documents` bucket) → create visit with vitals + chief complaints → AI visit summary generated for returning patients (stored in `visits.visit_summary`)
 2. **Nurse station** (same page): Weight, height, HC, MUAC, temp, HR, RR, SpO2
-3. **Doctor OPD** (Prescription Pad): Select patient from today's dropdown → view nurse-captured data → type/dictate clinical note → click Generate → Edge Function calls Claude (tool_use loop) → prescription renders → review, edit → sign off → print auto-opens
+3. **Doctor OPD** (Prescription Pad): Search patient in combo box (name/UHID/guardian/token) → view nurse-captured data + visit summary → select NHM or IAP vaccination schedule → review previous Rx history tabs → type/dictate clinical note → click Generate → Edge Function calls Claude (tool_use loop) → prescription renders → review, edit → sign off → print auto-opens
 
 ## Supabase Schema (10 Tables)
 
@@ -63,13 +67,14 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 | `doctors`                       | Seeded with Dr. Lokender Goyal.                                                                      |
 | `standard_prescriptions`        | 446 ICD-10 keyed protocols with first_line_drugs, investigations                                     |
 | `patients`                      | Demographics, UHID (RKH-YYMM#####), known_allergies text[], is_active                                |
-| `visits`                        | Per-visit vitals, diagnoses, clinical notes. NOT NULL on patient_id.                                 |
+| `visits`                        | Per-visit vitals, diagnoses, clinical notes, visit_summary (AI). NOT NULL on patient_id.             |
 | `prescriptions`                 | Generated Rx JSON, approval status. NOT NULL on visit_id + patient_id.                               |
 | `vaccinations`                  | Per-patient vaccination history (IAP 2024 + NHM-UIP)                                                 |
 | `growth_records`                | WHO Z-scores (WAZ, HAZ, WHZ, HCZ)                                                                    |
 | `developmental_screenings`      | Assessments by domain                                                                                |
 | Storage: `website` bucket       | Skill files (.md) + web pages                                                                        |
 | Storage: `prescriptions` bucket | Prescription text files                                                                              |
+| Storage: `documents` bucket     | Uploaded external records (lab reports, imaging, discharge summaries, etc.)                          |
 
 RLS enabled with anon_full_access policy for POC. ON DELETE RESTRICT. CHECK constraints on medical ranges.
 
@@ -81,7 +86,7 @@ RLS enabled with anon_full_access policy for POC. ON DELETE RESTRICT. CHECK cons
 - **6 dosing methods**: Weight-based, BSA, GFR-adjusted, fixed, infusion, age/GA-tier. NEVER exceed max dose.
 - **Rounding**: Syrups → 0.5ml, drops → 0.1ml, tablets → ¼ tab.
 - **Preterms**: CORRECTED age for growth/development, CHRONOLOGICAL age for vaccinations. Neonatal chip auto-activates for age < 28d, GA < 37wk, BW < 2.5kg.
-- **Vaccination**: Both IAP 2024 and NHM-UIP schedules. Haryana: PCV + Rotavirus free, no JE.
+- **Vaccination**: Split "NHM Vacc." / "IAP Vacc." buttons (mutually exclusive, neither pre-selected). Haryana: PCV + Rotavirus free, no JE.
 - **Safety checks**: allergy_note, interactions, per-medicine max_dose_check, overall_status (SAFE/REVIEW REQUIRED).
 - **NABH compliance**: Mandatory on every prescription. Claude always fetches nabh_compliance reference.
 - **ICD-10 primary**: Standard prescription lookup uses ICD-10 code first, diagnosis name as fallback.
@@ -104,6 +109,6 @@ When editing, maintain the self-contained nature. After editing an artifact in `
 ## Deployment
 
 - **Web app**: Push to `main` → GitHub Actions deploys `web/` to GitHub Pages
-- **Edge Function**: `supabase functions deploy generate-prescription --project-ref ecywxuqhnlkjtdshpcbc`
+- **Edge Functions**: `supabase functions deploy generate-prescription --project-ref ecywxuqhnlkjtdshpcbc` and `supabase functions deploy generate-visit-summary --project-ref ecywxuqhnlkjtdshpcbc`
 - **Skill files**: Upload to Supabase Storage `website/skill/` prefix (cached by Edge Function)
 - **Secrets**: `ANTHROPIC_API_KEY` set via `supabase secrets set`
