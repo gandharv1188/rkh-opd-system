@@ -64,7 +64,12 @@ Generate this exact structure. Field names MUST match exactly.
     "notes": "string"
   },
   "diagnosis": [
-    { "name": "string", "icd10": "string", "type": "provisional|final" }
+    {
+      "name": "string",
+      "icd10": "string",
+      "snomed_code": "string or null",
+      "type": "provisional|final"
+    }
   ],
   "triage_score": 0,
   "triage_action": "Routine OPD|Priority|Urgent|Emergency",
@@ -82,6 +87,8 @@ Generate this exact structure. Field names MUST match exactly.
       "concentration_per_ml": 0,
       "max_dose_single_mg": 0,
       "formulation": "syrup|drops|tablet|injection|inhaler|topical",
+      "snomed_code": "string or null (from formulary snomed_code field)",
+      "snomed_display": "string or null (from formulary snomed_display field)",
       "method": "weight|bsa|fixed|gfr|infusion|age",
       "pictogram": {
         "form": "syrup|tablet|drops|injection|inhaler|topical",
@@ -162,7 +169,10 @@ Generate this exact structure. Field names MUST match exactly.
 - `clinical_history`: Expand from note into a proper clinical narrative.
 - `examination`: Extract and structure physical exam findings from note.
 - `diagnosis[].type`: Always "provisional" unless doctor says "confirmed" or "final".
+- `diagnosis[].snomed_code`: If the `get_standard_rx` response includes a `snomed_code` field, copy it here. Otherwise null.
 - `neonatal`: Include ONLY for neonates/preterms. Null for older children.
+- `medicines[].snomed_code`: If the `get_formulary` response includes a `snomed_code` field for this drug, copy it here. Otherwise null.
+- `medicines[].snomed_display`: If the `get_formulary` response includes a `snomed_display` field, copy it here. Otherwise null.
 - `medicines[].calc`: ALWAYS include dose calculation working.
 - `medicines[].flag`: Empty string if no concern.
 - `medicines[].pictogram`: ALWAYS include. Visual dosing guide for low-literacy patients.

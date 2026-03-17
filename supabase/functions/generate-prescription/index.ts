@@ -175,7 +175,7 @@ async function executeGetFormulary(drugNames: string[]): Promise<string> {
     const orFilter = drugNames
       .map((d) => `generic_name.ilike.%25${encodeURIComponent(d.trim())}%25`)
       .join(",");
-    const url = `${SUPABASE_URL}/rest/v1/formulary?or=(${orFilter})&select=generic_name,formulations,dosing_bands,interactions,contraindications,cross_reactions,black_box_warnings,renal_bands,administration,food_instructions,notes&active=eq.true`;
+    const url = `${SUPABASE_URL}/rest/v1/formulary?or=(${orFilter})&select=generic_name,formulations,dosing_bands,interactions,contraindications,cross_reactions,black_box_warnings,renal_bands,administration,food_instructions,notes,snomed_code,snomed_display&active=eq.true`;
     const res = await fetch(url, {
       headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
     });
@@ -194,7 +194,7 @@ async function executeGetStandardRx(
   name?: string,
 ): Promise<string> {
   const select =
-    "icd10,diagnosis_name,first_line_drugs,second_line_drugs,investigations,counselling,referral_criteria,hospitalisation_criteria,notes,duration_days_default";
+    "icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,referral_criteria,hospitalisation_criteria,notes,duration_days_default";
   const headers = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
 
   try {

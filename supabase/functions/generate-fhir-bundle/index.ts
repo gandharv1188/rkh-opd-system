@@ -880,6 +880,45 @@ async function generateOPConsultationBundle(
 
   const rxData = prescription?.generated_json || {};
 
+  // === Enrich medicines with SNOMED codes from formulary (fallback for older prescriptions) ===
+  const medicines = prescription?.medicines || rxData.medicines || [];
+  for (const med of medicines) {
+    if (!med.snomed_code) {
+      const drugName = (med.row1_en || "").split("(")[0].trim();
+      if (drugName) {
+        const fRes = await fetch(
+          `${SUPABASE_URL}/rest/v1/formulary?generic_name=ilike.${encodeURIComponent(drugName)}&select=snomed_code,snomed_display&limit=1`,
+          { headers },
+        );
+        if (fRes.ok) {
+          const fData = await fRes.json();
+          if (fData.length > 0 && fData[0].snomed_code) {
+            med.snomed_code = fData[0].snomed_code;
+            med.snomed_display = fData[0].snomed_display;
+          }
+        }
+      }
+    }
+  }
+
+  // === Enrich diagnoses with SNOMED codes from standard_prescriptions (fallback) ===
+  const diagnosisCodes = visit.diagnosis_codes || rxData.diagnosis || [];
+  for (const dx of diagnosisCodes) {
+    const dxObj = typeof dx === "string" ? { name: dx } : dx;
+    if (!dxObj.snomed_code && dxObj.icd10) {
+      const spRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/standard_prescriptions?icd10=eq.${encodeURIComponent(dxObj.icd10)}&select=snomed_code&limit=1`,
+        { headers },
+      );
+      if (spRes.ok) {
+        const spData = await spRes.json();
+        if (spData.length > 0 && spData[0].snomed_code) {
+          dxObj.snomed_code = spData[0].snomed_code;
+        }
+      }
+    }
+  }
+
   // === Section: Chief Complaints ===
   if (visit.chief_complaints || rxData.chief_complaints) {
     const text = visit.chief_complaints || rxData.chief_complaints;
@@ -978,7 +1017,6 @@ async function generateOPConsultationBundle(
 
   // === Diagnoses as Condition resources ===
   const conditionRefs: string[] = [];
-  const diagnosisCodes = visit.diagnosis_codes || rxData.diagnosis || [];
   for (const dx of diagnosisCodes) {
     const dxObj = typeof dx === "string" ? { name: dx } : dx;
     const conditionId = uuid();
@@ -990,7 +1028,6 @@ async function generateOPConsultationBundle(
 
   // === Section: Medications ===
   const medRefs: string[] = [];
-  const medicines = prescription?.medicines || rxData.medicines || [];
   for (const med of medicines) {
     const medId = uuid();
     entries.push({
@@ -1140,9 +1177,46 @@ async function generatePrescriptionBundle(
 
   const rxData = prescription?.generated_json || {};
 
+  // === Enrich with SNOMED codes from database (fallback for older prescriptions) ===
+  const medicines = prescription?.medicines || rxData.medicines || [];
+  for (const med of medicines) {
+    if (!med.snomed_code) {
+      const drugName = (med.row1_en || "").split("(")[0].trim();
+      if (drugName) {
+        const fRes = await fetch(
+          `${SUPABASE_URL}/rest/v1/formulary?generic_name=ilike.${encodeURIComponent(drugName)}&select=snomed_code,snomed_display&limit=1`,
+          { headers },
+        );
+        if (fRes.ok) {
+          const fData = await fRes.json();
+          if (fData.length > 0 && fData[0].snomed_code) {
+            med.snomed_code = fData[0].snomed_code;
+            med.snomed_display = fData[0].snomed_display;
+          }
+        }
+      }
+    }
+  }
+
+  const diagnosisCodes = visit.diagnosis_codes || rxData.diagnosis || [];
+  for (const dx of diagnosisCodes) {
+    const dxObj = typeof dx === "string" ? { name: dx } : dx;
+    if (!dxObj.snomed_code && dxObj.icd10) {
+      const spRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/standard_prescriptions?icd10=eq.${encodeURIComponent(dxObj.icd10)}&select=snomed_code&limit=1`,
+        { headers },
+      );
+      if (spRes.ok) {
+        const spData = await spRes.json();
+        if (spData.length > 0 && spData[0].snomed_code) {
+          dxObj.snomed_code = spData[0].snomed_code;
+        }
+      }
+    }
+  }
+
   // Build Condition resources for diagnoses (as reason references)
   const conditionRefs: string[] = [];
-  const diagnosisCodes = visit.diagnosis_codes || rxData.diagnosis || [];
   for (const dx of diagnosisCodes) {
     const dxObj = typeof dx === "string" ? { name: dx } : dx;
     const conditionId = uuid();
@@ -1154,7 +1228,6 @@ async function generatePrescriptionBundle(
 
   // Build MedicationRequest resources
   const medRefs: string[] = [];
-  const medicines = prescription?.medicines || rxData.medicines || [];
   for (const med of medicines) {
     const medId = uuid();
     entries.push({
