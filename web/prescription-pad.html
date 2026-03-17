@@ -1297,8 +1297,21 @@
         <div class="mod-chip on" id="chip-inv" onclick="toggleMod('inv')">
           <span class="chip-dot"></span>Investigations
         </div>
-        <div class="mod-chip on" id="chip-vax" onclick="toggleMod('vax')">
-          <span class="chip-dot"></span>Vaccination
+        <div
+          class="mod-chip"
+          id="chip-vax-nhm"
+          onclick="toggleVax('nhm')"
+          style="border-radius: 6px 0 0 6px; margin-right: 0"
+        >
+          <span class="chip-dot"></span>NHM Vacc.
+        </div>
+        <div
+          class="mod-chip"
+          id="chip-vax-iap"
+          onclick="toggleVax('iap')"
+          style="border-radius: 0 6px 6px 0; margin-left: -1px"
+        >
+          <span class="chip-dot"></span>IAP Vacc.
         </div>
         <div class="mod-chip on" id="chip-growth" onclick="toggleMod('growth')">
           <span class="chip-dot"></span>Growth
@@ -1697,7 +1710,6 @@
     // Reset section chips to defaults (clear patient-specific auto-selections)
     activeMods.clear();
     activeMods.add("inv");
-    activeMods.add("vax");
     activeMods.add("growth");
     document.querySelectorAll(".mod-chip").forEach((el) => {
       const k = el.id.replace("chip-", "");
@@ -1850,19 +1862,37 @@
   /* ===== MODULES (checkbox toggles, no text areas) ===== */
   // Pre-select common sections
   activeMods.add("inv");
-  activeMods.add("vax");
   activeMods.add("growth");
 
   function toggleMod(k) {
     activeMods.has(k) ? activeMods.delete(k) : activeMods.add(k);
-    document
-      .getElementById("chip-" + k)
-      .classList.toggle("on", activeMods.has(k));
+    const el = document.getElementById("chip-" + k);
+    if (el) el.classList.toggle("on", activeMods.has(k));
+  }
+
+  // Split vaccination toggle — only one schedule can be active at a time
+  function toggleVax(schedule) {
+    const key = "vax-" + schedule;
+    const other = schedule === "nhm" ? "vax-iap" : "vax-nhm";
+    if (activeMods.has(key)) {
+      // Turn off
+      activeMods.delete(key);
+      document.getElementById("chip-" + key)?.classList.remove("on");
+    } else {
+      // Turn on this, turn off other
+      activeMods.delete(other);
+      document.getElementById("chip-" + other)?.classList.remove("on");
+      activeMods.add(key);
+      document.getElementById("chip-" + key)?.classList.add("on");
+    }
   }
   function getSelectedSections() {
     const sectionNames = {
       inv: "investigations",
-      vax: "vaccination status",
+      "vax-nhm":
+        "vaccination status (use NHM-UIP government schedule — free vaccines only)",
+      "vax-iap":
+        "vaccination status (use IAP 2024 ACVIP schedule — includes paid vaccines)",
       growth: "growth assessment",
       dev: "developmental screening",
       diet: "diet & nutrition",
@@ -2872,7 +2902,6 @@
     // Re-select default mods
     activeMods.clear();
     activeMods.add("inv");
-    activeMods.add("vax");
     activeMods.add("growth");
     document.querySelectorAll(".mod-chip").forEach((el) => {
       const k = el.id.replace("chip-", "");
@@ -3009,6 +3038,7 @@
     toggleVoice,
     generatePrescription,
     toggleMod,
+    toggleVax,
     toggleEP,
     showView,
     signOff,
