@@ -990,6 +990,22 @@
           throw new Error("Registration failed: " + (await pr.text()));
       }
 
+      // Generate visit summary for returning patients
+      let visitSummary = null;
+      if (currentPatient) {
+        try {
+          visitSummary = await buildVisitSummary(patientId);
+          if (visitSummary)
+            console.log(
+              "Visit summary generated:",
+              visitSummary.length,
+              "chars",
+            );
+        } catch (e) {
+          console.warn("Summary generation skipped:", e.message);
+        }
+      }
+
       // Create visit
       const visitPayload = {
         patient_id: patientId,
@@ -1007,6 +1023,7 @@
         spo2_pct: parseFloat(document.getElementById("f-spo2")?.value) || null,
         chief_complaints:
           (document.getElementById("f-complaints")?.value || "").trim() || null,
+        visit_summary: visitSummary,
       };
       console.log("Patient ID:", patientId);
       console.log("Visit payload:", JSON.stringify(visitPayload, null, 2));
@@ -1106,6 +1123,64 @@
     } finally {
       btn.disabled = false;
       btn.textContent = "Save & Create Visit";
+    }
+  }
+
+  async function buildVisitSummary(patientId) {
+    try {
+      const r = await q(
+        `prescriptions?patient_id=eq.${encodeURIComponent(patientId)}&is_approved=eq.true&order=created_at.desc&limit=3`,
+        "&select=id,created_at,generated_json",
+      );
+      if (!r.ok) return null;
+      const rxList = await r.json();
+      if (!rxList.length) return null;
+
+      const lines = [];
+
+      // Most recent visit — detailed summary
+      const latest = rxList[0];
+      const lg = latest.generated_json || {};
+      const lDate = new Date(latest.created_at).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "2-digit",
+      });
+      let detail = `LAST VISIT (${lDate}): `;
+      if (lg.diagnosis?.length)
+        detail += `Dx: ${lg.diagnosis.map((d) => d.name + (d.icd10 ? " (" + d.icd10 + ")" : "")).join(", ")}. `;
+      if (lg.medicines?.length)
+        detail += `Rx: ${lg.medicines.map((m) => (m.row1_en || "").split("(")[0].trim()).join(" + ")}. `;
+      if (lg.chief_complaints) detail += `Complaints: ${lg.chief_complaints}. `;
+      if (lg.examination) detail += `Exam: ${lg.examination.slice(0, 120)}. `;
+      if (lg.safety?.allergy_note && lg.safety.allergy_note !== "NKDA")
+        detail += `${lg.safety.allergy_note}. `;
+      if (lg.followup_days) detail += `Follow-up: ${lg.followup_days} days. `;
+      if (lg.doctor_notes) detail += `Notes: ${lg.doctor_notes} `;
+      lines.push(detail.trim());
+
+      // Older visits — condensed one-liners
+      for (let i = 1; i < rxList.length; i++) {
+        const rx = rxList[i];
+        const g = rx.generated_json || {};
+        const d = new Date(rx.created_at).toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "2-digit",
+        });
+        let line = `VISIT (${d}): `;
+        if (g.diagnosis?.length)
+          line += `Dx: ${g.diagnosis.map((dx) => dx.name).join(", ")}. `;
+        if (g.medicines?.length)
+          line += `Rx: ${g.medicines.map((m) => (m.row1_en || "").split("(")[0].trim()).join(" + ")}. `;
+        if (g.patient?.weight_kg) line += `Wt: ${g.patient.weight_kg} kg. `;
+        lines.push(line.trim());
+      }
+
+      return lines.join("\n");
+    } catch (e) {
+      console.warn("buildVisitSummary:", e.message);
+      return null;
     }
   }
 

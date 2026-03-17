@@ -265,6 +265,9 @@ create table visits (
   -- Doctor's raw dictation (saved for audit)
   raw_dictation       text,
 
+  -- AI-generated summary of previous visits (created at registration for returning patients)
+  visit_summary       text,
+
   created_at      timestamptz default now(),
   updated_at      timestamptz default now()
 );

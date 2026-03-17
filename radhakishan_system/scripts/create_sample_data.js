@@ -606,17 +606,7 @@ async function run() {
     console.log(`  ${result.id} ${result.name}${allergy}${preterm}`);
   }
 
-  // Step 3: Create today's visits
-  console.log(`\nCreating ${visits.length} visits for ${TODAY}...`);
-  for (let i = 0; i < visits.length; i++) {
-    const v = { ...visits[i], visit_date: TODAY, doctor_id: "DR-LOKENDER" };
-    const result = await post("visits", v);
-    console.log(
-      `  ${i + 1}. ${v.patient_id} — ${v.chief_complaints.slice(0, 60)}...`,
-    );
-  }
-
-  // Step 4: Create past visits + prescriptions for 8 returning patients
+  // Step 3: Create past visits + prescriptions for returning patients (BEFORE today's visits)
   console.log(
     "\nCreating past visits & prescriptions for returning patients...",
   );
@@ -1390,6 +1380,42 @@ async function run() {
     });
     console.log(
       `  ${prx.patient_id} — ${pastDate} — ${prx.rx.diagnosis[0].name} (${rxId})`,
+    );
+  }
+
+  // Build a map of past Rx summaries per patient (for today's visit_summary)
+  const pastRxMap = {};
+  for (const prx of pastRx) {
+    const g = prx.rx;
+    const pastDate = new Date(
+      Date.now() - prx.daysAgo * 86400000,
+    ).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "2-digit",
+    });
+    const dx = (g.diagnosis || [])
+      .map((d) => d.name + (d.icd10 ? " (" + d.icd10 + ")" : ""))
+      .join(", ");
+    const meds = (g.medicines || [])
+      .map((m) => (m.row1_en || "").split("(")[0].trim())
+      .join(" + ");
+    let summary = `LAST VISIT (${pastDate}): Dx: ${dx}. Rx: ${meds}.`;
+    if (g.chief_complaints) summary += ` Complaints: ${g.chief_complaints}.`;
+    if (g.followup_days) summary += ` Follow-up: ${g.followup_days} days.`;
+    if (g.doctor_notes) summary += ` Notes: ${g.doctor_notes}`;
+    pastRxMap[prx.patient_id] = summary.trim();
+  }
+
+  // Step 4: Create today's visits (with visit_summary for returning patients)
+  console.log(`\nCreating ${visits.length} visits for ${TODAY}...`);
+  for (let i = 0; i < visits.length; i++) {
+    const v = { ...visits[i], visit_date: TODAY, doctor_id: "DR-LOKENDER" };
+    if (pastRxMap[v.patient_id]) v.visit_summary = pastRxMap[v.patient_id];
+    await post("visits", v);
+    const sumTag = v.visit_summary ? " [+summary]" : "";
+    console.log(
+      `  ${i + 1}. ${v.patient_id} — ${v.chief_complaints.slice(0, 50)}...${sumTag}`,
     );
   }
 

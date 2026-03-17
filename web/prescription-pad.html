@@ -1668,7 +1668,7 @@
     try {
       const vr = await q(
         "visits",
-        `?visit_date=eq.${today}&select=patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,chief_complaints,doctor_id,created_at&order=created_at.asc`,
+        `?visit_date=eq.${today}&select=patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,chief_complaints,doctor_id,visit_summary,created_at&order=created_at.asc`,
       );
       if (!vr.ok) return;
       const visits = await vr.json();
@@ -2038,6 +2038,10 @@
     if (visit?.chief_complaints)
       ctx += `Chief complaints: ${visit.chief_complaints}. `;
     if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
+
+    // Append previous visit summary (generated at registration for returning patients)
+    if (visit?.visit_summary) ctx += "\n\n" + visit.visit_summary;
+
     document.getElementById("pad-ta").value = ctx;
 
     // Auto-activate Neonatal chip if age < 28 days OR preterm OR low birth weight
