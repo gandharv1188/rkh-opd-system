@@ -3273,14 +3273,14 @@
       @page { size: A4; margin: 8mm 8mm; }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body { font-family: Georgia, 'Times New Roman', serif; font-size: 10px; color: #1a1a14; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .hdr { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 2px solid #1e3a6b; margin-bottom: 4px; }
-      .hdr-l { font-size: 9px; line-height: 1.4; }
+      .hdr { display: flex; align-items: center; padding: 6px 0; border-bottom: 2px solid #1e3a6b; margin-bottom: 4px; }
+      .hdr-l { font-size: 9px; line-height: 1.4; width: 30%; flex-shrink: 0; }
       .hdr-c { text-align: center; flex: 1; }
       .hdr-c h1 { font-size: 15px; color: #1e3a6b; margin-bottom: 1px; }
       .hdr-hi { font-size: 10px; color: #666; }
       .hdr-sub { font-size: 8px; color: #888; }
       .nabh-badge { display: inline-block; border: 1px solid #1e3a6b; border-radius: 99px; padding: 0px 6px; font-size: 7px; color: #1e3a6b; margin-top: 2px; letter-spacing: 0.04em; }
-      .hdr-r { text-align: right; font-size: 8px; line-height: 1.4; }
+      .hdr-r { text-align: right; font-size: 8px; line-height: 1.4; width: 30%; flex-shrink: 0; }
       .meta { display: flex; gap: 10px; padding: 4px 0; border-bottom: 1px solid #ddd; margin-bottom: 4px; }
       .meta-item { flex: 1; }
       .meta-lbl { display: block; font-size: 7px; color: #999; text-transform: uppercase; letter-spacing: 0.04em; }

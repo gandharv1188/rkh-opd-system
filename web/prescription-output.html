@@ -152,7 +152,6 @@
   /* ===== A4 PRESCRIPTION STYLES (from printRx) ===== */
   .rx-area .hdr {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 6px 0;
     border-bottom: 2px solid #1e3a6b;
@@ -161,6 +160,8 @@
   .rx-area .hdr-l {
     font-size: 9px;
     line-height: 1.4;
+    width: 30%;
+    flex-shrink: 0;
   }
   .rx-area .hdr-c {
     text-align: center;
@@ -195,6 +196,8 @@
     text-align: right;
     font-size: 8px;
     line-height: 1.4;
+    width: 30%;
+    flex-shrink: 0;
   }
   .rx-area .info-strip {
     display: flex;
