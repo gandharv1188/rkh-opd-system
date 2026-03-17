@@ -1797,6 +1797,21 @@
     // Examination
     if (r.examination)
       h += `<div class="rv-sec"><div class="rv-hdr">Examination</div><div style="font-size:13px">${esc(r.examination)}</div></div>`;
+    // Neonatal details
+    if (r.neonatal) {
+      const n = r.neonatal;
+      let neo =
+        '<div class="rv-sec"><div class="rv-hdr">Neonatal Details</div><div>';
+      if (n.ga) neo += `GA: ${esc(n.ga)} &nbsp; `;
+      if (n.pna) neo += `PNA: ${esc(n.pna)} &nbsp; `;
+      if (n.bw) neo += `Birth wt: ${esc(n.bw)} &nbsp; `;
+      if (n.corrected) neo += `Corrected age: ${esc(n.corrected)}`;
+      neo += "</div>";
+      if (n.notes)
+        neo += `<div style="margin-top:4px;font-size:12px;color:var(--ink3)">${esc(n.notes)}</div>`;
+      neo += "</div>";
+      h += neo;
+    }
 
     // Medicines (read-only, no contenteditable, no adjust buttons)
     if (r.medicines?.length) {
