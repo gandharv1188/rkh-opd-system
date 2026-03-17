@@ -834,6 +834,32 @@
       </div>
     </div>`;
 
+    // Section 8: External clinical notes (lab results, outside doctor notes)
+    h += `<div class="form-section">
+      <div class="fs-hdr">External Records <span class="badge">Optional — lab results, outside notes</span></div>
+      <div class="fs-body">
+        <div class="ff">
+          <label>Clinical notes / Lab results / External doctor's findings</label>
+          <textarea id="f-ext-notes" rows="4" placeholder="e.g. Hb 8.2 g/dl (dated 10 Mar), S. Ferritin 12 ng/ml. Dr. XYZ advised iron supplements. CBC from City Lab attached."></textarea>
+          <div style="margin-top:4px;display:flex;gap:6px;align-items:center">
+            <button type="button" onclick="toggleExtDictation()" id="ext-mic-btn" style="padding:4px 10px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">
+              🎤 Dictate
+            </button>
+            <span id="ext-mic-status" style="font-size:10px;color:var(--ink3)">Click to dictate lab results or notes</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    // Section 9: Document upload (scans, images, PDFs)
+    h += `<div class="form-section">
+      <div class="fs-hdr">Upload Documents <span class="badge">Optional — scans, photos, PDFs</span></div>
+      <div class="fs-body">
+        <div id="doc-uploads"></div>
+        <button type="button" onclick="addDocUpload()" style="padding:6px 14px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:12px;margin-top:6px">+ Add Document</button>
+      </div>
+    </div>`;
+
     h += '<div style="height:70px"></div>'; // spacer for status bar
 
     document.getElementById("form-area").innerHTML = h;
@@ -1023,6 +1049,8 @@
         spo2_pct: parseFloat(document.getElementById("f-spo2")?.value) || null,
         chief_complaints:
           (document.getElementById("f-complaints")?.value || "").trim() || null,
+        clinical_notes:
+          (document.getElementById("f-ext-notes")?.value || "").trim() || null,
         visit_summary: visitSummary,
       };
       console.log("Patient ID:", patientId);
@@ -1032,6 +1060,27 @@
         throw new Error("Visit creation failed: " + (await vr.text()));
       const visitData = await vr.json();
       const visitId = Array.isArray(visitData) ? visitData[0].id : visitData.id;
+
+      // Upload attached documents to Supabase Storage
+      const uploadedDocs = await uploadDocuments(patientId, visitId);
+      if (uploadedDocs.length) {
+        // Append document metadata to clinical_notes
+        const existingNotes = visitPayload.clinical_notes || "";
+        const docSummary =
+          "\n\nATTACHED DOCUMENTS:\n" +
+          uploadedDocs
+            .map(
+              (d) =>
+                `- [${d.category}] ${d.description || d.filename} (${d.date}) → ${d.url}`,
+            )
+            .join("\n");
+        await q(`visits?id=eq.${visitId}`, "", "PATCH", {
+          clinical_notes: existingNotes + docSummary,
+          raw_dictation: JSON.stringify(uploadedDocs),
+          updated_at: new Date().toISOString(),
+        });
+        console.log("Documents uploaded:", uploadedDocs.length);
+      }
 
       // Save vaccination records
       const vaxList = document.getElementById("vax-list");
@@ -1177,6 +1226,153 @@
     document.getElementById("form-area").innerHTML = "";
     document.getElementById("status-bar").style.display = "none";
     currentPatient = null;
+  }
+
+  // ===== EXTERNAL RECORDS: Dictation =====
+  let extRecog = null;
+  let extIsRec = false;
+  function toggleExtDictation() {
+    if (
+      !("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
+    ) {
+      alert("Voice dictation requires Chrome browser.");
+      return;
+    }
+    if (extIsRec && extRecog) {
+      extRecog.stop();
+      return;
+    }
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    extRecog = new SR();
+    extRecog.lang = "en-IN";
+    extRecog.continuous = true;
+    extRecog.interimResults = true;
+    const ta = document.getElementById("f-ext-notes");
+    const btn = document.getElementById("ext-mic-btn");
+    const st = document.getElementById("ext-mic-status");
+    let finalText = ta.value;
+    extRecog.onstart = () => {
+      extIsRec = true;
+      btn.textContent = "⏹ Stop";
+      btn.style.background = "#fde8e8";
+      st.textContent = "Listening...";
+    };
+    extRecog.onresult = (e) => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        if (e.results[i].isFinal) finalText += e.results[i][0].transcript + " ";
+        else interim = e.results[i][0].transcript;
+      }
+      ta.value = finalText + interim;
+    };
+    extRecog.onend = () => {
+      extIsRec = false;
+      btn.textContent = "🎤 Dictate";
+      btn.style.background = "";
+      st.textContent = "Dictation stopped";
+    };
+    extRecog.onerror = () => {
+      extIsRec = false;
+      btn.textContent = "🎤 Dictate";
+      btn.style.background = "";
+      st.textContent = "Mic error — try again";
+    };
+    extRecog.start();
+  }
+
+  // ===== DOCUMENT UPLOAD =====
+  const DOC_CATEGORIES = [
+    { value: "lab_report", label: "Lab Investigation Report" },
+    { value: "radiology", label: "Radiology / Imaging (X-ray, USG, CT, MRI)" },
+    { value: "prescription", label: "Previous Prescription (external)" },
+    { value: "discharge_summary", label: "Discharge Summary" },
+    { value: "referral_letter", label: "Referral Letter" },
+    { value: "vaccination_card", label: "Vaccination Card" },
+    { value: "growth_chart", label: "Growth Chart / Booklet" },
+    { value: "insurance", label: "Insurance / TPA Document" },
+    { value: "consent_form", label: "Consent Form" },
+    { value: "birth_certificate", label: "Birth Certificate" },
+    { value: "allergy_card", label: "Allergy / Medical Alert Card" },
+    { value: "surgical_notes", label: "Surgical / Procedure Notes" },
+    { value: "developmental_report", label: "Developmental Assessment Report" },
+    { value: "diet_chart", label: "Diet / Nutrition Chart" },
+    { value: "other", label: "Other Document" },
+  ];
+
+  let docUploadCount = 0;
+  function addDocUpload() {
+    const idx = docUploadCount++;
+    const container = document.getElementById("doc-uploads");
+    const div = document.createElement("div");
+    div.id = "doc-row-" + idx;
+    div.style.cssText =
+      "border:1px solid var(--brd);border-radius:var(--r);padding:10px;margin-bottom:8px;background:var(--bg2)";
+    div.innerHTML = `
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px">
+        <select id="doc-cat-${idx}" style="flex:1;min-width:180px;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px">
+          <option value="">Select document type…</option>
+          ${DOC_CATEGORIES.map((c) => `<option value="${c.value}">${c.label}</option>`).join("")}
+        </select>
+        <input type="date" id="doc-date-${idx}" style="padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" value="${new Date().toISOString().split("T")[0]}" />
+        <button type="button" onclick="document.getElementById('doc-row-${idx}').remove()" style="padding:2px 8px;background:none;border:1px solid var(--brd);border-radius:var(--r);cursor:pointer;color:var(--red);font-size:14px">×</button>
+      </div>
+      <input type="text" id="doc-desc-${idx}" placeholder="Brief description (e.g., CBC from City Lab, Dr. XYZ referral)" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;margin-bottom:6px;box-sizing:border-box" />
+      <input type="file" id="doc-file-${idx}" accept="image/*,.pdf,.jpg,.jpeg,.png,.heic" style="font-size:11px" />
+      <div style="font-size:10px;color:var(--ink3);margin-top:2px">Accepted: Photos, scans, PDFs (max 10 MB)</div>
+    `;
+    container.appendChild(div);
+  }
+
+  async function uploadDocuments(patientId, visitId) {
+    const uploaded = [];
+    for (let i = 0; i < docUploadCount; i++) {
+      const row = document.getElementById("doc-row-" + i);
+      if (!row) continue;
+      const fileInput = document.getElementById("doc-file-" + i);
+      const file = fileInput?.files?.[0];
+      if (!file) continue;
+      const cat = document.getElementById("doc-cat-" + i)?.value || "other";
+      const date = document.getElementById("doc-date-" + i)?.value || "";
+      const desc = document.getElementById("doc-desc-" + i)?.value || "";
+      if (file.size > 10 * 1024 * 1024) {
+        console.warn("File too large:", file.name);
+        continue;
+      }
+      try {
+        const ext = file.name.split(".").pop() || "jpg";
+        const path = `${patientId}/${visitId}/${cat}_${Date.now()}.${ext}`;
+        const uploadRes = await fetch(
+          SB + "/storage/v1/object/documents/" + path,
+          {
+            method: "POST",
+            headers: {
+              apikey: KEY,
+              Authorization: "Bearer " + KEY,
+              "Content-Type": file.type,
+              "x-upsert": "true",
+            },
+            body: file,
+          },
+        );
+        if (uploadRes.ok) {
+          const url = SB + "/storage/v1/object/public/documents/" + path;
+          uploaded.push({
+            category: cat,
+            date,
+            description: desc,
+            filename: file.name,
+            url,
+            size_bytes: file.size,
+          });
+          console.log("Uploaded:", cat, file.name, "→", url);
+        } else {
+          console.warn("Upload failed:", file.name, uploadRes.status);
+        }
+      } catch (e) {
+        console.warn("Upload error:", file.name, e.message);
+      }
+    }
+    return uploaded;
   }
 
   function printToken() {
@@ -1356,6 +1552,8 @@
     showNewPatientForm,
     selectPatient,
     addVaxRow,
+    toggleExtDictation,
+    addDocUpload,
     cancelForm,
     saveAndCreateVisit,
     printToken,
