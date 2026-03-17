@@ -619,7 +619,7 @@
   function renderDoseIcon(p) {
     if (p.form === "syrup") return DOSE_SVG.spoon;
     if (p.form === "drops") {
-      const count = p.dose_qty || 1;
+      const count = Math.max(1, Math.round(p.dose_qty || 1));
       return new Array(Math.min(count, 5))
         .fill(
           `<span style="display:inline-block;width:8px;height:8px">${DOSE_SVG.drop}</span>`,
