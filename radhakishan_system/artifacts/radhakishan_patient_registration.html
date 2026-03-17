@@ -744,6 +744,44 @@
         .then((vaxList) => renderVaxChecklist(currentPatient.dob, vaxList))
         .catch(() => renderVaxChecklist(currentPatient.dob, []));
     }
+    // Fetch recent lab results for returning patient and show as read-only reference
+    q(
+      "lab_results",
+      `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&order=test_date.desc&limit=10&select=test_name,value,unit,flag,test_date`,
+    )
+      .then((r) => (r.ok ? r.json() : []))
+      .then((labs) => {
+        if (!labs.length) return;
+        const container = document.getElementById("lab-entries");
+        if (!container) return;
+        const header = document.createElement("div");
+        header.style.cssText =
+          "font-size:10px;color:var(--ink3);margin-bottom:4px;font-weight:600;";
+        header.textContent = "Previous lab results:";
+        container.before(header);
+        labs.forEach((l) => {
+          const flagIcon =
+            l.flag === "low"
+              ? "↓"
+              : l.flag === "high"
+                ? "↑"
+                : l.flag === "abnormal"
+                  ? "⚠"
+                  : "✓";
+          const flagColor =
+            l.flag && l.flag !== "normal" ? "var(--red)" : "var(--green)";
+          const d = new Date(l.test_date).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+          });
+          const span = document.createElement("span");
+          span.style.cssText =
+            "display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:#f0f0ea;border:1px solid var(--brd);border-radius:99px;font-size:10px;color:var(--ink3);margin:2px;";
+          span.innerHTML = `<strong>${esc(l.test_name)}</strong>: ${esc(l.value)} ${esc(l.unit || "")} <span style="color:${flagColor}">${flagIcon}</span> (${d})`;
+          container.appendChild(span);
+        });
+      })
+      .catch(() => {});
   }
 
   // ===== New patient form =====
