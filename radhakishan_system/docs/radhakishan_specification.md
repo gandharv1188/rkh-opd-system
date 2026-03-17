@@ -24,10 +24,9 @@ Version 2026 | March 2026
 
 Dr. Lokender Goyal, MD Pediatrics (PGI Chandigarh) · HMCI Reg. HN 21452
 
-
 > **CONFIDENTIAL — FOR AUTHORIZED USE ONLY**
 
-Built on Claude.ai (Anthropic) · Supabase · IAP / NABH / WHO Clinical Standards
+Built on Supabase Edge Functions · Claude API (tool_use) · GitHub Pages · IAP / NABH / WHO Clinical Standards
 
 # Table of Contents
 
@@ -39,7 +38,7 @@ Built on Claude.ai (Anthropic) · Supabase · IAP / NABH / WHO Clinical Standard
 
 4. Supabase Database Schema
 
-5. Artifacts — Complete Inventory
+5. Web Pages — Complete Inventory
 
 6. The Radhakishan Prescription Skill
 
@@ -59,7 +58,7 @@ Built on Claude.ai (Anthropic) · Supabase · IAP / NABH / WHO Clinical Standard
 
 14. Setup Instructions
 
-15. SDK Migration Path
+15. Migration Status & Future Roadmap
 
 16. Reference Sources
 
@@ -67,23 +66,24 @@ Built on Claude.ai (Anthropic) · Supabase · IAP / NABH / WHO Clinical Standard
 
 # 1. Executive Summary
 
-The Radhakishan Hospital Super Pediatric OPD Prescription System is an AI-assisted clinical documentation and prescription generation platform designed specifically for pediatric and neonatal outpatient practice. It replaces the fragmented, form-heavy approach of traditional HMIS systems with a single-input, notebook-style workflow where the doctor dictates or types a free-text clinical note and AI handles all structured output generation.
+The Radhakishan Hospital Super Pediatric OPD Prescription System is an AI-assisted clinical documentation and prescription generation platform designed specifically for pediatric and neonatal outpatient practice. It replaces the fragmented, form-heavy approach of traditional HMIS systems with a single-input workflow where the doctor types a free-text clinical note, clicks Generate, and a Supabase Edge Function calls the Claude API with progressive tool use to produce a complete prescription.
 
-The system generates complete NABH HCO 6th Edition compliant prescriptions including weight-based drug dose calculations, bilingual (Hindi + English) patient instructions, IAP 2024 vaccination schedules, WHO Z-score growth assessments, developmental milestone screening, diet prescriptions, and emergency warning signs — all from a single clinical note. Every prescription is saved to a Supabase database, linked to a patient and visit record, and rendered as a print-ready A4 document with an embedded QR code.
+The system generates complete NABH HCO 6th Edition compliant prescriptions including weight-based drug dose calculations, bilingual (Hindi + English) patient instructions, medication dosing pictograms, IAP 2024 vaccination schedules, WHO Z-score growth assessments, developmental milestone screening, diet prescriptions, and emergency warning signs — all from a single clinical note. Every prescription is saved to a Supabase database, linked to a patient and visit record, and rendered as a print-ready A4 document with an embedded QR code.
 
-> _KEY DESIGN PRINCIPLE: The doctor writes or dictates one free-text note. Everything else — extraction, calculation, formatting, bilingual translation, safety checking, NABH compliance — is handled by AI. No forms. No dropdowns. No HMIS-style field entry._
+> _KEY DESIGN PRINCIPLE: The doctor writes one free-text note and clicks Generate. Everything else — extraction, calculation, formatting, bilingual translation, safety checking, NABH compliance — is handled by the Edge Function + Claude API. No forms. No dropdowns. No HMIS-style field entry._
 
-|               |                                                         |
-| ------------- | ------------------------------------------------------- |
-| **Parameter** | **Value**                                               |
-| Hospital      | Radhakishan Hospital, Jyoti Nagar, Kurukshetra, Haryana |
-| Department    | Pediatrics & Neonatology (OPD)                          |
-| Accreditation | NABH HCO 6th Edition (January 2025)                     |
-| Patient scope | Pediatric (0-18 years) + Neonatal (preterm & term)      |
-| Platform      | Claude.ai Artifacts + Supabase                          |
-| AI model      | Claude Sonnet (claude-sonnet-4-20250514)                |
-| Version       | 2026 Edition                                            |
-| Status        | Production-ready for pilot deployment                   |
+|               |                                                                           |
+| ------------- | ------------------------------------------------------------------------- |
+| **Parameter** | **Value**                                                                 |
+| Hospital      | Radhakishan Hospital, Jyoti Nagar, Kurukshetra, Haryana                   |
+| Department    | Pediatrics & Neonatology (OPD)                                            |
+| Accreditation | NABH HCO 6th Edition (January 2025)                                       |
+| Patient scope | Pediatric (0-18 years) + Neonatal (preterm & term)                        |
+| Platform      | Standalone web app (GitHub Pages) + Supabase Edge Functions               |
+| AI model      | Claude Sonnet (claude-sonnet-4-20250514) via tool_use API                 |
+| Hosting       | gandharv1188.github.io/rkh-opd-system (CNAME: rx.radhakishanhospital.com) |
+| Version       | 2026 Edition                                                              |
+| Status        | Production-ready for pilot deployment                                     |
 
 # 2. Problem Statement & Design Rationale
 
@@ -109,39 +109,47 @@ This directly addresses the most common complaint about HMIS systems: they inter
 
 - Indian market drug concentrations often differ from international formularies — dose rounding must use local concentrations
 
-## 2.3 Why Claude.ai Artifacts (not a custom app)
+## 2.3 Architecture Evolution
 
-A key architectural decision was to build entirely within Claude.ai rather than developing a standalone SDK-based application. The rationale:
+The system was initially built as Claude.ai artifacts (browser-based HTML widgets running inside the Claude.ai sandbox) for rapid prototyping and clinical validation. This allowed the first working prescription to be generated within days at zero development cost.
 
-|                                    |                             |                          |
-| ---------------------------------- | --------------------------- | ------------------------ |
-| **Factor**                         | **Claude.ai Artifacts**     | **Custom SDK App**       |
-| Time to first working prescription | Days                        | 8-10 weeks               |
-| Development cost                   | \$0 (existing subscription) | \$5,000-15,000           |
-| Clinical validation speed          | Immediate with real doctors | After full development   |
-| Maintenance                        | Zero DevOps                 | Ongoing                  |
-| AI integration                     | Native, no code needed      | SDK integration required |
-| Risk if concept fails              | Minimal                     | High sunk cost           |
+After validating the clinical workflow with real doctors, the system was migrated to a standalone web app:
 
-> _DECISION: Build in Claude.ai first. Validate clinically. Migrate to SDK only when volume, multi-user concurrency, or mobile requirements justify it. All prompts, schema, and knowledge base transfer directly — nothing is throwaway work._
+|                       |                                    |                                                  |
+| --------------------- | ---------------------------------- | ------------------------------------------------ |
+| **Phase**             | **Architecture**                   | **Outcome**                                      |
+| POC (Jan-Feb 2026)    | Claude.ai Artifacts + conversation | Validated clinical workflow, prompt, JSON schema |
+| Production (Mar 2026) | Standalone web app + Edge Function | Independent deployment, no Claude.ai dependency  |
+
+> _DECISION: The POC validated that AI-generated prescriptions are clinically accurate and workflow-compatible. Migration to a standalone app with Supabase Edge Functions calling the Claude API directly eliminated the Claude.ai dependency while preserving all prompts, schema, and clinical knowledge — nothing was throwaway work._
 
 # 3. System Architecture
 
 ## 3.1 High-Level Architecture
 
-The system has four layers:
+```
+Web App (GitHub Pages — web/ directory)
+  ├── Patient Registration  → Supabase (patients, visits, vaccinations)
+  ├── Prescription Pad      → Edge Function → Claude API (tool_use) → Supabase
+  ├── Prescription Output   → Print (A4 with QR code)
+  ├── Patient Lookup        → Supabase (patients, visits, prescriptions, growth)
+  └── Admin Tools           → Supabase (formulary, standard_prescriptions)
+```
 
-|                  |                                       |                                                |
-| ---------------- | ------------------------------------- | ---------------------------------------------- |
-| **Layer**        | **Technology**                        | **Purpose**                                    |
-| UI / Interaction | Claude.ai Artifacts (HTML/JS/React)   | All doctor-facing interfaces                   |
-| AI Generation    | Claude API (claude-sonnet-4-20250514) | Prescription generation from clinical notes    |
-| Knowledge Base   | Supabase (PostgreSQL + JSONB)         | Formulary, standard protocols, patient records |
-| File Storage     | Supabase Storage                      | Prescription files (PDF/text)                  |
+The system has five layers:
+
+|                  |                                                  |                                                 |
+| ---------------- | ------------------------------------------------ | ----------------------------------------------- |
+| **Layer**        | **Technology**                                   | **Purpose**                                     |
+| UI / Interaction | Standalone HTML/CSS/JS (GitHub Pages)            | All doctor-facing interfaces                    |
+| AI Generation    | Supabase Edge Function + Claude API (tool_use)   | Prescription generation from clinical notes     |
+| Knowledge Base   | Supabase (PostgreSQL + JSONB) + Supabase Storage | Formulary, protocols, skill prompts, references |
+| Patient Data     | Supabase (PostgreSQL)                            | Patient records, visits, prescriptions          |
+| File Storage     | Supabase Storage                                 | Prescription files, skill references            |
 
 ## 3.2 Data Flow — Complete Patient Visit
 
-### Stage 1: Reception (Patient Registration Artifact)
+### Stage 1: Reception (Patient Registration Page)
 
 Patient arrives at reception desk
 
@@ -157,7 +165,7 @@ Patient arrives at reception desk
 
 → OPD token printed with UHID, name, doctor, visit details
 
-### Stage 2: Nurse Station (Patient Registration Artifact — continued)
+### Stage 2: Nurse Station (Patient Registration Page — continued)
 
 Nurse weighs and measures the child
 
@@ -167,43 +175,49 @@ Nurse weighs and measures the child
 
 → All data saved to the visit record in Supabase
 
-### Stage 3: Doctor OPD (Prescription Pad Artifact + Claude.ai Conversation)
+### Stage 3: Doctor OPD (Prescription Pad)
 
-Doctor opens Prescription Pad, selects patient
+Doctor opens Prescription Pad — auto-connects to Supabase (credentials hardcoded)
 
-→ Supabase credentials entered once (session-persisted)
+→ Patient dropdown shows all patients with visits created today (numbered list)
 
-→ System pre-loads formulary + standard Rx protocols into memory cache
+→ Doctor selects patient from dropdown
 
-→ On patient selection: fetches today's visit (created by reception/nurse)
-
-→ **Visit info panel** displays: allergies (RED), nurse-captured vitals (pills), chief complaints, assigned doctor auto-selected
+→ On selection: fetches today's visit and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO2), chief complaints, and known allergies (RED highlight)
 
 → Clinical note textarea pre-filled with: name, age, weight, sex, allergy status, chief complaints, temperature
 
-Doctor dictates or types additional clinical findings
+→ Section chips available: Neonatal (auto-activates for age < 28 days, GA < 37 weeks, or birth weight < 2.5 kg), Growth, Vaccination, Development
 
-→ Voice: Web Speech API (Chrome, en-IN locale) / Text: direct keyboard entry
+Doctor types clinical note and clicks **Generate**
 
-→ Doctor sends clinical note to Claude.ai conversation (via "Send to Chat" button which copies prompt with formulary context to clipboard, or types directly in conversation)
+→ Edge Function (`supabase/functions/generate-prescription/index.ts`) called with clinical note + patient context
 
-Claude.ai generates prescription (using Project Custom Instructions = Skill)
+→ Edge Function loads core prompt from Supabase Storage (`skill/core_prompt.md`, ~250 lines)
 
-→ **Step 1:** Claude confirms patient/diagnosis, presents numbered options for additional sections (investigations, growth, vaccination, etc.)
+→ Claude API called with tool_use — 3 tools defined: `get_reference(name)`, `get_formulary(drug_names)`, `get_standard_rx(icd10, name)`
 
-→ **Step 2:** After doctor selects, Claude generates structured JSON prescription with dose calculations, safety checks, Hindi translations
+→ Claude decides what knowledge it needs and calls tools (up to 10 rounds)
 
-→ Conversation named: "[Patient Name] — [UHID]"
+→ Tool responses fetched from Supabase Storage (references) and Supabase DB (formulary, standard Rx)
 
-Doctor pastes JSON into Prescription Pad (via "Paste JSON" or postMessage)
+→ NABH compliance reference always fetched; antibiotic stewardship mandatory when antibiotics prescribed
 
-→ Prescription rendered for review — every line directly editable (contenteditable)
+→ Claude returns structured JSON with: clinical sections (vitals, chief_complaints, clinical_history, examination), diagnoses, medicines with pictogram data, safety checks, Hindi translations
+
+→ Fallback: if tool use loop fails, single-shot generation attempted
+
+Prescription rendered for review
+
+→ Clinical sections shown: vitals, chief complaints, clinical history, examination, "Provisional Diagnosis" label
+
+→ Medicines with compact pictogram sidebar: time-of-day SVG icons (sunrise/sun/sunset/moon), PRN lightning bolt, dose quantity icons (pills/spoon/drops), duration and food instructions in Hindi
+
+→ Every line directly editable (contenteditable)
 
 → 'Adjust dose' panel: change weight/dose/freq → live recalculation
 
 Doctor signs off
-
-→ Supabase: patient record updated (if new data)
 
 → Supabase: visit record updated (diagnosis, clinical notes, raw dictation)
 
@@ -213,68 +227,73 @@ Doctor signs off
 
 → Supabase Storage: prescription file uploaded to `prescriptions` bucket
 
-→ postMessage → Output artifact renders A4 prescription with QR code
+→ Print auto-opens: A4 prescription with hospital letterhead, compact layout, QR code in footer, "Digitally Signed" label
 
-→ Print / save
+## 3.3 Skill Prompt Architecture — Progressive Disclosure via Tool Use
 
-## 3.3 Skill Prompt Architecture
+### Core Design
 
-### Current Approach: Project Custom Instructions
+The original monolithic skill prompt (`skill/radhakishan_prescription_skill.md`, 933 lines, ~4,600 tokens) has been split into a compact core prompt plus on-demand reference files. The Edge Function uses Claude's `tool_use` API pattern so Claude decides what knowledge it needs and fetches it dynamically.
 
-The prescription generation logic is delivered as a Claude.ai **Project Custom Instructions** prompt (file: `skill/radhakishan_prescription_skill.md`, v2026.2). This prompt is pasted into the project's Custom Instructions field and is automatically loaded into every conversation within the "Radhakishan Hospital Rx" project.
+### File Structure
 
-This approach was chosen over the newer Claude Skills system (`.claude/skills/SKILL.md` with YAML frontmatter) because:
-
-1. **Always-on loading:** Every conversation in this project is a prescription — there is no scenario where the skill should _not_ load. Skills are designed for selective/dynamic activation, which is unnecessary here.
-2. **Single project:** The system currently serves one hospital with one project. Cross-project reusability is not needed yet.
-3. **Simplicity:** Plain markdown pasted into a text box — no ZIP packaging, no YAML frontmatter, no directory structure required.
-
-### Production Migration: Claude Skills Format
-
-When the system needs to be shared with other hospitals or packaged for distribution, the prompt should be converted to the Agent Skills Open Standard format:
+All files are uploaded to Supabase Storage under the `website/skill/` prefix:
 
 ```
-radhakishan-prescription-skill/
-├── SKILL.md          (YAML frontmatter + core workflow instructions, <500 lines)
+skill/
+├── core_prompt.md              (~250 lines — role, JSON schema, medicine format,
+│                                 Hindi rules, safety checks, critical rules, tool instructions)
 ├── references/
-│   ├── iap_2024_schedule.md
-│   ├── nhm_uip_schedule.md
-│   ├── dosing_methods.md
-│   ├── safety_checks.md
-│   ├── standard_prescriptions.md
-│   └── growth_charts.md
-├── assets/
-│   └── prescription_json_schema.json
-└── scripts/
-    └── (future: validation scripts)
+│   ├── dosing_methods.md       — All 6 dosing methods with formulas and examples
+│   ├── standard_prescriptions.md — How to use ICD-10 keyed protocols
+│   ├── vaccination_iap2024.md  — Complete IAP 2024 ACVIP schedule
+│   ├── vaccination_nhm_uip.md  — NHM Universal Immunisation Programme
+│   ├── growth_charts.md        — WHO/Fenton/IAP chart selection, Z-score classification
+│   ├── developmental.md        — TDSC, DDST-II, HINE, M-CHAT-R, LEST, red flags
+│   ├── iv_fluids.md            — Holiday-Segar, bolus, ORS, neonatal Day 1 fluids
+│   ├── neonatal.md             — GA-based dosing, corrected age, preterm-specific rules
+│   ├── emergency_triage.md     — 10-parameter triage scoring, action thresholds
+│   ├── nabh_compliance.md      — NABH HCO 6th Edition 20-section checklist
+│   └── antibiotic_stewardship.md — 9-point stewardship checklist
+├── examples/
+│   └── worked_example.md       — Complete worked example (AOM prescription)
+└── radhakishan_prescription_skill.md  (original monolithic prompt — retained as reference)
 ```
 
-This enables progressive disclosure — the core SKILL.md stays under 500 lines and references external files only when needed, reducing context window usage.
+### Tool Definitions
 
-### Artifact Navigation Guidance
+The Edge Function defines 3 tools for Claude:
 
-Claude.ai artifacts cannot be programmatically opened, switched, or controlled from the conversation. The user must manually click on the artifact they want to use. To guide the doctor through the multi-artifact workflow, the skill prompt includes navigation cues in its responses:
+| **Tool**                       | **Parameters**          | **Returns**                                       |
+| ------------------------------ | ----------------------- | ------------------------------------------------- |
+| `get_reference(name)`          | Reference file name     | Full markdown content from `skill/references/`    |
+| `get_formulary(drug_names)`    | Array of drug names     | Formulary entries from Supabase `formulary` table |
+| `get_standard_rx(icd10, name)` | ICD-10 code and/or name | Standard prescription protocol from Supabase DB   |
 
-- After Step 1 (confirming patient): "Open the **Prescription Pad** artifact and select your patient."
-- After Step 2 (generating JSON): "Copy this JSON and paste it into the **Prescription Pad** → **Paste JSON** button."
-- After sign-off: "Click **Send to Output** in the Prescription Pad to view the printable prescription in the **Prescription Output** artifact."
+### How It Works
 
-These are text-based cues only — Claude cannot switch artifacts programmatically. This is a platform limitation that would be resolved in a standalone app (SDK migration).
+1. Edge Function sends the clinical note + core prompt (~250 lines) to Claude with tool definitions
+2. Claude analyzes the note and calls tools to fetch what it needs (e.g., `get_formulary(["AMOXICILLIN", "PARACETAMOL"])`, `get_standard_rx("H66.9", "acute otitis media")`)
+3. Edge Function resolves tool calls — fetches from Supabase Storage (references) or Supabase DB (formulary/protocols)
+4. Claude receives tool results and either calls more tools or generates the final prescription JSON
+5. Loop continues for up to 10 rounds
+6. **Mandatory fetches:** `nabh_compliance` is always fetched; `antibiotic_stewardship` is fetched whenever antibiotics are prescribed
+7. **Fallback:** If the tool use loop fails (network error, timeout), the Edge Function attempts a single-shot generation with the core prompt alone
 
 ## 3.4 Knowledge Base Architecture
 
-A critical architectural decision was how to store the clinical knowledge base (formulary and standard prescriptions). Three options were considered:
+The clinical knowledge base (530 drug formulary entries, 446 diagnosis protocols) is stored in Supabase and queried on-demand by Claude via tool use:
 
-|                            |                                                   |                                                         |
-| -------------------------- | ------------------------------------------------- | ------------------------------------------------------- |
-| **Option**                 | **Approach**                                      | **Decision**                                            |
-| Full document in prompt    | Embed entire formulary in every API call          | Rejected — ~37,500 tokens overhead per call             |
-| window.storage (key-value) | Store in browser, fetch by key                    | Partially used — 5MB limit constrains large formularies |
-| Supabase database          | Pre-load at session start, query at generate time | ADOPTED — instant after pre-load, no per-call overhead  |
+| **Knowledge Type**     | **Storage**                                       | **Access Pattern**                                                  |
+| ---------------------- | ------------------------------------------------- | ------------------------------------------------------------------- |
+| Formulary (drugs)      | Supabase `formulary` table                        | Claude calls `get_formulary(drug_names)` — returns matching entries |
+| Standard prescriptions | Supabase `standard_prescriptions`                 | Claude calls `get_standard_rx(icd10, name)` — ICD-10 as primary key |
+| Clinical references    | Supabase Storage (`website/skill/references/`)    | Claude calls `get_reference(name)` — returns full markdown          |
+| Core prompt            | Supabase Storage (`website/skill/core_prompt.md`) | Loaded every Edge Function call (~250 lines)                        |
 
-> _DECISION: Store formulary and standard prescriptions in Supabase. Pre-load entire dataset into JavaScript memory cache at session start. At generate time, scan the clinical note for drug names and diagnosis keywords, then inject only the relevant 2-4 entries as context into the API call. This keeps API context to ~500-1000 tokens of knowledge per call instead of 37,500+._
+> _DECISION: Claude decides what knowledge it needs based on the clinical note and fetches it via tools. The client sends formulary/protocol hints with the request, but the Edge Function handles all lookups server-side. This keeps per-call context lean — only the drugs and protocols actually needed are loaded, not the full 530-entry formulary._
 
-## 3.4 Prescription PDF Storage
+## 3.5 Prescription PDF Storage
 
 > _DECISION: No Google Drive. All prescription files stored in Supabase Storage. Rationale: (1) Supabase is already the database — single system of record; (2) Queryable by patient ID and date; (3) No separate authentication; (4) Faster access than Drive API fetch (500ms-2s latency). Google Drive was considered and explicitly rejected in favor of Supabase-only architecture._
 
@@ -353,85 +372,79 @@ The formulary table stores drug monographs in a structure that reflects real-wor
 
 "notes": "High-dose AOM protocol" }
 
-# 5. Artifacts — Complete Inventory
+# 5. Web Pages — Complete Inventory
 
-The system comprises 7 Claude.ai artifacts. Each artifact is a self-contained HTML/JS application that runs in the browser and communicates with Supabase via fetch().
+The system comprises standalone HTML files in the `web/` directory, deployed to GitHub Pages. Each is a self-contained HTML/JS application that communicates with Supabase via fetch(). Supabase credentials are hardcoded; pages auto-connect on load.
 
-## 5.1 Artifact 01 — Prescription Pad (Primary Clinical Tool)
+## 5.1 Prescription Pad (Primary Clinical Tool)
 
-**Identifier**
-
-radhakishan_connected_prescription_system
+**File:** `web/radhakishan_connected_prescription_system.html`
 
 **Purpose**
 
-The main doctor-facing tool. The doctor's only required action is to write or dictate a clinical note. Everything else is automated.
+The main doctor-facing tool. The doctor's only required action is to type a clinical note and click Generate.
 
 **Key features**
 
-- Voice dictation via Web Speech API (Chrome, en-IN locale)
+- Auto-connects to Supabase on page load (credentials hardcoded, config panel hidden)
 
-- Patient search — live query to Supabase patients table (filtered by is_active)
+- Patient dropdown showing all patients with visits created today (numbered list — not a search box)
 
-- On patient selection: fetches today's visit from Supabase and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO₂), chief complaints, and known allergies (RED highlight)
+- On patient selection: fetches today's visit and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO2), chief complaints, and known allergies (RED highlight)
 
 - Pre-fills clinical note textarea with patient context + vitals + allergy status + chief complaints from nurse
 
-- Auto-selects the doctor assigned at registration
+- Section chips: Neonatal (auto-activates when age < 28 days, GA < 37 weeks, or birth weight < 2.5 kg), Growth, Vaccination, Development
 
-- Dual-mode prescription input: "Send to Chat" (copies prompt with formulary context to clipboard for Claude.ai conversation) OR "Paste JSON" (receives Claude's JSON response)
+- **Generate button** calls Supabase Edge Function → Claude API with tool_use → returns structured prescription JSON
 
-- Auto-receives prescription JSON via postMessage (`radhakishan-rx-json` type)
+- Clinical sections extracted by AI and shown on review screen: vitals, chief_complaints, clinical_history, examination, "Provisional Diagnosis" label
 
-- Supabase pre-load: formulary + standard Rx loaded into memory at session start
-
-- Optional module sections now handled in the Claude.ai conversation workflow (Claude presents numbered options after confirming diagnosis)
+- **Medication dosing pictograms**: compact right-side sidebar per medicine with time-of-day SVG icons (sunrise/sun/sunset/moon for scheduled dosing), PRN lightning bolt, dose quantity icons (pills/spoon/drops), duration and food instructions in Hindi — all inline SVG
 
 - Smart inline dose adjustment: change weight/mg-per-kg/frequency → live recalculation → Row 2 (English) and Row 3 (Hindi) both auto-update
 
-- Sign-off saves simultaneously to: patients, visits, prescriptions, growth_records tables + Supabase Storage
+- Sign-off saves to: visits, prescriptions, growth_records tables + Supabase Storage
 
-- postMessage to Artifact 04 (Output) after sign-off
+- Print auto-opens after sign-off: A4 prescription with hospital letterhead, compact layout, QR code in footer
 
 **Supabase tables**
 
-READ: formulary, standard_prescriptions, patients | WRITE: patients, visits, prescriptions, growth_records, Storage
+READ: formulary, standard_prescriptions, patients, visits | WRITE: visits, prescriptions, growth_records, Storage
 
-## 5.2 Artifact 02 — Prescription Output (PDF Renderer)
+## 5.2 Prescription Output (Print Renderer)
 
-**Identifier**
-
-radhakishan_prescription_output_v2
+**File:** `web/radhakishan_prescription_output_v2.html`
 
 **Purpose**
 
-Renders the final signed prescription as a formatted A4 document with full Radhakishan Hospital letterhead, QR code, and print-ready CSS.
+Renders the final signed prescription as a proper A4 document with hospital letterhead, compact layout fitting all sections on one page, QR code in footer, and "Digitally Signed" label.
 
 **Key features**
 
-- Modular rendering: only sections where data exists are rendered — no empty sections
+- Rebuilt compact A4 layout — all sections fit on one page
 
-- Full hospital letterhead (blue header, NABH badge, doctor details, emergency contacts)
+- Full hospital letterhead (blue header, NABH badge, Dr. Lokender Goyal details, emergency contacts)
 
-- QR code generated client-side (qrcodejs CDN library) encoding: UHID, patient name (max 30 chars), DOB, sex initial — designed for patient re-registration on next visit via QR scan at reception
+- Clinical sections: vitals, chief complaints, clinical history, examination, "Provisional Diagnosis"
+
+- Medicines with dosing pictograms matching the review screen
+
+- QR code in footer encoding: UHID, patient name (max 30 chars), DOB, sex initial
 
 - Print-optimised CSS: hides UI chrome, A4 @page margins, colour-correct (blue medicines, red investigations)
 
-- Receives prescription JSON via postMessage from Artifact 01 OR by pasting JSON directly
-
-- 'Paste JSON' button for manual input when not connected to pad
+- "Digitally Signed" label in doctor authentication block
 
 **Sections rendered (conditional)**
 
-Always: hospital header, patient meta strip, diagnosis, medicines (3-row bilingual), emergency warning signs (bilingual), follow-up, safety compliance strip, doctor authentication + QR code
+Always: hospital header, patient meta strip, clinical sections, diagnosis, medicines (3-row bilingual), emergency warning signs (bilingual), follow-up, safety compliance strip, doctor authentication + QR code
 
 Conditional: triage score, safety flags, neonatal details, IV fluids, investigations (RED), growth assessment (Z-scores), vaccination status, developmental screening, diet, counselling given, referral
 
-## 5.3 Artifact 03 — Patient Lookup
+## 5.3 Patient Lookup
 
-**Identifier**
-
-radhakishan_patient_lookup
+**File:** `web/radhakishan_patient_lookup.html`
 
 **Purpose**
 
@@ -447,7 +460,7 @@ Search patients, view complete clinical history, register new patients, and load
 
 - Growth records display with Z-score colour chips (green/amber/red)
 
-- 'Reuse as template' button: sends previous prescription JSON to Artifact 01 via postMessage
+- 'Reuse as template' button: loads previous prescription JSON into Prescription Pad
 
 - 'Start new prescription' button: pre-fills pad with patient demographics
 
@@ -455,17 +468,17 @@ Search patients, view complete clinical history, register new patients, and load
 
 READ/WRITE: patients | READ: visits, prescriptions, growth_records, vaccinations
 
-## 5.4 Artifact 04 — Patient Registration (Reception & Nursing Station)
+## 5.4 Patient Registration (Reception & Nursing Station)
 
-**Identifier**
-
-radhakishan_patient_registration
+**File:** `web/radhakishan_patient_registration.html`
 
 **Purpose**
 
 Used at the reception desk and nurse station before the patient sees the doctor. Handles new patient registration, returning patient revisit (including QR scan), vitals capture, vaccination history entry, and visit creation.
 
 **Key features**
+
+- **Form shows on page load** — no need to click "New Patient" to start registration
 
 - **Search:** Live search by name, UHID, or phone number (filtered by is_active)
 
@@ -475,7 +488,7 @@ Used at the reception desk and nurse station before the patient sees the doctor.
 
 - **Returning patient revisit:** On selection, form pre-fills with existing data. Reception can update any changed fields (new phone, updated allergies, etc.)
 
-- **Nurse station vitals:** Weight (kg), height (cm), head circumference, MUAC, temperature (°F), heart rate, respiratory rate, SpO₂. These are captured before the doctor sees the patient and are available in the Prescription Pad's visit info panel.
+- **Nurse station vitals:** Weight (kg), height (cm), head circumference, MUAC, temperature (°F), heart rate, respiratory rate, SpO2. These are captured before the doctor sees the patient and are available in the Prescription Pad's visit info panel.
 
 - **Chief complaints:** Free-text field for what the parent/patient reports at reception
 
@@ -483,17 +496,17 @@ Used at the reception desk and nurse station before the patient sees the doctor.
 
 - **Visit creation:** Select doctor (Dr. Lokender Goyal), visit type (new/follow-up/vaccination/emergency), date
 
-- **OPD token:** After save, displays a printable token with UHID, name, age, vitals, doctor, allergy status
+- **OPD token:** After save, prints as 80mm sticker with QR code containing UHID, name, age, vitals, doctor, allergy status
+
+- **Clear Form** button resets all fields for next patient
 
 **Supabase tables**
 
 READ/WRITE: patients, visits, vaccinations
 
-## 5.5 Artifact 05 — Formulary Manager (Admin)
+## 5.5 Formulary Manager (Admin)
 
-**Identifier**
-
-radhakishan_formulary_v2
+**File:** `web/radhakishan_formulary_v2.html`
 
 **Purpose**
 
@@ -510,11 +523,9 @@ Admin/pharmacist tool for adding and editing drug monographs. Full BNFC/Lexicomp
 | Safety        | Black box warnings, contraindications, cross-reactions, interactions (with severity), monitoring parameters, renal bands (GFR tiers), hepatic adjustment |
 | Admin & Notes | Reconstitution, dilution, infusion rate, food instructions, storage, clinical notes, reference sources                                                   |
 
-## 5.6 Artifact 06 — Formulary Import Tool (Admin)
+## 5.6 Formulary Import Tool (Admin)
 
-**Identifier**
-
-radhakishan_formulary_importer
+**File:** `web/radhakishan_formulary_importer.html`
 
 **Purpose**
 
@@ -536,11 +547,9 @@ Bulk-import drug data from any JSON format into the Supabase formulary table.
 
 - Sample data loader with 3 complete reference entries (Amoxicillin, Paracetamol, Gentamicin)
 
-## 5.7 Artifact 07 — Standard Prescriptions Manager (Admin)
+## 5.7 Standard Prescriptions Manager (Admin)
 
-**Identifier**
-
-radhakishan_standard_rx_manager
+**File:** `web/radhakishan_standard_rx_manager.html`
 
 **Purpose**
 
@@ -566,9 +575,7 @@ Add and manage ICD-10 keyed diagnosis protocols. These pre-populate the prescrip
 
 ## 6.1 What the Skill Is
 
-The Skill is the system prompt embedded in the Claude.ai Project custom instructions. It is the clinical brain of the system — it contains all the rules that govern how Claude generates prescriptions. Every API call from every artifact uses this as the base system prompt, augmented with relevant knowledge from Supabase.
-
-_The Skill is 18,376 characters (approximately 4,600 tokens). It is loaded once into the Project and applies to all conversations and artifact API calls within that project._
+The Skill is the clinical brain of the system — it contains all the rules that govern how Claude generates prescriptions. It is now split into a core prompt (`skill/core_prompt.md`, ~250 lines) loaded on every Edge Function call, plus 11 reference files fetched on-demand via tool use (see Section 3.3). The original monolithic prompt (`skill/radhakishan_prescription_skill.md`, 933 lines, ~4,600 tokens) is retained as a reference document.
 
 ## 6.2 Skill Contents — Section by Section
 
@@ -855,7 +862,7 @@ Every antibiotic prescription must verify: clinically indicated, site of infecti
 
 ## 11.4 Safety Check Implementation
 
-**POC (current):** All safety checks (allergy, cross-reaction, drug interactions, max dose verification) are performed by Claude AI during prescription generation. The AI outputs detailed findings in a structured `safety_checks` object within the prescription JSON — not blanket pass/fail booleans, but specific results for each check (e.g., which drugs were compared, what max dose was used, whether any interaction was found and what action was taken). The `overall_status` field is set to `"SAFE"` or `"REVIEW REQUIRED"`. The Prescription Pad artifact renders these findings for the doctor to review before sign-off.
+**Current implementation:** All safety checks (allergy, cross-reaction, drug interactions, max dose verification) are performed by Claude AI during prescription generation via the Edge Function. The AI outputs detailed findings in a structured `safety_checks` object within the prescription JSON — not blanket pass/fail booleans, but specific results for each check (e.g., which drugs were compared, what max dose was used, whether any interaction was found and what action was taken). The `overall_status` field is set to `"SAFE"` or `"REVIEW REQUIRED"`. The Prescription Pad renders these findings for the doctor to review before sign-off.
 
 **Production (future):** Client-side verification will independently cross-reference prescribed drugs against the formulary's `interactions`, `contraindications`, `black_box_warnings`, and `max_single_qty` / `max_daily_qty` values. This provides a second layer of validation — if the AI misses something, the client-side check catches it. The two results are compared and any disagreement is flagged.
 
@@ -939,187 +946,150 @@ A `doctors` table stores credentials for all doctors (ID, full name, degree, reg
 
 ## 12.6 QR Code Library — Offline Consideration
 
-**POC (current):** The Prescription Output artifact loads qrcodejs (v1.0.0, ~9 KB minified) from cdnjs CDN. If the CDN is unavailable (offline clinic), QR generation silently fails and shows a "QR" text fallback. This is acceptable for the POC since internet connectivity is required for Supabase access anyway.
-
-**Production (future):** Bundle the qrcodejs library inline in the HTML artifact (only 9 KB). This ensures QR codes generate even if the CDN is temporarily unreachable. When migrating to a standalone React app, include `qrcode` as an npm dependency.
+The Prescription Output page loads qrcodejs (v1.0.0, ~9 KB minified) from cdnjs CDN. If the CDN is unavailable (offline clinic), QR generation silently fails and shows a "QR" text fallback. This is acceptable since internet connectivity is required for Supabase access anyway. Future improvement: bundle qrcodejs inline (only 9 KB) for resilience against CDN downtime.
 
 # 13. Technology Stack
 
-|                 |                                   |                                      |
-| --------------- | --------------------------------- | ------------------------------------ |
-| **Component**   | **Technology**                    | **Version / Details**                |
-| UI Framework    | Claude.ai Artifacts (HTML/CSS/JS) | Max Plan subscription                |
-| AI Model        | Claude Sonnet                     | claude-sonnet-4-20250514             |
-| Database        | Supabase (PostgreSQL)             | Free tier → Pro (\$25/mo)            |
-| File Storage    | Supabase Storage                  | Included with Supabase               |
-| Voice Dictation | Web Speech API                    | Chrome browser only, en-IN locale    |
-| QR Code         | qrcodejs 1.0.0                    | CDN: cdnjs.cloudflare.com            |
-| PDF (current)   | Browser print API                 | Print → Save as PDF                  |
-| PDF (planned)   | jsPDF + html2canvas               | Client-side pixel-perfect generation |
+|                 |                                |                                       |
+| --------------- | ------------------------------ | ------------------------------------- |
+| **Component**   | **Technology**                 | **Version / Details**                 |
+| UI Framework    | Standalone HTML/CSS/JS         | Self-contained files in `web/`        |
+| Hosting         | GitHub Pages                   | gandharv1188.github.io/rkh-opd-system |
+| CI/CD           | GitHub Actions                 | Deploys `web/` directory on push      |
+| Custom Domain   | CNAME                          | rx.radhakishanhospital.com            |
+| AI Model        | Claude Sonnet                  | claude-sonnet-4-20250514 via tool_use |
+| AI Integration  | Supabase Edge Functions (Deno) | `generate-prescription/index.ts`      |
+| Database        | Supabase (PostgreSQL)          | Free tier → Pro (\$25/mo)             |
+| File Storage    | Supabase Storage               | Prescriptions + skill prompt files    |
+| Voice Dictation | Web Speech API                 | Chrome browser only, en-IN locale     |
+| QR Code         | qrcodejs 1.0.0                 | CDN: cdnjs.cloudflare.com             |
+| Print Output    | Browser print API              | A4 @page rules, compact layout        |
 
-## 13.1 Inter-Artifact Communication
+## 13.1 Supabase Integration Pattern
 
-Artifacts communicate via browser postMessage API. The message format:
+All pages use a common pattern for Supabase queries with hardcoded credentials (auto-connect on load):
 
-window.parent.postMessage({
+```javascript
+const SB_URL = "https://[project].supabase.co";
+const KEY = "[anon-key]";
 
-type: "radhakishan-rx",
-
-payload: rxData // full prescription JSON
-
-}, "\*")
-
-The Output artifact listens for this message and renders automatically:
-
-window.addEventListener("message", e =\> {
-
-if (e.data && e.data.type === "radhakishan-rx") {
-
-render(e.data.payload);
-
+function sbFetch(table, query = "", method = "GET", body = null) {
+  return fetch(SB_URL + "/rest/v1/" + table + query, {
+    method,
+    headers: {
+      apikey: KEY,
+      Authorization: "Bearer " + KEY,
+      "Content-Type": "application/json",
+      Prefer: method === "POST" ? "return=representation" : "",
+    },
+    body: body ? JSON.stringify(body) : null,
+  });
 }
+```
 
+## 13.2 Edge Function Integration
+
+The Prescription Pad calls the Edge Function for AI generation:
+
+```javascript
+const response = await fetch(SB_URL + "/functions/v1/generate-prescription", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer " + KEY,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ clinical_note, patient_context, sections }),
 });
+```
 
-## 13.2 Supabase Integration Pattern
-
-All artifacts use a common pattern for Supabase queries:
-
-function sbFetch(table, query="", method="GET", body=null) {
-
-return fetch(SB_URL + "/rest/v1/" + table + query, {
-
-method,
-
-headers: {
-
-"apikey": KEY,
-
-"Authorization": "Bearer " + KEY,
-
-"Content-Type": "application/json",
-
-"Prefer": method === "POST" ? "return=representation" : ""
-
-},
-
-body: body ? JSON.stringify(body) : null
-
-});
-
-}
-
-> _CORS requirement: The Supabase project must have https://claude.ai added to allowed CORS origins in Project Settings → API → CORS before any artifact can connect._
+The Edge Function (`supabase/functions/generate-prescription/index.ts`) handles the Claude API call with tool use loop, loading the core prompt and resolving tool calls server-side.
 
 # 14. Setup Instructions
 
 ## 14.1 Supabase Setup
 
-13. Create account at supabase.com
+1. Create account at supabase.com
 
-14. New Project: 'Radhakishan Hospital' — Region: Southeast Asia (Singapore)
+2. New Project: 'Radhakishan Hospital' — Region: Southeast Asia (Singapore)
 
-15. SQL Editor → New query → Paste 02_supabase_schema.sql → Run
+3. SQL Editor → New query → Paste `schema/radhakishan_supabase_schema.sql` → Run
 
-16. Project Settings → API → Copy URL and anon key
+4. Project Settings → API → Copy URL and anon key
 
-17. Project Settings → API → CORS → Add https://claude.ai
+5. Storage → New bucket → Name: 'prescriptions' → Public: ON
 
-18. Storage → New bucket → Name: 'prescriptions' → Public: ON
+6. Storage → Create `website/skill/` folder → Upload `skill/core_prompt.md`, all files from `skill/references/`, and `skill/examples/worked_example.md`
 
-## 14.2 Claude.ai Project Setup
+## 14.2 Edge Function Deployment
 
-19. claude.ai → Projects → New Project → 'Radhakishan Hospital Rx'
+7. Install Supabase CLI: `npm install -g supabase`
 
-20. Project Settings → Custom Instructions
+8. Link project: `supabase link --project-ref [your-project-ref]`
 
-21. Paste entire contents of 03_radhakishan_prescription_skill.md
+9. Set Claude API key: `supabase secrets set ANTHROPIC_API_KEY=[your-key]`
 
-22. Save
+10. Deploy: `supabase functions deploy generate-prescription`
 
-## 14.3 Populate Knowledge Base
+## 14.3 Web App Deployment (GitHub Pages)
 
-23. Open Artifact 05 (Formulary Import Tool) → Connect Supabase
+11. Update Supabase URL and anon key in all HTML files under `web/`
 
-24. Paste drug JSON → Parse & Preview → Import
+12. Push to GitHub → GitHub Actions workflow deploys `web/` directory automatically
 
-25. Open Artifact 04 (Formulary Manager) → review and enrich imported drugs
+13. (Optional) Configure CNAME for `rx.radhakishanhospital.com`
 
-26. Open Artifact 06 (Standard Prescriptions Manager) → add diagnosis protocols
+## 14.4 Populate Knowledge Base
 
-## 14.4 First Test
+14. Run `node scripts/import_data.js` to import formulary + standard prescriptions
 
-27. Open Artifact 01 (Prescription Pad) → Connect Supabase
+15. Or: Open Formulary Import Tool → Paste drug JSON → Parse & Preview → Import
 
-28. Verify 'X drugs and Y protocols loaded' confirmation message
+16. Open Standard Prescriptions Manager → add/review diagnosis protocols
 
-29. Type: 'Arjun, 8 months, 7.2 kg. Fever 3 days, left ear pain. Diagnosis: acute otitis media.'
+## 14.5 First Test
 
-30. Click Generate → Verify Amoxicillin + Paracetamol with correct doses + Hindi Row 3
+17. Open Prescription Pad (auto-connects to Supabase)
 
-31. Sign off → Verify record in Supabase Table Editor
+18. Register a test patient via Patient Registration → create visit
 
-# 15. SDK Migration Path
+19. In Prescription Pad, select patient from today's dropdown
 
-## 15.1 Migration Triggers
+20. Type: 'Fever 3 days, left ear pain. Diagnosis: acute otitis media.'
 
-Migrate from Claude.ai to a full SDK-based application when ANY of these conditions are met:
+21. Click Generate → Verify Amoxicillin + Paracetamol with correct doses + Hindi Row 3 + pictograms
 
-- Volume exceeds 150 prescriptions per day (SDK becomes more cost-effective)
+22. Sign off → Verify print output and record in Supabase Table Editor
 
-- More than 2 doctors using the system simultaneously (concurrency limits)
+# 15. Migration Status & Future Roadmap
 
-- Mobile app required (Android / iOS for ward rounds)
+## 15.1 Migration from Claude.ai — COMPLETED
 
-- HIS / EMR integration required
+The system has been fully migrated from Claude.ai artifacts to a standalone web app:
 
-- Legal digital signature (DSC / PKI) required
+| **What changed**         | **Before (POC)**                       | **After (Production)**                          |
+| ------------------------ | -------------------------------------- | ----------------------------------------------- |
+| UI hosting               | Claude.ai artifact sandbox             | GitHub Pages (`web/` directory)                 |
+| AI generation            | Claude.ai conversation + skill prompt  | Supabase Edge Function + Claude API (tool_use)  |
+| Prompt loading           | Monolithic Project Custom Instructions | Core prompt + progressive tool-based disclosure |
+| Supabase credentials     | Manual entry each session              | Hardcoded, auto-connect on load                 |
+| Patient selection        | Search box                             | Dropdown of today's visits                      |
+| Doctor selection         | Dr. Lokender Goyal + Dr. Swati Goyal   | Dr. Lokender Goyal only                         |
+| Inter-page communication | postMessage via Claude.ai parent frame | Direct navigation / print API                   |
 
-- Offline mode required (no internet in clinic)
+All clinical knowledge (prompts, formulary, protocols, schema) transferred with zero rework.
 
-- Knowledge base exceeds 5MB browser storage limit
+## 15.2 Future Expansion Plans
 
-## 15.2 What Transfers Directly (Zero Rework)
-
-|                                     |                     |                                        |
-| ----------------------------------- | ------------------- | -------------------------------------- |
-| **Component**                       | **Transfer Effort** | **Notes**                              |
-| All system prompts / Skill          | Direct copy         | Paste into SDK system_prompt parameter |
-| Supabase schema                     | Zero                | Unchanged — no migration               |
-| All patient/visit/prescription data | Zero                | Already in Supabase                    |
-| Formulary and standard Rx data      | Zero                | Already in Supabase                    |
-| Clinical rules and NABH logic       | Direct copy         | From skill document                    |
-| Dose calculation formulas           | Rewrite in Node.js  | Straightforward port                   |
-
-## 15.3 Recommended SDK Stack
-
-|                    |                                                                |
-| ------------------ | -------------------------------------------------------------- |
-| **Layer**          | **Technology**                                                 |
-| Frontend (web)     | React 18 + Vite                                                |
-| Frontend (mobile)  | React Native (shared logic with web)                           |
-| Voice              | OpenAI Whisper API (better Hindi accuracy than Web Speech API) |
-| AI Generation      | Anthropic SDK (claude-sonnet)                                  |
-| Backend            | Node.js + Express (or Next.js API routes)                      |
-| Database           | Supabase (existing — no change)                                |
-| PDF                | Puppeteer (pixel-perfect, server-side)                         |
-| Hosting (frontend) | Vercel (free CDN)                                              |
-| Hosting (backend)  | Railway (~\$5/month)                                           |
-| Auth               | Supabase Auth (doctor login)                                   |
-
-## 15.4 Estimated Migration Effort
-
-|                              |                           |
-| ---------------------------- | ------------------------- |
-| **Component**                | **Effort**                |
-| Prescription Pad UI → React  | 2-3 weeks                 |
-| Patient Lookup UI → React    | 1 week                    |
-| Formulary Manager UI → React | 2 weeks                   |
-| Output / PDF → Puppeteer     | 1 week                    |
-| Voice → Whisper API upgrade  | 2 days                    |
-| Backend API + deployment     | 1 week                    |
-| Testing + parallel run       | 2 weeks                   |
-| TOTAL                        | ~8 weeks with 1 developer |
+| **Feature**                    | **Priority** | **Notes**                                           |
+| ------------------------------ | ------------ | --------------------------------------------------- |
+| Multi-specialty support        | High         | Extend beyond pediatrics (general medicine, OB-GYN) |
+| Mobile app (ward rounds)       | Medium       | React Native, shared logic with web                 |
+| HIS / EMR integration          | Medium       | HL7 FHIR or custom API                              |
+| Legal digital signature (DSC)  | Medium       | PKI-based sign-off for prescriptions                |
+| Multi-doctor concurrent access | Medium       | Per-doctor RLS, Supabase Auth                       |
+| Offline mode                   | Low          | Service worker + IndexedDB for clinic downtime      |
+| Voice (Whisper API)            | Low          | Better Hindi accuracy than Web Speech API           |
+| Server-side PDF (Puppeteer)    | Low          | Pixel-perfect, replaces browser print               |
 
 # 16. Reference Sources
 
