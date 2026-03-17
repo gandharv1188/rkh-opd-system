@@ -2350,18 +2350,125 @@
     document.getElementById("pad-ta").value = "";
   }
 
-  /* ===== VOICE ===== */
+  /* ===== VOICE (GPT-4o Transcribe primary, Web Speech API fallback) ===== */
+  let voiceEngine = null; // "ai" or "web" — set on first use
+  let mediaRecorder = null;
+  let audioChunks = [];
+  let chunkTimer = null;
+  let aiTranscribeFailed = false; // sticky flag: if AI fails once, stay on Web Speech for session
+
   function toggleVoice() {
+    if (isRec) {
+      stopVoice();
+      return;
+    }
+    startVoice();
+  }
+
+  async function startVoice() {
+    // Try AI transcription first (unless it already failed this session)
+    if (!aiTranscribeFailed) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true,
+            sampleRate: 16000,
+          },
+        });
+        voiceEngine = "ai";
+        isRec = true;
+        audioChunks = [];
+        updateMicUI(true, "AI");
+
+        // Use webm/opus — widely supported, good compression
+        const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+          ? "audio/webm;codecs=opus"
+          : "audio/webm";
+        mediaRecorder = new MediaRecorder(stream, { mimeType });
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) audioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = async () => {
+          stream.getTracks().forEach((t) => t.stop());
+          if (audioChunks.length === 0) return;
+          const blob = new Blob(audioChunks, { type: mimeType });
+          audioChunks = [];
+          await sendToAITranscribe(blob);
+        };
+
+        // Collect data every 1 second for smooth stopping
+        mediaRecorder.start(1000);
+
+        // Auto-send chunks every 12 seconds for progressive transcription
+        chunkTimer = setInterval(() => {
+          if (mediaRecorder && mediaRecorder.state === "recording") {
+            mediaRecorder.stop();
+            // Restart recording for next chunk
+            setTimeout(() => {
+              if (isRec) {
+                audioChunks = [];
+                try {
+                  navigator.mediaDevices
+                    .getUserMedia({
+                      audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true,
+                        sampleRate: 16000,
+                      },
+                    })
+                    .then((newStream) => {
+                      const newMime = MediaRecorder.isTypeSupported(
+                        "audio/webm;codecs=opus",
+                      )
+                        ? "audio/webm;codecs=opus"
+                        : "audio/webm";
+                      mediaRecorder = new MediaRecorder(newStream, {
+                        mimeType: newMime,
+                      });
+                      mediaRecorder.ondataavailable = (ev) => {
+                        if (ev.data.size > 0) audioChunks.push(ev.data);
+                      };
+                      mediaRecorder.onstop = async () => {
+                        newStream.getTracks().forEach((t) => t.stop());
+                        if (audioChunks.length === 0) return;
+                        const b = new Blob(audioChunks, { type: newMime });
+                        audioChunks = [];
+                        await sendToAITranscribe(b);
+                      };
+                      mediaRecorder.start(1000);
+                    });
+                } catch (_) {
+                  /* ignore restart errors */
+                }
+              }
+            }, 100);
+          }
+        }, 12000);
+
+        return; // AI mode started successfully
+      } catch (err) {
+        console.warn(
+          "AI dictation unavailable, falling back to Web Speech:",
+          err.message,
+        );
+        aiTranscribeFailed = true;
+        // Fall through to Web Speech API
+      }
+    }
+
+    // Fallback: Web Speech API (Chrome only)
     if (
       !("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
     ) {
-      alert("Voice dictation requires Chrome.");
+      alert("Voice dictation requires Chrome or microphone access.");
       return;
     }
-    if (isRec) {
-      recog && recog.stop();
-      return;
-    }
+    voiceEngine = "web";
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     recog = new SR();
     recog.continuous = true;
@@ -2381,35 +2488,124 @@
       document.getElementById("mic-st").textContent = i || "Listening…";
     };
     recog.onend = () => {
-      isRec = false;
-      document.getElementById("mic-btn").className = "mic-btn";
-      document.getElementById("mic-btn").innerHTML =
-        '<span class="mic-dot"></span> Dictate';
-      document.getElementById("mic-st").textContent =
-        "Tap to dictate, or type above";
+      if (!isRec) return;
+      // Auto-restart for continuous dictation
+      try {
+        recog.start();
+      } catch (_) {
+        stopVoice();
+      }
     };
     recog.onerror = (e) => {
-      isRec = false;
-      document.getElementById("mic-btn").className = "mic-btn";
-      document.getElementById("mic-btn").innerHTML =
-        '<span class="mic-dot"></span> Dictate';
       const msgs = {
         "not-allowed":
-          "Microphone permission denied. Allow microphone access in browser settings.",
+          "Microphone permission denied. Allow in browser settings.",
         "no-speech": "No speech detected. Try again.",
-        network: "Network error — check your internet connection.",
+        network: "Network error.",
         aborted: "Dictation stopped.",
       };
       document.getElementById("mic-st").textContent =
         msgs[e.error] || "Voice error: " + e.error;
+      stopVoice();
     };
     recog.start();
     isRec = true;
-    document.getElementById("mic-btn").className = "mic-btn rec";
-    document.getElementById("mic-btn").innerHTML =
-      '<span class="mic-dot"></span> Recording…';
-    document.getElementById("mic-st").textContent =
-      "Listening — speak naturally…";
+    updateMicUI(true, "Web");
+  }
+
+  function stopVoice() {
+    isRec = false;
+    if (chunkTimer) {
+      clearInterval(chunkTimer);
+      chunkTimer = null;
+    }
+    if (
+      voiceEngine === "ai" &&
+      mediaRecorder &&
+      mediaRecorder.state === "recording"
+    ) {
+      mediaRecorder.stop(); // triggers onstop → sends final chunk
+    }
+    if (voiceEngine === "web" && recog) {
+      try {
+        recog.stop();
+      } catch (_) {}
+    }
+    updateMicUI(false, null);
+  }
+
+  async function sendToAITranscribe(audioBlob) {
+    const statusEl = document.getElementById("mic-st");
+    statusEl.textContent = "Transcribing…";
+    try {
+      // Build patient context for the prompt
+      let patientCtx = "";
+      if (selectedPatient) {
+        const p = selectedPatient;
+        patientCtx = `${p.name || ""}, ${p.sex || ""}, weight ${p.weight_kg || "unknown"}kg`;
+        if (p.known_allergies && p.known_allergies.length)
+          patientCtx += `, allergies: ${p.known_allergies.join(", ")}`;
+        if (p.chief_complaints)
+          patientCtx += `, complaints: ${p.chief_complaints}`;
+      }
+
+      const fd = new FormData();
+      fd.append("audio", audioBlob, "dictation.webm");
+      if (patientCtx) fd.append("patient_context", patientCtx);
+      fd.append("language", "en"); // or "hi" or omit for auto-detect
+
+      const res = await fetch(SB + "/functions/v1/transcribe-audio", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + KEY },
+        body: fd,
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        if (err.fallback) {
+          // API not configured or failed — switch to Web Speech for this session
+          console.warn(
+            "AI transcription unavailable, switching to Web Speech fallback",
+          );
+          aiTranscribeFailed = true;
+          statusEl.textContent = "Switched to browser dictation";
+          // If still recording, restart with Web Speech
+          if (isRec) {
+            stopVoice();
+            setTimeout(() => startVoice(), 300);
+          }
+          return;
+        }
+        throw new Error(err.error || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      if (data.text) {
+        const ta = document.getElementById("pad-ta");
+        ta.value = (ta.value + " " + data.text).trim();
+      }
+      statusEl.textContent = isRec
+        ? "Listening — speak naturally…"
+        : "Tap to dictate, or type above";
+    } catch (err) {
+      console.error("AI transcription error:", err);
+      statusEl.textContent = isRec ? "Listening…" : "Transcription error";
+    }
+  }
+
+  function updateMicUI(recording, engine) {
+    const btn = document.getElementById("mic-btn");
+    const st = document.getElementById("mic-st");
+    if (recording) {
+      btn.className = "mic-btn rec";
+      btn.innerHTML = '<span class="mic-dot"></span> Recording…';
+      st.textContent =
+        engine === "AI" ? "Listening — speak naturally…" : "Listening…";
+    } else {
+      btn.className = "mic-btn";
+      btn.innerHTML = '<span class="mic-dot"></span> Dictate';
+      st.textContent = "Tap to dictate, or type above";
+    }
   }
 
   /* ===== MODULES (checkbox toggles, no text areas) ===== */

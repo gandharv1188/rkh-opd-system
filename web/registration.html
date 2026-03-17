@@ -1583,18 +1583,97 @@
     currentPatient = null;
   }
 
-  // ===== EXTERNAL RECORDS: Dictation =====
+  // ===== EXTERNAL RECORDS: Dictation (AI primary, Web Speech fallback) =====
   let extRecog = null;
   let extIsRec = false;
+  let extMediaRecorder = null;
+  let extAudioChunks = [];
+  let extAiFailed = false;
+
   function toggleExtDictation() {
+    if (extIsRec) {
+      stopExtDictation();
+      return;
+    }
+    startExtDictation();
+  }
+
+  async function startExtDictation() {
+    const btn = document.getElementById("ext-mic-btn");
+    const st = document.getElementById("ext-mic-status");
+
+    // Try AI transcription first
+    if (!extAiFailed) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true,
+            sampleRate: 16000,
+          },
+        });
+        extIsRec = true;
+        extAudioChunks = [];
+        btn.textContent = "⏹ Stop";
+        btn.style.background = "#fde8e8";
+        st.textContent = "Listening...";
+
+        const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+          ? "audio/webm;codecs=opus"
+          : "audio/webm";
+        extMediaRecorder = new MediaRecorder(stream, { mimeType });
+        extMediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) extAudioChunks.push(e.data);
+        };
+        extMediaRecorder.onstop = async () => {
+          stream.getTracks().forEach((t) => t.stop());
+          if (extAudioChunks.length === 0) return;
+          const blob = new Blob(extAudioChunks, { type: mimeType });
+          extAudioChunks = [];
+          st.textContent = "Transcribing...";
+          try {
+            const fd = new FormData();
+            fd.append("audio", blob, "dictation.webm");
+            const res = await fetch(SB + "/functions/v1/transcribe-audio", {
+              method: "POST",
+              headers: { Authorization: "Bearer " + KEY },
+              body: fd,
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.text) {
+                const ta = document.getElementById("f-ext-notes");
+                ta.value = (ta.value + " " + data.text).trim();
+              }
+            } else {
+              const err = await res.json().catch(() => ({}));
+              if (err.fallback) extAiFailed = true;
+            }
+          } catch (e) {
+            console.warn("AI transcribe failed:", e.message);
+            extAiFailed = true;
+          }
+          st.textContent = "Dictation stopped";
+          btn.textContent = "🎤 Dictate";
+          btn.style.background = "";
+        };
+        extMediaRecorder.start(1000);
+        return;
+      } catch (err) {
+        console.warn(
+          "AI dictation unavailable, using Web Speech:",
+          err.message,
+        );
+        extAiFailed = true;
+      }
+    }
+
+    // Fallback: Web Speech API
     if (
       !("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
     ) {
-      alert("Voice dictation requires Chrome browser.");
-      return;
-    }
-    if (extIsRec && extRecog) {
-      extRecog.stop();
+      alert("Voice dictation requires Chrome or microphone access.");
       return;
     }
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1603,8 +1682,6 @@
     extRecog.continuous = true;
     extRecog.interimResults = true;
     const ta = document.getElementById("f-ext-notes");
-    const btn = document.getElementById("ext-mic-btn");
-    const st = document.getElementById("ext-mic-status");
     let finalText = ta.value;
     extRecog.onstart = () => {
       extIsRec = true;
@@ -1633,6 +1710,23 @@
       st.textContent = "Mic error — try again";
     };
     extRecog.start();
+  }
+
+  function stopExtDictation() {
+    extIsRec = false;
+    if (extMediaRecorder && extMediaRecorder.state === "recording") {
+      extMediaRecorder.stop();
+    }
+    if (extRecog) {
+      try {
+        extRecog.stop();
+      } catch (_) {}
+    }
+    const btn = document.getElementById("ext-mic-btn");
+    const st = document.getElementById("ext-mic-status");
+    btn.textContent = "🎤 Dictate";
+    btn.style.background = "";
+    st.textContent = "Dictation stopped";
   }
 
   // ===== DOCUMENT UPLOAD =====
