@@ -1264,7 +1264,8 @@
           onfocus="showPatientList()"
           style="
             width: 100%;
-            padding: 6px 10px;
+            padding: 6px 10px 6px 10px;
+            padding-right: 28px;
             border-radius: 6px;
             border: 1px solid var(--bdr2);
             font-size: 13px;
@@ -1272,6 +1273,27 @@
             box-sizing: border-box;
           "
         />
+        <button
+          id="pt-clear-btn"
+          onclick="clearPatient()"
+          style="
+            display: none;
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--ink3);
+            padding: 0 4px;
+            line-height: 1;
+          "
+          title="Clear patient"
+        >
+          ×
+        </button>
         <div
           id="pt-list"
           style="
@@ -1782,9 +1804,12 @@
   function selectFromList(idx) {
     document.getElementById("pt-list").style.display = "none";
     const p = todayPatients[idx];
-    if (p)
+    if (p) {
       document.getElementById("pt-search").value =
         `${idx + 1}. ${p.name} — ${p.id}`;
+      const cb = document.getElementById("pt-clear-btn");
+      if (cb) cb.style.display = "block";
+    }
     onPatientSelect(String(idx));
   }
   // Close list when clicking outside
@@ -2069,6 +2094,8 @@
     if (panel) panel.innerHTML = "";
     const inp = document.getElementById("pt-search");
     if (inp) inp.value = "";
+    const cb = document.getElementById("pt-clear-btn");
+    if (cb) cb.style.display = "none";
     document.getElementById("pad-ta").value = "";
   }
 
