@@ -1222,6 +1222,15 @@
       Review &amp; edit
     </button>
     <span style="flex: 1"></span>
+    <span
+      id="save-indicator"
+      style="
+        font-size: 10px;
+        color: var(--ink3);
+        margin-right: 8px;
+        display: none;
+      "
+    ></span>
     <button
       id="conn-btn"
       onclick="connectSB()"
@@ -2113,6 +2122,7 @@
     // Save on input, debounced 3 seconds
     let saveTimeout = null;
     ta.addEventListener("input", () => {
+      showSaveStatus("Editing…", "var(--ink3)");
       if (saveTimeout) clearTimeout(saveTimeout);
       saveTimeout = setTimeout(() => saveNote(), 3000);
     });
@@ -2120,17 +2130,32 @@
     autoSaveTimer = setInterval(() => saveNote(), 30000);
   }
 
+  function showSaveStatus(text, color) {
+    const el = document.getElementById("save-indicator");
+    if (!el) return;
+    el.textContent = text;
+    el.style.color = color || "var(--ink3)";
+    el.style.display = "inline";
+  }
+
   async function saveNote() {
     if (!autoSaveVisitId || !sbConnected) return;
     const ta = document.getElementById("pad-ta");
     const note = ta?.value?.trim();
     if (!note) return;
+    showSaveStatus("Saving…", "var(--ink3)");
     try {
       await q(`visits?id=eq.${autoSaveVisitId}`, "", "PATCH", {
         raw_dictation: note,
         updated_at: new Date().toISOString(),
       });
+      const time = new Date().toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      showSaveStatus("✓ Saved " + time, "#1a6b3a");
     } catch (e) {
+      showSaveStatus("Save failed", "var(--red)");
       console.warn("Auto-save failed:", e.message);
     }
   }
@@ -2300,6 +2325,8 @@
       autoSaveTimer = null;
     }
     autoSaveVisitId = null;
+    const si = document.getElementById("save-indicator");
+    if (si) si.style.display = "none";
     clearHistoryTabs();
     selectedPatient = null;
     const panel = document.getElementById("pt-info-panel");
