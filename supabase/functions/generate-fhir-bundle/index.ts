@@ -544,6 +544,22 @@ function buildServiceRequestResource(
   effectiveDate: string,
   resourceId: string,
 ): Record<string, any> {
+  const invName =
+    typeof investigation === "string"
+      ? investigation
+      : investigation.name || investigation.test || "Investigation";
+  const loincCode =
+    typeof investigation === "object" ? investigation.loinc_code : null;
+
+  const codeCoding: any[] = [];
+  if (loincCode) {
+    codeCoding.push({
+      system: LOINC_SYSTEM,
+      code: loincCode,
+      display: invName,
+    });
+  }
+
   return {
     resourceType: "ServiceRequest",
     id: resourceId,
@@ -555,10 +571,8 @@ function buildServiceRequestResource(
     status: "active",
     intent: "order",
     code: {
-      text:
-        typeof investigation === "string"
-          ? investigation
-          : investigation.name || investigation.test || "Investigation",
+      coding: codeCoding.length > 0 ? codeCoding : undefined,
+      text: invName,
     },
     subject: { reference: patientRef },
     encounter: { reference: encounterRef },

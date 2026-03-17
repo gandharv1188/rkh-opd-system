@@ -321,7 +321,7 @@ async function executeGetLabHistory(
   testNames?: string[],
 ): Promise<string> {
   try {
-    let url = `${SUPABASE_URL}/rest/v1/lab_results?patient_id=eq.${encodeURIComponent(patientId)}&order=test_date.desc&limit=20&select=test_name,value,value_numeric,unit,reference_range,flag,test_date,notes`;
+    let url = `${SUPABASE_URL}/rest/v1/lab_results?patient_id=eq.${encodeURIComponent(patientId)}&order=test_date.desc&limit=20&select=test_name,value,value_numeric,unit,reference_range,flag,test_date,notes,loinc_code`;
     if (testNames && testNames.length) {
       const filter = testNames
         .map((t) => `test_name.ilike.%25${encodeURIComponent(t)}%25`)

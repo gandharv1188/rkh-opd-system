@@ -39,6 +39,7 @@ Generate this exact structure. Field names MUST match exactly.
 {
   "patient": {
     "name": "string",
+    "uhid": "string (from PATIENT ID in clinical note, e.g. RKH-25260300001)",
     "age": "string (e.g. '8 months', '3 yr 2 mo')",
     "dob": "YYYY-MM-DD or empty string",
     "sex": "Male|Female|Other",
@@ -105,7 +106,12 @@ Generate this exact structure. Field names MUST match exactly.
     }
   ],
   "investigations": [
-    { "name": "string", "indication": "string", "urgency": "same-day|routine" }
+    {
+      "name": "string",
+      "loinc_code": "string or null",
+      "indication": "string",
+      "urgency": "same-day|routine"
+    }
   ],
   "iv_fluids": [
     {
@@ -186,6 +192,8 @@ Generate this exact structure. Field names MUST match exactly.
   - `duration_days`: number of days. null for PRN or ongoing.
   - `with_food`: true if should be taken with/after food
   - `special`: null or a short string like "fever_only", "empty_stomach"
+- `investigations[].loinc_code`: Use the LOINC code for the investigation if known. Common codes: CBC="58410-2", Hemoglobin="718-7", CRP="1988-5", Blood Culture="600-7", Urine Routine="24356-8", Chest X-Ray="36643-5", USG Abdomen="24531-6", Blood Sugar(R)="2345-7", S.Creatinine="2160-0", Electrolytes Na="2951-2", K="2823-3", LFT panel="24325-3", RFT panel="24362-6". If unsure, use null.
+- `patient.uhid`: Copy the PATIENT ID from the clinical note (e.g., "RKH-25260300001"). If not present, use empty string.
 - Optional sections (growth, vaccinations, developmental, investigations, iv_fluids, diet, referral): Include when requested in the INCLUDE SECTIONS instruction. Never return null for a requested section.
 - `counselling`: Array of strings.
 - `referral`: Top-level string. Empty string if none.
