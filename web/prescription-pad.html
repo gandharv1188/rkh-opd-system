@@ -1726,14 +1726,20 @@
           day: "2-digit",
           month: "short",
         });
+        const yr = new Date(rx.created_at).getFullYear().toString().slice(-2);
+        const dateLabel = date + " '" + yr;
         const tabId = rx.id;
-        historyTabs.push({ id: tabId, date, rxData: rx.generated_json });
+        historyTabs.push({
+          id: tabId,
+          date: dateLabel,
+          rxData: rx.generated_json,
+        });
 
-        // Create tab button
+        // Create tab button with Rx icon
         const btn = document.createElement("button");
         btn.className = "tab tab-hist";
         btn.id = "tab-hist-" + tabId;
-        btn.textContent = date;
+        btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:3px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>${esc(dateLabel)}`;
         btn.style.fontSize = "11px";
         btn.style.color = "var(--ink3)";
         btn.onclick = () => showView("hist-" + tabId);
