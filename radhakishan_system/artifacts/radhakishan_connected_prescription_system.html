@@ -1254,21 +1254,43 @@
       class="pt-bar"
       style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"
     >
-      <select
-        id="pt-dropdown"
-        onchange="onPatientSelect(this.value)"
-        style="
-          flex: 1;
-          min-width: 200px;
-          padding: 6px 10px;
-          border-radius: 6px;
-          border: 1px solid var(--bdr2);
-          font-size: 13px;
-          font-family: inherit;
-        "
-      >
-        <option value="">— Select patient —</option>
-      </select>
+      <div id="pt-combo" style="flex: 1; min-width: 200px; position: relative">
+        <input
+          id="pt-search"
+          type="text"
+          placeholder="— Select patient —"
+          autocomplete="off"
+          oninput="filterPatientList(this.value)"
+          onfocus="showPatientList()"
+          style="
+            width: 100%;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--bdr2);
+            font-size: 13px;
+            font-family: inherit;
+            box-sizing: border-box;
+          "
+        />
+        <div
+          id="pt-list"
+          style="
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 350px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid var(--bdr2);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          "
+        ></div>
+      </div>
       <select class="doctor-select" id="doctor-sel">
         <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
       </select>
@@ -1652,7 +1674,7 @@
       const visits = await vr.json();
       if (!visits.length) {
         todayPatients = [];
-        updateDropdown();
+        renderPatientList();
         return;
       }
       const ids = [...new Set(visits.map((v) => v.patient_id))];
@@ -1666,6 +1688,15 @@
       patients.forEach((p) => {
         pMap[p.id] = p;
       });
+      // Check which patients have approved prescriptions today
+      const rxr = await q(
+        "prescriptions",
+        `?patient_id=in.(${ids.join(",")})&is_approved=eq.true&created_at=gte.${today}&select=patient_id`,
+      );
+      const doneIds = new Set();
+      if (rxr.ok) {
+        (await rxr.json()).forEach((rx) => doneIds.add(rx.patient_id));
+      }
       todayPatients = [];
       const seen = new Set();
       for (let i = visits.length - 1; i >= 0; i--) {
@@ -1673,30 +1704,96 @@
         if (seen.has(v.patient_id)) continue;
         seen.add(v.patient_id);
         const p = pMap[v.patient_id];
-        if (p) todayPatients.unshift({ ...p, visit: v });
+        if (p)
+          todayPatients.unshift({ ...p, visit: v, done: doneIds.has(p.id) });
       }
-      updateDropdown();
-      console.log("Today's patients:", todayPatients.length);
+      renderPatientList();
+      // Update placeholder with count
+      const inp = document.getElementById("pt-search");
+      if (inp && !inp.value) {
+        const pending = todayPatients.filter((p) => !p.done).length;
+        const done = todayPatients.filter((p) => p.done).length;
+        inp.placeholder = `Search ${todayPatients.length} patients (${pending} pending${done ? ", " + done + " done" : ""})`;
+      }
+      console.log(
+        "Today's patients:",
+        todayPatients.length,
+        "done:",
+        doneIds.size,
+      );
     } catch (e) {
       console.warn("loadTodayPatients:", e);
     }
   }
 
-  function updateDropdown() {
-    const sel = document.getElementById("pt-dropdown");
-    if (!sel) return;
-    sel.innerHTML =
-      '<option value="">— Select patient (' +
-      todayPatients.length +
-      " today) —</option>";
+  function renderPatientList(filter) {
+    const list = document.getElementById("pt-list");
+    if (!list) return;
+    const f = (filter || "").toLowerCase();
+    const pending = [];
+    const done = [];
     todayPatients.forEach((p, i) => {
+      const searchText =
+        `${i + 1} ${p.name} ${p.id} ${p.guardian_name || ""} ${p.contact_phone || ""}`.toLowerCase();
+      if (f && !searchText.includes(f)) return;
+      (p.done ? done : pending).push({ p, i });
+    });
+    let h = "";
+    if (!pending.length && !done.length) {
+      h =
+        '<div style="padding:10px;color:var(--ink3);font-size:12px;text-align:center">' +
+        (f ? "No matching patients" : "No patients registered today") +
+        "</div>";
+    }
+    pending.forEach(({ p, i }) => {
       const age = calcAge(p.dob);
       const allergy = p.known_allergies?.length
-        ? " ⚠ " + p.known_allergies.join(", ")
+        ? ' <span style="color:var(--red)">⚠ ' +
+          p.known_allergies.map((a) => esc(a)).join(", ") +
+          "</span>"
         : "";
-      sel.innerHTML += `<option value="${i}">${i + 1}. ${esc(p.name)} — ${esc(p.id)} · ${esc(age)} · ${esc(p.sex || "")}${allergy}</option>`;
+      h += `<div onclick="selectFromList(${i})" style="padding:7px 12px;cursor:pointer;border-bottom:1px solid #f0f0ea;font-size:12px;transition:background 0.1s;" onmouseover="this.style.background='var(--blue-lt)'" onmouseout="this.style.background=''">
+        <strong style="color:var(--blue)">${i + 1}.</strong> ${esc(p.name)} <span style="color:var(--ink3)">— ${esc(p.id)}</span> · ${esc(age)} · ${esc(p.sex || "")}${allergy}
+        ${p.guardian_name ? '<br><span style="font-size:10px;color:var(--ink3)">Guardian: ' + esc(p.guardian_name) + "</span>" : ""}
+        ${p.visit?.chief_complaints ? '<br><span style="font-size:10px;color:var(--ink2)">' + esc(p.visit.chief_complaints.slice(0, 60)) + "</span>" : ""}
+      </div>`;
     });
+    if (done.length) {
+      h +=
+        '<div style="padding:5px 12px;background:var(--bg3);font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;border-top:2px solid var(--bdr2)">✓ Consultation Completed</div>';
+      done.forEach(({ p, i }) => {
+        const age = calcAge(p.dob);
+        h += `<div onclick="selectFromList(${i})" style="padding:5px 12px;cursor:pointer;border-bottom:1px solid #f0f0ea;font-size:11px;color:var(--ink3);background:#f9f9f5;" onmouseover="this.style.background='#f0f0ea'" onmouseout="this.style.background='#f9f9f5'">
+          <strong>${i + 1}.</strong> ${esc(p.name)} <span style="color:#aaa">— ${esc(p.id)}</span> · ${esc(age)} · ✓
+        </div>`;
+      });
+    }
+    list.innerHTML = h;
   }
+
+  function filterPatientList(val) {
+    renderPatientList(val);
+    document.getElementById("pt-list").style.display = "block";
+  }
+  function showPatientList() {
+    renderPatientList(document.getElementById("pt-search")?.value);
+    document.getElementById("pt-list").style.display = "block";
+  }
+  function selectFromList(idx) {
+    document.getElementById("pt-list").style.display = "none";
+    const p = todayPatients[idx];
+    if (p)
+      document.getElementById("pt-search").value =
+        `${idx + 1}. ${p.name} — ${p.id}`;
+    onPatientSelect(String(idx));
+  }
+  // Close list when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#pt-combo")) {
+      const list = document.getElementById("pt-list");
+      if (list) list.style.display = "none";
+    }
+  });
 
   function clearHistoryTabs() {
     historyTabs.forEach((t) => {
@@ -1966,8 +2063,8 @@
     selectedPatient = null;
     const panel = document.getElementById("pt-info-panel");
     if (panel) panel.innerHTML = "";
-    const dd = document.getElementById("pt-dropdown");
-    if (dd) dd.value = "";
+    const inp = document.getElementById("pt-search");
+    if (inp) inp.value = "";
     document.getElementById("pad-ta").value = "";
   }
 
@@ -3079,8 +3176,8 @@
     document.getElementById("pad-ta").value = "";
     const ptPanel = document.getElementById("pt-info-panel");
     if (ptPanel) ptPanel.innerHTML = "";
-    const dd = document.getElementById("pt-dropdown");
-    if (dd) dd.value = "";
+    const inp = document.getElementById("pt-search");
+    if (inp) inp.value = "";
     const ss = document.getElementById("save-status");
     if (ss) ss.style.display = "none";
     // Reset generate button
@@ -3224,6 +3321,9 @@
     onPatientSelect,
     clearPatient,
     loadTodayPatients,
+    filterPatientList,
+    showPatientList,
+    selectFromList,
     autoGrow,
     toggleVoice,
     generatePrescription,
