@@ -107,6 +107,26 @@ const tools = [
       required: [],
     },
   },
+  {
+    name: "get_previous_rx",
+    description:
+      "Fetch the patient's most recent approved prescription(s). Use when doctor says 'continue same treatment', 'repeat last prescription', 'modify previous', 'add X to last prescription', or 'stop Y'. Returns clinical data only (HIPAA compliant — no patient PII). Use the patient_id from the PATIENT ID line in the clinical note.",
+    input_schema: {
+      type: "object",
+      properties: {
+        patient_id: {
+          type: "string",
+          description: "Patient UHID (e.g., 'RKH-25260300001')",
+        },
+        limit: {
+          type: "number",
+          description:
+            "Number of past prescriptions to fetch (default 1, max 3)",
+        },
+      },
+      required: ["patient_id"],
+    },
+  },
 ];
 
 // ===== TOOL EXECUTION =====
@@ -198,6 +218,62 @@ async function executeGetStandardRx(
   }
 }
 
+async function executeGetPreviousRx(
+  patientId: string,
+  limit = 1,
+): Promise<string> {
+  try {
+    const n = Math.min(Math.max(limit || 1, 1), 3);
+    const url = `${SUPABASE_URL}/rest/v1/prescriptions?patient_id=eq.${encodeURIComponent(patientId)}&is_approved=eq.true&order=created_at.desc&limit=${n}&select=id,created_at,generated_json`;
+    const res = await fetch(url, {
+      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
+    });
+    if (!res.ok) return `Previous Rx query error: HTTP ${res.status}`;
+    const rxList = await res.json();
+    if (!rxList.length)
+      return `No previous approved prescriptions found for patient ${patientId}.`;
+    // HIPAA compliant: strip PII, keep only clinical data
+    const cleaned = rxList.map((rx: any) => {
+      const g = rx.generated_json || {};
+      return {
+        rx_id: rx.id,
+        date: rx.created_at,
+        diagnosis: g.diagnosis,
+        medicines: (g.medicines || []).map((m: any) => ({
+          row1_en: m.row1_en,
+          row2_en: m.row2_en,
+          row3_hi: m.row3_hi,
+          formulation: m.formulation,
+          dose_mg_per_kg: m.dose_mg_per_kg,
+          dose_per_day_divided: m.dose_per_day_divided,
+          calc: m.calc,
+          pictogram: m.pictogram,
+        })),
+        investigations: g.investigations,
+        vitals: g.vitals,
+        safety: {
+          allergy_note: g.safety?.allergy_note,
+          interactions: g.safety?.interactions,
+          overall_status: g.safety?.overall_status,
+        },
+        followup_days: g.followup_days,
+        doctor_notes: g.doctor_notes,
+        vaccinations: g.vaccinations,
+        growth: g.growth,
+        counselling: g.counselling,
+        diet: g.diet,
+        referral: g.referral,
+        chief_complaints: g.chief_complaints,
+        clinical_history: g.clinical_history,
+        examination: g.examination,
+      };
+    });
+    return JSON.stringify(cleaned, null, 2);
+  } catch (e) {
+    return `Previous Rx query error: ${e.message}`;
+  }
+}
+
 async function executeTool(
   name: string,
   input: Record<string, any>,
@@ -210,6 +286,8 @@ async function executeTool(
       return await executeGetFormulary(input.drug_names);
     case "get_standard_rx":
       return await executeGetStandardRx(input.icd10, input.name);
+    case "get_previous_rx":
+      return await executeGetPreviousRx(input.patient_id, input.limit);
     default:
       return `Unknown tool: ${name}`;
   }
@@ -406,6 +484,7 @@ serve(async (req: Request) => {
       formulary_context,
       std_rx_context,
       patient_allergies,
+      patient_id,
     } = await req.json();
 
     if (!clinical_note) {
@@ -439,6 +518,12 @@ serve(async (req: Request) => {
     if (patient_allergies && patient_allergies.length) {
       userMessage +=
         "\n\nKNOWN PATIENT ALLERGIES: " + patient_allergies.join(", ");
+    }
+    if (patient_id) {
+      userMessage +=
+        "\n\nPATIENT ID: " +
+        patient_id +
+        " (use with get_previous_rx tool if doctor requests continuation or modification of previous treatment)";
     }
 
     let rawText: string;

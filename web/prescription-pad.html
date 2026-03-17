@@ -1639,6 +1639,7 @@
 
   /* ===== PATIENT DROPDOWN (today's visits) ===== */
   let todayPatients = [];
+  let historyTabs = [];
   async function loadTodayPatients() {
     if (!sbConnected) return;
     const today = new Date().toISOString().split("T")[0];
@@ -1695,6 +1696,155 @@
         : "";
       sel.innerHTML += `<option value="${i}">${i + 1}. ${esc(p.name)} — ${esc(p.id)} · ${esc(age)} · ${esc(p.sex || "")}${allergy}</option>`;
     });
+  }
+
+  function clearHistoryTabs() {
+    historyTabs.forEach((t) => {
+      document.getElementById("tab-hist-" + t.id)?.remove();
+      document.getElementById("view-hist-" + t.id)?.remove();
+    });
+    historyTabs = [];
+  }
+
+  async function loadHistoryTabs(patientId) {
+    clearHistoryTabs();
+    if (!sbConnected || !patientId) return;
+    try {
+      const r = await q(
+        "prescriptions",
+        `?patient_id=eq.${encodeURIComponent(patientId)}&is_approved=eq.true&order=created_at.desc&limit=5&select=id,created_at,generated_json`,
+      );
+      if (!r.ok) return;
+      const rxList = await r.json();
+      if (!rxList.length) return;
+
+      const tabBar = document.querySelector(".tabs");
+      const appDiv = document.querySelector(".app");
+
+      rxList.forEach((rx, i) => {
+        const date = new Date(rx.created_at).toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+        });
+        const tabId = rx.id;
+        historyTabs.push({ id: tabId, date, rxData: rx.generated_json });
+
+        // Create tab button
+        const btn = document.createElement("button");
+        btn.className = "tab tab-hist";
+        btn.id = "tab-hist-" + tabId;
+        btn.textContent = date;
+        btn.style.fontSize = "11px";
+        btn.style.color = "var(--ink3)";
+        btn.onclick = () => showView("hist-" + tabId);
+        // Insert before the flex spacer (the <span style="flex:1">)
+        const spacer = tabBar.querySelector("span[style*='flex']");
+        if (spacer) tabBar.insertBefore(btn, spacer);
+        else tabBar.appendChild(btn);
+
+        // Create view container with read-only prescription
+        const viewDiv = document.createElement("div");
+        viewDiv.id = "view-hist-" + tabId;
+        viewDiv.style.display = "none";
+        viewDiv.innerHTML = renderHistoryRx(rx.generated_json, tabId, date);
+        // Insert after view-rx
+        const viewRx = document.getElementById("view-rx");
+        viewRx.parentNode.insertBefore(viewDiv, viewRx.nextSibling);
+      });
+      console.log("History tabs loaded:", rxList.length);
+    } catch (e) {
+      console.warn("loadHistoryTabs:", e.message);
+    }
+  }
+
+  function renderHistoryRx(rxData, rxId, date) {
+    if (!rxData) return "";
+    const r = rxData;
+    const uhid = selectedPatient?.id || "";
+    let h = "";
+
+    // Date/ID banner
+    h += `<div style="background:var(--blue-lt);padding:8px 14px;border-radius:8px;margin-bottom:10px;font-size:12px;color:var(--blue)">
+      <strong>Previous Prescription</strong> — ${esc(date)} — ${esc(rxId)}
+      ${uhid ? " — UHID: " + esc(uhid) : ""}
+    </div>`;
+
+    // Patient strip
+    h += `<div class="pt-strip"><div>
+      <div class="pt-strip-name">${esc(r.patient?.name || "Patient")} <span class="pt-strip-meta">${esc(r.patient?.age || "")} · ${esc(r.patient?.sex || "")} · ${r.patient?.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
+      <div class="pt-strip-dx">Provisional Diagnosis: ${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "")).join(" · ")}</div>
+    </div></div>`;
+
+    // Chief complaints
+    if (r.chief_complaints)
+      h += `<div class="rv-sec"><div class="rv-hdr">Chief Complaints</div><div style="font-size:13px">${esc(r.chief_complaints)}</div></div>`;
+    // History
+    if (r.clinical_history)
+      h += `<div class="rv-sec"><div class="rv-hdr">History</div><div style="font-size:13px">${esc(r.clinical_history)}</div></div>`;
+    // Vitals
+    const vitals = r.vitals || {};
+    const vItems = [];
+    if (vitals.temp_f) vItems.push("Temp: " + esc(vitals.temp_f) + "°F");
+    if (vitals.hr_per_min)
+      vItems.push("HR: " + esc(vitals.hr_per_min) + "/min");
+    if (vitals.rr_per_min)
+      vItems.push("RR: " + esc(vitals.rr_per_min) + "/min");
+    if (vitals.spo2_pct) vItems.push("SpO₂: " + esc(vitals.spo2_pct) + "%");
+    if (r.patient?.weight_kg)
+      vItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
+    if (vItems.length)
+      h += `<div class="rv-sec"><div class="rv-hdr">Vitals</div><div style="display:flex;flex-wrap:wrap;gap:8px">${vItems.map((v) => '<span style="background:var(--blue-lt);padding:3px 10px;border-radius:4px;font-size:12px">' + v + "</span>").join("")}</div></div>`;
+    // Examination
+    if (r.examination)
+      h += `<div class="rv-sec"><div class="rv-hdr">Examination</div><div style="font-size:13px">${esc(r.examination)}</div></div>`;
+
+    // Medicines (read-only, no contenteditable, no adjust buttons)
+    if (r.medicines?.length) {
+      h += `<div class="rv-sec"><div class="rv-hdr blue">℞ Medicines</div>`;
+      r.medicines.forEach((m, idx) => {
+        h += `<div class="med-card"><div class="med-top"><div class="med-rows">
+          <div class="med-calc">${esc(m.calc || "")}</div>
+          <div class="med-r r1">${esc(m.row1_en || "")}</div>
+          <div class="med-r">${esc(m.row2_en || "")}</div>
+          <div class="med-r r3">${esc(m.row3_hi || "")}</div>
+          ${m.flag ? '<div class="med-flag">⚠ ' + esc(m.flag) + "</div>" : ""}
+        </div>${renderPictogram(m)}</div></div>`;
+      });
+      h += `</div>`;
+    }
+
+    // Investigations
+    if (r.investigations?.length)
+      h += `<div class="rv-sec"><div class="rv-hdr red">Investigations</div>${r.investigations.map((i) => '<div class="info-block"><strong>' + esc(i.name) + "</strong> — " + esc(i.indication) + "</div>").join("")}</div>`;
+    // IV Fluids
+    if (r.iv_fluids?.length)
+      h += `<div class="rv-sec"><div class="rv-hdr">IV Fluids</div>${r.iv_fluids.map((f) => (typeof f === "string" ? "<div>" + esc(f) + "</div>" : "<div>" + esc(f.fluid || "") + (f.volume_ml ? " — " + esc(f.volume_ml) + " ml" : "") + "</div>")).join("")}</div>`;
+    // Growth
+    if (r.growth?.comment)
+      h += `<div class="rv-sec"><div class="rv-hdr">Growth · ${esc(r.growth.chart || "WHO 2006")}</div><div>${esc(r.growth.comment)}</div></div>`;
+    // Vaccination
+    if (r.vaccinations?.notes || r.vaccinations?.due?.length)
+      h += `<div class="rv-sec"><div class="rv-hdr">Vaccination</div>${(r.vaccinations.due || []).map((v) => "<div>✓ " + esc(v) + "</div>").join("")}${r.vaccinations.notes ? '<div style="font-size:11px;color:var(--ink3)">' + esc(r.vaccinations.notes) + "</div>" : ""}</div>`;
+    // Developmental
+    if (r.developmental?.findings)
+      h += `<div class="rv-sec"><div class="rv-hdr">Developmental screening</div><div>${esc(r.developmental.findings)}</div></div>`;
+    // Diet
+    if (r.diet)
+      h += `<div class="rv-sec"><div class="rv-hdr">Diet & nutrition</div><div>${esc(r.diet)}</div></div>`;
+    // Referral
+    if (r.referral)
+      h += `<div class="rv-sec"><div class="rv-hdr">Referral</div><div>${esc(r.referral)}</div></div>`;
+    // Counselling
+    if (r.counselling?.length)
+      h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div><div>${r.counselling.map((c) => "✓ " + esc(c)).join(" &nbsp; ")}</div></div>`;
+    // Follow-up
+    h += `<div class="rv-sec"><div class="rv-hdr">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
+    // Safety
+    if (r.safety) {
+      h += `<div class="rv-sec"><div class="rv-hdr">Safety Checks</div><div>Allergy: ${esc(r.safety.allergy_note || "NKDA")} · Interactions: ${esc(r.safety.interactions || "None")} · Status: <strong>${esc(r.safety.overall_status || "SAFE")}</strong></div></div>`;
+    }
+
+    return h;
   }
 
   async function onPatientSelect(idx) {
@@ -1786,9 +1936,12 @@
       const chip = document.getElementById("chip-neo");
       if (chip) chip.classList.add("on");
     }
+    // Load previous prescription history tabs
+    loadHistoryTabs(p.id);
   }
 
   function clearPatient() {
+    clearHistoryTabs();
     selectedPatient = null;
     const panel = document.getElementById("pt-info-panel");
     if (panel) panel.innerHTML = "";
@@ -1905,16 +2058,30 @@
 
   /* ===== VIEW SWITCHING ===== */
   function showView(v) {
+    // Hide all standard views
     ["pad", "loading", "error", "rx"].forEach((x) => {
       const el = document.getElementById("view-" + x);
       if (el) el.style.display = "none";
     });
+    // Hide all history views
+    historyTabs.forEach((t) => {
+      const el = document.getElementById("view-hist-" + t.id);
+      if (el) el.style.display = "none";
+    });
+    // Show requested view
     const el = document.getElementById("view-" + v);
     if (el) el.style.display = v === "pad" ? "flex" : "block";
+    // Update tab active states
     document.getElementById("tab-pad").className =
       "tab" + (v === "pad" ? " active" : "");
     document.getElementById("tab-rx").className =
       "tab" + (v === "rx" ? " active" : "");
+    historyTabs.forEach((t) => {
+      const tabEl = document.getElementById("tab-hist-" + t.id);
+      if (tabEl)
+        tabEl.className =
+          "tab tab-hist" + (v === "hist-" + t.id ? " active" : "");
+    });
   }
 
   /* ===== SEND TO CHAT (Option A) ===== */
@@ -2019,6 +2186,7 @@
         formulary_context: formularyCtx,
         std_rx_context: stdRxCtx,
         patient_allergies: allergies,
+        patient_id: selectedPatient?.id || null,
       };
       console.log(
         "Prompt sent to AI (excluding skill):",
@@ -2882,6 +3050,7 @@
   }
 
   function resetPad() {
+    clearHistoryTabs();
     rxData = null;
     visitId = null;
     rxId = null;
@@ -3048,6 +3217,9 @@
     liveCalc,
     renderPictogram,
     renderDoseIcon,
+    clearHistoryTabs,
+    loadHistoryTabs,
+    renderHistoryRx,
   });
 
   // Auto-connect on page load
