@@ -619,7 +619,7 @@
   function renderDoseIcon(p) {
     if (p.form === "syrup") return DOSE_SVG.spoon;
     if (p.form === "drops") {
-      return `<span style="font-size:9px">${DOSE_SVG.drop} ${esc(p.dose_display || "")}</span>`;
+      return `<span style="display:inline-block;width:14px;height:14px;vertical-align:middle">${DOSE_SVG.drop}</span>`;
     }
     if (p.form === "tablet" || p.form === "capsule") {
       let pills = "";

@@ -2795,23 +2795,29 @@
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];
 
-    showView("loading");
-    document.getElementById("load-msg").textContent =
-      "Generating prescription…";
+    // Stay on the pad — show progress in the header bar, not a blank page
+    const genBtn = document.getElementById("gen-btn");
+    const saveInd = document.getElementById("save-indicator");
+    genBtn.disabled = true;
+    genBtn.textContent = "Generating…";
+    genBtn.style.opacity = "0.6";
+    genBtn.style.cursor = "wait";
+    saveInd.style.display = "inline";
 
-    // Loading messages
+    // Rotating status messages in the save indicator area
     const msgs = [
       "Reading clinical note…",
-      "Matching formulary data…",
+      "Fetching formulary data…",
       "Calculating doses…",
       "Running safety checks…",
       "Writing bilingual instructions…",
       "Finalising prescription…",
     ];
     let mi = 0;
+    saveInd.textContent = msgs[0];
+    saveInd.style.color = "var(--blue)";
     const t = setInterval(() => {
-      document.getElementById("load-msg").textContent =
-        msgs[mi++ % msgs.length];
+      saveInd.textContent = msgs[++mi % msgs.length];
     }, 1500);
 
     try {
@@ -2854,17 +2860,40 @@
         rxData.patient.uhid = selectedPatient.id;
       }
       await renderReview();
-      showView("rx");
-      // Update generate button to show success
-      const genBtn = document.getElementById("gen-btn");
-      if (genBtn) {
+
+      // Update button to success, then switch to review
+      genBtn.textContent = "✓ Ready — opening…";
+      genBtn.style.background = "#1a6b3a";
+      genBtn.style.opacity = "1";
+      saveInd.textContent = "";
+      saveInd.style.display = "none";
+
+      // Brief pause so doctor sees "Ready" before view switches
+      setTimeout(() => {
+        showView("rx");
         genBtn.textContent = "✓ Prescription generated";
-        genBtn.style.background = "#1a6b3a";
-      }
+        genBtn.disabled = false;
+        genBtn.style.cursor = "pointer";
+      }, 400);
     } catch (e) {
       clearInterval(t);
-      document.getElementById("err-txt").textContent = "Error: " + e.message;
-      showView("error");
+      // Show error inline — don't navigate away from the pad
+      genBtn.disabled = false;
+      genBtn.textContent = "Generate";
+      genBtn.style.background = "";
+      genBtn.style.opacity = "1";
+      genBtn.style.cursor = "pointer";
+      saveInd.textContent = "Error: " + e.message;
+      saveInd.style.color = "#c0392b";
+      saveInd.style.display = "inline";
+      console.error("Prescription generation error:", e.message);
+      // Auto-clear error after 8 seconds
+      setTimeout(() => {
+        if (saveInd.style.color === "rgb(192, 57, 43)") {
+          saveInd.style.display = "none";
+          saveInd.textContent = "";
+        }
+      }, 8000);
     }
   }
 
@@ -3879,8 +3908,7 @@
   function renderDoseIcon(p) {
     if (p.form === "syrup") return DOSE_SVG.spoon;
     if (p.form === "drops") {
-      // For drops, show the dose amount text instead of trying to render individual drop icons
-      return `<span style="font-size:11px">${DOSE_SVG.drop} ${esc(p.dose_display || "")}</span>`;
+      return `<span style="display:inline-block;width:16px;height:16px;vertical-align:middle">${DOSE_SVG.drop}</span>`;
     }
     if (p.form === "tablet" || p.form === "capsule") {
       let pills = "";
