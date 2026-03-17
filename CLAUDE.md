@@ -13,11 +13,12 @@ Web App (GitHub Pages: rx.radhakishanhospital.com)
   ├── Registration Page → Supabase (patients, visits)
   ├── Prescription Pad → Supabase Edge Function (generate-prescription)
   │                       ├── Loads core_prompt.md from Storage
-  │                       ├── Claude API with 4 tools:
+  │                       ├── Claude API with 5 tools:
   │                       │   ├── get_reference(name) → Storage .md files
   │                       │   ├── get_formulary(drug_names) → Supabase REST
   │                       │   ├── get_standard_rx(icd10, name) → Supabase REST
-  │                       │   └── get_previous_rx(patient_id) → PII-stripped past Rx
+  │                       │   ├── get_previous_rx(patient_id) → PII-stripped past Rx
+  │                       │   └── get_lab_history(patient_id) → Recent lab results with flags
   │                       └── Returns prescription JSON
   ├── Registration → Edge Function (generate-visit-summary)
   │                  └── AI clinical summary for returning patients
@@ -42,7 +43,7 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
   - `examples/worked_example.md` — Complete Arjun AOM case
   - All skill files also uploaded to Supabase Storage (`website/skill/` prefix)
 
-- **`supabase/functions/generate-prescription/`** — Edge Function (Deno/TypeScript) with tool_use loop (4 tools incl. `get_previous_rx`)
+- **`supabase/functions/generate-prescription/`** — Edge Function (Deno/TypeScript) with tool_use loop (5 tools: `get_reference`, `get_formulary`, `get_standard_rx`, `get_previous_rx`, `get_lab_history`)
 - **`supabase/functions/generate-visit-summary/`** — Edge Function: AI clinical summary for returning patients at registration
 
 - **`radhakishan_system/schema/`** — Supabase DDL (10 tables)
@@ -55,9 +56,9 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 
 ## Workflow (3-Stage)
 
-1. **Reception** (Registration page): Register patient → capture demographics, allergies → enter external records (free-text + document uploads to `documents` bucket) → create visit with vitals + chief complaints → AI visit summary generated for returning patients (stored in `visits.visit_summary`)
+1. **Reception** (Registration page): Register patient → capture demographics, allergies → structured lab entry (COMMON_LABS: 39 pediatric tests in 4 categories — Hematology, Biochemistry, Microbiology, Imaging — with auto-unit and auto-flag, saved to `lab_results`) → smart IAP vaccination checklist (IAP_SCHEDULE: 13 milestones birth–12yr, age-based display, pre-checks existing records, OVERDUE labels) → enter external records (free-text + document uploads to `documents` bucket) → create visit with vitals + chief complaints → AI visit summary generated for returning patients (stored in `visits.visit_summary`)
 2. **Nurse station** (same page): Weight, height, HC, MUAC, temp, HR, RR, SpO2
-3. **Doctor OPD** (Prescription Pad): Search patient in combo box (name/UHID/guardian/token) → view nurse-captured data + visit summary → select NHM or IAP vaccination schedule → review previous Rx history tabs → type/dictate clinical note → click Generate → Edge Function calls Claude (tool_use loop) → prescription renders → review, edit → sign off → print auto-opens
+3. **Doctor OPD** (Prescription Pad): Search patient in combo box (name/UHID/guardian/token) → view nurse-captured data + visit summary + growth trends (loadGrowthTrend: weight/height history with trend arrows + WAZ) + recent labs (loadRecentLabs: flagged results from lab_results table) + vaccination status (loadVaxStatus: dose count summary) → select NHM or IAP vaccination schedule → review previous Rx history tabs → type/dictate clinical note → click Generate → Edge Function calls Claude (5-tool loop incl. get_lab_history) → prescription renders → review, edit → sign off (saves vaccinations given_today) → print auto-opens
 
 ## Supabase Schema (10 Tables)
 
@@ -71,6 +72,7 @@ Supabase credentials (URL + anon key) are hardcoded in all pages. Auto-connect o
 | `prescriptions`                 | Generated Rx JSON, approval status. NOT NULL on visit_id + patient_id.                               |
 | `vaccinations`                  | Per-patient vaccination history (IAP 2024 + NHM-UIP)                                                 |
 | `growth_records`                | WHO Z-scores (WAZ, HAZ, WHZ, HCZ)                                                                    |
+| `lab_results`                   | Structured lab results: test_name, value, unit, flag (normal/low/high/critical), test_category       |
 | `developmental_screenings`      | Assessments by domain                                                                                |
 | Storage: `website` bucket       | Skill files (.md) + web pages                                                                        |
 | Storage: `prescriptions` bucket | Prescription text files                                                                              |

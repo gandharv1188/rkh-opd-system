@@ -268,7 +268,7 @@ skill/
 
 ### Tool Definitions
 
-The Edge Function defines 4 tools for Claude:
+The Edge Function defines 5 tools for Claude:
 
 | **Tool**                       | **Parameters**          | **Returns**                                                 |
 | ------------------------------ | ----------------------- | ----------------------------------------------------------- |
@@ -276,6 +276,7 @@ The Edge Function defines 4 tools for Claude:
 | `get_formulary(drug_names)`    | Array of drug names     | Formulary entries from Supabase `formulary` table           |
 | `get_standard_rx(icd10, name)` | ICD-10 code and/or name | Standard prescription protocol from Supabase DB             |
 | `get_previous_rx(patient_id)`  | Patient UUID            | Past prescriptions (PII-stripped) for "continue same" cases |
+| `get_lab_history(patient_id)`  | Patient UUID            | Recent lab results with flags (normal/low/high/critical)    |
 
 ### How It Works
 
@@ -308,16 +309,17 @@ The clinical knowledge base (530 drug formulary entries, 446 diagnosis protocols
 
 ## 4.1 Tables Overview
 
-|                        |                                                                                                                           |                                                               |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| **Table**              | **Purpose**                                                                                                               | **Key Relationships**                                         |
-| formulary              | Drug monographs — all dosing methods, safety, formulations                                                                | Referenced by prescription generator at runtime               |
-| standard_prescriptions | ICD-10 keyed diagnosis protocols                                                                                          | Referenced by prescription generator at runtime               |
-| patients               | Patient demographics, neonatal details                                                                                    | Parent of visits, prescriptions, vaccinations, growth_records |
-| visits                 | Per-visit clinical data — vitals, anthropometry, diagnosis, raw note, visit_summary (AI-generated for returning patients) | Child of patients, parent of prescriptions                    |
-| prescriptions          | Full generated prescription JSON + approval status + PDF URL                                                              | Child of visits and patients                                  |
-| vaccinations           | Vaccination history per patient                                                                                           | Child of patients                                             |
-| growth_records         | WHO Z-scores and measurements per visit                                                                                   | Child of patients and visits                                  |
+|                        |                                                                                                                                                                      |                                                               |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Table**              | **Purpose**                                                                                                                                                          | **Key Relationships**                                         |
+| formulary              | Drug monographs — all dosing methods, safety, formulations                                                                                                           | Referenced by prescription generator at runtime               |
+| standard_prescriptions | ICD-10 keyed diagnosis protocols                                                                                                                                     | Referenced by prescription generator at runtime               |
+| patients               | Patient demographics, neonatal details                                                                                                                               | Parent of visits, prescriptions, vaccinations, growth_records |
+| visits                 | Per-visit clinical data — vitals, anthropometry, diagnosis, raw note, visit_summary (AI-generated for returning patients)                                            | Child of patients, parent of prescriptions                    |
+| prescriptions          | Full generated prescription JSON + approval status + PDF URL                                                                                                         | Child of visits and patients                                  |
+| vaccinations           | Vaccination history per patient                                                                                                                                      | Child of patients                                             |
+| growth_records         | WHO Z-scores and measurements per visit                                                                                                                              | Child of patients and visits                                  |
+| lab_results            | Structured lab results: test_name, value, value_numeric, unit, reference_range, flag (normal/low/high/critical/abnormal), test_date, lab_name, source, test_category | Child of patients and visits                                  |
 
 ## 4.2 Formulary Table — Critical Design Decisions
 
@@ -399,6 +401,12 @@ The main doctor-facing tool. The doctor's only required action is to type a clin
 
 - On patient selection: fetches today's visit and displays **visit info panel** with nurse-captured vitals (weight, height, HC, MUAC, temp, HR, RR, SpO2), chief complaints, known allergies (RED highlight), and AI-generated visit summary (for returning patients)
 
+- **Growth trend display** (`loadGrowthTrend()`): Queries past visits for weight/height history and `growth_records` for latest Z-scores. Shows trend arrows in info panel: "Wt: 6.5→7.0→7.2 kg ↑ | WAZ: -0.8 (Normal)"
+
+- **Recent lab results** (`loadRecentLabs()`): Queries `lab_results` table for recent results, displays in info panel with flag colours (normal/high/low/critical). Provides clinical context before prescription generation.
+
+- **Vaccination status** (`loadVaxStatus()`): Queries `vaccinations` table and shows dose count summary in info panel (e.g., "8 doses on record"). Highlights overdue vaccines based on age.
+
 - Pre-fills clinical note textarea with patient context + vitals + allergy status + chief complaints from nurse
 
 - Section chips: Neonatal (auto-activates when age < 28 days, GA < 37 weeks, or birth weight < 2.5 kg), Growth, Development
@@ -415,13 +423,13 @@ The main doctor-facing tool. The doctor's only required action is to type a clin
 
 - Smart inline dose adjustment: change weight/mg-per-kg/frequency → live recalculation → Row 2 (English) and Row 3 (Hindi) both auto-update
 
-- Sign-off saves to: visits, prescriptions, growth_records tables + Supabase Storage
+- Sign-off saves to: visits, prescriptions, growth_records, vaccinations (given_today) tables + Supabase Storage
 
 - Print auto-opens after sign-off: A4 prescription with hospital letterhead, compact layout, QR code in footer
 
 **Supabase tables**
 
-READ: formulary, standard_prescriptions, patients, visits | WRITE: visits, prescriptions, growth_records, Storage
+READ: formulary, standard_prescriptions, patients, visits, growth_records, lab_results, vaccinations | WRITE: visits, prescriptions, growth_records, vaccinations, Storage
 
 ## 5.2 Prescription Output (Print Renderer)
 
@@ -503,13 +511,15 @@ Used at the reception desk and nurse station before the patient sees the doctor.
 
 - **Chief complaints:** Free-text field for what the parent/patient reports at reception
 
-- **Vaccination history:** Quick-entry with dropdown (BCG, OPV, Pentavalent, IPV, PCV, Rotavirus, MR, MMR, DPT, Hep A, Varicella, TCV, Influenza, HPV, Td, Tdap) + dose number + date
+- **Smart vaccination checklist:** IAP_SCHEDULE constant defines 13 milestones from birth to 12 years. Age-based checklist replaces old add-row grid — shows only age-appropriate vaccines. Pre-checks existing vaccination records for returning patients. OVERDUE labels highlight missed vaccines. Saves selected vaccines with dates to `vaccinations` table.
 
 - **Visit creation:** Select doctor (Dr. Lokender Goyal), visit type (new/follow-up/vaccination/emergency), date
 
 - **OPD token:** After save, prints as 80mm sticker with QR code containing UHID, name, age, vitals, doctor, allergy status
 
-- **External records**: Free-text area with voice dictation for lab results, external doctor notes. Document upload with 15 category tags (Lab Investigation Report, Radiology/Imaging, Previous Prescription, Discharge Summary, Referral Letter, Vaccination Card, Growth Chart, Insurance/TPA, Consent Form, Birth Certificate, Allergy/Medical Alert Card, Surgical Notes, Developmental Report, Diet Chart, Other). Each upload: category dropdown + date + description + file (max 10MB). Files stored in Supabase Storage `documents` bucket. Metadata saved in `clinical_notes` and `raw_dictation`.
+- **Structured lab entry:** COMMON_LABS constant with 39 pediatric tests across 4 categories (Hematology, Biochemistry, Microbiology, Imaging). Structured UI with test selection, auto-populated units, value entry, and auto-flag calculation (normal/low/high/critical based on reference ranges). Results saved to `lab_results` table with test_name, value, value_numeric, unit, reference_range, flag, test_date, lab_name, source, test_category.
+
+- **External records**: Free-text area with voice dictation for external doctor notes. Document upload with 15 category tags (Lab Investigation Report, Radiology/Imaging, Previous Prescription, Discharge Summary, Referral Letter, Vaccination Card, Growth Chart, Insurance/TPA, Consent Form, Birth Certificate, Allergy/Medical Alert Card, Surgical Notes, Developmental Report, Diet Chart, Other). Each upload: category dropdown + date + description + file (max 10MB). Files stored in Supabase Storage `documents` bucket. Metadata saved in `clinical_notes` and `raw_dictation`.
 
 - **AI-generated visit summary**: For returning patients, the `generate-visit-summary` Edge Function calls Claude to produce a clinical summary (~200 words) from past prescriptions. Stored in `visits.visit_summary`. Shown on Prescription Pad textarea when patient selected. New patients skip this step (cost saving).
 
@@ -517,7 +527,7 @@ Used at the reception desk and nurse station before the patient sees the doctor.
 
 **Supabase tables**
 
-READ/WRITE: patients, visits, vaccinations | WRITE: Storage (`documents` bucket)
+READ/WRITE: patients, visits, vaccinations, lab_results | WRITE: Storage (`documents` bucket)
 
 ## 5.5 Formulary Manager (Admin)
 
@@ -1017,7 +1027,7 @@ const response = await fetch(SB_URL + "/functions/v1/generate-prescription", {
 });
 ```
 
-The Edge Function (`supabase/functions/generate-prescription/index.ts`) handles the Claude API call with tool use loop (4 tools including `get_previous_rx`), loading the core prompt and resolving tool calls server-side. A second Edge Function (`generate-visit-summary`) produces AI clinical summaries for returning patients at registration time.
+The Edge Function (`supabase/functions/generate-prescription/index.ts`) handles the Claude API call with tool use loop (5 tools: `get_reference`, `get_formulary`, `get_standard_rx`, `get_previous_rx`, `get_lab_history`), loading the core prompt and resolving tool calls server-side. Core prompt instruction #14 directs Claude to use `get_lab_history` for clinical context. A second Edge Function (`generate-visit-summary`) produces AI clinical summaries for returning patients at registration time.
 
 # 14. Setup Instructions
 
