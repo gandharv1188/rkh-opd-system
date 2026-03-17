@@ -448,14 +448,67 @@
   }
 </style>
 
-<div class="hdr">
+<div class="hdr" style="flex-wrap: wrap; gap: 8px">
   <div>
     <div class="hdr-title">Radhakishan Hospital — Patient Registration</div>
     <div class="hdr-sub">Reception & Nursing Station</div>
   </div>
+  <div
+    style="
+      flex: 1;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      min-width: 250px;
+    "
+  >
+    <input
+      id="srch"
+      placeholder="Search patient by name, UHID, or phone…"
+      oninput="debounceSearch(this.value)"
+      style="
+        flex: 1;
+        padding: 6px 10px;
+        border: none;
+        border-radius: var(--r);
+        font-size: 13px;
+        font-family: inherit;
+      "
+    />
+    <button
+      onclick="startQrScan()"
+      style="
+        padding: 6px 12px;
+        background: var(--green);
+        color: #fff;
+        border: none;
+        border-radius: var(--r);
+        cursor: pointer;
+        font-size: 12px;
+        white-space: nowrap;
+      "
+    >
+      Scan QR
+    </button>
+    <button
+      id="new-btn"
+      onclick="showNewPatientForm()"
+      style="
+        padding: 6px 12px;
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: var(--r);
+        cursor: pointer;
+        font-size: 12px;
+        white-space: nowrap;
+      "
+    >
+      Clear Form
+    </button>
+  </div>
   <div class="hdr-right" style="display: none">
     <span class="cfg-status" id="conn-status">Not connected</span>
-    <button class="cfg-btn" onclick="toggleCfg()">Supabase</button>
   </div>
 </div>
 
@@ -478,17 +531,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 
 <div class="main">
-  <div class="search-wrap">
-    <input
-      id="srch"
-      placeholder="Search patient by name, UHID, or phone number…"
-      oninput="debounceSearch(this.value)"
-    />
-    <button onclick="startQrScan()" style="background: var(--green)">
-      Scan QR
-    </button>
-    <button id="new-btn" onclick="showNewPatientForm()">Clear Form</button>
-  </div>
   <div id="qr-scanner-area" style="display: none; margin-bottom: 16px">
     <div
       style="
@@ -757,9 +799,49 @@
       </div>
     </div>`;
 
-    // Section 2: Neonatal (show if age < 2 years or new patient)
+    // Section 2: Visit Details (moved up — doctor + visit type needed early)
     h += `<div class="form-section">
-      <div class="fs-hdr">Neonatal Details <span class="badge">If applicable</span></div>
+      <div class="fs-hdr">Visit Details <span class="badge req">Required</span></div>
+      <div class="fs-body">
+        <div class="fg fg3">
+          <div class="ff"><label>Visit Date</label><input type="date" id="f-visit-date" value="${new Date().toISOString().split("T")[0]}" /></div>
+          <div class="ff"><label>Doctor</label>
+            <select id="f-doctor">
+              <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
+            </select>
+          </div>
+          <div class="ff"><label>Visit Type</label>
+            <select id="f-visit-type">
+              <option value="new">New consultation</option>
+              <option value="followup">Follow-up</option>
+              <option value="vaccination">Vaccination only</option>
+              <option value="emergency">Emergency</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    // Section 3: Chief Complaints (moved up — needed before vitals)
+    h += `<div class="form-section">
+      <div class="fs-hdr">Chief Complaints</div>
+      <div class="fs-body">
+        <div class="ff">
+          <label>What the parent/patient reports</label>
+          <textarea id="f-complaints" placeholder="e.g. Fever 3 days, cough, not eating well"></textarea>
+        </div>
+      </div>
+    </div>`;
+
+    // Section 4: Neonatal (auto-shown when DOB indicates age < 90 days)
+    const dobVal = p.dob || "";
+    const ageDays = dobVal
+      ? Math.floor((new Date() - new Date(dobVal)) / 86400000)
+      : 999;
+    const showNeo =
+      ageDays < 90 || p.gestational_age_weeks || p.birth_weight_kg;
+    h += `<div class="form-section" id="neo-section" style="${showNeo ? "" : "display:none"}">
+      <div class="fs-hdr">Neonatal Details <span class="badge">For neonates/young infants</span></div>
       <div class="fs-body">
         <div class="fg fg3">
           <div class="ff"><label>Gestational Age (weeks)</label><input type="number" id="f-ga" step="0.5" value="${p.gestational_age_weeks || ""}" placeholder="e.g. 36" /></div>
@@ -799,16 +881,7 @@
       </div>
     </div>`;
 
-    // Section 5: Chief complaints
-    h += `<div class="form-section">
-      <div class="fs-hdr">Chief Complaints</div>
-      <div class="fs-body">
-        <div class="ff">
-          <label>What the parent/patient reports</label>
-          <textarea id="f-complaints" placeholder="e.g. Fever 3 days, cough, not eating well"></textarea>
-        </div>
-      </div>
-    </div>`;
+    // (Chief Complaints moved to after Demographics)
 
     // Section 6: Vaccination history (age-based checklist)
     const ageMonths = isNew
@@ -825,28 +898,7 @@
       </div>
     </div>`;
 
-    // Section 7: Visit details
-    h += `<div class="form-section">
-      <div class="fs-hdr">Visit Details <span class="badge req">Required</span></div>
-      <div class="fs-body">
-        <div class="fg fg3">
-          <div class="ff"><label>Visit Date</label><input type="date" id="f-visit-date" value="${new Date().toISOString().split("T")[0]}" /></div>
-          <div class="ff"><label>Doctor</label>
-            <select id="f-doctor">
-              <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
-            </select>
-          </div>
-          <div class="ff"><label>Visit Type</label>
-            <select id="f-visit-type">
-              <option value="new">New consultation</option>
-              <option value="followup">Follow-up</option>
-              <option value="vaccination">Vaccination only</option>
-              <option value="emergency">Emergency</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>`;
+    // (Visit Details moved to after Demographics)
 
     // Section 8: Lab Results & External Notes
     h += `<div class="form-section">
@@ -901,10 +953,19 @@
     }
     // Re-render checklist when DOB changes
     const dobEl = document.getElementById("f-dob");
-    if (dobEl)
-      dobEl.addEventListener("change", () =>
-        renderVaxChecklist(dobEl.value, existingVax),
-      );
+    if (dobEl) {
+      dobEl.addEventListener("change", () => {
+        renderVaxChecklist(dobEl.value, existingVax);
+        // Show/hide neonatal section based on age
+        const neo = document.getElementById("neo-section");
+        if (neo) {
+          const days = dobEl.value
+            ? Math.floor((new Date() - new Date(dobEl.value)) / 86400000)
+            : 999;
+          neo.style.display = days < 90 ? "" : "none";
+        }
+      });
+    }
   }
 
   // ===== IAP Vaccination Schedule Checklist =====
