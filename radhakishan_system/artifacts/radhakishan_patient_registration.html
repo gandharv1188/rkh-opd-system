@@ -881,10 +881,11 @@
     h += `<div class="form-section" id="neo-section" style="${showNeo ? "" : "display:none"}">
       <div class="fs-hdr">Neonatal Details <span class="badge">For neonates/young infants</span></div>
       <div class="fs-body">
-        <div class="fg fg3">
+        <div class="fg fg4">
           <div class="ff"><label>Gestational Age (weeks)</label><input type="number" id="f-ga" step="0.5" value="${p.gestational_age_weeks || ""}" placeholder="e.g. 36" /></div>
           <div class="ff"><label>Birth Weight (kg)</label><input type="number" id="f-bw" step="0.01" value="${p.birth_weight_kg || ""}" placeholder="e.g. 2.5" /></div>
-          <div class="ff"><label>Birth Date/Time Notes</label><input id="f-birth-notes" value="" placeholder="e.g. LSCS, cried immediately" /></div>
+          <div class="ff"><label>Time of Birth</label><input type="time" id="f-birth-time" value="" /></div>
+          <div class="ff"><label>Birth Notes</label><input id="f-birth-notes" value="" placeholder="e.g. NVD / LSCS, cried immediately, APGAR 8/9" /></div>
         </div>
       </div>
     </div>`;
