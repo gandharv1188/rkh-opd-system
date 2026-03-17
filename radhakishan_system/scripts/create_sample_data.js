@@ -616,6 +616,783 @@ async function run() {
     );
   }
 
+  // Step 4: Create past visits + prescriptions for 8 returning patients
+  console.log(
+    "\nCreating past visits & prescriptions for returning patients...",
+  );
+
+  const pastRx = [
+    // #1 Arjun — URTI 2 weeks ago
+    {
+      patient_id: "RKH-25260300001",
+      daysAgo: 14,
+      visit: {
+        weight_kg: 7.0,
+        temp_f: 100.4,
+        hr_per_min: 125,
+        rr_per_min: 34,
+        spo2_pct: 99,
+        chief_complaints: "Runny nose, cough, low-grade fever 2 days",
+      },
+      rx: {
+        patient: {
+          name: "Arjun Kumar",
+          age: "7.5 months",
+          sex: "Male",
+          weight_kg: 7.0,
+        },
+        diagnosis: [
+          { name: "Acute URTI", icd10: "J06.9", type: "provisional" },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "PARACETAMOL SUSPENSION (120 mg / 5 ml)",
+            row2_en:
+              "4 ml orally every 6 hours as needed for fever. Max 4 doses/day.",
+            row3_hi:
+              "4 ml बुखार होने पर हर 6 घंटे में मुँह से दें। दिन में 4 बार से ज़्यादा न दें।",
+            calc: "15 mg/kg × 7 kg = 105 mg → 4 ml",
+            formulation: "syrup",
+            dose_mg_per_kg: 15,
+            dose_per_day_divided: 4,
+            concentration_mg: 120,
+            concentration_per_ml: 5,
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "4 ml",
+              times: [],
+              prn: true,
+              max_per_day: 4,
+              duration_days: null,
+              with_food: false,
+              special: "fever_only",
+            },
+          },
+          {
+            number: 2,
+            row1_en: "CETIRIZINE DROPS (10 mg / ml)",
+            row2_en: "2 drops (0.2 ml) orally once daily for 5 days.",
+            row3_hi: "2 बूँदें दिन में एक बार 5 दिन तक दें।",
+            calc: "0.25 mg/kg × 7 kg = 1.75 mg → 0.2 ml (2 drops)",
+            formulation: "drops",
+            dose_mg_per_kg: 0.25,
+            dose_per_day_divided: 1,
+            concentration_mg: 10,
+            concentration_per_ml: 1,
+            flag: "",
+            pictogram: {
+              form: "drops",
+              dose_display: "2 drops",
+              dose_qty: 2,
+              times: ["morning"],
+              prn: false,
+              duration_days: 5,
+              with_food: false,
+            },
+          },
+        ],
+        investigations: [],
+        vitals: {
+          temp_f: "100.4",
+          hr_per_min: "125",
+          rr_per_min: "34",
+          spo2_pct: "99",
+        },
+        chief_complaints: "Runny nose, cough, low-grade fever 2 days",
+        clinical_history:
+          "7.5-month-old male with acute onset rhinorrhea and cough for 2 days. Low-grade fever (100.4°F). Feeding well. No rash, no vomiting.",
+        examination:
+          "Mild nasal congestion. Throat clear. Chest clear. No distress.",
+        safety: {
+          allergy_note: "NKDA",
+          interactions: "None found",
+          overall_status: "SAFE",
+          max_dose_check: [
+            {
+              drug: "PARACETAMOL",
+              calculated_dose_mg: 105,
+              max_allowed_mg: 1000,
+              status: "PASS",
+            },
+          ],
+          flags: [],
+        },
+        counselling: [
+          "Nasal saline drops",
+          "Increase fluid intake",
+          "Return if fever persists >3 days",
+        ],
+        followup_days: 5,
+        doctor_notes: "Viral URTI. Symptomatic management.",
+        nabh_compliant: true,
+      },
+    },
+    // #6 Priya — URTI 3 weeks ago
+    {
+      patient_id: "RKH-25260300006",
+      daysAgo: 21,
+      visit: {
+        weight_kg: 9.5,
+        temp_f: 99.8,
+        hr_per_min: 112,
+        rr_per_min: 28,
+        spo2_pct: 99,
+        chief_complaints: "Cough and cold 4 days, slight fever",
+      },
+      rx: {
+        patient: {
+          name: "Priya Sharma",
+          age: "15 months",
+          sex: "Female",
+          weight_kg: 9.5,
+        },
+        diagnosis: [
+          { name: "Acute URTI", icd10: "J06.9", type: "provisional" },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "PARACETAMOL SUSPENSION (120 mg / 5 ml)",
+            row2_en: "6 ml orally every 6 hours as needed for fever.",
+            row3_hi: "6 ml बुखार होने पर हर 6 घंटे में मुँह से दें।",
+            calc: "15 mg/kg × 9.5 kg = 142 mg → 6 ml",
+            formulation: "syrup",
+            dose_mg_per_kg: 15,
+            dose_per_day_divided: 4,
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "6 ml",
+              times: [],
+              prn: true,
+              max_per_day: 4,
+            },
+          },
+          {
+            number: 2,
+            row1_en: "AMBROXOL SYRUP (15 mg / 5 ml)",
+            row2_en: "2.5 ml orally twice daily for 5 days.",
+            row3_hi: "2.5 ml सुबह-शाम 5 दिन तक दें।",
+            calc: "1.2 mg/kg × 9.5 kg = 11.4 mg → 3.8 ml → rounded to 2.5 ml (pediatric dose)",
+            formulation: "syrup",
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "2.5 ml",
+              times: ["morning", "evening"],
+              prn: false,
+              duration_days: 5,
+              with_food: false,
+            },
+          },
+        ],
+        investigations: [],
+        vitals: { temp_f: "99.8" },
+        chief_complaints: "Cough and cold 4 days, slight fever",
+        clinical_history:
+          "15-month-old female with cough and nasal discharge for 4 days. Low-grade fever.",
+        examination:
+          "Rhinorrhea present. Throat mildly congested. Chest clear.",
+        safety: {
+          allergy_note: "NKDA",
+          interactions: "None",
+          overall_status: "SAFE",
+          max_dose_check: [],
+          flags: [],
+        },
+        counselling: ["Steam inhalation", "Warm fluids"],
+        followup_days: 5,
+        nabh_compliant: true,
+      },
+    },
+    // #9 Rohan (Penicillin allergy) — Skin infection 1 month ago
+    {
+      patient_id: "RKH-25260300009",
+      daysAgo: 30,
+      visit: {
+        weight_kg: 13.2,
+        temp_f: 99.4,
+        hr_per_min: 100,
+        rr_per_min: 22,
+        spo2_pct: 99,
+        chief_complaints: "Itchy red patches on arms, worsening for 1 week",
+      },
+      rx: {
+        patient: {
+          name: "Rohan Singh",
+          age: "2 yr 11 mo",
+          sex: "Male",
+          weight_kg: 13.2,
+        },
+        diagnosis: [
+          { name: "Dermatitis", icd10: "L30.9", type: "provisional" },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "CETIRIZINE SYRUP (5 mg / 5 ml)",
+            row2_en: "2.5 ml orally once daily for 7 days.",
+            row3_hi: "2.5 ml दिन में एक बार 7 दिन तक दें।",
+            calc: "0.25 mg/kg × 13.2 kg = 3.3 mg → 2.5 ml (standard pediatric dose)",
+            formulation: "syrup",
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "2.5 ml",
+              times: ["bedtime"],
+              prn: false,
+              duration_days: 7,
+              with_food: false,
+            },
+          },
+          {
+            number: 2,
+            row1_en: "CALAMINE LOTION (Topical)",
+            row2_en: "Apply thin layer to affected areas twice daily.",
+            row3_hi: "प्रभावित जगह पर पतली परत दिन में 2 बार लगाएं।",
+            calc: "Topical — no dose calculation",
+            formulation: "topical",
+            flag: "",
+            pictogram: {
+              form: "topical",
+              dose_display: "Apply",
+              times: ["morning", "evening"],
+              prn: false,
+              duration_days: 7,
+              with_food: false,
+            },
+          },
+        ],
+        investigations: [],
+        vitals: { temp_f: "99.4" },
+        chief_complaints: "Itchy red patches on arms, worsening for 1 week",
+        examination:
+          "Erythematous papular rash on bilateral forearms. No vesicles. No secondary infection.",
+        safety: {
+          allergy_note: "ALLERGY: Penicillin",
+          interactions: "None",
+          overall_status: "SAFE",
+          max_dose_check: [],
+          flags: [],
+        },
+        counselling: [
+          "Keep skin moisturized",
+          "Avoid scratching",
+          "Cotton clothing",
+        ],
+        followup_days: 7,
+        nabh_compliant: true,
+      },
+    },
+    // #10 Vihaan (Asthma) — Previous asthma episode 6 weeks ago
+    {
+      patient_id: "RKH-25260300010",
+      daysAgo: 42,
+      visit: {
+        weight_kg: 14.8,
+        temp_f: 98.6,
+        hr_per_min: 96,
+        rr_per_min: 26,
+        spo2_pct: 96,
+        chief_complaints:
+          "Wheezing, cough at night, difficulty breathing after running",
+      },
+      rx: {
+        patient: {
+          name: "Vihaan Yadav",
+          age: "3 yr 7 mo",
+          sex: "Male",
+          weight_kg: 14.8,
+        },
+        diagnosis: [
+          {
+            name: "Asthma Exacerbation",
+            icd10: "J45.901",
+            type: "provisional",
+          },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "SALBUTAMOL NEBULISATION (5 mg / ml)",
+            row2_en:
+              "2.5 mg (0.5 ml + 2 ml NS) nebulised every 6 hours for 3 days, then as needed.",
+            row3_hi: "2.5 mg नेबुलाइज़र से हर 6 घंटे 3 दिन, फिर ज़रूरत पर।",
+            calc: "0.15 mg/kg × 14.8 kg = 2.22 mg → 2.5 mg (min dose)",
+            formulation: "inhaler",
+            flag: "",
+            pictogram: {
+              form: "inhaler",
+              dose_display: "2.5 mg neb",
+              times: ["morning", "afternoon", "evening", "bedtime"],
+              prn: false,
+              duration_days: 3,
+            },
+          },
+          {
+            number: 2,
+            row1_en: "PREDNISOLONE ORAL (5 mg / 5 ml)",
+            row2_en: "7.5 ml (15 mg) orally once daily for 3 days.",
+            row3_hi: "7.5 ml सुबह एक बार 3 दिन तक दें।",
+            calc: "1 mg/kg × 14.8 kg = 14.8 mg → 15 mg = 7.5 ml",
+            formulation: "syrup",
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "7.5 ml",
+              times: ["morning"],
+              prn: false,
+              duration_days: 3,
+              with_food: true,
+            },
+          },
+        ],
+        investigations: [],
+        vitals: { temp_f: "98.6", spo2_pct: "96" },
+        chief_complaints:
+          "Wheezing, cough at night, difficulty breathing after running",
+        examination:
+          "Bilateral wheeze on auscultation. No retractions. SpO2 96%.",
+        safety: {
+          allergy_note: "ALLERGY: Sulfa drugs, Eggs",
+          interactions: "None",
+          overall_status: "SAFE",
+          max_dose_check: [
+            {
+              drug: "PREDNISOLONE",
+              calculated_dose_mg: 15,
+              max_allowed_mg: 40,
+              status: "PASS",
+            },
+          ],
+          flags: ["Egg allergy — avoid egg-based vaccines"],
+        },
+        counselling: [
+          "Avoid triggers (dust, smoke)",
+          "Asthma action plan explained",
+          "Return if breathing worsens",
+        ],
+        followup_days: 3,
+        nabh_compliant: true,
+      },
+    },
+    // #11 Saanvi — Iron deficiency follow-up 1 month ago
+    {
+      patient_id: "RKH-25260300011",
+      daysAgo: 30,
+      visit: {
+        weight_kg: 14.5,
+        temp_f: 98.4,
+        hr_per_min: 90,
+        rr_per_min: 22,
+        spo2_pct: 99,
+        chief_complaints:
+          "Follow-up for anaemia. Started iron 1 month ago. Hb was 8.2.",
+      },
+      rx: {
+        patient: {
+          name: "Saanvi Joshi",
+          age: "4 yr",
+          sex: "Female",
+          weight_kg: 14.5,
+        },
+        diagnosis: [
+          {
+            name: "Iron Deficiency Anaemia",
+            icd10: "D50.9",
+            type: "provisional",
+          },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "IRON (ELEMENTAL) SYRUP (50 mg / 5 ml)",
+            row2_en:
+              "4.5 ml orally twice daily for 3 months. Give on empty stomach with Vitamin C.",
+            row3_hi:
+              "4.5 ml सुबह-शाम 3 महीने तक खाली पेट दें। विटामिन C के साथ दें।",
+            calc: "3 mg/kg × 14.5 kg = 43.5 mg/day ÷ 2 = 21.75 mg/dose → 2.2 ml → rounded to 2.5 ml. Total: 4.5 ml/day",
+            formulation: "syrup",
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "2.5 ml",
+              times: ["morning", "evening"],
+              prn: false,
+              duration_days: 90,
+              with_food: false,
+              special: "empty_stomach",
+            },
+          },
+          {
+            number: 2,
+            row1_en: "VITAMIN C TABLET (100 mg)",
+            row2_en: "Half tablet (50 mg) orally twice daily with iron.",
+            row3_hi: "आधी गोली दिन में 2 बार आयरन के साथ दें।",
+            calc: "50 mg × 2 = 100 mg/day",
+            formulation: "tablet",
+            flag: "",
+            pictogram: {
+              form: "tablet",
+              dose_display: "½ tab",
+              dose_qty: 0,
+              dose_fraction: "half",
+              times: ["morning", "evening"],
+              prn: false,
+              duration_days: 90,
+              with_food: false,
+            },
+          },
+          {
+            number: 3,
+            row1_en: "ALBENDAZOLE TABLET (400 mg)",
+            row2_en: "400 mg single dose today. Repeat after 2 weeks.",
+            row3_hi: "400 mg की एक गोली आज दें। 2 हफ्ते बाद दोबारा दें।",
+            calc: "Fixed dose: 400 mg single dose (age >2yr)",
+            formulation: "tablet",
+            flag: "",
+            pictogram: {
+              form: "tablet",
+              dose_display: "1 tab",
+              dose_qty: 1,
+              times: [],
+              prn: false,
+              duration_days: 1,
+            },
+          },
+        ],
+        investigations: [
+          {
+            name: "CBC with reticulocyte count",
+            indication: "Baseline for anaemia treatment",
+            urgency: "routine",
+          },
+        ],
+        vitals: { temp_f: "98.4" },
+        chief_complaints:
+          "Follow-up for anaemia. Started iron 1 month ago. Hb was 8.2.",
+        examination:
+          "Mild pallor of conjunctiva and nail beds. No organomegaly.",
+        safety: {
+          allergy_note: "NKDA",
+          interactions: "Iron + Vitamin C — beneficial (enhances absorption)",
+          overall_status: "SAFE",
+          max_dose_check: [],
+          flags: [],
+        },
+        counselling: [
+          "Continue iron for full 3 months",
+          "Iron-rich diet (green leafy vegetables, jaggery)",
+          "Avoid milk/tea 1 hour before/after iron",
+        ],
+        followup_days: 30,
+        doctor_notes: "Recheck Hb in 4 weeks.",
+        nabh_compliant: true,
+      },
+    },
+    // #12 Karan — URTI 2 months ago
+    {
+      patient_id: "RKH-25260300012",
+      daysAgo: 60,
+      visit: {
+        weight_kg: 18.0,
+        temp_f: 100.8,
+        hr_per_min: 92,
+        rr_per_min: 22,
+        spo2_pct: 99,
+        chief_complaints: "Fever, sore throat, body aches 2 days",
+      },
+      rx: {
+        patient: {
+          name: "Karan Malik",
+          age: "5 yr 3 mo",
+          sex: "Male",
+          weight_kg: 18.0,
+        },
+        diagnosis: [
+          { name: "Acute Pharyngitis", icd10: "J02.9", type: "provisional" },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "AMOXICILLIN SUSPENSION (250 mg / 5 ml)",
+            row2_en: "7 ml orally three times a day for 7 days.",
+            row3_hi: "7 ml दिन में 3 बार 7 दिन तक खाने के बाद दें।",
+            calc: "50 mg/kg/day × 18 kg = 900 mg/day ÷ 3 = 300 mg/dose → 6 ml → 7 ml",
+            formulation: "syrup",
+            dose_mg_per_kg: 50,
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "7 ml",
+              times: ["morning", "afternoon", "evening"],
+              prn: false,
+              duration_days: 7,
+              with_food: true,
+            },
+          },
+          {
+            number: 2,
+            row1_en: "IBUPROFEN SUSPENSION (100 mg / 5 ml)",
+            row2_en:
+              "4.5 ml orally every 8 hours as needed for fever/pain. Max 3 doses/day.",
+            row3_hi:
+              "4.5 ml बुखार/दर्द पर हर 8 घंटे दें। दिन में 3 बार से ज़्यादा न दें।",
+            calc: "5 mg/kg × 18 kg = 90 mg → 4.5 ml",
+            formulation: "syrup",
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "4.5 ml",
+              times: [],
+              prn: true,
+              max_per_day: 3,
+              special: "fever_only",
+            },
+          },
+        ],
+        investigations: [
+          {
+            name: "Rapid Strep Test",
+            indication: "Rule out GAS pharyngitis",
+            urgency: "same-day",
+          },
+        ],
+        vitals: { temp_f: "100.8" },
+        chief_complaints: "Fever, sore throat, body aches 2 days",
+        examination:
+          "Pharynx erythematous with tonsillar exudate. Bilateral tender anterior cervical lymphadenopathy.",
+        safety: {
+          allergy_note: "NKDA",
+          interactions: "None",
+          overall_status: "SAFE",
+          max_dose_check: [],
+          flags: [],
+        },
+        counselling: [
+          "Complete full antibiotic course",
+          "Gargle with warm salt water",
+          "Soft diet",
+        ],
+        followup_days: 3,
+        nabh_compliant: true,
+      },
+    },
+    // #17 Simran — Previous migraine episode 2 weeks ago
+    {
+      patient_id: "RKH-25260300017",
+      daysAgo: 14,
+      visit: {
+        weight_kg: 41.5,
+        temp_f: 98.4,
+        hr_per_min: 78,
+        rr_per_min: 16,
+        spo2_pct: 99,
+        chief_complaints:
+          "Severe left-sided headache, throbbing, nausea, light sensitivity. 2nd episode this month.",
+      },
+      rx: {
+        patient: {
+          name: "Simran Kaur",
+          age: "12 yr 11 mo",
+          sex: "Female",
+          weight_kg: 41.5,
+        },
+        diagnosis: [
+          {
+            name: "Migraine without aura",
+            icd10: "G43.009",
+            type: "provisional",
+          },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "IBUPROFEN TABLET (400 mg)",
+            row2_en:
+              "1 tablet orally at onset of headache. May repeat once after 6 hours. Max 2 tablets/day.",
+            row3_hi:
+              "सिरदर्द शुरू होते ही 1 गोली मुँह से लें। 6 घंटे बाद दोबारा ले सकते हैं। दिन में 2 से ज़्यादा न लें।",
+            calc: "10 mg/kg × 41.5 kg = 415 mg → 400 mg (1 tablet)",
+            formulation: "tablet",
+            dose_mg_per_kg: 10,
+            flag: "",
+            pictogram: {
+              form: "tablet",
+              dose_display: "1 tab",
+              dose_qty: 1,
+              times: [],
+              prn: true,
+              max_per_day: 2,
+              special: null,
+            },
+          },
+          {
+            number: 2,
+            row1_en: "DOMPERIDONE TABLET (10 mg)",
+            row2_en: "Half tablet orally at onset with ibuprofen. For nausea.",
+            row3_hi: "आधी गोली सिरदर्द की दवा के साथ उल्टी आने पर लें।",
+            calc: "0.25 mg/kg × 41.5 = 10.4 mg → 10 mg (½ tab of 10 mg insufficient, use 1 tab). Adjusted to ½ tab.",
+            formulation: "tablet",
+            flag: "",
+            pictogram: {
+              form: "tablet",
+              dose_display: "½ tab",
+              dose_qty: 0,
+              dose_fraction: "half",
+              times: [],
+              prn: true,
+              max_per_day: 2,
+            },
+          },
+        ],
+        investigations: [],
+        vitals: { temp_f: "98.4" },
+        chief_complaints:
+          "Severe left-sided headache, throbbing, nausea, light sensitivity. 2nd episode this month.",
+        examination:
+          "Alert, oriented. No focal neurological deficit. No papilloedema. BP 110/70.",
+        safety: {
+          allergy_note: "NKDA",
+          interactions: "None",
+          overall_status: "SAFE",
+          max_dose_check: [
+            {
+              drug: "IBUPROFEN",
+              calculated_dose_mg: 400,
+              max_allowed_mg: 600,
+              status: "PASS",
+            },
+          ],
+          flags: [],
+        },
+        counselling: [
+          "Maintain headache diary",
+          "Identify triggers (stress, screen time, sleep)",
+          "Adequate hydration",
+          "Return if frequency increases",
+        ],
+        followup_days: 14,
+        doctor_notes: "If >4 episodes/month, start prophylaxis (Flunarizine).",
+        nabh_compliant: true,
+      },
+    },
+    // #19 Mohammed (Ibuprofen allergy) — Viral fever 3 weeks ago
+    {
+      patient_id: "RKH-25260300019",
+      daysAgo: 21,
+      visit: {
+        weight_kg: 10.0,
+        temp_f: 102.0,
+        hr_per_min: 120,
+        rr_per_min: 30,
+        spo2_pct: 98,
+        chief_complaints: "High fever 2 days, runny nose, irritable",
+      },
+      rx: {
+        patient: {
+          name: "Mohammed Akhtar",
+          age: "20 months",
+          sex: "Male",
+          weight_kg: 10.0,
+        },
+        diagnosis: [
+          {
+            name: "Acute Febrile Illness",
+            icd10: "R50.9",
+            type: "provisional",
+          },
+        ],
+        medicines: [
+          {
+            number: 1,
+            row1_en: "PARACETAMOL SUSPENSION (120 mg / 5 ml)",
+            row2_en:
+              "6 ml orally every 6 hours as needed for fever. Max 4 doses/day.",
+            row3_hi:
+              "6 ml बुखार होने पर हर 6 घंटे दें। दिन में 4 बार से ज़्यादा न दें।",
+            calc: "15 mg/kg × 10 kg = 150 mg → 6 ml (rounded)",
+            formulation: "syrup",
+            dose_mg_per_kg: 15,
+            flag: "",
+            pictogram: {
+              form: "syrup",
+              dose_display: "6 ml",
+              times: [],
+              prn: true,
+              max_per_day: 4,
+              special: "fever_only",
+            },
+          },
+        ],
+        investigations: [
+          {
+            name: "CBC",
+            indication: "Fever >2 days, rule out bacterial",
+            urgency: "same-day",
+          },
+        ],
+        vitals: { temp_f: "102.0" },
+        chief_complaints: "High fever 2 days, runny nose, irritable",
+        examination:
+          "Febrile. Nasal discharge. Throat mildly congested. Chest clear. No rash.",
+        safety: {
+          allergy_note: "ALLERGY: Ibuprofen — avoid all NSAIDs",
+          interactions: "None",
+          overall_status: "SAFE",
+          max_dose_check: [
+            {
+              drug: "PARACETAMOL",
+              calculated_dose_mg: 150,
+              max_allowed_mg: 1000,
+              status: "PASS",
+            },
+          ],
+          flags: ["Ibuprofen allergy — Paracetamol only for antipyretic"],
+        },
+        counselling: [
+          "Tepid sponging for fever",
+          "Increase fluid intake",
+          "Return if fever >3 days or rash appears",
+        ],
+        followup_days: 3,
+        nabh_compliant: true,
+      },
+    },
+  ];
+
+  for (const prx of pastRx) {
+    const pastDate = new Date(Date.now() - prx.daysAgo * 86400000)
+      .toISOString()
+      .split("T")[0];
+    // Create past visit
+    const pv = await post("visits", {
+      ...prx.visit,
+      patient_id: prx.patient_id,
+      visit_date: pastDate,
+      doctor_id: "DR-LOKENDER",
+    });
+    // Create past prescription
+    const rxId = "RX-" + pastDate.replace(/-/g, "") + prx.patient_id.slice(-3);
+    await post("prescriptions", {
+      id: rxId,
+      visit_id: pv.id,
+      patient_id: prx.patient_id,
+      generated_json: prx.rx,
+      medicines: prx.rx.medicines,
+      investigations: prx.rx.investigations || [],
+      is_approved: true,
+      approved_by: "DR-LOKENDER",
+      approved_at: new Date(Date.now() - prx.daysAgo * 86400000).toISOString(),
+      version: 1,
+    });
+    console.log(
+      `  ${prx.patient_id} — ${pastDate} — ${prx.rx.diagnosis[0].name} (${rxId})`,
+    );
+  }
+
   // Summary
   console.log(`\n=== COMPLETE ===`);
   console.log(`${patients.length} patients created`);
@@ -645,6 +1422,21 @@ async function run() {
     `\nAllergies: #7 Cephalosporins, #9 Penicillin, #10 Sulfa+Eggs, #13 Aspirin, #19 Ibuprofen`,
   );
   console.log(`Preterms:  #4 (34wk/1.8kg), #5 (32wk/1.5kg)`);
+  console.log(`\nPast prescriptions (${pastRx.length} returning patients):`);
+  console.log(`  #1 Arjun — URTI 2 weeks ago`);
+  console.log(`  #6 Priya — URTI 3 weeks ago`);
+  console.log(`  #9 Rohan — Dermatitis 1 month ago (Penicillin allergy)`);
+  console.log(
+    `  #10 Vihaan — Asthma exacerbation 6 weeks ago (Sulfa+Eggs allergy)`,
+  );
+  console.log(
+    `  #11 Saanvi — Iron deficiency anaemia 1 month ago (Iron+VitC+Albendazole)`,
+  );
+  console.log(`  #12 Karan — Pharyngitis 2 months ago (Amoxicillin+Ibuprofen)`);
+  console.log(`  #17 Simran — Migraine 2 weeks ago (Ibuprofen+Domperidone)`);
+  console.log(
+    `  #19 Mohammed — Viral fever 3 weeks ago (Ibuprofen allergy, Paracetamol only)`,
+  );
 }
 
 run().catch((e) => console.error("\nError:", e.message));
