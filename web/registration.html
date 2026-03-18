@@ -2472,55 +2472,102 @@
   function printToken() {
     if (!lastToken) return;
     const t = lastToken;
+    const payLabel = { cash: "Cash", upi: "UPI", waived: "Waived" };
+    const statusLabel = { paid: "PAID", pending: "PENDING" };
+    const visitLabel = {
+      new: "New Consultation",
+      followup: "Follow-up",
+      vaccination: "Vaccination",
+      emergency: "Emergency",
+    };
     const w = window.open("", "_blank");
     w.document
       .write(`<!DOCTYPE html><html><head><title>Receipt ${t.receiptNo || t.patientId}</title>
     <style>
-      @page { size: A4; margin: 10mm; }
+      @page { size: A4; margin: 12mm 15mm; }
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { font-family: system-ui, Arial, sans-serif; font-size: 12px; color: #1a1a14; max-width: 50%; }
-      .receipt { border: 1.5px solid #1e3a6b; border-radius: 8px; padding: 14px 16px; }
-      .hospital { font-size: 15px; font-weight: 700; color: #1e3a6b; }
-      .hospital-hi { font-size: 10px; color: #888; margin-bottom: 6px; }
-      .receipt-no { font-size: 10px; color: #777; margin-bottom: 8px; }
-      .receipt-no strong { color: #1a1a14; }
-      .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-      .left { flex: 1; }
-      .right { flex-shrink: 0; text-align: center; }
-      .uhid { font-size: 16px; font-weight: 800; color: #1e3a6b; letter-spacing: 0.05em; margin-bottom: 2px; }
-      .name { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
-      .meta { font-size: 11px; color: #555; margin-bottom: 2px; }
-      .visit { font-size: 10px; color: #777; margin-bottom: 4px; }
-      .allergy { font-size: 11px; font-weight: 700; margin: 4px 0; }
+      body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; color: #1a1a14; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .receipt { width: 100%; max-width: 48%; border: 1.5px solid #1e3a6b; border-radius: 6px; overflow: hidden; }
+      .header { background: #1e3a6b; color: #fff; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+      .header-left h1 { font-size: 14px; font-weight: 700; letter-spacing: 0.02em; }
+      .header-left .hi { font-size: 9px; opacity: 0.8; font-family: 'Noto Sans Devanagari', system-ui; }
+      .header-left .addr { font-size: 8px; opacity: 0.7; margin-top: 1px; }
+      .header-right { text-align: right; font-size: 8px; opacity: 0.8; line-height: 1.5; }
+      .body { padding: 10px 14px; }
+      .rcpt-row { display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: #777; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+      .rcpt-row strong { color: #1a1a14; font-size: 10px; }
+      .patient { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+      .patient-info { flex: 1; }
+      .patient-qr { flex-shrink: 0; text-align: center; }
+      .patient-qr img { border: 1px solid #eee; border-radius: 4px; }
+      .patient-qr .qr-label { font-size: 6px; color: #aaa; margin-top: 2px; }
+      .uhid { font-size: 15px; font-weight: 800; color: #1e3a6b; letter-spacing: 0.04em; }
+      .pname { font-size: 14px; font-weight: 600; margin: 2px 0; }
+      .pmeta { font-size: 10px; color: #555; line-height: 1.6; }
+      .allergy { font-size: 10px; font-weight: 700; margin-top: 3px; }
       .allergy.red { color: #8b1a1a; }
       .allergy.green { color: #1a6b3a; }
-      .fee-line { margin-top: 6px; padding-top: 6px; border-top: 1px dashed #ccc; font-size: 13px; }
-      .fee-line strong { color: #1e3a6b; }
-      .qr-label { font-size: 7px; color: #999; margin-top: 2px; }
-      .cut { border-top: 1px dashed #ccc; margin: 8px 0 0; padding-top: 4px; font-size: 8px; color: #ccc; text-align: center; }
-      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      .divider { border-top: 1px dashed #ccc; margin: 8px 0; }
+      .pay-section { display: flex; justify-content: space-between; align-items: center; }
+      .pay-left { font-size: 10px; color: #555; }
+      .pay-left .visit-type { font-weight: 600; color: #1a1a14; }
+      .pay-right { text-align: right; }
+      .pay-amt { font-size: 18px; font-weight: 800; color: #1e3a6b; }
+      .pay-mode { font-size: 9px; color: #555; margin-top: 1px; }
+      .pay-status { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 8px; font-weight: 700; letter-spacing: 0.05em; }
+      .pay-status.paid { background: #e8f4ed; color: #1a6b3a; }
+      .pay-status.pending { background: #fdf0f0; color: #8b1a1a; }
+      .footer { padding: 6px 14px; background: #f8f8f4; border-top: 1px solid #eee; font-size: 7px; color: #999; display: flex; justify-content: space-between; }
+      .cut { margin-top: 6px; border-top: 1px dashed #ccc; padding-top: 3px; font-size: 7px; color: #ccc; text-align: center; width: 48%; }
     </style></head><body>
     <div class="receipt">
-      <div class="hospital">Radhakishan Hospital</div>
-      <div class="hospital-hi">\u0930\u093E\u0927\u093E\u0915\u093F\u0936\u0928 \u0939\u0938\u094D\u092A\u0924\u093E\u0932 \u00B7 Jyoti Nagar, Kurukshetra</div>
-      <div class="receipt-no">Receipt: <strong>${esc(t.receiptNo || "")}</strong> \u00B7 ${esc(t.visitDate)}</div>
-      <div class="row">
-        <div class="left">
-          <div class="uhid">${esc(t.patientId)}</div>
-          <div class="name">${esc(t.name)}</div>
-          <div class="meta">${t.age ? esc(t.age) + " \u00B7 " : ""}${esc(t.sex)}${t.wt ? " \u00B7 " + esc(t.wt) + " kg" : ""}</div>
-          <div class="meta">${t.phone ? "Phone: " + esc(t.phone) : ""}</div>
-          <div class="visit">${esc(t.doctor)} \u00B7 ${esc(t.visitType)}</div>
-          <div class="allergy ${t.allergyText ? "red" : "green"}">${t.allergyText ? "\u26A0 ALLERGY: " + esc(t.allergyText) : "NKDA"}</div>
-          <div class="fee-line"><strong>Fee: \u20B9${esc(t.feeAmt || "0")}</strong> \u00B7 ${esc((t.payMode || "cash").toUpperCase())} \u00B7 ${esc((t.payStatus || "pending").toUpperCase())}</div>
+      <div class="header">
+        <div class="header-left">
+          <h1>Radhakishan Hospital</h1>
+          <div class="hi">\u0930\u093E\u0927\u093E\u0915\u093F\u0936\u0928 \u0939\u0938\u094D\u092A\u0924\u093E\u0932</div>
+          <div class="addr">Jyoti Nagar, Kurukshetra, Haryana</div>
         </div>
-        <div class="right">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${t.qrPayload}" width="100" height="100" alt="QR">
-          <div class="qr-label">Scan for next visit</div>
+        <div class="header-right">01744-251441<br>7206029516<br>NABH Accredited</div>
+      </div>
+      <div class="body">
+        <div class="rcpt-row">
+          <span>Receipt: <strong>${esc(t.receiptNo || "")}</strong></span>
+          <span>Date: <strong>${esc(t.visitDate)}</strong></span>
+          <span>Doctor: <strong>${esc(t.doctor)}</strong></span>
+        </div>
+        <div class="patient">
+          <div class="patient-info">
+            <div class="uhid">${esc(t.patientId)}</div>
+            <div class="pname">${esc(t.name)}</div>
+            <div class="pmeta">
+              ${t.age ? esc(t.age) : ""}${t.age && t.sex ? " \u00B7 " : ""}${esc(t.sex || "")}${t.wt ? " \u00B7 " + esc(t.wt) + " kg" : ""}
+            </div>
+            ${t.phone ? '<div class="pmeta">Phone: ' + esc(t.phone) + "</div>" : ""}
+            <div class="allergy ${t.allergyText ? "red" : "green"}">${t.allergyText ? "\u26A0 ALLERGY: " + esc(t.allergyText) : "No Known Drug Allergy"}</div>
+          </div>
+          <div class="patient-qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=${t.qrPayload}" width="70" height="70" alt="QR">
+            <div class="qr-label">Scan for next visit</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="pay-section">
+          <div class="pay-left">
+            <div class="visit-type">${esc(visitLabel[t.visitType] || t.visitType)}</div>
+            <div>Payment: ${esc(payLabel[t.payMode] || t.payMode)}</div>
+          </div>
+          <div class="pay-right">
+            <div class="pay-amt">\u20B9${esc(t.feeAmt || "0")}</div>
+            <div class="pay-mode"><span class="pay-status ${(t.payStatus || "pending") === "paid" ? "paid" : "pending"}">${esc(statusLabel[t.payStatus] || "PENDING")}</span></div>
+          </div>
         </div>
       </div>
+      <div class="footer">
+        <span>OPD Token + Payment Receipt</span>
+        <span>${esc(t.receiptNo || "")}</span>
+      </div>
     </div>
-    <div class="cut">\u2702 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500</div>
+    <div class="cut">\u2702 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500</div>
     </body></html>`);
     w.document.close();
     setTimeout(() => w.print(), 500);
