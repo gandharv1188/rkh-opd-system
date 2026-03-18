@@ -276,8 +276,9 @@
   }
   .rx-area .med {
     margin-bottom: 10px;
-    padding-left: 10px;
+    padding: 6px 8px 6px 10px;
     border-left: 3px solid #1e3a6b;
+    background: rgba(30, 58, 107, 0.03);
     break-inside: avoid;
     display: flex;
     align-items: flex-start;
@@ -378,6 +379,9 @@
   .rx-area .inv {
     color: #8b1a1a;
     margin-bottom: 3px;
+    padding: 3px 6px;
+    background: rgba(139, 26, 26, 0.03);
+    border-radius: 3px;
   }
   .rx-area .urg {
     font-size: 9px;
@@ -558,17 +562,56 @@
     return d.innerHTML;
   }
 
-  /* ===== EMERGENCY WARNING SIGNS ===== */
-  const EMERGENCY = [
+  /* ===== EMERGENCY WARNING SIGNS (age-appropriate) ===== */
+  const EMERGENCY_BASE = [
     { hi: "तेज सांस / सीने में धंसाव", en: "Fast breathing / chest indrawing" },
     { hi: "होंठ या जीभ का नीला पड़ना", en: "Bluish lips or tongue" },
-    { hi: "दूध / खाना न पीना", en: "Refusal to feed" },
     { hi: "बार-बार उल्टी आना", en: "Repeated vomiting" },
     { hi: "दौरा पड़ना / अकड़न", en: "Convulsions / fits" },
     { hi: "दवा से भी बुखार न उतरना", en: "Fever not responding to medicine" },
-    { hi: "6 घंटे से पेशाब न आना", en: "No urine for 6+ hours" },
-    { hi: "अत्यधिक नींद / प्रतिक्रिया न करना", en: "Excessive sleepiness" },
+    {
+      hi: "अत्यधिक नींद / प्रतिक्रिया न करना",
+      en: "Excessive sleepiness / unresponsive",
+    },
   ];
+  const EMERGENCY_INFANT = [
+    {
+      hi: "दूध न पीना / स्तनपान से इनकार",
+      en: "Refusal to breastfeed / poor feeding",
+    },
+    {
+      hi: "6 घंटे से पेशाब न आना / गीला न होना",
+      en: "No wet diaper for 6+ hours",
+    },
+    { hi: "पेट फूलना / सख्त पेट", en: "Abdominal distension" },
+    { hi: "शरीर का ठंडा / पीला पड़ना", en: "Cold / pale / mottled skin" },
+  ];
+  const EMERGENCY_CHILD = [
+    { hi: "खाना-पीना बंद करना", en: "Refusal to eat or drink" },
+    { hi: "6 घंटे से पेशाब न आना", en: "No urine for 6+ hours" },
+    { hi: "तेज पेट दर्द", en: "Severe abdominal pain" },
+    {
+      hi: "चकत्ते / दाने जो दबाने पर न मिटें",
+      en: "Rash that doesn't blanch on pressure",
+    },
+  ];
+  function parseAgeMonths(ageStr) {
+    if (!ageStr) return null;
+    const s = ageStr.toLowerCase();
+    const yrMatch = s.match(/(\d+)\s*(?:yr|year)/);
+    const moMatch = s.match(/(\d+)\s*(?:mo|month)/);
+    const dayMatch = s.match(/(\d+)\s*(?:d|day)/);
+    let months = 0;
+    if (yrMatch) months += parseInt(yrMatch[1]) * 12;
+    if (moMatch) months += parseInt(moMatch[1]);
+    if (dayMatch && !yrMatch && !moMatch) months = 0;
+    return months || (dayMatch ? 0 : null);
+  }
+  function getEmergencySigns(ageMonths) {
+    if (ageMonths != null && ageMonths < 12)
+      return [...EMERGENCY_BASE, ...EMERGENCY_INFANT];
+    return [...EMERGENCY_BASE, ...EMERGENCY_CHILD];
+  }
 
   /* ===== DOSING PICTOGRAM ICONS (inline SVG) ===== */
   const DOSE_SVG = {
@@ -773,8 +816,10 @@
     if (r.counselling?.length) {
       h += `<div class="sec"><div class="sec-title">Counselling</div><div>${r.counselling.map((c) => `\u2713 ${esc(c)}`).join(" &nbsp; ")}</div></div>`;
     }
-    // Emergency signs
-    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs \u2014 \u0924\u0941\u0930\u0902\u0924 \u0935\u093e\u092a\u0938 \u0906\u090f\u0902</div><div class="emerg-grid">${EMERGENCY.map((s) => `<div><strong>${esc(s.hi)}</strong><br><span>${esc(s.en)}</span></div>`).join("")}</div></div>`;
+    // Emergency signs (age-appropriate)
+    const ageMonths = r.patient?.age ? parseAgeMonths(r.patient.age) : null;
+    const emergSigns = getEmergencySigns(ageMonths);
+    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs \u2014 \u0924\u0941\u0930\u0902\u0924 \u0935\u093e\u092a\u0938 \u0906\u090f\u0902</div><div class="emerg-grid">${emergSigns.map((s) => `<div><strong>${esc(s.hi)}</strong><br><span>${esc(s.en)}</span></div>`).join("")}</div></div>`;
     // Follow-up
     h += `<div class="sec"><div class="sec-title">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " \u2014 " + esc(r.doctor_notes) : ""}</div></div>`;
     // Footer with QR
