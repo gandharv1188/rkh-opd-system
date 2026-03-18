@@ -2123,29 +2123,35 @@
     currentPatient = null;
   }
 
-  // ===== EXTERNAL RECORDS: Dictation (AI primary, Web Speech fallback) =====
-  let extRecog = null;
-  let extIsRec = false;
-  let extMediaRecorder = null;
-  let extAudioChunks = [];
-  let extAiFailed = false;
+  // ===== EXTERNAL RECORDS: Dictation (AI primary with VAD, Web Speech fallback) =====
+  let extRecog = null,
+    extIsRec = false,
+    extMediaRecorder = null,
+    extAudioChunks = [];
+  let extAiFailed = false,
+    extMicStream = null,
+    extAudioCtx = null,
+    extVadAnalyser = null;
+  let extIsSpeaking = false,
+    extSilenceStart = 0,
+    extChunkStartTime = 0,
+    extChunkHadSpeech = false;
+  let extChunkTimer = null;
+  const EXT_VAD_THRESHOLD = 25,
+    EXT_SILENCE_SEND_MS = 1500,
+    EXT_MAX_CHUNK_MS = 15000,
+    EXT_MIN_BLOB = 4000;
 
   function toggleExtDictation() {
-    if (extIsRec) {
-      stopExtDictation();
-      return;
-    }
-    startExtDictation();
+    extIsRec ? stopExtDictation() : startExtDictation();
   }
 
   async function startExtDictation() {
     const btn = document.getElementById("ext-mic-btn");
     const st = document.getElementById("ext-mic-status");
-
-    // Try AI transcription first
     if (!extAiFailed) {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        extMicStream = await navigator.mediaDevices.getUserMedia({
           audio: {
             echoCancellation: true,
             noiseSuppression: true,
@@ -2154,61 +2160,56 @@
           },
         });
         extIsRec = true;
-        extAudioChunks = [];
         btn.textContent = "⏹ Stop";
         btn.style.background = "#fde8e8";
         st.textContent = "Listening...";
-
-        const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-          ? "audio/webm;codecs=opus"
-          : "audio/webm";
-        extMediaRecorder = new MediaRecorder(stream, { mimeType });
-        extMediaRecorder.ondataavailable = (e) => {
-          if (e.data.size > 0) extAudioChunks.push(e.data);
-        };
-        extMediaRecorder.onstop = async () => {
-          stream.getTracks().forEach((t) => t.stop());
-          if (extAudioChunks.length === 0) return;
-          const blob = new Blob(extAudioChunks, { type: mimeType });
-          extAudioChunks = [];
-          st.textContent = "Transcribing...";
-          try {
-            const fd = new FormData();
-            fd.append("audio", blob, "dictation.webm");
-            const res = await fetch(SB + "/functions/v1/transcribe-audio", {
-              method: "POST",
-              headers: { Authorization: "Bearer " + KEY },
-              body: fd,
-            });
-            if (res.ok) {
-              const data = await res.json();
-              if (data.text) {
-                const ta = document.getElementById("f-ext-notes");
-                ta.value = (ta.value + " " + data.text).trim();
-              }
-            } else {
-              const err = await res.json().catch(() => ({}));
-              if (err.fallback) extAiFailed = true;
-            }
-          } catch (e) {
-            console.warn("AI transcribe failed:", e.message);
-            extAiFailed = true;
+        // VAD setup
+        extAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const src = extAudioCtx.createMediaStreamSource(extMicStream);
+        extVadAnalyser = extAudioCtx.createAnalyser();
+        extVadAnalyser.fftSize = 512;
+        extVadAnalyser.smoothingTimeConstant = 0.3;
+        src.connect(extVadAnalyser);
+        startExtChunk();
+        extChunkStartTime = Date.now();
+        extSilenceStart = 0;
+        extIsSpeaking = false;
+        extChunkTimer = setInterval(() => {
+          if (!extIsRec || !extVadAnalyser) return;
+          const buf = new Uint8Array(extVadAnalyser.frequencyBinCount);
+          extVadAnalyser.getByteFrequencyData(buf);
+          const energy = buf.reduce((a, b) => a + b, 0) / buf.length;
+          const now = Date.now(),
+            chunkAge = now - extChunkStartTime;
+          if (energy > EXT_VAD_THRESHOLD) {
+            extIsSpeaking = true;
+            extChunkHadSpeech = true;
+            extSilenceStart = 0;
+            st.textContent = "Listening...";
+          } else {
+            if (extIsSpeaking && extSilenceStart === 0) extSilenceStart = now;
+            if (!extIsSpeaking && extSilenceStart === 0) extSilenceStart = now;
           }
-          st.textContent = "Dictation stopped";
-          btn.textContent = "🎤 Dictate";
-          btn.style.background = "";
-        };
-        extMediaRecorder.start(1000);
+          const silDur = extSilenceStart > 0 ? now - extSilenceStart : 0;
+          if (
+            ((extIsSpeaking && silDur >= EXT_SILENCE_SEND_MS) ||
+              chunkAge >= EXT_MAX_CHUNK_MS) &&
+            extMediaRecorder?.state === "recording"
+          ) {
+            extMediaRecorder.stop();
+            extIsSpeaking = false;
+            extSilenceStart = 0;
+            setTimeout(() => {
+              if (extIsRec && extMicStream) startExtChunk();
+            }, 50);
+          }
+        }, 150);
         return;
       } catch (err) {
-        console.warn(
-          "AI dictation unavailable, using Web Speech:",
-          err.message,
-        );
+        console.warn("AI dictation unavailable:", err.message);
         extAiFailed = true;
       }
     }
-
     // Fallback: Web Speech API
     if (
       !("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
@@ -2238,24 +2239,95 @@
       ta.value = finalText + interim;
     };
     extRecog.onend = () => {
-      extIsRec = false;
-      btn.textContent = "🎤 Dictate";
-      btn.style.background = "";
-      st.textContent = "Dictation stopped";
+      if (!extIsRec) return;
+      try {
+        extRecog.start();
+      } catch (_) {
+        stopExtDictation();
+      }
     };
     extRecog.onerror = () => {
-      extIsRec = false;
-      btn.textContent = "🎤 Dictate";
-      btn.style.background = "";
+      stopExtDictation();
       st.textContent = "Mic error — try again";
     };
     extRecog.start();
   }
 
+  function startExtChunk() {
+    if (!extMicStream) return;
+    extAudioChunks = [];
+    extChunkStartTime = Date.now();
+    extChunkHadSpeech = false;
+    const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+      ? "audio/webm;codecs=opus"
+      : "audio/webm";
+    extMediaRecorder = new MediaRecorder(extMicStream, { mimeType });
+    extMediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) extAudioChunks.push(e.data);
+    };
+    extMediaRecorder.onstop = async () => {
+      if (extAudioChunks.length === 0) return;
+      const blob = new Blob(extAudioChunks, { type: mimeType });
+      extAudioChunks = [];
+      if (!extChunkHadSpeech || blob.size < EXT_MIN_BLOB) return;
+      const st = document.getElementById("ext-mic-status");
+      st.textContent = "Transcribing...";
+      try {
+        let ctx = "";
+        if (currentPatient) {
+          ctx = `${currentPatient.name || ""}, ${currentPatient.sex || ""}${currentPatient.dob ? ", " + calcAge(currentPatient.dob) : ""}`;
+        }
+        const fd = new FormData();
+        fd.append("audio", blob, "dictation.webm");
+        if (ctx) fd.append("patient_context", ctx);
+        const res = await fetch(SB + "/functions/v1/transcribe-audio", {
+          method: "POST",
+          headers: { Authorization: "Bearer " + KEY },
+          body: fd,
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.text) {
+            const ta = document.getElementById("f-ext-notes");
+            ta.value = (ta.value + " " + data.text).trim();
+          }
+        } else {
+          const err = await res.json().catch(() => ({}));
+          if (err.fallback) {
+            extAiFailed = true;
+            if (extIsRec) {
+              stopExtDictation();
+              setTimeout(startExtDictation, 300);
+            }
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("AI transcribe error:", e.message);
+      }
+      if (document.getElementById("ext-mic-status"))
+        document.getElementById("ext-mic-status").textContent = extIsRec
+          ? "Listening..."
+          : "Dictation stopped";
+    };
+    extMediaRecorder.start(500);
+  }
+
   function stopExtDictation() {
     extIsRec = false;
-    if (extMediaRecorder && extMediaRecorder.state === "recording") {
-      extMediaRecorder.stop();
+    if (extChunkTimer) {
+      clearInterval(extChunkTimer);
+      extChunkTimer = null;
+    }
+    if (extMediaRecorder?.state === "recording") extMediaRecorder.stop();
+    if (extMicStream) {
+      extMicStream.getTracks().forEach((t) => t.stop());
+      extMicStream = null;
+    }
+    if (extAudioCtx) {
+      extAudioCtx.close().catch(() => {});
+      extAudioCtx = null;
+      extVadAnalyser = null;
     }
     if (extRecog) {
       try {
@@ -2264,9 +2336,11 @@
     }
     const btn = document.getElementById("ext-mic-btn");
     const st = document.getElementById("ext-mic-status");
-    btn.textContent = "🎤 Dictate";
-    btn.style.background = "";
-    st.textContent = "Dictation stopped";
+    if (btn) {
+      btn.textContent = "🎤 Dictate";
+      btn.style.background = "";
+    }
+    if (st) st.textContent = "Dictation stopped";
   }
 
   // ===== DOCUMENT UPLOAD =====
