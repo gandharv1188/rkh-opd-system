@@ -816,6 +816,15 @@
               } else {
                 updateFee(); // Recalculate for legacy visits with default 0/pending
               }
+              // Pre-fill procedures if any
+              if (visit.procedures && Array.isArray(visit.procedures)) {
+                proceduresList = visit.procedures;
+                renderProcedures();
+                // Expand the procedures section
+                const procBody = document.getElementById("proc-body");
+                if (procBody && proceduresList.length)
+                  procBody.style.display = "block";
+              }
               // Update save button to indicate edit mode
               const saveBtn = document.getElementById("save-btn");
               if (saveBtn) {
@@ -995,6 +1004,20 @@
               <option value="paid">Paid</option>
               <option value="pending">Pending</option>
             </select>
+          </div>
+        </div>
+        <div style="margin-top:10px;border-top:1px solid var(--brd);padding-top:8px">
+          <div onclick="document.getElementById('proc-body').style.display=document.getElementById('proc-body').style.display==='none'?'block':'none';this.querySelector('span').textContent=document.getElementById('proc-body').style.display==='none'?'▸':'▾'" style="cursor:pointer;font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:0.04em;display:flex;align-items:center;gap:4px"><span>▸</span> OPD Procedures (if any)</div>
+          <div id="proc-body" style="display:none;margin-top:8px">
+            <div id="proc-list"></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:end;margin-top:6px">
+              <div class="ff" style="flex:2;min-width:120px"><label>Procedure Name</label><input id="f-proc-name" placeholder="e.g. Nebulisation, Dressing, Injection" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" /></div>
+              <div class="ff" style="flex:0.7;min-width:70px"><label>Charge (₹)</label><input type="number" id="f-proc-charge" placeholder="e.g. 200" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" /></div>
+              <div class="ff" style="flex:0.7;min-width:80px"><label>Payment</label>
+                <select id="f-proc-pay" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px"><option value="cash">Cash</option><option value="upi">UPI</option><option value="waived">Waived</option></select>
+              </div>
+              <button type="button" onclick="addProcedure()" style="padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--blue);color:#fff;cursor:pointer;font-size:11px;height:28px">+ Add</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1402,6 +1425,112 @@
     centileEl.innerHTML = `<span style="color:${color};font-weight:600">${label}</span>`;
   }
 
+  // ===== OPD Procedures =====
+  let proceduresList = [];
+  function addProcedure() {
+    const name = (document.getElementById("f-proc-name")?.value || "").trim();
+    const charge =
+      parseFloat(document.getElementById("f-proc-charge")?.value) || 0;
+    const payMode = document.getElementById("f-proc-pay")?.value || "cash";
+    if (!name) {
+      alert("Enter procedure name");
+      return;
+    }
+    const rcptDate =
+      String(new Date().getFullYear() % 100).padStart(2, "0") +
+      String(new Date().getMonth() + 1).padStart(2, "0") +
+      String(new Date().getDate()).padStart(2, "0");
+    const proc = {
+      name,
+      charge,
+      payMode,
+      status: "paid",
+      receiptNo:
+        "RKH-PRC-" +
+        rcptDate +
+        "-" +
+        String(Math.floor(Math.random() * 99999) + 1).padStart(5, "0"),
+    };
+    proceduresList.push(proc);
+    document.getElementById("f-proc-name").value = "";
+    document.getElementById("f-proc-charge").value = "";
+    renderProcedures();
+  }
+  function removeProcedure(idx) {
+    proceduresList.splice(idx, 1);
+    renderProcedures();
+  }
+  function renderProcedures() {
+    const el = document.getElementById("proc-list");
+    if (!el) return;
+    if (!proceduresList.length) {
+      el.innerHTML = "";
+      return;
+    }
+    let total = 0;
+    el.innerHTML =
+      proceduresList
+        .map((p, i) => {
+          total += p.charge;
+          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--bg);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:4px;font-size:12px">
+        <span><strong>${esc(p.name)}</strong> — ₹${esc(p.charge)} · ${esc(p.payMode.toUpperCase())}</span>
+        <span style="display:flex;gap:6px;align-items:center">
+          <span style="font-size:9px;color:var(--ink3)">${esc(p.receiptNo)}</span>
+          <button onclick="printProcReceipt(${i})" style="padding:2px 6px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:9px">Print</button>
+          <button onclick="removeProcedure(${i})" style="padding:2px 6px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:9px;color:var(--red)">×</button>
+        </span>
+      </div>`;
+        })
+        .join("") +
+      `<div style="text-align:right;font-size:12px;font-weight:600;padding:4px 8px;color:var(--blue)">Procedures Total: ₹${total}</div>`;
+  }
+  function printProcReceipt(idx) {
+    const p = proceduresList[idx];
+    if (!p) return;
+    const pt = currentPatient || {};
+    const w = window.open("", "_blank");
+    w.document
+      .write(`<!DOCTYPE html><html><head><title>Procedure Receipt ${p.receiptNo}</title>
+    <style>
+      @page { size: A4; margin: 12mm 15mm; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: system-ui, Arial, sans-serif; color: #1a1a14; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .rct { width: 48%; border: 1.5px solid #1e3a6b; border-radius: 6px; overflow: hidden; }
+      .hdr { background: #1e3a6b; color: #fff; padding: 8px 12px; }
+      .hdr h1 { font-size: 13px; } .hdr .sub { font-size: 8px; opacity: 0.8; }
+      .bd { padding: 10px 12px; }
+      .row { display: flex; justify-content: space-between; font-size: 10px; color: #777; margin-bottom: 6px; padding-bottom: 5px; border-bottom: 1px solid #eee; }
+      .row strong { color: #1a1a14; }
+      .pt { font-size: 12px; margin-bottom: 8px; }
+      .pt .name { font-weight: 700; font-size: 14px; }
+      .pt .meta { font-size: 10px; color: #555; }
+      .proc { padding: 8px 0; border-top: 1px dashed #ccc; }
+      .proc-name { font-size: 14px; font-weight: 600; }
+      .proc-amt { font-size: 20px; font-weight: 800; color: #1e3a6b; text-align: right; }
+      .proc-pay { font-size: 10px; color: #555; text-align: right; }
+      .ft { padding: 5px 12px; background: #f8f8f4; border-top: 1px solid #eee; font-size: 7px; color: #999; display: flex; justify-content: space-between; }
+      .cut { margin-top: 5px; border-top: 1px dashed #ccc; padding-top: 3px; font-size: 7px; color: #ccc; text-align: center; width: 48%; }
+    </style></head><body>
+    <div class="rct">
+      <div class="hdr"><h1>Radhakishan Hospital</h1><div class="sub">राधाकिशन हस्पताल · Jyoti Nagar, Kurukshetra</div></div>
+      <div class="bd">
+        <div class="row"><span>Receipt: <strong>${esc(p.receiptNo)}</strong></span><span>Date: <strong>${new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</strong></span></div>
+        <div class="pt"><div class="name">${esc(pt.name || "Patient")}</div><div class="meta">${esc(pt.id || "")}${pt.dob ? " · " + esc(calcAge(pt.dob)) : ""}${pt.sex ? " · " + esc(pt.sex) : ""}</div></div>
+        <div class="proc">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div class="proc-name">${esc(p.name)}</div><div style="font-size:9px;color:#777">OPD Procedure</div></div>
+            <div><div class="proc-amt">₹${esc(p.charge)}</div><div class="proc-pay">${esc(p.payMode.toUpperCase())} · PAID</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ft"><span>OPD Procedure Receipt</span><span>${esc(p.receiptNo)}</span></div>
+    </div>
+    <div class="cut">✂ ────────────────────────────────</div>
+    </body></html>`);
+    w.document.close();
+    setTimeout(() => w.print(), 500);
+  }
+
   // ===== Fee calculation =====
   function updateFee() {
     const visitType = document.getElementById("f-visit-type")?.value;
@@ -1713,6 +1842,7 @@
         payment_mode: document.getElementById("f-pay-mode")?.value || "cash",
         payment_status:
           document.getElementById("f-pay-status")?.value || "pending",
+        procedures: proceduresList.length ? proceduresList : null,
       };
       console.log("Patient ID:", patientId);
       console.log("Visit payload:", JSON.stringify(visitPayload, null, 2));
@@ -2596,6 +2726,7 @@
     document.getElementById("results").innerHTML = "";
     currentPatient = null;
     currentVisitId = null;
+    proceduresList = [];
   }
 
   async function editVisit() {
