@@ -1064,12 +1064,13 @@
         ? Math.floor((new Date() - new Date(p.dob)) / (86400000 * 30.44))
         : 0;
     h += `<div class="form-section">
-      <div class="fs-hdr">Vaccination History <span class="badge">From vaccination card</span></div>
-      <div class="fs-body">
-        <div style="display:flex;gap:0;margin-bottom:8px">
-          <button type="button" id="vax-btn-iap" onclick="switchVaxSchedule('iap')" style="padding:5px 14px;font-size:11px;border:1px solid var(--brd);border-radius:var(--r) 0 0 var(--r);cursor:pointer;font-family:inherit;background:var(--blue);color:#fff;font-weight:600">IAP Schedule</button>
-          <button type="button" id="vax-btn-nhm" onclick="switchVaxSchedule('nhm')" style="padding:5px 14px;font-size:11px;border:1px solid var(--brd);border-left:none;border-radius:0 var(--r) var(--r) 0;cursor:pointer;font-family:inherit;background:var(--bg2);color:var(--ink3)">NHM-UIP Schedule</button>
+      <div class="fs-hdr" style="display:flex;justify-content:space-between;align-items:center">Vaccination History
+        <div style="display:flex;gap:0">
+          <button type="button" id="vax-btn-iap" onclick="switchVaxSchedule('iap')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-radius:var(--r) 0 0 var(--r);cursor:pointer;font-family:inherit;background:var(--blue);color:#fff;font-weight:600">IAP</button>
+          <button type="button" id="vax-btn-nhm" onclick="switchVaxSchedule('nhm')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-left:none;border-radius:0 var(--r) var(--r) 0;cursor:pointer;font-family:inherit;background:var(--bg2);color:var(--ink3)">NHM-UIP</button>
         </div>
+      </div>
+      <div class="fs-body">
         <div id="vax-checklist"></div>
         <button type="button" onclick="addVaxRow()" style="margin-top:6px;padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">+ Add unlisted vaccine</button>
         <div id="vax-manual-list"></div>
