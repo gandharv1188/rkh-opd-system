@@ -1173,7 +1173,7 @@ All clinical knowledge (prompts, formulary, protocols, schema) transferred with 
 | HAZ           | Height-for-Age Z-score                                                                                                |
 | HCZ           | Head Circumference-for-Age Z-score                                                                                    |
 | HINE          | Hammersmith Infant Neurological Examination                                                                           |
-| HMC          | Haryana Medical Council of India                                                                                      |
+| HMC           | Haryana Medical Council of India                                                                                      |
 | IAP           | Indian Academy of Pediatrics                                                                                          |
 | LEST          | Language Evaluation Scale Trivandrum                                                                                  |
 | MAM           | Moderate Acute Malnutrition (WHZ \< -2 SD OR MUAC 11.5-12.5cm)                                                        |
