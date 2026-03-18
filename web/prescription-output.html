@@ -739,6 +739,15 @@
       pVItems.push("RR: " + esc(pVitals.rr_per_min) + "/min");
     if (pVitals.spo2_pct)
       pVItems.push("SpO\u2082: " + esc(pVitals.spo2_pct) + "%");
+    if (pVitals.bp_systolic && pVitals.bp_diastolic)
+      pVItems.push(
+        "BP: " +
+          esc(pVitals.bp_systolic) +
+          "/" +
+          esc(pVitals.bp_diastolic) +
+          " mmHg",
+      );
+    if (pVitals.map_mmhg) pVItems.push("MAP: " + esc(pVitals.map_mmhg));
     if (r.patient?.weight_kg)
       pVItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
     if (r.patient?.height_cm)

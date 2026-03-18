@@ -1956,7 +1956,7 @@
     try {
       const vr = await q(
         "visits",
-        `?visit_date=eq.${today}&select=id,patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,chief_complaints,doctor_id,visit_summary,raw_dictation,created_at&order=created_at.asc`,
+        `?visit_date=eq.${today}&select=id,patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,bp_systolic,bp_diastolic,map_mmhg,chief_complaints,doctor_id,visit_summary,raw_dictation,created_at&order=created_at.asc`,
       );
       if (!vr.ok) return;
       const visits = await vr.json();
@@ -2184,6 +2184,15 @@
     if (vitals.rr_per_min)
       vItems.push("RR: " + esc(vitals.rr_per_min) + "/min");
     if (vitals.spo2_pct) vItems.push("SpO₂: " + esc(vitals.spo2_pct) + "%");
+    if (vitals.bp_systolic && vitals.bp_diastolic)
+      vItems.push(
+        "BP: " +
+          esc(vitals.bp_systolic) +
+          "/" +
+          esc(vitals.bp_diastolic) +
+          " mmHg",
+      );
+    if (vitals.map_mmhg) vItems.push("MAP: " + esc(vitals.map_mmhg));
     if (r.patient?.weight_kg)
       vItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
     if (vItems.length)
@@ -2462,6 +2471,11 @@
       if (visit.hr_per_min) vitals.push(`HR: ${esc(visit.hr_per_min)}/min`);
       if (visit.rr_per_min) vitals.push(`RR: ${esc(visit.rr_per_min)}/min`);
       if (visit.spo2_pct) vitals.push(`SpO₂: ${esc(visit.spo2_pct)}%`);
+      if (visit.bp_systolic && visit.bp_diastolic)
+        vitals.push(
+          `BP: ${esc(visit.bp_systolic)}/${esc(visit.bp_diastolic)} mmHg`,
+        );
+      if (visit.map_mmhg) vitals.push(`MAP: ${esc(visit.map_mmhg)}`);
 
       if (vitals.length) {
         vi += `<div class="vi-row"><span class="vi-label">Vitals</span><div class="vi-vitals">${vitals.map((v) => `<span class="vi-vital">${v}</span>`).join("")}</div></div>`;
@@ -2514,6 +2528,8 @@
       if (visit?.chief_complaints)
         ctx += `Chief complaints: ${visit.chief_complaints}. `;
       if (visit?.temp_f) ctx += `Temp ${fmtTemp(visit.temp_f)}. `;
+      if (visit?.bp_systolic && visit?.bp_diastolic)
+        ctx += `BP ${visit.bp_systolic}/${visit.bp_diastolic} mmHg${visit.map_mmhg ? " (MAP " + visit.map_mmhg + ")" : ""}. `;
       // Add vaccination history if available
       try {
         const vaxR = await q(
@@ -3317,6 +3333,15 @@
     if (vitals.rr_per_min)
       vItems.push("RR: " + esc(vitals.rr_per_min) + "/min");
     if (vitals.spo2_pct) vItems.push("SpO₂: " + esc(vitals.spo2_pct) + "%");
+    if (vitals.bp_systolic && vitals.bp_diastolic)
+      vItems.push(
+        "BP: " +
+          esc(vitals.bp_systolic) +
+          "/" +
+          esc(vitals.bp_diastolic) +
+          " mmHg",
+      );
+    if (vitals.map_mmhg) vItems.push("MAP: " + esc(vitals.map_mmhg));
     if (r.patient.weight_kg)
       vItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
     if (r.patient.height_cm)
@@ -4079,6 +4104,15 @@
     if (pVitals.rr_per_min)
       pVItems.push("RR: " + esc(pVitals.rr_per_min) + "/min");
     if (pVitals.spo2_pct) pVItems.push("SpO₂: " + esc(pVitals.spo2_pct) + "%");
+    if (pVitals.bp_systolic && pVitals.bp_diastolic)
+      pVItems.push(
+        "BP: " +
+          esc(pVitals.bp_systolic) +
+          "/" +
+          esc(pVitals.bp_diastolic) +
+          " mmHg",
+      );
+    if (pVitals.map_mmhg) pVItems.push("MAP: " + esc(pVitals.map_mmhg));
     if (r.patient?.weight_kg)
       pVItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
     if (r.patient?.height_cm)
