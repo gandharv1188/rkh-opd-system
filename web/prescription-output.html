@@ -561,6 +561,13 @@
     d.textContent = String(s);
     return d.innerHTML;
   }
+  function fmtTemp(v) {
+    if (!v) return "";
+    const s = String(v).trim();
+    const num = s.replace(/[^0-9.]/g, "");
+    if (/[Cc]|celsius/i.test(s)) return num + "°C";
+    return num + "°F";
+  }
 
   /* ===== EMERGENCY WARNING SIGNS (age-appropriate) ===== */
   const EMERGENCY_BASE = [
@@ -725,8 +732,7 @@
     // Vitals
     const pVitals = r.vitals || {};
     const pVItems = [];
-    if (pVitals.temp_f)
-      pVItems.push("Temp: " + esc(pVitals.temp_f) + "\u00b0F");
+    if (pVitals.temp_f) pVItems.push("Temp: " + esc(fmtTemp(pVitals.temp_f)));
     if (pVitals.hr_per_min)
       pVItems.push("HR: " + esc(pVitals.hr_per_min) + "/min");
     if (pVitals.rr_per_min)

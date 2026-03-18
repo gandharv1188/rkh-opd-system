@@ -1650,6 +1650,15 @@
       p: "e.g. 28wks GA, postnatal day 14, BW 1.1kg, on EBM",
     },
   };
+  // Format temperature: strip duplicate units, preserve °C if Celsius
+  function fmtTemp(v) {
+    if (!v) return "";
+    const s = String(v).trim();
+    const num = s.replace(/[^0-9.]/g, "");
+    if (/[Cc]|celsius/i.test(s)) return num + "°C";
+    return num + "°F";
+  }
+
   const EMERGENCY_BASE = [
     { hi: "तेज सांस / सीने में धंसाव", en: "Fast breathing / chest indrawing" },
     { hi: "होंठ या जीभ का नीला पड़ना", en: "Bluish lips or tongue" },
@@ -2169,7 +2178,7 @@
     // Vitals
     const vitals = r.vitals || {};
     const vItems = [];
-    if (vitals.temp_f) vItems.push("Temp: " + esc(vitals.temp_f) + "°F");
+    if (vitals.temp_f) vItems.push("Temp: " + esc(fmtTemp(vitals.temp_f)));
     if (vitals.hr_per_min)
       vItems.push("HR: " + esc(vitals.hr_per_min) + "/min");
     if (vitals.rr_per_min)
@@ -2449,7 +2458,7 @@
       if (visit.height_cm) vitals.push(`Ht: ${esc(visit.height_cm)} cm`);
       if (visit.hc_cm) vitals.push(`HC: ${esc(visit.hc_cm)} cm`);
       if (visit.muac_cm) vitals.push(`MUAC: ${esc(visit.muac_cm)} cm`);
-      if (visit.temp_f) vitals.push(`Temp: ${esc(visit.temp_f)}°F`);
+      if (visit.temp_f) vitals.push(`Temp: ${esc(fmtTemp(visit.temp_f))}`);
       if (visit.hr_per_min) vitals.push(`HR: ${esc(visit.hr_per_min)}/min`);
       if (visit.rr_per_min) vitals.push(`RR: ${esc(visit.rr_per_min)}/min`);
       if (visit.spo2_pct) vitals.push(`SpO₂: ${esc(visit.spo2_pct)}%`);
@@ -2504,7 +2513,7 @@
       }
       if (visit?.chief_complaints)
         ctx += `Chief complaints: ${visit.chief_complaints}. `;
-      if (visit?.temp_f) ctx += `Temp ${visit.temp_f}°F. `;
+      if (visit?.temp_f) ctx += `Temp ${fmtTemp(visit.temp_f)}. `;
       // Append previous visit summary (generated at registration for returning patients)
       if (visit?.visit_summary) ctx += "\n\n" + visit.visit_summary;
       document.getElementById("pad-ta").value = ctx;
@@ -3283,7 +3292,7 @@
     // VITALS
     const vitals = r.vitals || {};
     const vItems = [];
-    if (vitals.temp_f) vItems.push("Temp: " + esc(vitals.temp_f) + "°F");
+    if (vitals.temp_f) vItems.push("Temp: " + esc(fmtTemp(vitals.temp_f)));
     if (vitals.hr_per_min)
       vItems.push("HR: " + esc(vitals.hr_per_min) + "/min");
     if (vitals.rr_per_min)
@@ -4045,7 +4054,7 @@
     // Vitals
     const pVitals = r.vitals || {};
     const pVItems = [];
-    if (pVitals.temp_f) pVItems.push("Temp: " + esc(pVitals.temp_f) + "°F");
+    if (pVitals.temp_f) pVItems.push("Temp: " + esc(fmtTemp(pVitals.temp_f)));
     if (pVitals.hr_per_min)
       pVItems.push("HR: " + esc(pVitals.hr_per_min) + "/min");
     if (pVitals.rr_per_min)
