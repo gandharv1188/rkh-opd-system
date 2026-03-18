@@ -755,6 +755,7 @@
       document.getElementById("results").innerHTML = "";
       document.getElementById("srch").value = "";
       renderForm(currentPatient);
+      updateFee();
 
       // Check if this patient already has a visit today — if so, enable edit mode
       const today = new Date().toISOString().split("T")[0];
@@ -786,6 +787,9 @@
               setVal("f-spo2", visit.spo2_pct);
               setVal("f-complaints", visit.chief_complaints);
               setVal("f-ext-notes", visit.clinical_notes);
+              setVal("f-fee", visit.consultation_fee);
+              setVal("f-pay-mode", visit.payment_mode);
+              setVal("f-pay-status", visit.payment_status || "paid");
               // Update save button to indicate edit mode
               const saveBtn = document.getElementById("save-btn");
               if (saveBtn) {
@@ -924,7 +928,7 @@
     h += `<div class="form-section">
       <div class="fs-hdr">Visit Details <span class="badge req">Required</span></div>
       <div class="fs-body">
-        <div class="fg fg3">
+        <div class="fg fg3" style="margin-bottom:10px">
           <div class="ff"><label>Visit Date</label><input type="date" id="f-visit-date" value="${new Date().toISOString().split("T")[0]}" /></div>
           <div class="ff"><label>Doctor</label>
             <select id="f-doctor">
@@ -932,11 +936,27 @@
             </select>
           </div>
           <div class="ff"><label>Visit Type</label>
-            <select id="f-visit-type">
+            <select id="f-visit-type" onchange="updateFee()">
               <option value="new">New consultation</option>
               <option value="followup">Follow-up</option>
               <option value="vaccination">Vaccination only</option>
               <option value="emergency">Emergency</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg fg3">
+          <div class="ff"><label>Consultation Fee (₹)</label><input type="number" id="f-fee" value="300" readonly style="background:#f0f0f0;font-weight:600;color:var(--ink)" /></div>
+          <div class="ff"><label>Payment Mode</label>
+            <select id="f-pay-mode">
+              <option value="cash">Cash</option>
+              <option value="upi">UPI</option>
+              <option value="waived">Waived</option>
+            </select>
+          </div>
+          <div class="ff"><label>Payment Status</label>
+            <select id="f-pay-status">
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
             </select>
           </div>
         </div>
@@ -1014,6 +1034,10 @@
     h += `<div class="form-section">
       <div class="fs-hdr">Vaccination History <span class="badge">From vaccination card</span></div>
       <div class="fs-body">
+        <div style="display:flex;gap:0;margin-bottom:8px">
+          <button type="button" id="vax-btn-iap" onclick="switchVaxSchedule('iap')" style="padding:5px 14px;font-size:11px;border:1px solid var(--brd);border-radius:var(--r) 0 0 var(--r);cursor:pointer;font-family:inherit;background:var(--blue);color:#fff;font-weight:600">IAP Schedule</button>
+          <button type="button" id="vax-btn-nhm" onclick="switchVaxSchedule('nhm')" style="padding:5px 14px;font-size:11px;border:1px solid var(--brd);border-left:none;border-radius:0 var(--r) var(--r) 0;cursor:pointer;font-family:inherit;background:var(--bg2);color:var(--ink3)">NHM-UIP Schedule</button>
+        </div>
         <div id="vax-checklist"></div>
         <button type="button" onclick="addVaxRow()" style="margin-top:6px;padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">+ Add unlisted vaccine</button>
         <div id="vax-manual-list"></div>
@@ -1048,15 +1072,11 @@
             <span id="ext-mic-status" style="font-size:10px;color:var(--ink3)">Click to dictate notes</span>
           </div>
         </div>
-      </div>
-    </div>`;
-
-    // Section 9: Document upload (scans, images, PDFs)
-    h += `<div class="form-section">
-      <div class="fs-hdr">Upload Documents <span class="badge">Optional — scans, photos, PDFs</span></div>
-      <div class="fs-body">
-        <div id="doc-uploads"></div>
-        <button type="button" onclick="addDocUpload()" style="padding:6px 14px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:12px;margin-top:6px">+ Add Document</button>
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--brd)">
+          <div style="font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">Attach Documents (scans, photos, PDFs)</div>
+          <div id="doc-uploads"></div>
+          <button type="button" onclick="addDocUpload()" style="padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px;margin-top:4px">+ Add Document</button>
+        </div>
       </div>
     </div>`;
 
@@ -1180,7 +1200,144 @@
     { age: "10-12 years", mo: 132, vax: [{ n: "Tdap", d: 1 }] },
   ];
 
+  const NHM_SCHEDULE = [
+    {
+      age: "Birth",
+      mo: 0,
+      vax: [
+        { n: "BCG", d: 1 },
+        { n: "OPV", d: 0 },
+        { n: "Hepatitis B", d: 0 },
+      ],
+    },
+    {
+      age: "6 weeks",
+      mo: 1.5,
+      vax: [
+        { n: "Pentavalent", d: 1 },
+        { n: "OPV", d: 1 },
+        { n: "Rotavirus", d: 1 },
+        { n: "fIPV", d: 1 },
+        { n: "PCV", d: 1 },
+      ],
+    },
+    {
+      age: "10 weeks",
+      mo: 2.5,
+      vax: [
+        { n: "Pentavalent", d: 2 },
+        { n: "OPV", d: 2 },
+        { n: "Rotavirus", d: 2 },
+      ],
+    },
+    {
+      age: "14 weeks",
+      mo: 3.5,
+      vax: [
+        { n: "Pentavalent", d: 3 },
+        { n: "OPV", d: 3 },
+        { n: "Rotavirus", d: 3 },
+        { n: "fIPV", d: 2 },
+        { n: "PCV", d: 2 },
+      ],
+    },
+    {
+      age: "9 months",
+      mo: 9,
+      vax: [
+        { n: "MR", d: 1 },
+        { n: "JE", d: 1 },
+        { n: "PCV Booster", d: 1 },
+        { n: "Vitamin A", d: 1 },
+      ],
+    },
+    {
+      age: "16-24 months",
+      mo: 17,
+      vax: [
+        { n: "DPT Booster", d: 1 },
+        { n: "MR", d: 2 },
+        { n: "OPV Booster", d: 1 },
+        { n: "JE", d: 2 },
+        { n: "Vitamin A", d: 2 },
+      ],
+    },
+    { age: "5-6 years", mo: 66, vax: [{ n: "DPT Booster", d: 2 }] },
+    { age: "10 years", mo: 120, vax: [{ n: "TT", d: 1 }] },
+    { age: "16 years", mo: 192, vax: [{ n: "TT", d: 2 }] },
+  ];
+  let activeVaxSchedule = "iap";
+
+  function switchVaxSchedule(schedule) {
+    activeVaxSchedule = schedule;
+    const iapBtn = document.getElementById("vax-btn-iap");
+    const nhmBtn = document.getElementById("vax-btn-nhm");
+    if (iapBtn && nhmBtn) {
+      iapBtn.style.background =
+        schedule === "iap" ? "var(--blue)" : "var(--bg2)";
+      iapBtn.style.color = schedule === "iap" ? "#fff" : "var(--ink3)";
+      iapBtn.style.fontWeight = schedule === "iap" ? "600" : "400";
+      nhmBtn.style.background =
+        schedule === "nhm" ? "var(--blue)" : "var(--bg2)";
+      nhmBtn.style.color = schedule === "nhm" ? "#fff" : "var(--ink3)";
+      nhmBtn.style.fontWeight = schedule === "nhm" ? "600" : "400";
+    }
+    if (currentPatient?.dob) {
+      renderVaxChecklist(currentPatient.dob, existingVax);
+    }
+  }
+
   let existingVax = []; // Populated for returning patients
+
+  // ===== Fee calculation =====
+  function updateFee() {
+    const visitType = document.getElementById("f-visit-type")?.value;
+    const feeEl = document.getElementById("f-fee");
+    if (!feeEl) return;
+    if (visitType === "emergency") {
+      feeEl.value = 500;
+      return;
+    }
+    if (visitType === "vaccination") {
+      feeEl.value = 0;
+      return;
+    }
+    if (!currentPatient) {
+      feeEl.value = 300;
+      return;
+    }
+    // Check for same-day revisit (free) or within-7-day follow-up (50%)
+    const today = new Date().toISOString().split("T")[0];
+    q(
+      "visits",
+      `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&visit_date=lte.${today}&order=visit_date.desc&limit=1&select=visit_date`,
+    )
+      .then((r) => (r.ok ? r.json() : []))
+      .then((visits) => {
+        if (!visits.length) {
+          feeEl.value = 300;
+          return;
+        }
+        const lastDate = visits[0].visit_date;
+        if (lastDate === today) {
+          feeEl.value = 0;
+          feeEl.style.color = "#1a6b3a";
+          return;
+        } // Same day = free
+        const daysDiff = Math.floor(
+          (new Date(today) - new Date(lastDate)) / 86400000,
+        );
+        if (daysDiff <= 7 && visitType === "followup") {
+          feeEl.value = 150;
+          return;
+        } // 50% within 7 days
+        feeEl.value = 300;
+        feeEl.style.color = "var(--ink)";
+      })
+      .catch(() => {
+        feeEl.value = 300;
+      });
+  }
 
   function renderVaxChecklist(dob, existingVaxList) {
     existingVax = existingVaxList || [];
@@ -1201,7 +1358,9 @@
       );
 
     let h = '<div style="font-size:11px">';
-    for (const milestone of IAP_SCHEDULE) {
+    for (const milestone of activeVaxSchedule === "nhm"
+      ? NHM_SCHEDULE
+      : IAP_SCHEDULE) {
       if (milestone.mo > ageMonths + 3) break; // Show up to next milestone
       const isPast = milestone.mo <= ageMonths;
       h += `<div style="margin-bottom:6px;padding:4px 0;border-bottom:1px solid #f0f0ea">
@@ -1437,6 +1596,11 @@
         clinical_notes:
           (document.getElementById("f-ext-notes")?.value || "").trim() || null,
         visit_summary: visitSummary,
+        consultation_fee:
+          parseFloat(document.getElementById("f-fee")?.value) || 0,
+        payment_mode: document.getElementById("f-pay-mode")?.value || "cash",
+        payment_status:
+          document.getElementById("f-pay-status")?.value || "pending",
       };
       console.log("Patient ID:", patientId);
       console.log("Visit payload:", JSON.stringify(visitPayload, null, 2));
