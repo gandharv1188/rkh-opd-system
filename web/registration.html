@@ -1057,28 +1057,6 @@
 
     // (Chief Complaints moved to after Demographics)
 
-    // Section 6: Vaccination history (age-based checklist)
-    const ageMonths = isNew
-      ? 0
-      : p.dob
-        ? Math.floor((new Date() - new Date(p.dob)) / (86400000 * 30.44))
-        : 0;
-    h += `<div class="form-section">
-      <div class="fs-hdr" style="display:flex;justify-content:space-between;align-items:center">Vaccination History
-        <div style="display:flex;gap:0">
-          <button type="button" id="vax-btn-iap" onclick="switchVaxSchedule('iap')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-radius:var(--r) 0 0 var(--r);cursor:pointer;font-family:inherit;background:var(--blue);color:#fff;font-weight:600">IAP</button>
-          <button type="button" id="vax-btn-nhm" onclick="switchVaxSchedule('nhm')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-left:none;border-radius:0 var(--r) var(--r) 0;cursor:pointer;font-family:inherit;background:var(--bg2);color:var(--ink3)">NHM-UIP</button>
-        </div>
-      </div>
-      <div class="fs-body">
-        <div id="vax-checklist"></div>
-        <button type="button" onclick="addVaxRow()" style="margin-top:6px;padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">+ Add unlisted vaccine</button>
-        <div id="vax-manual-list"></div>
-      </div>
-    </div>`;
-
-    // (Visit Details moved to after Demographics)
-
     // Section 8: Lab Results & External Notes
     h += `<div class="form-section">
       <div class="fs-hdr">Lab Results & External Records <span class="badge">Optional</span></div>
@@ -1110,6 +1088,26 @@
           <div id="doc-uploads"></div>
           <button type="button" onclick="addDocUpload()" style="padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px;margin-top:4px">+ Add Document</button>
         </div>
+      </div>
+    </div>`;
+
+    // Vaccination history (age-based checklist) — after lab results
+    const ageMonths = isNew
+      ? 0
+      : p.dob
+        ? Math.floor((new Date() - new Date(p.dob)) / (86400000 * 30.44))
+        : 0;
+    h += `<div class="form-section">
+      <div class="fs-hdr" style="display:flex;justify-content:space-between;align-items:center">Vaccination History
+        <div style="display:flex;gap:0">
+          <button type="button" id="vax-btn-iap" onclick="switchVaxSchedule('iap')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-radius:var(--r) 0 0 var(--r);cursor:pointer;font-family:inherit;background:var(--blue);color:#fff;font-weight:600">IAP</button>
+          <button type="button" id="vax-btn-nhm" onclick="switchVaxSchedule('nhm')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-left:none;border-radius:0 var(--r) var(--r) 0;cursor:pointer;font-family:inherit;background:var(--bg2);color:var(--ink3)">NHM-UIP</button>
+        </div>
+      </div>
+      <div class="fs-body">
+        <div id="vax-checklist"></div>
+        <button type="button" onclick="addVaxRow()" style="margin-top:6px;padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2);cursor:pointer;font-size:11px">+ Add unlisted vaccine</button>
+        <div id="vax-manual-list"></div>
       </div>
     </div>`;
 
