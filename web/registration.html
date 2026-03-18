@@ -2928,6 +2928,41 @@
 
   async function handleQrResult(text) {
     try {
+      // Handle verification URL format (from prescription QR codes)
+      if (text.includes("verify.html?") || text.includes("uhid=")) {
+        let uhid;
+        try {
+          const url = new URL(text);
+          uhid = url.searchParams.get("uhid");
+        } catch (_) {
+          // Maybe just params without full URL
+          const params = new URLSearchParams(text.split("?")[1] || text);
+          uhid = params.get("uhid");
+        }
+        if (uhid) {
+          showToast("QR scanned — looking up " + uhid);
+          document.getElementById("srch").value = uhid;
+          if (connected) {
+            const r = await q(
+              "patients",
+              `?id=eq.${encodeURIComponent(uhid)}&is_active=eq.true`,
+            );
+            if (r.ok) {
+              const pts = await r.json();
+              if (pts.length) {
+                selectPatient(JSON.stringify(pts[0]));
+                showToast(
+                  "Patient found: " + pts[0].name + " — creating revisit",
+                );
+                return;
+              }
+            }
+          }
+          showToast("Patient " + uhid + " not found in database");
+          return;
+        }
+      }
+      // Legacy JSON format
       const data = JSON.parse(text);
       if (data.uhid) {
         // Search for patient by UHID
