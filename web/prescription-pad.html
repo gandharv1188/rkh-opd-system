@@ -1793,6 +1793,7 @@
         console.log("connectSB: success");
         preloadKnowledge();
         loadTodayPatients();
+        subscribeToNewVisits();
       } else {
         throw new Error("HTTP " + r.status);
       }
@@ -1854,6 +1855,96 @@
   /* ===== PATIENT DROPDOWN (today's visits) ===== */
   let todayPatients = [];
   let historyTabs = [];
+  // Real-time push: Supabase Realtime subscription on visits table.
+  // New visits appear in the dropdown without page refresh.
+  // Non-disruptive: silently updates the list in the background,
+  // preserves the currently selected patient and any in-progress work.
+  let realtimeWs = null;
+  function subscribeToNewVisits() {
+    if (realtimeWs) return;
+    try {
+      const wsUrl =
+        SB.replace("https://", "wss://") +
+        "/realtime/v1/websocket?apikey=" +
+        KEY +
+        "&vsn=1.0.0";
+      const ws = new WebSocket(wsUrl);
+      let hbTimer = null,
+        ref = 0;
+      ws.onopen = () => {
+        ws.send(
+          JSON.stringify({
+            topic: "realtime:public:visits",
+            event: "phx_join",
+            payload: {
+              config: {
+                broadcast: { self: false },
+                presence: {},
+                postgres_changes: [
+                  { event: "INSERT", schema: "public", table: "visits" },
+                ],
+              },
+            },
+            ref: String(++ref),
+          }),
+        );
+        hbTimer = setInterval(() => {
+          ws.send(
+            JSON.stringify({
+              topic: "phoenix",
+              event: "heartbeat",
+              payload: {},
+              ref: String(++ref),
+            }),
+          );
+        }, 30000);
+        realtimeWs = ws;
+        console.log("Realtime: subscribed to new visits");
+      };
+      ws.onmessage = (evt) => {
+        try {
+          const msg = JSON.parse(evt.data);
+          if (msg.event === "postgres_changes" || msg.event === "INSERT") {
+            const today = new Date().toISOString().split("T")[0];
+            const record = msg.payload?.record || msg.payload?.data?.record;
+            if (record?.visit_date === today || !record) {
+              // Silently refresh list — preserve current selection
+              const currentId = selectedPatient?.id;
+              const prevCount = todayPatients.length;
+              loadTodayPatients().then(() => {
+                if (todayPatients.length > prevCount) {
+                  // Re-select the patient the doctor was working on
+                  if (currentId) {
+                    const idx = todayPatients.findIndex(
+                      (p) => p.id === currentId,
+                    );
+                    if (idx >= 0) {
+                      const inp = document.getElementById("pt-search");
+                      if (inp)
+                        inp.value = todayPatients[idx].name + " — " + currentId;
+                    }
+                  }
+                  console.log(
+                    `Realtime: new visit (${prevCount} → ${todayPatients.length})`,
+                  );
+                }
+              });
+            }
+          }
+        } catch (_) {}
+      };
+      ws.onclose = () => {
+        if (hbTimer) clearInterval(hbTimer);
+        realtimeWs = null;
+        setTimeout(() => {
+          if (sbConnected) subscribeToNewVisits();
+        }, 5000);
+      };
+      ws.onerror = () => ws.close();
+    } catch (e) {
+      console.warn("Realtime failed:", e.message);
+    }
+  }
   async function loadTodayPatients() {
     if (!sbConnected) return;
     const today = new Date().toISOString().split("T")[0];
