@@ -3317,6 +3317,57 @@
         </div>
         <div class="ep" id="${pid}-ep">
           <div class="ep-title">Dose adjustment — ${esc((m.row1_en || "").split("(")[0].trim())}</div>
+          ${(() => {
+            const dn = (m.row1_en || "").split("(")[0].trim().toUpperCase();
+            const fc = formularyCache[dn];
+            const forms = fc?.formulations || [];
+            return forms.length > 1
+              ? '<div class="epf" style="margin-bottom:6px"><label>Formulation</label><select id="' +
+                  pid +
+                  '-form" onchange="switchFormulation(\'' +
+                  pid +
+                  "'," +
+                  idx +
+                  ')" style="width:100%;padding:5px;border:1px solid var(--bdr2);border-radius:var(--r);font-size:12px;font-family:inherit">' +
+                  forms
+                    .map(
+                      (f) =>
+                        '<option value="' +
+                        esc(
+                          f.form +
+                            "|" +
+                            (f.conc_qty || "") +
+                            "|" +
+                            (f.conc_unit || "") +
+                            "|" +
+                            (f.per_qty || "") +
+                            "|" +
+                            (f.per_unit || ""),
+                        ) +
+                        '"' +
+                        (f.conc_qty == m.concentration_mg &&
+                        f.per_qty == m.concentration_per_ml
+                          ? " selected"
+                          : "") +
+                        ">" +
+                        esc(f.form) +
+                        " " +
+                        esc(
+                          (f.conc_qty || "") +
+                            (f.conc_unit || "") +
+                            "/" +
+                            (f.per_qty || "") +
+                            (f.per_unit || ""),
+                        ) +
+                        (f.indian_brand
+                          ? " (" + esc(f.indian_brand) + ")"
+                          : "") +
+                        "</option>",
+                    )
+                    .join("") +
+                  "</select></div>"
+              : "";
+          })()}
           <div class="ep-grid">
             <div class="epf"><label>Weight (kg)</label><input type="number" step="0.1" id="${pid}-wt" value="${esc(r.patient.weight_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>mg/kg/day</label><input type="number" step="0.5" id="${pid}-mgkg" value="${esc(m.dose_mg_per_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
@@ -3374,8 +3425,8 @@
     ) {
       const v = r.vaccinations;
       h += `<div class="rv-sec"><div class="rv-hdr">Vaccination — ${esc(v.schedule_used || "IAP 2024")}</div>
-    ${(v.due || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="due" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="due" data-idx="${i}">${esc(x)}</span></label><span class="vax-due">Due today</span><input type="date" class="vax-date" data-type="due" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
-    ${(v.overdue || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="overdue" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="overdue" data-idx="${i}">${esc(x)}</span></label><span class="vax-over">Overdue</span><input type="date" class="vax-date" data-type="overdue" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
+    ${(v.due || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="due" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="due" data-idx="${i}">${esc(x)}</span></label><select class="vax-status" data-type="due" data-idx="${i}" style="font-size:10px;padding:2px 4px;border:1px solid var(--bdr);border-radius:3px;color:var(--green);background:var(--green-lt);font-weight:600"><option value="due" selected>Due today</option><option value="completed">Completed</option><option value="missed">Missed</option></select><input type="date" class="vax-date" data-type="due" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
+    ${(v.overdue || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="overdue" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="overdue" data-idx="${i}">${esc(x)}</span></label><select class="vax-status" data-type="overdue" data-idx="${i}" style="font-size:10px;padding:2px 4px;border:1px solid var(--bdr);border-radius:3px;color:var(--red);background:var(--red-lt);font-weight:600"><option value="overdue" selected>Overdue</option><option value="completed">Completed</option><option value="missed">Missed</option></select><input type="date" class="vax-date" data-type="overdue" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
     ${v.next_due ? `<div style="font-size:11px;color:var(--ink3);padding:5px 0;font-family:system-ui,sans-serif">Next due: <span contenteditable="true" spellcheck="false" id="vax-next-due">${esc(v.next_due)}</span></div>` : ""}
     ${v.notes ? `<div style="font-size:11px;color:var(--ink2);padding:3px 0;font-family:system-ui,sans-serif" contenteditable="true" spellcheck="false" id="vax-notes">${esc(v.notes)}</div>` : ""}
     <button class="add-item-btn" onclick="addVaccination()">+ Add vaccine</button>
@@ -3519,6 +3570,34 @@
     const card = document.getElementById(pid);
     card.style.outline = "2px solid var(--green)";
     setTimeout(() => (card.style.outline = ""), 1400);
+  }
+
+  function switchFormulation(pid, idx) {
+    const sel = document.getElementById(pid + "-form");
+    if (!sel) return;
+    const parts = sel.value.split("|"); // form|conc_qty|conc_unit|per_qty|per_unit
+    const form = parts[0] || "syrup";
+    const concQty = parseFloat(parts[1]) || 0;
+    const concUnit = parts[2] || "mg";
+    const perQty = parseFloat(parts[3]) || 5;
+    const perUnit = parts[4] || "ml";
+    // Update the concentration fields in the adjustment panel
+    const cmgEl = document.getElementById(pid + "-cmg");
+    const cmlEl = document.getElementById(pid + "-cml");
+    if (cmgEl) cmgEl.value = concQty;
+    if (cmlEl) cmlEl.value = perQty;
+    // Update the medicine data
+    const m = rxData.medicines[idx];
+    m.concentration_mg = concQty;
+    m.concentration_per_ml = perQty;
+    m.formulation = form;
+    // Update Row 1 with new formulation
+    const drugName = (m.row1_en || "").split("(")[0].trim();
+    const newR1 = `${drugName} (${concQty}${concUnit}/${perQty}${perUnit} ${form})`;
+    document.getElementById(pid + "-r1").textContent = newR1;
+    m.row1_en = newR1;
+    // Trigger recalculation
+    liveCalc(pid, idx);
   }
 
   /* ===== SIGN OFF & SAVE TO SUPABASE ===== */
