@@ -706,8 +706,10 @@
           '<div class="empty">No patients found. Click "+ New Patient" to register.</div>';
         return;
       }
+      // Store search results in array — pass index to selectPatient (avoids complex JSON-in-HTML-attribute)
+      window._searchResults = pts;
       document.getElementById("results").innerHTML = pts
-        .map((p) => {
+        .map((p, idx) => {
           const allergy =
             p.known_allergies && p.known_allergies.length
               ? '<div class="pt-allergy">ALLERGY: ' +
@@ -715,7 +717,7 @@
                 "</div>"
               : "";
           const age = p.dob ? esc(calcAge(p.dob)) : "";
-          return `<div class="pt-card" onclick="selectPatient(${esc(JSON.stringify(JSON.stringify(p)))})">
+          return `<div class="pt-card" onclick="selectPatientByIndex(${idx})">
           <span class="pt-uhid">${esc(p.id)}</span>
           <div class="pt-name">${esc(p.name)}</div>
           <div class="pt-meta">${age}${age ? " · " : ""}${esc(p.sex || "")}${p.guardian_name ? " · " + esc(p.guardian_name) : ""}${p.contact_phone ? " · " + esc(p.contact_phone) : ""}</div>
@@ -729,29 +731,24 @@
     }
   }
 
+  // ===== Select by index from search results (avoids JSON-in-HTML issues) =====
+  function selectPatientByIndex(idx) {
+    const p = window._searchResults?.[idx];
+    if (!p) {
+      console.error("selectPatientByIndex: no patient at index", idx);
+      return;
+    }
+    selectPatient(p);
+  }
+
   // ===== Select existing patient for revisit =====
-  async function selectPatient(json) {
+  async function selectPatient(patientObj) {
     try {
-      console.log(
-        "selectPatient called, json type:",
-        typeof json,
-        "length:",
-        json?.length,
-      );
-      let parsed;
-      try {
-        parsed = JSON.parse(json);
-      } catch (e) {
-        console.error("selectPatient parse1 fail:", e.message);
-        return;
-      }
-      if (typeof parsed === "string") {
-        try {
-          parsed = JSON.parse(parsed);
-        } catch (e) {
-          console.error("selectPatient parse2 fail:", e.message);
-          return;
-        }
+      // Accept either an object directly or a JSON string (from QR scan)
+      let parsed = patientObj;
+      if (typeof patientObj === "string") {
+        parsed = JSON.parse(patientObj);
+        if (typeof parsed === "string") parsed = JSON.parse(parsed);
       }
       currentPatient = parsed;
       currentVisitId = null;
