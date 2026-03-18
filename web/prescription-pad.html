@@ -740,6 +740,109 @@
   .adj-btn:hover {
     background: var(--blue-mid);
   }
+  .item-remove {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--bdr2);
+    background: var(--bg2);
+    color: var(--red);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1;
+    transition: all 0.15s;
+  }
+  .item-remove:hover {
+    background: var(--red-lt);
+    border-color: var(--red);
+  }
+  .item-remove.struck {
+    background: var(--green-lt);
+    color: var(--green);
+    border-color: var(--green);
+  }
+  .item-struck {
+    opacity: 0.4;
+    text-decoration: line-through;
+    pointer-events: none;
+  }
+  .add-item-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: var(--bg2);
+    border: 1px dashed var(--bdr2);
+    border-radius: var(--r);
+    color: var(--ink3);
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 6px;
+    font-family: system-ui, sans-serif;
+    transition: all 0.15s;
+  }
+  .add-item-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: var(--blue-lt);
+  }
+  .add-med-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  .add-med-box {
+    background: var(--bg2);
+    border-radius: var(--r2);
+    padding: 20px;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+  .add-med-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--bdr2);
+    border-radius: var(--r);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    margin-bottom: 8px;
+  }
+  .add-med-search:focus {
+    border-color: var(--blue);
+  }
+  .add-med-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  .add-med-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 0.5px solid var(--bdr);
+    font-size: 12px;
+    font-family: system-ui, sans-serif;
+  }
+  .add-med-item:hover {
+    background: var(--blue-lt);
+  }
+  .add-med-item strong {
+    color: var(--blue);
+  }
 
   /* Edit panel */
   .ep {
@@ -3110,6 +3213,7 @@
         const pid = "m" + idx;
         h += `<div class="med-card" id="${pid}">
         <div class="med-top">
+          <button class="item-remove" onclick="toggleStrike('med',${idx})" id="${pid}-rm" title="Remove medicine">×</button>
           <div class="med-rows">
             <div class="med-calc" id="${pid}-calc">${esc(m.calc)}</div>
             <div contenteditable="true" spellcheck="false" class="med-r r1" id="${pid}-r1">${esc(m.row1_en)}</div>
@@ -3139,12 +3243,14 @@
         </div>
       </div>`;
       });
+      h += `<button class="add-item-btn" onclick="showAddMedicine()">+ Add medicine</button>`;
       h += `</div>`;
     }
 
     if (has(r.investigations)) {
       h += `<div class="rv-sec"><div class="rv-hdr red">Investigations</div>
-    ${r.investigations.map((inv) => `<div class="inv-block" contenteditable="true" spellcheck="false"><strong>${esc(inv.name)}</strong> — ${esc(inv.indication)}${inv.urgency === "same-day" ? ' <span style="font-size:11px;color:var(--red)">(Same day)</span>' : ""}</div>`).join("")}
+    ${r.investigations.map((inv, i) => `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><button class="item-remove" onclick="toggleStrike('inv',${i})" id="inv${i}-rm" title="Remove investigation">×</button><div class="inv-block" id="inv${i}-text" contenteditable="true" spellcheck="false" style="flex:1"><strong>${esc(inv.name)}</strong> — ${esc(inv.indication)}${inv.urgency === "same-day" ? ' <span style="font-size:11px;color:var(--red)">(Same day)</span>' : ""}</div></div>`).join("")}
+    <button class="add-item-btn" onclick="addInvestigation()">+ Add investigation</button>
     </div>`;
     }
     if (has(r.iv_fluids) && r.iv_fluids.length) {
@@ -3177,10 +3283,11 @@
     ) {
       const v = r.vaccinations;
       h += `<div class="rv-sec"><div class="rv-hdr">Vaccination — ${esc(v.schedule_used || "IAP 2024")}</div>
-    ${(v.due || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="due" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="due" data-idx="${i}">${esc(x)}</span></label><span class="vax-due">Due today</span></div>`).join("")}
-    ${(v.overdue || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="overdue" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="overdue" data-idx="${i}">${esc(x)}</span></label><span class="vax-over">Overdue</span></div>`).join("")}
+    ${(v.due || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="due" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="due" data-idx="${i}">${esc(x)}</span></label><span class="vax-due">Due today</span><input type="date" class="vax-date" data-type="due" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
+    ${(v.overdue || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="overdue" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="overdue" data-idx="${i}">${esc(x)}</span></label><span class="vax-over">Overdue</span><input type="date" class="vax-date" data-type="overdue" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
     ${v.next_due ? `<div style="font-size:11px;color:var(--ink3);padding:5px 0;font-family:system-ui,sans-serif">Next due: <span contenteditable="true" spellcheck="false" id="vax-next-due">${esc(v.next_due)}</span></div>` : ""}
     ${v.notes ? `<div style="font-size:11px;color:var(--ink2);padding:3px 0;font-family:system-ui,sans-serif" contenteditable="true" spellcheck="false" id="vax-notes">${esc(v.notes)}</div>` : ""}
+    <button class="add-item-btn" onclick="addVaccination()">+ Add vaccine</button>
     </div>`;
     }
     if (has(r.developmental) && has(r.developmental.findings)) {
@@ -3341,6 +3448,18 @@
       };
     });
     rxData.medicines = meds;
+    // Remove struck-through medicines
+    rxData.medicines = rxData.medicines.filter((m, idx) => {
+      const btn = document.getElementById("m" + idx + "-rm");
+      return !btn || !btn.classList.contains("struck");
+    });
+    // Remove struck-through investigations
+    if (rxData.investigations) {
+      rxData.investigations = rxData.investigations.filter((inv, idx) => {
+        const btn = document.getElementById("inv" + idx + "-rm");
+        return !btn || !btn.classList.contains("struck");
+      });
+    }
     rxData.followup_days =
       parseInt(document.getElementById("fu-days")?.value) ||
       rxData.followup_days;
@@ -3883,6 +4002,156 @@
     </style></head><body>${h}</body></html>`);
     w.document.close();
     setTimeout(() => w.print(), 600);
+  }
+
+  // ===== REVIEW EDIT: Toggle strike-through on items =====
+  function toggleStrike(type, idx) {
+    const btn = document.getElementById(
+      `${type === "med" ? "m" : type}${idx}-rm`,
+    );
+    if (!btn) return;
+    const isStruck = btn.classList.toggle("struck");
+    btn.textContent = isStruck ? "\u2713" : "\u00d7";
+    btn.title = isStruck ? "Restore" : "Remove";
+    // Strike/unstrike the content
+    if (type === "med") {
+      const card = document.getElementById("m" + idx);
+      if (card) {
+        const top = card.querySelector(".med-top");
+        if (top) top.classList.toggle("item-struck");
+      }
+    } else if (type === "inv") {
+      const text = document.getElementById("inv" + idx + "-text");
+      if (text) text.classList.toggle("item-struck");
+    }
+  }
+
+  // ===== REVIEW EDIT: Add Medicine popup with formulary search =====
+  function showAddMedicine() {
+    const drugNames = Object.keys(formularyCache).sort();
+    const overlay = document.createElement("div");
+    overlay.className = "add-med-popup";
+    overlay.id = "add-med-overlay";
+    overlay.innerHTML = `<div class="add-med-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <strong style="font-size:14px;color:var(--blue)">Add Medicine from Formulary</strong>
+        <button onclick="document.getElementById('add-med-overlay').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink3)">\u00d7</button>
+      </div>
+      <input class="add-med-search" id="add-med-search" placeholder="Search drug name..." oninput="filterAddMed()" autofocus>
+      <div class="add-med-list" id="add-med-list">
+        ${drugNames
+          .slice(0, 50)
+          .map(
+            (d) =>
+              `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + (f.conc_qty || "") + (f.conc_unit || "") + "/" + (f.per_qty || "") + (f.per_unit || "")).join(", ")}</div></div>`,
+          )
+          .join("")}
+      </div>
+    </div>`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    document.getElementById("add-med-search").focus();
+  }
+
+  function filterAddMed() {
+    const q = (
+      document.getElementById("add-med-search")?.value || ""
+    ).toUpperCase();
+    const list = document.getElementById("add-med-list");
+    const drugNames = Object.keys(formularyCache)
+      .filter((d) => d.includes(q))
+      .sort();
+    list.innerHTML = drugNames
+      .slice(0, 50)
+      .map(
+        (d) =>
+          `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + (f.conc_qty || "") + (f.conc_unit || "") + "/" + (f.per_qty || "") + (f.per_unit || "")).join(", ")}</div></div>`,
+      )
+      .join("");
+  }
+
+  function selectAddMed(drugName) {
+    document.getElementById("add-med-overlay")?.remove();
+    const f = formularyCache[drugName];
+    if (!f) return;
+    const form = f.formulations?.[0] || {};
+    const band = f.dosing_bands?.[0] || {};
+    const wt = rxData?.patient?.weight_kg || 0;
+    const newMed = {
+      number: (rxData.medicines?.length || 0) + 1,
+      row1_en: `${drugName} (${form.conc_qty || ""}${form.conc_unit || ""}/${form.per_qty || ""}${form.per_unit || ""} ${form.form || ""})`,
+      row2_en:
+        wt && band.dose_min_qty
+          ? `${((wt * band.dose_min_qty) / (band.frequency_per_day || 1)).toFixed(1)} ${form.per_unit || "ml"} ${form.form === "tablet" ? "orally" : "orally"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days_default || "?"} days`
+          : "Enter dosing instructions",
+      row3_hi:
+        "\u0939\u093f\u0902\u0926\u0940 \u0928\u093f\u0930\u094d\u0926\u0947\u0936 \u092f\u0939\u093e\u0901 \u0932\u093f\u0916\u0947\u0902",
+      calc:
+        wt && band.dose_min_qty
+          ? `${band.dose_min_qty}mg/kg \u00d7 ${wt}kg = ${(band.dose_min_qty * wt).toFixed(1)}mg`
+          : "Calculate dose",
+      flag: "",
+      dose_mg_per_kg: band.dose_min_qty || 0,
+      dose_per_day_divided: band.frequency_per_day || 1,
+      concentration_mg: form.conc_qty || 0,
+      concentration_per_ml: form.per_qty || 5,
+      max_dose_single_mg: band.max_single_qty || 0,
+      formulation: form.form || "syrup",
+      snomed_code: f.snomed_code || null,
+      snomed_display: f.snomed_display || null,
+      method: "weight",
+      pictogram: {
+        form: form.form || "syrup",
+        dose_display: "",
+        dose_qty: 1,
+        dose_fraction: null,
+        times: ["morning", "evening"],
+        prn: false,
+        max_per_day: null,
+        duration_days: band.duration_days_default || null,
+        with_food: true,
+        special: null,
+      },
+    };
+    if (!rxData.medicines) rxData.medicines = [];
+    rxData.medicines.push(newMed);
+    renderReview();
+    showView("rx");
+  }
+
+  // ===== REVIEW EDIT: Add Investigation =====
+  function addInvestigation() {
+    const name = prompt("Investigation name (e.g. CBC, CRP, Chest X-Ray):");
+    if (!name?.trim()) return;
+    const indication =
+      prompt("Indication (e.g. Rule out bacterial infection):") || "";
+    if (!rxData.investigations) rxData.investigations = [];
+    rxData.investigations.push({
+      name: name.trim(),
+      indication: indication.trim(),
+      urgency: "routine",
+      loinc_code: null,
+    });
+    renderReview();
+    showView("rx");
+  }
+
+  // ===== REVIEW EDIT: Add Vaccination =====
+  function addVaccination() {
+    const name = prompt("Vaccine name (e.g. DPT-3, IPV-2, PCV-2):");
+    if (!name?.trim()) return;
+    if (!rxData.vaccinations)
+      rxData.vaccinations = {
+        schedule_used: "IAP2024",
+        due: [],
+        overdue: [],
+        given_today: [],
+      };
+    rxData.vaccinations.due.push(name.trim());
+    renderReview();
+    showView("rx");
   }
 
   function resetPad() {
