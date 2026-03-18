@@ -2536,9 +2536,21 @@
             wrap?.querySelectorAll("[contenteditable]").forEach((el) => {
               el.removeAttribute("contenteditable");
             });
-            wrap?.querySelectorAll(".adj-btn, .ep, .ep-apply").forEach((el) => {
-              el.style.display = "none";
-            });
+            wrap
+              ?.querySelectorAll(
+                ".adj-btn, .ep, .ep-apply, .item-remove, .add-item-btn",
+              )
+              .forEach((el) => {
+                el.style.display = "none";
+              });
+            wrap
+              ?.querySelectorAll(
+                ".vax-check, .vax-status, .vax-date, .fu-edit, input, select",
+              )
+              .forEach((el) => {
+                el.disabled = true;
+                el.style.opacity = "0.6";
+              });
             const signoff = document.querySelector(".signoff");
             if (signoff)
               signoff.innerHTML = `<span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription saved — ${esc(rxId)}</span>
