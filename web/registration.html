@@ -796,6 +796,10 @@
               setVal("f-hr", visit.hr_per_min);
               setVal("f-rr", visit.rr_per_min);
               setVal("f-spo2", visit.spo2_pct);
+              setVal("f-bp-sys", visit.bp_systolic);
+              setVal("f-bp-dia", visit.bp_diastolic);
+              setVal("f-map", visit.map_mmhg);
+              calcMAP();
               setVal("f-complaints", visit.chief_complaints);
               setVal("f-ext-notes", visit.clinical_notes);
               setVal("f-fee", visit.consultation_fee);
@@ -1036,11 +1040,17 @@
           <div class="ff"><label>Head Circumference (cm)</label><input type="number" id="f-hc" step="0.1" placeholder="e.g. 43" /></div>
           <div class="ff"><label>MUAC (cm)</label><input type="number" id="f-muac" step="0.1" placeholder="e.g. 13.5" /></div>
         </div>
-        <div class="fg fg4">
+        <div class="fg fg4" style="margin-bottom:10px">
           <div class="ff"><label>Temperature (°F)</label><input type="number" id="f-temp" step="0.1" placeholder="e.g. 99.4" /></div>
           <div class="ff"><label>Heart Rate (/min)</label><input type="number" id="f-hr" placeholder="e.g. 120" /></div>
           <div class="ff"><label>Respiratory Rate (/min)</label><input type="number" id="f-rr" placeholder="e.g. 28" /></div>
           <div class="ff"><label>SpO₂ (%)</label><input type="number" id="f-spo2" step="0.1" placeholder="e.g. 98" /></div>
+        </div>
+        <div class="fg fg4">
+          <div class="ff"><label>BP Systolic (mmHg)</label><input type="number" id="f-bp-sys" placeholder="e.g. 90" oninput="calcMAP()" /></div>
+          <div class="ff"><label>BP Diastolic (mmHg)</label><input type="number" id="f-bp-dia" placeholder="e.g. 60" oninput="calcMAP()" /></div>
+          <div class="ff"><label>MAP (mmHg)</label><input type="number" id="f-map" step="0.1" readonly style="background:#f0f0f0;color:var(--ink)" placeholder="Auto" /></div>
+          <div class="ff"><label>BP Centile</label><div id="bp-centile" style="font-size:12px;padding-top:6px;color:var(--ink3)">—</div></div>
         </div>
       </div>
     </div>`;
@@ -1310,6 +1320,77 @@
   }
 
   let existingVax = []; // Populated for returning patients
+
+  // ===== BP: MAP calculation + pediatric percentile =====
+  // Pediatric BP 50th/90th/95th percentiles by age (AAP 2017 simplified)
+  // Source: AAP Clinical Practice Guideline for Screening and Management of High BP in Children
+  // Values: [age_years, sys_50th, sys_90th, sys_95th, dia_50th, dia_90th, dia_95th]
+  const BP_CENTILES = [
+    [1, 85, 98, 102, 40, 52, 54],
+    [2, 87, 100, 104, 42, 54, 56],
+    [3, 88, 101, 105, 44, 56, 58],
+    [4, 89, 102, 106, 46, 58, 60],
+    [5, 90, 103, 107, 48, 60, 62],
+    [6, 91, 105, 109, 50, 62, 64],
+    [7, 92, 106, 110, 52, 64, 66],
+    [8, 93, 107, 111, 54, 66, 68],
+    [9, 94, 108, 112, 55, 67, 69],
+    [10, 95, 109, 113, 56, 68, 70],
+    [11, 96, 110, 114, 57, 69, 71],
+    [12, 97, 111, 115, 58, 70, 72],
+    [13, 98, 112, 116, 59, 71, 73],
+    [14, 100, 114, 118, 60, 72, 74],
+    [15, 102, 116, 120, 62, 74, 76],
+    [16, 104, 118, 122, 64, 76, 78],
+    [17, 106, 120, 124, 66, 78, 80],
+    [18, 108, 122, 126, 68, 80, 82],
+  ];
+  function calcMAP() {
+    const sys = parseInt(document.getElementById("f-bp-sys")?.value);
+    const dia = parseInt(document.getElementById("f-bp-dia")?.value);
+    const mapEl = document.getElementById("f-map");
+    const centileEl = document.getElementById("bp-centile");
+    if (isNaN(sys) || isNaN(dia)) {
+      if (mapEl) mapEl.value = "";
+      if (centileEl) centileEl.textContent = "—";
+      return;
+    }
+    const map = Math.round((dia + (sys - dia) / 3) * 10) / 10;
+    if (mapEl) mapEl.value = map;
+    // Percentile lookup
+    if (!centileEl) return;
+    const dob = document.getElementById("f-dob")?.value;
+    if (!dob) {
+      centileEl.textContent = map + " mmHg";
+      return;
+    }
+    const ageYears = Math.floor(
+      (new Date() - new Date(dob)) / (365.25 * 86400000),
+    );
+    if (ageYears < 1) {
+      centileEl.innerHTML =
+        '<span style="color:var(--ink3)">Age < 1yr (use neonatal norms)</span>';
+      return;
+    }
+    const row =
+      BP_CENTILES.find((r) => r[0] === Math.min(ageYears, 18)) ||
+      BP_CENTILES[BP_CENTILES.length - 1];
+    let label, color;
+    if (sys >= row[3] || dia >= row[6]) {
+      label = "≥95th (Stage 1 HTN)";
+      color = "var(--red)";
+    } else if (sys >= row[2] || dia >= row[5]) {
+      label = "90th-95th (Elevated)";
+      color = "#b8860b";
+    } else if (sys >= row[1] || dia >= row[4]) {
+      label = "50th-90th (Normal)";
+      color = "var(--green)";
+    } else {
+      label = "<50th (Normal)";
+      color = "var(--green)";
+    }
+    centileEl.innerHTML = `<span style="color:${color};font-weight:600">${label}</span>`;
+  }
 
   // ===== Fee calculation =====
   function updateFee() {
@@ -1613,6 +1694,11 @@
         hr_per_min: parseInt(document.getElementById("f-hr")?.value) || null,
         rr_per_min: parseInt(document.getElementById("f-rr")?.value) || null,
         spo2_pct: parseFloat(document.getElementById("f-spo2")?.value) || null,
+        bp_systolic:
+          parseInt(document.getElementById("f-bp-sys")?.value) || null,
+        bp_diastolic:
+          parseInt(document.getElementById("f-bp-dia")?.value) || null,
+        map_mmhg: parseFloat(document.getElementById("f-map")?.value) || null,
         chief_complaints:
           (document.getElementById("f-complaints")?.value || "").trim() || null,
         clinical_notes:
