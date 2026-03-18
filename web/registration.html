@@ -1548,7 +1548,7 @@
       feeEl.value = 300;
       return;
     }
-    // Check for follow-up within 7 days (50% discount)
+    // Check for previous visit — auto-detect follow-up within 7 days
     const today = new Date().toISOString().split("T")[0];
     q(
       "visits",
@@ -1564,11 +1564,14 @@
         const daysDiff = Math.floor(
           (new Date(today) - new Date(lastDate)) / 86400000,
         );
-        if (daysDiff <= 7 && visitType === "followup") {
+        if (daysDiff <= 7) {
+          // Auto-set to follow-up and apply 50% discount
+          const vtSel = document.getElementById("f-visit-type");
+          if (vtSel && vtSel.value === "new") vtSel.value = "followup";
           feeEl.value = 150;
-          return;
+        } else {
+          feeEl.value = 300;
         }
-        feeEl.value = 300;
       })
       .catch(() => {
         feeEl.value = 300;
