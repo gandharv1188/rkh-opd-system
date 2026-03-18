@@ -697,7 +697,7 @@
       const enc = encodeURIComponent(val);
       const r = await q(
         "patients",
-        `?is_active=eq.true&or=(name.ilike.*${enc}*,id.ilike.*${enc}*,contact_phone.ilike.*${enc}*)&order=name.asc&limit=20`,
+        `?is_active=eq.true&or=(name.ilike.*${enc}*,id.ilike.*${enc}*,contact_phone.ilike.*${enc}*,guardian_name.ilike.*${enc}*)&order=name.asc&limit=20`,
       );
       if (!r.ok) throw new Error("Search failed");
       const pts = await r.json();
@@ -730,11 +730,59 @@
   }
 
   // ===== Select existing patient for revisit =====
-  function selectPatient(json) {
+  async function selectPatient(json) {
     currentPatient = JSON.parse(json);
+    currentVisitId = null;
     document.getElementById("results").innerHTML = "";
     document.getElementById("srch").value = "";
     renderForm(currentPatient);
+
+    // Check if this patient already has a visit today — if so, enable edit mode
+    const today = new Date().toISOString().split("T")[0];
+    try {
+      const tvr = await q(
+        "visits",
+        `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&visit_date=eq.${today}&order=created_at.desc&limit=1&select=*`,
+      );
+      if (tvr.ok) {
+        const todayVisits = await tvr.json();
+        if (todayVisits.length) {
+          const visit = todayVisits[0];
+          currentVisitId = visit.id;
+          // Pre-fill visit fields with saved data
+          setTimeout(() => {
+            const setVal = (id, v) => {
+              const el = document.getElementById(id);
+              if (el && v != null) el.value = v;
+            };
+            setVal("f-visit-date", visit.visit_date);
+            setVal("f-doctor", visit.doctor_id);
+            setVal("f-wt", visit.weight_kg);
+            setVal("f-ht", visit.height_cm);
+            setVal("f-hc", visit.hc_cm);
+            setVal("f-muac", visit.muac_cm);
+            setVal("f-temp", visit.temp_f);
+            setVal("f-hr", visit.hr_per_min);
+            setVal("f-rr", visit.rr_per_min);
+            setVal("f-spo2", visit.spo2_pct);
+            setVal("f-complaints", visit.chief_complaints);
+            setVal("f-ext-notes", visit.clinical_notes);
+            // Update save button to indicate edit mode
+            const saveBtn = document.getElementById("save-btn");
+            if (saveBtn) {
+              saveBtn.textContent = "Update Visit";
+              saveBtn.style.background = "#2d5aa0";
+            }
+            showToast(
+              "Today's visit found — editing. Change values and click Update Visit.",
+            );
+          }, 100);
+        }
+      }
+    } catch (e) {
+      console.warn("Today visit check:", e.message);
+    }
+
     // Fetch existing vaccinations for returning patient and render checklist
     if (currentPatient.dob) {
       q(
@@ -1535,7 +1583,6 @@
         </div>
         <div style="text-align:center;margin-top:12px">
           <button class="act-btn primary" onclick="printToken()">Print Token</button>
-          <button class="act-btn" onclick="editVisit()">Edit Visit</button>
           <button class="act-btn" onclick="resetAll()">Register Next Patient</button>
         </div>`;
       showToast(
