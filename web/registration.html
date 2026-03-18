@@ -802,9 +802,20 @@
               calcMAP();
               setVal("f-complaints", visit.chief_complaints);
               setVal("f-ext-notes", visit.clinical_notes);
-              setVal("f-fee", visit.consultation_fee);
-              setVal("f-pay-mode", visit.payment_mode);
-              setVal("f-pay-status", visit.payment_status || "paid");
+              // Payment: if fee was explicitly set (non-zero or status=paid), use saved values; otherwise recalculate
+              const hasSavedPayment =
+                visit.consultation_fee > 0 || visit.payment_status === "paid";
+              if (hasSavedPayment) {
+                setVal("f-fee", visit.consultation_fee);
+                if (visit.payment_mode)
+                  document.getElementById("f-pay-mode").value =
+                    visit.payment_mode;
+                if (visit.payment_status)
+                  document.getElementById("f-pay-status").value =
+                    visit.payment_status;
+              } else {
+                updateFee(); // Recalculate for legacy visits with default 0/pending
+              }
               // Update save button to indicate edit mode
               const saveBtn = document.getElementById("save-btn");
               if (saveBtn) {
@@ -1408,11 +1419,11 @@
       feeEl.value = 300;
       return;
     }
-    // Check for same-day revisit (free) or within-7-day follow-up (50%)
+    // Check for follow-up within 7 days (50% discount)
     const today = new Date().toISOString().split("T")[0];
     q(
       "visits",
-      `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&visit_date=lte.${today}&order=visit_date.desc&limit=1&select=visit_date`,
+      `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&visit_date=lt.${today}&order=visit_date.desc&limit=1&select=visit_date`,
     )
       .then((r) => (r.ok ? r.json() : []))
       .then((visits) => {
@@ -1421,20 +1432,14 @@
           return;
         }
         const lastDate = visits[0].visit_date;
-        if (lastDate === today) {
-          feeEl.value = 0;
-          feeEl.style.color = "#1a6b3a";
-          return;
-        } // Same day = free
         const daysDiff = Math.floor(
           (new Date(today) - new Date(lastDate)) / 86400000,
         );
         if (daysDiff <= 7 && visitType === "followup") {
           feeEl.value = 150;
           return;
-        } // 50% within 7 days
+        }
         feeEl.value = 300;
-        feeEl.style.color = "var(--ink)";
       })
       .catch(() => {
         feeEl.value = 300;
@@ -1821,17 +1826,27 @@
         }
       }
 
-      // Generate receipt number: RKH-RCT-YYMMDD-NNNNN
-      const now = new Date();
-      const rcptDate =
-        String(now.getFullYear() % 100).padStart(2, "0") +
-        String(now.getMonth() + 1).padStart(2, "0") +
-        String(now.getDate()).padStart(2, "0");
-      const rcptSeq = String(Math.floor(Math.random() * 99999) + 1).padStart(
-        5,
-        "0",
-      );
-      const receiptNo = "RKH-RCT-" + rcptDate + "-" + rcptSeq;
+      // Generate receipt number — only for NEW visits, reuse for updates
+      let receiptNo;
+      if (isNewVisit) {
+        const now = new Date();
+        const rcptDate =
+          String(now.getFullYear() % 100).padStart(2, "0") +
+          String(now.getMonth() + 1).padStart(2, "0") +
+          String(now.getDate()).padStart(2, "0");
+        const rcptSeq = String(Math.floor(Math.random() * 99999) + 1).padStart(
+          5,
+          "0",
+        );
+        receiptNo = "RKH-RCT-" + rcptDate + "-" + rcptSeq;
+      } else {
+        receiptNo =
+          lastToken?.receiptNo ||
+          "RKH-RCT-" +
+            new Date().toISOString().slice(2, 10).replace(/-/g, "") +
+            "-" +
+            String(Math.floor(Math.random() * 99999) + 1).padStart(5, "0");
+      }
 
       // Save form values before clearing
       const doctor = "Dr. Lokender Goyal";
