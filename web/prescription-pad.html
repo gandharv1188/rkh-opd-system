@@ -1526,21 +1526,6 @@
         <button class="mic-btn" id="mic-btn" onclick="toggleVoice()">
           <span class="mic-dot"></span> Dictate
         </button>
-        <button
-          class="mic-btn"
-          onclick="document.getElementById('attach-input').click()"
-          style="background: var(--blue-mid); padding: 7px 10px"
-          title="Attach image/PDF — AI will extract medical data"
-        >
-          + Attach
-        </button>
-        <input
-          type="file"
-          id="attach-input"
-          accept="image/*,.pdf"
-          style="display: none"
-          onchange="handleAttachment(this)"
-        />
         <span
           class="mic-st"
           id="mic-st"
@@ -1553,14 +1538,41 @@
           >Tap to dictate, or type above</span
         >
       </div>
-      <button
-        class="gen-btn"
-        id="gen-btn"
-        onclick="generatePrescription()"
-        style="width: auto; padding: 8px 16px; font-size: 13px; flex-shrink: 0"
-      >
-        Generate
-      </button>
+      <div style="display: flex; gap: 6px; flex-shrink: 0">
+        <button
+          class="gen-btn"
+          onclick="document.getElementById('attach-input').click()"
+          style="
+            width: auto;
+            padding: 8px 12px;
+            font-size: 12px;
+            background: var(--blue-mid);
+          "
+          title="Attach image/PDF — AI will extract medical data"
+        >
+          + Attach
+        </button>
+        <input
+          type="file"
+          id="attach-input"
+          accept="image/*,.pdf"
+          style="display: none"
+          onchange="handleAttachment(this)"
+        />
+        <button
+          class="gen-btn"
+          id="gen-btn"
+          onclick="generatePrescription()"
+          style="
+            width: auto;
+            padding: 8px 12px;
+            font-size: 12px;
+            flex-shrink: 0;
+          "
+        >
+          Generate
+        </button>
+      </div>
     </div>
   </div>
 
