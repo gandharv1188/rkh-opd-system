@@ -752,20 +752,9 @@
       }
       currentPatient = parsed;
       currentVisitId = null;
-      console.log(
-        "selectPatient: patient =",
-        currentPatient?.id,
-        currentPatient?.name,
-      );
       document.getElementById("results").innerHTML = "";
       document.getElementById("srch").value = "";
       renderForm(currentPatient);
-      console.log(
-        "selectPatient: f-name =",
-        document.getElementById("f-name")?.value,
-        "f-uhid =",
-        document.getElementById("f-uhid")?.value,
-      );
 
       // Check if this patient already has a visit today — if so, enable edit mode
       const today = new Date().toISOString().split("T")[0];
