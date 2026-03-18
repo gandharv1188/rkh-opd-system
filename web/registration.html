@@ -731,124 +731,142 @@
 
   // ===== Select existing patient for revisit =====
   async function selectPatient(json) {
-    let parsed = JSON.parse(json);
-    // Handle double-stringified JSON from search result onclick
-    if (typeof parsed === "string") parsed = JSON.parse(parsed);
-    currentPatient = parsed;
-    currentVisitId = null;
-    console.log(
-      "selectPatient: parsed patient:",
-      currentPatient?.id,
-      currentPatient?.name,
-      typeof currentPatient,
-    );
-    document.getElementById("results").innerHTML = "";
-    document.getElementById("srch").value = "";
-    renderForm(currentPatient);
-    // Verify form fields were populated
-    console.log(
-      "selectPatient: f-name value after renderForm:",
-      document.getElementById("f-name")?.value,
-    );
-    console.log(
-      "selectPatient: f-uhid value after renderForm:",
-      document.getElementById("f-uhid")?.value,
-    );
-
-    // Check if this patient already has a visit today — if so, enable edit mode
-    const today = new Date().toISOString().split("T")[0];
     try {
-      const tvr = await q(
-        "visits",
-        `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&visit_date=eq.${today}&order=created_at.desc&limit=1&select=*`,
+      console.log(
+        "selectPatient called, json type:",
+        typeof json,
+        "length:",
+        json?.length,
       );
-      if (tvr.ok) {
-        const todayVisits = await tvr.json();
-        if (todayVisits.length) {
-          const visit = todayVisits[0];
-          currentVisitId = visit.id;
-          // Pre-fill visit fields with saved data
-          setTimeout(() => {
-            const setVal = (id, v) => {
-              const el = document.getElementById(id);
-              if (el && v != null) el.value = v;
-            };
-            setVal("f-visit-date", visit.visit_date);
-            setVal("f-doctor", visit.doctor_id);
-            setVal("f-wt", visit.weight_kg);
-            setVal("f-ht", visit.height_cm);
-            setVal("f-hc", visit.hc_cm);
-            setVal("f-muac", visit.muac_cm);
-            setVal("f-temp", visit.temp_f);
-            setVal("f-hr", visit.hr_per_min);
-            setVal("f-rr", visit.rr_per_min);
-            setVal("f-spo2", visit.spo2_pct);
-            setVal("f-complaints", visit.chief_complaints);
-            setVal("f-ext-notes", visit.clinical_notes);
-            // Update save button to indicate edit mode
-            const saveBtn = document.getElementById("save-btn");
-            if (saveBtn) {
-              saveBtn.textContent = "Update Visit";
-              saveBtn.style.background = "#2d5aa0";
-            }
-            showToast(
-              "Today's visit found — editing. Change values and click Update Visit.",
-            );
-          }, 100);
+      let parsed;
+      try {
+        parsed = JSON.parse(json);
+      } catch (e) {
+        console.error("selectPatient parse1 fail:", e.message);
+        return;
+      }
+      if (typeof parsed === "string") {
+        try {
+          parsed = JSON.parse(parsed);
+        } catch (e) {
+          console.error("selectPatient parse2 fail:", e.message);
+          return;
         }
       }
-    } catch (e) {
-      console.warn("Today visit check:", e.message);
-    }
+      currentPatient = parsed;
+      currentVisitId = null;
+      console.log(
+        "selectPatient: patient =",
+        currentPatient?.id,
+        currentPatient?.name,
+      );
+      document.getElementById("results").innerHTML = "";
+      document.getElementById("srch").value = "";
+      renderForm(currentPatient);
+      console.log(
+        "selectPatient: f-name =",
+        document.getElementById("f-name")?.value,
+        "f-uhid =",
+        document.getElementById("f-uhid")?.value,
+      );
 
-    // Fetch existing vaccinations for returning patient and render checklist
-    if (currentPatient.dob) {
+      // Check if this patient already has a visit today — if so, enable edit mode
+      const today = new Date().toISOString().split("T")[0];
+      try {
+        const tvr = await q(
+          "visits",
+          `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&visit_date=eq.${today}&order=created_at.desc&limit=1&select=*`,
+        );
+        if (tvr.ok) {
+          const todayVisits = await tvr.json();
+          if (todayVisits.length) {
+            const visit = todayVisits[0];
+            currentVisitId = visit.id;
+            // Pre-fill visit fields with saved data
+            setTimeout(() => {
+              const setVal = (id, v) => {
+                const el = document.getElementById(id);
+                if (el && v != null) el.value = v;
+              };
+              setVal("f-visit-date", visit.visit_date);
+              setVal("f-doctor", visit.doctor_id);
+              setVal("f-wt", visit.weight_kg);
+              setVal("f-ht", visit.height_cm);
+              setVal("f-hc", visit.hc_cm);
+              setVal("f-muac", visit.muac_cm);
+              setVal("f-temp", visit.temp_f);
+              setVal("f-hr", visit.hr_per_min);
+              setVal("f-rr", visit.rr_per_min);
+              setVal("f-spo2", visit.spo2_pct);
+              setVal("f-complaints", visit.chief_complaints);
+              setVal("f-ext-notes", visit.clinical_notes);
+              // Update save button to indicate edit mode
+              const saveBtn = document.getElementById("save-btn");
+              if (saveBtn) {
+                saveBtn.textContent = "Update Visit";
+                saveBtn.style.background = "#2d5aa0";
+              }
+              showToast(
+                "Today's visit found — editing. Change values and click Update Visit.",
+              );
+            }, 100);
+          }
+        }
+      } catch (e) {
+        console.warn("Today visit check:", e.message);
+      }
+
+      // Fetch existing vaccinations for returning patient and render checklist
+      if (currentPatient.dob) {
+        q(
+          "vaccinations",
+          `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&date_given=not.is.null&select=vaccine_name,dose_number,date_given`,
+        )
+          .then((r) => (r.ok ? r.json() : []))
+          .then((vaxList) => renderVaxChecklist(currentPatient.dob, vaxList))
+          .catch(() => renderVaxChecklist(currentPatient.dob, []));
+      }
+      // Fetch recent lab results for returning patient and show as read-only reference
       q(
-        "vaccinations",
-        `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&date_given=not.is.null&select=vaccine_name,dose_number,date_given`,
+        "lab_results",
+        `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&order=test_date.desc&limit=10&select=test_name,value,unit,flag,test_date`,
       )
         .then((r) => (r.ok ? r.json() : []))
-        .then((vaxList) => renderVaxChecklist(currentPatient.dob, vaxList))
-        .catch(() => renderVaxChecklist(currentPatient.dob, []));
-    }
-    // Fetch recent lab results for returning patient and show as read-only reference
-    q(
-      "lab_results",
-      `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&order=test_date.desc&limit=10&select=test_name,value,unit,flag,test_date`,
-    )
-      .then((r) => (r.ok ? r.json() : []))
-      .then((labs) => {
-        if (!labs.length) return;
-        const container = document.getElementById("lab-entries");
-        if (!container) return;
-        const header = document.createElement("div");
-        header.style.cssText =
-          "font-size:10px;color:var(--ink3);margin-bottom:4px;font-weight:600;";
-        header.textContent = "Previous lab results:";
-        container.before(header);
-        labs.forEach((l) => {
-          const flagIcon =
-            l.flag === "low"
-              ? "↓"
-              : l.flag === "high"
-                ? "↑"
-                : l.flag === "abnormal"
-                  ? "⚠"
-                  : "✓";
-          const flagColor =
-            l.flag && l.flag !== "normal" ? "var(--red)" : "var(--green)";
-          const d = new Date(l.test_date).toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "short",
+        .then((labs) => {
+          if (!labs.length) return;
+          const container = document.getElementById("lab-entries");
+          if (!container) return;
+          const header = document.createElement("div");
+          header.style.cssText =
+            "font-size:10px;color:var(--ink3);margin-bottom:4px;font-weight:600;";
+          header.textContent = "Previous lab results:";
+          container.before(header);
+          labs.forEach((l) => {
+            const flagIcon =
+              l.flag === "low"
+                ? "↓"
+                : l.flag === "high"
+                  ? "↑"
+                  : l.flag === "abnormal"
+                    ? "⚠"
+                    : "✓";
+            const flagColor =
+              l.flag && l.flag !== "normal" ? "var(--red)" : "var(--green)";
+            const d = new Date(l.test_date).toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+            });
+            const span = document.createElement("span");
+            span.style.cssText =
+              "display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:#f0f0ea;border:1px solid var(--brd);border-radius:99px;font-size:10px;color:var(--ink3);margin:2px;";
+            span.innerHTML = `<strong>${esc(l.test_name)}</strong>: ${esc(l.value)} ${esc(l.unit || "")} <span style="color:${flagColor}">${flagIcon}</span> (${d})`;
+            container.appendChild(span);
           });
-          const span = document.createElement("span");
-          span.style.cssText =
-            "display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:#f0f0ea;border:1px solid var(--brd);border-radius:99px;font-size:10px;color:var(--ink3);margin:2px;";
-          span.innerHTML = `<strong>${esc(l.test_name)}</strong>: ${esc(l.value)} ${esc(l.unit || "")} <span style="color:${flagColor}">${flagIcon}</span> (${d})`;
-          container.appendChild(span);
-        });
-      })
-      .catch(() => {});
+        })
+        .catch(() => {});
+    } catch (outerErr) {
+      console.error("selectPatient outer error:", outerErr);
+    }
   }
 
   // ===== New patient form =====
