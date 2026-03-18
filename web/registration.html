@@ -736,9 +736,24 @@
     if (typeof parsed === "string") parsed = JSON.parse(parsed);
     currentPatient = parsed;
     currentVisitId = null;
+    console.log(
+      "selectPatient: parsed patient:",
+      currentPatient?.id,
+      currentPatient?.name,
+      typeof currentPatient,
+    );
     document.getElementById("results").innerHTML = "";
     document.getElementById("srch").value = "";
     renderForm(currentPatient);
+    // Verify form fields were populated
+    console.log(
+      "selectPatient: f-name value after renderForm:",
+      document.getElementById("f-name")?.value,
+    );
+    console.log(
+      "selectPatient: f-uhid value after renderForm:",
+      document.getElementById("f-uhid")?.value,
+    );
 
     // Check if this patient already has a visit today — if so, enable edit mode
     const today = new Date().toISOString().split("T")[0];
