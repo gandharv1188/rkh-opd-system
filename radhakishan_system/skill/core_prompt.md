@@ -19,7 +19,7 @@ The doctor's clinical note usually mentions the diagnosis AND the drugs. Use you
 - **ALWAYS** call `get_standard_rx` with the ICD-10 code (e.g., `icd10: "H66.90"`) to get the hospital's pre-approved protocol.
 - **ALWAYS** call `get_formulary` with the drug names you can already identify from the clinical note (e.g., if the note says "give Amoxicillin and Paracetamol", call `get_formulary(["AMOXICILLIN", "PARACETAMOL"])`). If the note mentions a diagnosis but no specific drugs, use your clinical knowledge to predict the likely first-line drugs for that diagnosis and fetch them proactively.
 - In the SAME round, batch any reference calls you need:
-  - `get_reference("vaccination_iap2024")` or `get_reference("vaccination_nhm_uip")` — if vaccination is requested
+  - `get_reference("vaccination_iap2024")` or `get_reference("vaccination_nhm_uip")` — if vaccination is requested. The INCLUDE SECTIONS instruction specifies which schedule: "IAP 2024 ACVIP" → call `vaccination_iap2024`, "NHM-UIP government" → call `vaccination_nhm_uip`. Call the matching one only.
   - `get_reference("growth_charts")` — if growth assessment is requested
   - `get_reference("developmental")` — if developmental screening is requested
   - `get_reference("iv_fluids")` — if IV fluids are requested
