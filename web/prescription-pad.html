@@ -3057,23 +3057,15 @@
       if (!res.ok) throw new Error("AI processing failed (" + res.status + ")");
       const data = await res.json();
 
-      // Step 4: Dump extracted text into the prescription pad
+      // Step 4: Dump transcribed text directly into the prescription pad
       if (data.text_for_pad) {
-        ta.value = (
-          ta.value +
-          "\n\n--- Extracted from attached document ---\n" +
-          data.text_for_pad
-        ).trim();
-        st.textContent = "Document data added to note ✓";
+        ta.value = (ta.value ? ta.value + "\n" : "") + data.text_for_pad.trim();
+        st.textContent = "Notes added ✓";
       } else if (data.summary) {
-        ta.value = (
-          ta.value +
-          "\n\n--- From attached document ---\n" +
-          data.summary
-        ).trim();
-        st.textContent = "Document summary added ✓";
+        ta.value = (ta.value ? ta.value + "\n" : "") + data.summary.trim();
+        st.textContent = "Notes added ✓";
       } else {
-        st.textContent = "No extractable data found in document";
+        st.textContent = "Could not read the document";
       }
     } catch (e) {
       console.error("Attachment processing error:", e);

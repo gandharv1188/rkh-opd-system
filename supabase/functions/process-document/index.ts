@@ -138,16 +138,20 @@ serve(async (req: Request) => {
 
     // For prescription pad mode, use a fast text-dump prompt instead of structured JSON
     const isPadMode = mode === "pad";
-    const padPrompt = `Read this medical document quickly. Output a concise clinical summary that a doctor can use while writing a prescription. Format as plain text (NOT JSON):
+    const padPrompt = `This is a photo of a doctor's handwritten notes on a notepad. The handwriting may be messy, abbreviated, or use medical shorthand — this is normal.
 
-- Patient details (name, age, sex) if visible
-- All lab values: "Test: Value Unit (H/L/N)" one per line
-- Diagnoses mentioned
-- Medications listed with doses
-- Key clinical findings
-- Any abnormal values flagged with (HIGH) or (LOW)
+Your job: transcribe EXACTLY what is written. Do not summarize, interpret, rephrase, or add commentary. Output the text as-is, preserving the doctor's own words, abbreviations, and structure.
 
-Be brief and factual. Skip headers, logos, addresses. Just the medical data.`;
+Rules:
+- Output ONLY the transcribed text, nothing else
+- Keep the doctor's exact abbreviations (e.g., "c/o", "o/e", "Dx", "Rx", "Hb", "TLC", "BD", "TDS")
+- Keep the doctor's exact phrasing and sentence fragments
+- If a word is unclear, write your best guess — do not skip it
+- Preserve line breaks as the doctor wrote them
+- Do NOT add labels like "Patient:", "Diagnosis:", "Medicines:" unless the doctor wrote them
+- Do NOT add "(HIGH)" or "(LOW)" or any flags
+- Do NOT rearrange or reformat the content
+- If it is a printed lab report or prescription (not handwritten), still just transcribe all the text verbatim`;
 
     const userText = isPadMode
       ? padPrompt
