@@ -1279,7 +1279,7 @@
 <div class="app">
   <!-- HEADER -->
   <div class="hdr">
-    <div class="hdr-l">
+    <div class="hdr-l" id="hdr-doctor">
       Dr. Lokender Goyal<br />MD Pediatrics (PGI)<br />HMC HN 21452
     </div>
     <div class="hdr-c">
@@ -1439,7 +1439,11 @@
           "
         ></div>
       </div>
-      <select class="doctor-select" id="doctor-sel">
+      <select
+        class="doctor-select"
+        id="doctor-sel"
+        onchange="updateDoctorHeader()"
+      >
         <option value="DR-LOKENDER">Dr. Lokender Goyal</option>
         <option value="DR-GANDHARV">Dr. Gandharv Goyal</option>
       </select>
@@ -1615,6 +1619,37 @@
     const d = document.createElement("div");
     d.textContent = String(s);
     return d.innerHTML;
+  }
+
+  // Doctor profiles — dynamically switch based on dropdown selection
+  const DOCTORS = {
+    "DR-LOKENDER": {
+      name: "Dr. Lokender Goyal",
+      degree: "MD Pediatrics (PGI Chandigarh)",
+      reg: "HMC HN 21452 / PMC 23168",
+      spec: "Pediatrics & Neonatology",
+      short: "MD Pediatrics",
+      regShort: "HMC HN 21452 · PMC 23168",
+    },
+    "DR-GANDHARV": {
+      name: "Dr. Gandharv Goyal",
+      degree: "MBBS (AIIMS, New Delhi)",
+      reg: "DMC/R/0632",
+      spec: "General Medicine",
+      short: "MBBS, AIIMS",
+      regShort: "DMC/R/0632",
+    },
+  };
+  function getDoctor() {
+    const sel = document.getElementById("doctor-sel")?.value || "DR-LOKENDER";
+    return DOCTORS[sel] || DOCTORS["DR-LOKENDER"];
+  }
+  function updateDoctorHeader() {
+    const doc = getDoctor();
+    const el = document.getElementById("hdr-doctor");
+    if (el)
+      el.innerHTML =
+        esc(doc.name) + "<br>" + esc(doc.short) + "<br>" + esc(doc.regShort);
   }
 
   const MODS = {
@@ -3527,9 +3562,10 @@
     ${r.doctor_notes ? `<div style="flex:1;font-size:13px;color:var(--ink2);border-left:0.5px solid var(--bdr);padding-left:14px;outline:none;font-family:system-ui,sans-serif" contenteditable="true" spellcheck="false">${esc(r.doctor_notes)}</div>` : ""}
   </div>`;
 
+    const authDoc = getDoctor();
     h += `<div class="auth-block">
-    <div><div class="auth-name">Dr. Lokender Goyal</div>
-    <div class="auth-meta">MD Pediatrics · HMC HN 21452 (Haryana) · PMC 23168 (Punjab)<br>Radhakishan Hospital, Jyoti Nagar, Kurukshetra · 01744-251441 · 7206029516</div>
+    <div><div class="auth-name">${esc(authDoc.name)}</div>
+    <div class="auth-meta">${esc(authDoc.degree)} · ${esc(authDoc.reg)}<br>Radhakishan Hospital, Jyoti Nagar, Kurukshetra · 01744-251441 · 7206029516</div>
     <div style="font-size:11px;color:var(--green);font-weight:500;margin-top:3px">Digitally Signed</div></div>
     <div style="text-align:right;color:var(--ink3)"><div>Allergy: ${esc(r.safety?.allergy_note) || "NKDA"}</div><div>Interactions ✓</div><div>Max dose ✓</div><div>NABH ✓</div></div>
   </div>`;
@@ -4000,7 +4036,7 @@
             `Diagnosis: ${(r.diagnosis || []).map((d) => d.name).join(", ")}\n\n` +
             `MEDICINES:\n${meds}\n\n` +
             `Follow-up: ${r.followup_days || 3} days\n` +
-            `Dr. Lokender Goyal | Radhakishan Hospital, Kurukshetra`,
+            `${getDoctor().name} | Radhakishan Hospital, Kurukshetra`,
         ],
         { type: "text/plain" },
       );
@@ -4061,6 +4097,7 @@
   async function printRx() {
     if (!rxData) return;
     const r = rxData;
+    const pDoc = getDoctor();
     const today = new Date().toLocaleDateString("en-IN", {
       day: "2-digit",
       month: "short",
@@ -4075,7 +4112,7 @@
     let h = "";
     // Header — doctor left, hospital center, emergency right
     h += `<div class="hdr">
-      <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMC Reg. HN 21452 · PMC 23168<br>Pediatrics &amp; Neonatology</div>
+      <div class="hdr-l"><strong>${esc(pDoc.name)}</strong><br>${esc(pDoc.degree)}<br>${esc(pDoc.regShort)}<br>${esc(pDoc.spec)}</div>
       <div class="hdr-c"><h1>Radhakishan Hospital</h1><div class="hdr-hi">राधाकिशन हस्पताल</div><div class="hdr-sub">Jyoti Nagar, Kurukshetra, Haryana</div><span class="nabh-badge">NABH Accredited</span></div>
       <div class="hdr-r">Emergency:<br>01744-251441<br>01744-270516<br>7206029516</div>
     </div>`;
@@ -4230,7 +4267,7 @@
       qrParams.toString();
     const qrData = encodeURIComponent(qrUrl);
     h += `<div class="footer">
-      <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics · HMC HN 21452 · PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
+      <div class="footer-doc"><strong>${esc(pDoc.name)}</strong><br>${esc(pDoc.degree)} · ${esc(pDoc.regShort)}<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
       <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: ✓<br>Max dose: ✓<br>NABH: ✓${selectedPatient?.abha_number ? '<br><span style="font-size:10px;color:#2980b9">ABDM: ' + esc(selectedPatient.abha_number) + (selectedPatient.abha_verified ? " \u2713" : "") + "</span>" : ""}</div>
       <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to verify</div></div>
     </div>`;
