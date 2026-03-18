@@ -1,0 +1,4413 @@
+[
+  {
+    "generic_name": "NEOMYCIN+POLYMYXIN B+BACITRACIN ZINC",
+    "brand_names": [
+      "Nebasulf Ointment (Pfizer)",
+      "Neosporin Ointment (GSK)",
+      "Baneocin (Sandoz)",
+      "Healocin (Lupin)"
+    ],
+    "drug_class": "Topical antibiotic combination (aminoglycoside + polypeptide + polypeptide)",
+    "category": "Dermatology",
+    "therapeutic_use": [
+      "Superficial skin infections",
+      "Minor cuts and wounds prophylaxis",
+      "Impetigo (mild)",
+      "Infected eczema"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for use in children for topical application to minor wounds and skin infections",
+    "formulations": [
+      {
+        "form": "Ointment",
+        "conc_qty": 3400,
+        "conc_unit": "IU/5000IU/250IU",
+        "per_qty": 1,
+        "per_unit": "g",
+        "route": "Topical",
+        "indian_brand": "Nebasulf Ointment (Pfizer)",
+        "indian_conc_note": "Neomycin 3400 IU + Polymyxin B 5000 IU + Bacitracin Zinc 250 IU per g"
+      },
+      {
+        "form": "Powder (dusting)",
+        "conc_qty": 3400,
+        "conc_unit": "IU/5000IU/250IU",
+        "per_qty": 1,
+        "per_unit": "g",
+        "route": "Topical",
+        "indian_brand": "Nebasulf Powder (Pfizer)",
+        "indian_conc_note": "Neomycin 3400 IU + Polymyxin B 5000 IU + Bacitracin Zinc 250 IU per g"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Superficial skin infections / Minor wound prophylaxis",
+        "age_band": "all_ages",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": null,
+        "dose_min_unit": null,
+        "dose_basis": "fixed",
+        "dose_max_qty": null,
+        "dose_max_unit": null,
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "Apply thin layer to affected area 2-3 times daily for up to 7 days",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Do not apply to large open wounds or burn areas due to neomycin absorption risk; not for ophthalmic use"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Known hypersensitivity to neomycin, polymyxin B, or bacitracin",
+      "Deep puncture wounds or serious burns (systemic absorption risk)",
+      "Use near eyes or on mucous membranes"
+    ],
+    "cross_reactions": [
+      "Aminoglycosides (neomycin cross-sensitivity)",
+      "Other bacitracin-containing products"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Systemic aminoglycosides",
+        "severity": "moderate",
+        "effect": "Additive nephrotoxicity and ototoxicity if applied over large areas with concurrent systemic aminoglycosides"
+      }
+    ],
+    "monitoring_parameters": [
+      "Signs of contact dermatitis or allergic sensitization",
+      "If used on large area: renal function, hearing assessment"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Avoid application on large body surface area in neonates and infants — risk of systemic absorption",
+      "Neomycin sensitization can occur — discontinue if rash develops"
+    ],
+    "administration": [
+      {
+        "route": "Topical",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C"
+      }
+    ],
+    "food_instructions": "Not applicable (topical use)",
+    "storage_instructions": "Store below 25°C; do not freeze",
+    "pregnancy_category": "C",
+    "lactation_safe": true,
+    "lactation_note": "Topical use on small areas considered safe during lactation; avoid application on breast area",
+    "reference_source": [
+      "IAP Textbook of Pediatrics",
+      "BNF for Children",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "410851007",
+    "snomed_display": "Neomycin + polymyxin B + bacitracin topical product"
+  },
+  {
+    "generic_name": "NEOSTIGMINE",
+    "brand_names": [
+      "Prostigmin (Sun Pharma)",
+      "Myostigmin (Neon Labs)",
+      "Tilstigmin (Samarth Pharma)"
+    ],
+    "drug_class": "Cholinesterase inhibitor (anticholinesterase)",
+    "category": "Neurology",
+    "therapeutic_use": [
+      "Myasthenia gravis",
+      "Reversal of non-depolarising neuromuscular blockade",
+      "Post-operative urinary retention",
+      "Paralytic ileus"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for use in children for myasthenia gravis and reversal of neuromuscular blockade",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 0.5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM/SC",
+        "indian_brand": "Prostigmin 0.5 mg/mL (Sun Pharma)",
+        "indian_conc_note": "Neostigmine methylsulfate 0.5 mg/mL"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 2.5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM/SC",
+        "indian_brand": "Prostigmin 2.5 mg/mL (Sun Pharma)",
+        "indian_conc_note": "Neostigmine methylsulfate 2.5 mg/mL"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 15,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Prostigmin 15 mg (Sun Pharma)",
+        "indian_conc_note": "Neostigmine bromide 15 mg"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Reversal of non-depolarising neuromuscular blockade",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.04,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.08,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Single dose IV with atropine 0.02 mg/kg or glycopyrrolate 0.01 mg/kg",
+        "max_single_qty": 2.5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 2.5,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Always give with anticholinergic agent to prevent bradycardia; give slowly IV over 1 minute"
+      },
+      {
+        "indication": "Reversal of non-depolarising neuromuscular blockade",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.04,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.08,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Single dose IV with atropine 0.02 mg/kg or glycopyrrolate 0.01 mg/kg",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 5,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Must be given with anticholinergic; ensure adequate spontaneous recovery before reversal"
+      },
+      {
+        "indication": "Myasthenia gravis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.3,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Oral: 0.3-1 mg/kg per dose every 4-6 hours; titrate to response",
+        "max_single_qty": 15,
+        "max_single_unit": "mg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Titrate dose carefully to clinical response; risk of cholinergic crisis with overdose"
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 10,
+        "gfr_max": 50,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Reduce dose by 50% and titrate to response"
+      }
+    ],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Mechanical bowel or urinary obstruction",
+      "Peritonitis",
+      "Known hypersensitivity to neostigmine or bromides"
+    ],
+    "cross_reactions": ["Other anticholinesterases (pyridostigmine)"],
+    "interactions": [
+      {
+        "drug_or_class": "Succinylcholine",
+        "severity": "severe",
+        "effect": "Neostigmine prolongs Phase I block of succinylcholine; do not use together"
+      },
+      {
+        "drug_or_class": "Aminoglycosides",
+        "severity": "moderate",
+        "effect": "Aminoglycosides may antagonize effect of neostigmine at neuromuscular junction"
+      },
+      {
+        "drug_or_class": "Beta-blockers",
+        "severity": "moderate",
+        "effect": "Increased risk of bradycardia when combined"
+      }
+    ],
+    "monitoring_parameters": [
+      "Heart rate and rhythm",
+      "Signs of cholinergic excess (salivation, lacrimation, urination, defecation)",
+      "Muscle strength (myasthenia gravis)",
+      "Train-of-four monitoring (reversal of NMB)"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Neonatal myasthenia: transient condition — assess before long-term therapy",
+      "Cholinergic crisis may mimic myasthenic crisis — differentiate before dose adjustment",
+      "Always have atropine available when administering IV neostigmine"
+    ],
+    "administration": [
+      {
+        "route": "IV",
+        "reconstitution": null,
+        "dilution": "May dilute in 0.9% NaCl for slow IV injection",
+        "infusion_rate_note": "Give IV over 1 minute; must be accompanied by anticholinergic",
+        "compatibility_note": "Compatible with 0.9% NaCl",
+        "storage": "Store at 15-25°C; protect from light"
+      },
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C"
+      }
+    ],
+    "food_instructions": "May be taken with food to reduce GI side effects",
+    "storage_instructions": "Store at 15-25°C; protect injection from light",
+    "pregnancy_category": "C",
+    "lactation_safe": false,
+    "lactation_note": "Limited data; use with caution",
+    "reference_source": [
+      "BNF for Children",
+      "Nelson Textbook of Pediatrics",
+      "IAP Drug Formulary"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "373727006",
+    "snomed_display": "Neostigmine"
+  },
+  {
+    "generic_name": "NORETHISTERONE",
+    "brand_names": [
+      "Primolut-N (Zydus)",
+      "Regestrone (Torrent)",
+      "Norlut-N (Zydus)",
+      "Styptin (Lupin)"
+    ],
+    "drug_class": "Progestogen (19-nortestosterone derivative)",
+    "category": "Endocrinology",
+    "therapeutic_use": [
+      "Dysfunctional uterine bleeding in adolescents",
+      "Precocious puberty (adjunctive)",
+      "Menstrual postponement",
+      "Endometriosis"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not licensed for children; used off-label in adolescent gynaecological conditions under specialist supervision",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Primolut-N 5 mg (Zydus)",
+        "indian_conc_note": "Norethisterone 5 mg tablet"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Dysfunctional uterine bleeding (adolescent)",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 5,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": 5,
+        "maintenance_dose_unit": "mg",
+        "duration_days_default": 21,
+        "duration_note": "5 mg TDS for acute bleed, then taper to 5 mg OD for 21 days; withdrawal bleed expected 2-4 days after stopping",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 15,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Specialist supervision required in adolescents; rule out pregnancy before use"
+      },
+      {
+        "indication": "Menstrual postponement",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 5,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 14,
+        "duration_note": "Start 3 days before expected period; 5 mg TDS for up to 14 days; bleeding 2-3 days after stopping",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 15,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Short-term use only; not a contraceptive at this dosing schedule"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Contraindicated in active liver disease or history of cholestatic jaundice with prior progestogen use",
+    "contraindications": [
+      "Pregnancy or suspected pregnancy",
+      "Active liver disease or liver tumours",
+      "History of thromboembolism",
+      "Undiagnosed vaginal bleeding",
+      "Breast cancer (current)"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Enzyme-inducing drugs (carbamazepine, phenytoin, rifampicin)",
+        "severity": "severe",
+        "effect": "Reduced efficacy of norethisterone due to increased hepatic metabolism"
+      },
+      {
+        "drug_or_class": "Ciclosporin",
+        "severity": "moderate",
+        "effect": "Progestogens may increase ciclosporin levels"
+      }
+    ],
+    "monitoring_parameters": [
+      "Blood pressure",
+      "Liver function before and during treatment",
+      "Signs of thromboembolism",
+      "Menstrual pattern response"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Not recommended before menarche",
+      "Use in adolescents only under gynaecological or endocrine specialist supervision",
+      "May affect bone mineral density with prolonged use"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C; protect from light"
+      }
+    ],
+    "food_instructions": "Take with food to reduce nausea",
+    "storage_instructions": "Store below 25°C; protect from light and moisture",
+    "pregnancy_category": "X",
+    "lactation_safe": false,
+    "lactation_note": "Small amounts excreted in breast milk; not recommended during lactation",
+    "reference_source": [
+      "BNF for Children",
+      "FOGSI Adolescent Gynaecology Guidelines",
+      "IAP Textbook of Pediatrics"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387408001",
+    "snomed_display": "Norethisterone"
+  },
+  {
+    "generic_name": "NORFLOXACIN",
+    "brand_names": [
+      "Norflox (Cipla)",
+      "Uroflox (Aristo)",
+      "Norbactin (Abbott)",
+      "Norilet (Mankind)"
+    ],
+    "drug_class": "Fluoroquinolone antibiotic (second generation)",
+    "category": "Infectious",
+    "therapeutic_use": [
+      "Urinary tract infections",
+      "Acute gastroenteritis (bacterial)",
+      "Traveller's diarrhoea",
+      "Prostatitis"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not licensed for children due to risk of cartilage damage; used off-label in severe UTI when no alternative available, under specialist guidance",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 400,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Norflox 400 (Cipla)",
+        "indian_conc_note": "Norfloxacin 400 mg film-coated tablet"
+      },
+      {
+        "form": "Eye drops",
+        "conc_qty": 3,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "Ophthalmic",
+        "indian_brand": "Norflox Eye Drops (Cipla)",
+        "indian_conc_note": "Norfloxacin 0.3% ophthalmic solution"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Urinary tract infection (complicated, no alternative)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "5-10 mg/kg/day in 2 divided doses for 7-14 days; only when culture shows resistance to safer alternatives",
+        "max_single_qty": 400,
+        "max_single_unit": "mg",
+        "max_daily_qty": 800,
+        "max_daily_unit": "mg",
+        "rounding_rule": "quarter_tab",
+        "notes": "RESTRICTED IN PEDIATRICS: Risk of articular cartilage damage. Use only when benefit clearly outweighs risk and no alternative exists. Document justification."
+      },
+      {
+        "indication": "Bacterial conjunctivitis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "drop",
+        "dose_basis": "fixed",
+        "dose_max_qty": 2,
+        "dose_max_unit": "drops",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "1-2 drops in affected eye(s) every 6 hours for 7 days; may increase to hourly for severe infection initially",
+        "max_single_qty": 2,
+        "max_single_unit": "drops",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Ophthalmic use licensed in children >=1 year; minimal systemic absorption"
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Reduce to 400 mg once daily if CrCl <30 mL/min"
+      }
+    ],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Known hypersensitivity to fluoroquinolones",
+      "History of tendon disorders with fluoroquinolone use",
+      "Myasthenia gravis",
+      "G6PD deficiency (relative)"
+    ],
+    "cross_reactions": [
+      "Other fluoroquinolones (ciprofloxacin, levofloxacin, ofloxacin)"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Antacids, iron, zinc, calcium supplements",
+        "severity": "severe",
+        "effect": "Markedly reduce norfloxacin absorption; give norfloxacin 2 hours before or 6 hours after"
+      },
+      {
+        "drug_or_class": "Theophylline",
+        "severity": "moderate",
+        "effect": "Norfloxacin may increase theophylline levels"
+      },
+      {
+        "drug_or_class": "Warfarin",
+        "severity": "moderate",
+        "effect": "Enhanced anticoagulant effect; monitor INR"
+      }
+    ],
+    "monitoring_parameters": [
+      "Joint symptoms and tendon pain",
+      "Urine culture before and after treatment",
+      "Renal function in prolonged therapy"
+    ],
+    "black_box_warnings": [
+      "Risk of tendinitis and tendon rupture, especially in combination with corticosteroids",
+      "Risk of peripheral neuropathy — discontinue if symptoms occur",
+      "May exacerbate muscle weakness in myasthenia gravis"
+    ],
+    "pediatric_specific_warnings": [
+      "AVOID in children unless absolutely no alternative: risk of articular cartilage damage in weight-bearing joints",
+      "Document clinical justification for any pediatric systemic use",
+      "Ophthalmic use is generally safer with minimal systemic absorption"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C; protect from light"
+      }
+    ],
+    "food_instructions": "Take on empty stomach, 1 hour before or 2 hours after meals; take with a full glass of water",
+    "storage_instructions": "Store below 25°C; protect from light and moisture",
+    "pregnancy_category": "C",
+    "lactation_safe": false,
+    "lactation_note": "Excreted in breast milk; not recommended during lactation",
+    "reference_source": [
+      "IAP Guidelines on UTI Management",
+      "BNF for Children",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387271008",
+    "snomed_display": "Norfloxacin"
+  },
+  {
+    "generic_name": "ORAL POLIO VACCINE",
+    "brand_names": [
+      "Biopolio (Bharat Biotech)",
+      "Poliprotect (Serum Institute)",
+      "Oral Polio Vaccine (SII)"
+    ],
+    "drug_class": "Live attenuated vaccine (Sabin strains)",
+    "category": "Vaccine",
+    "therapeutic_use": [
+      "Prevention of poliomyelitis",
+      "National Immunization Schedule (NIS) — birth dose + boosters",
+      "Pulse polio campaigns"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for all ages from birth; part of NIS India",
+    "formulations": [
+      {
+        "form": "Oral drops (bivalent — bOPV types 1 & 3)",
+        "conc_qty": 2,
+        "conc_unit": "drops",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "PO",
+        "indian_brand": "Biopolio (Bharat Biotech)",
+        "indian_conc_note": "Bivalent OPV (types 1 & 3); 2 drops per dose; 10-dose or 20-dose vial"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Polio immunization (NIS India)",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 2,
+        "dose_min_unit": "drops",
+        "dose_basis": "fixed",
+        "dose_max_qty": 2,
+        "dose_max_unit": "drops",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Birth dose (OPV-0): 2 drops oral; NIS schedule: OPV-0 at birth, then OPV 1,2,3 at 6,10,14 weeks with IPV co-administration, booster OPV at 16-24 months and 5-6 years",
+        "max_single_qty": 2,
+        "max_single_unit": "drops",
+        "max_daily_qty": 2,
+        "max_daily_unit": "drops",
+        "rounding_rule": null,
+        "notes": "Administer directly into mouth; if child spits out dose, repeat immediately. Breastfeeding need not be withheld. Keep cold chain 2-8°C."
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Severe immunodeficiency (SCID, symptomatic HIV)",
+      "Anaphylaxis to previous dose or vaccine components",
+      "Acute febrile illness (defer vaccination)"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Immunosuppressive therapy",
+        "severity": "severe",
+        "effect": "May render vaccine ineffective and risk of vaccine-derived poliovirus infection in immunocompromised"
+      }
+    ],
+    "monitoring_parameters": [
+      "Post-vaccination observation for 30 minutes",
+      "Monitor for vaccine-associated paralytic poliomyelitis (VAPP) — extremely rare"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "VAPP risk approximately 1 in 2.7 million first doses — benefits vastly outweigh risks",
+      "IPV should be given concomitantly per NIS to mitigate VAPP risk",
+      "Avoid in known immunodeficiency — use IPV only"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": "Can be given simultaneously with other childhood vaccines at different sites",
+        "storage": "Store at 2-8°C; protect from light; use within 28 days of opening multi-dose vial"
+      }
+    ],
+    "food_instructions": "No food restrictions; breastfeeding need not be withheld before or after vaccine",
+    "storage_instructions": "Store at 2-8°C (cold chain); do not freeze; protect from light",
+    "pregnancy_category": "C",
+    "lactation_safe": true,
+    "lactation_note": "Safe to administer to infants of breastfeeding mothers",
+    "reference_source": [
+      "IAP Immunization Guidelines 2024",
+      "NIS India Schedule",
+      "WHO Position Paper on Polio Vaccines"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "111164008",
+    "snomed_display": "Poliovirus vaccine, live, oral"
+  },
+  {
+    "generic_name": "ORAL REHYDRATION SALTS",
+    "brand_names": [
+      "Electral (FDC)",
+      "Enerzal ORS (FDC)",
+      "Walyte (Wallace)",
+      "ORS WHO (generic)"
+    ],
+    "drug_class": "Oral rehydration therapy",
+    "category": "Gastrointestinal",
+    "therapeutic_use": [
+      "Dehydration due to diarrhoea",
+      "Prevention of dehydration in acute gastroenteritis",
+      "Cholera (mild to moderate dehydration)",
+      "Heat-related dehydration"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Fully licensed for all ages including neonates; WHO-recommended formulation",
+    "formulations": [
+      {
+        "form": "Powder for oral solution (WHO low-osmolarity)",
+        "conc_qty": 1,
+        "conc_unit": "sachet",
+        "per_qty": 1000,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Electral Powder (FDC)",
+        "indian_conc_note": "WHO-ORS: NaCl 2.6g, KCl 1.5g, Na citrate 2.9g, Glucose anhydrous 13.5g per litre; osmolarity 245 mOsm/L"
+      },
+      {
+        "form": "Ready-to-drink solution",
+        "conc_qty": 200,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "tetrapack",
+        "route": "PO",
+        "indian_brand": "Electral Ready (FDC)",
+        "indian_conc_note": "Pre-mixed WHO-ORS 200 mL"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Mild dehydration (Plan A)",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 50,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 100,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "50-100 mL ORS after each loose stool; continue breastfeeding; maintain until diarrhoea stops",
+        "max_single_qty": 100,
+        "max_single_unit": "mL",
+        "max_daily_qty": 500,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "Give small frequent sips with spoon or cup — not bottle. Continue breastfeeding. Add zinc supplementation."
+      },
+      {
+        "indication": "Mild dehydration (Plan A)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 100,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 200,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "100-200 mL ORS after each loose stool; encourage ad libitum drinking between episodes",
+        "max_single_qty": 200,
+        "max_single_unit": "mL",
+        "max_daily_qty": 2000,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "WHO Plan A for prevention/treatment of mild dehydration. Always combine with zinc supplementation for 14 days."
+      },
+      {
+        "indication": "Some dehydration (Plan B)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 75,
+        "dose_min_unit": "mL/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 75,
+        "dose_max_unit": "mL/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "75 mL/kg over 4 hours in ORT corner; reassess hydration status after 4 hours",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Administer under supervision in ORT/observation area. If vomiting, give small sips every 1-2 minutes. Reassess at 4 hours. If worsening, switch to IV fluids."
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Severe dehydration (requires IV rehydration first)",
+      "Paralytic ileus",
+      "Intestinal obstruction",
+      "Intractable vomiting (relative — try small sips first)"
+    ],
+    "cross_reactions": [],
+    "interactions": [],
+    "monitoring_parameters": [
+      "Hydration status (skin turgor, mucous membranes, urine output)",
+      "Serum electrolytes in prolonged diarrhoea",
+      "Weight monitoring",
+      "Stool frequency and consistency"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Do NOT add sugar, salt, or other additives to prepared ORS",
+      "Discard prepared solution after 24 hours at room temperature",
+      "Use cup and spoon, not bottle, in infants to prevent aspiration",
+      "Always supplement with zinc (10 mg <6 months, 20 mg >6 months for 14 days)"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": "Dissolve entire sachet in 1 litre of clean drinking water; do not boil after preparation",
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Prepared solution: use within 24 hours at room temperature; discard remaining"
+      }
+    ],
+    "food_instructions": "Give between meals; continue normal feeding and breastfeeding during rehydration",
+    "storage_instructions": "Dry sachets: store below 30°C in dry place; prepared solution: use within 24 hours",
+    "pregnancy_category": "A",
+    "lactation_safe": true,
+    "lactation_note": "Safe to use during lactation; encourage continued breastfeeding",
+    "reference_source": [
+      "WHO/UNICEF Guidelines on Diarrhoea Management",
+      "IAP Guidelines on Acute Diarrhoeal Disease",
+      "NHM IMNCI Protocol"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387325003",
+    "snomed_display": "Oral rehydration salts"
+  },
+  {
+    "generic_name": "OXYTOCIN",
+    "brand_names": [
+      "Pitocin (Sun Pharma)",
+      "Syntocinon (Novartis)",
+      "Oxytac (Neon Labs)"
+    ],
+    "drug_class": "Oxytocic / Uterotonic hormone",
+    "category": "Obstetrics",
+    "therapeutic_use": [
+      "Induction of labour",
+      "Augmentation of labour",
+      "Prevention and treatment of postpartum haemorrhage",
+      "Incomplete/inevitable abortion (adjunct)"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not indicated in pediatric practice; included in formulary for maternal emergencies managed in hospital and for neonatal resuscitation support context",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 5,
+        "conc_unit": "IU",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM",
+        "indian_brand": "Pitocin 5 IU/mL (Sun Pharma)",
+        "indian_conc_note": "Oxytocin 5 IU/mL; 1 mL ampoule"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 10,
+        "conc_unit": "IU",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM",
+        "indian_brand": "Syntocinon 10 IU/mL (Novartis)",
+        "indian_conc_note": "Oxytocin 10 IU/mL; 1 mL ampoule"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Prevention of postpartum haemorrhage (AMTSL)",
+        "age_band": "adult",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 10,
+        "dose_min_unit": "IU",
+        "dose_basis": "fixed",
+        "dose_max_qty": 10,
+        "dose_max_unit": "IU",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "10 IU IM after delivery of anterior shoulder (AMTSL); alternative: 5 IU slow IV",
+        "max_single_qty": 10,
+        "max_single_unit": "IU",
+        "max_daily_qty": 40,
+        "max_daily_unit": "IU",
+        "rounding_rule": null,
+        "notes": "Hospital/maternal use only; included for emergency obstetric care. Not a pediatric drug."
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Hypertonic uterine contractions",
+      "Major cephalopelvic disproportion",
+      "Unfavourable fetal position",
+      "Placenta praevia",
+      "Cord presentation"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Prostaglandins (misoprostol, dinoprostone)",
+        "severity": "severe",
+        "effect": "Synergistic uterotonic effect; risk of uterine hyperstimulation and rupture"
+      },
+      {
+        "drug_or_class": "Vasopressors",
+        "severity": "moderate",
+        "effect": "Increased risk of hypertension when combined"
+      }
+    ],
+    "monitoring_parameters": [
+      "Uterine contractions (frequency, duration, intensity)",
+      "Fetal heart rate",
+      "Blood pressure and pulse",
+      "Fluid balance (risk of water intoxication)"
+    ],
+    "black_box_warnings": [
+      "Not for elective induction of labour for convenience",
+      "Risk of uterine rupture especially in multiparous women and prior uterine surgery"
+    ],
+    "pediatric_specific_warnings": [
+      "Not a pediatric drug; included for maternal emergency protocols only"
+    ],
+    "administration": [
+      {
+        "route": "IM",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": "10 IU IM single dose for PPH prevention",
+        "compatibility_note": null,
+        "storage": "Store at 2-8°C; protect from light"
+      },
+      {
+        "route": "IV",
+        "reconstitution": null,
+        "dilution": "Dilute in 0.9% NaCl or Ringer's lactate for infusion",
+        "infusion_rate_note": "For induction: start at 1-2 mU/min, increase by 1-2 mU every 30 min; max 20 mU/min",
+        "compatibility_note": "Compatible with 0.9% NaCl, Ringer's lactate",
+        "storage": "Store at 2-8°C"
+      }
+    ],
+    "food_instructions": "Not applicable (injectable)",
+    "storage_instructions": "Store at 2-8°C; protect from light; do not freeze",
+    "pregnancy_category": "X (first trimester) / C (for labour)",
+    "lactation_safe": true,
+    "lactation_note": "Negligible amount in breast milk; enhances milk let-down",
+    "reference_source": [
+      "WHO Recommendations for PPH Prevention",
+      "FOGSI Guidelines",
+      "Essential Medicines List India"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "372857005",
+    "snomed_display": "Oxytocin"
+  },
+  {
+    "generic_name": "PANTOPRAZOLE",
+    "brand_names": [
+      "Pan (Alkem)",
+      "Pantop (Aristo)",
+      "Pan-D (Alkem)",
+      "Nupenta (Sun Pharma)"
+    ],
+    "drug_class": "Proton pump inhibitor (PPI)",
+    "category": "Gastrointestinal",
+    "therapeutic_use": [
+      "Gastro-oesophageal reflux disease (GERD)",
+      "Peptic ulcer disease",
+      "Stress ulcer prophylaxis (ICU)",
+      "Zollinger-Ellison syndrome",
+      "NSAID-associated gastropathy prophylaxis"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "IV formulation licensed for children >=2 years; oral formulation has limited pediatric data but widely used off-label in neonates/infants under specialist guidance",
+    "formulations": [
+      {
+        "form": "Tablet (enteric-coated)",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Pan 20 (Alkem)",
+        "indian_conc_note": "Pantoprazole sodium 20 mg enteric-coated tablet"
+      },
+      {
+        "form": "Tablet (enteric-coated)",
+        "conc_qty": 40,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Pan 40 (Alkem)",
+        "indian_conc_note": "Pantoprazole sodium 40 mg enteric-coated tablet"
+      },
+      {
+        "form": "Injection (powder for reconstitution)",
+        "conc_qty": 40,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "vial",
+        "route": "IV",
+        "indian_brand": "Pantop IV 40 mg (Aristo)",
+        "indian_conc_note": "Pantoprazole sodium 40 mg lyophilized powder for reconstitution"
+      },
+      {
+        "form": "Oral granules (sachet)",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "sachet",
+        "route": "PO",
+        "indian_brand": "Nupenta Sachet (Sun Pharma)",
+        "indian_conc_note": "Pantoprazole 20 mg gastro-resistant granules"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "GERD / Erosive oesophagitis",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 28,
+        "duration_note": "1 mg/kg/day once daily; review at 4 weeks; specialist use only in infants",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 20,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Off-label in infants <2 years; most infant reflux is physiological and does not require acid suppression. Use only if proven acid-related pathology."
+      },
+      {
+        "indication": "GERD / Erosive oesophagitis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 28,
+        "duration_note": "0.5-1 mg/kg/day once daily before breakfast; 15-40 kg: 20 mg OD; >40 kg: 40 mg OD; review at 4-8 weeks",
+        "max_single_qty": 40,
+        "max_single_unit": "mg",
+        "max_daily_qty": 40,
+        "max_daily_unit": "mg",
+        "rounding_rule": "half_tab",
+        "notes": "Do not crush enteric-coated tablets; use granule sachets for children who cannot swallow tablets"
+      },
+      {
+        "indication": "Stress ulcer prophylaxis (ICU)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "1 mg/kg IV once daily (max 40 mg); switch to oral when tolerating feeds",
+        "max_single_qty": 40,
+        "max_single_unit": "mg",
+        "max_daily_qty": 40,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "IV use in critically ill children; reconstitute with 10 mL NS, give over 2-15 minutes"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "In severe hepatic impairment: max dose 20 mg/day; monitor LFTs",
+    "contraindications": [
+      "Known hypersensitivity to pantoprazole or substituted benzimidazoles",
+      "Co-administration with rilpivirine"
+    ],
+    "cross_reactions": [
+      "Other PPIs (omeprazole, esomeprazole, rabeprazole) — rare cross-reactivity"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Atazanavir/Nelfinavir",
+        "severity": "severe",
+        "effect": "PPI reduces absorption of these antiretrovirals — contraindicated"
+      },
+      {
+        "drug_or_class": "Methotrexate",
+        "severity": "moderate",
+        "effect": "PPI may increase methotrexate levels; consider temporary discontinuation with high-dose MTX"
+      },
+      {
+        "drug_or_class": "Iron, calcium, vitamin B12",
+        "severity": "minor",
+        "effect": "Long-term acid suppression may reduce absorption of iron, calcium, and vitamin B12"
+      },
+      {
+        "drug_or_class": "Clopidogrel",
+        "severity": "moderate",
+        "effect": "Pantoprazole has less CYP2C19 interaction than omeprazole but monitor if combined"
+      }
+    ],
+    "monitoring_parameters": [
+      "Symptom resolution",
+      "Magnesium levels (long-term use >3 months)",
+      "Vitamin B12 (long-term use)",
+      "Consider C. difficile if diarrhoea develops"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Do not use PPI for physiological GER in infants — no evidence of benefit",
+      "Long-term PPI use in children associated with increased respiratory and GI infections",
+      "Step-down to lowest effective dose; plan for discontinuation"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C; protect from moisture"
+      },
+      {
+        "route": "IV",
+        "reconstitution": "Reconstitute 40 mg vial with 10 mL 0.9% NaCl",
+        "dilution": "May further dilute in 100 mL 0.9% NaCl or D5W for infusion",
+        "infusion_rate_note": "Give IV bolus over 2-15 minutes; or infusion over 15-30 minutes",
+        "compatibility_note": "Compatible with 0.9% NaCl, D5W; incompatible with Ringer's lactate",
+        "storage": "Use reconstituted solution within 12 hours at room temperature"
+      }
+    ],
+    "food_instructions": "Take 30 minutes before breakfast on empty stomach; swallow whole, do not crush or chew",
+    "storage_instructions": "Store below 25°C; protect from moisture; keep in original blister pack",
+    "pregnancy_category": "B",
+    "lactation_safe": false,
+    "lactation_note": "Excreted in breast milk; weigh benefit vs risk",
+    "reference_source": [
+      "ESPGHAN/NASPGHAN GERD Guidelines 2018",
+      "IAP Drug Formulary",
+      "BNF for Children"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "395882003",
+    "snomed_display": "Pantoprazole"
+  },
+  {
+    "generic_name": "PENTAZOCINE",
+    "brand_names": [
+      "Fortwin (Ranbaxy/Sun Pharma)",
+      "Pentowin (Neon Labs)",
+      "Talwin (Sanofi)"
+    ],
+    "drug_class": "Opioid analgesic (mixed agonist-antagonist)",
+    "category": "Analgesic",
+    "therapeutic_use": [
+      "Moderate to severe pain",
+      "Pre-operative sedation/analgesia",
+      "Renal colic (adjunct)",
+      "Post-operative pain"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for children >=1 year for moderate to severe pain; use with extreme caution and specialist oversight",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 30,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM/SC",
+        "indian_brand": "Fortwin 30 mg/mL (Sun Pharma)",
+        "indian_conc_note": "Pentazocine lactate 30 mg/mL; 1 mL ampoule"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 25,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Fortwin 25 mg (Sun Pharma)",
+        "indian_conc_note": "Pentazocine hydrochloride 25 mg tablet"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Moderate to severe pain",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "0.5-1 mg/kg per dose IM/SC/IV every 3-4 hours as needed; use lowest effective dose for shortest duration",
+        "max_single_qty": 30,
+        "max_single_unit": "mg",
+        "max_daily_qty": 120,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Use under specialist supervision in children; monitor respiratory rate and sedation level; have naloxone available"
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Reduce dose by 50-75%; active metabolites may accumulate"
+      }
+    ],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Reduce dose in hepatic impairment; avoid in severe hepatic disease",
+    "contraindications": [
+      "Children under 1 year",
+      "Respiratory depression",
+      "Raised intracranial pressure",
+      "Head injury",
+      "Acute alcoholism",
+      "Known hypersensitivity to pentazocine"
+    ],
+    "cross_reactions": [
+      "Other opioids — may precipitate withdrawal in opioid-dependent patients due to antagonist properties"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Other CNS depressants (benzodiazepines, antihistamines)",
+        "severity": "severe",
+        "effect": "Enhanced respiratory depression and sedation; reduce doses of both"
+      },
+      {
+        "drug_or_class": "Pure opioid agonists (morphine, fentanyl)",
+        "severity": "severe",
+        "effect": "Pentazocine may antagonize pure agonist analgesia and precipitate withdrawal"
+      },
+      {
+        "drug_or_class": "MAO inhibitors",
+        "severity": "severe",
+        "effect": "Risk of serotonin syndrome and enhanced CNS effects; avoid combination"
+      }
+    ],
+    "monitoring_parameters": [
+      "Respiratory rate (hold if <12/min in children, <20/min in infants)",
+      "Pain scores",
+      "Sedation level",
+      "Blood pressure (may cause hypertension)",
+      "Signs of psychotomimetic effects (hallucinations, dysphoria)"
+    ],
+    "black_box_warnings": [
+      "Risk of addiction, abuse, and misuse — use lowest effective dose for shortest duration",
+      "Respiratory depression risk — monitor closely in children",
+      "Schedule H (India) controlled substance"
+    ],
+    "pediatric_specific_warnings": [
+      "Higher incidence of dysphoric/psychotomimetic effects compared to other opioids",
+      "Not first-line analgesic in pediatrics — prefer paracetamol, ibuprofen, or morphine",
+      "Avoid in children <1 year due to limited safety data"
+    ],
+    "administration": [
+      {
+        "route": "IM/SC",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": "IM preferred over SC to reduce tissue irritation",
+        "compatibility_note": null,
+        "storage": "Store below 25°C; protect from light"
+      },
+      {
+        "route": "IV",
+        "reconstitution": null,
+        "dilution": "May dilute in 0.9% NaCl for slow IV injection",
+        "infusion_rate_note": "Give slowly IV over 2-3 minutes",
+        "compatibility_note": "Do not mix with barbiturates in same syringe — precipitation",
+        "storage": "Store below 25°C"
+      }
+    ],
+    "food_instructions": "Oral: may take with food to reduce GI upset",
+    "storage_instructions": "Store below 25°C; protect from light; Schedule H controlled substance — locked storage",
+    "pregnancy_category": "C (D at term)",
+    "lactation_safe": false,
+    "lactation_note": "Excreted in breast milk; may cause neonatal respiratory depression; avoid",
+    "reference_source": [
+      "BNF for Children",
+      "IAP Pain Management Guidelines",
+      "WHO Analgesic Ladder"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "373528008",
+    "snomed_display": "Pentazocine"
+  },
+  {
+    "generic_name": "PHENIRAMINE MALEATE",
+    "brand_names": ["Avil (Sanofi)", "Phenargan (various)", "Feniram (Cipla)"],
+    "drug_class": "First-generation antihistamine (H1 receptor antagonist)",
+    "category": "Allergy",
+    "therapeutic_use": [
+      "Allergic rhinitis",
+      "Urticaria",
+      "Allergic conjunctivitis",
+      "Pruritus",
+      "Adjunct in anaphylaxis (after adrenaline)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for children >=1 year; widely used in Indian pediatric practice",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 25,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Avil 25 mg (Sanofi)",
+        "indian_conc_note": "Pheniramine maleate 25 mg tablet"
+      },
+      {
+        "form": "Syrup",
+        "conc_qty": 15,
+        "conc_unit": "mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Avil Syrup (Sanofi)",
+        "indian_conc_note": "Pheniramine maleate 15 mg per 5 mL"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 22.75,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM",
+        "indian_brand": "Avil Injection (Sanofi)",
+        "indian_conc_note": "Pheniramine maleate 22.75 mg/mL; 2 mL ampoule"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Allergic conditions",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "0.5 mg/kg/day in 2-3 divided doses; use with caution in infants due to sedation risk",
+        "max_single_qty": 7.5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 15,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Prefer second-generation antihistamines (cetirizine) in infants; first-gen antihistamines carry sedation and paradoxical excitation risk"
+      },
+      {
+        "indication": "Allergic conditions",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "0.5-1 mg/kg/day in 2-3 divided doses; 1-5 years: 7.5-15 mg/day; 6-12 years: 15-30 mg/day",
+        "max_single_qty": 25,
+        "max_single_unit": "mg",
+        "max_daily_qty": 75,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Second-generation antihistamines preferred for routine allergic conditions; use first-gen when sedation is beneficial (e.g., pruritus at night)"
+      },
+      {
+        "indication": "Acute allergic reaction / Anaphylaxis adjunct",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "0.5-1 mg/kg slow IV/IM as single dose; for anaphylaxis: ALWAYS give adrenaline first — antihistamine is adjunctive only",
+        "max_single_qty": 45.5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 45.5,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "In anaphylaxis: adrenaline IM is first-line, NOT antihistamines. Pheniramine is adjunctive for symptom relief."
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Use with caution in hepatic impairment; may worsen hepatic encephalopathy",
+    "contraindications": [
+      "Neonates and premature infants",
+      "Known hypersensitivity to pheniramine or antihistamines",
+      "Acute asthma attack (may thicken secretions)",
+      "Angle-closure glaucoma"
+    ],
+    "cross_reactions": [
+      "Other first-generation antihistamines (chlorpheniramine, diphenhydramine)"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "CNS depressants (opioids, benzodiazepines)",
+        "severity": "moderate",
+        "effect": "Enhanced sedation and respiratory depression"
+      },
+      {
+        "drug_or_class": "Anticholinergic drugs",
+        "severity": "moderate",
+        "effect": "Additive anticholinergic effects — urinary retention, dry mouth, tachycardia"
+      },
+      {
+        "drug_or_class": "MAO inhibitors",
+        "severity": "severe",
+        "effect": "Prolonged and intensified anticholinergic and sedative effects"
+      }
+    ],
+    "monitoring_parameters": [
+      "Sedation level",
+      "Symptom resolution",
+      "Paradoxical excitation in young children"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Risk of paradoxical CNS stimulation (excitation, insomnia) in young children",
+      "Avoid in neonates — risk of seizures and apnoea",
+      "Second-generation antihistamines (cetirizine, levocetirizine) are preferred first-line in pediatrics"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C"
+      },
+      {
+        "route": "IV",
+        "reconstitution": null,
+        "dilution": "Dilute in 10-20 mL 0.9% NaCl for slow IV injection",
+        "infusion_rate_note": "Give slowly IV over 3-5 minutes to avoid hypotension",
+        "compatibility_note": "Compatible with 0.9% NaCl",
+        "storage": "Store below 25°C; protect from light"
+      }
+    ],
+    "food_instructions": "May be taken with or without food; take with food if GI upset occurs",
+    "storage_instructions": "Store below 25°C; protect from light and moisture",
+    "pregnancy_category": "C",
+    "lactation_safe": false,
+    "lactation_note": "Excreted in breast milk; may cause drowsiness in infant; use with caution",
+    "reference_source": [
+      "IAP Drug Formulary",
+      "BNF for Children",
+      "CIMS India"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "372668009",
+    "snomed_display": "Pheniramine"
+  },
+  {
+    "generic_name": "PIROXICAM",
+    "brand_names": [
+      "Dolonex (Pfizer)",
+      "Pirox (Cipla)",
+      "Mobicam (Sun Pharma)"
+    ],
+    "drug_class": "Non-steroidal anti-inflammatory drug (NSAID) — Oxicam",
+    "category": "Analgesic",
+    "therapeutic_use": [
+      "Juvenile idiopathic arthritis",
+      "Musculoskeletal pain",
+      "Dysmenorrhoea (adolescent)"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not licensed for children <12 years in most countries; used off-label for juvenile idiopathic arthritis under specialist guidance. Licensed for adolescents >=16 years for short-term use.",
+    "formulations": [
+      {
+        "form": "Capsule",
+        "conc_qty": 10,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Dolonex 10 mg (Pfizer)",
+        "indian_conc_note": "Piroxicam 10 mg capsule"
+      },
+      {
+        "form": "Capsule",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Dolonex 20 mg (Pfizer)",
+        "indian_conc_note": "Piroxicam 20 mg capsule"
+      },
+      {
+        "form": "Dispersible tablet",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Dolonex DT (Pfizer)",
+        "indian_conc_note": "Piroxicam 20 mg dispersible tablet"
+      },
+      {
+        "form": "Gel (topical)",
+        "conc_qty": 0.5,
+        "conc_unit": "g",
+        "per_qty": 100,
+        "per_unit": "g",
+        "route": "Topical",
+        "indian_brand": "Dolonex Gel (Pfizer)",
+        "indian_conc_note": "Piroxicam 0.5% gel"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Juvenile idiopathic arthritis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.2,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.4,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "0.2-0.4 mg/kg/day once daily; max 15 mg/day for <46 kg; max 20 mg/day for >=46 kg; long-term specialist use only",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 20,
+        "max_daily_unit": "mg",
+        "rounding_rule": "half_tab",
+        "notes": "NOT first-line NSAID for JIA — prefer ibuprofen or naproxen. Use only if other NSAIDs failed. Long half-life allows once daily dosing."
+      },
+      {
+        "indication": "Musculoskeletal pain / Dysmenorrhoea",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 20,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 20,
+        "dose_max_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "20 mg once daily for short-term use (max 14 days); reduce to 10 mg/day for maintenance if needed",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 20,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Short-term use preferred; higher GI toxicity compared to ibuprofen/naproxen"
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "avoid",
+        "adjusted_dose_note": "Avoid in severe renal impairment; if essential, use lowest dose with close monitoring"
+      }
+    ],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Reduce dose in hepatic impairment; avoid in severe liver disease",
+    "contraindications": [
+      "Active GI ulceration or bleeding",
+      "Severe heart failure",
+      "Severe renal or hepatic impairment",
+      "History of GI bleeding with NSAID use",
+      "Aspirin-sensitive asthma",
+      "Children under 6 years"
+    ],
+    "cross_reactions": [
+      "Other NSAIDs (aspirin, ibuprofen, naproxen)",
+      "Sulfonamides (piroxicam contains a sulfonamide moiety)"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Anticoagulants (warfarin)",
+        "severity": "severe",
+        "effect": "Increased risk of GI bleeding; piroxicam has high protein binding displacement"
+      },
+      {
+        "drug_or_class": "Methotrexate",
+        "severity": "severe",
+        "effect": "Reduced renal clearance of MTX; risk of toxicity"
+      },
+      {
+        "drug_or_class": "ACE inhibitors / ARBs",
+        "severity": "moderate",
+        "effect": "Reduced antihypertensive effect; increased nephrotoxicity risk"
+      },
+      {
+        "drug_or_class": "Lithium",
+        "severity": "moderate",
+        "effect": "NSAIDs may increase lithium levels"
+      }
+    ],
+    "monitoring_parameters": [
+      "GI symptoms (pain, black stools)",
+      "Renal function",
+      "CBC if prolonged use",
+      "Blood pressure"
+    ],
+    "black_box_warnings": [
+      "Increased risk of serious cardiovascular thrombotic events including MI and stroke",
+      "Increased risk of serious GI adverse events including bleeding, ulceration, and perforation"
+    ],
+    "pediatric_specific_warnings": [
+      "Not first-line NSAID in children — prefer ibuprofen or naproxen",
+      "Long half-life (50 hours) means drug accumulation risk",
+      "Higher GI toxicity profile compared to other NSAIDs"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C"
+      }
+    ],
+    "food_instructions": "Take with food or milk to reduce GI irritation",
+    "storage_instructions": "Store below 25°C; protect from moisture",
+    "pregnancy_category": "C (D in third trimester)",
+    "lactation_safe": false,
+    "lactation_note": "Excreted in breast milk in small amounts; avoid if possible",
+    "reference_source": [
+      "BNF for Children",
+      "ACR/SPARTAN JIA Guidelines",
+      "IAP Rheumatology Chapter"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387153005",
+    "snomed_display": "Piroxicam"
+  },
+  {
+    "generic_name": "PNEUMOCOCCAL CONJUGATE VACCINE",
+    "brand_names": [
+      "Prevenar 13 (Pfizer)",
+      "Pneumosil (SII)",
+      "Synflorix (GSK)"
+    ],
+    "drug_class": "Conjugate vaccine (pneumococcal)",
+    "category": "Vaccine",
+    "therapeutic_use": [
+      "Prevention of invasive pneumococcal disease",
+      "Prevention of pneumococcal pneumonia",
+      "Prevention of pneumococcal meningitis",
+      "Prevention of pneumococcal otitis media"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed from 6 weeks of age; part of NIS India (Haryana: PCV free under UIP) and IAP schedule",
+    "formulations": [
+      {
+        "form": "Injection (PCV13 — 13-valent)",
+        "conc_qty": 0.5,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "IM",
+        "indian_brand": "Prevenar 13 (Pfizer)",
+        "indian_conc_note": "13 pneumococcal serotypes conjugated to CRM197; 0.5 mL pre-filled syringe"
+      },
+      {
+        "form": "Injection (PCV10 — 10-valent)",
+        "conc_qty": 0.5,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "IM",
+        "indian_brand": "Pneumosil (SII)",
+        "indian_conc_note": "10 pneumococcal serotypes conjugated to CRM197; 0.5 mL; used in NIS India"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Pneumococcal immunization (primary series)",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "NIS: PCV-1 at 6 weeks, PCV-2 at 14 weeks, PCV-Booster at 9-12 months. IAP: PCV-1 at 6 weeks, PCV-2 at 10 weeks, PCV-3 at 14 weeks, Booster at 15-18 months.",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "IM injection in anterolateral thigh (infants) or deltoid (older children). Haryana provides PCV free under UIP. Can be given with other routine vaccines."
+      },
+      {
+        "indication": "Catch-up immunization (unvaccinated child 12-23 months)",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "2 doses, 8 weeks apart; for PCV13 — if unvaccinated child 12-23 months",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "Catch-up schedule depends on age at first dose and product used; refer to IAP guidelines"
+      },
+      {
+        "indication": "High-risk child immunization (>=2 years, unvaccinated)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "1 dose of PCV13 for healthy children >=2 years; high-risk children may need PCV13 + PPSV23 sequence",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "High-risk: sickle cell, asplenia, HIV, cochlear implant, immunocompromised; follow IAP/ACIP guidance for PCV+PPSV schedule"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Anaphylaxis to previous dose or any vaccine component (including diphtheria toxoid for CRM197-conjugated vaccines)",
+      "Acute febrile illness (defer vaccination)"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Immunosuppressive therapy",
+        "severity": "moderate",
+        "effect": "May reduce immune response to vaccine; vaccinate at least 2 weeks before starting immunosuppression if possible"
+      }
+    ],
+    "monitoring_parameters": [
+      "Post-vaccination observation for 30 minutes",
+      "Local reactions (redness, swelling at injection site)",
+      "Fever (common, usually mild and self-limiting)"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Apnoea risk in premature infants (<28 weeks GA) — monitor for 48-72 hours after vaccination",
+      "Fever and irritability common but self-limiting; manage with paracetamol if needed",
+      "Not a substitute for PPSV23 in high-risk children >=2 years who need both"
+    ],
+    "administration": [
+      {
+        "route": "IM",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": "Shake well before use; 0.5 mL IM in anterolateral thigh (infants) or deltoid (>1 year)",
+        "compatibility_note": "Can be given simultaneously with other childhood vaccines at different sites; do not mix in same syringe",
+        "storage": "Store at 2-8°C; do not freeze; discard if frozen"
+      }
+    ],
+    "food_instructions": "Not applicable (injectable vaccine)",
+    "storage_instructions": "Store at 2-8°C (cold chain); do not freeze — freezing destroys vaccine; protect from light",
+    "pregnancy_category": "B",
+    "lactation_safe": true,
+    "lactation_note": "Safe to administer to infants of breastfeeding mothers",
+    "reference_source": [
+      "IAP Immunization Guidelines 2024",
+      "NIS India Schedule",
+      "WHO Position Paper on PCV",
+      "ACIP Recommendations"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "699946002",
+    "snomed_display": "Pneumococcal conjugate vaccine"
+  },
+  {
+    "generic_name": "POVIDONE IODINE",
+    "brand_names": [
+      "Betadine (Win-Medicare)",
+      "Wokadine (Wockhardt)",
+      "Microshield PVP (Johnson & Johnson)"
+    ],
+    "drug_class": "Antiseptic / Disinfectant (iodophor)",
+    "category": "Dermatology",
+    "therapeutic_use": [
+      "Wound antisepsis",
+      "Surgical site preparation",
+      "Skin disinfection before procedures",
+      "Infected wounds and ulcers",
+      "Oral mucositis (gargle)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for external use in children; avoid in neonates <2 months and premature infants due to thyroid absorption risk",
+    "formulations": [
+      {
+        "form": "Solution (topical)",
+        "conc_qty": 5,
+        "conc_unit": "g",
+        "per_qty": 100,
+        "per_unit": "mL",
+        "route": "Topical",
+        "indian_brand": "Betadine Solution 5% (Win-Medicare)",
+        "indian_conc_note": "Povidone iodine 5% w/v solution (0.5% available iodine)"
+      },
+      {
+        "form": "Solution (topical)",
+        "conc_qty": 10,
+        "conc_unit": "g",
+        "per_qty": 100,
+        "per_unit": "mL",
+        "route": "Topical",
+        "indian_brand": "Betadine Solution 10% (Win-Medicare)",
+        "indian_conc_note": "Povidone iodine 10% w/v solution (1% available iodine)"
+      },
+      {
+        "form": "Ointment",
+        "conc_qty": 5,
+        "conc_unit": "g",
+        "per_qty": 100,
+        "per_unit": "g",
+        "route": "Topical",
+        "indian_brand": "Betadine Ointment (Win-Medicare)",
+        "indian_conc_note": "Povidone iodine 5% w/w ointment"
+      },
+      {
+        "form": "Gargle",
+        "conc_qty": 2,
+        "conc_unit": "g",
+        "per_qty": 100,
+        "per_unit": "mL",
+        "route": "Oropharyngeal",
+        "indian_brand": "Betadine Gargle (Win-Medicare)",
+        "indian_conc_note": "Povidone iodine 2% gargle/mouthwash"
+      },
+      {
+        "form": "Surgical scrub",
+        "conc_qty": 7.5,
+        "conc_unit": "g",
+        "per_qty": 100,
+        "per_unit": "mL",
+        "route": "Topical",
+        "indian_brand": "Betadine Scrub (Win-Medicare)",
+        "indian_conc_note": "Povidone iodine 7.5% surgical scrub"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Wound antisepsis / Skin disinfection",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": null,
+        "dose_min_unit": null,
+        "dose_basis": "fixed",
+        "dose_max_qty": null,
+        "dose_max_unit": null,
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "Apply 5-10% solution to affected area 1-2 times daily; allow to dry before dressing; use 5% for sensitive areas",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Avoid use on large open wounds in infants — risk of iodine absorption and thyroid suppression. Let dry for 2 minutes for full bactericidal effect."
+      },
+      {
+        "indication": "Oral mucositis / Pharyngitis gargle",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 10,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 15,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "Dilute 10-15 mL of 2% gargle in equal amount of warm water; gargle for 30 seconds, spit out; do not swallow; 3-4 times daily",
+        "max_single_qty": 15,
+        "max_single_unit": "mL",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Only for children old enough to gargle and spit (usually >=6 years); do not swallow"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Neonates <2 months (thyroid absorption risk)",
+      "Known iodine hypersensitivity",
+      "Thyroid disorders (relative — short-term topical use OK)",
+      "Very low birth weight infants",
+      "Use before/during radioiodine therapy"
+    ],
+    "cross_reactions": [
+      "Iodine-containing contrast media (not true cross-reactivity but monitor)"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Mercury-based antiseptics",
+        "severity": "severe",
+        "effect": "Do not use simultaneously — risk of caustic injury"
+      },
+      {
+        "drug_or_class": "Lithium",
+        "severity": "moderate",
+        "effect": "Chronic large-area application may cause additive thyroid suppression with lithium"
+      }
+    ],
+    "monitoring_parameters": [
+      "Thyroid function if used on large areas in infants/neonates",
+      "Signs of iodine sensitivity (rash, itching)",
+      "Wound healing progress"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "AVOID in neonates <2 months and premature infants — systemic iodine absorption can cause transient hypothyroidism",
+      "Limit area and duration of application in infants 2-12 months",
+      "Do not use under occlusive dressings on large areas in young children"
+    ],
+    "administration": [
+      {
+        "route": "Topical",
+        "reconstitution": null,
+        "dilution": "May dilute 10% solution to 5% for sensitive areas or young children",
+        "infusion_rate_note": null,
+        "compatibility_note": "Do not mix with mercury-based antiseptics; inactivated by blood and pus (re-apply if contaminated)",
+        "storage": "Store below 25°C; protect from light"
+      }
+    ],
+    "food_instructions": "Not applicable (topical/gargle use); gargle — do not swallow",
+    "storage_instructions": "Store below 25°C; protect from light; keep container tightly closed",
+    "pregnancy_category": "C",
+    "lactation_safe": true,
+    "lactation_note": "Short-term topical use on small areas is safe during lactation; avoid on breast area",
+    "reference_source": [
+      "IAP Textbook of Pediatrics",
+      "BNF for Children",
+      "WHO Wound Care Guidelines"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "386989006",
+    "snomed_display": "Povidone iodine"
+  },
+  {
+    "generic_name": "PREGABALIN+METHYLCOBALAMIN",
+    "brand_names": [
+      "Pregabalin-M (Sun Pharma)",
+      "Pregalin-M (Torrent)",
+      "Nervigesic-M (Glenmark)",
+      "Mecobion-PG (Alkem)"
+    ],
+    "drug_class": "Gabapentinoid analgesic + Vitamin B12 analogue",
+    "category": "Neurology",
+    "therapeutic_use": [
+      "Neuropathic pain",
+      "Diabetic peripheral neuropathy",
+      "Post-herpetic neuralgia"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not licensed for children; combination product used in adults for neuropathic pain. Pediatric use extremely limited and only under specialist neurology guidance.",
+    "formulations": [
+      {
+        "form": "Capsule",
+        "conc_qty": 75,
+        "conc_unit": "mg/750mcg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Pregalin-M 75 (Torrent)",
+        "indian_conc_note": "Pregabalin 75 mg + Methylcobalamin 750 mcg"
+      },
+      {
+        "form": "Capsule",
+        "conc_qty": 150,
+        "conc_unit": "mg/750mcg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Nervigesic-M 150 (Glenmark)",
+        "indian_conc_note": "Pregabalin 150 mg + Methylcobalamin 750 mcg"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Neuropathic pain (adolescent, specialist use)",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 75,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 75,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Start 75 mg BID, may increase to 150 mg BID after 1 week based on response; specialist supervision only",
+        "max_single_qty": 150,
+        "max_single_unit": "mg",
+        "max_daily_qty": 300,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Pregabalin component: Schedule H in India. Very limited pediatric data. Use individual components if dose titration needed in younger children."
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 30,
+        "gfr_max": 60,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Reduce pregabalin dose to 50-75% of normal; use individual components for precise adjustment"
+      },
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Reduce pregabalin dose to 25-50% of normal; extend interval; use individual components"
+      }
+    ],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": "Pregabalin not hepatically metabolized; no adjustment needed",
+    "contraindications": [
+      "Known hypersensitivity to pregabalin or methylcobalamin",
+      "Children under 12 years (no data)",
+      "Severe renal impairment without dose adjustment"
+    ],
+    "cross_reactions": ["Gabapentin (structural similarity)"],
+    "interactions": [
+      {
+        "drug_or_class": "CNS depressants (opioids, benzodiazepines)",
+        "severity": "severe",
+        "effect": "Enhanced sedation and respiratory depression risk; pregabalin potentiates CNS depression"
+      },
+      {
+        "drug_or_class": "ACE inhibitors",
+        "severity": "moderate",
+        "effect": "Increased risk of angioedema when pregabalin combined with ACE inhibitors"
+      },
+      {
+        "drug_or_class": "Thiazolidinediones",
+        "severity": "moderate",
+        "effect": "Additive peripheral oedema and weight gain"
+      }
+    ],
+    "monitoring_parameters": [
+      "Pain scores and functional assessment",
+      "Sedation level",
+      "Signs of peripheral oedema",
+      "Weight monitoring",
+      "Suicidal ideation (rare but reported with pregabalin)"
+    ],
+    "black_box_warnings": [
+      "Pregabalin: risk of suicidal thoughts and behaviour — monitor closely in adolescents"
+    ],
+    "pediatric_specific_warnings": [
+      "Not recommended for children <12 years — insufficient safety and efficacy data",
+      "Risk of sedation, dizziness, weight gain in adolescents",
+      "Abrupt withdrawal may cause seizures — taper over at least 1 week",
+      "Potential for misuse/abuse — Schedule H substance"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C; protect from moisture"
+      }
+    ],
+    "food_instructions": "May be taken with or without food",
+    "storage_instructions": "Store below 25°C; protect from moisture and light",
+    "pregnancy_category": "D",
+    "lactation_safe": false,
+    "lactation_note": "Pregabalin excreted in breast milk; not recommended during lactation",
+    "reference_source": [
+      "BNF for Children",
+      "IAP Neurology Chapter Guidelines",
+      "NICE Neuropathic Pain Guideline"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "415160008",
+    "snomed_display": "Pregabalin + methylcobalamin product"
+  },
+  {
+    "generic_name": "PROGESTERONE",
+    "brand_names": [
+      "Susten (Sun Pharma)",
+      "Gestofit (Sun Pharma)",
+      "Naturogest (German Remedies)",
+      "Endogest (Organon)"
+    ],
+    "drug_class": "Natural progestogen (C-21 steroid hormone)",
+    "category": "Endocrinology",
+    "therapeutic_use": [
+      "Luteal phase support",
+      "Threatened abortion",
+      "Preterm birth prevention",
+      "Dysfunctional uterine bleeding",
+      "Precocious puberty (specialist)"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not licensed for pediatric use; used off-label by pediatric endocrinologists for precocious puberty management and in adolescent gynaecology",
+    "formulations": [
+      {
+        "form": "Capsule (soft gelatin, micronized)",
+        "conc_qty": 100,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO/PV",
+        "indian_brand": "Susten 100 mg (Sun Pharma)",
+        "indian_conc_note": "Micronized progesterone 100 mg soft gelatin capsule"
+      },
+      {
+        "form": "Capsule (soft gelatin, micronized)",
+        "conc_qty": 200,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO/PV",
+        "indian_brand": "Susten 200 mg (Sun Pharma)",
+        "indian_conc_note": "Micronized progesterone 200 mg soft gelatin capsule"
+      },
+      {
+        "form": "Injection (in oil)",
+        "conc_qty": 50,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IM",
+        "indian_brand": "Naturogest Injection (German Remedies)",
+        "indian_conc_note": "Progesterone 50 mg/mL in oil; 1 mL ampoule"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Dysfunctional uterine bleeding (adolescent)",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 200,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 300,
+        "dose_max_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 12,
+        "duration_note": "200-300 mg at bedtime for 12 days in second half of cycle; specialist supervision required",
+        "max_single_qty": 300,
+        "max_single_unit": "mg",
+        "max_daily_qty": 300,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Specialist use only in adolescents; rule out pregnancy before use; take at bedtime to minimize drowsiness"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Contraindicated in severe hepatic impairment; use with caution in mild-moderate hepatic disease",
+    "contraindications": [
+      "Undiagnosed vaginal bleeding",
+      "Severe hepatic impairment",
+      "Known or suspected breast cancer",
+      "Active thromboembolic disease",
+      "Known hypersensitivity to progesterone or peanut/soya (capsule excipients)"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "CYP3A4 inducers (rifampicin, carbamazepine, phenytoin)",
+        "severity": "moderate",
+        "effect": "Increased metabolism of progesterone; reduced efficacy"
+      },
+      {
+        "drug_or_class": "CYP3A4 inhibitors (ketoconazole, erythromycin)",
+        "severity": "moderate",
+        "effect": "Increased progesterone levels; monitor for enhanced effects"
+      }
+    ],
+    "monitoring_parameters": [
+      "Menstrual pattern response",
+      "Blood pressure",
+      "Liver function tests",
+      "Signs of thromboembolism"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Not for use before menarche",
+      "Specialist endocrine supervision mandatory in adolescents",
+      "Drowsiness is common — advise taking at bedtime"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C; protect from moisture"
+      }
+    ],
+    "food_instructions": "Take at bedtime with water; food may delay absorption but taking at bedtime minimizes drowsiness",
+    "storage_instructions": "Store below 25°C; protect from moisture and light",
+    "pregnancy_category": "B",
+    "lactation_safe": true,
+    "lactation_note": "Naturally occurring hormone; small amounts in breast milk; considered safe",
+    "reference_source": [
+      "FOGSI Adolescent Gynaecology Guidelines",
+      "BNF for Children",
+      "IAP Endocrinology Chapter"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387375008",
+    "snomed_display": "Progesterone"
+  },
+  {
+    "generic_name": "PROPOFOL",
+    "brand_names": [
+      "Diprivan (AstraZeneca)",
+      "Propofol (Fresenius Kabi)",
+      "Profol (Neon Labs)",
+      "Neorof (Neon Labs)"
+    ],
+    "drug_class": "General anaesthetic (IV — alkylphenol derivative)",
+    "category": "Anaesthesia",
+    "therapeutic_use": [
+      "Induction and maintenance of general anaesthesia",
+      "Sedation in ICU (short-term)",
+      "Procedural sedation",
+      "Status epilepticus (refractory)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for induction of anaesthesia in children >=1 month and maintenance in children >=3 years. ICU sedation NOT licensed in children — associated with propofol infusion syndrome.",
+    "formulations": [
+      {
+        "form": "Injection/Infusion (emulsion)",
+        "conc_qty": 10,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV",
+        "indian_brand": "Neorof 1% (Neon Labs)",
+        "indian_conc_note": "Propofol 1% (10 mg/mL) lipid emulsion; 20 mL ampoule"
+      },
+      {
+        "form": "Injection/Infusion (emulsion)",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV",
+        "indian_brand": "Neorof 2% (Neon Labs)",
+        "indian_conc_note": "Propofol 2% (20 mg/mL) lipid emulsion; 50 mL vial"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Induction of anaesthesia",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 2.5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 4,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "2.5-4 mg/kg IV; titrate slowly in 1 mg/kg aliquots every 20-30 seconds until loss of consciousness",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "Infants 1-6 months may require higher induction doses (up to 4 mg/kg). Painful on injection — may give lidocaine 1 mg/kg IV before or mix with propofol."
+      },
+      {
+        "indication": "Induction of anaesthesia",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 2,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 3.5,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "2-3.5 mg/kg IV; titrate in aliquots every 20-30 seconds; young children may need higher end of range",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "Higher doses needed in younger children (3-8 years). Reduce dose in ASA III/IV patients. Always have airway equipment ready."
+      },
+      {
+        "indication": "Maintenance of anaesthesia (TIVA)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "infusion",
+        "dose_min_qty": 9,
+        "dose_min_unit": "mg/kg/hr",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 15,
+        "dose_max_unit": "mg/kg/hr",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "9-15 mg/kg/hr continuous infusion; titrate to clinical effect; reduce rate as anaesthesia deepens",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "Licensed for TIVA maintenance in children >=3 years. Always combine with analgesic (fentanyl/remifentanil). Monitor depth with clinical signs."
+      },
+      {
+        "indication": "Procedural sedation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 2,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "1-2 mg/kg IV initial bolus; titrate 0.5 mg/kg aliquots every 2-3 minutes as needed; max total dose usually 4-5 mg/kg",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "Only by trained personnel with airway management skills. Fasting guidelines apply. Must have full monitoring and resuscitation equipment."
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Reduce dose in severe hepatic impairment; slower metabolism",
+    "contraindications": [
+      "Known hypersensitivity to propofol, soya, or egg lecithin",
+      "Age <1 month for anaesthesia induction",
+      "ICU sedation in children (propofol infusion syndrome risk)",
+      "Disorders of fat metabolism"
+    ],
+    "cross_reactions": [
+      "Egg allergy (contains egg lecithin — true anaphylaxis rare but caution)",
+      "Soya allergy"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Opioids (fentanyl, remifentanil)",
+        "severity": "moderate",
+        "effect": "Synergistic respiratory and cardiovascular depression; reduce propofol dose when combined"
+      },
+      {
+        "drug_or_class": "Benzodiazepines",
+        "severity": "moderate",
+        "effect": "Enhanced sedation and respiratory depression; reduce propofol dose"
+      },
+      {
+        "drug_or_class": "Suxamethonium",
+        "severity": "minor",
+        "effect": "Propofol does not prevent suxamethonium-induced fasciculations or bradycardia"
+      }
+    ],
+    "monitoring_parameters": [
+      "Continuous SpO2, ETCO2, ECG, BP",
+      "Depth of anaesthesia (clinical signs)",
+      "Injection site for pain/phlebitis",
+      "Triglyceride levels (if prolonged use >3 days — rarely indicated in pediatrics)",
+      "Signs of propofol infusion syndrome (metabolic acidosis, rhabdomyolysis, hyperkalaemia)"
+    ],
+    "black_box_warnings": [
+      "PROPOFOL INFUSION SYNDROME: Potentially fatal — metabolic acidosis, rhabdomyolysis, cardiac failure, hyperkalaemia. Risk increases with >4 mg/kg/hr for >48 hours. AVOID prolonged ICU sedation in children.",
+      "Not for ICU sedation in children — use alternative agents"
+    ],
+    "pediatric_specific_warnings": [
+      "Propofol infusion syndrome is more common in children than adults — DO NOT use for ICU sedation",
+      "Higher induction doses needed in young children compared to adults",
+      "Injection pain is common — pretreat with lidocaine or use large vein",
+      "Apnoea is common after induction — be prepared to ventilate"
+    ],
+    "administration": [
+      {
+        "route": "IV",
+        "reconstitution": null,
+        "dilution": "May dilute 1% with D5W only to minimum 2 mg/mL; shake well before use",
+        "infusion_rate_note": "Induction: give in aliquots every 20-30 seconds. Maintenance: continuous infusion via syringe pump.",
+        "compatibility_note": "May be diluted with D5W only; do not mix with other drugs in same syringe; co-administer lidocaine to reduce injection pain",
+        "storage": "Store below 25°C; do not freeze; shake before use; discard 12 hours after opening (no preservative)"
+      }
+    ],
+    "food_instructions": "Not applicable (IV anaesthetic); standard fasting guidelines: 6h solids, 4h breast milk, 2h clear fluids pre-anaesthesia",
+    "storage_instructions": "Store below 25°C; do not freeze; do not refrigerate (may separate); use within 12 hours of opening vial",
+    "pregnancy_category": "B",
+    "lactation_safe": true,
+    "lactation_note": "Rapidly cleared; short exposure during anaesthesia compatible with breastfeeding after recovery",
+    "reference_source": [
+      "BNF for Children",
+      "APAGBI Guidelines",
+      "APA Pediatric Anaesthesia Handbook",
+      "Miller's Anesthesia"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387423006",
+    "snomed_display": "Propofol"
+  },
+  {
+    "generic_name": "RAMIPRIL",
+    "brand_names": [
+      "Cardace (Sanofi)",
+      "Ramistar (Lupin)",
+      "Ramace (Cipla)",
+      "Hopace (Micro Labs)"
+    ],
+    "drug_class": "ACE inhibitor (angiotensin-converting enzyme inhibitor)",
+    "category": "Cardiovascular",
+    "therapeutic_use": [
+      "Hypertension",
+      "Heart failure",
+      "Diabetic nephropathy (proteinuria reduction)",
+      "Post-myocardial infarction LV dysfunction"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not licensed for children; used off-label for pediatric hypertension and proteinuric renal disease under pediatric nephrology/cardiology supervision",
+    "formulations": [
+      {
+        "form": "Capsule",
+        "conc_qty": 1.25,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Cardace 1.25 mg (Sanofi)",
+        "indian_conc_note": "Ramipril 1.25 mg capsule"
+      },
+      {
+        "form": "Capsule",
+        "conc_qty": 2.5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Cardace 2.5 mg (Sanofi)",
+        "indian_conc_note": "Ramipril 2.5 mg capsule"
+      },
+      {
+        "form": "Capsule",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Cardace 5 mg (Sanofi)",
+        "indian_conc_note": "Ramipril 5 mg capsule"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 2.5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Ramistar 2.5 mg (Lupin)",
+        "indian_conc_note": "Ramipril 2.5 mg tablet"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Hypertension",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.05,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Start 0.05 mg/kg/day once daily; titrate up every 2 weeks to max 0.1-0.2 mg/kg/day based on BP response",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mg",
+        "rounding_rule": "quarter_tab",
+        "notes": "Off-label pediatric use; monitor BP carefully after first dose (risk of first-dose hypotension). Check K+ and creatinine at baseline and 1-2 weeks after initiation."
+      },
+      {
+        "indication": "Proteinuric renal disease",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.05,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.15,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Start low, titrate to target proteinuria reduction; long-term use under nephrology supervision",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mg",
+        "rounding_rule": "quarter_tab",
+        "notes": "Used for antiproteinuric effect in IgA nephropathy, FSGS, diabetic nephropathy. Monitor urine protein:creatinine ratio."
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 40,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Start at 25% of normal dose; titrate cautiously with close monitoring of K+ and creatinine"
+      }
+    ],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Reduce initial dose; ramipril is a prodrug (activated by hepatic esterases); impaired activation in liver disease",
+    "contraindications": [
+      "Bilateral renal artery stenosis",
+      "History of angioedema with ACE inhibitor",
+      "Pregnancy (all trimesters) — TERATOGENIC",
+      "Hyperkalaemia (K+ >5.5 mEq/L)",
+      "Known hypersensitivity to ACE inhibitors"
+    ],
+    "cross_reactions": [
+      "Other ACE inhibitors (enalapril, lisinopril, captopril)"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Potassium-sparing diuretics / K+ supplements",
+        "severity": "severe",
+        "effect": "Risk of life-threatening hyperkalaemia; avoid combination or monitor K+ closely"
+      },
+      {
+        "drug_or_class": "NSAIDs",
+        "severity": "moderate",
+        "effect": "Reduced antihypertensive effect; increased nephrotoxicity risk"
+      },
+      {
+        "drug_or_class": "Lithium",
+        "severity": "moderate",
+        "effect": "ACE inhibitors increase lithium levels; monitor closely"
+      },
+      {
+        "drug_or_class": "Trimethoprim",
+        "severity": "moderate",
+        "effect": "Additive hyperkalaemic effect; monitor K+"
+      }
+    ],
+    "monitoring_parameters": [
+      "Blood pressure (including first-dose monitoring)",
+      "Serum potassium at baseline, 1-2 weeks, then periodically",
+      "Serum creatinine / eGFR at baseline and after each dose change",
+      "Urine protein:creatinine ratio (if renal indication)",
+      "Signs of angioedema"
+    ],
+    "black_box_warnings": [
+      "TERATOGENIC: ACE inhibitors cause fetal renal agenesis, oligohydramnios, and death when used in pregnancy. Discontinue immediately if pregnancy detected."
+    ],
+    "pediatric_specific_warnings": [
+      "First-dose hypotension risk — give first dose at bedtime or under observation",
+      "ABSOLUTELY contraindicated in adolescent females of childbearing age without reliable contraception",
+      "Monitor growth and renal function in long-term pediatric use",
+      "Dry cough is common — if intolerable, switch to ARB (losartan)"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": "Capsule contents can be mixed with water or apple juice for children unable to swallow capsules",
+        "storage": "Store below 25°C; protect from moisture"
+      }
+    ],
+    "food_instructions": "May be taken with or without food; take at same time daily",
+    "storage_instructions": "Store below 25°C; protect from moisture; keep in original blister pack",
+    "pregnancy_category": "D",
+    "lactation_safe": false,
+    "lactation_note": "Excreted in breast milk; not recommended during lactation",
+    "reference_source": [
+      "AAP Clinical Practice Guideline for Pediatric Hypertension",
+      "BNF for Children",
+      "KDIGO Guidelines"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "386872004",
+    "snomed_display": "Ramipril"
+  },
+  {
+    "generic_name": "ROSUVASTATIN",
+    "brand_names": [
+      "Rosuvas (Sun Pharma)",
+      "Crestor (AstraZeneca)",
+      "Rozavel (Glenmark)",
+      "Rosulip (Cipla)"
+    ],
+    "drug_class": "HMG-CoA reductase inhibitor (statin)",
+    "category": "Cardiovascular",
+    "therapeutic_use": [
+      "Familial hypercholesterolaemia (heterozygous and homozygous)",
+      "Primary hyperlipidaemia"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for children >=6 years with heterozygous familial hypercholesterolaemia; >=10 years for some formulations",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Rosuvas 5 mg (Sun Pharma)",
+        "indian_conc_note": "Rosuvastatin calcium 5 mg tablet"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 10,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Rosuvas 10 mg (Sun Pharma)",
+        "indian_conc_note": "Rosuvastatin calcium 10 mg tablet"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Rosuvas 20 mg (Sun Pharma)",
+        "indian_conc_note": "Rosuvastatin calcium 20 mg tablet"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Heterozygous familial hypercholesterolaemia",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "6-9 years: start 5 mg OD, max 10 mg OD; 10-17 years: start 5 mg OD, may increase to 10-20 mg OD after 4 weeks",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 20,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Specialist lipidology/cardiology supervision required. Dietary modification for 6-12 months before considering statin. Monitor LFTs and CK at baseline and periodically."
+      },
+      {
+        "indication": "Homozygous familial hypercholesterolaemia",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 20,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 20,
+        "dose_max_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "20 mg once daily (children >=10 years); adjunct to other lipid-lowering therapies; specialist use only",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 20,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Usually combined with ezetimibe and/or LDL apheresis; specialist centre management"
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Start at 5 mg; max 10 mg; doses >10 mg contraindicated in severe renal impairment"
+      }
+    ],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Contraindicated in active liver disease or unexplained persistent transaminase elevation",
+    "contraindications": [
+      "Active liver disease",
+      "Unexplained persistent elevated transaminases (>3x ULN)",
+      "Pregnancy and lactation",
+      "Myopathy",
+      "Concomitant ciclosporin"
+    ],
+    "cross_reactions": ["Other statins (atorvastatin, simvastatin)"],
+    "interactions": [
+      {
+        "drug_or_class": "Ciclosporin",
+        "severity": "severe",
+        "effect": "Markedly increases rosuvastatin levels — CONTRAINDICATED"
+      },
+      {
+        "drug_or_class": "Warfarin",
+        "severity": "moderate",
+        "effect": "Rosuvastatin may increase INR; monitor closely"
+      },
+      {
+        "drug_or_class": "Gemfibrozil",
+        "severity": "severe",
+        "effect": "Increased risk of myopathy/rhabdomyolysis; avoid combination"
+      },
+      {
+        "drug_or_class": "Antacids",
+        "severity": "minor",
+        "effect": "Aluminium/magnesium antacids reduce rosuvastatin absorption; give rosuvastatin 2 hours after antacid"
+      }
+    ],
+    "monitoring_parameters": [
+      "Fasting lipid profile at baseline, 4-6 weeks, then every 3-6 months",
+      "LFTs (ALT) at baseline and as clinically indicated",
+      "CK if muscle symptoms develop",
+      "Growth and pubertal development in children on long-term therapy"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Not recommended for children <6 years",
+      "Must be combined with dietary intervention and lifestyle modification",
+      "Contraindicated in adolescent females who may become pregnant",
+      "Monitor growth and pubertal development annually"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 30°C; protect from moisture"
+      }
+    ],
+    "food_instructions": "May be taken with or without food; take at same time daily (evening preferred)",
+    "storage_instructions": "Store below 30°C; protect from moisture and light",
+    "pregnancy_category": "X",
+    "lactation_safe": false,
+    "lactation_note": "Contraindicated during lactation; cholesterol is essential for infant development",
+    "reference_source": [
+      "NICE Familial Hypercholesterolaemia Guideline",
+      "AAP Expert Panel on Lipids",
+      "BNF for Children"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "412439003",
+    "snomed_display": "Rosuvastatin"
+  },
+  {
+    "generic_name": "ROTAVIRUS VACCINE",
+    "brand_names": [
+      "Rotavac (Bharat Biotech)",
+      "Rotasiil (SII)",
+      "Rotateq (MSD)",
+      "Rotarix (GSK)"
+    ],
+    "drug_class": "Live attenuated vaccine (rotavirus)",
+    "category": "Vaccine",
+    "therapeutic_use": [
+      "Prevention of rotavirus gastroenteritis",
+      "Part of NIS India and IAP immunization schedule"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for infants from 6 weeks of age; part of NIS India (Haryana: Rotavirus vaccine free under UIP)",
+    "formulations": [
+      {
+        "form": "Oral solution (Rotavac — bovine-human reassortant, 116E)",
+        "conc_qty": 0.5,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "PO",
+        "indian_brand": "Rotavac (Bharat Biotech)",
+        "indian_conc_note": "Live attenuated bovine-human reassortant rotavirus 116E strain; 0.5 mL per dose; 5-dose vial"
+      },
+      {
+        "form": "Oral solution (Rotasiil — bovine-human reassortant, pentavalent)",
+        "conc_qty": 2.5,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "PO",
+        "indian_brand": "Rotasiil (SII)",
+        "indian_conc_note": "Live bovine-human reassortant pentavalent rotavirus vaccine; lyophilized; reconstitute with 2.5 mL diluent"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Rotavirus immunization (NIS India)",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "NIS (Rotavac): 3 doses at 6, 10, 14 weeks. IAP (Rotasiil/Rotavac): 3 doses at 6, 10, 14 weeks. Do not start after 15 weeks of age. Complete series by 8 months.",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "Oral administration only. Haryana provides rotavirus vaccine free under UIP. If child spits out or vomits dose, do NOT repeat. Breastfeeding does not need to be withheld."
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "History of intussusception",
+      "Severe combined immunodeficiency (SCID)",
+      "Known hypersensitivity to previous dose or vaccine components",
+      "Uncorrected congenital malformation of GI tract (e.g., Meckel's diverticulum)",
+      "Age >8 months (do not initiate or continue series)"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Immunosuppressive therapy",
+        "severity": "severe",
+        "effect": "May render vaccine ineffective; risk of vaccine strain gastroenteritis in immunocompromised"
+      }
+    ],
+    "monitoring_parameters": [
+      "Post-vaccination observation for 30 minutes",
+      "Monitor for signs of intussusception for 7 days post-vaccination (irritability, blood in stool, abdominal distension, vomiting)"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Small increased risk of intussusception (~1-6 per 100,000 vaccinated infants) — mainly within 7 days of first dose",
+      "Do NOT initiate series after 15 weeks of age; complete by 8 months",
+      "Shedding of vaccine virus in stool for up to 15 days — advise hand hygiene for caregivers",
+      "Pre-term infants can be vaccinated at chronological age per schedule"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": "Rotasiil: reconstitute lyophilized vaccine with 2.5 mL diluent provided",
+        "dilution": null,
+        "infusion_rate_note": null,
+        "compatibility_note": "Can be given simultaneously with other oral and injectable vaccines at same visit",
+        "storage": "Store at 2-8°C; do not freeze; Rotavac can be kept at room temperature for limited period (CTC)"
+      }
+    ],
+    "food_instructions": "No food restrictions; breastfeeding need not be withheld before or after vaccine",
+    "storage_instructions": "Store at 2-8°C (cold chain); do not freeze; use reconstituted vaccine within 4 hours",
+    "pregnancy_category": "Not applicable (infant vaccine)",
+    "lactation_safe": true,
+    "lactation_note": "Safe to administer to breastfed infants",
+    "reference_source": [
+      "IAP Immunization Guidelines 2024",
+      "NIS India Schedule",
+      "WHO Position Paper on Rotavirus Vaccines"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "415354003",
+    "snomed_display": "Rotavirus vaccine"
+  },
+  {
+    "generic_name": "SEVOFLURANE",
+    "brand_names": [
+      "Sevorane (AbbVie)",
+      "Sevoflo (Piramal)",
+      "Sojourn (Piramal)"
+    ],
+    "drug_class": "Inhalational general anaesthetic (fluorinated methyl isopropyl ether)",
+    "category": "Anaesthesia",
+    "therapeutic_use": [
+      "Induction of general anaesthesia (inhalational induction)",
+      "Maintenance of general anaesthesia",
+      "Preferred inhalational agent for pediatric anaesthesia"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for all ages including neonates; preferred inhalational agent for pediatric induction due to non-irritant nature",
+    "formulations": [
+      {
+        "form": "Inhalation vapour (liquid for vaporiser)",
+        "conc_qty": 250,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "Inhalation",
+        "indian_brand": "Sevoflo (Piramal)",
+        "indian_conc_note": "Sevoflurane 100% liquid for use in calibrated vaporiser; 250 mL bottle"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Inhalational induction of anaesthesia",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 6,
+        "dose_min_unit": "vol%",
+        "dose_basis": "fixed",
+        "dose_max_qty": 8,
+        "dose_max_unit": "vol%",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Vital capacity or tidal breathing induction: start at 6-8% in 100% O2 or O2/N2O; loss of consciousness in 1-2 minutes",
+        "max_single_qty": 8,
+        "max_single_unit": "vol%",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Preferred agent for inhalational induction in infants and children — pleasant smell, non-irritant to airways. MAC in neonates ~3.3%, infants ~3.2%."
+      },
+      {
+        "indication": "Inhalational induction of anaesthesia",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 6,
+        "dose_min_unit": "vol%",
+        "dose_basis": "fixed",
+        "dose_max_qty": 8,
+        "dose_max_unit": "vol%",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "6-8% in O2 or O2/N2O for induction; reduce to maintenance once IV access secured",
+        "max_single_qty": 8,
+        "max_single_unit": "vol%",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "MAC decreases with age: 1-6 months ~3.2%, 6m-3y ~2.8%, 3-12y ~2.5%. Children require higher MAC than adults."
+      },
+      {
+        "indication": "Maintenance of anaesthesia",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "vol%",
+        "dose_basis": "fixed",
+        "dose_max_qty": 3,
+        "dose_max_unit": "vol%",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "1-3% (0.5-1.0 MAC) with O2/air or O2/N2O; titrate to clinical effect and end-tidal concentration",
+        "max_single_qty": 3,
+        "max_single_unit": "vol%",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Adjust based on surgical stimulus and concurrent analgesics. Monitor end-tidal sevoflurane concentration. Rapid emergence — plan analgesia accordingly."
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "caution",
+        "adjusted_dose_note": "Use with caution — fluoride metabolite may accumulate; keep fresh gas flows >2 L/min; avoid prolonged procedures"
+      }
+    ],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": "Rare cases of hepatotoxicity reported; use with caution if prior halogenated anaesthetic hepatitis",
+    "contraindications": [
+      "Known or suspected susceptibility to malignant hyperthermia",
+      "Known hypersensitivity to sevoflurane or other halogenated agents",
+      "History of confirmed hepatotoxicity to halogenated anaesthetics"
+    ],
+    "cross_reactions": [
+      "Other halogenated inhalational anaesthetics (isoflurane, desflurane, halothane)"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Succinylcholine",
+        "severity": "severe",
+        "effect": "Sevoflurane potentiates succinylcholine; increased risk of malignant hyperthermia in susceptible individuals"
+      },
+      {
+        "drug_or_class": "Non-depolarising neuromuscular blockers",
+        "severity": "moderate",
+        "effect": "Sevoflurane enhances neuromuscular blockade — may need reduced doses of relaxants"
+      },
+      {
+        "drug_or_class": "Beta-blockers / Calcium channel blockers",
+        "severity": "moderate",
+        "effect": "Enhanced hypotension and myocardial depression"
+      }
+    ],
+    "monitoring_parameters": [
+      "End-tidal sevoflurane concentration",
+      "SpO2, ETCO2, ECG, NIBP continuously",
+      "Temperature (malignant hyperthermia risk)",
+      "Emergence agitation (common in children 2-6 years)"
+    ],
+    "black_box_warnings": [
+      "Risk of malignant hyperthermia — have dantrolene available",
+      "FDA warning: repeated/prolonged exposure to general anaesthetics in children <3 years may affect brain development — use only when medically necessary"
+    ],
+    "pediatric_specific_warnings": [
+      "Emergence agitation/delirium common (30-80% in preschool children) — may need rescue with propofol, clonidine, or fentanyl",
+      "Higher MAC in younger children — need higher concentrations than adults",
+      "Bradycardia more common in children than adults — have atropine ready",
+      "Neurotoxicity concern with prolonged/repeated exposure <3 years — discuss risk-benefit with parents"
+    ],
+    "administration": [
+      {
+        "route": "Inhalation",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": "Use only in calibrated sevoflurane vaporiser; fresh gas flows 2-6 L/min for induction, can reduce for maintenance",
+        "compatibility_note": "Compatible with standard anaesthesia circuits; avoid desiccated CO2 absorbents (Compound A formation)",
+        "storage": "Store below 25°C; keep bottle tightly closed; no refrigeration needed"
+      }
+    ],
+    "food_instructions": "Pre-anaesthetic fasting: 6h solids, 4h breast milk, 2h clear fluids",
+    "storage_instructions": "Store below 25°C in original bottle; keep tightly closed; no special storage requirements",
+    "pregnancy_category": "B",
+    "lactation_safe": true,
+    "lactation_note": "Rapidly eliminated; short exposure during anaesthesia compatible with breastfeeding after full recovery",
+    "reference_source": [
+      "BNF for Children",
+      "APAGBI Guidelines for Pediatric Anaesthesia",
+      "Miller's Anesthesia"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "386842000",
+    "snomed_display": "Sevoflurane"
+  },
+  {
+    "generic_name": "SIMETHICONE+DILL OIL+FENNEL OIL",
+    "brand_names": [
+      "Colicaid Drops (Meyer Organics)",
+      "Bonnisan Drops (Himalaya)",
+      "Woodward's Gripe Water (Reckitt)"
+    ],
+    "drug_class": "Antiflatulent combination (simethicone + carminatives)",
+    "category": "Gastrointestinal",
+    "therapeutic_use": [
+      "Infantile colic",
+      "Flatulence",
+      "Abdominal distension in infants",
+      "Griping pain"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "OTC formulation; widely used in Indian pediatric practice for infantile colic; limited evidence base but long safety record",
+    "formulations": [
+      {
+        "form": "Oral drops",
+        "conc_qty": 40,
+        "conc_unit": "mg/0.3mL/0.005mL",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Colicaid Drops (Meyer Organics)",
+        "indian_conc_note": "Simethicone 40 mg + Dill oil 0.3 mL + Fennel oil 0.005 mL per mL"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Infantile colic / Flatulence",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.3,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.3,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "0.3 mL (6 drops) after each feed, up to 3-4 times daily; use after feeds",
+        "max_single_qty": 0.3,
+        "max_single_unit": "mL",
+        "max_daily_qty": 1.2,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.1ml",
+        "notes": "Symptomatic relief only; counsel parents about normal infant crying patterns. Infantile colic usually resolves by 3-4 months."
+      },
+      {
+        "indication": "Infantile colic / Flatulence",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "0.5-1 mL after each feed, up to 3-4 times daily",
+        "max_single_qty": 1,
+        "max_single_unit": "mL",
+        "max_daily_qty": 4,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.1ml",
+        "notes": "Generally well tolerated; limited evidence for efficacy but excellent safety profile"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Known hypersensitivity to any component",
+      "Intestinal obstruction"
+    ],
+    "cross_reactions": [],
+    "interactions": [],
+    "monitoring_parameters": [
+      "Symptom response",
+      "Feeding pattern and weight gain"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Limited evidence for efficacy in infantile colic; parental reassurance and dietary review equally important",
+      "Rule out organic causes if persistent or severe symptoms",
+      "Contains herbal oils — rare possibility of allergic reaction"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": "May be mixed with small amount of cooled boiled water or given directly into mouth",
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C"
+      }
+    ],
+    "food_instructions": "Give after each feed; may mix with small amount of water",
+    "storage_instructions": "Store below 25°C; use within 3 months of opening",
+    "pregnancy_category": "Not applicable (infant use)",
+    "lactation_safe": true,
+    "lactation_note": "Given directly to infant; not a concern for breastfeeding",
+    "reference_source": [
+      "IAP Textbook of Pediatrics",
+      "CIMS India",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387442005",
+    "snomed_display": "Simethicone-containing product"
+  },
+  {
+    "generic_name": "SODIUM CHLORIDE+DEXTROSE",
+    "brand_names": [
+      "DNS (Fresenius Kabi)",
+      "Dextrose Normal Saline (B. Braun)",
+      "D5NS (Claris)"
+    ],
+    "drug_class": "Intravenous fluid (crystalloid — glucose-saline combination)",
+    "category": "Fluids and Electrolytes",
+    "therapeutic_use": [
+      "Maintenance IV fluids",
+      "Dehydration (correction and maintenance)",
+      "Perioperative fluid management",
+      "Caloric supplementation when NPO"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for all ages; standard maintenance IV fluid in pediatric practice; NOTE: isotonic fluids (N/2 + D5 or NS + D5) preferred over hypotonic fluids per current guidelines",
+    "formulations": [
+      {
+        "form": "IV infusion (0.9% NaCl + 5% Dextrose — DNS)",
+        "conc_qty": 1,
+        "conc_unit": "L",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "IV",
+        "indian_brand": "DNS (Fresenius Kabi)",
+        "indian_conc_note": "NaCl 0.9% + Dextrose 5% (Na 154 mEq/L, Cl 154 mEq/L, Glucose 50 g/L)"
+      },
+      {
+        "form": "IV infusion (0.45% NaCl + 5% Dextrose — N/2 in D5)",
+        "conc_qty": 500,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "IV",
+        "indian_brand": "N/2 in D5 (Fresenius Kabi)",
+        "indian_conc_note": "NaCl 0.45% + Dextrose 5% (Na 77 mEq/L); half-normal saline + dextrose"
+      },
+      {
+        "form": "IV infusion (0.2% NaCl + 5% Dextrose — N/5 in D5)",
+        "conc_qty": 500,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "IV",
+        "indian_brand": "N/5 in D5 (Claris)",
+        "indian_conc_note": "NaCl 0.2% + Dextrose 5% (Na 34 mEq/L); one-fifth NS + dextrose — AVOID in children (hyponatraemia risk)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Maintenance IV fluids (Holliday-Segar)",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 100,
+        "dose_min_unit": "mL/kg/day",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 100,
+        "dose_max_unit": "mL/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "First 10 kg: 100 mL/kg/day (4 mL/kg/hr); use isotonic fluid (0.9% NaCl + D5 or 0.45% NaCl + D5 with 20 mEq/L KCl)",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Current guidelines: use ISOTONIC maintenance fluids (0.9% NaCl + D5 or 0.45% NaCl + D5) to prevent hospital-acquired hyponatraemia. AVOID N/5 in D5."
+      },
+      {
+        "indication": "Maintenance IV fluids (Holliday-Segar)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": null,
+        "dose_min_unit": null,
+        "dose_basis": "per_kg",
+        "dose_max_qty": null,
+        "dose_max_unit": null,
+        "is_per_day": true,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Holliday-Segar: first 10 kg = 100 mL/kg/day, next 10 kg = 50 mL/kg/day, each subsequent kg = 20 mL/kg/day. Use 0.9% NaCl+D5 or 0.45% NaCl+D5 with 20 mEq/L KCl once voiding.",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": 2500,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "Add KCl (20 mEq/L) once urine output confirmed. Restrict to 50-80% maintenance for post-op, meningitis, SIADH. Switch to oral as soon as tolerated."
+      },
+      {
+        "indication": "Dehydration correction (moderate — 5-10%)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 20,
+        "dose_min_unit": "mL/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 20,
+        "dose_max_unit": "mL/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": 20,
+        "loading_dose_unit": "mL/kg",
+        "loading_dose_basis": "per_kg",
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Initial bolus: 0.9% NaCl 20 mL/kg over 20-30 min (may repeat up to 3 times); then deficit replacement + maintenance with 0.9% NaCl + D5 over 24-48 hours",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Bolus should be with 0.9% NaCl (NO dextrose). Dextrose-saline for maintenance phase only. Reassess after each bolus. Calculate deficit = %dehydration x weight(kg) x 10 mL."
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "reduce_dose",
+        "adjusted_dose_note": "Restrict fluid volume; avoid potassium supplementation; monitor fluid balance and electrolytes closely"
+      }
+    ],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": "Use sodium-restricted fluids in ascites/hepatic oedema",
+    "contraindications": [
+      "Fluid overload / pulmonary oedema",
+      "Severe hyponatraemia (use 3% NaCl instead)",
+      "Hyperglycaemia (avoid dextrose-containing fluids until glucose controlled)"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Insulin",
+        "severity": "moderate",
+        "effect": "Dextrose-containing fluids may require insulin adjustment in diabetic patients"
+      },
+      {
+        "drug_or_class": "Corticosteroids",
+        "severity": "minor",
+        "effect": "Sodium-containing fluids may exacerbate fluid retention with steroids"
+      }
+    ],
+    "monitoring_parameters": [
+      "Serum electrolytes (Na, K, Cl) every 12-24 hours",
+      "Blood glucose (especially in neonates)",
+      "Fluid balance (intake/output)",
+      "Daily weight",
+      "Signs of fluid overload (oedema, tachycardia, respiratory distress)"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "AVOID hypotonic fluids (N/5 in D5) for routine maintenance — risk of fatal hospital-acquired hyponatraemia",
+      "Use isotonic fluids (0.9% NaCl+D5 or 0.45% NaCl+D5) per NICE/AAP guidelines",
+      "Neonates: risk of hyperglycaemia with D10; risk of hypoglycaemia without dextrose — monitor BGL",
+      "Always calculate maintenance rate accurately using Holliday-Segar formula"
+    ],
+    "administration": [
+      {
+        "route": "IV",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": "Bolus: 20 mL/kg over 20-30 min using 0.9% NaCl. Maintenance: continuous infusion via infusion pump using Holliday-Segar rate.",
+        "compatibility_note": "Check compatibility before adding medications; KCl commonly added (max 40 mEq/L peripheral, 60 mEq/L central)",
+        "storage": "Store at room temperature; do not freeze; inspect for particulate matter before use"
+      }
+    ],
+    "food_instructions": "Not applicable (IV use); switch to oral fluids/feeding as soon as tolerated",
+    "storage_instructions": "Store at room temperature (15-30°C); do not freeze; discard unused portion",
+    "pregnancy_category": "A",
+    "lactation_safe": true,
+    "lactation_note": "Safe; physiological fluids",
+    "reference_source": [
+      "NICE IV Fluid Therapy in Children Guidelines",
+      "AAP Clinical Practice Guideline",
+      "IAP Fluid Management Protocol",
+      "Holliday-Segar Formula"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387390002",
+    "snomed_display": "Sodium chloride and glucose infusion solution"
+  },
+  {
+    "generic_name": "SODIUM PICOSULFATE",
+    "brand_names": [
+      "Cremalax (Abbott)",
+      "Laxisoft (Lupin)",
+      "Gutfree (Mankind)",
+      "Picosulf (Aristo)"
+    ],
+    "drug_class": "Stimulant laxative (diphenylmethane derivative)",
+    "category": "Gastrointestinal",
+    "therapeutic_use": [
+      "Constipation",
+      "Bowel preparation before procedures",
+      "Faecal impaction (adjunct)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for children >=4 years for constipation; younger children off-label with specialist guidance",
+    "formulations": [
+      {
+        "form": "Oral drops",
+        "conc_qty": 7.5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Cremalax Drops (Abbott)",
+        "indian_conc_note": "Sodium picosulfate 7.5 mg/mL oral drops (15 drops = 1 mL = 7.5 mg)"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Cremalax 5 mg (Abbott)",
+        "indian_conc_note": "Sodium picosulfate 5 mg tablet"
+      },
+      {
+        "form": "Syrup",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Laxisoft Syrup (Lupin)",
+        "indian_conc_note": "Sodium picosulfate 5 mg per 5 mL"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Constipation",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 2,
+        "dose_min_unit": "drops",
+        "dose_basis": "fixed",
+        "dose_max_qty": 5,
+        "dose_max_unit": "drops",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "2-5 drops (1-2.5 mg) at bedtime; off-label use in infants <4 years; prefer osmotic laxatives (lactulose) first",
+        "max_single_qty": 5,
+        "max_single_unit": "drops",
+        "max_daily_qty": 5,
+        "max_daily_unit": "drops",
+        "rounding_rule": null,
+        "notes": "Not first-line for infantile constipation — prefer lactulose or polyethylene glycol. Use only for short-term relief."
+      },
+      {
+        "indication": "Constipation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "age_tier",
+        "dose_min_qty": 2.5,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 5,
+        "dose_max_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "4-10 years: 2.5-5 mg (5-10 drops) at bedtime; >10 years: 5-10 mg at bedtime; short-term use only",
+        "max_single_qty": 10,
+        "max_single_unit": "mg",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mg",
+        "rounding_rule": null,
+        "notes": "Give at bedtime; effect in 6-12 hours (morning bowel movement). Not for chronic daily use. Treat underlying cause of constipation."
+      },
+      {
+        "indication": "Bowel preparation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 2,
+        "duration_note": "5-10 mg at bedtime for 2 days before procedure; combined with polyethylene glycol for optimal preparation",
+        "max_single_qty": 10,
+        "max_single_unit": "mg",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mg",
+        "rounding_rule": null,
+        "notes": "Part of bowel prep regimen; ensure adequate hydration"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": false,
+    "hepatic_note": null,
+    "contraindications": [
+      "Intestinal obstruction",
+      "Acute surgical abdominal conditions (appendicitis, peritonitis)",
+      "Severe dehydration",
+      "Known hypersensitivity to sodium picosulfate"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Diuretics / Corticosteroids",
+        "severity": "moderate",
+        "effect": "Chronic stimulant laxative use may worsen electrolyte imbalance (hypokalaemia)"
+      },
+      {
+        "drug_or_class": "Antibiotics",
+        "severity": "minor",
+        "effect": "Antibiotics may reduce efficacy of sodium picosulfate (requires colonic bacteria for activation)"
+      }
+    ],
+    "monitoring_parameters": [
+      "Bowel movement frequency and consistency",
+      "Hydration status",
+      "Electrolytes if prolonged use"
+    ],
+    "black_box_warnings": [],
+    "pediatric_specific_warnings": [
+      "Not first-line for childhood constipation — prefer PEG 3350 or lactulose",
+      "Avoid chronic daily use — risk of laxative dependence",
+      "Ensure adequate fluid intake during treatment"
+    ],
+    "administration": [
+      {
+        "route": "PO",
+        "reconstitution": null,
+        "dilution": "Drops may be mixed with water or juice",
+        "infusion_rate_note": null,
+        "compatibility_note": null,
+        "storage": "Store below 25°C"
+      }
+    ],
+    "food_instructions": "Give at bedtime; may take with or without food; ensure adequate water intake",
+    "storage_instructions": "Store below 25°C; protect from light",
+    "pregnancy_category": "B",
+    "lactation_safe": true,
+    "lactation_note": "Not absorbed systemically; safe during lactation",
+    "reference_source": [
+      "IAP Constipation Guidelines",
+      "BNF for Children",
+      "ESPGHAN/NASPGHAN Constipation Guidelines"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "395910002",
+    "snomed_display": "Sodium picosulfate"
+  },
+  {
+    "generic_name": "STREPTOKINASE",
+    "brand_names": [
+      "Streptase (CSL Behring)",
+      "STPase (Cadila)",
+      "Myokinase (Biocon)"
+    ],
+    "drug_class": "Thrombolytic / Fibrinolytic agent",
+    "category": "Haematology",
+    "therapeutic_use": [
+      "Acute myocardial infarction (thrombolysis)",
+      "Massive pulmonary embolism",
+      "Deep vein thrombosis (extensive)",
+      "Blocked arteriovenous shunt / catheter",
+      "Arterial thromboembolism"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Not specifically licensed for children; used off-label in life-threatening thrombotic events under pediatric haematology/ICU specialist supervision",
+    "formulations": [
+      {
+        "form": "Injection (powder for reconstitution)",
+        "conc_qty": 750000,
+        "conc_unit": "IU",
+        "per_qty": 1,
+        "per_unit": "vial",
+        "route": "IV",
+        "indian_brand": "STPase 7.5 Lakh IU (Cadila)",
+        "indian_conc_note": "Streptokinase 750,000 IU lyophilized powder for reconstitution"
+      },
+      {
+        "form": "Injection (powder for reconstitution)",
+        "conc_qty": 1500000,
+        "conc_unit": "IU",
+        "per_qty": 1,
+        "per_unit": "vial",
+        "route": "IV",
+        "indian_brand": "STPase 15 Lakh IU (Cadila)",
+        "indian_conc_note": "Streptokinase 1,500,000 IU lyophilized powder for reconstitution"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Systemic thrombolysis (life-threatening thrombosis)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "infusion",
+        "dose_min_qty": 1000,
+        "dose_min_unit": "IU/kg/hr",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1000,
+        "dose_max_unit": "IU/kg/hr",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": 2000,
+        "loading_dose_unit": "IU/kg",
+        "loading_dose_basis": "per_kg",
+        "maintenance_dose_qty": 1000,
+        "maintenance_dose_unit": "IU/kg/hr",
+        "duration_days_default": null,
+        "duration_note": "Loading: 2000 IU/kg IV over 30 min; Maintenance: 1000 IU/kg/hr for 24-72 hours; monitor fibrinogen, PT, aPTT every 6 hours",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "PICU/specialist use only. Type and cross-match blood before starting. Have fresh frozen plasma and cryoprecipitate available. Stop if fibrinogen <100 mg/dL."
+      },
+      {
+        "indication": "Blocked central venous catheter",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5000,
+        "dose_min_unit": "IU",
+        "dose_basis": "fixed",
+        "dose_max_qty": 25000,
+        "dose_max_unit": "IU",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Instil 5,000-25,000 IU in sufficient volume to fill catheter lumen; leave for 2-4 hours then aspirate; may repeat once",
+        "max_single_qty": 25000,
+        "max_single_unit": "IU",
+        "max_daily_qty": 50000,
+        "max_daily_unit": "IU",
+        "rounding_rule": null,
+        "notes": "Local instillation for catheter clearance — lower systemic risk than IV thrombolysis"
+      }
+    ],
+    "renal_adjustment_required": false,
+    "renal_bands": [],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Increased bleeding risk in hepatic impairment due to coagulopathy; use with extreme caution",
+    "contraindications": [
+      "Active internal bleeding",
+      "Recent (within 10 days) major surgery, trauma, or childbirth",
+      "Intracranial or intraspinal surgery within 2 months",
+      "Intracranial neoplasm, AVM, or aneurysm",
+      "Known bleeding diathesis",
+      "Severe uncontrolled hypertension",
+      "Recent streptococcal infection (antibodies may neutralize; use alteplase instead)",
+      "Previous streptokinase use within 12 months"
+    ],
+    "cross_reactions": [
+      "Prior streptococcal infection (anti-streptokinase antibodies)",
+      "Prior streptokinase use (neutralizing antibodies persist 6-12 months)"
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Anticoagulants (heparin, warfarin)",
+        "severity": "severe",
+        "effect": "Markedly increased bleeding risk; hold heparin before and during infusion; restart 4-6 hours after"
+      },
+      {
+        "drug_or_class": "Antiplatelet agents (aspirin, clopidogrel)",
+        "severity": "severe",
+        "effect": "Increased bleeding risk; but aspirin often given concomitantly in MI protocols"
+      },
+      {
+        "drug_or_class": "NSAIDs",
+        "severity": "moderate",
+        "effect": "Increased risk of GI bleeding"
+      }
+    ],
+    "monitoring_parameters": [
+      "Fibrinogen levels every 6 hours (target >100 mg/dL)",
+      "PT, aPTT every 6 hours",
+      "Haemoglobin, platelet count",
+      "Vital signs every 15 minutes during infusion",
+      "Signs of bleeding (all sites — IV sites, GI, intracranial)",
+      "Allergic/anaphylactic reactions"
+    ],
+    "black_box_warnings": [
+      "Risk of life-threatening haemorrhage including intracranial bleeding",
+      "Anaphylaxis reported — streptococcal protein; have adrenaline available",
+      "Cannot re-use within 12 months due to neutralizing antibodies — use alteplase for repeat thrombolysis"
+    ],
+    "pediatric_specific_warnings": [
+      "PICU use only under haematology consultation",
+      "Neonatal use: extremely high risk of IVH — generally avoided; prefer alteplase if thrombolysis needed",
+      "Document recent streptococcal infections — anti-streptokinase antibodies reduce efficacy",
+      "Allergic reactions more common than with alteplase"
+    ],
+    "administration": [
+      {
+        "route": "IV",
+        "reconstitution": "Reconstitute with 5 mL 0.9% NaCl; gently swirl — do not shake",
+        "dilution": "Further dilute in 50-100 mL 0.9% NaCl for infusion",
+        "infusion_rate_note": "Loading dose over 30 minutes; maintenance infusion via infusion pump. Monitor for hypotension and allergic reactions.",
+        "compatibility_note": "Compatible with 0.9% NaCl; incompatible with dextrose solutions",
+        "storage": "Store at 2-8°C before reconstitution; use within 24 hours after reconstitution"
+      }
+    ],
+    "food_instructions": "Not applicable (IV use)",
+    "storage_instructions": "Store lyophilized powder at 2-8°C; reconstituted solution: use within 24 hours if refrigerated",
+    "pregnancy_category": "C",
+    "lactation_safe": false,
+    "lactation_note": "Unknown if excreted in breast milk; avoid during active treatment",
+    "reference_source": [
+      "CHEST Guidelines on Antithrombotic Therapy in Children",
+      "BNF for Children",
+      "ASH Guidelines on VTE in Children"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "387404004",
+    "snomed_display": "Streptokinase"
+  },
+  {
+    "generic_name": "SUCCINYLCHOLINE",
+    "brand_names": [
+      "Scoline (GSK)",
+      "Suxamethonium (Neon Labs)",
+      "Anectine (generic)"
+    ],
+    "drug_class": "Depolarising neuromuscular blocking agent",
+    "category": "Anaesthesia",
+    "therapeutic_use": [
+      "Rapid sequence intubation (RSI)",
+      "Emergency airway management",
+      "Short procedures requiring muscle relaxation",
+      "Electroconvulsive therapy (ECT)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for all ages including neonates; however, NOT first-choice in elective pediatric anaesthesia due to risks — reserved for emergency RSI and specific indications",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 50,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM",
+        "indian_brand": "Scoline 50 mg/mL (GSK)",
+        "indian_conc_note": "Suxamethonium chloride 50 mg/mL; 2 mL ampoule"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Rapid sequence intubation",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 2,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 3,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "2-3 mg/kg IV (higher dose in neonates due to larger volume of distribution); onset 30-60 seconds; duration 4-6 minutes",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "Pre-treat with atropine 0.02 mg/kg (min 0.1 mg) in neonates and infants to prevent bradycardia. Higher dose required in neonates than older children."
+      },
+      {
+        "indication": "Rapid sequence intubation",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 2,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 2,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "2 mg/kg IV; onset 30-60 seconds; duration 4-6 minutes; pre-treat with atropine 0.02 mg/kg",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "Atropine pre-treatment mandatory in infants to prevent vagal bradycardia/asystole"
+      },
+      {
+        "indication": "Rapid sequence intubation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 2,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "1-2 mg/kg IV; onset 30-60 seconds; duration 4-6 minutes; atropine pre-treatment recommended for children <5 years",
+        "max_single_qty": 150,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "Reserve for emergency RSI when rocuronium not available. Ensure suction and difficult airway equipment ready."
+      },
+      {
+        "indication": "Emergency intubation (IM route when IV access unavailable)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 4,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 4,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "4 mg/kg IM (deltoid or vastus lateralis); onset 2-4 minutes; use when IV access impossible in emergency",
+        "max_single_qty": 150,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "IM route only when IV access truly impossible; onset slower and less predictable. Must give atropine IM simultaneously."
+      }
+    ],
+    "renal_adjustment_required": true,
+    "renal_bands": [
+      {
+        "gfr_min": 0,
+        "gfr_max": 30,
+        "action": "caution",
+        "adjusted_dose_note": "Risk of hyperkalaemia in renal failure — AVOID if possible; use rocuronium + sugammadex instead"
+      }
+    ],
+    "hepatic_adjustment_required": true,
+    "hepatic_note": "Prolonged duration in severe liver disease due to reduced pseudocholinesterase production",
+    "contraindications": [
+      "Known or family history of malignant hyperthermia",
+      "Known pseudocholinesterase deficiency",
+      "Hyperkalaemia or conditions prone to hyperkalaemia (burns >24h, crush injuries, denervation injuries, prolonged immobilisation, renal failure)",
+      "Penetrating eye injury (raises IOP)",
+      "Myopathies (Duchenne, Becker) — risk of fatal rhabdomyolysis",
+      "Personal or family history of undiagnosed muscular dystrophy"
+    ],
+    "cross_reactions": [],
+    "interactions": [
+      {
+        "drug_or_class": "Neostigmine / Anticholinesterases",
+        "severity": "severe",
+        "effect": "Anticholinesterases prolong Phase I block of succinylcholine; do not use for reversal"
+      },
+      {
+        "drug_or_class": "Non-depolarising muscle relaxants",
+        "severity": "moderate",
+        "effect": "Prior non-depolariser may reduce onset of succinylcholine; prior succinylcholine may prolong non-depolariser"
+      },
+      {
+        "drug_or_class": "Volatile anaesthetics (sevoflurane, isoflurane)",
+        "severity": "moderate",
+        "effect": "May potentiate neuromuscular blockade and increase malignant hyperthermia risk in susceptible individuals"
+      },
+      {
+        "drug_or_class": "Organophosphates",
+        "severity": "severe",
+        "effect": "Inhibit pseudocholinesterase — massively prolonged paralysis"
+      }
+    ],
+    "monitoring_parameters": [
+      "Heart rate and ECG (bradycardia, arrhythmias, hyperkalaemia)",
+      "SpO2 continuously",
+      "Temperature (malignant hyperthermia)",
+      "Serum potassium if at-risk patient",
+      "Duration of paralysis (should recover in 5-10 minutes)"
+    ],
+    "black_box_warnings": [
+      "FATAL CARDIAC ARREST from hyperkalaemia reported in children with undiagnosed muscular dystrophy — NOT for routine elective paediatric anaesthesia",
+      "MALIGNANT HYPERTHERMIA: potentially fatal hypermetabolic crisis — have dantrolene available",
+      "FDA boxed warning: restrict pediatric use to emergency RSI or when immediate airway control is imperative"
+    ],
+    "pediatric_specific_warnings": [
+      "NOT for routine elective pediatric anaesthesia — use rocuronium instead",
+      "Undiagnosed muscular dystrophy (especially Duchenne) can cause fatal hyperkalaemic cardiac arrest",
+      "Always pre-treat infants and young children with atropine to prevent bradycardia/asystole",
+      "Bradycardia more common and more severe in children than adults, especially with repeat doses",
+      "Masseter muscle rigidity after succinylcholine may be early sign of malignant hyperthermia"
+    ],
+    "administration": [
+      {
+        "route": "IV",
+        "reconstitution": null,
+        "dilution": "May dilute in 0.9% NaCl or D5W for infusion if needed",
+        "infusion_rate_note": "Give as rapid IV bolus over 10-30 seconds",
+        "compatibility_note": "Do not mix with thiopental or alkaline solutions in same syringe — precipitation",
+        "storage": "Store at 2-8°C; may store at room temperature for up to 14 days"
+      },
+      {
+        "route": "IM",
+        "reconstitution": null,
+        "dilution": null,
+        "infusion_rate_note": "4 mg/kg IM in deltoid or vastus lateralis; onset 2-4 minutes",
+        "compatibility_note": null,
+        "storage": "Store at 2-8°C"
+      }
+    ],
+    "food_instructions": "Not applicable (emergency injectable); standard pre-anaesthetic fasting if applicable",
+    "storage_instructions": "Store at 2-8°C; may be stored at room temperature (up to 25°C) for max 14 days; do not use if not clear",
+    "pregnancy_category": "C",
+    "lactation_safe": true,
+    "lactation_note": "Ultra-short acting; negligible transfer to breast milk after single dose",
+    "reference_source": [
+      "BNF for Children",
+      "APAGBI Guidelines",
+      "AHA PALS Guidelines",
+      "FDA Succinylcholine Safety Communication"
+    ],
+    "last_reviewed_date": "2026-03-18",
+    "active": true,
+    "snomed_code": "373744004",
+    "snomed_display": "Succinylcholine"
+  }
+]

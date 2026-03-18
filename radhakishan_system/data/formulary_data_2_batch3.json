@@ -1,0 +1,3069 @@
+[
+  {
+    "generic_name": "HEPATITIS-B VACCINE",
+    "brand_names": [
+      "Engerix-B (GSK)",
+      "Shanvac-B (Shantha/Sanofi)",
+      "Bevac (Serum Institute)",
+      "Gene Vac-B (Serum Institute)",
+      "Revac-B+ (Bharat Biotech)"
+    ],
+    "drug_class": "Recombinant hepatitis B surface antigen vaccine",
+    "category": "Vaccine",
+    "therapeutic_use": [
+      "Prevention of hepatitis B virus infection",
+      "Universal immunization programme",
+      "Post-exposure prophylaxis (with HBIG)"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Injection (pediatric)",
+        "conc_qty": 10,
+        "conc_unit": "mcg",
+        "per_qty": 0.5,
+        "per_unit": "mL",
+        "route": "IM",
+        "indian_brand": "Shanvac-B 0.5 mL (Shantha)"
+      },
+      {
+        "form": "Injection (adult)",
+        "conc_qty": 20,
+        "conc_unit": "mcg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IM",
+        "indian_brand": "Engerix-B 1 mL (GSK)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Primary immunization — birth dose",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Birth dose within 24 hours; 0-1-6 month schedule (NHM) or 0-1-2-12 month accelerated",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "IM in anterolateral thigh; monovalent birth dose; preterm <2 kg: give at birth but do not count — restart 3-dose series at 1 month"
+      },
+      {
+        "indication": "Primary immunization — infant/child series",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "0.5 mL IM at 6, 10, 14 weeks (as pentavalent) or monovalent 0-1-6 months; 3-dose series",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "Anterolateral thigh in infants; deltoid in older children; check anti-HBs titre 1-2 months after last dose in high-risk"
+      },
+      {
+        "indication": "Primary immunization — adolescent",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "1 mL (20 mcg) IM at 0-1-6 months; adult dose for >=16 years",
+        "max_single_qty": 1,
+        "max_single_unit": "mL",
+        "max_daily_qty": 1,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "Deltoid muscle; 3-dose series at 0, 1, 6 months"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Immunosuppressants",
+        "severity": "moderate",
+        "effect": "Reduced immune response; may need higher dose or additional booster"
+      }
+    ],
+    "contraindications": [
+      "Severe allergic reaction to previous dose or vaccine component (yeast)",
+      "Moderate-severe acute illness (defer until recovery)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (injectable vaccine)",
+    "snomed_code": "871822003",
+    "snomed_display": "Hepatitis B virus vaccine"
+  },
+  {
+    "generic_name": "HEPATITIS-B IMMUNOGLOBULIN",
+    "brand_names": [
+      "Hepabig (Bharat Serums)",
+      "HepaRab (Bharat Serums)",
+      "Hepatect CP (Biotest)",
+      "HBIG (generic)"
+    ],
+    "drug_class": "Human hepatitis B immunoglobulin (passive immunization)",
+    "category": "Immunoglobulin",
+    "therapeutic_use": [
+      "Post-exposure prophylaxis — neonates born to HBsAg-positive mothers",
+      "Post-exposure prophylaxis — needlestick injury",
+      "Prevention of hepatitis B recurrence post liver transplant"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 100,
+        "conc_unit": "IU",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IM",
+        "indian_brand": "Hepabig 100 IU/mL (Bharat Serums)"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 200,
+        "conc_unit": "IU",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IM",
+        "indian_brand": "Hepabig 200 IU (Bharat Serums)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Perinatal prophylaxis — neonate born to HBsAg+ mother",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 100,
+        "dose_min_unit": "IU",
+        "dose_basis": "fixed",
+        "dose_max_qty": 200,
+        "dose_max_unit": "IU",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "Single dose within 12 hours of birth; give simultaneously with HepB vaccine at different site",
+        "max_single_qty": 200,
+        "max_single_unit": "IU",
+        "max_daily_qty": 200,
+        "max_daily_unit": "IU",
+        "rounding_rule": "fixed",
+        "notes": "Administer IM in anterolateral thigh opposite to vaccine site; must be given within 12 hours of birth for maximum efficacy"
+      },
+      {
+        "indication": "Post-exposure prophylaxis — child",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.06,
+        "dose_min_unit": "mL/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.06,
+        "dose_max_unit": "mL/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "Single dose IM as soon as possible after exposure; concurrent HepB vaccine at different site",
+        "max_single_qty": 5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.1ml",
+        "notes": "0.06 mL/kg IM; give within 24 hours of percutaneous exposure, within 14 days of sexual exposure"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Live vaccines (MMR, Varicella)",
+        "severity": "major",
+        "effect": "HBIG may interfere with immune response to live vaccines; defer live vaccines by 3 months after HBIG"
+      }
+    ],
+    "contraindications": [
+      "Known anaphylaxis to human immunoglobulin products",
+      "IgA deficiency with anti-IgA antibodies (risk of anaphylaxis)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (injectable)",
+    "snomed_code": "116085006",
+    "snomed_display": "Hepatitis B immunoglobulin"
+  },
+  {
+    "generic_name": "HYOSCINE BUTYLBROMIDE",
+    "brand_names": [
+      "Buscopan (Sanofi)",
+      "Colicaid (Meyer Organics)",
+      "Hyospasmol (Alkem)",
+      "Buskopan (generic)"
+    ],
+    "drug_class": "Anticholinergic / Antispasmodic (quaternary ammonium)",
+    "category": "Gastrointestinal",
+    "therapeutic_use": [
+      "Abdominal cramps and colic",
+      "Irritable bowel syndrome — spasm",
+      "Biliary and renal colic",
+      "Pre-procedural gastrointestinal spasm reduction"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for children >=6 years for oral; injection used off-label in younger children",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 10,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Buscopan 10 mg (Sanofi)"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IM/IV",
+        "indian_brand": "Buscopan 20 mg/mL (Sanofi)"
+      },
+      {
+        "form": "Syrup",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Colicaid Syrup (Meyer Organics)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Abdominal colic / spasm",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 10,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "10 mg PO TDS for children 6-12 years; use for short-term relief only",
+        "max_single_qty": 10,
+        "max_single_unit": "mg",
+        "max_daily_qty": 30,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "For children >=6 years; swallow whole; not to be chewed; short-term use only (few days)"
+      },
+      {
+        "indication": "Abdominal colic / spasm",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 10,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 20,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "10-20 mg PO TDS; max 60 mg/day for adolescents >=12 years",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Short-term use; consider if spasm is an ongoing concern — evaluate for underlying cause"
+      },
+      {
+        "indication": "Acute colic — injection",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.3,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "0.3-0.5 mg/kg IV/IM per dose TDS; for severe colic not responsive to oral",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Slow IV over 1 minute; monitor for hypotension; off-label in children <6 years"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Other anticholinergics",
+        "severity": "moderate",
+        "effect": "Additive anticholinergic effects — dry mouth, urinary retention, constipation"
+      },
+      {
+        "drug_or_class": "Metoclopramide/Domperidone",
+        "severity": "moderate",
+        "effect": "Antagonistic effects on GI motility"
+      }
+    ],
+    "contraindications": [
+      "Myasthenia gravis",
+      "Megacolon",
+      "Mechanical GI obstruction",
+      "Narrow-angle glaucoma",
+      "Tachyarrhythmia"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Take before meals for best effect",
+    "snomed_code": "387470007",
+    "snomed_display": "Hyoscine butylbromide"
+  },
+  {
+    "generic_name": "IBUPROFEN+PARACETAMOL",
+    "brand_names": [
+      "Combiflam (Sanofi)",
+      "Flexon (Aristo)",
+      "Ibugesic Plus (Cipla)",
+      "Acecloren-P (Shreya)"
+    ],
+    "drug_class": "NSAID + Analgesic-antipyretic combination",
+    "category": "Analgesic",
+    "therapeutic_use": [
+      "Fever unresponsive to monotherapy",
+      "Pain — moderate",
+      "Post-operative pain",
+      "Musculoskeletal pain"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Combination suspension licensed for children; use of alternating monotherapy preferred by IAP over fixed-dose combination",
+    "formulations": [
+      {
+        "form": "Suspension",
+        "conc_qty": 100,
+        "conc_unit": "mg/162.5mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Ibugesic Plus Suspension (Cipla)",
+        "indian_conc_note": "Ibuprofen 100 mg + Paracetamol 162.5 mg per 5 mL"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 400,
+        "conc_unit": "mg/325mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Combiflam (Sanofi)",
+        "indian_conc_note": "Ibuprofen 400 mg + Paracetamol 325 mg"
+      },
+      {
+        "form": "Drops",
+        "conc_qty": 50,
+        "conc_unit": "mg/125mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Ibugesic Plus Drops (Cipla)",
+        "indian_conc_note": "Ibuprofen 50 mg + Paracetamol 125 mg per mL"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Fever / Pain",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "Ibuprofen 5-10 mg/kg TDS (paracetamol dose proportional); use only if >3 months and >5 kg",
+        "max_single_qty": 10,
+        "max_single_unit": "mg/kg",
+        "max_daily_qty": 30,
+        "max_daily_unit": "mg/kg",
+        "rounding_rule": "0.5ml",
+        "notes": "Based on ibuprofen component; IAP recommends monotherapy alternation over FDC when possible; avoid in dehydrated children"
+      },
+      {
+        "indication": "Fever / Pain",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "Ibuprofen 5-10 mg/kg/dose TDS; max ibuprofen 400 mg/dose",
+        "max_single_qty": 400,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1200,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Give after food; ensure adequate hydration; avoid in dengue, varicella, GI bleeding"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Other NSAIDs / Aspirin",
+        "severity": "major",
+        "effect": "Increased risk of GI bleeding and ulceration"
+      },
+      {
+        "drug_or_class": "Anticoagulants (Warfarin)",
+        "severity": "major",
+        "effect": "Enhanced anticoagulant effect; increased bleeding risk"
+      },
+      {
+        "drug_or_class": "Methotrexate",
+        "severity": "major",
+        "effect": "Reduced renal clearance of methotrexate; increased toxicity"
+      },
+      {
+        "drug_or_class": "ACE inhibitors / ARBs",
+        "severity": "moderate",
+        "effect": "Reduced antihypertensive effect; risk of renal impairment"
+      }
+    ],
+    "contraindications": [
+      "Active GI bleeding or peptic ulcer",
+      "Severe renal or hepatic impairment",
+      "Age <3 months or weight <5 kg (ibuprofen)",
+      "Dengue fever (risk of bleeding)",
+      "Known aspirin-sensitive asthma",
+      "Dehydration or hypovolemia"
+    ],
+    "black_box_warnings": [
+      "NSAIDs increase risk of serious cardiovascular thrombotic events, myocardial infarction, and stroke",
+      "NSAIDs increase risk of serious gastrointestinal adverse events including bleeding, ulceration, and perforation"
+    ],
+    "food_instructions": "Take after food to reduce gastric irritation",
+    "snomed_code": "426842004",
+    "snomed_display": "Ibuprofen + paracetamol"
+  },
+  {
+    "generic_name": "ISOFLURANE",
+    "brand_names": [
+      "Forane (AbbVie)",
+      "Isorane (Neon Labs)",
+      "Isoflurane IP (Piramal)"
+    ],
+    "drug_class": "Halogenated inhalational anaesthetic",
+    "category": "Anaesthesia",
+    "therapeutic_use": [
+      "General anaesthesia — induction and maintenance",
+      "Status epilepticus refractory to other agents"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Inhalation liquid",
+        "conc_qty": 100,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "INH",
+        "indian_brand": "Forane 100 mL (AbbVie)"
+      },
+      {
+        "form": "Inhalation liquid",
+        "conc_qty": 250,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "INH",
+        "indian_brand": "Isorane 250 mL (Neon Labs)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "General anaesthesia — induction",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1.5,
+        "dose_min_unit": "%",
+        "dose_basis": "concentration",
+        "dose_max_qty": 3,
+        "dose_max_unit": "%",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Induction: 1.5-3% in O2 or O2/N2O; MAC higher in infants (1.6-1.87%)",
+        "max_single_qty": 3,
+        "max_single_unit": "%",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "MAC varies by age: neonate 1.6%, infant 1.87%, child 1.6%, adolescent 1.28%; use calibrated vaporizer only"
+      },
+      {
+        "indication": "General anaesthesia — maintenance",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "%",
+        "dose_basis": "concentration",
+        "dose_max_qty": 2.5,
+        "dose_max_unit": "%",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Maintenance: 0.5-2.5% in O2 or O2/N2O; titrate to surgical depth",
+        "max_single_qty": 2.5,
+        "max_single_unit": "%",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": null,
+        "notes": "Continuous inhalation via calibrated vaporizer; monitor ETCO2, SpO2, ECG, BP; risk of malignant hyperthermia"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Succinylcholine",
+        "severity": "major",
+        "effect": "Increased risk of malignant hyperthermia"
+      },
+      {
+        "drug_or_class": "Non-depolarizing muscle relaxants",
+        "severity": "moderate",
+        "effect": "Potentiates neuromuscular blockade; reduce relaxant dose by 30-50%"
+      },
+      {
+        "drug_or_class": "Beta-blockers",
+        "severity": "moderate",
+        "effect": "Additive myocardial depression and hypotension"
+      }
+    ],
+    "contraindications": [
+      "Known or suspected susceptibility to malignant hyperthermia",
+      "Known sensitivity to halogenated agents",
+      "History of confirmed hepatitis from halogenated anaesthetics"
+    ],
+    "black_box_warnings": [
+      "Malignant hyperthermia — have dantrolene available",
+      "FDA warning: repeated or prolonged anaesthesia in children <3 years may affect brain development"
+    ],
+    "food_instructions": "NPO as per anaesthesia fasting guidelines (2h clear fluids, 4h breast milk, 6h solids)",
+    "snomed_code": "386209006",
+    "snomed_display": "Isoflurane"
+  },
+  {
+    "generic_name": "ISOLYTE-P",
+    "brand_names": [
+      "Isolyte-P (Baxter/Claris)",
+      "Ringer's Lactate Pediatric (various)",
+      "DNS-P (various)"
+    ],
+    "drug_class": "Pediatric maintenance IV fluid (hypotonic crystalloid)",
+    "category": "IV Fluid",
+    "therapeutic_use": [
+      "Pediatric maintenance fluid therapy",
+      "Rehydration — mild to moderate dehydration",
+      "Perioperative fluid management in children"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "IV fluid",
+        "conc_qty": 500,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "IV",
+        "indian_brand": "Isolyte-P 500 mL (Claris/Baxter)",
+        "indian_conc_note": "Dextrose 5% + NaCl 0.22% + KCl 20 mEq/L; Na 25, K 20, Cl 22, Lactate 23 mEq/L"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Maintenance fluid therapy",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 100,
+        "dose_min_unit": "mL/kg/day",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 100,
+        "dose_max_unit": "mL/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Holliday-Segar: 100 mL/kg/day for first 10 kg; infuse at 4 mL/kg/hr",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": 1000,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "CAUTION: Hypotonic fluids risk hyponatremia — monitor serum Na; WHO/IAP now recommends isotonic fluids (NS or Ringer's Lactate) for most sick children; Isolyte-P reserved for well children on maintenance"
+      },
+      {
+        "indication": "Maintenance fluid therapy",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1500,
+        "dose_min_unit": "mL/m2/day",
+        "dose_basis": "per_bsa",
+        "dose_max_qty": 1500,
+        "dose_max_unit": "mL/m2/day",
+        "is_per_day": true,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Holliday-Segar formula: first 10 kg = 100 mL/kg, next 10 kg = 50 mL/kg, thereafter 20 mL/kg; or 1500 mL/m2/day",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": 2500,
+        "max_daily_unit": "mL",
+        "rounding_rule": null,
+        "notes": "Monitor electrolytes every 12-24 hours; switch to isotonic NS if hyponatremia develops; restrict to 2/3 maintenance in SIADH, meningitis, post-operative"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Potassium-sparing diuretics",
+        "severity": "moderate",
+        "effect": "Risk of hyperkalemia due to K+ content (20 mEq/L)"
+      }
+    ],
+    "contraindications": [
+      "Hyperkalemia",
+      "Severe hyponatremia (use isotonic saline instead)",
+      "Renal failure with oliguria",
+      "Conditions requiring isotonic fluid resuscitation (shock, DKA, burns)"
+    ],
+    "black_box_warnings": [
+      "Hypotonic IV fluids can cause fatal hyponatremia in children — monitor serum sodium closely"
+    ],
+    "food_instructions": "Not applicable (IV fluid)",
+    "snomed_code": "346441008",
+    "snomed_display": "Pediatric maintenance intravenous fluid"
+  },
+  {
+    "generic_name": "JAPANESE ENCEPHALITIS VACCINE",
+    "brand_names": [
+      "JENVAC (Bharat Biotech)",
+      "Jeev (Biological E)",
+      "Ixiaro (Valneva — imported)",
+      "SA 14-14-2 (Chengdu Institute)"
+    ],
+    "drug_class": "Inactivated Vero cell-derived Japanese encephalitis vaccine",
+    "category": "Vaccine",
+    "therapeutic_use": [
+      "Prevention of Japanese encephalitis",
+      "NHM Universal Immunization Programme — endemic states"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "NHM recommends in endemic states; Haryana is NOT JE-endemic — not routinely given",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 0.5,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "IM/SC",
+        "indian_brand": "JENVAC 0.5 mL (Bharat Biotech)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Primary immunization — JE endemic areas",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "2 doses 28 days apart; first dose at 9-12 months with second dose at 16-24 months (NHM); or single dose live vaccine per campaign",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "Haryana is NOT JE-endemic — not routinely recommended; give only if travelling to endemic areas or on NHM campaign; SC or IM in anterolateral thigh/deltoid"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Immunosuppressants",
+        "severity": "moderate",
+        "effect": "May reduce immune response to vaccine"
+      }
+    ],
+    "contraindications": [
+      "Severe allergic reaction to previous JE vaccine dose",
+      "Acute febrile illness (defer)",
+      "Age <9 months (JENVAC)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (injectable vaccine)",
+    "snomed_code": "871724008",
+    "snomed_display": "Japanese encephalitis virus vaccine"
+  },
+  {
+    "generic_name": "L-ARGININE",
+    "brand_names": [
+      "Argi Plus (Macleods)",
+      "Larginine (generic)",
+      "Arg-Amine (FDC)"
+    ],
+    "drug_class": "Amino acid supplement / Nitric oxide precursor",
+    "category": "Metabolic",
+    "therapeutic_use": [
+      "Urea cycle disorders — acute hyperammonemia",
+      "Growth hormone stimulation test",
+      "Metabolic alkalosis correction"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for urea cycle disorders; GH stimulation test use is established but off-label",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 10,
+        "conc_unit": "g",
+        "per_qty": 100,
+        "per_unit": "mL",
+        "route": "IV",
+        "indian_brand": "L-Arginine 10% (generic)",
+        "indian_conc_note": "L-Arginine HCl 10% w/v (100 mg/mL)"
+      },
+      {
+        "form": "Sachet (oral)",
+        "conc_qty": 3,
+        "conc_unit": "g",
+        "per_qty": 1,
+        "per_unit": "sachet",
+        "route": "PO",
+        "indian_brand": "Argi Plus Sachet (Macleods)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Acute hyperammonemia — urea cycle disorder",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 200,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 600,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": 200,
+        "loading_dose_unit": "mg/kg",
+        "loading_dose_basis": "per_kg",
+        "maintenance_dose_qty": 200,
+        "maintenance_dose_unit": "mg/kg/day",
+        "duration_days_default": null,
+        "duration_note": "Loading dose 200 mg/kg IV over 90 min, then continuous infusion 200-600 mg/kg/day; under metabolic specialist guidance",
+        "max_single_qty": 12,
+        "max_single_unit": "g",
+        "max_daily_qty": 12,
+        "max_daily_unit": "g",
+        "rounding_rule": "0.1ml",
+        "notes": "PICU setting only; monitor arterial pH, ammonia, arginine levels; contraindicated in arginase deficiency (argininemia)"
+      },
+      {
+        "indication": "Growth hormone stimulation test",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "g/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "g/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "0.5 g/kg (max 30 g) IV over 30 min; blood sampling at 0, 30, 60, 90, 120 min for GH",
+        "max_single_qty": 30,
+        "max_single_unit": "g",
+        "max_daily_qty": 30,
+        "max_daily_unit": "g",
+        "rounding_rule": "0.1ml",
+        "notes": "Dilute in NS; infuse over 30 minutes; monitor blood glucose (risk of hypoglycemia); keep child fasting overnight"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "ACE inhibitors",
+        "severity": "minor",
+        "effect": "Additive hypotensive effect"
+      },
+      {
+        "drug_or_class": "Potassium-sparing diuretics",
+        "severity": "moderate",
+        "effect": "Arginine HCl is acidifying — may cause hyperkalemia in combination"
+      }
+    ],
+    "contraindications": [
+      "Arginase deficiency (argininemia)",
+      "Severe hepatic failure",
+      "Severe metabolic acidosis with hyperchloremia"
+    ],
+    "black_box_warnings": [
+      "Extravasation of IV arginine HCl causes severe tissue necrosis — ensure secure IV access"
+    ],
+    "food_instructions": "IV: NPO during infusion; Oral: take on empty stomach",
+    "snomed_code": "52625008",
+    "snomed_display": "Arginine"
+  },
+  {
+    "generic_name": "LABETALOL",
+    "brand_names": [
+      "Lobet (Zydus)",
+      "Labetalol (Neon Labs)",
+      "Trandate (GSK — imported)",
+      "Labet (Cadila)"
+    ],
+    "drug_class": "Combined alpha + beta adrenergic blocker",
+    "category": "Cardiovascular",
+    "therapeutic_use": [
+      "Hypertensive emergency",
+      "Hypertensive urgency",
+      "Chronic hypertension in children",
+      "Pheochromocytoma — perioperative control"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for hypertension; pediatric use well-established but doses are off-label in many countries",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 100,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Lobet 100 (Zydus)"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV",
+        "indian_brand": "Labetalol 20 mL vial (Neon Labs)",
+        "indian_conc_note": "5 mg/mL; 20 mL ampoule = 100 mg"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Hypertensive emergency — IV",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.2,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": 0.2,
+        "loading_dose_unit": "mg/kg",
+        "loading_dose_basis": "per_kg",
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Initial bolus 0.2-1 mg/kg IV over 2 min (max 40 mg); may repeat q10-15 min; or infusion 0.25-3 mg/kg/hr",
+        "max_single_qty": 40,
+        "max_single_unit": "mg",
+        "max_daily_qty": 300,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "PICU setting; continuous BP monitoring; reduce BP by no more than 25% in first 8 hours; supine during administration"
+      },
+      {
+        "indication": "Chronic hypertension — oral",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_min_unit": "mg/kg/dose",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 3,
+        "dose_max_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Start 1 mg/kg/dose BID; titrate up to 3 mg/kg/dose BID; max 10-12 mg/kg/day or 1200 mg/day",
+        "max_single_qty": 600,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1200,
+        "max_daily_unit": "mg",
+        "rounding_rule": "quarter_tab",
+        "notes": "Monitor orthostatic BP; avoid abrupt withdrawal; may mask hypoglycemia symptoms"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Calcium channel blockers (Verapamil)",
+        "severity": "major",
+        "effect": "Severe bradycardia, AV block, and heart failure risk"
+      },
+      {
+        "drug_or_class": "Insulin / Oral hypoglycemics",
+        "severity": "moderate",
+        "effect": "Masks hypoglycemia symptoms (tachycardia); prolonged hypoglycemia"
+      },
+      {
+        "drug_or_class": "Inhalational anaesthetics",
+        "severity": "moderate",
+        "effect": "Additive myocardial depression"
+      }
+    ],
+    "contraindications": [
+      "Asthma or severe bronchospasm (beta-blocker component)",
+      "Second or third degree AV block",
+      "Cardiogenic shock",
+      "Severe bradycardia",
+      "Uncompensated heart failure",
+      "Pheochromocytoma without adequate alpha blockade (for oral use)"
+    ],
+    "black_box_warnings": [
+      "Severe hepatocellular injury reported — monitor LFTs; discontinue if liver injury suspected"
+    ],
+    "food_instructions": "May be taken with or without food; food increases bioavailability",
+    "snomed_code": "372743006",
+    "snomed_display": "Labetalol"
+  },
+  {
+    "generic_name": "LEVOCETIRIZINE",
+    "brand_names": [
+      "Xyzal (UCB/Sanofi)",
+      "Lecope (Cipla)",
+      "Levocet (Sun Pharma)",
+      "Vozet (Glenmark)"
+    ],
+    "drug_class": "Third-generation antihistamine (H1 receptor antagonist)",
+    "category": "Allergy",
+    "therapeutic_use": [
+      "Allergic rhinitis",
+      "Urticaria — acute and chronic",
+      "Atopic dermatitis — pruritus",
+      "Allergic conjunctivitis"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Syrup",
+        "conc_qty": 2.5,
+        "conc_unit": "mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Levocet Syrup (Sun Pharma)"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Vozet 5 mg (Glenmark)"
+      },
+      {
+        "form": "Drops",
+        "conc_qty": 2.5,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Lecope Drops (Cipla)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Allergic rhinitis / Urticaria",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1.25,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 1.25,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "1.25 mg (2.5 mL drops) once daily at bedtime; for ages 6 months to 2 years",
+        "max_single_qty": 1.25,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1.25,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Off-label below 2 years; use drops formulation; give at bedtime"
+      },
+      {
+        "indication": "Allergic rhinitis / Urticaria",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 2.5,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 5,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "2-5 years: 1.25 mg OD; 6-11 years: 2.5 mg OD; >=12 years: 5 mg OD",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 5,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Give at bedtime; minimal sedation; reduce dose in renal impairment"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "CNS depressants (sedatives, opioids)",
+        "severity": "moderate",
+        "effect": "Additive sedation though levocetirizine is minimally sedating"
+      },
+      {
+        "drug_or_class": "Ritonavir",
+        "severity": "moderate",
+        "effect": "Increased levocetirizine levels due to reduced renal clearance"
+      }
+    ],
+    "contraindications": [
+      "Severe renal impairment (CrCl <10 mL/min)",
+      "Hypersensitivity to cetirizine or levocetirizine",
+      "End-stage renal disease on dialysis (children)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "May be taken with or without food; give at bedtime",
+    "snomed_code": "421889003",
+    "snomed_display": "Levocetirizine"
+  },
+  {
+    "generic_name": "LEVOSALBUTAMOL",
+    "brand_names": [
+      "Levolin (Cipla)",
+      "Levosol (Sun Pharma)",
+      "Duolin-L (Cipla — in combinations)",
+      "Airosal-L (Lupin)"
+    ],
+    "drug_class": "Selective beta-2 adrenergic agonist (R-isomer of salbutamol)",
+    "category": "Respiratory",
+    "therapeutic_use": [
+      "Acute bronchospasm",
+      "Asthma — acute exacerbation",
+      "Recurrent wheezing episodes",
+      "Exercise-induced bronchospasm"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Respules (nebulization)",
+        "conc_qty": 0.63,
+        "conc_unit": "mg",
+        "per_qty": 2.5,
+        "per_unit": "mL",
+        "route": "NEB",
+        "indian_brand": "Levolin 0.63 Respules (Cipla)"
+      },
+      {
+        "form": "Respules (nebulization)",
+        "conc_qty": 1.25,
+        "conc_unit": "mg",
+        "per_qty": 2.5,
+        "per_unit": "mL",
+        "route": "NEB",
+        "indian_brand": "Levolin 1.25 Respules (Cipla)"
+      },
+      {
+        "form": "MDI (inhaler)",
+        "conc_qty": 50,
+        "conc_unit": "mcg",
+        "per_qty": 1,
+        "per_unit": "puff",
+        "route": "INH",
+        "indian_brand": "Levolin MDI (Cipla)"
+      },
+      {
+        "form": "Syrup",
+        "conc_qty": 1,
+        "conc_unit": "mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Levolin Syrup (Cipla)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Acute bronchospasm — nebulization",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.31,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.63,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "0.31-0.63 mg via nebulization q6-8h; for infants <2 years",
+        "max_single_qty": 0.63,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1.89,
+        "max_daily_unit": "mg",
+        "rounding_rule": "fixed",
+        "notes": "Half the dose of racemic salbutamol; less tachycardia; dilute to 3 mL with NS if needed"
+      },
+      {
+        "indication": "Acute bronchospasm — nebulization",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.63,
+        "dose_min_unit": "mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 1.25,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "0.63-1.25 mg nebulization TDS-QDS; for children 2-12 years",
+        "max_single_qty": 1.25,
+        "max_single_unit": "mg",
+        "max_daily_qty": 3.75,
+        "max_daily_unit": "mg",
+        "rounding_rule": "fixed",
+        "notes": "Can be given q20 min × 3 doses in acute severe asthma; use 0.63 mg respule for mild-moderate, 1.25 mg for severe"
+      },
+      {
+        "indication": "Acute bronchospasm — MDI",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "puff",
+        "dose_basis": "fixed",
+        "dose_max_qty": 2,
+        "dose_max_unit": "puffs",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "1-2 puffs (50 mcg/puff) via spacer QDS PRN; equivalent to 100-200 mcg salbutamol MDI",
+        "max_single_qty": 2,
+        "max_single_unit": "puffs",
+        "max_daily_qty": 8,
+        "max_daily_unit": "puffs",
+        "rounding_rule": "fixed",
+        "notes": "Always use with spacer +/- facemask in children; shake well before use"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Beta-blockers",
+        "severity": "major",
+        "effect": "Antagonistic effect — beta-blockers reduce bronchodilatory action"
+      },
+      {
+        "drug_or_class": "Other sympathomimetics",
+        "severity": "moderate",
+        "effect": "Additive cardiovascular effects — tachycardia, hypertension"
+      },
+      {
+        "drug_or_class": "Diuretics (loop/thiazide)",
+        "severity": "moderate",
+        "effect": "Additive hypokalemia risk"
+      }
+    ],
+    "contraindications": [
+      "Hypersensitivity to levosalbutamol or salbutamol",
+      "Tachyarrhythmias",
+      "Hypertrophic obstructive cardiomyopathy"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (inhaled/nebulized); oral form may be taken with or without food",
+    "snomed_code": "410842007",
+    "snomed_display": "Levosalbutamol"
+  },
+  {
+    "generic_name": "LIQUID PARAFFIN+MILK OF MAGNESIA",
+    "brand_names": [
+      "Cremaffin (Abbott)",
+      "Cremaffin Plus (Abbott)",
+      "Laxopeg-M (Aristo)",
+      "Magnesia Liquid (generic)"
+    ],
+    "drug_class": "Lubricant laxative + Osmotic laxative combination",
+    "category": "Gastrointestinal",
+    "therapeutic_use": [
+      "Constipation — functional",
+      "Fecal impaction — maintenance therapy",
+      "Post-operative bowel management"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Widely used in Indian pediatric practice; not first-line — PEG/lactulose preferred per IAP",
+    "formulations": [
+      {
+        "form": "Emulsion",
+        "conc_qty": 3.75,
+        "conc_unit": "mL/mL",
+        "per_qty": 15,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Cremaffin (Abbott)",
+        "indian_conc_note": "Liquid paraffin 3.75 mL + Milk of magnesia 11.25 mL per 15 mL"
+      },
+      {
+        "form": "Emulsion (sugar-free)",
+        "conc_qty": 3.75,
+        "conc_unit": "mL/mL",
+        "per_qty": 15,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Cremaffin Plus SF (Abbott)",
+        "indian_conc_note": "Sugar-free; with sodium picosulfate 3.33 mg/15 mL added"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Constipation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "5-10 mL at bedtime for children 3-12 years; not for prolonged use >2 weeks without review",
+        "max_single_qty": 10,
+        "max_single_unit": "mL",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.5ml",
+        "notes": "Give at bedtime; not recommended <3 years (aspiration risk with liquid paraffin); PEG 3350 or lactulose preferred as first-line"
+      },
+      {
+        "indication": "Constipation",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 15,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 30,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "15-30 mL at bedtime; adjust dose to achieve soft stools",
+        "max_single_qty": 30,
+        "max_single_unit": "mL",
+        "max_daily_qty": 30,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.5ml",
+        "notes": "Short-term use preferred; chronic use may impair fat-soluble vitamin absorption; encourage dietary fiber and fluids"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Fat-soluble vitamins (A, D, E, K)",
+        "severity": "moderate",
+        "effect": "Liquid paraffin impairs absorption of fat-soluble vitamins with chronic use"
+      },
+      {
+        "drug_or_class": "Oral medications (general)",
+        "severity": "minor",
+        "effect": "Give liquid paraffin at least 2 hours apart from other medications to avoid reduced absorption"
+      }
+    ],
+    "contraindications": [
+      "Age <3 years (aspiration risk — lipoid pneumonia)",
+      "Intestinal obstruction",
+      "Acute abdominal conditions (appendicitis, peritonitis)",
+      "Dysphagia or risk of aspiration",
+      "Renal impairment (magnesium accumulation risk)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Take at bedtime on empty stomach; do not give with meals (aspiration risk when recumbent)",
+    "snomed_code": "387234006",
+    "snomed_display": "Liquid paraffin"
+  },
+  {
+    "generic_name": "LIQUID PARAFFIN",
+    "brand_names": [
+      "Laxol (Alkem)",
+      "Parafin Liquid IP (generic)",
+      "Agarol (various)"
+    ],
+    "drug_class": "Lubricant laxative / Emollient",
+    "category": "Gastrointestinal",
+    "therapeutic_use": [
+      "Constipation — functional",
+      "Fecal impaction — softening",
+      "Topical emollient for dry skin (external use)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Oral use not recommended in children <3 years due to aspiration risk; topical use safe at all ages",
+    "formulations": [
+      {
+        "form": "Liquid (oral)",
+        "conc_qty": 100,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "PO",
+        "indian_brand": "Liquid Paraffin IP (generic)"
+      },
+      {
+        "form": "Liquid (topical)",
+        "conc_qty": 100,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "bottle",
+        "route": "Topical",
+        "indian_brand": "Light Liquid Paraffin IP (generic)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Constipation — oral",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_min_unit": "mL/kg/day",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 3,
+        "dose_max_unit": "mL/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 14,
+        "duration_note": "1-3 mL/kg/day in 1-2 divided doses; max 90 mL/day; for children >=3 years only",
+        "max_single_qty": 45,
+        "max_single_unit": "mL",
+        "max_daily_qty": 90,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.5ml",
+        "notes": "NOT for children <3 years (lipoid pneumonia risk); give between meals, not at bedtime in young children; PEG preferred as first-line"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Fat-soluble vitamins (A, D, E, K)",
+        "severity": "moderate",
+        "effect": "Impairs absorption with chronic oral use"
+      },
+      {
+        "drug_or_class": "Docusate sodium",
+        "severity": "major",
+        "effect": "Do NOT co-administer — docusate increases absorption of liquid paraffin leading to granuloma formation"
+      }
+    ],
+    "contraindications": [
+      "Children <3 years (aspiration → lipoid pneumonia)",
+      "Dysphagia or feeding difficulties",
+      "Intestinal obstruction",
+      "Nausea or vomiting",
+      "Bedridden patients (aspiration risk)"
+    ],
+    "black_box_warnings": [
+      "Aspiration of liquid paraffin causes severe lipoid pneumonia — do not give to children <3 years or those with swallowing difficulties"
+    ],
+    "food_instructions": "Give between meals; do not give at bedtime to young children due to aspiration risk in recumbent position",
+    "snomed_code": "387234006",
+    "snomed_display": "Liquid paraffin"
+  },
+  {
+    "generic_name": "LOTEPREDNOL ETABONATE",
+    "brand_names": [
+      "Loteflam (Sun Pharma)",
+      "Lotepred (Cipla)",
+      "Lotemox (Allergan — Alcon)",
+      "Lotesol (FDC)"
+    ],
+    "drug_class": "Corticosteroid (ophthalmic — retrometabolically designed, site-active)",
+    "category": "Ophthalmology",
+    "therapeutic_use": [
+      "Allergic conjunctivitis",
+      "Anterior uveitis — mild",
+      "Post-operative ocular inflammation",
+      "Vernal keratoconjunctivitis"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for use in children; preferred over prednisolone eye drops due to lower IOP elevation risk",
+    "formulations": [
+      {
+        "form": "Eye drops (suspension)",
+        "conc_qty": 0.5,
+        "conc_unit": "%",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "Ophthalmic",
+        "indian_brand": "Lotepred 0.5% (Cipla)"
+      },
+      {
+        "form": "Eye drops (suspension)",
+        "conc_qty": 0.2,
+        "conc_unit": "%",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "Ophthalmic",
+        "indian_brand": "Loteflam 0.2% (Sun Pharma)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Allergic conjunctivitis / VKC",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "drop",
+        "dose_basis": "fixed",
+        "dose_max_qty": 1,
+        "dose_max_unit": "drop",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 14,
+        "duration_note": "1 drop in affected eye(s) QDS; 0.2% for allergic conjunctivitis, 0.5% for anterior uveitis; taper over 1-2 weeks",
+        "max_single_qty": 1,
+        "max_single_unit": "drop",
+        "max_daily_qty": 4,
+        "max_daily_unit": "drops",
+        "rounding_rule": "fixed",
+        "notes": "Shake well before use; preferred over dexamethasone/prednisolone in children (lower IOP risk); still monitor IOP in prolonged use >2 weeks"
+      },
+      {
+        "indication": "Post-operative inflammation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "drop",
+        "dose_basis": "fixed",
+        "dose_max_qty": 2,
+        "dose_max_unit": "drops",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 14,
+        "duration_note": "0.5% suspension, 1-2 drops QDS; begin 24 hours post-surgery; taper gradually",
+        "max_single_qty": 2,
+        "max_single_unit": "drops",
+        "max_daily_qty": 8,
+        "max_daily_unit": "drops",
+        "rounding_rule": "fixed",
+        "notes": "Use 0.5% formulation for post-surgical inflammation; taper after 2 weeks to prevent rebound"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Other ophthalmic medications",
+        "severity": "minor",
+        "effect": "Wait at least 5 minutes between different eye drops"
+      },
+      {
+        "drug_or_class": "Contact lenses",
+        "severity": "minor",
+        "effect": "Remove contact lenses before instillation; wait 15 minutes before reinserting"
+      }
+    ],
+    "contraindications": [
+      "Viral eye infections (herpes simplex keratitis, vaccinia)",
+      "Fungal eye infections",
+      "Mycobacterial eye infections",
+      "Untreated bacterial eye infection"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (ophthalmic)",
+    "snomed_code": "386854005",
+    "snomed_display": "Loteprednol etabonate"
+  },
+  {
+    "generic_name": "MEASLES VACCINE",
+    "brand_names": [
+      "M-Vac (Serum Institute)",
+      "Rouvax (Sanofi — discontinued)",
+      "Measles Vaccine IP (Serum Institute)"
+    ],
+    "drug_class": "Live attenuated measles virus vaccine (Edmonston-Zagreb strain)",
+    "category": "Vaccine",
+    "therapeutic_use": [
+      "Prevention of measles",
+      "Outbreak response vaccination",
+      "NHM Universal Immunization Programme (as MR/MMR)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Monovalent measles vaccine being replaced by MR/MMR in NHM; still used in outbreak response",
+    "formulations": [
+      {
+        "form": "Injection (lyophilized + diluent)",
+        "conc_qty": 0.5,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "SC",
+        "indian_brand": "M-Vac (Serum Institute)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Primary immunization",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "0.5 mL SC at 9 months (MCV1) and 16-24 months (MCV2) per NHM; now given as MR vaccine",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "SC in upper arm; use within 4 hours of reconstitution; protect from light; NHM has replaced with MR vaccine at 9 and 16-24 months"
+      },
+      {
+        "indication": "Outbreak response — early dose",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Can be given as early as 6 months in outbreak; does not count as MCV1 — still give at 9 months",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "Outbreak dose at 6 months does NOT count — regular MCV1 at 9 months still required; maternal antibodies may reduce seroconversion"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Immunoglobulins (IVIG, HBIG)",
+        "severity": "major",
+        "effect": "Defer measles vaccine 3-6 months after immunoglobulin administration (antibody interference)"
+      },
+      {
+        "drug_or_class": "Immunosuppressants",
+        "severity": "major",
+        "effect": "Contraindicated in immunosuppressed — risk of vaccine-strain disease"
+      },
+      {
+        "drug_or_class": "Tuberculin skin test",
+        "severity": "moderate",
+        "effect": "Measles vaccine may suppress tuberculin reactivity for 4-6 weeks"
+      }
+    ],
+    "contraindications": [
+      "Severe immunodeficiency (cellular)",
+      "Anaphylaxis to neomycin or gelatin",
+      "Pregnancy",
+      "Active untreated tuberculosis",
+      "High-dose systemic corticosteroid therapy (>2 mg/kg/day for >14 days)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (injectable vaccine)",
+    "snomed_code": "871765008",
+    "snomed_display": "Measles virus vaccine"
+  },
+  {
+    "generic_name": "MEFENAMIC ACID",
+    "brand_names": [
+      "Meftal (Blue Cross)",
+      "Ponstan (Pfizer)",
+      "Mefkind (Mankind)"
+    ],
+    "drug_class": "Non-steroidal anti-inflammatory drug (NSAID — fenamate)",
+    "category": "Analgesic",
+    "therapeutic_use": [
+      "Fever — especially when paracetamol/ibuprofen inadequate",
+      "Pain — mild to moderate",
+      "Dysmenorrhea",
+      "Headache"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for children >=6 months in India; widely used as antipyretic in Indian pediatric practice",
+    "formulations": [
+      {
+        "form": "Suspension",
+        "conc_qty": 50,
+        "conc_unit": "mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Meftal-P Suspension (Blue Cross)"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 250,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Meftal 250 (Blue Cross)"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 500,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Meftal 500 (Blue Cross)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Fever / Pain",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 8,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "5-8 mg/kg/dose TDS; for infants >=6 months; max 3 days for fever",
+        "max_single_qty": 8,
+        "max_single_unit": "mg/kg",
+        "max_daily_qty": 24,
+        "max_daily_unit": "mg/kg",
+        "rounding_rule": "0.5ml",
+        "notes": "Give after food; avoid in dehydration, dengue; not first-line — use paracetamol/ibuprofen first"
+      },
+      {
+        "indication": "Fever / Pain",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 8,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "5-8 mg/kg/dose TDS; max 500 mg/dose for older children",
+        "max_single_qty": 500,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1500,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Give after food; limit to 7 days; diarrhea is common side effect; avoid in G6PD deficiency"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Anticoagulants (Warfarin)",
+        "severity": "major",
+        "effect": "Increased bleeding risk; displaces warfarin from protein binding"
+      },
+      {
+        "drug_or_class": "Other NSAIDs",
+        "severity": "major",
+        "effect": "Increased risk of GI bleeding; avoid concomitant use"
+      },
+      {
+        "drug_or_class": "Lithium",
+        "severity": "moderate",
+        "effect": "Reduced lithium clearance; monitor levels"
+      },
+      {
+        "drug_or_class": "Methotrexate",
+        "severity": "major",
+        "effect": "Reduced renal clearance of methotrexate"
+      }
+    ],
+    "contraindications": [
+      "Active GI bleeding or peptic ulcer",
+      "Inflammatory bowel disease",
+      "Age <6 months",
+      "Severe renal or hepatic impairment",
+      "Aspirin-sensitive asthma",
+      "Dengue (risk of bleeding)"
+    ],
+    "black_box_warnings": [
+      "NSAIDs increase risk of serious cardiovascular thrombotic events",
+      "NSAIDs increase risk of serious gastrointestinal adverse events",
+      "Autoimmune hemolytic anemia reported with prolonged use (>7 days)"
+    ],
+    "food_instructions": "Take after food to reduce gastric irritation",
+    "snomed_code": "387185008",
+    "snomed_display": "Mefenamic acid"
+  },
+  {
+    "generic_name": "MEFENAMIC ACID+PARACETAMOL",
+    "brand_names": [
+      "Meftal-P Plus (Blue Cross)",
+      "Mefkind-P (Mankind)",
+      "Mefspa-P (Indoco)"
+    ],
+    "drug_class": "NSAID + Analgesic-antipyretic combination",
+    "category": "Analgesic",
+    "therapeutic_use": [
+      "Fever — refractory to monotherapy",
+      "Pain — moderate",
+      "Post-operative pain"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Suspension",
+        "conc_qty": 50,
+        "conc_unit": "mg/125mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Meftal-P Plus Suspension (Blue Cross)",
+        "indian_conc_note": "Mefenamic acid 50 mg + Paracetamol 125 mg per 5 mL"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 250,
+        "conc_unit": "mg/325mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Meftal Plus (Blue Cross)",
+        "indian_conc_note": "Mefenamic acid 250 mg + Paracetamol 325 mg"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Fever / Pain",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 8,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "Dose based on mefenamic acid component: 5-8 mg/kg TDS; max 3-5 days",
+        "max_single_qty": 250,
+        "max_single_unit": "mg",
+        "max_daily_qty": 750,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.5ml",
+        "notes": "Give after food; ensure total paracetamol from all sources <60 mg/kg/day; IAP recommends monotherapy first-line"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Other paracetamol-containing products",
+        "severity": "major",
+        "effect": "Risk of paracetamol overdose — hepatotoxicity; calculate total daily paracetamol"
+      },
+      {
+        "drug_or_class": "Anticoagulants",
+        "severity": "major",
+        "effect": "Increased bleeding risk from mefenamic acid component"
+      },
+      {
+        "drug_or_class": "Other NSAIDs",
+        "severity": "major",
+        "effect": "Do not combine with other NSAIDs"
+      }
+    ],
+    "contraindications": [
+      "Active GI bleeding",
+      "Age <6 months",
+      "Hepatic impairment (paracetamol risk)",
+      "Renal impairment",
+      "Dengue fever",
+      "G6PD deficiency (mefenamic acid)"
+    ],
+    "black_box_warnings": [
+      "Paracetamol overdose causes fatal hepatotoxicity — ensure total paracetamol from all sources <60 mg/kg/day"
+    ],
+    "food_instructions": "Take after food",
+    "snomed_code": "387185008",
+    "snomed_display": "Mefenamic acid + paracetamol"
+  },
+  {
+    "generic_name": "MENINGOCOCCAL CONJUGATE VACCINE",
+    "brand_names": [
+      "Menactra (Sanofi — MCV4 ACWY)",
+      "Menveo (GSK — MCV4 ACWY)",
+      "Nimenrix (Pfizer — MCV4 ACWY)",
+      "MenAfriVac (Serum Institute — MenA)"
+    ],
+    "drug_class": "Meningococcal polysaccharide conjugate vaccine (ACWY)",
+    "category": "Vaccine",
+    "therapeutic_use": [
+      "Prevention of invasive meningococcal disease (serogroups A, C, W, Y)",
+      "Travelers to meningitis belt",
+      "Complement deficiency — prophylaxis",
+      "Asplenia — prophylaxis"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 0.5,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "dose",
+        "route": "IM",
+        "indian_brand": "Menactra 0.5 mL (Sanofi)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Primary immunization — high-risk children",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "2-dose series 8-12 weeks apart starting at 9 months (Menactra); booster at 3 years if ongoing risk",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "Not in NHM routine schedule; indicated for high-risk: complement deficiency, asplenia, travel to endemic areas, outbreak"
+      },
+      {
+        "indication": "Primary immunization — child/adolescent",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 0.5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Single dose IM for age >=2 years; booster every 5 years if ongoing risk",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "rounding_rule": "fixed",
+        "notes": "Deltoid IM; IAP recommends for high-risk children; mandatory for Hajj/Umrah travel"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Immunosuppressants",
+        "severity": "moderate",
+        "effect": "Reduced immune response; may need additional dose"
+      }
+    ],
+    "contraindications": [
+      "Severe allergic reaction to previous dose or vaccine component",
+      "Age <9 months (Menactra — risk of GBS with earlier dosing)",
+      "Current GBS history within 6 weeks of prior vaccination"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (injectable vaccine)",
+    "snomed_code": "871866001",
+    "snomed_display": "Meningococcal conjugate vaccine"
+  },
+  {
+    "generic_name": "MEPHENTERMINE",
+    "brand_names": [
+      "Mephentin (Neon Labs)",
+      "Mephen (generic)",
+      "Mephentermine Sulphate IP (generic)"
+    ],
+    "drug_class": "Sympathomimetic amine (indirect-acting alpha + beta agonist)",
+    "category": "Emergency / Anaesthesia",
+    "therapeutic_use": [
+      "Hypotension — spinal/epidural anaesthesia-induced",
+      "Hypotension — drug-induced",
+      "Shock — supportive"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Used in Indian anaesthesia practice; limited pediatric data; phenylephrine/ephedrine preferred internationally",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 15,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM",
+        "indian_brand": "Mephentin 30 mg/2 mL (Neon Labs)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Anaesthesia-induced hypotension",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.1,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.4,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "0.1-0.4 mg/kg IV bolus; may repeat q10-15 min as needed; max cumulative 3 mg/kg",
+        "max_single_qty": 15,
+        "max_single_unit": "mg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Slow IV push; monitor BP continuously; avoid in hypovolemic shock (volume resuscitation first); tachyphylaxis with repeated doses"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "MAO inhibitors",
+        "severity": "major",
+        "effect": "Severe hypertensive crisis — contraindicated"
+      },
+      {
+        "drug_or_class": "Halothane / Halogenated anaesthetics",
+        "severity": "major",
+        "effect": "Increased risk of ventricular arrhythmias"
+      },
+      {
+        "drug_or_class": "Oxytocin",
+        "severity": "moderate",
+        "effect": "Severe sustained hypertension when used together"
+      }
+    ],
+    "contraindications": [
+      "Concurrent MAO inhibitor use",
+      "Pheochromocytoma",
+      "Ventricular tachycardia",
+      "Hypovolemic shock (correct volume first)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (injectable — emergency use)",
+    "snomed_code": "373479007",
+    "snomed_display": "Mephentermine"
+  },
+  {
+    "generic_name": "METOPROLOL",
+    "brand_names": [
+      "Betaloc (AstraZeneca)",
+      "Metolar (Cipla)",
+      "Seloken (AstraZeneca)",
+      "Met XL (Intas)"
+    ],
+    "drug_class": "Selective beta-1 adrenergic blocker",
+    "category": "Cardiovascular",
+    "therapeutic_use": [
+      "Supraventricular tachycardia (SVT)",
+      "Hypertension",
+      "Heart failure — chronic stable",
+      "Long QT syndrome — prophylaxis",
+      "Tetralogy of Fallot — hypercyanotic spells"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for hypertension; pediatric SVT and heart failure use well-established but off-label",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 25,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Metolar 25 (Cipla)"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 50,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Metolar 50 (Cipla)"
+      },
+      {
+        "form": "Tablet XL (extended release)",
+        "conc_qty": 25,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Met XL 25 (Intas)"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 1,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV",
+        "indian_brand": "Betaloc IV 5 mL (AstraZeneca)",
+        "indian_conc_note": "1 mg/mL; 5 mL ampoule"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Hypertension / SVT — oral",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg/dose",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 2,
+        "dose_max_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "Start 0.5-1 mg/kg/dose BID; titrate to effect; max 6 mg/kg/day or 200 mg/day",
+        "max_single_qty": 100,
+        "max_single_unit": "mg",
+        "max_daily_qty": 200,
+        "max_daily_unit": "mg",
+        "rounding_rule": "quarter_tab",
+        "notes": "Start low and titrate slowly; monitor HR and BP; do not stop abruptly; may mask hypoglycemia"
+      },
+      {
+        "indication": "SVT / Hypertensive emergency — IV",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.05,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "0.05-0.1 mg/kg IV over 5 min; may repeat q5 min × 3; max total 5 mg",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 15,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Slow IV push over 5 minutes with continuous ECG monitoring; have atropine and isoprenaline available"
+      },
+      {
+        "indication": "TOF spells — oral prophylaxis",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg/dose",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "0.5-1 mg/kg/dose TDS; for prevention of hypercyanotic spells until surgical correction",
+        "max_single_qty": 25,
+        "max_single_unit": "mg",
+        "max_daily_qty": 75,
+        "max_daily_unit": "mg",
+        "rounding_rule": "quarter_tab",
+        "notes": "Crush and disperse in water for infants; critical bridge therapy until TOF repair; do not stop abruptly"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Verapamil / Diltiazem",
+        "severity": "major",
+        "effect": "Severe bradycardia, AV block, heart failure — avoid IV combination"
+      },
+      {
+        "drug_or_class": "Clonidine",
+        "severity": "major",
+        "effect": "Rebound hypertension if clonidine withdrawn while on beta-blocker"
+      },
+      {
+        "drug_or_class": "Insulin / Oral hypoglycemics",
+        "severity": "moderate",
+        "effect": "Masks hypoglycemia symptoms; prolonged hypoglycemia"
+      },
+      {
+        "drug_or_class": "Digoxin",
+        "severity": "moderate",
+        "effect": "Additive bradycardia; monitor HR"
+      }
+    ],
+    "contraindications": [
+      "Sinus bradycardia (<2nd percentile for age)",
+      "Second or third degree AV block",
+      "Cardiogenic shock",
+      "Decompensated heart failure",
+      "Asthma or severe bronchospasm",
+      "Sick sinus syndrome without pacemaker"
+    ],
+    "black_box_warnings": [
+      "Do not abruptly discontinue — taper over 1-2 weeks to avoid rebound hypertension, angina, or arrhythmia"
+    ],
+    "food_instructions": "Take with or immediately after food; food enhances absorption",
+    "snomed_code": "372826007",
+    "snomed_display": "Metoprolol"
+  },
+  {
+    "generic_name": "MISOPROSTOL",
+    "brand_names": [
+      "Cytolog (Cipla — not for pediatric use)",
+      "Misoprost (Cipla)",
+      "PGE1 (generic)"
+    ],
+    "drug_class": "Prostaglandin E1 analogue",
+    "category": "Gastrointestinal / Neonatology",
+    "therapeutic_use": [
+      "NSAID-induced gastropathy prevention",
+      "Ductus-dependent congenital heart disease — maintain PDA (off-label, resource-limited settings)"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "NOT licensed for pediatric use; oral misoprostol used off-label in resource-limited settings to maintain ductal patency when IV alprostadil unavailable",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 200,
+        "conc_unit": "mcg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO/SL",
+        "indian_brand": "Misoprost 200 mcg (Cipla)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Maintain ductal patency — ductus-dependent CHD (when alprostadil unavailable)",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mcg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mcg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "5-10 mcg/kg PO/SL/NG q3-6h; bridge therapy only — transfer to center with IV alprostadil",
+        "max_single_qty": 25,
+        "max_single_unit": "mcg",
+        "max_daily_qty": 100,
+        "max_daily_unit": "mcg",
+        "rounding_rule": "0.1ml",
+        "notes": "CRITICAL: Off-label use only when IV PGE1 unavailable; dissolve fragment of 200 mcg tablet in water; monitor SpO2, apnea, temperature; immediate transfer to cardiac center"
+      },
+      {
+        "indication": "NSAID gastropathy prevention",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 100,
+        "dose_min_unit": "mcg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 200,
+        "dose_max_unit": "mcg",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": null,
+        "duration_note": "100-200 mcg QDS with food; for duration of NSAID therapy; rarely needed in children — PPI preferred",
+        "max_single_qty": 200,
+        "max_single_unit": "mcg",
+        "max_daily_qty": 800,
+        "max_daily_unit": "mcg",
+        "rounding_rule": "quarter_tab",
+        "notes": "PPI (omeprazole) is preferred gastroprotective in children; misoprostol reserved for PPI-intolerant cases"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Oxytocin",
+        "severity": "major",
+        "effect": "Additive uterotonic effect — not relevant in pediatrics but critical safety note"
+      },
+      {
+        "drug_or_class": "Antacids (Mg-containing)",
+        "severity": "minor",
+        "effect": "May worsen diarrhea — use aluminum-containing antacid instead"
+      }
+    ],
+    "contraindications": [
+      "Pregnancy (abortifacient)",
+      "Known allergy to prostaglandins",
+      "Inflammatory bowel disease (may worsen diarrhea)"
+    ],
+    "black_box_warnings": [
+      "CONTRAINDICATED IN PREGNANCY — can cause abortion, premature birth, or birth defects",
+      "In neonatal ductal patency use: risk of apnea, hypotension — use only with monitoring and when IV PGE1 unavailable"
+    ],
+    "food_instructions": "Take with food (for gastroprotection indication); neonatal use: NG/sublingual",
+    "snomed_code": "387242007",
+    "snomed_display": "Misoprostol"
+  },
+  {
+    "generic_name": "MONTELUKAST+LEVOCETIRIZINE",
+    "brand_names": [
+      "Montair-LC (Cipla)",
+      "Montek-LC (Sun Pharma)",
+      "L-Montus (Glenmark)",
+      "Romilast-L (Ranbaxy/Sun)"
+    ],
+    "drug_class": "Leukotriene receptor antagonist + Antihistamine combination",
+    "category": "Respiratory / Allergy",
+    "therapeutic_use": [
+      "Allergic rhinitis with asthma",
+      "Chronic urticaria with allergic rhinitis",
+      "Seasonal allergic rhinoconjunctivitis"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Tablet (pediatric)",
+        "conc_qty": 4,
+        "conc_unit": "mg/2.5mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Montair-LC Kid (Cipla)",
+        "indian_conc_note": "Montelukast 4 mg + Levocetirizine 2.5 mg"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 10,
+        "conc_unit": "mg/5mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Montair-LC (Cipla)",
+        "indian_conc_note": "Montelukast 10 mg + Levocetirizine 5 mg"
+      },
+      {
+        "form": "Syrup",
+        "conc_qty": 4,
+        "conc_unit": "mg/2.5mg",
+        "per_qty": 5,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Montek-LC Syrup (Sun Pharma)",
+        "indian_conc_note": "Montelukast 4 mg + Levocetirizine 2.5 mg per 5 mL"
+      },
+      {
+        "form": "Sachet (granules)",
+        "conc_qty": 4,
+        "conc_unit": "mg/2.5mg",
+        "per_qty": 1,
+        "per_unit": "sachet",
+        "route": "PO",
+        "indian_brand": "Montair-LC Sachet (Cipla)",
+        "indian_conc_note": "Montelukast 4 mg + Levocetirizine 2.5 mg granules"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Allergic rhinitis + Asthma",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "age_tier",
+        "dose_min_qty": 4,
+        "dose_min_unit": "mg/2.5mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 4,
+        "dose_max_unit": "mg/2.5mg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": "2-5 years: montelukast 4 mg + levocetirizine 2.5 mg OD at bedtime; 6-14 years: montelukast 5 mg + levocetirizine 2.5 mg OD",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 5,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Give at bedtime; montelukast component: 4 mg for 2-5 yr, 5 mg for 6-14 yr; FDA black box on montelukast — discuss neuropsychiatric risk with parents"
+      },
+      {
+        "indication": "Allergic rhinitis + Asthma",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 10,
+        "dose_min_unit": "mg/5mg",
+        "dose_basis": "fixed",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg/5mg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": ">=15 years: montelukast 10 mg + levocetirizine 5 mg OD at bedtime",
+        "max_single_qty": 10,
+        "max_single_unit": "mg",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_unit",
+        "notes": "Give at bedtime; counsel about neuropsychiatric risk (montelukast FDA black box); review need every 3 months"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Phenobarbital / CYP3A4 inducers",
+        "severity": "moderate",
+        "effect": "Reduced montelukast levels — may decrease efficacy"
+      },
+      {
+        "drug_or_class": "CNS depressants",
+        "severity": "moderate",
+        "effect": "Additive sedation from levocetirizine component"
+      }
+    ],
+    "contraindications": [
+      "Phenylketonuria (some chewable formulations contain aspartame)",
+      "Severe renal impairment (levocetirizine)",
+      "Known hypersensitivity to either component"
+    ],
+    "black_box_warnings": [
+      "FDA black box: Montelukast — serious neuropsychiatric events including agitation, depression, sleep disturbances, suicidal thinking and behavior; evaluate risk vs benefit; counsel caregivers"
+    ],
+    "food_instructions": "Take at bedtime; may be taken with or without food",
+    "snomed_code": "409160004",
+    "snomed_display": "Montelukast + levocetirizine"
+  },
+  {
+    "generic_name": "MULTIVITAMIN+MULTIMINERAL+AMINO ACID",
+    "brand_names": [
+      "Zincovit (Apex)",
+      "Becosules Z (Pfizer)",
+      "Supradyn (Abbott)",
+      "Astymin Forte (Saga/Themis)"
+    ],
+    "drug_class": "Nutritional supplement — multivitamin, mineral, and amino acid complex",
+    "category": "Nutritional Supplement",
+    "therapeutic_use": [
+      "Nutritional deficiency — recovering illness",
+      "Growth failure — adjuvant therapy",
+      "Post-infectious recovery — nutritional rehabilitation",
+      "Micronutrient supplementation"
+    ],
+    "licensed_in_children": true,
+    "formulations": [
+      {
+        "form": "Syrup",
+        "conc_qty": 15,
+        "conc_unit": "mL",
+        "per_qty": 15,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Zincovit Syrup (Apex)",
+        "indian_conc_note": "Multivitamin + zinc + lysine per 15 mL dose"
+      },
+      {
+        "form": "Drops",
+        "conc_qty": 1,
+        "conc_unit": "mL",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "PO",
+        "indian_brand": "Zincovit Drops (Apex)"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 1,
+        "conc_unit": "tablet",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Supradyn (Abbott)"
+      },
+      {
+        "form": "Capsule",
+        "conc_qty": 1,
+        "conc_unit": "capsule",
+        "per_qty": 1,
+        "per_unit": "capsule",
+        "route": "PO",
+        "indian_brand": "Astymin Forte Capsule (Themis)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Nutritional supplementation",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": "0.5-1 mL drops OD; for infants 6-12 months during/after illness",
+        "max_single_qty": 1,
+        "max_single_unit": "mL",
+        "max_daily_qty": 1,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.1ml",
+        "notes": "Drops formulation preferred for infants; give with meals; not a substitute for balanced nutrition"
+      },
+      {
+        "indication": "Nutritional supplementation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mL",
+        "dose_basis": "fixed",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": "5 mL (2-5 yr) to 10 mL (6-12 yr) syrup OD; for 1-3 months during recovery",
+        "max_single_qty": 10,
+        "max_single_unit": "mL",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.5ml",
+        "notes": "Encourage dietary diversity; supplement is adjuvant only; check specific deficiencies (iron, vitamin D, zinc) and treat individually"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Iron preparations",
+        "severity": "minor",
+        "effect": "Some formulations already contain iron — check to avoid double supplementation"
+      },
+      {
+        "drug_or_class": "Tetracycline / Fluoroquinolone antibiotics",
+        "severity": "moderate",
+        "effect": "Mineral content (calcium, iron, zinc) may chelate antibiotics — separate by 2 hours"
+      }
+    ],
+    "contraindications": [
+      "Hypervitaminosis A or D",
+      "Hemochromatosis (if iron-containing)",
+      "Wilson disease (if copper-containing)",
+      "Known hypersensitivity to any component"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Take with or after meals for best absorption",
+    "snomed_code": "412369009",
+    "snomed_display": "Multivitamin and mineral preparation"
+  },
+  {
+    "generic_name": "NALBUPHINE",
+    "brand_names": [
+      "Nubain (Endo — imported)",
+      "Nalbuphine (Neon Labs)",
+      "Nalufin (generic)"
+    ],
+    "drug_class": "Opioid agonist-antagonist analgesic (kappa agonist, mu partial antagonist)",
+    "category": "Analgesic / Emergency",
+    "therapeutic_use": [
+      "Moderate to severe pain — procedural",
+      "Post-operative pain",
+      "Supplement to balanced anaesthesia",
+      "Reversal of opioid-induced pruritus (with retained analgesia)"
+    ],
+    "licensed_in_children": true,
+    "unlicensed_note": "Licensed for pediatric use; ceiling effect on respiratory depression makes it relatively safer than full agonists",
+    "formulations": [
+      {
+        "form": "Injection",
+        "conc_qty": 10,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM/SC",
+        "indian_brand": "Nalbuphine 10 mg/mL (Neon Labs)"
+      },
+      {
+        "form": "Injection",
+        "conc_qty": 20,
+        "conc_unit": "mg",
+        "per_qty": 1,
+        "per_unit": "mL",
+        "route": "IV/IM/SC",
+        "indian_brand": "Nalbuphine 20 mg/mL (Neon Labs)"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Moderate-severe pain / Procedural analgesia",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.1,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.2,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "0.1-0.2 mg/kg IV/IM/SC q4-6h PRN; onset 2-3 min IV, 15 min IM",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 80,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Ceiling effect on respiratory depression at ~30 mg; does not require controlled substance registration in India (Schedule H); may reverse mu-agonist analgesia if given with morphine/fentanyl"
+      },
+      {
+        "indication": "Neonatal / Infant pain",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.05,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "0.05-0.1 mg/kg IV slow push q4-6h; monitor respiratory rate and SpO2",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 2,
+        "max_daily_unit": "mg",
+        "rounding_rule": "0.1ml",
+        "notes": "Neonatal use: start at lower dose; monitor closely for respiratory depression; NICU setting preferred"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "Pure mu-agonist opioids (Morphine, Fentanyl)",
+        "severity": "major",
+        "effect": "Nalbuphine may partially reverse analgesia of full mu-agonists; may precipitate withdrawal in opioid-dependent patients"
+      },
+      {
+        "drug_or_class": "CNS depressants (benzodiazepines)",
+        "severity": "major",
+        "effect": "Additive respiratory depression and sedation"
+      },
+      {
+        "drug_or_class": "MAO inhibitors",
+        "severity": "major",
+        "effect": "Unpredictable potentiation of opioid effects"
+      }
+    ],
+    "contraindications": [
+      "Known hypersensitivity to nalbuphine",
+      "Significant respiratory depression without monitoring",
+      "Head injury with raised ICP (may obscure neurological signs)"
+    ],
+    "black_box_warnings": [],
+    "food_instructions": "Not applicable (injectable)",
+    "snomed_code": "373478004",
+    "snomed_display": "Nalbuphine"
+  },
+  {
+    "generic_name": "NAPROXEN+DOMPERIDONE",
+    "brand_names": [
+      "Naprosyn-D (RPG)",
+      "Naproz-D (Alkem)",
+      "Naxdom (Micro Labs)"
+    ],
+    "drug_class": "NSAID + Dopamine antagonist (prokinetic) combination",
+    "category": "Analgesic",
+    "therapeutic_use": [
+      "Migraine with nausea/vomiting",
+      "Pain with gastroparesis",
+      "Dysmenorrhea with nausea"
+    ],
+    "licensed_in_children": false,
+    "unlicensed_note": "Combination not licensed for pediatric use; individual components may be used separately in children; rarely needed in pediatric practice",
+    "formulations": [
+      {
+        "form": "Tablet",
+        "conc_qty": 250,
+        "conc_unit": "mg/10mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Naxdom 250 (Micro Labs)",
+        "indian_conc_note": "Naproxen 250 mg + Domperidone 10 mg"
+      },
+      {
+        "form": "Tablet",
+        "conc_qty": 500,
+        "conc_unit": "mg/10mg",
+        "per_qty": 1,
+        "per_unit": "tablet",
+        "route": "PO",
+        "indian_brand": "Naxdom 500 (Micro Labs)",
+        "indian_conc_note": "Naproxen 500 mg + Domperidone 10 mg"
+      }
+    ],
+    "dosing_bands": [
+      {
+        "indication": "Migraine with nausea — adolescent",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 7.5,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "Based on naproxen component: 5-7.5 mg/kg/dose BID; for adolescents >=12 years; max naproxen 500 mg/dose",
+        "max_single_qty": 500,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1000,
+        "max_daily_unit": "mg",
+        "rounding_rule": "half_tab",
+        "notes": "Reserve for migraine with significant nausea; use individual components in younger children; domperidone max 10 mg TDS and max 7 days per EMA recommendation"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_or_class": "QT-prolonging drugs (azithromycin, ondansetron)",
+        "severity": "major",
+        "effect": "Domperidone prolongs QTc — additive risk of torsades de pointes"
+      },
+      {
+        "drug_or_class": "CYP3A4 inhibitors (ketoconazole, erythromycin)",
+        "severity": "major",
+        "effect": "Increased domperidone levels — QT prolongation risk; contraindicated"
+      },
+      {
+        "drug_or_class": "Anticoagulants",
+        "severity": "major",
+        "effect": "Naproxen increases bleeding risk with anticoagulants"
+      },
+      {
+        "drug_or_class": "Lithium",
+        "severity": "moderate",
+        "effect": "Naproxen reduces lithium clearance"
+      }
+    ],
+    "contraindications": [
+      "Active GI bleeding or perforation",
+      "Known cardiac conduction abnormalities or QT prolongation",
+      "Prolactinoma",
+      "Age <12 years (combination product)",
+      "Severe hepatic impairment",
+      "Concomitant CYP3A4 inhibitors (with domperidone)",
+      "Body weight <35 kg (domperidone per EMA)"
+    ],
+    "black_box_warnings": [
+      "Domperidone: risk of serious cardiac arrhythmias (QT prolongation, torsades de pointes, sudden cardiac death); use lowest effective dose for shortest duration",
+      "NSAIDs increase risk of serious cardiovascular and gastrointestinal events"
+    ],
+    "food_instructions": "Take before meals; naproxen absorption is better with food but domperidone works best 15-30 min before food",
+    "snomed_code": "372588000",
+    "snomed_display": "Naproxen"
+  }
+]
