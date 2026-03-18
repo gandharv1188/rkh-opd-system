@@ -741,20 +741,16 @@
     background: var(--blue-mid);
   }
   .item-remove {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
+    padding: 4px 10px;
+    border-radius: 99px;
     border: 1px solid var(--bdr2);
     background: var(--bg2);
     color: var(--red);
-    font-size: 14px;
+    font-size: 10px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
     font-family: system-ui, sans-serif;
-    line-height: 1;
+    white-space: nowrap;
     transition: all 0.15s;
   }
   .item-remove:hover {
@@ -3317,7 +3313,6 @@
         const pid = "m" + idx;
         h += `<div class="med-card" id="${pid}">
         <div class="med-top">
-          <button class="item-remove" onclick="toggleStrike('med',${idx})" id="${pid}-rm" title="Remove medicine">×</button>
           <div class="med-rows">
             <div class="med-calc" id="${pid}-calc">${esc(m.calc)}</div>
             <div contenteditable="true" spellcheck="false" class="med-r r1" id="${pid}-r1">${esc(m.row1_en)}</div>
@@ -3326,7 +3321,10 @@
             <div class="med-flag" id="${pid}-flag" style="${m.flag ? "" : "display:none"}">${m.flag ? "⚠ " + esc(m.flag) : ""}</div>
           </div>
           ${renderPictogram(m)}
-          <button class="adj-btn" onclick="toggleEP('${pid}',${idx})">Adjust dose</button>
+          <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0">
+            <button class="adj-btn" onclick="toggleEP('${pid}',${idx})">Adjust dose</button>
+            <button class="item-remove" onclick="toggleStrike('med',${idx})" id="${pid}-rm" title="Remove medicine">Remove</button>
+          </div>
         </div>
         <div class="ep" id="${pid}-ep">
           <div class="ep-title">Dose adjustment — ${esc((m.row1_en || "").split("(")[0].trim())}</div>
@@ -3404,7 +3402,7 @@
 
     if (has(r.investigations)) {
       h += `<div class="rv-sec"><div class="rv-hdr red">Investigations</div>
-    ${r.investigations.map((inv, i) => `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><button class="item-remove" onclick="toggleStrike('inv',${i})" id="inv${i}-rm" title="Remove investigation">×</button><div class="inv-block" id="inv${i}-text" contenteditable="true" spellcheck="false" style="flex:1"><strong>${esc(inv.name)}</strong> — ${esc(inv.indication)}${inv.urgency === "same-day" ? ' <span style="font-size:11px;color:var(--red)">(Same day)</span>' : ""}</div></div>`).join("")}
+    ${r.investigations.map((inv, i) => `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><div class="inv-block" id="inv${i}-text" contenteditable="true" spellcheck="false" style="flex:1"><strong>${esc(inv.name)}</strong> — ${esc(inv.indication)}${inv.urgency === "same-day" ? ' <span style="font-size:11px;color:var(--red)">(Same day)</span>' : ""}</div><button class="item-remove" onclick="toggleStrike('inv',${i})" id="inv${i}-rm" title="Remove investigation">Remove</button></div>`).join("")}
     <button class="add-item-btn" onclick="addInvestigation()">+ Add investigation</button>
     </div>`;
     }
@@ -4227,8 +4225,8 @@
     );
     if (!btn) return;
     const isStruck = btn.classList.toggle("struck");
-    btn.textContent = isStruck ? "\u2713" : "\u00d7";
-    btn.title = isStruck ? "Restore" : "Remove";
+    btn.textContent = isStruck ? "Restore" : "Remove";
+    btn.title = isStruck ? "Restore this item" : "Remove this item";
     // Strike/unstrike the content
     if (type === "med") {
       const card = document.getElementById("m" + idx);
