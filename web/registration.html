@@ -731,7 +731,10 @@
 
   // ===== Select existing patient for revisit =====
   async function selectPatient(json) {
-    currentPatient = JSON.parse(json);
+    let parsed = JSON.parse(json);
+    // Handle double-stringified JSON from search result onclick
+    if (typeof parsed === "string") parsed = JSON.parse(parsed);
+    currentPatient = parsed;
     currentVisitId = null;
     document.getElementById("results").innerHTML = "";
     document.getElementById("srch").value = "";
