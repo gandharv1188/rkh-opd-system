@@ -13,7 +13,7 @@
 5. **Three mandatory safety checks** — allergy + cross-reaction + drug interaction
 6. **ICD-10 + standard prescription** — every diagnosis gets a code; standard Rx generated
 7. **Bilingual counselling** — Hindi + English for every medicine instruction
-8. **Doctor authentication** — full name, degree, HMCI reg no, date, time, emergency contacts
+8. **Doctor authentication** — full name, degree, HMC reg no, date, time, emergency contacts
 9. **WHO Z-scores mandatory** — WAZ, HAZ, WHZ, HCZ at every visit
 10. **Developmental screening mandatory** — TDSC/DDST-II/M-CHAT-R as appropriate
 11. **Immunization advice always** — IAP 2024 due/overdue vaccines at every visit

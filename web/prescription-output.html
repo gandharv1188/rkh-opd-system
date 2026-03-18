@@ -706,7 +706,7 @@
     let h = "";
     // Header — doctor left, hospital center, emergency right
     h += `<div class="hdr">
-      <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMCI Reg. HN 21452 \u00b7 PMC 23168<br>Pediatrics &amp; Neonatology</div>
+      <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMC Reg. HN 21452 \u00b7 PMC 23168<br>Pediatrics &amp; Neonatology</div>
       <div class="hdr-c"><h1>Radhakishan Hospital</h1><div class="hdr-hi">\u0930\u093e\u0927\u093e\u0915\u093f\u0936\u0928 \u0939\u0938\u094d\u092a\u0924\u093e\u0932</div><div class="hdr-sub">Jyoti Nagar, Kurukshetra, Haryana</div><span class="nabh-badge">NABH Accredited</span></div>
       <div class="hdr-r">Emergency:<br>01744-251441<br>01744-270516<br>7206029516</div>
     </div>`;
@@ -847,7 +847,7 @@
       }),
     );
     h += `<div class="footer">
-      <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics \u00b7 HMCI HN 21452 \u00b7 PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 \u00b7 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
+      <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics \u00b7 HMC HN 21452 \u00b7 PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 \u00b7 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
       <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: \u2713<br>Max dose: \u2713<br>NABH: \u2713${r.patient?.abha_number ? "<br>ABDM: " + esc(r.patient.abha_number) : ""}</div>
       <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to re-register</div></div>
     </div>`;

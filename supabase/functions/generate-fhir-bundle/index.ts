@@ -1506,7 +1506,7 @@ serve(async (req: Request) => {
       id: "DR-LOKENDER",
       full_name: "Dr. Lokender Goyal",
       degree: "MD Pediatrics (PGI Chandigarh)",
-      registration_no: "HMCI HN 21452 / PMC 23168",
+      registration_no: "HMC HN 21452 / PMC 23168",
     };
 
     let visit: any = null;

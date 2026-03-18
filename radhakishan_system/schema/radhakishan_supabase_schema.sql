@@ -138,7 +138,7 @@ create table doctors (
   full_name       text not null,
   degree          text,
   registration_no text,
-  -- HMCI / PMC registration number
+  -- HMC / PMC registration number
   specialisation  text,
   contact_phone   text,
   is_active       boolean default true,
@@ -147,7 +147,7 @@ create table doctors (
 
 -- Seed doctor
 insert into doctors (id, full_name, degree, registration_no, specialisation) values
-  ('DR-LOKENDER', 'Dr. Lokender Goyal', 'MD Pediatrics (PGI Chandigarh)', 'HMCI HN 21452 / PMC 23168', 'Pediatrics & Neonatology');
+  ('DR-LOKENDER', 'Dr. Lokender Goyal', 'MD Pediatrics (PGI Chandigarh)', 'HMC HN 21452 / PMC 23168', 'Pediatrics & Neonatology');
 
 -- ============================================================
 -- 3. STANDARD PRESCRIPTIONS

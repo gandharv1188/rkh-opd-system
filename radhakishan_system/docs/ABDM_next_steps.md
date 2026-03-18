@@ -61,7 +61,7 @@ npx supabase secrets set ABDM_CLIENT_ID=your_client_id ABDM_CLIENT_SECRET=your_c
 **Depends on:** Nothing — can start now
 
 1. Go to **https://hpr.abdm.gov.in/**
-2. Register **Dr. Lokender Goyal** (MD Pediatrics, HMCI HN 21452 / PMC 23168)
+2. Register **Dr. Lokender Goyal** (MD Pediatrics, HMC HN 21452 / PMC 23168)
 3. You'll receive an **HPR ID**
 4. Update the database:
 

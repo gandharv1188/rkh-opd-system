@@ -1280,7 +1280,7 @@
   <!-- HEADER -->
   <div class="hdr">
     <div class="hdr-l">
-      Dr. Lokender Goyal<br />MD Pediatrics (PGI)<br />HMCI HN 21452
+      Dr. Lokender Goyal<br />MD Pediatrics (PGI)<br />HMC HN 21452
     </div>
     <div class="hdr-c">
       <h1>Radhakishan Hospital</h1>
@@ -3528,7 +3528,7 @@
 
     h += `<div class="auth-block">
     <div><div class="auth-name">Dr. Lokender Goyal</div>
-    <div class="auth-meta">MD Pediatrics · HMCI HN 21452 (Haryana) · PMC 23168 (Punjab)<br>Radhakishan Hospital, Jyoti Nagar, Kurukshetra · 01744-251441 · 7206029516</div>
+    <div class="auth-meta">MD Pediatrics · HMC HN 21452 (Haryana) · PMC 23168 (Punjab)<br>Radhakishan Hospital, Jyoti Nagar, Kurukshetra · 01744-251441 · 7206029516</div>
     <div style="font-size:11px;color:var(--green);font-weight:500;margin-top:3px">Digitally Signed</div></div>
     <div style="text-align:right;color:var(--ink3)"><div>Allergy: ${esc(r.safety?.allergy_note) || "NKDA"}</div><div>Interactions ✓</div><div>Max dose ✓</div><div>NABH ✓</div></div>
   </div>`;
@@ -4073,7 +4073,7 @@
     let h = "";
     // Header — doctor left, hospital center, emergency right
     h += `<div class="hdr">
-      <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMCI Reg. HN 21452 · PMC 23168<br>Pediatrics &amp; Neonatology</div>
+      <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMC Reg. HN 21452 · PMC 23168<br>Pediatrics &amp; Neonatology</div>
       <div class="hdr-c"><h1>Radhakishan Hospital</h1><div class="hdr-hi">राधाकिशन हस्पताल</div><div class="hdr-sub">Jyoti Nagar, Kurukshetra, Haryana</div><span class="nabh-badge">NABH Accredited</span></div>
       <div class="hdr-r">Emergency:<br>01744-251441<br>01744-270516<br>7206029516</div>
     </div>`;
@@ -4214,7 +4214,7 @@
       }),
     );
     h += `<div class="footer">
-      <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics · HMCI HN 21452 · PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
+      <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics · HMC HN 21452 · PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 · 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
       <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: ✓<br>Max dose: ✓<br>NABH: ✓${selectedPatient?.abha_number ? '<br><span style="font-size:10px;color:#2980b9">ABDM: ' + esc(selectedPatient.abha_number) + (selectedPatient.abha_verified ? " \u2713" : "") + "</span>" : ""}</div>
       <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to re-register</div></div>
     </div>`;

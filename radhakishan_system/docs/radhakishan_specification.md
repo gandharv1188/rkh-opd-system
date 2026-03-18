@@ -4,7 +4,7 @@ subtitle: "Complete Technical & Clinical Specification"
 version: "2026 Edition"
 date: "March 2026"
 authors:
-  - "Dr. Lokender Goyal, MD Pediatrics (PGI Chandigarh), HMCI Reg. HN 21452"
+  - "Dr. Lokender Goyal, MD Pediatrics (PGI Chandigarh), HMC Reg. HN 21452"
 hospital: "Radhakishan Hospital, Jyoti Nagar, Kurukshetra, Haryana"
 accreditation: "NABH HCO 6th Edition"
 status: "Production-ready for pilot deployment"
@@ -22,7 +22,7 @@ _Complete Technical & Clinical Specification_
 
 Version 2026 | March 2026
 
-Dr. Lokender Goyal, MD Pediatrics (PGI Chandigarh) · HMCI Reg. HN 21452
+Dr. Lokender Goyal, MD Pediatrics (PGI Chandigarh) · HMC Reg. HN 21452
 
 > **CONFIDENTIAL — FOR AUTHORIZED USE ONLY**
 
@@ -1173,7 +1173,7 @@ All clinical knowledge (prompts, formulary, protocols, schema) transferred with 
 | HAZ           | Height-for-Age Z-score                                                                                                |
 | HCZ           | Head Circumference-for-Age Z-score                                                                                    |
 | HINE          | Hammersmith Infant Neurological Examination                                                                           |
-| HMCI          | Haryana Medical Council of India                                                                                      |
+| HMC          | Haryana Medical Council of India                                                                                      |
 | IAP           | Indian Academy of Pediatrics                                                                                          |
 | LEST          | Language Evaluation Scale Trivandrum                                                                                  |
 | MAM           | Moderate Acute Malnutrition (WHZ \< -2 SD OR MUAC 11.5-12.5cm)                                                        |
