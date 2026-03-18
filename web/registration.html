@@ -754,6 +754,17 @@
       currentVisitId = null;
       document.getElementById("results").innerHTML = "";
       document.getElementById("srch").value = "";
+      // Fetch last visit date for header display
+      try {
+        const lvr = await q(
+          "visits",
+          `?patient_id=eq.${encodeURIComponent(currentPatient.id)}&order=visit_date.desc&limit=1&select=visit_date,created_at`,
+        );
+        if (lvr.ok) {
+          const lvs = await lvr.json();
+          if (lvs.length) currentPatient._lastVisitDate = lvs[0].visit_date;
+        }
+      } catch (_) {}
       renderForm(currentPatient);
       updateFee();
 
@@ -925,8 +936,19 @@
     </div>`;
 
     // Section 2: Visit Details (moved up — doctor + visit type needed early)
+    const lastVisitInfo =
+      !isNew && currentPatient?._lastVisitDate
+        ? ' <span style="font-size:11px;color:var(--ink3);font-weight:400">Last visit: ' +
+          esc(
+            new Date(currentPatient._lastVisitDate).toLocaleDateString(
+              "en-IN",
+              { day: "2-digit", month: "short", year: "numeric" },
+            ),
+          ) +
+          "</span>"
+        : "";
     h += `<div class="form-section">
-      <div class="fs-hdr">Visit Details <span class="badge req">Required</span></div>
+      <div class="fs-hdr">Visit Details${lastVisitInfo} <span class="badge req">Required</span></div>
       <div class="fs-body">
         <div class="fg fg3" style="margin-bottom:10px">
           <div class="ff"><label>Visit Date</label><input type="date" id="f-visit-date" value="${new Date().toISOString().split("T")[0]}" /></div>
@@ -1714,6 +1736,18 @@
         }
       }
 
+      // Generate receipt number: RKH-RCT-YYMMDD-NNNNN
+      const now = new Date();
+      const rcptDate =
+        String(now.getFullYear() % 100).padStart(2, "0") +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0");
+      const rcptSeq = String(Math.floor(Math.random() * 99999) + 1).padStart(
+        5,
+        "0",
+      );
+      const receiptNo = "RKH-RCT-" + rcptDate + "-" + rcptSeq;
+
       // Save form values before clearing
       const doctor = "Dr. Lokender Goyal";
       const visitType = document.getElementById("f-visit-type")?.value || "new";
@@ -1747,25 +1781,42 @@
         visitType,
         allergyText,
         qrPayload,
+        receiptNo,
+        feeAmt: document.getElementById("f-fee")?.value || "0",
+        payMode: document.getElementById("f-pay-mode")?.value || "cash",
+        payStatus: document.getElementById("f-pay-status")?.value || "pending",
       };
 
       // Show success ticket
       document.getElementById("form-area").innerHTML = "";
       document.getElementById("status-bar").style.display = "none";
+      const feeAmt = document.getElementById("f-fee")?.value || "0";
+      const payMode = document.getElementById("f-pay-mode")?.value || "cash";
+      const payStatus =
+        document.getElementById("f-pay-status")?.value || "pending";
       document.getElementById("ticket-area").innerHTML = `
         <div class="ticket">
-          <div style="font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Radhakishan Hospital — OPD Token</div>
-          <div class="ticket-uhid">${esc(patientId)}</div>
-          <div class="ticket-name">${esc(name)}</div>
-          <div class="ticket-meta">
-            ${age ? esc(age) + " · " : ""}
-            ${esc(sex)}
-            ${wt ? " · " + esc(wt) + " kg" : ""}
-            ${phone ? " · " + esc(phone) : ""}
+          <div style="font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Radhakishan Hospital — OPD Receipt</div>
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">Receipt: <strong style="color:var(--ink)">${esc(receiptNo)}</strong></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+            <div style="flex:1">
+              <div class="ticket-uhid">${esc(patientId)}</div>
+              <div class="ticket-name">${esc(name)}</div>
+              <div class="ticket-meta">
+                ${age ? esc(age) + " · " : ""}${esc(sex)}${wt ? " · " + esc(wt) + " kg" : ""}
+              </div>
+              <div class="ticket-meta">${phone ? esc(phone) : ""}</div>
+              <div class="ticket-visit">${esc(visitDate)} · ${esc(doctor)} · ${esc(visitType)}</div>
+              ${allergyText ? '<div style="color:var(--red);font-weight:600;margin-top:4px;font-size:11px">ALLERGY: ' + esc(allergyText) + "</div>" : '<div style="color:var(--green);margin-top:4px;font-size:11px">NKDA</div>'}
+              <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--brd);font-size:12px">
+                <strong>Fee: &#8377;${esc(feeAmt)}</strong> · ${esc(payMode.toUpperCase())} · <span style="color:${payStatus === "paid" ? "var(--green)" : "var(--red)"}">${esc(payStatus.toUpperCase())}</span>
+              </div>
+            </div>
+            <div style="text-align:center;flex-shrink:0">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrPayload}" width="80" height="80" alt="QR">
+              <div style="font-size:7px;color:#999;margin-top:2px">Scan for next visit</div>
+            </div>
           </div>
-          <div class="ticket-visit">Visit: ${esc(visitDate)} · ${esc(doctor)} · ${esc(visitType)}</div>
-          ${allergyText ? '<div style="color:var(--red);font-weight:600;margin-top:6px">ALLERGY: ' + esc(allergyText) + "</div>" : '<div style="color:var(--green);margin-top:6px">NKDA</div>'}
-          <div style="text-align:center;margin-top:8px"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrPayload}" width="80" height="80" alt="QR"><div style="font-size:8px;color:#999">Scan for next visit</div></div>
         </div>
         <div style="text-align:center;margin-top:12px">
           <button class="act-btn primary" onclick="printToken()">Print Token</button>
@@ -2338,39 +2389,53 @@
     const t = lastToken;
     const w = window.open("", "_blank");
     w.document
-      .write(`<!DOCTYPE html><html><head><title>Token ${t.patientId}</title>
+      .write(`<!DOCTYPE html><html><head><title>Receipt ${t.receiptNo || t.patientId}</title>
     <style>
-      @page { size: 80mm 120mm; margin: 3mm; }
+      @page { size: A4; margin: 10mm; }
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { font-family: system-ui, Arial, sans-serif; font-size: 11px; color: #1a1a14; width: 74mm; }
-      .token { border: 1.5px solid #1e3a6b; border-radius: 6px; padding: 6mm 4mm; text-align: center; }
-      .hospital { font-size: 13px; font-weight: 700; color: #1e3a6b; margin-bottom: 2px; }
-      .hospital-hi { font-size: 9px; color: #888; margin-bottom: 4px; }
-      .uhid { font-size: 18px; font-weight: 800; color: #1e3a6b; letter-spacing: 0.05em; margin: 6px 0 2px; }
-      .name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-      .meta { font-size: 10px; color: #555; margin-bottom: 4px; }
-      .visit { font-size: 9px; color: #777; margin-bottom: 4px; }
+      body { font-family: system-ui, Arial, sans-serif; font-size: 12px; color: #1a1a14; max-width: 50%; }
+      .receipt { border: 1.5px solid #1e3a6b; border-radius: 8px; padding: 14px 16px; }
+      .hospital { font-size: 15px; font-weight: 700; color: #1e3a6b; }
+      .hospital-hi { font-size: 10px; color: #888; margin-bottom: 6px; }
+      .receipt-no { font-size: 10px; color: #777; margin-bottom: 8px; }
+      .receipt-no strong { color: #1a1a14; }
+      .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+      .left { flex: 1; }
+      .right { flex-shrink: 0; text-align: center; }
+      .uhid { font-size: 16px; font-weight: 800; color: #1e3a6b; letter-spacing: 0.05em; margin-bottom: 2px; }
+      .name { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+      .meta { font-size: 11px; color: #555; margin-bottom: 2px; }
+      .visit { font-size: 10px; color: #777; margin-bottom: 4px; }
       .allergy { font-size: 11px; font-weight: 700; margin: 4px 0; }
       .allergy.red { color: #8b1a1a; }
       .allergy.green { color: #1a6b3a; }
-      .qr { margin-top: 6px; }
+      .fee-line { margin-top: 6px; padding-top: 6px; border-top: 1px dashed #ccc; font-size: 13px; }
+      .fee-line strong { color: #1e3a6b; }
       .qr-label { font-size: 7px; color: #999; margin-top: 2px; }
-      .cut { border-top: 1px dashed #ccc; margin: 4mm 0 0; padding-top: 2mm; font-size: 8px; color: #ccc; text-align: center; }
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
+      .cut { border-top: 1px dashed #ccc; margin: 8px 0 0; padding-top: 4px; font-size: 8px; color: #ccc; text-align: center; }
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
     </style></head><body>
-    <div class="token">
+    <div class="receipt">
       <div class="hospital">Radhakishan Hospital</div>
-      <div class="hospital-hi">राधाकिशन हस्पताल · Kurukshetra</div>
-      <div class="uhid">${esc(t.patientId)}</div>
-      <div class="name">${esc(t.name)}</div>
-      <div class="meta">${t.age ? esc(t.age) + " · " : ""}${esc(t.sex)}${t.wt ? " · " + esc(t.wt) + " kg" : ""}${t.phone ? " · " + esc(t.phone) : ""}</div>
-      <div class="visit">${esc(t.visitDate)} · ${esc(t.doctor)} · ${esc(t.visitType)}</div>
-      <div class="allergy ${t.allergyText ? "red" : "green"}">${t.allergyText ? "⚠ ALLERGY: " + esc(t.allergyText) : "NKDA"}</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${t.qrPayload}" width="100" height="100" alt="QR"></div>
-      <div class="qr-label">Scan for next visit</div>
+      <div class="hospital-hi">\u0930\u093E\u0927\u093E\u0915\u093F\u0936\u0928 \u0939\u0938\u094D\u092A\u0924\u093E\u0932 \u00B7 Jyoti Nagar, Kurukshetra</div>
+      <div class="receipt-no">Receipt: <strong>${esc(t.receiptNo || "")}</strong> \u00B7 ${esc(t.visitDate)}</div>
+      <div class="row">
+        <div class="left">
+          <div class="uhid">${esc(t.patientId)}</div>
+          <div class="name">${esc(t.name)}</div>
+          <div class="meta">${t.age ? esc(t.age) + " \u00B7 " : ""}${esc(t.sex)}${t.wt ? " \u00B7 " + esc(t.wt) + " kg" : ""}</div>
+          <div class="meta">${t.phone ? "Phone: " + esc(t.phone) : ""}</div>
+          <div class="visit">${esc(t.doctor)} \u00B7 ${esc(t.visitType)}</div>
+          <div class="allergy ${t.allergyText ? "red" : "green"}">${t.allergyText ? "\u26A0 ALLERGY: " + esc(t.allergyText) : "NKDA"}</div>
+          <div class="fee-line"><strong>Fee: \u20B9${esc(t.feeAmt || "0")}</strong> \u00B7 ${esc((t.payMode || "cash").toUpperCase())} \u00B7 ${esc((t.payStatus || "pending").toUpperCase())}</div>
+        </div>
+        <div class="right">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${t.qrPayload}" width="100" height="100" alt="QR">
+          <div class="qr-label">Scan for next visit</div>
+        </div>
+      </div>
     </div>
-    <div class="cut">✂ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</div>
+    <div class="cut">\u2702 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500 \u2500</div>
     </body></html>`);
     w.document.close();
     setTimeout(() => w.print(), 500);
