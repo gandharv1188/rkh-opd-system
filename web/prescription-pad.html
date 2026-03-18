@@ -2514,6 +2514,30 @@
       if (visit?.chief_complaints)
         ctx += `Chief complaints: ${visit.chief_complaints}. `;
       if (visit?.temp_f) ctx += `Temp ${fmtTemp(visit.temp_f)}. `;
+      // Add vaccination history if available
+      try {
+        const vaxR = await q(
+          "vaccinations",
+          `?patient_id=eq.${encodeURIComponent(p.id)}&date_given=not.is.null&select=vaccine_name,dose_number,date_given&order=date_given.desc`,
+        );
+        if (vaxR.ok) {
+          const vaxList = await vaxR.json();
+          if (vaxList.length) {
+            ctx +=
+              `\nVACCINATION HISTORY (${vaxList.length} doses recorded): ` +
+              vaxList
+                .map(
+                  (v) =>
+                    `${v.vaccine_name} Dose ${v.dose_number} (${v.date_given})`,
+                )
+                .join(", ") +
+              ". ";
+          } else {
+            ctx +=
+              "\nVACCINATION HISTORY: No records — assume vaccinations are up to date for age. Only suggest upcoming/next-due vaccines. ";
+          }
+        }
+      } catch (_) {}
       // Append previous visit summary (generated at registration for returning patients)
       if (visit?.visit_summary) ctx += "\n\n" + visit.visit_summary;
       document.getElementById("pad-ta").value = ctx;

@@ -202,6 +202,7 @@ Generate this exact structure. Field names MUST match exactly.
 - `investigations[].loinc_code`: Use the LOINC code for the investigation if known. Common codes: CBC="58410-2", Hemoglobin="718-7", CRP="1988-5", Blood Culture="600-7", Urine Routine="24356-8", Chest X-Ray="36643-5", USG Abdomen="24531-6", Blood Sugar(R)="2345-7", S.Creatinine="2160-0", Electrolytes Na="2951-2", K="2823-3", LFT panel="24325-3", RFT panel="24362-6". If unsure, use null.
 - `patient.uhid`: Copy the PATIENT ID from the clinical note (e.g., "RKH-25260300001"). If not present, use empty string.
 - Optional sections (growth, vaccinations, developmental, investigations, iv_fluids, diet, referral): Include when requested in the INCLUDE SECTIONS instruction. Never return null for a requested section.
+- `vaccinations`: The clinical note may include a VACCINATION HISTORY section listing doses already given. Use this to determine what is due/overdue. If the note says "No records — assume vaccinations are up to date for age", then set `due` to only upcoming/next-due vaccines (not past ones), set `overdue` to empty, and note this assumption. NEVER suggest vaccines that are already recorded as given in the vaccination history.
 - `counselling`: Array of strings.
 - `referral`: Top-level string. Empty string if none.
 - `followup_days`: Top-level number.
