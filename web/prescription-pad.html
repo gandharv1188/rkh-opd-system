@@ -2823,11 +2823,12 @@
       let patientCtx = "";
       if (selectedPatient) {
         const p = selectedPatient;
-        patientCtx = `${p.name || ""}, ${p.sex || ""}, weight ${p.weight_kg || "unknown"}kg`;
+        const wt = p.visit?.weight_kg || p.weight_kg;
+        patientCtx = `${p.name || ""}, ${p.sex || ""}${wt ? ", weight " + wt + "kg" : ""}`;
         if (p.known_allergies && p.known_allergies.length)
           patientCtx += `, allergies: ${p.known_allergies.join(", ")}`;
-        if (p.chief_complaints)
-          patientCtx += `, complaints: ${p.chief_complaints}`;
+        if (p.visit?.chief_complaints)
+          patientCtx += `, complaints: ${p.visit.chief_complaints}`;
       }
       const fd = new FormData();
       fd.append("audio", audioBlob, "dictation.webm");
