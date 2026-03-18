@@ -429,16 +429,14 @@ async function toolUseLoop(
 
       console.log(`  ${toolBlocks.length} tool call(s) in round ${round}`);
 
-      // Execute all tools and collect results
-      const toolResults: any[] = [];
-      for (const block of toolBlocks) {
-        const result = await executeTool(block.name!, block.input!);
-        toolResults.push({
+      // Execute all tools IN PARALLEL for speed
+      const toolResults = await Promise.all(
+        toolBlocks.map(async (block: ContentBlock) => ({
           type: "tool_result",
           tool_use_id: block.id,
-          content: result,
-        });
-      }
+          content: await executeTool(block.name!, block.input!),
+        })),
+      );
 
       // Add tool results as user message
       messages.push({ role: "user", content: toolResults });
@@ -544,24 +542,19 @@ serve(async (req: Request) => {
       );
     }
 
-    // Load core prompt from Storage (cached)
-    const corePrompt = await fetchCached(
-      STORAGE_BASE + "/core_prompt.md",
-      "core-prompt",
-    );
+    // Load core prompt from Storage (cached) + embed NABH compliance (saves a tool call every time)
+    const [corePromptRaw, nabhRef] = await Promise.all([
+      fetchCached(STORAGE_BASE + "/core_prompt.md", "core-prompt"),
+      fetchCached(
+        STORAGE_BASE + "/references/nabh_compliance.md",
+        "ref:nabh_compliance",
+      ),
+    ]);
+    const corePrompt = corePromptRaw + "\n\n" + nabhRef;
 
-    // Build user message (same interface as before — client hints still accepted)
+    // Build user message — send clinical note + allergies + patient ID only.
+    // Formulary and standard Rx data are fetched by Claude via tools as needed.
     let userMessage = clinical_note;
-    if (formulary_context) {
-      userMessage +=
-        "\n\nFORMULARY HINTS (verify via get_formulary tool for exact data):\n" +
-        formulary_context;
-    }
-    if (std_rx_context) {
-      userMessage +=
-        "\n\nPROTOCOL HINTS (verify via get_standard_rx tool for exact data):\n" +
-        std_rx_context;
-    }
     if (patient_allergies && patient_allergies.length) {
       userMessage +=
         "\n\nKNOWN PATIENT ALLERGIES: " + patient_allergies.join(", ");

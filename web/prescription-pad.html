@@ -3045,9 +3045,6 @@
       : "";
     const fullNote = note + sectionsNote;
 
-    const formularyCtx = buildFormularyContext(note);
-    const stdRxCtx = buildStdRxContext(note);
-
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];
 
@@ -3079,8 +3076,6 @@
     try {
       const payload = {
         clinical_note: fullNote,
-        formulary_context: formularyCtx,
-        std_rx_context: stdRxCtx,
         patient_allergies: allergies,
         patient_id: selectedPatient?.id || null,
       };
