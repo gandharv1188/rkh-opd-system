@@ -3650,7 +3650,7 @@
           <div class="ep-grid">
             <div class="epf"><label>Weight (kg)</label><input type="number" step="0.1" id="${pid}-wt" value="${esc(r.patient.weight_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>mg/kg/day</label><input type="number" step="0.5" id="${pid}-mgkg" value="${esc(m.dose_mg_per_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Times/day</label><input type="number" id="${pid}-freq" value="${esc(m.dose_per_day_divided)}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>Times/day</label><input type="number" id="${pid}-freq" value="${Math.round(m.dose_per_day_divided) || m.dose_per_day_divided}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>Conc. (mg)</label><input type="number" id="${pid}-cmg" value="${esc(m.concentration_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>Per (ml)</label><input type="number" id="${pid}-cml" value="${esc(m.concentration_per_ml || 5)}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>Max single (mg)</label><input type="number" id="${pid}-max" value="${esc(m.max_dose_single_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
