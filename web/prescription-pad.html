@@ -4304,29 +4304,50 @@
         });
       }
 
-      // 2. Create visit record (skip in update mode — visit already exists)
+      // 2. Use existing visit from registration or create new one
       if (!isUpdateMode) {
-        const vRes = await q("visits", "", "POST", {
-          patient_id: patientId,
-          visit_date: today,
-          doctor_id: doctor,
-          weight_kg: rxData.patient.weight_kg,
-          height_cm: rxData.patient.height_cm,
-          hc_cm: rxData.patient.hc_cm,
-          diagnosis_codes: rxData.diagnosis || [],
-          clinical_notes: document.getElementById("pad-ta").value,
-          raw_dictation: document.getElementById("pad-ta").value,
-          triage_score: rxData.triage_score || 0,
-          created_at: new Date().toISOString(),
-        });
-        if (vRes.ok) {
-          const vData = await vRes.json();
-          visitId = Array.isArray(vData) ? vData[0]?.id : vData?.id;
+        // Check if registration already created a visit for this patient today
+        const existVisitRes = await q(
+          "visits",
+          `?patient_id=eq.${encodeURIComponent(patientId)}&visit_date=eq.${today}&order=created_at.desc&limit=1&select=id`,
+        );
+        const existVisits = existVisitRes.ok ? await existVisitRes.json() : [];
+        if (existVisits.length) {
+          // Update the existing visit with diagnosis + clinical notes from the doctor
+          visitId = existVisits[0].id;
+          const updatePayload = {
+            diagnosis_codes: rxData.diagnosis || [],
+            clinical_notes: document.getElementById("pad-ta").value,
+            raw_dictation: document.getElementById("pad-ta").value,
+            triage_score: rxData.triage_score || 0,
+            updated_at: new Date().toISOString(),
+          };
+          await q(`visits?id=eq.${visitId}`, "", "PATCH", updatePayload);
+          console.log("Sign-off: updated existing visit", visitId);
         } else {
-          const vErr = await vRes.json().catch(() => ({}));
-          throw new Error(
-            "Visit creation failed: " + (vErr.message || vRes.status),
-          );
+          // No visit from registration — create a new one
+          const vRes = await q("visits", "", "POST", {
+            patient_id: patientId,
+            visit_date: today,
+            doctor_id: doctor,
+            weight_kg: rxData.patient.weight_kg,
+            height_cm: rxData.patient.height_cm,
+            hc_cm: rxData.patient.hc_cm,
+            diagnosis_codes: rxData.diagnosis || [],
+            clinical_notes: document.getElementById("pad-ta").value,
+            raw_dictation: document.getElementById("pad-ta").value,
+            triage_score: rxData.triage_score || 0,
+            created_at: new Date().toISOString(),
+          });
+          if (vRes.ok) {
+            const vData = await vRes.json();
+            visitId = Array.isArray(vData) ? vData[0]?.id : vData?.id;
+          } else {
+            const vErr = await vRes.json().catch(() => ({}));
+            throw new Error(
+              "Visit creation failed: " + (vErr.message || vRes.status),
+            );
+          }
         }
       }
 
