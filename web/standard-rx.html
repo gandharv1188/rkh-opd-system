@@ -1577,15 +1577,55 @@
         const err = await r.json().catch(() => ({ error: r.statusText }));
         throw new Error(err.error || err.message || "AI lookup failed");
       }
-      const data = await r.json();
+      const result = await r.json();
+      const resolvedName = result.diagnosis_name || "";
+      const resolvedICD = result.icd10 || "";
+      // Notify if AI corrected/resolved the name
+      if (
+        resolvedName &&
+        diag &&
+        resolvedName.toLowerCase() !== diag.toLowerCase()
+      ) {
+        showToast("Resolved: " + diag + " \u2192 " + resolvedName);
+      }
+      // Check for duplicate — does this protocol already exist?
+      const existing = data.find(
+        (d) =>
+          (resolvedICD &&
+            d.icd10 === resolvedICD &&
+            (d.severity || "any") === (result.severity || "any")) ||
+          (resolvedName &&
+            d.diagnosis_name &&
+            d.diagnosis_name.toLowerCase() === resolvedName.toLowerCase()),
+      );
+      if (existing) {
+        const action = confirm(
+          (resolvedName || resolvedICD) +
+            " already exists in the database.\n\n" +
+            "Click OK to load the existing entry for editing, or Cancel to use AI data instead.",
+        );
+        if (action) {
+          editId = existing.id;
+          clearForm();
+          populate(existing);
+          document.getElementById("drw-title").textContent = "Edit protocol";
+          showToast("Loaded existing protocol for editing");
+          return;
+        }
+        // User wants AI data — set editId for PATCH update
+        editId = existing.id;
+        document.getElementById("drw-title").textContent =
+          "Edit protocol (AI refresh)";
+      }
       clearForm();
-      populate(data);
+      populate(result);
       showToast("AI populated \u2014 review and save");
     } catch (e) {
       alert("AI Lookup error: " + e.message);
+    } finally {
+      btn.innerHTML = origHTML;
+      btn.disabled = false;
     }
-    btn.innerHTML = origHTML;
-    btn.disabled = false;
   }
 
   // Expose functions for sandboxed iframe onclick/oninput handlers

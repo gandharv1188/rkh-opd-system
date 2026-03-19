@@ -2380,6 +2380,34 @@
         throw new Error(errBody || "Request failed (" + res.status + ")");
       }
       const data = await res.json();
+      const resolvedName = (data.generic_name || "").toUpperCase();
+      // Check if AI resolved to a different generic name (brand → generic)
+      if (resolvedName && resolvedName !== name.toUpperCase()) {
+        showToast("Resolved: " + name + " → " + resolvedName);
+      }
+      // Check for duplicate — does this drug already exist in our formulary?
+      const existing = drugs.find(
+        (d) => d.generic_name.toUpperCase() === resolvedName,
+      );
+      if (existing) {
+        const action = confirm(
+          resolvedName +
+            " already exists in the formulary.\n\n" +
+            "Click OK to load it for editing, or Cancel to proceed with AI data anyway.",
+        );
+        if (action) {
+          // Switch to edit mode for the existing drug
+          editId = existing.id;
+          populate(existing);
+          document.getElementById("drw-title").textContent = "Edit drug";
+          showToast("Loaded existing entry for editing");
+          return;
+        }
+        // User chose Cancel — populate with AI data but set editId to existing for PATCH
+        editId = existing.id;
+        document.getElementById("drw-title").textContent =
+          "Edit drug (AI refresh)";
+      }
       populate(data);
       showToast("AI populated \u2014 review and save");
     } catch (e) {
