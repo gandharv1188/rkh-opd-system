@@ -3621,53 +3621,115 @@
               }
             }
             const fc = formularyCache[dn];
-            const forms = fc?.formulations || [];
-            return forms.length >= 1
-              ? '<div class="epf" style="margin-bottom:6px"><label>Formulation</label><select id="' +
-                  pid +
-                  '-form" onchange="switchFormulation(\'' +
-                  pid +
-                  "'," +
-                  idx +
-                  ')" style="width:100%;padding:5px;border:1px solid var(--bdr2);border-radius:var(--r);font-size:12px;font-family:inherit">' +
-                  forms
-                    .map(
-                      (f) =>
-                        '<option value="' +
-                        esc(
-                          f.form +
-                            "|" +
-                            (f.conc_qty || "") +
-                            "|" +
-                            (f.conc_unit || "") +
-                            "|" +
-                            (f.per_qty || "") +
-                            "|" +
-                            (f.per_unit || ""),
-                        ) +
-                        '"' +
-                        (f.conc_qty == m.concentration_mg &&
-                        f.per_qty == m.concentration_per_ml
-                          ? " selected"
-                          : "") +
-                        ">" +
-                        esc(f.form) +
-                        " " +
-                        esc(
-                          (f.conc_qty || "") +
-                            (f.conc_unit || "") +
-                            "/" +
-                            (f.per_qty || "") +
-                            (f.per_unit || ""),
-                        ) +
-                        (f.indian_brand
-                          ? " (" + esc(f.indian_brand) + ")"
-                          : "") +
-                        "</option>",
-                    )
-                    .join("") +
-                  "</select></div>"
-              : "";
+            const drugForms = fc?.formulations || [];
+            // Standard pharmaceutical dose forms (universal)
+            const STD_FORMS = [
+              "syrup",
+              "tablet",
+              "capsule",
+              "drops",
+              "oral drops",
+              "injection",
+              "IV infusion",
+              "IM injection",
+              "SC injection",
+              "cream",
+              "ointment",
+              "gel",
+              "lotion",
+              "inhaler (MDI)",
+              "inhaler (DPI)",
+              "nebulisation",
+              "respules",
+              "suppository",
+              "nasal drops",
+              "nasal spray",
+              "eye drops",
+              "eye ointment",
+              "ear drops",
+              "suspension",
+              "dry syrup",
+              "dispersible tablet",
+              "chewable tablet",
+              "sublingual tablet",
+              "effervescent tablet",
+              "sachets",
+              "powder",
+              "granules",
+              "paste",
+              "spray",
+              "patch",
+              "pessary",
+              "enema",
+            ];
+            let opts = "";
+            if (drugForms.length) {
+              opts += '<optgroup label="Available for this drug">';
+              drugForms.forEach((f) => {
+                const val =
+                  f.form +
+                  "|" +
+                  (f.conc_qty || "") +
+                  "|" +
+                  (f.conc_unit || "") +
+                  "|" +
+                  (f.per_qty || "") +
+                  "|" +
+                  (f.per_unit || "");
+                const sel =
+                  f.conc_qty == m.concentration_mg &&
+                  f.per_qty == m.concentration_per_ml
+                    ? " selected"
+                    : "";
+                const label =
+                  esc(f.form) +
+                  " " +
+                  esc(
+                    (f.conc_qty || "") +
+                      (f.conc_unit || "") +
+                      "/" +
+                      (f.per_qty || "") +
+                      (f.per_unit || ""),
+                  ) +
+                  (f.indian_brand ? " (" + esc(f.indian_brand) + ")" : "");
+                opts +=
+                  '<option value="' +
+                  esc(val) +
+                  '"' +
+                  sel +
+                  ">" +
+                  label +
+                  "</option>";
+              });
+              opts += "</optgroup>";
+            }
+            opts += '<optgroup label="All standard forms">';
+            STD_FORMS.forEach((sf) => {
+              const val =
+                sf +
+                "|||1|" +
+                (sf.includes("tablet") || sf.includes("capsule")
+                  ? "tablet"
+                  : "ml");
+              opts +=
+                '<option value="' +
+                esc(val) +
+                '">' +
+                esc(sf) +
+                " (enter concentration manually)</option>";
+            });
+            opts += "</optgroup>";
+            return (
+              '<div class="epf" style="margin-bottom:6px"><label>Formulation</label><select id="' +
+              pid +
+              '-form" onchange="switchFormulation(\'' +
+              pid +
+              "\'," +
+              idx +
+              ')" style="width:100%;padding:5px;border:1px solid var(--bdr2);border-radius:var(--r);font-size:12px;font-family:inherit">' +
+              opts +
+              "</select></div>"
+            );
           })()}
           <div class="ep-grid">
             <div class="epf"><label>Weight (kg)</label><input type="number" step="0.1" id="${pid}-wt" value="${esc(r.patient.weight_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
