@@ -3095,13 +3095,13 @@
       const data = await res.json();
 
       // Step 4: Dump transcribed text directly into the prescription pad
-      // Clean up whitespace: trim each line, collapse multiple blank lines into one
+      // Clean up whitespace: trim each line, remove all blank lines
       const cleanText = (t) =>
         t
           .split("\n")
           .map((l) => l.trim())
-          .join("\n")
-          .replace(/\n{3,}/g, "\n\n")
+          .filter((l) => l.length > 0)
+          .join(" ")
           .trim();
       if (data.text_for_pad) {
         const cleaned = cleanText(data.text_for_pad);
