@@ -779,7 +779,7 @@
         display: flex;
         gap: 10px;
         padding: 6px 18px;
-        align-items: center;
+        align-items: flex-end;
         flex-wrap: wrap;
       "
     >
@@ -793,19 +793,24 @@
           "
           >Clinical category</label
         >
-        <select
-          id="filter-category"
-          multiple
-          onchange="applyFilters()"
+        <input
+          id="filter-category-input"
+          list="dl-categories"
+          placeholder="Type to filter by category…"
+          autocomplete="off"
           style="
             width: 100%;
-            height: 60px;
             font-size: 12px;
+            padding: 6px 8px;
             border: 1px solid var(--brd);
             border-radius: 6px;
-            padding: 2px 4px;
           "
-        ></select>
+        />
+        <datalist id="dl-categories"></datalist>
+        <div
+          id="filter-category-chips"
+          style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px"
+        ></div>
       </div>
       <div style="flex: 1; min-width: 180px">
         <label
@@ -817,26 +822,30 @@
           "
           >Drug class</label
         >
-        <select
-          id="filter-drugclass"
-          multiple
-          onchange="applyFilters()"
+        <input
+          id="filter-drugclass-input"
+          list="dl-drugclasses"
+          placeholder="Type to filter by drug class…"
+          autocomplete="off"
           style="
             width: 100%;
-            height: 60px;
             font-size: 12px;
+            padding: 6px 8px;
             border: 1px solid var(--brd);
             border-radius: 6px;
-            padding: 2px 4px;
           "
-        ></select>
+        />
+        <datalist id="dl-drugclasses"></datalist>
+        <div
+          id="filter-drugclass-chips"
+          style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px"
+        ></div>
       </div>
       <button
         onclick="clearFilters()"
         style="
-          align-self: flex-end;
           font-size: 11px;
-          padding: 4px 10px;
+          padding: 6px 12px;
           border: 1px solid var(--brd);
           border-radius: 4px;
           background: var(--bg2);
@@ -1527,22 +1536,20 @@
       .join("");
   }
 
+  // Active filter chips
+  let _filterCats = [],
+    _filterClasses = [];
+
   function filterDrugs(q) {
     const ql = q.toLowerCase();
     let f = drugs;
-    // Apply category filter (multi-select)
-    const selCats = Array.from(
-      document.getElementById("filter-category").selectedOptions,
-    ).map((o) => o.value);
-    if (selCats.length)
-      f = f.filter((d) => selCats.some((c) => (d.category || "").includes(c)));
-    // Apply drug class filter (multi-select)
-    const selClass = Array.from(
-      document.getElementById("filter-drugclass").selectedOptions,
-    ).map((o) => o.value);
-    if (selClass.length)
+    if (_filterCats.length)
       f = f.filter((d) =>
-        selClass.some((c) =>
+        _filterCats.some((c) => (d.category || "").includes(c)),
+      );
+    if (_filterClasses.length)
+      f = f.filter((d) =>
+        _filterClasses.some((c) =>
           (d.drug_class || "").toLowerCase().includes(c.toLowerCase()),
         ),
       );
@@ -1556,16 +1563,90 @@
       );
     renderTable(f);
   }
+  function addFilterChip(type, value) {
+    if (!value) return;
+    const arr = type === "cat" ? _filterCats : _filterClasses;
+    if (arr.includes(value)) return;
+    arr.push(value);
+    renderFilterChips(type);
+    applyFilters();
+    // Clear input
+    const inp = document.getElementById(
+      type === "cat" ? "filter-category-input" : "filter-drugclass-input",
+    );
+    if (inp) inp.value = "";
+  }
+  function removeFilterChip(type, value) {
+    const arr = type === "cat" ? _filterCats : _filterClasses;
+    const idx = arr.indexOf(value);
+    if (idx >= 0) arr.splice(idx, 1);
+    renderFilterChips(type);
+    applyFilters();
+  }
+  function renderFilterChips(type) {
+    const arr = type === "cat" ? _filterCats : _filterClasses;
+    const el = document.getElementById(
+      type === "cat" ? "filter-category-chips" : "filter-drugclass-chips",
+    );
+    if (!el) return;
+    el.innerHTML = arr
+      .map(
+        (v) =>
+          '<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:var(--blue);color:#fff;border-radius:99px;font-size:11px">' +
+          esc(v) +
+          " <span onclick=\"removeFilterChip('" +
+          type +
+          "','" +
+          esc(v).replace(/'/g, "\\'") +
+          '\')" style="cursor:pointer;font-size:14px;line-height:1">&times;</span></span>',
+      )
+      .join("");
+  }
   function applyFilters() {
     filterDrugs(document.getElementById("srch").value);
   }
   function clearFilters() {
-    document.getElementById("filter-category").selectedIndex = -1;
-    document.getElementById("filter-drugclass").selectedIndex = -1;
-    filterDrugs(document.getElementById("srch").value);
+    _filterCats = [];
+    _filterClasses = [];
+    renderFilterChips("cat");
+    renderFilterChips("cls");
+    document.getElementById("filter-category-input").value = "";
+    document.getElementById("filter-drugclass-input").value = "";
+    applyFilters();
+  }
+  function setupFilterInputs() {
+    const catInp = document.getElementById("filter-category-input");
+    const clsInp = document.getElementById("filter-drugclass-input");
+    // On selecting from datalist (input event + value matches an option)
+    function onFilterInput(inp, type, dlId) {
+      const dl = document.getElementById(dlId);
+      const val = inp.value.trim();
+      const opts = Array.from(dl.options).map((o) => o.value);
+      if (opts.includes(val)) {
+        addFilterChip(type, val);
+      }
+    }
+    catInp.addEventListener("input", () =>
+      onFilterInput(catInp, "cat", "dl-categories"),
+    );
+    clsInp.addEventListener("input", () =>
+      onFilterInput(clsInp, "cls", "dl-drugclasses"),
+    );
+    // Also support Enter key
+    catInp.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && catInp.value.trim()) {
+        addFilterChip("cat", catInp.value.trim());
+        e.preventDefault();
+      }
+    });
+    clsInp.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && clsInp.value.trim()) {
+        addFilterChip("cls", clsInp.value.trim());
+        e.preventDefault();
+      }
+    });
   }
   function populateFilterDropdowns() {
-    // Extract unique categories and drug classes from loaded data
     const cats = new Set(),
       classes = new Set();
     drugs.forEach((d) => {
@@ -1573,24 +1654,21 @@
         d.category.split(/\s*\/\s*/).forEach((c) => cats.add(c.trim()));
       if (d.drug_class) classes.add(d.drug_class);
     });
-    const catSel = document.getElementById("filter-category");
+    const catDl = document.getElementById("dl-categories");
     [...cats].sort().forEach((c) => {
       const count = drugs.filter((d) => (d.category || "").includes(c)).length;
       const o = document.createElement("option");
       o.value = c;
-      o.textContent = c + " (" + count + ")";
-      catSel.appendChild(o);
+      o.label = c + " (" + count + ")";
+      catDl.appendChild(o);
     });
-    const clsSel = document.getElementById("filter-drugclass");
-    // Group drug classes by keyword for manageable list
-    const clsArr = [...classes].sort();
-    clsArr.forEach((c) => {
-      const count = drugs.filter((d) => d.drug_class === c).length;
+    const clsDl = document.getElementById("dl-drugclasses");
+    [...classes].sort().forEach((c) => {
       const o = document.createElement("option");
       o.value = c;
-      o.textContent = c + (count > 1 ? " (" + count + ")" : "");
-      clsSel.appendChild(o);
+      clsDl.appendChild(o);
     });
+    setupFilterInputs();
   }
 
   /* ===== Tags ===== */
@@ -2229,6 +2307,8 @@
     filterDrugs,
     applyFilters,
     clearFilters,
+    addFilterChip,
+    removeFilterChip,
     openDrawer,
     closeDrawer,
     showDrwTab,
