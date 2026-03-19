@@ -3650,7 +3650,38 @@
           <div class="ep-grid">
             <div class="epf"><label>Weight (kg)</label><input type="number" step="0.1" id="${pid}-wt" value="${esc(r.patient.weight_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>mg/kg/day</label><input type="number" step="0.5" id="${pid}-mgkg" value="${esc(m.dose_mg_per_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Times/day</label><input type="number" id="${pid}-freq" value="${Math.round(m.dose_per_day_divided) || m.dose_per_day_divided}" oninput="liveCalc('${pid}',${idx})"></div>
+            <div class="epf"><label>Times/day</label><input type="number" id="${pid}-freq" value="${(() => {
+              const v = Math.round(m.dose_per_day_divided);
+              if (v >= 1 && v <= 4) return v;
+              const txt = (m.row2_en || "").toLowerCase();
+              if (
+                txt.includes("four times") ||
+                txt.includes("qid") ||
+                txt.includes("q6h")
+              )
+                return 4;
+              if (
+                txt.includes("three times") ||
+                txt.includes("tds") ||
+                txt.includes("tid") ||
+                txt.includes("q8h")
+              )
+                return 3;
+              if (
+                txt.includes("twice") ||
+                txt.includes("bd") ||
+                txt.includes("bid") ||
+                txt.includes("q12h")
+              )
+                return 2;
+              if (
+                txt.includes("once") ||
+                txt.includes("od") ||
+                txt.includes("daily")
+              )
+                return 1;
+              return v || 3;
+            })()}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>Conc. (mg)</label><input type="number" id="${pid}-cmg" value="${esc(m.concentration_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>Per (ml)</label><input type="number" id="${pid}-cml" value="${esc(m.concentration_per_ml || 5)}" oninput="liveCalc('${pid}',${idx})"></div>
             <div class="epf"><label>Max single (mg)</label><input type="number" id="${pid}-max" value="${esc(m.max_dose_single_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
