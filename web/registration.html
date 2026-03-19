@@ -2609,7 +2609,8 @@
       return '<div style="padding:10px;color:var(--ink3);font-size:12px">No LOINC matches found</div>';
     return rows
       .map((r) => {
-        const name = esc(r.display_name || r.component || r.short_name || "");
+        const name = esc(r.long_name || r.display_name || r.component || "");
+        const specimen = esc(r.system_specimen || "");
         const cat = esc(CLASS_LABELS[r.class] || r.class || "");
         const loinc = esc(r.loinc_code || "");
         const units = esc(r.example_units || "");
@@ -2625,9 +2626,10 @@
           '\')" style="padding:6px 10px;cursor:pointer;border-bottom:1px solid #f0f0f0">' +
           '<strong style="font-size:12px">' +
           name +
-          "</strong> " +
+          "</strong><br>" +
           '<span style="font-size:10px;color:var(--ink3)">' +
           cat +
+          (specimen ? " · " + specimen : "") +
           (units ? " · " + units : "") +
           (loinc ? " · LOINC: " + loinc : "") +
           "</span>" +
