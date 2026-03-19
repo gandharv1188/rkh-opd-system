@@ -5145,13 +5145,12 @@
       return '<div style="padding:10px;color:var(--ink3);font-size:12px">No matches — <a href="#" onclick="addCustomInv();return false" style="color:var(--blue)">add custom investigation</a></div>';
     return rows
       .map((r) => {
-        const name = esc(r.long_name || r.display_name || r.component || "");
-        const shortName = esc(r.component || "");
+        const common = esc(r.component || "");
+        const full = esc(r.long_name || r.component || "");
         const specimen = esc(r.system_specimen || "");
         const cat = esc(CLASS_LABELS[r.class] || r.class || "");
-        const loinc = esc(r.loinc_code || "");
         const units = esc(r.example_units || "");
-        return `<div class="add-med-item" onclick="selectInv('${name}','${loinc}','${units}')"><strong>${name}</strong><br><span style="font-size:10px;color:var(--ink3)">${cat}${specimen ? " · " + specimen : ""}${units ? " · " + units : ""}${loinc ? " · LOINC: " + loinc : ""}</span></div>`;
+        return `<div class="add-med-item" onclick="selectInv('${full}','${esc(r.loinc_code || "")}','${units}')"><strong>${common}</strong><br><span style="font-size:10px;color:#555">${full}</span><br><span style="font-size:10px;color:var(--ink3)">${cat}${specimen ? " · " + specimen : ""}${units ? " · " + units : ""}</span></div>`;
       })
       .join("");
   }
