@@ -1523,7 +1523,12 @@
           min-width: 0;
         "
       >
-        <button class="mic-btn" id="mic-btn" onclick="toggleVoice()">
+        <button
+          class="mic-btn"
+          id="mic-btn"
+          onclick="toggleVoice()"
+          title="Toggle dictation (F2) · Hold F4 for push-to-talk"
+        >
           <span class="mic-dot"></span> Dictate
         </button>
         <span
@@ -3004,9 +3009,34 @@
     } else {
       btn.className = "mic-btn";
       btn.innerHTML = '<span class="mic-dot"></span> Dictate';
-      st.textContent = "Tap to dictate, or type above";
+      st.textContent = "F2: toggle mic · F4 hold: push-to-talk";
     }
   }
+
+  // ===== KEYBOARD SHORTCUTS: F2 = toggle mic, F4 = push-to-talk =====
+  let pushToTalkActive = false;
+  document.addEventListener("keydown", (e) => {
+    // F2: Toggle dictation on/off
+    if (e.key === "F2") {
+      e.preventDefault();
+      toggleVoice();
+      return;
+    }
+    // F4: Push-to-talk (start on keydown, stop on keyup)
+    if (e.key === "F4" && !pushToTalkActive) {
+      e.preventDefault();
+      pushToTalkActive = true;
+      if (!isRec) startVoice();
+      return;
+    }
+  });
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "F4" && pushToTalkActive) {
+      e.preventDefault();
+      pushToTalkActive = false;
+      if (isRec) stopVoice();
+    }
+  });
 
   /* ===== ATTACH IMAGE/PDF — AI extracts medical data and dumps to pad ===== */
   async function handleAttachment(input) {
