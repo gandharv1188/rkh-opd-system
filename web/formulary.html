@@ -2385,14 +2385,35 @@
       if (resolvedName && resolvedName !== name.toUpperCase()) {
         showToast("Resolved: " + name + " → " + resolvedName);
       }
-      // Check for duplicate — does this drug already exist in our formulary?
-      const existing = drugs.find(
-        (d) => d.generic_name.toUpperCase() === resolvedName,
-      );
+      // Check for duplicate — fuzzy match (substring both ways, or salt form variants)
+      const rn = resolvedName
+        .replace(
+          /\s*(MALEATE|SULPHATE|SULFATE|HYDROCHLORIDE|HCL|SODIUM|POTASSIUM|PHOSPHATE|ACETATE|CITRATE|FUMARATE|SUCCINATE|TARTRATE|MESYLATE|BESYLATE|NITRATE|CHLORIDE|BROMIDE|LACTATE|GLUCONATE|STEARATE|PALMITATE|VALERATE|PROPIONATE|BUTYRATE|DIHYDRATE|MONOHYDRATE)\b/gi,
+          "",
+        )
+        .trim();
+      const existing = drugs.find((d) => {
+        const dn = d.generic_name.toUpperCase();
+        const dnStripped = dn
+          .replace(
+            /\s*(MALEATE|SULPHATE|SULFATE|HYDROCHLORIDE|HCL|SODIUM|POTASSIUM|PHOSPHATE|ACETATE|CITRATE|FUMARATE|SUCCINATE|TARTRATE|MESYLATE|BESYLATE|NITRATE|CHLORIDE|BROMIDE|LACTATE|GLUCONATE|STEARATE|PALMITATE|VALERATE|PROPIONATE|BUTYRATE|DIHYDRATE|MONOHYDRATE)\b/gi,
+            "",
+          )
+          .trim();
+        return (
+          dn === resolvedName ||
+          dnStripped === rn ||
+          dn.includes(rn) ||
+          resolvedName.includes(dnStripped)
+        );
+      });
       if (existing) {
         const action = confirm(
-          resolvedName +
-            " already exists in the formulary.\n\n" +
+          '"' +
+            resolvedName +
+            '" matches existing drug "' +
+            existing.generic_name +
+            '".\n\n' +
             "Click OK to load it for editing, or Cancel to proceed with AI data anyway.",
         );
         if (action) {
