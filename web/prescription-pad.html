@@ -3600,7 +3600,7 @@
             const dn = (m.row1_en || "").split("(")[0].trim().toUpperCase();
             const fc = formularyCache[dn];
             const forms = fc?.formulations || [];
-            return forms.length > 1
+            return forms.length >= 1
               ? '<div class="epf" style="margin-bottom:6px"><label>Formulation</label><select id="' +
                   pid +
                   '-form" onchange="switchFormulation(\'' +
@@ -4765,10 +4765,32 @@
   }
 
   function selectAddMed(drugName) {
+    const f = formularyCache[drugName];
+    if (!f) return;
+    const forms = f.formulations || [];
+    // If multiple formulations, show picker — otherwise use the only one
+    if (forms.length > 1) {
+      const list = document.getElementById("add-med-list");
+      if (list) {
+        list.innerHTML =
+          `<div style="padding:10px;font-size:13px;font-weight:600;color:var(--blue);border-bottom:1px solid var(--bdr)">${esc(drugName)} — Select formulation:</div>` +
+          forms
+            .map(
+              (fm, i) =>
+                `<div class="add-med-item" onclick="confirmAddMed('${esc(drugName)}',${i})"><strong>${esc(fm.form)}</strong> — ${esc((fm.conc_qty || "") + (fm.conc_unit || "") + "/" + (fm.per_qty || "") + (fm.per_unit || ""))}${fm.indian_brand ? ' <span style="color:var(--ink3);font-size:10px">(' + esc(fm.indian_brand) + ")</span>" : ""}</div>`,
+            )
+            .join("");
+      }
+      return;
+    }
+    confirmAddMed(drugName, 0);
+  }
+
+  function confirmAddMed(drugName, formIdx) {
     document.getElementById("add-med-overlay")?.remove();
     const f = formularyCache[drugName];
     if (!f) return;
-    const form = f.formulations?.[0] || {};
+    const form = f.formulations?.[formIdx] || f.formulations?.[0] || {};
     const band = f.dosing_bands?.[0] || {};
     const wt = rxData?.patient?.weight_kg || 0;
     const newMed = {
