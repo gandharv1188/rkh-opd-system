@@ -2085,6 +2085,7 @@
 
   /* ===== Open/close drawer ===== */
   function openDrawer(id) {
+    exitViewMode();
     editId = id || null;
     document.getElementById("drw-title").textContent = id
       ? "Edit drug"
@@ -2102,6 +2103,7 @@
     openDrawer(id);
   }
   function closeDrawer() {
+    exitViewMode();
     document.getElementById("ov").classList.remove("open");
   }
 
@@ -2264,10 +2266,53 @@
   }
 
   /* ===== View monograph ===== */
+  let _viewMode = false;
   function viewDrug(id) {
     const d = drugs.find((x) => x.id === id);
     if (!d) return;
     openDrawer(id);
+    _viewMode = true;
+    document.getElementById("drw-title").textContent = "View drug";
+    // Hide save button, show only close
+    document.getElementById("sv-btn").style.display = "none";
+    // Disable all inputs, selects, textareas, and buttons inside drawer (except Cancel and tab buttons)
+    const drw = document.querySelector(".drawer");
+    drw.querySelectorAll("input, select, textarea").forEach((el) => {
+      el.disabled = true;
+      el.style.opacity = "0.7";
+    });
+    // Hide add/remove buttons inside the drawer
+    drw
+      .querySelectorAll(
+        ".rm-btn, button[onclick*='addForm'], button[onclick*='addBand'], button[onclick*='addInt'], button[onclick*='addRenal'], button[onclick*='addAdmin']",
+      )
+      .forEach((el) => {
+        el.style.display = "none";
+      });
+    // Hide tag input fields (they allow adding tags)
+    drw.querySelectorAll(".tag-input").forEach((el) => {
+      el.style.display = "none";
+    });
+  }
+  function exitViewMode() {
+    if (!_viewMode) return;
+    _viewMode = false;
+    document.getElementById("sv-btn").style.display = "";
+    const drw = document.querySelector(".drawer");
+    drw.querySelectorAll("input, select, textarea").forEach((el) => {
+      el.disabled = false;
+      el.style.opacity = "";
+    });
+    drw
+      .querySelectorAll(
+        ".rm-btn, button[onclick*='addForm'], button[onclick*='addBand'], button[onclick*='addInt'], button[onclick*='addRenal'], button[onclick*='addAdmin']",
+      )
+      .forEach((el) => {
+        el.style.display = "";
+      });
+    drw.querySelectorAll(".tag-input").forEach((el) => {
+      el.style.display = "";
+    });
   }
 
   /* ===== Helpers ===== */
