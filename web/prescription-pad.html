@@ -3823,6 +3823,15 @@
     rxData.patient.weight_kg = wt;
     m.dose_mg_per_kg = mgkg;
     m.dose_per_day_divided = freq;
+    // Update Row 1 if concentration changed
+    if (cmg !== m.concentration_mg || cml !== m.concentration_per_ml) {
+      const drugName = (m.row1_en || "").split("(")[0].trim();
+      const unit = form === "tablet" || form === "capsule" ? "mg" : "mg";
+      const perUnit = form === "tablet" || form === "capsule" ? "tablet" : "ml";
+      const newR1 = `${drugName} (${cmg}${unit}/${cml}${perUnit} ${form})`;
+      document.getElementById(pid + "-r1").textContent = newR1;
+      m.row1_en = newR1;
+    }
     m.concentration_mg = cmg;
     m.concentration_per_ml = cml;
     m.max_dose_single_mg = maxS;
