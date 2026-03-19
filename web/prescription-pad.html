@@ -3998,6 +3998,43 @@
       el.style.display = "";
       el.classList.remove("open");
     });
+    // Fix dose adjustment panel values from prescription data
+    (rxData.medicines || []).forEach((m, idx) => {
+      const pid = "m" + idx;
+      // Fix frequency: parse from Row 2 text if dose_per_day_divided is wrong
+      const freqEl = document.getElementById(pid + "-freq");
+      if (freqEl) {
+        const txt = (m.row2_en || "").toLowerCase();
+        let freq = Math.round(m.dose_per_day_divided);
+        if (
+          txt.includes("four times") ||
+          txt.includes("qid") ||
+          txt.includes("q6h")
+        )
+          freq = 4;
+        else if (
+          txt.includes("three times") ||
+          txt.includes("tds") ||
+          txt.includes("tid") ||
+          txt.includes("q8h")
+        )
+          freq = 3;
+        else if (
+          txt.includes("twice") ||
+          txt.includes("bd") ||
+          txt.includes("bid") ||
+          txt.includes("q12h")
+        )
+          freq = 2;
+        else if (
+          txt.includes("once") ||
+          txt.includes("od ") ||
+          txt.match(/\bonce\b/)
+        )
+          freq = 1;
+        freqEl.value = freq || 3;
+      }
+    });
     // Re-enable inputs
     wrap
       .querySelectorAll(
