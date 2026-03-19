@@ -3095,11 +3095,21 @@
       const data = await res.json();
 
       // Step 4: Dump transcribed text directly into the prescription pad
+      // Clean up whitespace: trim each line, collapse multiple blank lines into one
+      const cleanText = (t) =>
+        t
+          .split("\n")
+          .map((l) => l.trim())
+          .join("\n")
+          .replace(/\n{3,}/g, "\n\n")
+          .trim();
       if (data.text_for_pad) {
-        ta.value = (ta.value ? ta.value + "\n" : "") + data.text_for_pad.trim();
+        const cleaned = cleanText(data.text_for_pad);
+        ta.value = (ta.value ? ta.value + " " : "") + cleaned;
         st.textContent = "Notes added ✓";
       } else if (data.summary) {
-        ta.value = (ta.value ? ta.value + "\n" : "") + data.summary.trim();
+        const cleaned = cleanText(data.summary);
+        ta.value = (ta.value ? ta.value + " " : "") + cleaned;
         st.textContent = "Notes added ✓";
       } else {
         st.textContent = "Could not read the document";
