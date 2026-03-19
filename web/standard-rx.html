@@ -790,8 +790,31 @@
                 <div class="dx-res" id="dx-res" style="display: none"></div>
               </div>
               <div class="ff">
-                <label>Diagnosis name *</label
-                ><input id="d-name" placeholder="e.g. Acute Otitis Media" />
+                <label>Diagnosis name *</label>
+                <div style="display: flex; gap: 6px; align-items: center">
+                  <input
+                    id="d-name"
+                    placeholder="e.g. Acute Otitis Media"
+                    style="flex: 1"
+                  />
+                  <button
+                    id="ai-lookup-btn"
+                    onclick="aiProtocolLookup()"
+                    style="
+                      padding: 5px 10px;
+                      background: var(--blue-mid);
+                      color: #fff;
+                      border: none;
+                      border-radius: var(--r);
+                      font-size: 11px;
+                      cursor: pointer;
+                      white-space: nowrap;
+                      font-family: inherit;
+                    "
+                  >
+                    &#128269; AI Lookup
+                  </button>
+                </div>
               </div>
             </div>
             <div class="fg g3">
@@ -1530,6 +1553,41 @@
     setTimeout(() => t.classList.remove("on"), 2500);
   }
 
+  async function aiProtocolLookup() {
+    const diag = v("d-name");
+    const icd = v("d-icd");
+    if (!diag && !icd) {
+      alert("Enter a diagnosis name or ICD-10 code first");
+      return;
+    }
+    const btn = document.getElementById("ai-lookup-btn");
+    const origHTML = btn.innerHTML;
+    btn.innerHTML = "Researching\u2026";
+    btn.disabled = true;
+    try {
+      const r = await fetch(SB + "/functions/v1/ai-protocol-lookup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + KEY,
+        },
+        body: JSON.stringify({ diagnosis: diag, icd10: icd }),
+      });
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({ error: r.statusText }));
+        throw new Error(err.error || err.message || "AI lookup failed");
+      }
+      const data = await r.json();
+      clearForm();
+      populate(data);
+      showToast("AI populated \u2014 review and save");
+    } catch (e) {
+      alert("AI Lookup error: " + e.message);
+    }
+    btn.innerHTML = origHTML;
+    btn.disabled = false;
+  }
+
   // Expose functions for sandboxed iframe onclick/oninput handlers
   Object.assign(window, {
     toggleCfg,
@@ -1547,6 +1605,7 @@
     rmTag,
     searchICD,
     selectICD,
+    aiProtocolLookup,
   });
 
   // Auto-connect on page load

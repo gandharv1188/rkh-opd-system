@@ -910,12 +910,32 @@
             <div class="fs-title">Drug identity</div>
             <div class="fg g2">
               <div class="ff">
-                <label>Generic name *</label
-                ><input
-                  id="d-name"
-                  placeholder="e.g. AMOXICILLIN"
-                  oninput="this.value = this.value.toUpperCase()"
-                />
+                <label>Generic name *</label>
+                <div style="display: flex; gap: 6px; align-items: center">
+                  <input
+                    id="d-name"
+                    placeholder="e.g. AMOXICILLIN"
+                    oninput="this.value = this.value.toUpperCase()"
+                    style="flex: 1"
+                  /><button
+                    id="ai-lookup-btn"
+                    type="button"
+                    onclick="aiDrugLookup()"
+                    style="
+                      white-space: nowrap;
+                      padding: 6px 10px;
+                      background: var(--pri, #2563eb);
+                      color: #fff;
+                      border: none;
+                      border-radius: var(--r, 6px);
+                      font-size: 12px;
+                      cursor: pointer;
+                      font-family: inherit;
+                    "
+                  >
+                    &#128269; AI Lookup
+                  </button>
+                </div>
               </div>
               <div class="ff">
                 <label>Drug class</label
@@ -2335,6 +2355,41 @@
     e.textContent = msg;
     e.style.display = "block";
   }
+  async function aiDrugLookup() {
+    const nameEl = document.getElementById("d-name");
+    const name = (nameEl.value || "").trim();
+    if (!name) {
+      alert("Enter a drug name first");
+      return;
+    }
+    const btn = document.getElementById("ai-lookup-btn");
+    const origText = btn.innerHTML;
+    btn.innerHTML = "Researching\u2026";
+    btn.disabled = true;
+    try {
+      const res = await fetch(SB + "/functions/v1/ai-drug-lookup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + KEY,
+        },
+        body: JSON.stringify({ drug_name: name }),
+      });
+      if (!res.ok) {
+        const errBody = await res.text();
+        throw new Error(errBody || "Request failed (" + res.status + ")");
+      }
+      const data = await res.json();
+      populate(data);
+      showToast("AI populated \u2014 review and save");
+    } catch (e) {
+      alert("AI Lookup failed: " + e.message);
+    } finally {
+      btn.innerHTML = origText;
+      btn.disabled = false;
+    }
+  }
+
   function showToast(msg) {
     const t = document.getElementById("toast");
     t.textContent = msg;
@@ -2368,6 +2423,7 @@
     addAdmin,
     removeTag,
     updateMethodHelp,
+    aiDrugLookup,
   });
 
   // Auto-connect and load immediately
