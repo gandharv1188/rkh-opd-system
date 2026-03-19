@@ -2342,8 +2342,15 @@
         `?patient_id=eq.${encodeURIComponent(patientId)}&weight_kg=not.is.null&order=visit_date.desc&limit=6&select=visit_date,weight_kg,height_cm,hc_cm`,
       );
       if (!r.ok) return "";
-      const rows = await r.json();
-      if (rows.length < 2) return ""; // Need at least 2 visits for trend
+      let rows = await r.json();
+      // Deduplicate by visit_date — keep the latest entry per date
+      const seen = new Set();
+      rows = rows.filter((r) => {
+        if (seen.has(r.visit_date)) return false;
+        seen.add(r.visit_date);
+        return true;
+      });
+      if (rows.length < 2) return ""; // Need at least 2 distinct visit dates for trend
       rows.reverse(); // Chronological order
 
       const wtTrend = rows.map((r) => r.weight_kg).filter(Boolean);
