@@ -268,6 +268,9 @@
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
+  .lab-dd-item:hover {
+    background: var(--blue-lt) !important;
+  }
   .ff input,
   .ff select,
   .ff textarea {
@@ -1101,15 +1104,16 @@
       <div class="fs-hdr">Lab Results & External Records <span class="badge">Optional</span></div>
       <div class="fs-body">
         <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:end;margin-bottom:8px">
-          <div class="ff" style="flex:2;min-width:150px"><label>Test</label>
-            <select id="f-lab-test" onchange="onLabTestSelect()" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px">
-              <option value="">Select test…</option>
-              ${COMMON_LABS.map((g) => '<optgroup label="' + g.cat + '">' + g.tests.map((t) => '<option value="' + t.name + '" data-unit="' + t.unit + '" data-ref="' + t.ref + '" data-loinc="' + (t.loinc || "") + '">' + t.name + "</option>").join("") + "</optgroup>").join("")}
-              <option value="__custom">Other (type manually)</option>
-            </select>
+          <div class="ff" style="flex:2;min-width:150px;position:relative"><label>Test <span style="font-size:10px;color:var(--ink3)">(type to search LOINC database)</span></label>
+            <input id="f-lab-search" type="text" placeholder="Search test or select common below..." oninput="filterLabSearch()" onfocus="showLabDropdown()" onblur="hideLabDropdown()" autocomplete="off" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" />
+            <input type="hidden" id="f-lab-test-name" />
+            <input type="hidden" id="f-lab-test-loinc" />
+            <input type="hidden" id="f-lab-test-ref" />
+            <input type="hidden" id="f-lab-test-cat" />
+            <div id="lab-search-results" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:100;max-height:260px;overflow-y:auto;background:#fff;border:1px solid var(--brd);border-radius:0 0 var(--r) var(--r);box-shadow:0 4px 12px rgba(0,0,0,0.12);font-size:12px"></div>
           </div>
           <div class="ff" style="flex:1;min-width:80px"><label>Value</label><input id="f-lab-val" placeholder="e.g. 8.2" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" /></div>
-          <div class="ff" style="flex:0.5;min-width:60px"><label>Unit</label><input id="f-lab-unit" readonly style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:#f5f5f0" /></div>
+          <div class="ff" style="flex:0.5;min-width:60px"><label>Unit</label><input id="f-lab-unit" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:#f5f5f0" /></div>
           <div class="ff" style="flex:0.8;min-width:100px"><label>Date</label><input type="date" id="f-lab-date" value="${new Date().toISOString().split("T")[0]}" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px" /></div>
           <button type="button" onclick="addLabEntry()" style="padding:4px 12px;border:1px solid var(--brd);border-radius:var(--r);background:var(--green);color:#fff;cursor:pointer;font-size:12px;height:28px">+ Add</button>
         </div>
@@ -2367,7 +2371,27 @@
     { value: "other", label: "Other Document" },
   ];
 
-  const COMMON_LABS = [
+  const CLASS_LABELS = {
+    "HEM/BC": "Hematology",
+    CHEM: "Biochemistry",
+    MICRO: "Microbiology",
+    RAD: "Radiology",
+    COAG: "Coagulation",
+    UA: "Urinalysis",
+    BLDBK: "Blood Bank",
+    SERO: "Serology",
+    "DRUG/TOX": "Drug/Toxicology",
+    ALLERGY: "Allergy",
+    PULM: "Pulmonary",
+    PATH: "Pathology",
+    CELLMARK: "Flow Cytometry",
+    "CARD.US": "Cardiac US",
+    "EKG.MEAS": "ECG",
+  };
+  let _labSearchDebounce = null;
+  let _selectedLabTest = null; // {name, unit, ref, loinc, cat}
+
+  const COMMON_LABS_OFFLINE = [
     {
       cat: "Hematology",
       tests: [
@@ -2505,25 +2529,219 @@
   ];
   let labEntries = [];
 
-  function onLabTestSelect() {
-    const sel = document.getElementById("f-lab-test");
-    const opt = sel?.selectedOptions[0];
-    document.getElementById("f-lab-unit").value = opt?.dataset?.unit || "";
-    if (sel.value === "__custom") {
-      const name = prompt("Enter test name:");
-      if (name) {
-        sel.value = "";
-        document.getElementById("f-lab-unit").value = "";
-        document.getElementById("f-lab-unit").removeAttribute("readonly");
+  // --- LOINC Lab Search Functions ---
+  function showLabDropdown() {
+    const q = (document.getElementById("f-lab-search")?.value || "").trim();
+    if (!q) renderLabOfflineResults("");
+  }
+
+  function hideLabDropdown() {
+    setTimeout(() => {
+      const el = document.getElementById("lab-search-results");
+      if (el) el.style.display = "none";
+    }, 200);
+  }
+
+  function renderLabOfflineResults(q) {
+    const panel = document.getElementById("lab-search-results");
+    if (!panel) return;
+    const qu = q.toUpperCase().trim();
+    let html = "";
+    for (const g of COMMON_LABS_OFFLINE) {
+      let tests = g.tests;
+      if (qu) {
+        tests = tests.filter((t) => {
+          const n = t.name.toUpperCase();
+          return (
+            n.includes(qu) ||
+            n.replace(/[^A-Z0-9]/g, "").includes(qu.replace(/[^A-Z0-9]/g, ""))
+          );
+        });
+      }
+      if (!tests.length) continue;
+      html +=
+        '<div style="padding:4px 8px;font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;background:var(--bg2);border-bottom:1px solid var(--brd)">' +
+        esc(g.cat) +
+        "</div>";
+      for (const t of tests) {
+        html +=
+          '<div class="lab-dd-item" onmousedown="selectLabTest(\'' +
+          esc(t.name).replace(/'/g, "\\'") +
+          "','" +
+          esc(t.unit) +
+          "','" +
+          esc(t.ref) +
+          "','" +
+          esc(t.loinc || "") +
+          "','" +
+          esc(g.cat) +
+          '\')" style="padding:6px 10px;cursor:pointer;border-bottom:1px solid #f0f0f0">' +
+          '<strong style="font-size:12px">' +
+          esc(t.name) +
+          "</strong>" +
+          (t.unit
+            ? ' <span style="font-size:10px;color:var(--ink3)">' +
+              esc(t.unit) +
+              "</span>"
+            : "") +
+          (t.ref
+            ? ' <span style="font-size:10px;color:var(--ink3)">ref: ' +
+              esc(t.ref) +
+              "</span>"
+            : "") +
+          (t.loinc
+            ? ' <span style="font-size:10px;color:var(--blue-mid)">LOINC: ' +
+              esc(t.loinc) +
+              "</span>"
+            : "") +
+          "</div>";
       }
     }
+    if (!html)
+      html =
+        '<div style="padding:10px;color:var(--ink3);font-size:12px">No common tests match. Keep typing to search LOINC database...</div>';
+    panel.innerHTML = html;
+    panel.style.display = "block";
+  }
+
+  function renderLabDbResults(rows) {
+    if (!rows.length)
+      return '<div style="padding:10px;color:var(--ink3);font-size:12px">No LOINC matches found</div>';
+    return rows
+      .map((r) => {
+        const name = esc(r.display_name || r.component || r.short_name || "");
+        const cat = esc(CLASS_LABELS[r.class] || r.class || "");
+        const loinc = esc(r.loinc_code || "");
+        const units = esc(r.example_units || "");
+        return (
+          '<div class="lab-dd-item" onmousedown="selectLabTest(\'' +
+          name.replace(/'/g, "\\'") +
+          "','" +
+          units.replace(/'/g, "\\'") +
+          "','','" +
+          loinc.replace(/'/g, "\\'") +
+          "','" +
+          cat.replace(/'/g, "\\'") +
+          '\')" style="padding:6px 10px;cursor:pointer;border-bottom:1px solid #f0f0f0">' +
+          '<strong style="font-size:12px">' +
+          name +
+          "</strong> " +
+          '<span style="font-size:10px;color:var(--ink3)">' +
+          cat +
+          (units ? " · " + units : "") +
+          (loinc ? " · LOINC: " + loinc : "") +
+          "</span>" +
+          "</div>"
+        );
+      })
+      .join("");
+  }
+
+  async function filterLabSearch() {
+    const q = (document.getElementById("f-lab-search")?.value || "").trim();
+    if (_labSearchDebounce) clearTimeout(_labSearchDebounce);
+    // Clear selection if user is typing over a previous selection
+    _selectedLabTest = null;
+    document.getElementById("f-lab-test-name").value = "";
+    document.getElementById("f-lab-test-loinc").value = "";
+    document.getElementById("f-lab-test-ref").value = "";
+    document.getElementById("f-lab-test-cat").value = "";
+
+    if (!q) {
+      renderLabOfflineResults("");
+      return;
+    }
+    // Short queries: just filter offline list immediately
+    if (q.length < 2) {
+      renderLabOfflineResults(q);
+      return;
+    }
+    _labSearchDebounce = setTimeout(async () => {
+      const panel = document.getElementById("lab-search-results");
+      if (!panel) return;
+      // Show offline matches immediately, then overlay DB results
+      renderLabOfflineResults(q);
+      // Append a searching indicator
+      panel.innerHTML +=
+        '<div id="lab-db-searching" style="padding:6px 10px;color:var(--ink3);font-size:11px;border-top:1px solid var(--brd);background:var(--bg2)">Searching LOINC database...</div>';
+      try {
+        // Try RPC full-text search
+        const rpcRes = await fetch(SB + "/rest/v1/rpc/search_investigations", {
+          method: "POST",
+          headers: {
+            apikey: KEY,
+            Authorization: "Bearer " + KEY,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: q, lim: 20 }),
+        });
+        if (rpcRes.ok) {
+          const rows = await rpcRes.json();
+          if (rows.length) {
+            const dbHtml =
+              '<div style="padding:4px 8px;font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;background:var(--blue-lt);border-bottom:1px solid var(--brd)">LOINC Database Results</div>' +
+              renderLabDbResults(rows);
+            const searchingEl = document.getElementById("lab-db-searching");
+            if (searchingEl) searchingEl.outerHTML = dbHtml;
+            else panel.innerHTML += dbHtml;
+            return;
+          }
+        }
+        // Fallback: ilike search
+        const ilikeRes = await fetch(
+          SB +
+            "/rest/v1/loinc_investigations?component=ilike.*" +
+            encodeURIComponent(q) +
+            "*&active=eq.true&order=common_test_rank.asc.nullslast&limit=20",
+          { headers: { apikey: KEY, Authorization: "Bearer " + KEY } },
+        );
+        if (ilikeRes.ok) {
+          const rows2 = await ilikeRes.json();
+          if (rows2.length) {
+            const dbHtml =
+              '<div style="padding:4px 8px;font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;background:var(--blue-lt);border-bottom:1px solid var(--brd)">LOINC Database Results</div>' +
+              renderLabDbResults(rows2);
+            const searchingEl = document.getElementById("lab-db-searching");
+            if (searchingEl) searchingEl.outerHTML = dbHtml;
+            else panel.innerHTML += dbHtml;
+            return;
+          }
+        }
+        // No DB results — just remove the searching indicator
+        const searchingEl = document.getElementById("lab-db-searching");
+        if (searchingEl)
+          searchingEl.outerHTML =
+            '<div style="padding:6px 10px;color:var(--ink3);font-size:11px;border-top:1px solid var(--brd);background:var(--bg2)">No additional LOINC results</div>';
+      } catch (e) {
+        console.warn("LOINC lab search failed:", e);
+        const searchingEl = document.getElementById("lab-db-searching");
+        if (searchingEl) searchingEl.remove();
+      }
+    }, 300);
+  }
+
+  function selectLabTest(name, unit, ref, loinc, cat) {
+    _selectedLabTest = { name, unit, ref, loinc, cat };
+    document.getElementById("f-lab-search").value = name;
+    document.getElementById("f-lab-test-name").value = name;
+    document.getElementById("f-lab-test-loinc").value = loinc;
+    document.getElementById("f-lab-test-ref").value = ref;
+    document.getElementById("f-lab-test-cat").value = cat;
+    document.getElementById("f-lab-unit").value = unit;
+    const panel = document.getElementById("lab-search-results");
+    if (panel) panel.style.display = "none";
+    document.getElementById("f-lab-val")?.focus();
   }
 
   function addLabEntry() {
-    const sel = document.getElementById("f-lab-test");
-    const testName = sel.value === "__custom" ? "Custom" : sel.value;
+    const searchInput = document.getElementById("f-lab-search");
+    let testName = document.getElementById("f-lab-test-name")?.value || "";
+    // If user typed a custom test name without selecting from dropdown
+    if (!testName && searchInput?.value?.trim()) {
+      testName = searchInput.value.trim();
+    }
     if (!testName) {
-      alert("Select a test first.");
+      alert("Select or type a test name first.");
       return;
     }
     const val = document.getElementById("f-lab-val")?.value?.trim();
@@ -2535,8 +2753,9 @@
     const date =
       document.getElementById("f-lab-date")?.value ||
       new Date().toISOString().split("T")[0];
-    const opt = sel.selectedOptions[0];
-    const ref = opt?.dataset?.ref || "";
+    const ref = document.getElementById("f-lab-test-ref")?.value || "";
+    const loinc = document.getElementById("f-lab-test-loinc")?.value || null;
+    const cat = document.getElementById("f-lab-test-cat")?.value || "";
 
     // Auto-compute flag
     let flag = "normal";
@@ -2567,17 +2786,23 @@
       ref,
       flag,
       test_date: date,
-      cat: sel.selectedOptions[0]?.parentElement?.label || "",
-      loinc: opt?.dataset?.loinc || null,
+      cat: cat,
+      loinc: loinc,
     };
     labEntries.push(entry);
     renderLabEntries();
 
     // Clear inputs
-    sel.value = "";
+    _selectedLabTest = null;
+    document.getElementById("f-lab-search").value = "";
+    document.getElementById("f-lab-test-name").value = "";
+    document.getElementById("f-lab-test-loinc").value = "";
+    document.getElementById("f-lab-test-ref").value = "";
+    document.getElementById("f-lab-test-cat").value = "";
     document.getElementById("f-lab-val").value = "";
     document.getElementById("f-lab-unit").value = "";
-    document.getElementById("f-lab-unit").setAttribute("readonly", "");
+    const panel = document.getElementById("lab-search-results");
+    if (panel) panel.style.display = "none";
   }
 
   function removeLabEntry(idx) {
@@ -3205,7 +3430,10 @@
     renderVaxChecklist,
     getCheckedVaccines,
     toggleExtDictation,
-    onLabTestSelect,
+    filterLabSearch,
+    showLabDropdown,
+    hideLabDropdown,
+    selectLabTest,
     addLabEntry,
     removeLabEntry,
     addDocUpload,

@@ -5007,7 +5007,25 @@
   }
 
   // ===== REVIEW EDIT: Add Investigation (searchable popup) =====
-  const INVESTIGATIONS = [
+  const CLASS_LABELS = {
+    "HEM/BC": "Hematology",
+    CHEM: "Biochemistry",
+    MICRO: "Microbiology",
+    RAD: "Radiology",
+    COAG: "Coagulation",
+    UA: "Urinalysis",
+    BLDBK: "Blood Bank",
+    SERO: "Serology",
+    "DRUG/TOX": "Drug/Toxicology",
+    ALLERGY: "Allergy",
+    PULM: "Pulmonary",
+    PATH: "Pathology",
+    CELLMARK: "Flow Cytometry",
+    "CARD.US": "Cardiac US",
+    "EKG.MEAS": "ECG",
+  };
+  let _invDebounce = null;
+  const INVESTIGATIONS_OFFLINE = [
     { name: "Complete Blood Count (CBC)", loinc: "58410-2", cat: "Hematology" },
     { name: "Hemoglobin", loinc: "718-7", cat: "Hematology" },
     { name: "TLC (WBC)", loinc: "6690-2", cat: "Hematology" },
@@ -5093,19 +5111,53 @@
         <button onclick="document.getElementById('add-inv-overlay').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink3)">×</button>
       </div>
       <input class="add-med-search" id="add-inv-search" placeholder="Search investigation..." oninput="filterAddInv()" autofocus>
-      <div class="add-med-list" id="add-inv-list">${renderInvList("")}</div>
+      <div class="add-med-list" id="add-inv-list"><div style="padding:10px;color:var(--ink3);font-size:12px">Loading top investigations...</div></div>
     </div>`;
     document.body.appendChild(overlay);
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) overlay.remove();
     });
     document.getElementById("add-inv-search").focus();
+    loadTopInvestigations();
   }
-  function renderInvList(q) {
+  async function loadTopInvestigations() {
+    const listEl = document.getElementById("add-inv-list");
+    if (!listEl) return;
+    try {
+      const res = await fetch(
+        SB +
+          "/rest/v1/loinc_investigations?active=eq.true&common_test_rank=gt.0&order=common_test_rank.asc&limit=30",
+        { headers: { apikey: KEY, Authorization: "Bearer " + KEY } },
+      );
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const rows = await res.json();
+      if (rows.length) {
+        listEl.innerHTML = renderDbResults(rows);
+        return;
+      }
+    } catch (e) {
+      console.warn("Top investigations fetch failed, using offline:", e);
+    }
+    listEl.innerHTML = renderOfflineInvList("");
+  }
+  function renderDbResults(rows) {
+    if (!rows.length)
+      return '<div style="padding:10px;color:var(--ink3);font-size:12px">No matches — <a href="#" onclick="addCustomInv();return false" style="color:var(--blue)">add custom investigation</a></div>';
+    return rows
+      .map((r) => {
+        const name = esc(r.display_name || r.component || r.short_name || "");
+        const cat = esc(CLASS_LABELS[r.class] || r.class || "");
+        const loinc = esc(r.loinc_code || "");
+        const units = esc(r.example_units || "");
+        return `<div class="add-med-item" onclick="selectInv('${name}','${loinc}','${units}')"><strong>${name}</strong> <span style="font-size:10px;color:var(--ink3)">${cat}${units ? " · " + units : ""}${loinc ? " · LOINC: " + loinc : ""}</span></div>`;
+      })
+      .join("");
+  }
+  function renderOfflineInvList(q) {
     q = q.toUpperCase().trim();
-    let items = INVESTIGATIONS;
+    let items = INVESTIGATIONS_OFFLINE;
     if (q) {
-      items = INVESTIGATIONS.map((inv) => {
+      items = INVESTIGATIONS_OFFLINE.map((inv) => {
         const n = inv.name.toUpperCase();
         let s = n.includes(q) ? 3 : 0;
         if (
@@ -5132,25 +5184,79 @@
       .slice(0, 30)
       .map(
         (inv) =>
-          `<div class="add-med-item" onclick="selectInv('${esc(inv.name)}','${esc(inv.loinc || "")}')"><strong>${esc(inv.name)}</strong> <span style="font-size:10px;color:var(--ink3)">${esc(inv.cat)}${inv.loinc ? " · LOINC: " + esc(inv.loinc) : ""}</span></div>`,
+          `<div class="add-med-item" onclick="selectInv('${esc(inv.name)}','${esc(inv.loinc || "")}','')"><strong>${esc(inv.name)}</strong> <span style="font-size:10px;color:var(--ink3)">${esc(inv.cat)}${inv.loinc ? " · LOINC: " + esc(inv.loinc) : ""}</span></div>`,
       )
       .join("");
   }
-  function filterAddInv() {
-    const q = document.getElementById("add-inv-search")?.value || "";
-    document.getElementById("add-inv-list").innerHTML = renderInvList(q);
+  async function filterAddInv() {
+    const q = (document.getElementById("add-inv-search")?.value || "").trim();
+    if (_invDebounce) clearTimeout(_invDebounce);
+    if (!q) {
+      loadTopInvestigations();
+      return;
+    }
+    _invDebounce = setTimeout(async () => {
+      const listEl = document.getElementById("add-inv-list");
+      if (!listEl) return;
+      listEl.innerHTML =
+        '<div style="padding:10px;color:var(--ink3);font-size:12px">Searching...</div>';
+      try {
+        // Try full-text search RPC first
+        const rpcRes = await fetch(SB + "/rest/v1/rpc/search_investigations", {
+          method: "POST",
+          headers: {
+            apikey: KEY,
+            Authorization: "Bearer " + KEY,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: q, lim: 30 }),
+        });
+        if (rpcRes.ok) {
+          const rows = await rpcRes.json();
+          if (rows.length) {
+            listEl.innerHTML = renderDbResults(rows);
+            return;
+          }
+        }
+        // Fallback: ilike search
+        const ilikeRes = await fetch(
+          SB +
+            "/rest/v1/loinc_investigations?component=ilike.*" +
+            encodeURIComponent(q) +
+            "*&active=eq.true&order=common_test_rank.asc.nullslast&limit=30",
+          {
+            headers: { apikey: KEY, Authorization: "Bearer " + KEY },
+          },
+        );
+        if (ilikeRes.ok) {
+          const rows2 = await ilikeRes.json();
+          if (rows2.length) {
+            listEl.innerHTML = renderDbResults(rows2);
+            return;
+          }
+        }
+        // Both DB searches returned nothing — try offline
+        const offlineHtml = renderOfflineInvList(q);
+        listEl.innerHTML = offlineHtml;
+      } catch (e) {
+        console.warn("Investigation search failed, using offline:", e);
+        listEl.innerHTML = renderOfflineInvList(q);
+      }
+    }, 300);
   }
-  function selectInv(name, loinc) {
+  function selectInv(name, loinc, units) {
     document.getElementById("add-inv-overlay")?.remove();
     const indication =
       prompt("Indication (e.g. Rule out bacterial infection):") || "";
     if (!rxData.investigations) rxData.investigations = [];
-    rxData.investigations.push({
+    const inv = {
       name,
       indication: indication.trim(),
       urgency: "routine",
       loinc_code: loinc || null,
-    });
+    };
+    if (units) inv.units = units;
+    rxData.investigations.push(inv);
     renderReview();
     showView("rx");
   }

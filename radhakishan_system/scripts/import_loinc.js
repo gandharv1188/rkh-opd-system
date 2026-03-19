@@ -112,7 +112,7 @@ async function importLoinc() {
     excluded = 0,
     failed = 0;
   const batch = [];
-  const BATCH_SIZE = 500;
+  const BATCH_SIZE = 100;
 
   for (let i = 1; i < lines.length; i++) {
     if (!lines[i].trim()) continue;
