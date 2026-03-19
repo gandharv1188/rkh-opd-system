@@ -3945,12 +3945,19 @@
       el.setAttribute("contenteditable", "true");
       el.setAttribute("spellcheck", "false");
     });
-    // Show edit controls
+    // Show edit controls and reset hidden panels
     wrap
-      .querySelectorAll(".adj-btn, .item-remove, .add-item-btn")
+      .querySelectorAll(
+        ".adj-btn, .item-remove, .add-item-btn, .ep-apply, .ep-cancel",
+      )
       .forEach((el) => {
         el.style.display = "";
       });
+    // Reset expansion panels (remove inline display:none so toggleEP works)
+    wrap.querySelectorAll(".ep").forEach((el) => {
+      el.style.display = "";
+      el.classList.remove("open");
+    });
     // Re-enable inputs
     wrap
       .querySelectorAll(
