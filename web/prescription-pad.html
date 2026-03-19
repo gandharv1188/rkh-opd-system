@@ -4809,21 +4809,68 @@
     document.getElementById("add-med-search").focus();
   }
 
+  function fuzzyScore(drug, query) {
+    if (!query) return 1;
+    if (drug.includes(query)) return 3; // exact substring
+    const d = drug.replace(/[^A-Z0-9]/g, "");
+    const q = query.replace(/[^A-Z0-9]/g, "");
+    if (!q) return 1;
+    if (d.includes(q)) return 2.5; // match after stripping special chars/spaces
+    // All query chars in order (subsequence)
+    let di = 0,
+      matched = 0;
+    for (let qi = 0; qi < q.length; qi++) {
+      const f = d.indexOf(q[qi], di);
+      if (f !== -1) {
+        di = f + 1;
+        matched++;
+      }
+    }
+    if (matched === q.length) return 2;
+    // 1-char typo tolerance: drop each char and check
+    if (q.length > 2) {
+      for (let i = 0; i < q.length; i++) {
+        if (d.includes(q.slice(0, i) + q.slice(i + 1))) return 1.5;
+      }
+    }
+    // Multi-word: all words present
+    const words = query.split(/\s+/).filter(Boolean);
+    if (
+      words.length > 1 &&
+      words.every((w) => d.includes(w.replace(/[^A-Z0-9]/g, "")))
+    )
+      return 2;
+    if (
+      words.some((w) => w.length > 2 && d.includes(w.replace(/[^A-Z0-9]/g, "")))
+    )
+      return 1;
+    return 0;
+  }
   function filterAddMed() {
-    const q = (
-      document.getElementById("add-med-search")?.value || ""
-    ).toUpperCase();
+    const q = (document.getElementById("add-med-search")?.value || "")
+      .toUpperCase()
+      .trim();
     const list = document.getElementById("add-med-list");
-    const drugNames = Object.keys(formularyCache)
-      .filter((d) => d.includes(q))
-      .sort();
-    list.innerHTML = drugNames
-      .slice(0, 50)
-      .map(
-        (d) =>
-          `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + (f.conc_qty || "") + (f.conc_unit || "") + "/" + (f.per_qty || "") + (f.per_unit || "")).join(", ")}</div></div>`,
-      )
-      .join("");
+    const renderItem = (d) =>
+      `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + (f.conc_qty || "") + (f.conc_unit || "") + "/" + (f.per_qty || "") + (f.per_unit || "")).join(", ")}</div></div>`;
+    if (!q) {
+      list.innerHTML = Object.keys(formularyCache)
+        .sort()
+        .slice(0, 50)
+        .map(renderItem)
+        .join("");
+      return;
+    }
+    const results = Object.keys(formularyCache)
+      .map((d) => ({ d, s: fuzzyScore(d, q) }))
+      .filter((x) => x.s > 0)
+      .sort((a, b) => b.s - a.s || a.d.localeCompare(b.d));
+    list.innerHTML =
+      results
+        .slice(0, 50)
+        .map((x) => renderItem(x.d))
+        .join("") ||
+      '<div style="padding:10px;color:var(--ink3);font-size:12px">No matches found</div>';
   }
 
   function selectAddMed(drugName) {
