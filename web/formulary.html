@@ -172,28 +172,6 @@
     background: var(--blue-mid);
   }
 
-  .cat-tabs {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
-  .ct {
-    padding: 4px 12px;
-    border-radius: 99px;
-    border: 0.5px solid var(--bdr2);
-    background: var(--bg2);
-    font-size: 11px;
-    color: var(--ink3);
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-  .ct.on {
-    background: var(--blue);
-    color: #fff;
-    border-color: var(--blue);
-  }
-
   .tbl-wrap {
     background: var(--bg2);
     border: 0.5px solid var(--bdr2);
@@ -798,156 +776,76 @@
 
     <div
       style="
-        font-size: 10px;
-        color: var(--ink3);
-        padding: 0 18px 2px;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
+        display: flex;
+        gap: 10px;
+        padding: 6px 18px;
+        align-items: center;
+        flex-wrap: wrap;
       "
     >
-      Drug class
-    </div>
-    <div class="cat-tabs" id="cat-tabs">
-      <div class="ct on" onclick="filterCat('')" data-cat="">All</div>
-      <div class="ct" onclick="filterCat('Antibiotics')" data-cat="Antibiotics">
-        Antibiotics
+      <div style="flex: 1; min-width: 180px">
+        <label
+          style="
+            font-size: 10px;
+            color: var(--ink3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          "
+          >Clinical category</label
+        >
+        <select
+          id="filter-category"
+          multiple
+          onchange="applyFilters()"
+          style="
+            width: 100%;
+            height: 60px;
+            font-size: 12px;
+            border: 1px solid var(--brd);
+            border-radius: 6px;
+            padding: 2px 4px;
+          "
+        ></select>
       </div>
-      <div class="ct" onclick="filterCat('Analgesics')" data-cat="Analgesics">
-        Analgesics
+      <div style="flex: 1; min-width: 180px">
+        <label
+          style="
+            font-size: 10px;
+            color: var(--ink3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          "
+          >Drug class</label
+        >
+        <select
+          id="filter-drugclass"
+          multiple
+          onchange="applyFilters()"
+          style="
+            width: 100%;
+            height: 60px;
+            font-size: 12px;
+            border: 1px solid var(--brd);
+            border-radius: 6px;
+            padding: 2px 4px;
+          "
+        ></select>
       </div>
-      <div
-        class="ct"
-        onclick="filterCat('Bronchodilators')"
-        data-cat="Bronchodilators"
+      <button
+        onclick="clearFilters()"
+        style="
+          align-self: flex-end;
+          font-size: 11px;
+          padding: 4px 10px;
+          border: 1px solid var(--brd);
+          border-radius: 4px;
+          background: var(--bg2);
+          cursor: pointer;
+          margin-bottom: 2px;
+        "
       >
-        Bronchodilators
-      </div>
-      <div class="ct" onclick="filterCat('Antivirals')" data-cat="Antivirals">
-        Antivirals
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Antiparasitics')"
-        data-cat="Antiparasitics"
-      >
-        Antiparasitics
-      </div>
-      <div class="ct" onclick="filterCat('Vitamins')" data-cat="Vitamins">
-        Vitamins/Suppl
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Corticosteroids')"
-        data-cat="Corticosteroids"
-      >
-        Steroids
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Antihistamines')"
-        data-cat="Antihistamines"
-      >
-        Antihistamines
-      </div>
-      <div class="ct" onclick="filterCat('Antifungals')" data-cat="Antifungals">
-        Antifungals
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Antiepileptics')"
-        data-cat="Antiepileptics"
-      >
-        Antiepileptics
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Anticoagulants')"
-        data-cat="Anticoagulants"
-      >
-        Anticoagulants
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Immunosuppressants')"
-        data-cat="Immunosuppressants"
-      >
-        Immunosuppressants
-      </div>
-      <div class="ct" onclick="filterCat('Oncology')" data-cat="Oncology">
-        Oncology
-      </div>
-    </div>
-    <div
-      style="
-        font-size: 10px;
-        color: var(--ink3);
-        padding: 4px 18px 2px;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-      "
-    >
-      Clinical specialty
-    </div>
-    <div class="cat-tabs">
-      <div class="ct" onclick="filterCat('Respiratory')" data-cat="Respiratory">
-        Respiratory
-      </div>
-      <div class="ct" onclick="filterCat('ENT')" data-cat="ENT">ENT</div>
-      <div class="ct" onclick="filterCat('GI')" data-cat="GI">GI</div>
-      <div
-        class="ct"
-        onclick="filterCat('Cardiovascular')"
-        data-cat="Cardiovascular"
-      >
-        Cardiovascular
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Neurological')"
-        data-cat="Neurological"
-      >
-        Neurological
-      </div>
-      <div class="ct" onclick="filterCat('Endocrine')" data-cat="Endocrine">
-        Endocrine
-      </div>
-      <div class="ct" onclick="filterCat('Infectious')" data-cat="Infectious">
-        Infectious
-      </div>
-      <div class="ct" onclick="filterCat('Skin')" data-cat="Skin">Skin</div>
-      <div class="ct" onclick="filterCat('Neonatology')" data-cat="Neonatology">
-        Neonatology
-      </div>
-      <div class="ct" onclick="filterCat('Haematology')" data-cat="Haematology">
-        Haematology
-      </div>
-      <div class="ct" onclick="filterCat('Renal')" data-cat="Renal">Renal</div>
-      <div
-        class="ct"
-        onclick="filterCat('Rheumatology')"
-        data-cat="Rheumatology"
-      >
-        Rheumatology
-      </div>
-      <div class="ct" onclick="filterCat('Allergy')" data-cat="Allergy">
-        Allergy
-      </div>
-      <div class="ct" onclick="filterCat('Pain/Fever')" data-cat="Pain/Fever">
-        Pain/Fever
-      </div>
-      <div class="ct" onclick="filterCat('Emergency')" data-cat="Emergency">
-        Emergency
-      </div>
-      <div
-        class="ct"
-        onclick="filterCat('Developmental')"
-        data-cat="Developmental"
-      >
-        Developmental
-      </div>
-      <div class="ct" onclick="filterCat('Surgical')" data-cat="Surgical">
-        Surgical
-      </div>
+        Clear
+      </button>
     </div>
 
     <div class="tbl-wrap">
@@ -1487,7 +1385,6 @@
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg",
     drugs = [],
     editId = null,
-    curCat = "",
     curDrwTab = 0;
   let tags = {};
   let formCnt = 0,
@@ -1549,6 +1446,7 @@
       if (!r.ok) throw new Error((await r.json()).message);
       drugs = await r.json();
       renderTable(drugs);
+      populateFilterDropdowns();
     } catch (e) {
       document.getElementById("tbody").innerHTML =
         `<tr class="er"><td colspan="5">Error: ${esc(e.message)}</td></tr>`;
@@ -1632,7 +1530,22 @@
   function filterDrugs(q) {
     const ql = q.toLowerCase();
     let f = drugs;
-    if (curCat) f = f.filter((d) => (d.category || "").includes(curCat));
+    // Apply category filter (multi-select)
+    const selCats = Array.from(
+      document.getElementById("filter-category").selectedOptions,
+    ).map((o) => o.value);
+    if (selCats.length)
+      f = f.filter((d) => selCats.some((c) => (d.category || "").includes(c)));
+    // Apply drug class filter (multi-select)
+    const selClass = Array.from(
+      document.getElementById("filter-drugclass").selectedOptions,
+    ).map((o) => o.value);
+    if (selClass.length)
+      f = f.filter((d) =>
+        selClass.some((c) =>
+          (d.drug_class || "").toLowerCase().includes(c.toLowerCase()),
+        ),
+      );
     if (q)
       f = f.filter(
         (d) =>
@@ -1643,12 +1556,41 @@
       );
     renderTable(f);
   }
-  function filterCat(cat) {
-    curCat = cat;
-    document
-      .querySelectorAll(".ct")
-      .forEach((el) => el.classList.toggle("on", el.dataset.cat === cat));
+  function applyFilters() {
     filterDrugs(document.getElementById("srch").value);
+  }
+  function clearFilters() {
+    document.getElementById("filter-category").selectedIndex = -1;
+    document.getElementById("filter-drugclass").selectedIndex = -1;
+    filterDrugs(document.getElementById("srch").value);
+  }
+  function populateFilterDropdowns() {
+    // Extract unique categories and drug classes from loaded data
+    const cats = new Set(),
+      classes = new Set();
+    drugs.forEach((d) => {
+      if (d.category)
+        d.category.split(/\s*\/\s*/).forEach((c) => cats.add(c.trim()));
+      if (d.drug_class) classes.add(d.drug_class);
+    });
+    const catSel = document.getElementById("filter-category");
+    [...cats].sort().forEach((c) => {
+      const count = drugs.filter((d) => (d.category || "").includes(c)).length;
+      const o = document.createElement("option");
+      o.value = c;
+      o.textContent = c + " (" + count + ")";
+      catSel.appendChild(o);
+    });
+    const clsSel = document.getElementById("filter-drugclass");
+    // Group drug classes by keyword for manageable list
+    const clsArr = [...classes].sort();
+    clsArr.forEach((c) => {
+      const count = drugs.filter((d) => d.drug_class === c).length;
+      const o = document.createElement("option");
+      o.value = c;
+      o.textContent = c + (count > 1 ? " (" + count + ")" : "");
+      clsSel.appendChild(o);
+    });
   }
 
   /* ===== Tags ===== */
