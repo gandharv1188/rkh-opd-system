@@ -2667,8 +2667,9 @@
             const signoff = document.querySelector(".signoff");
             if (signoff)
               signoff.innerHTML = `<span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription saved — ${esc(rxId)}</span>
-              <div style="display:flex;gap:8px">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <button class="sign-btn" onclick="printRx()" style="background:var(--blue)">Print now</button>
+                <button class="sign-btn" onclick="enableUpdateMode()" style="background:#b8860b">Update Prescription</button>
                 <button class="back-btn" onclick="showView('pad')">View note</button>
                 <button class="back-btn" onclick="resetPad()">New prescription</button>
               </div>`;
@@ -3913,6 +3914,72 @@
     applyDose(pid, idx);
   }
 
+  /* ===== UPDATE MODE: Re-enable editing on a finalized prescription ===== */
+  let isUpdateMode = false;
+  function enableUpdateMode() {
+    isUpdateMode = true;
+    const wrap = document.getElementById("review-wrap");
+    if (!wrap) return;
+    // Re-enable contenteditable
+    wrap
+      .querySelectorAll(
+        ".med-r, .inv-block, .info-block, .rv-sec > div:not(.rv-hdr)",
+      )
+      .forEach((el) => {
+        if (
+          el.classList.contains("rv-hdr") ||
+          el.classList.contains("med-calc") ||
+          el.classList.contains("med-flag")
+        )
+          return;
+        if (
+          el.querySelector("[contenteditable]") ||
+          el.closest(".emerg-grid") ||
+          el.closest(".auth-block")
+        )
+          return;
+        el.setAttribute("contenteditable", "true");
+        el.setAttribute("spellcheck", "false");
+      });
+    // Re-enable med rows specifically
+    wrap.querySelectorAll(".med-r").forEach((el) => {
+      el.setAttribute("contenteditable", "true");
+      el.setAttribute("spellcheck", "false");
+    });
+    // Show edit controls
+    wrap
+      .querySelectorAll(".adj-btn, .item-remove, .add-item-btn")
+      .forEach((el) => {
+        el.style.display = "";
+      });
+    // Re-enable inputs
+    wrap
+      .querySelectorAll(
+        ".vax-check, .vax-status, .vax-date, .fu-edit, input, select",
+      )
+      .forEach((el) => {
+        el.disabled = false;
+        el.style.opacity = "1";
+      });
+    // Change signoff bar to update mode
+    const signoff = document.querySelector(".signoff");
+    if (signoff)
+      signoff.innerHTML = `<span style="color:#b8860b;font-weight:600;font-size:13px">Editing — make changes and save</span>
+      <div style="display:flex;gap:8px">
+        <button class="sign-btn" id="sign-btn" onclick="signOff()" style="background:#b8860b">Save Updated Prescription</button>
+        <button class="back-btn" onclick="cancelUpdate()">Cancel</button>
+      </div>`;
+  }
+
+  function cancelUpdate() {
+    isUpdateMode = false;
+    // Reload the saved prescription to discard changes
+    if (selectedPatient) {
+      const idx = todayPatients.findIndex((p) => p.id === selectedPatient.id);
+      if (idx >= 0) onPatientSelect(idx);
+    }
+  }
+
   /* ===== SIGN OFF & SAVE TO SUPABASE ===== */
   async function signOff() {
     const btn = document.getElementById("sign-btn");
@@ -4006,9 +4073,9 @@
     try {
       const today = new Date().toISOString().split("T")[0];
       const doctor = document.getElementById("doctor-sel").value;
-      rxId = "RX-" + Date.now().toString().slice(-8);
+      if (!isUpdateMode) rxId = "RX-" + Date.now().toString().slice(-8);
 
-      // 1. Ensure patient exists
+      // 1. Ensure patient exists (skip in update mode)
       let patientId = selectedPatient?.id;
       if (!patientId && rxData.patient.name) {
         // Register new patient on the fly
@@ -4023,35 +4090,34 @@
         });
       }
 
-      // 2. Create visit record
-      const vRes = await q("visits", "", "POST", {
-        patient_id: patientId,
-        visit_date: today,
-        doctor_id: doctor,
-        weight_kg: rxData.patient.weight_kg,
-        height_cm: rxData.patient.height_cm,
-        hc_cm: rxData.patient.hc_cm,
-        diagnosis_codes: rxData.diagnosis || [],
-        clinical_notes: document.getElementById("pad-ta").value,
-        raw_dictation: document.getElementById("pad-ta").value,
-        triage_score: rxData.triage_score || 0,
-        created_at: new Date().toISOString(),
-      });
-      if (vRes.ok) {
-        const vData = await vRes.json();
-        visitId = Array.isArray(vData) ? vData[0]?.id : vData?.id;
-      } else {
-        const vErr = await vRes.json().catch(() => ({}));
-        throw new Error(
-          "Visit creation failed: " + (vErr.message || vRes.status),
-        );
+      // 2. Create visit record (skip in update mode — visit already exists)
+      if (!isUpdateMode) {
+        const vRes = await q("visits", "", "POST", {
+          patient_id: patientId,
+          visit_date: today,
+          doctor_id: doctor,
+          weight_kg: rxData.patient.weight_kg,
+          height_cm: rxData.patient.height_cm,
+          hc_cm: rxData.patient.hc_cm,
+          diagnosis_codes: rxData.diagnosis || [],
+          clinical_notes: document.getElementById("pad-ta").value,
+          raw_dictation: document.getElementById("pad-ta").value,
+          triage_score: rxData.triage_score || 0,
+          created_at: new Date().toISOString(),
+        });
+        if (vRes.ok) {
+          const vData = await vRes.json();
+          visitId = Array.isArray(vData) ? vData[0]?.id : vData?.id;
+        } else {
+          const vErr = await vRes.json().catch(() => ({}));
+          throw new Error(
+            "Visit creation failed: " + (vErr.message || vRes.status),
+          );
+        }
       }
 
-      // 3. Save prescription record
+      // 3. Save or update prescription record
       const rxPayload = {
-        id: rxId,
-        visit_id: visitId,
-        patient_id: patientId,
         generated_json: rxData,
         medicines: rxData.medicines,
         investigations: rxData.investigations,
@@ -4071,13 +4137,30 @@
             .join(","),
           abha: selectedPatient?.abha_number || null,
         },
-        created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };
-      const rxRes = await q("prescriptions", "", "POST", rxPayload);
 
-      // 4. Save growth record if data present
-      if (has(rxData.growth) && has(rxData.growth.waz)) {
+      let rxRes;
+      if (isUpdateMode && rxId) {
+        // Update existing prescription
+        rxRes = await q(
+          `prescriptions?id=eq.${encodeURIComponent(rxId)}`,
+          "",
+          "PATCH",
+          rxPayload,
+        );
+        console.log("Prescription updated:", rxId);
+      } else {
+        // New prescription
+        rxPayload.id = rxId;
+        rxPayload.visit_id = visitId;
+        rxPayload.patient_id = patientId;
+        rxPayload.created_at = new Date().toISOString();
+        rxRes = await q("prescriptions", "", "POST", rxPayload);
+      }
+
+      // 4. Save growth record if data present (skip in update mode to avoid duplicates)
+      if (!isUpdateMode && has(rxData.growth) && has(rxData.growth.waz)) {
         const g = rxData.growth;
         await q("growth_records", "", "POST", {
           patient_id: patientId,
@@ -4097,8 +4180,8 @@
         });
       }
 
-      // 5. Save vaccinations given today
-      if (has(rxData.vaccinations?.given_today)) {
+      // 5. Save vaccinations given today (skip in update mode to avoid duplicates)
+      if (!isUpdateMode && has(rxData.vaccinations?.given_today)) {
         for (const vax of rxData.vaccinations.given_today) {
           await q("vaccinations", "", "POST", {
             patient_id: patientId,
@@ -4245,6 +4328,7 @@
   }
 
   function showSaveSuccess(pdfUrl, saved) {
+    isUpdateMode = false; // Reset update mode after successful save
     const wrap = document.getElementById("review-wrap");
 
     // Disable editing
@@ -4253,18 +4337,28 @@
       el.style.outline = "none";
       el.style.border = "none";
     });
-    // Hide adjust dose buttons
+    // Hide edit controls
     wrap
-      .querySelectorAll(".adj-btn, .ep, .ep-apply")
+      .querySelectorAll(".adj-btn, .ep, .ep-apply, .item-remove, .add-item-btn")
       .forEach((el) => (el.style.display = "none"));
+    wrap
+      .querySelectorAll(
+        ".vax-check, .vax-status, .vax-date, .fu-edit, input, select",
+      )
+      .forEach((el) => {
+        el.disabled = true;
+        el.style.opacity = "0.6";
+      });
 
     // Replace signoff bar content with saved status + action buttons
     const signoff = document.querySelector(".signoff");
     if (signoff) {
       signoff.innerHTML = `
-        <span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription saved — ${esc(rxId)}</span>
-        <div style="display:flex;gap:8px">
+        <span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription ${saved !== false ? "saved" : "generated"} — ${esc(rxId)}</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="sign-btn" onclick="printRx()" style="background:var(--blue)">Print now</button>
+          <button class="sign-btn" onclick="enableUpdateMode()" style="background:#b8860b">Update Prescription</button>
+          <button class="back-btn" onclick="showView('pad')">View note</button>
           <button class="back-btn" onclick="resetPad()">New prescription</button>
         </div>`;
     }
