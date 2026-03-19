@@ -1,0 +1,11630 @@
+# LOINC Database v2.82 — Sample Code per Class
+
+**Source:** LOINC v2.82 (downloaded from loinc.org)
+**Total active codes:** 97,206
+**Total columns per code:** 40
+
+---
+
+## ABXBACT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18862-3 |
+| **COMPONENT** | Amoxicillin+Clavulanate |
+| **PROPERTY** | Susc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Isolate |
+| **SCALE_TYP** | OrdQn |
+| **CLASS** | ABXBACT |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | Amox; Amoxicillin+clavulanic acid; Amoxicilloyl; Amoxil; ANTIBIOTIC SUSCEPTIBILITIES; AST; Augmentin; Bristamox; c204; c305; c6; Clav; Clavate; Clavu; Clavul; Clavulanic; Clavulanic acid; ID; Infectio |
+| **SHORTNAME** | Amoxicillin+Clav Susc Islt |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Amoxicillin+Clavulanate [Susceptibility] |
+| **COMMON_TEST_RANK** | 1818 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+| **DisplayName** | Amoxicillin+Clavulanate [Susc] |
+
+---
+
+## ADMIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 102033-8 |
+| **COMPONENT** | Pathology network list |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Personnel |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ADMIN |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; Finding; Findings; Nominal; Path; Point in time; Random; Specialist |
+| **SHORTNAME** | Personnel Pathology network list |
+| **LONG_COMMON_NAME** | Personnel Pathology network list |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## ADMIN.DEMOG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 46463-6 |
+| **COMPONENT** | Race or ethnicity |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ADMIN.DEMOG |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | MAJ |
+| **DefinitionDescription** | The groups or populations to which the patient is affiliated, as identified by the patient or caregiver. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; ADMIN.DEMOG; Ethnicity; Nominal; Point in time; Random; Typ |
+| **SHORTNAME** | Race or ethnicity |
+| **HL7_FIELD_SUBFIELD_ID** | PID-10;PID-22 |
+| **LONG_COMMON_NAME** | Race or ethnicity |
+| **CHANGE_REASON_PUBLIC** | Release 2.69: ANSWER_LIST_TYPE: Answer list type changed from Normative to Example for the base term; override Normative lists added in the context of the panels in which this term is a member.; METHO |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.19 |
+
+---
+
+## ADMIN.FACILITY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 44955-3 |
+| **COMPONENT** | Archive facility identification number NPI |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cancer.XXX |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ADMIN.FACILITY |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The NPI (National Provider Identifier) code which identifies the facility that originally accessioned the tumor. The NPI equivalent of Archive FIN [3100]. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; Archive FIN; Archive FIN NPI; CA; Ident; Identifier; Misc; Miscellaneous; National Provider Identifier; No; Nominal; Num; Oncology; Other; Point in time; Random; Spec; To be specified in anothe |
+| **SHORTNAME** | Archive FIN NPI Cancer |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Archive facility identification number NPI Cancer |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.17 |
+
+---
+
+## ADMIN.ID
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101114-7 |
+| **COMPONENT** | National Council of State Boards of Nursing ID |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Provider |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ADMIN.ID |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The National Council of State Boards of Nursing (NCSBN) ID is a unique, eight-digit number assigned to every nurse upon their first licensure with the board of nursing. It's the only unique nurse iden |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; Ident; Identifier; Intradermal; NCSBN ID; Nominal; Point in time; Random |
+| **SHORTNAME** | NCSBN ID |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | NCSBN ID |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## ADMIN.PATIENT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103599-7 |
+| **COMPONENT** | Reason for discharge |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ADMIN.PATIENT |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; ADMIN.PATIENT; Disch; Finding; Findings; Nominal; Point in time; Random |
+| **SHORTNAME** | Reason for D/C from ICU |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Reason for discharge from the intensive care unit |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## ADMIN.PATIENT.DEMOG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104101-1 |
+| **COMPONENT** | Hospital admission timestamp |
+| **PROPERTY** | TmStp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | ADMIN.PATIENT.DEMOG |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; ADMIN.PATIENT; ADMIN.PT.DEMOG; Date and time; Hosp; Hospital admis timestamp; Point in time; QNT; Quan; Quant; Quantitative; Random; Time stamp; Timestamp |
+| **SHORTNAME** | Hospital admis timestamp |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | TmStp |
+| **LONG_COMMON_NAME** | Hospital admission timestamp |
+| **EXAMPLE_UCUM_UNITS** | {tmstp} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## ADMIN.PATIENT.ID
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104099-7 |
+| **COMPONENT** | ICU admission ID |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ADMIN.PATIENT.ID |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; ADMIN.PATIENT; ADMIN.PATIENT.ID; Ident; Identifier; Intradermal; Nominal; Point in time; Random |
+| **SHORTNAME** | ICU admission ID |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | ICU admission ID |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## ALLERGY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100350-8 |
+| **COMPONENT** | Sesamum indicum 1 Ab.IgE |
+| **PROPERTY** | ACnc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser |
+| **SCALE_TYP** | Qn |
+| **CLASS** | ALLERGY |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ABS; Aby; Allergen; Allergens; ALLERGY TESTING; Antby; Anti; Antibodies; Antibody; Arbitrary concentration; Autoantibodies; Autoantibody; f010; f10; i; Immune globulin E; Immunoglobulin E; Point in ti |
+| **SHORTNAME** | Ses i 1 IgE Qn |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | kUA/l |
+| **LONG_COMMON_NAME** | Sesamum indicum 1 IgE Ab [Units/volume] in Serum |
+| **EXAMPLE_UCUM_UNITS** | kU/L |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Sesamum indicum 1 IgE Qn (S) |
+
+---
+
+## APTA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 76421-7 |
+| **COMPONENT** | Physical therapy provider type |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Provider |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | APTA |
+| **CLASS** | APTA |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The list of physical therapy provider types is defined and maintained by the American Physical Therapy Association. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | American Physical Therapy Association; Nominal; Physical Therapy; Point in time; PT; PT provider type; Random; Typ |
+| **SHORTNAME** | PT provider type APTA |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Physical therapy provider type APTA |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## ART
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 45230-0 |
+| **COMPONENT** | District where patient entered HIV Rx |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Reported |
+| **CLASS** | ART |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The local administrative area, e.g., county. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | AIDS; Anti-retroviral therapy; ART; Human immunodeficiency virus; ID; Ident; Identifier; Infectious Disease; InfectiousDisease; Nominal; Point in time; Random; Treatment |
+| **SHORTNAME** | District where patient entered HIV Rx |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006 World Health Organization. Used with permission. Publications of the World Health Organization can be obtained from WHO Press, World Health Organization, 20 Avenue Appia, 1211 Geneva  |
+| **LONG_COMMON_NAME** | District where patient entered HIV treatment |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | WHO_HIV |
+| **VersionFirstReleased** | 2.17 |
+
+---
+
+## ATTACH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103595-5 |
+| **COMPONENT** | Certificate of medical necessity |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **CLASS** | ATTACH |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ATTACH; CertMedNec; Document; Finding; Findings; Point in time; Random |
+| **SHORTNAME** | Cert Med Neces |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Certificate of Medical Necessity |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **HL7_ATTACHMENT_STRUCTURE** | No IG exists |
+| **VersionFirstReleased** | 2.77 |
+| **ValidHL7AttachmentRequest** | Y |
+
+---
+
+## ATTACH.AMB
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 15509-3 |
+| **COMPONENT** | Rationale for scheduled transport |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ambulance transport |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ATTACH.AMB |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.AMB; Nominal; Point in time; Random; Typ |
+| **LONG_COMMON_NAME** | Ambulance transport, Rationale for scheduled transport |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0k |
+
+---
+
+## ATTACH.CARD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 26441-6 |
+| **COMPONENT** | Cardiology studies |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.CARD |
+| **VersionLastChanged** | 2.00 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.CARD; Cardio; Cardiology; Complex; Heart Disease |
+| **LONG_COMMON_NAME** | Cardiology studies (set) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.CLINRPT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103567-4 |
+| **COMPONENT** | Previous cancer therapy |
+| **PROPERTY** | Prid |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nar |
+| **CLASS** | ATTACH.CLINRPT |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ATTACH; ATTACH.CLINRPT; Identity or presence; Narrative; Point in time; Prev; Prev CA Tx; Random; Report |
+| **SHORTNAME** | Path report IG |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Previous cancer therapy (narrative) |
+| **CHANGE_REASON_PUBLIC** | Release 2.78: PROPERTY: This code should not be a doc_ontology and Prid is the appropriate value to attachments. ; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **HL7_ATTACHMENT_STRUCTURE** | No IG exists |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## ATTACH.CPHS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 39155-7 |
+| **COMPONENT** | Family history or condition or disease and action |
+| **PROPERTY** | Arb |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Family |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | CPHS |
+| **CLASS** | ATTACH.CPHS |
+| **VersionLastChanged** | 2.56 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Arbitrary; ATTACH; ATTACH.CPHS; Children's Preventative Health Service; Dis; Diseases; Dz; Family Hx or condition or disease and action; Hx; Ordinal; Point in time; QL; Qual; Qualitative; Random; Scre |
+| **LONG_COMMON_NAME** | Family history or condition or disease and action Family CPHS |
+| **CHANGE_REASON_PUBLIC** | Corrected System from Family (System) to ^Family (Super System) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.15 |
+
+---
+
+## ATTACH.ED
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18624-7 |
+| **COMPONENT** | ED problem |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nar |
+| **METHOD_TYP** | Reported |
+| **CLASS** | ATTACH.ED |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.ED; DEEDS; Emergency Department; EMERGENCY DEPARTMENT (DEEDS); Finding; Findings; Narrative; Point in time; Random; Report |
+| **LONG_COMMON_NAME** | ED problem (narrative) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## ATTACH.GI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27895-2 |
+| **COMPONENT** | Gastroenterology endoscopy studies |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.GI |
+| **VersionLastChanged** | 2.00 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.GI; Complex; GI |
+| **LONG_COMMON_NAME** | Gastroenterology endoscopy studies (set) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.LAB
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18716-1 |
+| **COMPONENT** | Allergy studies |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.LAB |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.LAB; Complex; Lab |
+| **LONG_COMMON_NAME** | Allergy studies (set) |
+| **COMMON_TEST_RANK** | 6526 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## ATTACH.MEDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18605-6 |
+| **COMPONENT** | Medication.current |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **METHOD_TYP** | Reported |
+| **CLASS** | ATTACH.MEDS |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.MEDS; Complex; MEDS; Point in time; Random |
+| **LONG_COMMON_NAME** | Medication current Set |
+| **COMMON_TEST_RANK** | 10999 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## ATTACH.MODIFIER
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18789-8 |
+| **COMPONENT** | Include all data of the selected type within the date window associated with the service |
+| **PROPERTY** | Scope.modifier.selection item |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | X12^277 |
+| **SCALE_TYP** | - |
+| **CLASS** | ATTACH.MODIFIER |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Indicates inclusion of all data of the selected type within the date window associated with the service (e.g., tests performed during a hospital stay or a note written to describe a clinic visit). Thi |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | Assoc; ATTACH; ATTACH.MODIFIER; Point in time; Random |
+| **LONG_COMMON_NAME** | Include all data of the selected type within the date window associated with the service |
+| **CHANGE_REASON_PUBLIC** | In collaboration with the HL7 Attachment workgroup, we have changed claim to service in this term to clarify the intended use. This code may be used to account for services not associated with a claim |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## ATTACH.OBS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 26442-4 |
+| **COMPONENT** | Obstetrical studies |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.OBS |
+| **VersionLastChanged** | 2.00 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.OBS; Complex |
+| **LONG_COMMON_NAME** | Obstetrical studies (set) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.PERIODONTAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 74047-2 |
+| **COMPONENT** | Periodontal procedure is related to orthodontic treatment plan |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Oral cavity |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | HL7.Attach |
+| **CLASS** | ATTACH.PERIODONTAL |
+| **VersionLastChanged** | 2.46 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | True or false indicator to denote whether a periodontal procedure is related to an orthodontic treatment plan. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH.PERIODONTAL; Dental; Dentistry; Finding; Findings; Mouth; Mouth+throat+teeth; Ordinal; Orthodontic Tx; Perio proc related ortho trt pln; Point in time; QL; Qual; Qualitative; Random; Screen; Tx |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Periodontal procedure is related to orthodontic treatment plan |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.46 |
+
+---
+
+## ATTACH.REHAB
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18630-4 |
+| **COMPONENT** | Diagnosis.primary |
+| **PROPERTY** | Imp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ATTACH.REHAB |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; Dx; Dx.primary; Impression; Impression/interpretation of study; Impressions; Interp; Interpretation; Nominal; Point in time; Random |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Primary diagnosis |
+| **CHANGE_REASON_PUBLIC** | Release 2.70: AnswerListId: Added example answer list; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## ATTACH.REHAB.ABUSE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18663-5 |
+| **COMPONENT** | History of present alcohol &or substance abuse |
+| **PROPERTY** | Hx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nar |
+| **CLASS** | ATTACH.REHAB.ABUSE |
+| **VersionLastChanged** | 2.56 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | Alc; alcoholic; ATTACH; ATTACH.REHAB; ATTACH.REHAB.ABUSE; H/O; History; Hx; Narrative; Point in time; Present alcohol/substance abuse Hx; Random; Report; Subs |
+| **LONG_COMMON_NAME** | Alcohol-substance abuse, rehabilitation plan, History of present alcohol/substance abuse (narrative) |
+| **CHANGE_REASON_PUBLIC** | Changed Property from Find to Hx per 8/2015 Clinical LOINC Committee decision |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## ATTACH.REHAB.CARDIAC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27457-1 |
+| **COMPONENT** | Diagnosis.primary |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cardiac rehabilitation treatment |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.CARDIAC |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.CARDIAC; Cardiac rehabilitation Tx; Cardio; Cardiology; Complex; Dx; Dx.primary; Heart Disease; Point in time; Random; RehabTx; Tx |
+| **LONG_COMMON_NAME** | Cardiac rehabilitation treatment plan, Primary diagnosis Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.REHAB.NURS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27551-1 |
+| **COMPONENT** | Author of treatment plan |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Skilled nursing treatment plan |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.NURS |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.NURS; Complex; Point in time; Random; Skilled nursing Tx; Skilled nursing Tx plan; Tx; Tx Plan |
+| **LONG_COMMON_NAME** | Skilled nursing treatment plan, Author of treatment plan Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.REHAB.OT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27602-2 |
+| **COMPONENT** | Author of treatment plan |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Occupational therapy treatment plan |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.OT |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.OT; Complex; Occupational Therapy; Occupational therapy Tx; Occupational therapy Tx plan; OT; Point in time; Random; Tx; Tx Plan |
+| **LONG_COMMON_NAME** | Occupational therapy treatment plan, Author of treatment plan Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.REHAB.PSYCH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18632-0 |
+| **COMPONENT** | Author of treatment plan |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Psychiatric rehabilitation treatment plan |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.PSYCH |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.PSYCH; Complex; Mental health; MentalHealth; Point in time; Psych; Psychiatric rehabilitation Tx; Psychiatric rehabilitation Tx plan; Psychiatry; Random; Rehabilitat |
+| **LONG_COMMON_NAME** | Psychiatric rehabilitation treatment plan, Author of treatment plan Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## ATTACH.REHAB.PT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27665-9 |
+| **COMPONENT** | Author of treatment plan |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Physical therapy treatment plan |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.PT |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.PT; Complex; Physical Therapy; Physical therapy Tx; Physical therapy Tx plan; Point in time; PT; Random; Tx; Tx Plan |
+| **LONG_COMMON_NAME** | Physical therapy treatment plan, Author of treatment plan Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.REHAB.PULM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 52137-7 |
+| **COMPONENT** | Diagnosis.primary |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Pulmonary therapy treatment |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.PULM |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.PULM; Complex; Dx; Dx.primary; Lung; Point in time; Pulmonary; Pulmonary therapy Tx; Pulmonology; Random; Respiratory; Tx |
+| **LONG_COMMON_NAME** | Pulmonary therapy treatment plan, Primary diagnosis Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.24 |
+
+---
+
+## ATTACH.REHAB.RT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27704-6 |
+| **COMPONENT** | Author of treatment plan |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Respiratory therapy treatment plan |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.RT |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.RT; Complex; Lung; Point in time; Pulmonary; Pulmonology; Random; Respiratory; Respiratory therapy Tx; Respiratory therapy Tx plan; Tx; Tx Plan |
+| **LONG_COMMON_NAME** | Respiratory therapy treatment plan, Author of treatment plan Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.REHAB.SOCIAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27755-8 |
+| **COMPONENT** | Author of treatment plan |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Medical social services treatment plan |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.SOCIAL |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.SOCIAL; Complex; Medical social services Tx; Medical social services Tx plan; Point in time; Random; Tx; Tx Plan |
+| **LONG_COMMON_NAME** | Medical social services treatment plan, Author of treatment plan Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## ATTACH.REHAB.SPEECH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 29168-2 |
+| **COMPONENT** | Author of treatment plan |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Speech therapy treatment plan |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.REHAB.SPEECH |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ATTACH; ATTACH.REHAB; ATTACH.REHAB.SPEECH; Complex; Point in time; Random; Speech therapy Tx; Speech therapy Tx plan; Tx; Tx Plan |
+| **LONG_COMMON_NAME** | Speech therapy treatment plan, Author of treatment plan Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.03 |
+
+---
+
+## ATTACH.RESP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 27896-0 |
+| **COMPONENT** | Pulmonary studies |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **CLASS** | ATTACH.RESP |
+| **VersionLastChanged** | 2.02 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **RELATEDNAMES2** | ATTACH; ATTACH.RESP; Complex; Lung; Pulm; Pulmonary; Pulmonology; Respiratory; Respiratory studies |
+| **LONG_COMMON_NAME** | Pulmonary studies (set) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## AUDIO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 89016-0 |
+| **COMPONENT** | Hearing threshold^1000 Hz |
+| **PROPERTY** | RelSoundInt |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ear.left |
+| **SCALE_TYP** | Qn |
+| **CLASS** | AUDIO |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | AUDIO; Audiology; Ear-L; Hearing; L; LT; Otologic; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Hearing threshold 1000 Hz Ear-L |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | dB HL |
+| **LONG_COMMON_NAME** | Hearing threshold Ear - left --1000 Hz |
+| **EXAMPLE_UCUM_UNITS** | dB |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.64 |
+
+---
+
+## BDYCRC.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 106932-7 |
+| **COMPONENT** | Circumference |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ankle |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BDYCRC.ATOM |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | This term captures a circumference measurement which is closely related to heart failure symptoms, particularly in the context of peripheral edema. [PMID:25194293] |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | BODY CIRCUMFERENCE.ATOM; Girth; Length; Lower extremity joint; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Ankle Circumf |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | cm |
+| **LONG_COMMON_NAME** | Ankle Circumference |
+| **EXAMPLE_UCUM_UNITS** | cm |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.79 |
+
+---
+
+## BDYCRC.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 107232-1 |
+| **COMPONENT** | Circumference |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Lower extremity.left>Ankle |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BDYCRC.MOLEC |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Ankle-L; BODY CIRCUMFERENCE.MOLEC; EXT; Extr-L; Girth; L; LE; Leg; LE-L; Length; LLE; Low; Lower extremity joint; LT; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Ankle-L Circumf |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | cm |
+| **LONG_COMMON_NAME** | Ankle - left Circumference |
+| **EXAMPLE_UCUM_UNITS** | cm |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.79 |
+
+---
+
+## BDYHGT.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 3137-7 |
+| **COMPONENT** | Body height |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Measured |
+| **CLASS** | BDYHGT.ATOM |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Axial length; bod; Bodies; BODY HEIGHT(LENGTH).ATOM; Body length; Length; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Body height Measured |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | in;cm |
+| **LONG_COMMON_NAME** | Body height Measured |
+| **EXAMPLE_UCUM_UNITS** | [in_us];cm;m |
+| **COMMON_TEST_RANK** | 372 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0 |
+
+---
+
+## BDYHGT.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8303-0 |
+| **COMPONENT** | Body height |
+| **PROPERTY** | Prctl |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BDYHGT.MOLEC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Axial length; bod; Bodies; BODY HEIGHT(LENGTH).MOLEC; Body length; Percentile; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Body height Prctl |
+| **EXAMPLE_UNITS** | % |
+| **LONG_COMMON_NAME** | Body height [Percentile] |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **COMMON_TEST_RANK** | 732 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(2) |
+
+---
+
+## BDYSURF.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 3139-3 |
+| **COMPONENT** | Body surface |
+| **PROPERTY** | Area |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Measured |
+| **CLASS** | BDYSURF.ATOM |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Bdy surface; bod; Bodies; BODY SURFACE AREA.ATOM; BSA; Point in time; QNT; Quan; Quant; Quantitative; Random; Surf |
+| **SHORTNAME** | BSA Measured |
+| **EXAMPLE_UNITS** | m2 |
+| **LONG_COMMON_NAME** | Body surface area Measured |
+| **EXAMPLE_UCUM_UNITS** | m2 |
+| **COMMON_TEST_RANK** | 8430 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0 |
+
+---
+
+## BDYTMP.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 111795-1 |
+| **COMPONENT** | Pain body location qualifier |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | BDYTMP.ATOM |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Directional terms for pain body location, excluding the laterality, that describe the positions of structures relative to other structure or locations on the body. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bdy location qualifier; bod; Bodies; BODY TEMPERATURE.ATOM; Finding; Findings; Nominal; Pain body loc qual; Point in time; Random |
+| **SHORTNAME** | Pain body loc qual |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Pain body location qualifier |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## BDYTMP.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104063-3 |
+| **COMPONENT** | Body temperature |
+| **PROPERTY** | Temp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Groin |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BDYTMP.MOLEC |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bdy temp; bod; Bodies; BODY TEMPERATURE.MOLEC; Point in time; QNT; Quan; Quant; Quantitative; Random; Temp; Temperature |
+| **SHORTNAME** | Bdy temp Groin |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | deg C; deg F |
+| **LONG_COMMON_NAME** | Body temperature - Groin |
+| **EXAMPLE_UCUM_UNITS** | Cel; [degF] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## BDYTMP.TIMED.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8311-3 |
+| **COMPONENT** | Body temperature |
+| **PROPERTY** | Temp |
+| **TIME_ASPCT** | 1H^max |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BDYTMP.TIMED.MOLEC |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | 1 hour; 1.0Hr; 1HR; 60 min; 60 minutes; 60M; 60min; Bdy temp; bod; Bodies; BODY TEMPERATURE.TIMED.MOLEC; Maximum; Misc; Miscellaneous; Other; QNT; Quan; Quant; Quantitative; Spec; Temp; Temperature; T |
+| **SHORTNAME** | Bdy temp 1h Max |
+| **EXAMPLE_UNITS** | deg F; deg C |
+| **LONG_COMMON_NAME** | Body temperature 1 hour maximum |
+| **EXAMPLE_UCUM_UNITS** | Cel;[degF] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(2) |
+
+---
+
+## BDYWGT.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 107164-6 |
+| **COMPONENT** | Weight |
+| **PROPERTY** | Mass |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Kidney.bilateral |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BDYWGT.ATOM |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bil; Bilat; BODY WEIGHT.ATOM; Both; Kdny-Bl; Kidneys; Nephric; Point in time; QNT; Quan; Quant; Quantitative; Random; Renal; Wt |
+| **SHORTNAME** | Wt Kdny-Bl |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | g |
+| **LONG_COMMON_NAME** | Weight [Mass] Kidney - bilateral |
+| **EXAMPLE_UCUM_UNITS** | g |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## BDYWGT.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101683-1 |
+| **COMPONENT** | Body water |
+| **PROPERTY** | Mass |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BDYWGT.MOLEC |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bdy water; bod; Bodies; BODY WEIGHT.MOLEC; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Body h2O mass |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | kg |
+| **LONG_COMMON_NAME** | Body water mass |
+| **EXAMPLE_UCUM_UNITS** | kg |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## BLDBK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 882-1 |
+| **COMPONENT** | ABO & Rh group |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Nom |
+| **CLASS** | BLDBK |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | ABO + Rh; ABO group and Rh type; ABO+Rh Gp; Blood; BLOOD BANK; D phenotyping; D typing; Hematology; Heme; Nominal; Point in time; Random; Rh phenotyping; Rh typing; Typ; UniversalLabOrders; WB; Whole  |
+| **SHORTNAME** | ABO + Rh Bld |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | ABO and Rh group [Type] in Blood |
+| **COMMON_TEST_RANK** | 207 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0 |
+| **DisplayName** | ABO and Rh group (Bld) |
+
+---
+
+## BLDBK.GENOTYPING
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 92478-7 |
+| **COMPONENT** | VS Ag inferred phenotype |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | BLDBK.GENOTYPING |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | BLDBK.GENO; Blood; BLOOD BANK; Molecular genetics; Ordinal; PCR; Point in time; PR; QL; Qual; Qualitative; Random; Rh; Rh Blood Group System; Screen; Tissue; Tissue, unspecified; WB; Whole blood; Whol |
+| **SHORTNAME** | VS Ag inferred Bld/T Ql |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | VS Ag inferred phenotype [Presence] in Blood or Tissue by Molecular genetics method |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.66 |
+| **DisplayName** | VS Ag inferred phenotype Molgen Ql (Bld/Tiss) |
+
+---
+
+## BP.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 111734-0 |
+| **COMPONENT** | Philtrum length |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Lip |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BP.ATOM |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | BLOOD PRESSURE MEASUREMENTS.ATOM; Len; Length; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Lip Philtrum length |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | cm |
+| **LONG_COMMON_NAME** | Lip Philtrum length |
+| **EXAMPLE_UCUM_UNITS** | cm |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## BP.CENT.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 60981-8 |
+| **COMPONENT** | Intravascular |
+| **PROPERTY** | Pres |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Aorta |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BP.CENT.MOLEC |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | AO; Aortic; BLOOD PRESSURE MEASUREMENTS.CENTRAL.MOLEC; BP; Cardio; Cardiology; Heart Disease; Intravenous; IV; Point in time; Pressure; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Aorta BP |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | mm Hg |
+| **LONG_COMMON_NAME** | Aorta blood pressure |
+| **EXAMPLE_UCUM_UNITS** | mm[Hg] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## BP.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103810-8 |
+| **COMPONENT** | Pulse pressure |
+| **PROPERTY** | PressDiff |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Arterial system |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Invasive |
+| **CLASS** | BP.MOLEC |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Art sys; BLOOD PRESSURE MEASUREMENTS.MOLEC; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Pulse pressure by Invasive |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | mm Hg |
+| **LONG_COMMON_NAME** | Pulse pressure by Invasive |
+| **EXAMPLE_UCUM_UNITS** | mm[Hg] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## BP.PSTN.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 34538-9 |
+| **COMPONENT** | Orthostatic blood pressure |
+| **PROPERTY** | PressDiff |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Arterial system |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BP.PSTN.MOLEC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | According to the American Academy of Neurology, the formal diagnosis of orthostatic hypotension requires a 20mm drop in systolic blood pressure or a 10mm drop in diastolic blood pressure within three  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Art sys; BLOOD PRESSURE MEASUREMENTS.POSITION.MOLEC; BP; Orthostatic BP; Point in time; Position; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Orthostatic BP |
+| **EXAMPLE_UNITS** | mm Hg |
+| **LONG_COMMON_NAME** | Orthostatic blood pressure |
+| **EXAMPLE_UCUM_UNITS** | mm[Hg] |
+| **COMMON_TEST_RANK** | 8556 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.10 |
+
+---
+
+## BP.TIMED.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8463-2 |
+| **COMPONENT** | Intravascular diastolic |
+| **PROPERTY** | Pres |
+| **TIME_ASPCT** | 1H^max |
+| **SYSTEM** | Arterial system |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BP.TIMED.MOLEC |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | 1 hour; 1.0Hr; 1HR; 60 min; 60 minutes; 60M; 60min; Art sys; Blood pressure; Blood pressure diastolic; BLOOD PRESSURE MEASUREMENTS.TIMED.MOLEC; BP; BP dias; BP diastolic; Cardio; Cardiology; DBP; Dias |
+| **SHORTNAME** | BP dias 1h Max |
+| **EXAMPLE_UNITS** | mm Hg |
+| **LONG_COMMON_NAME** | Diastolic blood pressure 1 hour maximum |
+| **EXAMPLE_UCUM_UNITS** | mm[Hg] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(2) |
+
+---
+
+## BP.VENOUS.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8582-9 |
+| **COMPONENT** | A wave amplitude |
+| **PROPERTY** | Pres |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart.atrium.left |
+| **SCALE_TYP** | Qn |
+| **CLASS** | BP.VENOUS.MOLEC |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Atrial; Atrial wave; A-wave; a-wave amp; BLOOD PRESSURE MEASUREMENTS.VENOUS.MOLEC; Cardiac; Cardio; Cardiology; Heart Disease; Hrt; L; LA; LT; Point in time; Pressure; QNT; Quan; Quant; Quantitative;  |
+| **SHORTNAME** | LA A-wave amp |
+| **EXAMPLE_UNITS** | cm H2O |
+| **LONG_COMMON_NAME** | Left atrial A-wave amplitude |
+| **EXAMPLE_UCUM_UNITS** | cm[H2O] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(3) |
+
+---
+
+## CARD.PROC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101577-5 |
+| **COMPONENT** | Cardioversion report |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart |
+| **SCALE_TYP** | Doc |
+| **CLASS** | CARD.PROC |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CARD.PROC; Cardiac; Cardiology; Document; Finding; Findings; Hrt; Point in time; Random |
+| **SHORTNAME** | Cardioversion report Hrt Doc |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Cardioversion report Heart Document |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## CARD.RISK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 65850-0 |
+| **COMPONENT** | Hard coronary heart disease 10Y risk |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Framingham.The Adult Treatment Panel III 2001 |
+| **CLASS** | CARD.RISK |
+| **VersionLastChanged** | 2.42 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Based on a population free of CHD, intermittent claudication and diabetes, 30-79 years of age with predictors including age, total cholesterol, HDL, systolic blood pressure, treatment for hypertension |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **SURVEY_QUEST_SRC** | Framingham - HCHD10Y |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 3; CARD.RISK; Cardio; Cardiology; CHD 10Y risk; Cnt; Count; Dis; Diseases; Dz; Hard CHD10Y risk; Heart Disease; Number; Pan; Panl; Pnl; Point in time; QNT; Quan; Quant; Quantitative; Random; Tx |
+| **SHORTNAME** | Hard CHD10Y risk |
+| **LONG_COMMON_NAME** | Hard coronary heart disease 10Y risk [#] Framingham.The Adult Treatment Panel III 2001 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.36 |
+
+---
+
+## CARD.US
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18043-0 |
+| **COMPONENT** | Ejection fraction |
+| **PROPERTY** | VFr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart.ventricle.left |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | US |
+| **CLASS** | CARD.US |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **FORMULA** | Ejection fraction=[(LV end-diastolic volume-LV end-systolic volume)/LV end-diastolic volume]*100 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | CARD.US; Cardiac; Cardio; Cardiology; Echography; EF; Frac; Fract; Fractionation; Fractions; Heart Disease; Hrt; Hrt ventr; L; LT; LV; LVEF; Percent; Point in time; QNT; Quan; Quant; Quantitative; Ran |
+| **SHORTNAME** | LV EF US |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | % |
+| **LONG_COMMON_NAME** | Left ventricular Ejection fraction by US |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **COMMON_TEST_RANK** | 692 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## CARD.US.DICOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 11710-1 |
+| **COMPONENT** | Blood flow velocity.systolic.max |
+| **PROPERTY** | Vel |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Pulmonic valve |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | US.doppler |
+| **CLASS** | CARD.US.DICOM |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Maximum value of the Doppler shift frequency envelope. If System is Patient or if System is Fetus or Other but the context is supplied by DICOM Supplement 23-Structured Reporting, Observation Subject  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | Bld flow; Bld flow vel; Bld flow.velocity; CARD.US; CARD.US.DICOM; Cardio; Cardiology; DOP; DUPLEX; Dynamic; Echography; Heart Disease; Largest; Max V; Maximal; Maximum; Peak; Point in time; PV; QNT;  |
+| **SHORTNAME** | PV Vmax sys |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | m/s; cm/s |
+| **LONG_COMMON_NAME** | Pulmonic valve Peak systolic flow velocity by US.doppler |
+| **EXAMPLE_UCUM_UNITS** | m/s; cm/s |
+| **CHANGE_REASON_PUBLIC** | Release 2.68: COMPONENT: Updated component to include velocity for accuracy and consistency across terms; CLASS: Updated for consistency; Release 2.67: COMPONENT: Updated component to include velocity |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0j-a |
+
+---
+
+## CARDIO-PULM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 60837-2 |
+| **COMPONENT** | Temperature |
+| **PROPERTY** | Temp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Injectate |
+| **SCALE_TYP** | Qn |
+| **CLASS** | CARDIO-PULM |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The temperature of an indicator injectate (cold indicator) used to calculate cardiac output via thermodilution. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cardio; Cardiology; CARDIO-PULM; Heart Disease; Lung; Point in time; Pulmonary; Pulmonology; QNT; Quan; Quant; Quantitative; Random; Respiratory; Temp; Temperature |
+| **SHORTNAME** | Injectate temp |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | deg C; deg F |
+| **LONG_COMMON_NAME** | Injectate temperature |
+| **EXAMPLE_UCUM_UNITS** | Cel;[degF] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## CELLMARK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100430-8 |
+| **COMPONENT** | Cells.LRBA+/Cells.CD3+CD14-CD45+ |
+| **PROPERTY** | NFr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Flow cytometry |
+| **CLASS** | CELLMARK |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | NAM |
+| **DefinitionDescription** | This term represents the fraction of T-cells that are LRBA positive. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | B220; Blood; CD3 Cells; CD45R; CD45RA; CD45RB; CD45RC; CD45RO; Cell; CELL MARKERS; Cellularity; Dynamic; FC; LCA; Leu4; Leu-4; Leukocyte common antigen; LeuM3; Leu-M3; LPS receptor; LPS-R; Ly5; Mo2; M |
+| **SHORTNAME** | Cells.LRBA+/T Cells NFr Bld FC |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | % |
+| **LONG_COMMON_NAME** | Cells.LRBA+/Cells.CD3+CD14-CD45+ in Blood by Flow cytometry (FC) |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **CHANGE_REASON_PUBLIC** | Release 2.79: COMPONENT: Triggered by Coll w SCT: This is a specific fraction case where the denominator is percentage or /100. Because the logic is that the percentage piece is captured by Property:  |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Cells.LRBA+/Cells.CD3+CD14-CD45+ FC (Bld) |
+
+---
+
+## CHAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100793-9 |
+| **COMPONENT** | Testosterone |
+| **PROPERTY** | MCnc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Body fld |
+| **SCALE_TYP** | Qn |
+| **CLASS** | CHAL |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | B/F; BF; bod; Bodies; Body fluid; Body fluid, unsp; CHEMISTRY.CHALLENGE TESTING; Fl; Fld; FLU; Fluid; Level; Mass concentration; Point in time; QNT; Quan; Quant; Quantitative; Random; Testo; Testos; T |
+| **SHORTNAME** | Testost Fld-mCnc |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | ng/mL |
+| **LONG_COMMON_NAME** | Testosterone [Mass/volume] in Body fluid |
+| **EXAMPLE_UCUM_UNITS** | ng/mL |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Testosterone (Body fld) [Mass/Vol] |
+
+---
+
+## CHAL.ROUTINE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10449-7 |
+| **COMPONENT** | Glucose^1H post meal |
+| **PROPERTY** | MCnc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser/Plas |
+| **SCALE_TYP** | Qn |
+| **CLASS** | CHAL.ROUTINE |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | 1 hour; 1.0Hr; 1h p meal; 60 min; 60 minutes; 60M; 60min; After; CHEMISTRY.CHALLENGE TESTING; Endocrine; Endocrinology; Glu; Glu tol; Gluc; Glucose tolerance; Glucoseur; GTT; Level; Mass concentration |
+| **SHORTNAME** | Glucose 1h p meal SerPl-mCnc |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | mg/dL |
+| **LONG_COMMON_NAME** | Glucose [Mass/volume] in Serum or Plasma --1 hour post meal |
+| **EXAMPLE_UCUM_UNITS** | mg/dL |
+| **CHANGE_REASON_PUBLIC** | Changed Class from CHAL to CHAL.ROUTINE |
+| **COMMON_TEST_RANK** | 3381 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+| **DisplayName** | Glucose 1 Hr post meal [Mass/Vol] |
+
+---
+
+## CHALSKIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100763-2 |
+| **COMPONENT** | Mycobacterium sp comparative reaction interpretation |
+| **PROPERTY** | Imp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Skin |
+| **SCALE_TYP** | Nar |
+| **CLASS** | CHALSKIN |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Acid Fast; Acid Fast Bacilli; Acid fast bacillus; AFB; Dermatologic; Epidermis; Impression; Impression/interpretation of study; Impressions; Integument; Interp; Interpret; Interpretation; Interpt; Int |
+| **SHORTNAME** | Mycobacterium sp comp react interp |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Mycobacterium sp comparative reaction interpretation Narrative |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Mycobacterium sp comparative reaction interpretation Nar (Skin) [Interp] |
+
+---
+
+## CHEM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 2160-0 |
+| **COMPONENT** | Creatinine |
+| **PROPERTY** | MCnc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser/Plas |
+| **SCALE_TYP** | Qn |
+| **CLASS** | CHEM |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | Chemistry; CR; Crea; Creat; Kidney; Level; Mass concentration; Nephrology; Pl; Plasma; Plsm; Point in time; QNT; Quan; Quant; Quantitative; Random; Renal; SerP; SerPl; SerPlas; Serum; Serum or plasma; |
+| **SHORTNAME** | Creat SerPl-mCnc |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | mg/dL |
+| **LONG_COMMON_NAME** | Creatinine [Mass/volume] in Serum or Plasma |
+| **EXAMPLE_UCUM_UNITS** | mg/dL |
+| **COMMON_TEST_RANK** | 4 |
+| **COMMON_ORDER_RANK** | 55 |
+| **VersionFirstReleased** | 1.0 |
+| **DisplayName** | Creatinine [Mass/Vol] |
+
+---
+
+## CLIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100063-7 |
+| **COMPONENT** | Primary skin concern |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | CLIN |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CLIN; Finding; Findings; Integument; Nominal; Point in time; Random |
+| **SHORTNAME** | Primary skin concern |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Primary skin concern |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## CLIN.RISK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101439-8 |
+| **COMPONENT** | Change in mental status |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | CLIN.RISK |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CLIN; CLIN.RISK; Exchange; Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Replace; Screen |
+| **SHORTNAME** | Change in mental status |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Change in mental status |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## CLIN.VET
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104881-8 |
+| **COMPONENT** | Equine acute pain scale |
+| **PROPERTY** | Imp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Animal |
+| **SCALE_TYP** | Ord |
+| **CLASS** | CLIN.VET |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **SURVEY_QUEST_TEXT** | Equine acute pain scale |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CLIN; CLIN.VET; Equin; Impression; Impression/interpretation of study; Impressions; Interp; Interpretation; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen |
+| **SHORTNAME** | Equine acute pain scale Animal |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2006 PW Hellyer, SR Uhrig, NG Robinson. Used with permission. |
+| **LONG_COMMON_NAME** | Equine acute pain scale Animal |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | PHELLVET |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## CLINTRIAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82770-9 |
+| **COMPONENT** | Patient reported outcome Computer Adaptive Testing used |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | CLINTRIAL |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | CLINTRIAL; Ordinal; Point in time; PR; PRO CAT used; Ql; Qual; Qualitative; Random; Screen |
+| **SHORTNAME** | PRO CAT used |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Patient reported outcome Computer Adaptive Testing used |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## COAG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 5902-2 |
+| **COMPONENT** | Coagulation |
+| **PROPERTY** | Time |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | PPP |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Coag.tissue factor induced |
+| **CLASS** | COAG |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | Clot; Clottable; Coag; Coagulation assay; Fac; Fact; Hematology; Heme; Plas; Platelet poor plasma; Point in time; QNT; Quan; Quant; Quantitative; Random; Tilt tube; UniversalLabOrders |
+| **SHORTNAME** | Prothrombin time |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | s |
+| **LONG_COMMON_NAME** | Prothrombin time (PT) |
+| **EXAMPLE_UCUM_UNITS** | s |
+| **COMMON_TEST_RANK** | 54 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0 |
+| **DisplayName** | Coagulation PT (PPP) [Time] |
+
+---
+
+## CYTO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104866-9 |
+| **COMPONENT** | Observation |
+| **PROPERTY** | Prid |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cvx |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Cyto stain.thin prep.computer assisted |
+| **CLASS** | CYTO |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Artificial Intelligence; Automated detection; Cervix; Comp Assist; Cyto Comp Assist; CYTOLOGY; Cytology stain; Cytostain; Genital tract; Identity or presence; Nominal; Pap Smear; Pap Stain; Papanicola |
+| **SHORTNAME** | Cyto Comp Assist Cvx |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Microscopic observation [Identifier] in Cervix by Cyto stain.thin prep.computer assisted |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.78 |
+| **DisplayName** | Microscopic observation Nom (Cvx) |
+
+---
+
+## DENTAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 32864-1 |
+| **COMPONENT** | Frankfort horizontal plane to mandibular plane |
+| **PROPERTY** | Angle |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Skull |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | XR.measured |
+| **CLASS** | DENTAL |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cranial; Cranium; Dental; Dentistry; FH; FMA; Go-Gn; gonion to gnathion; Head; Mand; Me-Goi; menton to reconstructed gonion; MP; Plain Films; Point in time; QNT; Quan; Quant; Quantitative; Random; Xra |
+| **SHORTNAME** | FMA Angle Skull XR |
+| **EXAMPLE_UNITS** | deg |
+| **LONG_COMMON_NAME** | Frankfort horizontal plane to mandibular plane [Angle] Skull X-ray measured |
+| **EXAMPLE_UCUM_UNITS** | deg |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.09 |
+
+---
+
+## DEVICES
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101129-5 |
+| **COMPONENT** | Assay Sensitivity |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Laboratory device |
+| **SCALE_TYP** | Qn |
+| **CLASS** | DEVICES |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cnt; Count; Lab Device; Number; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Lab Device |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | # |
+| **LONG_COMMON_NAME** | Laboratory device Assay Sensitivity |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## DOC.ADMIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100214-6 |
+| **COMPONENT** | Dental model prior authorization |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **CLASS** | DOC.ADMIN |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | A collection of clinical information necessary to support billing or prior authorization of dental models. Dental models/casts are accurate, three-dimensional replicas of a patient's teeth that are ma |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; DOC.ADMIN; Document; Finding; Findings; Point in time; Random |
+| **SHORTNAME** | Dental model prior auth Doc |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Dental model prior authorization Document |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## DOC.MISC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100215-3 |
+| **COMPONENT** | Episode of care medical records |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | Transplant surgery |
+| **CLASS** | DOC.MISC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The collection of medical records associated with a patient's episode of care for transplant surgery.  (Note:  episode of care defined in LOINC as the provision of care over a specified period of time |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | DOC.MISC; Document; EOC; Episode of care med rec; Finding; Findings; MISC; Point in time; Random; Surg; Transpl surg |
+| **SHORTNAME** | Episode of care med rec Doc Transpl surg |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Episode of care medical records Document Transplant surgery |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## DOC.ONTOLOGY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 34133-9 |
+| **COMPONENT** | Summary of episode note |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | {Setting} |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | {Role} |
+| **CLASS** | DOC.ONTOLOGY |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This LOINC term is commonly used as the Clinical Document code for both the Care Record Summary (CRS) and Continuity of Care Document (CCD), with an episode of care defined as the provision of care ov |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CCD; Continuity of Care Document; DOC.ONT; Document; Encounter; Evaluation and management; Evaluation and management note; Finding; Findings; notes; Point in time; Random; Visit note |
+| **SHORTNAME** | Summary of episode note |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Summary of episode note |
+| **CHANGE_REASON_PUBLIC** | Release 2.70: DefinitionDescription: Added definition of episode of care; Previous Releases: Changed Component from 'Summarization of episode' per Clinical LOINC Committee decision to harmonize existi |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **HL7_ATTACHMENT_STRUCTURE** | IG exists |
+| **AssociatedObservations** | 81214-9;72232-2 |
+| **VersionFirstReleased** | 2.09 |
+| **ValidHL7AttachmentRequest** | Y |
+
+---
+
+## DOC.PUBLICHEALTH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 85473-7 |
+| **COMPONENT** | Male sexual partner in last 12Mo |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | DOC.PUBLICHEALTH |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This is a common ask-at-order entry (AOE) observation for STD testing. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Ordinal; Past; Point in time; PR; Public Health; Public Health Documents; PUBLICHEALTH; Ql; Qual; Qualitative; Random; Screen |
+| **SHORTNAME** | Male sexual partner in last 12Mo |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Male sexual partner in last 12 months |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.61 |
+
+---
+
+## DOC.QUALITY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 57025-9 |
+| **COMPONENT** | Data criteria |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nar |
+| **CLASS** | DOC.QUALITY |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Data Criteria section contains criteria used primarily to determine whether or not a given patient is included in a measure's numerator, denomator, etc.. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | DOCUMENT QUALITY; Finding; Findings; Narrative; Point in time; Quality; Random; Report |
+| **SHORTNAME** | Data criteria |
+| **LONG_COMMON_NAME** | Data criteria Narrative |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.29 |
+
+---
+
+## DOC.REF
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100382-1 |
+| **COMPONENT** | REMS addressed risk |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^FDA package insert |
+| **SCALE_TYP** | Nar |
+| **CLASS** | DOC.REF |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | DOCUMENT.REF; FDA insert; Narrative; Report; SPL; Structured Product Labelling |
+| **SHORTNAME** | FDA insert REMS addressed risk |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | FDA package insert REMS addressed risk |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## DOC.REF.CTP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 35510-7 |
+| **COMPONENT** | General information section |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Clinical trial protocol |
+| **SCALE_TYP** | Nar |
+| **CLASS** | DOC.REF.CTP |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CTP; DOCUMENT.REF; DOCUMENT.REF.CTP; Narrative; Report |
+| **SHORTNAME** | CTP General info |
+| **LONG_COMMON_NAME** | Clinical trial protocol General information section |
+| **CHANGE_REASON_PUBLIC** | Release 2.81: ValidHL7AttachmentRequest: Updated to add to HIPAA Attachments, per user request.; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **HL7_ATTACHMENT_STRUCTURE** | No IG exists |
+| **VersionFirstReleased** | 2.13 |
+| **ValidHL7AttachmentRequest** | Y |
+
+---
+
+## DOCUMENT.REGULATORY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101437-2 |
+| **COMPONENT** | Intentional animal genomic alteration label |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^FDA product label |
+| **SCALE_TYP** | Nar |
+| **CLASS** | DOCUMENT.REGULATORY |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | DOCUMENT.REGULATORY; FDA label; Genetic; Genetics; Intent animal genomic alter label; Narrative; Report |
+| **SHORTNAME** | FDA label Int animal genomic alter label |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | FDA product label Intentional animal genomic alteration label |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## DRUG/TOX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100351-6 |
+| **COMPONENT** | Pioglitazone |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser/Plas |
+| **SCALE_TYP** | Ord |
+| **CLASS** | DRUG/TOX |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **FORMULA** | 20 ng/mL Cutoff |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Actos; DRUG/TOXICOLOGY; Drugs; Ordinal; Pl; Plasma; Plsm; Point in time; PR; QL; Qual; Qualitative; Random; Screen; SerP; SerPl; SerPlas; Serum; Serum or plasma; SR |
+| **SHORTNAME** | Pioglitazone SerPl Ql |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | Qualitative |
+| **LONG_COMMON_NAME** | Pioglitazone [Presence] in Serum or Plasma |
+| **EXAMPLE_UCUM_UNITS** | ng/mL |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Pioglitazone Ql |
+
+---
+
+## DRUGDOSE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 102035-3 |
+| **COMPONENT** | Screening anti-hypertensive and anti-thrombotic drugs |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | LC/MS/MS |
+| **CLASS** | DRUGDOSE |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Asympt; Asymptomatic; Drug; DRUG DOSES; HTN and ATT drug LC/MS/MS; Ordinal; Point in time; PR; QL; Qual; Qualitative; Random; Scn; Screen; Serum; SR |
+| **SHORTNAME** | HTN and ATT drug LC/MS/MS Ser Ql LC/MS/MS |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Screening anti-hypertensive and anti-thrombotic drugs [Presence] of Serum |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.75 |
+| **DisplayName** | Screening anti-hypertensive and anti-thrombotic drugs, LC/MS/MS LC/MS/MS Ql (S) |
+
+---
+
+## ED
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 11288-8 |
+| **COMPONENT** | Arrival time documented |
+| **PROPERTY** | ClockTime |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | ED |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Clock time; DEEDS; Emergency Department; EMERGENCY DEPARTMENT (DEEDS); Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Arrival time documented Clock time |
+| **EXAMPLE_UNITS** | clock time |
+| **LONG_COMMON_NAME** | Arrival time documented |
+| **EXAMPLE_UCUM_UNITS** | {clock_time} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0j-a |
+
+---
+
+## EKG.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18843-3 |
+| **COMPONENT** | Comparison.study |
+| **PROPERTY** | Imp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart |
+| **SCALE_TYP** | Nar |
+| **METHOD_TYP** | EKG |
+| **CLASS** | EKG.ATOM |
+| **VersionLastChanged** | 2.29 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Cardiac; Cardio; Cardiology; Compare; Comparison study; ECG; EKG.ATOM; Electrocardiogram; Electrocardiograph; Heart Disease; Hrt; Impression; Impression/interpretation of study; Impressions; Interp; I |
+| **SHORTNAME** | Comparison study Imp EKG |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | EKG Comparison study (narrative) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## EKG.IMP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 18810-2 |
+| **COMPONENT** | Study observation.overall |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart |
+| **SCALE_TYP** | Nar |
+| **METHOD_TYP** | EKG |
+| **CLASS** | EKG.IMP |
+| **VersionLastChanged** | 2.29 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Cardiac; Cardio; Cardiology; ECG; EKG.IMPRESSION; Electrocardiogram; Electrocardiograph; Finding; Findings; Heart Disease; Hrt; Narrative; Point in time; Random; Report; Study report |
+| **SHORTNAME** | EKG Study |
+| **LONG_COMMON_NAME** | EKG Study observation overall (narrative) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0l |
+
+---
+
+## EKG.MEAS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10000-8 |
+| **COMPONENT** | R wave duration.lead AVR |
+| **PROPERTY** | Time |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | EKG |
+| **CLASS** | EKG.MEAS |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | Cardiac; Cardio; Cardiology; Durat; ECG; EKG.MEASUREMENTS; Electrocardiogram; Electrocardiograph; Heart Disease; Hrt; Painter's colic; PB; Plumbism; Point in time; QNT; Quan; Quant; Quantitative; R pr |
+| **SHORTNAME** | R wave dur L-AVR |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | s |
+| **LONG_COMMON_NAME** | R wave duration in lead AVR |
+| **EXAMPLE_UCUM_UNITS** | s |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## ENDO.GI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100226-0 |
+| **COMPONENT** | Small bowel capsule endoscopy study |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **CLASS** | ENDO.GI |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Capsule endoscopy is a non-invasive procedure used to evaluate various types of gastrointestinal pathology. It involves the patient swallowing a capsule containing cameras that capture images of the g |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Document; Finding; Findings; GI; GI.ENDO; Point in time; Random; Sm bowel capsule endo study; Study report |
+| **SHORTNAME** | Sm bowel capsule endo study Doc |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Small bowel capsule endoscopy study Document |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## ENDO.PULM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100231-0 |
+| **COMPONENT** | Bronchial endoscopic ultrasound study |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **CLASS** | ENDO.PULM |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Endobronchial ultrasound (EBUS) combines bronchial endoscopy with ultrasound and is used to visualize the lining of the large airways as well underlying structures. It can also be used to perform biop |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bronchial endo US study; Document; Endo US study; ENDO.PULM; Finding; Findings; Point in time; PULMONARY; Random; Study report |
+| **SHORTNAME** | EBUS study |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Endobronchial ultrasound study |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## EYE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 111585-6 |
+| **COMPONENT** | Manufacturer |
+| **PROPERTY** | ACnt |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye.left |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Static Automated Perimetry |
+| **CLASS** | EYE |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Arbitrary content; Auto; Automated detection; Elec; Elect; Electr; Eyeball; L; L eye; LT; Nominal; Occular; Oculis; Ophthalmologic; Optic globe; Point in time; Prmtry; Random; SAP; Vision; Visual |
+| **SHORTNAME** | L eye Manufacturer [aCnt] SAP |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Left eye Manufacturer [Units/mass] Static Automated Perimetry |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## EYE.ANGIO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103571-6 |
+| **COMPONENT** | Study observation^W fluorescein IV |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ocular fundus |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Angiography |
+| **CLASS** | EYE.ANGIO |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Angiography with fluorescein of the posterior segment of both eyes (OU)      Examine the circulation of the retina and choroid  using a fluorescent dye and specialized camera. It is used to help diagn |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Angio; EYE; EYE.ANGIO; Finding; Findings; Nominal; Point in time; Random; Study report; W fluoresc IV |
+| **SHORTNAME** | Stdy obs Ocular fund Angio W fluoresc IV |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Study observation Ocular fundus Angiography W fluorescein IV |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## EYE.ANGIO.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79809-0 |
+| **COMPONENT** | Study observation^W fluorescein IV |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ocular fundus.right |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Angiography |
+| **CLASS** | EYE.ANGIO.NEI |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Angio; EYE; EYE.ANGIO; EYE.ANGIO.NEI; Finding; Findings; Nominal; Ophthalmology; Ophtho; Ophthy; Point in time; R; R ocular fund; Random; RT; Study report; W fluoresc IV |
+| **SHORTNAME** | Study obs Ocular fund-R Angio W fluor IV |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Study observation Right ocular fundus Angiography W fluorescein IV |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## EYE.CONTACT_LENS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28861-3 |
+| **COMPONENT** | Correction code |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Contact lens.right |
+| **SCALE_TYP** | Nom |
+| **CLASS** | EYE.CONTACT_LENS |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cont lens; Correctn; EYE; EYE.CONTACT_LENS; Finding; Findings; Nominal; Ophthalmology; Ophtho; Ophthy; Point in time; R; R cont lens; Random; RT |
+| **SHORTNAME** | R cont lens Correction code |
+| **LONG_COMMON_NAME** | Right contact lens Correction code |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## EYE.EOG.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79769-6 |
+| **COMPONENT** | Arden ratio |
+| **PROPERTY** | ElpotRto |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Retina.right |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Electrooculogram |
+| **CLASS** | EYE.EOG.NEI |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Arden rto; EOG; EYE; EYE.EOG; EYE.EOG.NEI; Ophthalmology; Ophtho; Ophthy; Point in time; QNT; Quan; Quant; Quantitative; R; R ret; Random; RT |
+| **SHORTNAME** | R ret Arden rto EOG |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | ratio |
+| **LONG_COMMON_NAME** | Right retina Arden ratio by EOG |
+| **EXAMPLE_UCUM_UNITS** | {ratio} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## EYE.ERG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 96189-6 |
+| **COMPONENT** | Function |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Macula.right |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Electroretinogram |
+| **CLASS** | EYE.ERG |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | ERG; EYE; EYE.ERG; FCN; Finding; Findings; Func; Funct; Ophthalmology; Ophtho; Ophthy; Ordinal; Point in time; QL; Qual; Qualitative; R; R macula; Random; RT; Screen |
+| **SHORTNAME** | R macula Function ERG |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Right macula Function by ERG |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.69 |
+
+---
+
+## EYE.ERG.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79773-8 |
+| **COMPONENT** | a-wave amplitude^dark-adapted |
+| **PROPERTY** | Elpot |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Retina.right |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Electroretinogram |
+| **CLASS** | EYE.ERG.NEI |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Atrial wave; Electrical potential; ERG; EYE; EYE.ERG; EYE.ERG.NEI; Ophthalmology; Ophtho; Ophthy; Point in time; QNT; Quan; Quant; Quantitative; R; R ret; Random; RT; Voltage |
+| **SHORTNAME** | a-wave amp R ret dark-adapt ERG |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | mv |
+| **LONG_COMMON_NAME** | a-wave amplitude Right retina dark-adapted by ERG |
+| **EXAMPLE_UCUM_UNITS** | mV |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## EYE.GLASSES
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28771-4 |
+| **COMPONENT** | Type |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Corrective lens |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Lensmeter |
+| **CLASS** | EYE.GLASSES |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | by LM; Corr lens; EYE; EYE.GLASSES; Focimeter; Lensometer; LM; Nominal; Ophthalmology; Ophtho; Ophthy; Point in time; Random; Typ |
+| **SHORTNAME** | Corr lens Type by LM |
+| **LONG_COMMON_NAME** | Corrective lens Type by Lensmeter |
+| **CHANGE_REASON_PUBLIC** | Release 2.69: SYSTEM: Updated System from Glasses to Corrective lens for consistency across terms.; Release 2.68: METHOD_TYP: Moved Lensmeter (LM) from System to Method for accuracy. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## EYE.HETEROPHORIA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28765-6 |
+| **COMPONENT** | Heterophoria |
+| **PROPERTY** | Prid |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eyes |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Schober test |
+| **CLASS** | EYE.HETEROPHORIA |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Eye; EYE.HETEROPHORIA; Identity or presence; Nominal; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Point in time; Random; Vision; Visual |
+| **SHORTNAME** | Schober |
+| **LONG_COMMON_NAME** | Schober test for Heterophoria |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## EYE.HX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 64847-7 |
+| **COMPONENT** | How much of the time do you worry about your eyesight |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | EYE.HX |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | EYE.HX; Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Time worry eyesight |
+| **SHORTNAME** | Time worry eyesight |
+| **LONG_COMMON_NAME** | How much of the time do you worry about your eyesight |
+| **CHANGE_REASON_PUBLIC** | Release 2.71: METHOD_TYP: Removed Method because this concept is not specific to PhenX; ANSWER_LIST_TYPE: Updated from Normative to Example for increased usability; CLASS: Moved from PhenX to Eye.Hx b |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.36 |
+
+---
+
+## EYE.HX.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 64846-9 |
+| **COMPONENT** | At the present time, how is your eyesight, using both eyes with glasses or contact lenses, if you wear them |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | EYE.HX.NEI |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | EYE.HX; EYE.HX.NEI; Eyesight both eyes; Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen |
+| **SHORTNAME** | Eyesight both eyes |
+| **LONG_COMMON_NAME** | At the present time, how is your eyesight, using both eyes with glasses or contact lenses, if you wear them |
+| **CHANGE_REASON_PUBLIC** | Release 2.71: AnswerListId: Updated to a more general list without associated codes; Status: Moved from Trial to Active for increased usability..; METHOD_TYP: Removed Method because this concept is no |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.36 |
+
+---
+
+## EYE.LENSOMETRY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95320-8 |
+| **COMPONENT** | Sphere measurement increment |
+| **PROPERTY** | InvLen |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Lensmeter |
+| **SCALE_TYP** | Nom |
+| **CLASS** | EYE.LENSOMETRY |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Sphere measurement increment is the specificity to which a lensmeter can measure the sphere diopter, typically 0.25 diopters, but may be as small as 0.01 diopters. For example, a 0.25 diopter incremen |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | EYE; EYE.LENSOMETRY; Focimeter; Inverse Length; Lensometer; LM; Nominal; Ophthalmology; Ophtho; Ophthy; Point in time; Random; Sphere increment |
+| **SHORTNAME** | LM Sphere increment [InvLen] |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Lensmeter Sphere measurement increment |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.68 |
+
+---
+
+## EYE.OCT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 57108-3 |
+| **COMPONENT** | Macular grid.center point thickness |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | OCT |
+| **CLASS** | EYE.OCT |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | ILM-RPE (internal limiting membrane - retinal pigment epithelium) measurement at the anatomic center of the macula, see ETDRS |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Eye; EYE.OCT; Eyeball; Length; Macular grid.CP thickness; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Optical Coherence Tomography; Point in time; QNT; Quan; Quant; Qu |
+| **SHORTNAME** | Macular grid.CP thickness OCT |
+| **EXAMPLE_UNITS** | um |
+| **LONG_COMMON_NAME** | Macular grid.center point thickness by OCT |
+| **EXAMPLE_UCUM_UNITS** | um |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.29 |
+
+---
+
+## EYE.OCT.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79816-5 |
+| **COMPONENT** | Foveal thickness |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Retina.right |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | OCT |
+| **CLASS** | EYE.OCT.NEI |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | EYE; EYE.OCT; EYE.OCT.NEI; Length; Ophthalmology; Ophtho; Ophthy; Optical Coherence Tomography; Point in time; QNT; Quan; Quant; Quantitative; R; R ret; Random; RT; Thick |
+| **SHORTNAME** | R ret Foveal thickness OCT |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | um |
+| **LONG_COMMON_NAME** | Right retina Foveal thickness by OCT |
+| **EXAMPLE_UCUM_UNITS** | um |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## EYE.PX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100223-7 |
+| **COMPONENT** | Physical findings |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Retina |
+| **SCALE_TYP** | Nar |
+| **CLASS** | EYE.PX |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Exam; Examination; EYE; EYE.PX; Finding; Findings; Narrative; Phys find; Point in time; Random; Report |
+| **SHORTNAME** | Retina Phys find |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Physical findings of Retina Narrative |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## EYE.PX.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 66067-0 |
+| **COMPONENT** | Axial length |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye.left |
+| **SCALE_TYP** | Qn |
+| **CLASS** | EYE.PX.NEI |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Eye; EYE.PX; EYE.PX.NEI; Eyeball; L; L eye; Len; Length; LT; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Point in time; QNT; Quan; Quant; Quantitative; Random; Skyline |
+| **SHORTNAME** | L eye Axial length |
+| **EXAMPLE_UNITS** | mm |
+| **LONG_COMMON_NAME** | Left eye Axial length |
+| **EXAMPLE_UCUM_UNITS** | mm |
+| **CHANGE_REASON_PUBLIC** | Updated Example and UCUM units from cm to mm. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.36 |
+
+---
+
+## EYE.REFRACTION
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28661-7 |
+| **COMPONENT** | Pupillary distance.binocular |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Autorefractor.sciascopy |
+| **CLASS** | EYE.REFRACTION |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Eye; EYE.REFRACTION; Eyeball; Length; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; PD binoc; Point in time; QNT; Quan; Quant; Quantitative; Random; Vision; Visual |
+| **SHORTNAME** | Eye PD binoc Sciascopy |
+| **EXAMPLE_UNITS** | mm |
+| **LONG_COMMON_NAME** | Eye Pupillary distance.binocular Autorefractor.sciascopy |
+| **EXAMPLE_UCUM_UNITS** | mm |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## EYE.REFRACTION.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79829-8 |
+| **COMPONENT** | Axis^W cycloplegia |
+| **PROPERTY** | Angle |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye.right |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Objective refraction |
+| **CLASS** | EYE.REFRACTION.NEI |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Eye; EYE.REFRACTION; EYE.REFRACTION.NEI; Eyeball; Obj refraction; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Point in time; QNT; Quan; Quant; Quantitative; R; R eye;  |
+| **SHORTNAME** | R eye Axis--W cyclo Obj refraction |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | deg |
+| **LONG_COMMON_NAME** | Right eye Axis--W cycloplegia by Objective refraction |
+| **EXAMPLE_UCUM_UNITS** | deg |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## EYE.RETINAL_RX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 29011-4 |
+| **COMPONENT** | Argon laser coagulation Rx effects |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye.right |
+| **SCALE_TYP** | Qn |
+| **CLASS** | EYE.RETINAL_RX |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Argon LC; Argon LC effects; Cnt; Coag; Count; Eye; EYE.RETINAL_RX; Eyeball; LC; Number; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Point in time; QNT; Quan; Quant; Qu |
+| **SHORTNAME** | R eye Argon LC effects |
+| **EXAMPLE_UNITS** | um |
+| **LONG_COMMON_NAME** | Right eye Argon laser coagulation treatment effects |
+| **EXAMPLE_UCUM_UNITS** | um |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## EYE.SLITLAMP.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79857-9 |
+| **COMPONENT** | Study observation |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Anterior chamber.right |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Slit lamp biomicroscopy |
+| **CLASS** | EYE.SLITLAMP.NEI |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Ant chamber; EYE; EYE.SLITLAMP; EYE.SLITLAMP.NEI; Finding; Findings; Nominal; Ophthalmology; Ophtho; Ophthy; Point in time; R; R ant chamber; Random; RT; Study report |
+| **SHORTNAME** | Study obs R ant chamber Slit lamp |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Study observation Right anterior chamber Slit lamp biomicroscopy |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## EYE.TONOMETRY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28670-8 |
+| **COMPONENT** | Corneal indentation depth |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye.right |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Tonometry.Goldmann appl |
+| **CLASS** | EYE.TONOMETRY |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Corn indent depth; Dpth; Eye; EYE.TONOMETRY; Eyeball; Glaucoma testing; Impression tonometry; Length; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Point in time; QNT; Q |
+| **SHORTNAME** | R eye Corn indent depth Goldmann appl |
+| **EXAMPLE_UNITS** | mm |
+| **LONG_COMMON_NAME** | Right eye Corneal indentation depth Goldmann appl tonometry |
+| **EXAMPLE_UCUM_UNITS** | mm |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## EYE.TONOMETRY.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79764-7 |
+| **COMPONENT** | Tonometer |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Tonometry device |
+| **SCALE_TYP** | Nom |
+| **CLASS** | EYE.TONOMETRY.NEI |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | EYE; EYE.TONOMETRY; EYE.TONOMETRY.NEI; Glaucoma testing; Nominal; Ophthalmology; Ophtho; Ophthy; Point in time; Random; Tono device; Typ |
+| **SHORTNAME** | Type of Tonometer |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Type of Tonometer |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## EYE.US
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 24853-4 |
+| **COMPONENT** | Multisection |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye+Orbit.bilateral |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | US |
+| **CLASS** | EYE.US |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Bil; Bilat; Both; Document; Echography; Eye; Eye socket; EYE.ULTRASOUND; Eye+Orbit-Bl; Eyeball; Finding; Findings; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Orbital; |
+| **SHORTNAME** | US Eye+Orbit-Bl |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | US Eye+Orbit - bilateral |
+| **CHANGE_REASON_PUBLIC** | The scale has been changed from Nar to Doc to fit with the CDA model. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0o |
+
+---
+
+## EYE.VISUAL_FIELD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 29045-2 |
+| **COMPONENT** | Perimeter format |
+| **PROPERTY** | Prid |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Visual sensory |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Perimetry.Goldman |
+| **CLASS** | EYE.VISUAL_FIELD |
+| **VersionLastChanged** | 2.29 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Circum; Circumference; EYE; EYE.VISUAL_FIELD; Identity or presence; Nominal; Ophthalmology; Ophtho; Ophthy; Point in time; Prmtry; Random |
+| **SHORTNAME** | Perimeter format Goldman |
+| **LONG_COMMON_NAME** | Perimeter format Goldman |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## EYE.VISUAL_FIELD.NEI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79804-1 |
+| **COMPONENT** | Visual field defects |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye.right |
+| **SCALE_TYP** | Nom |
+| **CLASS** | EYE.VISUAL_FIELD.NEI |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term was developed in collaboration with the National Institute of Health's National Eye Institute (NEI) as part of an effort to standardize the data elements collected by the National Ophthalmic |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Eye; EYE.VISUAL_FIELD; EYE.VISUAL_FIELD.NEI; Eyeball; Finding; Findings; Nominal; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Point in time; R; R eye; Random; RT; Visi |
+| **SHORTNAME** | Visual field defects Eye-R |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Visual field defects Right eye |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## FERT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101238-4 |
+| **COMPONENT** | Spermatozoa.immotile/Spermatozoa^post vasectomy |
+| **PROPERTY** | NFr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Semen |
+| **SCALE_TYP** | Qn |
+| **CLASS** | FERT |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | After; Ejaculate; FERTILITY TESTING; immobile; nonmotile; Number fraction; p vas; Percent; Point in time; Post vas; PST; QNT; Quan; Quant; Quantitative; Random; Sem; Seminal fluid; Smn; SMPLS; Sperm;  |
+| **SHORTNAME** | Sperm Immotile p vas NFr Smn |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | % |
+| **LONG_COMMON_NAME** | Spermatozoa Immotile/Spermatozoa in Semen --post vasectomy |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **CHANGE_REASON_PUBLIC** | Release 2.79: COMPONENT: Triggered by Coll w SCT: This is a specific fraction case where the denominator is percentage or /100. Because the logic is that the percentage piece is captured by Property:  |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Spermatozoa Immotile/Spermatozoa post vasectomy (Sem) |
+
+---
+
+## FUNCTION
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 11324-1 |
+| **COMPONENT** | Glasgow coma score.eye opening |
+| **PROPERTY** | Fcn |
+| **TIME_ASPCT** | Enctr^frst |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | FUNCTION |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | 1st; Encounter; FCN; Func; Funct; Function; GCS eye; GCS.eye nemsis; Neuro; Neurology; Ordinal; QL; Qual; Qualitative; Screen |
+| **SHORTNAME** | GCS eye 1st enctr |
+| **LONG_COMMON_NAME** | Glasgow coma score eye opening at First encounter |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0j-a |
+
+---
+
+## GEN.US
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 33867-3 |
+| **COMPONENT** | Blood velocity/Blood velocity 2 |
+| **PROPERTY** | VelRto |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | {Circulatory system} |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | US |
+| **CLASS** | GEN.US |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This is a generic ratio of two blood velocities |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bld vel; Cardio; Cardiology; Circ; Circ sys; Echography; GENERAL ULTRASOUND; Heart Disease; II; Point in time; QNT; Quan; Quant; Quantitative; Random; Sonogram; Sonograph; Sonography; ULS; Ultrasound; |
+| **SHORTNAME** | Bld vel/Vel 2 US |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | ratio |
+| **LONG_COMMON_NAME** | Blood velocity/Blood velocity 2 by US |
+| **EXAMPLE_UCUM_UNITS** | {ratio} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.09 |
+
+---
+
+## GI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 60738-2 |
+| **COMPONENT** | Intraluminal |
+| **PROPERTY** | Pres |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Esophagus |
+| **SCALE_TYP** | Qn |
+| **CLASS** | GI |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Esophageal; Gastro; Gastroenterology; GI; Point in time; Pressure; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Intraluminal Esoph |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | mm Hg |
+| **LONG_COMMON_NAME** | Intraluminal [Pressure] Esophagus |
+| **EXAMPLE_UCUM_UNITS** | mm[Hg] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## H&P.HX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8691-8 |
+| **COMPONENT** | Travel |
+| **PROPERTY** | Hx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | H&P.HX |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | AOEObservation; H+P; H+P.HX; History; Nominal; P prime; Point in time; Random |
+| **SHORTNAME** | Hx of Travel |
+| **LONG_COMMON_NAME** | History of Travel |
+| **CHANGE_REASON_PUBLIC** | Removed History of from Component, changed Property from Find to Hx, and removed Reported Method per 8/2015 Clinical LOINC Committee decision |
+| **COMMON_TEST_RANK** | 4676 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(3) |
+
+---
+
+## H&P.HX.LAB
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 57700-7 |
+| **COMPONENT** | Hearing loss newborn screening comment-discussion |
+| **PROPERTY** | Txt |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ear |
+| **SCALE_TYP** | Nar |
+| **CLASS** | H&P.HX.LAB |
+| **VersionLastChanged** | 2.46 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Asympt; Asymptomatic; cmmt; cmnt; Com; Comm; Comments; Commt; H&P.HX.LAB; H+P; H+P.HX; Hearing; Hearing loss NBS comment; Lab; Narrative; NBS comment; New born; Otologic; P prime; Point in time; Rando |
+| **SHORTNAME** | Hearing loss NBS comment/discussion |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Hearing loss newborn screening comment/discussion |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.29 |
+| **DisplayName** | Hearing loss newborn screening comment-discussion Nar (Ear) |
+
+---
+
+## H&P.PX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100035-5 |
+| **COMPONENT** | Exam finding location |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Chest |
+| **SCALE_TYP** | Nom |
+| **CLASS** | H&P.PX |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; H+P; H+P.PX; Nominal; P prime; Point in time; Random; Thorax |
+| **SHORTNAME** | Exam finding location Chest |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Exam finding location of Chest |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## H&P.SURG PROC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10213-7 |
+| **COMPONENT** | Surgical operation note anesthesia |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nar |
+| **CLASS** | H&P.SURG PROC |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Encounter; Evaluation and management; Evaluation and management note; Finding; Findings; H+P; H+P.SURGICAL PROCEDURES; Narrative; notes; Operative note; Operative note anesthesia; P prime; Point in ti |
+| **SHORTNAME** | Operative note anesthesia |
+| **LONG_COMMON_NAME** | Surgical operation note anesthesia Narrative |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## HEM/BC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 718-7 |
+| **COMPONENT** | Hemoglobin |
+| **PROPERTY** | MCnc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Qn |
+| **CLASS** | HEM/BC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | Blood; Haemoglobin; Hb; HEMATOLOGY/CELL COUNTS; Hgb; Level; Mass concentration; Point in time; QNT; Quan; Quant; Quantitative; Random; UniversalLabOrders; WB; Whole blood |
+| **SHORTNAME** | Hgb Bld-mCnc |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | g/dL |
+| **LONG_COMMON_NAME** | Hemoglobin [Mass/volume] in Blood |
+| **EXAMPLE_UCUM_UNITS** | g/dL |
+| **COMMON_TEST_RANK** | 17 |
+| **COMMON_ORDER_RANK** | 66 |
+| **VersionFirstReleased** | 1.0 |
+| **DisplayName** | Hemoglobin (Bld) [Mass/Vol] |
+
+---
+
+## HEMODYN.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10224-4 |
+| **COMPONENT** | Hemodynamic method special circumstances |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | HEMODYN.ATOM |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Hemodynamics; HEMODYNAMICS.ATOM; Meth; Method of; Nominal; Point in time; Random; Typ |
+| **SHORTNAME** | Hemodynamic method special circumstances |
+| **LONG_COMMON_NAME** | Hemodynamic method special circumstances |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## HEMODYN.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101150-1 |
+| **COMPONENT** | Cardiac output |
+| **PROPERTY** | VRat |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart.ventricle.right |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Fick |
+| **CLASS** | HEMODYN.MOLEC |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **FORMULA** | where: CO = cardiac output VO2 = oxygen consumption AVDO2 = arteriovenous difference |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cardiac; CO; Flow; Hemodynamics; HEMODYNAMICS.MOLEC; Hrt; Hrt ventr; Point in time; QNT; Quan; Quant; Quantitative; R; Random; RT; RV; Ventricular; Volume rate; vRate |
+| **SHORTNAME** | RV Output Fick |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | L/min |
+| **LONG_COMMON_NAME** | Right ventricular Cardiac output by Fick method |
+| **EXAMPLE_UCUM_UNITS** | L/min |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## HL7.CCDA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101349-9 |
+| **COMPONENT** | Jurisdiction where advance directive is accepted |
+| **PROPERTY** | Loc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | HL7.CCDA |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | This is an observation to indicate the relevant jurisdiction that accepts an advance directive document.  The answers to the question What jurisdiction accepts this document? are provided in the follo |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Advanced; directives; HL7CCDA; Jurisdiction where adv direct accepted; Location; Nominal; Point in time; Random |
+| **SHORTNAME** | Jurisdiction where adv direct accepted |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Jurisdiction where advance directive is accepted [Location] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## HL7.CYTOGEN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 62356-1 |
+| **COMPONENT** | Chromosome analysis result in ISCN expression |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | HL7.CYTOGEN |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The chromosome analysis result, which is expressed using the International System for Human Cytogenetics Nomenclature (ISCN). |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **EXMPL_ANSWERS** | (1) 46,XX  -  this indicates a normal female  (2) 45,X[10]/46,XX[10] - this indicates that two cell lines were detected from this patient. The 45,X cell line shows the patient only contains one X sex  |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; Chrom analy; Chrom analy result (ISCN); Chromosom; Chromosomes; Cytogenetics; Finding; Findings; HL7.CYTOGEN; Karyotype; Molecular genetics; Nominal; PCR; Point in time; Random; Tissue; Tissue, |
+| **SHORTNAME** | Chrom analy result (ISCN) |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Chromosome analysis result in ISCN expression |
+| **COMMON_TEST_RANK** | 6252 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.34 |
+| **DisplayName** | Chr analysis result in ISCN expression Molgen Nom (Bld/Tiss) |
+
+---
+
+## HL7.GENETICS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 47998-0 |
+| **COMPONENT** | DNA sequence variation display name |
+| **PROPERTY** | Txt |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Nar |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | HL7.GENETICS |
+| **VersionLastChanged** | 2.56 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Thumbnail textual display convention of a single DNA Marker and its interpretation. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **EXMPL_ANSWERS** | Heterozygous c.724A>T (p.Ile242Phe), Exon 5, GLA, Presumed Pathogenic |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; Deoxyribonucleic acid; DNA change; DNA seq var; DNA seq var display name; Genetic; Genetic variant for display; Genetics; Genomic; Heredity; Heritable; HL7.GENETICS; Inherited; Molecular geneti |
+| **SHORTNAME** | DNA seq var display name |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | DNA sequence variation display name [Text] Narrative |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.21 |
+| **DisplayName** | DNA sequence variation display name Molgen Nar (Bld/Tiss) |
+
+---
+
+## HL7.SMP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104202-7 |
+| **COMPONENT** | Active medication list |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Episode |
+| **SYSTEM** | Pharmacy |
+| **SCALE_TYP** | Nom |
+| **CLASS** | HL7.SMP |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Active medication list is a list of medications that a patient is currently taken.  This list is inclusive of current prescription, otc, or administered medications |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Active med list; HL7SMP; Ident; Identifier; Nominal |
+| **SHORTNAME** | Active med list Episode Pharm |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Active medication list [Identifier] Episode Pharmacy |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## HLA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 107913-6 |
+| **COMPONENT** | HLA-A & B & C (class I) & HLA-DP & DQ & DR (class II) Ab.IgG donor specific |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser/Plas |
+| **SCALE_TYP** | Ord |
+| **CLASS** | HLA |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 2; A,B; HLA ANTIGEN; HLA class I; HLA Class I & II; HLA Class I & II Ab; HLA class II; HLA Class II Ab.IgG Don Spec; HLA I & II IgG; HLA-A+B; HLA-A+B+C; HLA-A+B+C (class I); HLA-DP+DQ+DR; HLA-DP+DQ+DR |
+| **SHORTNAME** | HLA I & II IgG SerPl Ql |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | HLA-A and B and C (class I) and HLA-DP and DQ and DR (class II) Ab.IgG donor specific [Presence] in Serum or Plasma |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.81 |
+| **DisplayName** | HLA-A and B and C (class I) and HLA-DP and DQ and DR (class II) Ab.IgG donor specific Ql |
+
+---
+
+## HNA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 72910-3 |
+| **COMPONENT** | HNA 4a-4b Ab |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | IA |
+| **CLASS** | HNA |
+| **VersionLastChanged** | 2.56 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | ABS; Aby; Antby; Anti; Antibodies; Antibody; Autoantibodies; Autoantibody; EIA; ELFA; ELISA; Enzyme immunoassay; HNA 4a/4b; Human Neutrophil Antigen; Human Neutrophil Antigens; IAA; MEIA; Ordinal; Poi |
+| **SHORTNAME** | HNA 4a/4b Ab Ser Ql IA |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | HNA 4a/4b Ab [Presence] in Serum by Immunoassay |
+| **CHANGE_REASON_PUBLIC** | The PrThr property is used for LOINC terms whose results are reported using an ordered categorical scale, regardless of whether or not an internal threshold was used to make that determination. This c |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.44 |
+| **DisplayName** | HNA 4a/4b Ab IA Ql (S) |
+
+---
+
+## HPA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 50596-6 |
+| **COMPONENT** | HPA-1a |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Nom |
+| **CLASS** | HPA |
+| **VersionLastChanged** | 2.26 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; HPA antigen; Human Platelet Antigen; Nominal; Pl-a1; Point in time; Random; Typ; WB; Whole blood; Zw-a |
+| **SHORTNAME** | HPA-1a Bld |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | HPA-1a [Type] in Blood |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.22 |
+| **DisplayName** | HPA-1a Nom (Bld) |
+
+---
+
+## HRTRATE.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101692-2 |
+| **COMPONENT** | Heart rate.maximum |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | XXX |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Measured |
+| **CLASS** | HRTRATE.ATOM |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ?Tm; Count/time; Heart beat; Heart rate max; HEART RATE.ATOM; nRate; Number rate; Number Rate = Count/Time; Pulse; QNT; Quan; Quant; Quantitative |
+| **SHORTNAME** | Maximum HR |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | {beats}/min |
+| **LONG_COMMON_NAME** | Maximum heart rate |
+| **EXAMPLE_UCUM_UNITS** | {beats}/min |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## HRTRATE.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 40442-6 |
+| **COMPONENT** | Heart rate^post exercise |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | Qn |
+| **CLASS** | HRTRATE.MOLEC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | After; Count/time; EXCZ; Heart beat; HEART RATE.MOLEC; Misc; Miscellaneous; nRate; Number rate; Number Rate = Count/Time; Other; p Exc; Point in time; PST; Pulse; QNT; Quan; Quant; Quantitative; Rando |
+| **SHORTNAME** | Heart rate p Exc |
+| **EXAMPLE_UNITS** | beats/min |
+| **LONG_COMMON_NAME** | Heart rate --post exercise |
+| **EXAMPLE_UCUM_UNITS** | {beats}/min |
+| **COMMON_TEST_RANK** | 10998 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.15 |
+
+---
+
+## HRTRATE.PSTN.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 68999-2 |
+| **COMPONENT** | Heart rate^supine |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Arterial system |
+| **SCALE_TYP** | Qn |
+| **CLASS** | HRTRATE.PSTN.MOLEC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Art sys; Count/time; Heart beat; HRTRATE.PSTN.MOLEC; Lying; nRate; Number rate; Number Rate = Count/Time; Point in time; Pulse; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Heart rate sup |
+| **EXAMPLE_UNITS** | beats/min |
+| **LONG_COMMON_NAME** | Heart rate --supine |
+| **EXAMPLE_UCUM_UNITS** | {beats}/min |
+| **COMMON_TEST_RANK** | 3642 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## HRTRATE.TIMED.MOL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103205-1 |
+| **COMPONENT** | Heart rate.mean |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | XXX |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Measured |
+| **CLASS** | HRTRATE.TIMED.MOL |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ?Tm; Average; Avg; Count/time; Heart beat; HEART RATE.TIMED.MOL; Misc; Miscellaneous; nRate; Number rate; Number Rate = Count/Time; Other; Pulse; QNT; Quan; Quant; Quantitative; Spec; To be specified  |
+| **SHORTNAME** | Mean HR |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | {beats}/min |
+| **LONG_COMMON_NAME** | Mean heart rate |
+| **EXAMPLE_UCUM_UNITS** | {beats}/min |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## ICU
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104064-1 |
+| **COMPONENT** | Intensive Care Unit specialty destination |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ICU |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ICU; ICU dest; Nominal; Point in time; Random; Spclty; Typ |
+| **SHORTNAME** | ICU spec destination after DC |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Medical specialty responsible for patient after ICU discharge |
+| **CHANGE_REASON_PUBLIC** | Release 2.78: SCALE_TYP: Existing Loinc review Scale name correction; COMPONENT: Removed the ICU abbreviation; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## IEEE Rosetta
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 60846-3 |
+| **COMPONENT** | Burst count |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cerebral cortex |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | EEG |
+| **CLASS** | IEEE Rosetta |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cereb; Cnt; Count; Ctx; Electroencephalogram; IEEE Rosetta; Neuro; Neurology; Number; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Burst count Ctx EEG |
+| **EXAMPLE_UNITS** | # |
+| **LONG_COMMON_NAME** | Burst count Cerebral cortex Electroencephalogram (EEG) |
+| **EXAMPLE_UCUM_UNITS** | {#} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## IO.TUBE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10252-5 |
+| **COMPONENT** | Biliary drain site |
+| **PROPERTY** | Anat |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | *^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | IO.TUBE |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Anatomy; IO; IO.TUBE; Nominal; Point in time; Random |
+| **SHORTNAME** | Biliary drain site |
+| **LONG_COMMON_NAME** | Biliary drain site |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## IO_IN.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8984-7 |
+| **COMPONENT** | Fluid intake |
+| **PROPERTY** | Vol |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Estimated |
+| **CLASS** | IO_IN.ATOM |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Est; estimation; Fld; IO_INTAKE; IO_INTAKE.ATOM; Misc; Miscellaneous; Other; Point in time; QNT; Quan; Quant; Quantitative; Random; Spec; To be specified in another part of the message; Unspecified; V |
+| **SHORTNAME** | Fluid intake Est |
+| **EXAMPLE_UNITS** | mL |
+| **LONG_COMMON_NAME** | Fluid intake Estimated |
+| **EXAMPLE_UCUM_UNITS** | mL |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(3) |
+
+---
+
+## IO_IN.INFUS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 76299-7 |
+| **COMPONENT** | Time interval between start of doses |
+| **PROPERTY** | Time |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Infusion pump |
+| **SCALE_TYP** | Qn |
+| **CLASS** | IO_IN.INFUS |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Time interval between the start of doses (e.g., in multi-dosing or intermittent therapies) {Harmonized Rosetta (IHE PCD Infusion Pump Work Group)} |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Inf pump; IO_IN.INFUS; IO_INTAKE; Point in time; QNT; Quan; Quant; Quantitative; Random; Started; Time int btwn start of doses |
+| **SHORTNAME** | Time int btwn dose start Inf pump |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | h |
+| **LONG_COMMON_NAME** | Time interval between start of doses Infusion pump |
+| **EXAMPLE_UCUM_UNITS** | h |
+| **CHANGE_REASON_PUBLIC** | Corrected Property from TimeDif to Time because the result is a time duration, not the difference between two durations. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## IO_IN.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10319-2 |
+| **COMPONENT** | Institution inventory number |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Enema device |
+| **SCALE_TYP** | Nom |
+| **CLASS** | IO_IN.MOLEC |
+| **VersionLastChanged** | 2.29 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Facility; Ident; Identifier; Inventory #; IO_INTAKE; IO_INTAKE.MOLEC; No; Nominal; Num; Point in time; Random |
+| **SHORTNAME** | Enema Device Inventory # |
+| **LONG_COMMON_NAME** | Enema device Institution inventory number |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## IO_IN.SUMMARY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104103-7 |
+| **COMPONENT** | Cumulative fluid balance |
+| **PROPERTY** | VRat |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | IO_IN.SUMMARY |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bal; Fld; Flow; IO_INTAKE; IO_INTAKE.SUMMARY; Point in time; QNT; Quan; Quant; Quantitative; Random; Volume rate; vRate |
+| **SHORTNAME** | Cumulative fluid bal |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | mL/H |
+| **LONG_COMMON_NAME** | Cumulative fluid balance |
+| **EXAMPLE_UCUM_UNITS** | mL/h |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## IO_IN.TIMED.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75301-2 |
+| **COMPONENT** | Fluid intake |
+| **PROPERTY** | VRat |
+| **TIME_ASPCT** | 24H |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Estimated |
+| **CLASS** | IO_IN.TIMED.MOLEC |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The estimated total amount of fluid/beverage intake consumed orally in a 24 hour period. This term was created for, but not limited in use to, the HL7 Implementation Guide for CDA Release 2: Consolida |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | 1 day; 24 hours; 24HR; Est; estimation; Fld; Flow; IO_INTAKE; IO_INTAKE.TIMED.MOLEC; QNT; Quan; Quant; Quantitative; Volume Rate; vRate |
+| **SHORTNAME** | Fluid intake 24h Est |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | ml/24 H |
+| **LONG_COMMON_NAME** | Fluid intake 24 hour Estimated |
+| **EXAMPLE_UCUM_UNITS** | mL/(24.h) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## IO_IN_SALTS+CALS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10322-6 |
+| **COMPONENT** | Potassium intake |
+| **PROPERTY** | SRat |
+| **TIME_ASPCT** | 24H |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | IO_IN_SALTS+CALS |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | 1 day; 24 hours; 24HR; IO_INTAKE_SALTS+CALORIES; k; K+; Potass; QNT; Quan; Quant; Quantitative; sRate; Substance Rate |
+| **SHORTNAME** | Potassium intake 24h |
+| **EXAMPLE_UNITS** | mol/24 H |
+| **LONG_COMMON_NAME** | Potassium intake 24 hour |
+| **EXAMPLE_UCUM_UNITS** | mol/(24.h) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## IO_OUT.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79550-0 |
+| **COMPONENT** | Voids |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Urinary tract |
+| **SCALE_TYP** | Qn |
+| **CLASS** | IO_OUT.ATOM |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Cnt; Count; IO_OUTPUT; IO_OUTPUT.ATOM; Number; Point in time; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Num voids |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | # |
+| **LONG_COMMON_NAME** | Number of voids |
+| **EXAMPLE_UCUM_UNITS** | {#} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## IO_OUT.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10323-4 |
+| **COMPONENT** | Wound drain fluid |
+| **PROPERTY** | Aper |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Lower GI tract |
+| **SCALE_TYP** | Nom |
+| **CLASS** | IO_OUT.MOLEC |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Appearance; Fld; IO_OUTPUT; IO_OUTPUT.MOLEC; LGI; Low; Nominal; Point in time; Random |
+| **SHORTNAME** | Wound drain fluid Lower GI tract |
+| **LONG_COMMON_NAME** | Wound drain fluid [Appearance] Lower GI tract |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## IO_OUT.TIMED.MOLE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 32387-3 |
+| **COMPONENT** | Chest tube output.total |
+| **PROPERTY** | VRat |
+| **TIME_ASPCT** | 24H |
+| **SYSTEM** | Pleural space.right |
+| **SCALE_TYP** | Qn |
+| **CLASS** | IO_OUT.TIMED.MOLE |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 1 day; 24 hours; 24HR; Flow; IO_OUTPUT; IO_OUTPUT.TIMED.MOLE; Lung; Pl space; Pl space-R; Pulmonary; Pulmonology; QNT; Quan; Quant; Quantitative; R; Respiratory; RT; Tot; Totl; Volume rate; vRate |
+| **SHORTNAME** | Chest tube output 24h Pl space-R |
+| **EXAMPLE_UNITS** | mL/24 H |
+| **LONG_COMMON_NAME** | Chest tube output 24 hour Pleural space - right |
+| **EXAMPLE_UCUM_UNITS** | mL/(24.h) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.07 |
+
+---
+
+## LABORDERS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82768-3 |
+| **COMPONENT** | Lab order priority |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | LABORDERS |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | Lab orders; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Typ |
+| **SHORTNAME** | Lab order priority Patient Ql |
+| **ORDER_OBS** | Observation |
+| **HL7_FIELD_SUBFIELD_ID** | TQ1-9 |
+| **LONG_COMMON_NAME** | Lab order priority [Type] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.58 |
+| **DisplayName** | Lab order priority Ql |
+
+---
+
+## MEDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104703-4 |
+| **COMPONENT** | Medication non-substitution reason |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | MEDS |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The reason given  explaining why a substitute medication was not provided. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Med non-sub reason; MEDS; Nominal; Point in time; Random |
+| **SHORTNAME** | Med non-sub reason |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Medication non-substitution reason |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## MEPS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104000-5 |
+| **COMPONENT** | Anyone in your household currently have any medical bills that you are unable to pay at all |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | MEPS |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; MEPS; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Anyone in your household currently have any medical bills that you are unable to pay at all |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## MICRO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 600-7 |
+| **COMPONENT** | Bacteria |
+| **PROPERTY** | Prid |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Culture |
+| **CLASS** | MICRO |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | Bact; Blood; C&S; Cult; Cultures; ID; Identity or presence; Infectious Disease; InfectiousDisease; Microbiology; Nominal; Point in time; Random; UniversalLabOrders; WB; Whole blood |
+| **SHORTNAME** | Bacteria Bld Cult |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Bacteria identified in Blood by Culture |
+| **CHANGE_REASON_PUBLIC** | Release 2.78: COMPONENT: Removed Identified from the component because it is implied by the Property Prid; |
+| **COMMON_TEST_RANK** | 102 |
+| **COMMON_ORDER_RANK** | 8 |
+| **VersionFirstReleased** | 1.0 |
+| **DisplayName** | Bacteria identified Cx Nom (Bld) |
+
+---
+
+## MISC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101128-7 |
+| **COMPONENT** | Theoretical limit of detection |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Calculated |
+| **CLASS** | MISC |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The theoretical limit of detection for the patient sample, which at one reference laboratory, is calculated as 20 abnormal cell events divided by the actual number of non-aggregate events collected fr |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Calc; Calculation; Cnt; Count; Misc; Miscellaneous; Number; Other; Point in time; QNT; Quan; Quant; Quantitative; Random; Spec; To be specified in another part of the message; Unspecified |
+| **SHORTNAME** | Theoretical limit of detection Spec Calc |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | % |
+| **LONG_COMMON_NAME** | Theoretical limit of detection [#] in Specimen by calculation |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Theoretical limit of detection Calc (Specimen) [#] |
+
+---
+
+## MOLPATH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100029-8 |
+| **COMPONENT** | Cancer related multigene analysis |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Plas.cfDNA |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | MOLPATH |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Multigene analysis for cancer-related variants in plasma cell-free DNA (cfDNA)is performed by various molecular techniques, including multiplex PCR and next generation sequencing (NGS), to identify ge |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cancer multigene analysis; Document; Finding; Findings; Gene; Gene panel; Molecular genetics; Molecular pathology; MOLPATH; Multi-gene study; Multiple-gene panel test; PCR; Pl; Plasma; Plsm; Point in  |
+| **SHORTNAME** | Cancer multigene analysis Plas.cfDNA |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Cancer related multigene analysis in Plasma cell-free DNA by Molecular genetics method |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+| **DisplayName** | Cancer related multigene analysis Molgen Doc (cfDNA) |
+
+---
+
+## MOLPATH.DEL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101469-5 |
+| **COMPONENT** | HBA1+2 gene FIL deletion |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | MOLPATH.DEL |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; Del; Deletions; HBA1+2 FIL; HBA1+2 FIL del; II; Molecular genetics; Molecular pathology; MOLPATH; MOLPATH.DELETIONS; Ordinal; PCR; Point in time; PR; QL; Qual; Qualitative; Random; Screen; WB;  |
+| **SHORTNAME** | HBA1+2 FIL Del Bld Ql |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | HBA1+2 gene FIL deletion [Presence] in Blood by Molecular genetics method |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | HBA1+2 gene FIL del Molgen Ql (Bld) |
+
+---
+
+## MOLPATH.DELDUP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101224-4 |
+| **COMPONENT** | PKD1 gene & PKD2 gene deletion+duplication |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | MLPA |
+| **CLASS** | MOLPATH.DELDUP |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Amplification; APKD2; Blood; Del; Del+Dup; Deletions; Document; Dp; Finding; Findings; Molecular pathology; MOLPATH; MOLPATH.DELDUP; PBP; Pc-1; PC2; Pc-2; PKD1 + PKD2; PKD1+PKD2 gene; PKD4; Point in t |
+| **SHORTNAME** | PKD1 + PKD2 Del+Dup Bld/T MLPA |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | PKD1 and PKD2 gene deletion and duplication mutation analysis in Blood or Tissue by MLPA |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | PKD1 and PKD2 gene del and dup mutation analysis MLPA Doc (Bld/Tiss) |
+
+---
+
+## MOLPATH.INV
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 70291-0 |
+| **COMPONENT** | inv(16)(p13.1;q22.1)(MYH11,CBFB) fusion transcript |
+| **PROPERTY** | Arb |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | MOLPATH.INV |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term is used to identify a leukemia causing inversion on chromosome 16 resulting in gene fusion between CBFB (16q22) and MYH11 (16p13) genes.  The term was created for (but not limited to) DNA Te |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **EXMPL_ANSWERS** | Positive/Negative |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Acute myeloid leukemia; AML; Arbitrary; Blood; DNA; gene fusion; gene translocation; inv(16)(CBFB,MYH11) gene inversion; inv(16)(p13;q22); Inversion 16; Molecular genetics; Molecular pathology; MOLPAT |
+| **SHORTNAME** | inv(16)(p13;q22) Bld/T Ql |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | inv(16)(p13.1;q22.1)(MYH11,CBFB) fusion transcript [Presence] in Blood or Tissue by Molecular genetics method |
+| **COMMON_TEST_RANK** | 5684 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.40 |
+| **DisplayName** | inv(16)(p13.1;q22.1)(MYH11,CBFB) fusion transcript Molgen Ql (Bld/Tiss) |
+
+---
+
+## MOLPATH.MISC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101239-2 |
+| **COMPONENT** | Mean chromosome banding resolution |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Banding |
+| **CLASS** | MOLPATH.MISC |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The mean banding resolution (i.e., number of bands) obtained for chromosome analysis. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Average; Avg; Blood; Chromosom; Chromosomes; Cnt; Count; Mean chr band resolution; MISC; Miscellaneous molecular pathology; Molecular pathology; MOLPATH; Number; Point in time; QNT; Quan; Quant; Quant |
+| **SHORTNAME** | Mean chr band resolution Bld/T Banding |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | # |
+| **LONG_COMMON_NAME** | Mean chromosome banding resolution [#] in Blood or Tissue by Banding |
+| **EXAMPLE_UCUM_UNITS** | {#} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Mean chromosome banding resolution Banding (Bld/Tiss) [#] |
+
+---
+
+## MOLPATH.MUT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100019-9 |
+| **COMPONENT** | ALK gene targeted mutation analysis |
+| **PROPERTY** | Prid |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | MOLPATH.MUT |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ALK receptor tyrosine kinase; Anaplastic lymphoma kinase (Ki-1); Blood; Identity or presence; Molecular genetics; Molecular pathology; MOLPATH; MOLPATH.MUTATIONS; Mut; Mut Anl; Mutations; NBLST3; Nomi |
+| **SHORTNAME** | ALK gene Mut Anl Bld/T |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | ALK gene mutations found [Identifier] in Blood or Tissue by Molecular genetics method Nominal |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+| **DisplayName** | ALK gene targeted mutation analysis Molgen Nom (Bld/Tiss) |
+
+---
+
+## MOLPATH.NUCREPEAT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 21754-7 |
+| **COMPONENT** | AR gene.CAG repeats |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | MOLPATH.NUCREPEAT |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | AIS; androgen receptor; Androgen receptor gene; AR gene CAG Rpt; Blood; DHTR; Dihydrotestosterone receptor gene; Genetics; Heredity; Heritable; HUMARA; HYSP1; Inherited; KD; Kennedy disease; Molecular |
+| **SHORTNAME** | AR gene CAG Rpt Bld/T Ql |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | AR gene CAG repeats [Presence] in Blood or Tissue by Molecular genetics method |
+| **CHANGE_REASON_PUBLIC** | Changed Property from Arb (Arbitrary) to 'Threshold' since the results (e.g. positive, intermediate, negative) is based on the number of nucleotide repeats. Moved term from Class MOLPATH.TRINUC to MOL |
+| **COMMON_TEST_RANK** | 19134 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0m |
+| **DisplayName** | AR gene CAG repeats Molgen Ql (Bld/Tiss) |
+
+---
+
+## MOLPATH.PHARMG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100663-4 |
+| **COMPONENT** | TPMT gene c.460G>A&c.719A>G |
+| **PROPERTY** | PrThr |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | MOLPATH.PHARMG |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Ala154Thr; Blood; Molecular genetics; Molecular pathology; MOLPATH; MOLPATH.PHARMG; Ordinal; PCR; Point in time; PR; QL; Qual; Qualitative; Random; rs1800460; Screen; thiopurine S-methyltransferase; T |
+| **SHORTNAME** | TPMT gene c.460G>A&c.719A>G Bld Ql |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | TPMT gene c.460G>A and c.719A>G [Presence] in Blood by Molecular genetics method |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | TPMT gene c.460G>A&c.719A>G Molgen Ql (Bld) |
+
+---
+
+## MOLPATH.REARRANGE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101379-6 |
+| **COMPONENT** | DDIT3 gene rearrangement |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | FISH |
+| **CLASS** | MOLPATH.REARRANGE |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; C/EBP homologous protein; CHOP; DNA-damage-inducible transcript 3; Document; Finding; Findings; Fluorescent in situ hybridization; GADD153; gene fusion; Gene Fusions; Gene Rearrangements; Growt |
+| **SHORTNAME** | DDIT3 gene rearrangement Bld/T FISH |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | DDIT3 gene rearrangement in Blood or Tissue by FISH |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | DDIT3 gene rearrangement FISH Doc (Bld/Tiss) |
+
+---
+
+## MOLPATH.TRISOMY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 111735-7 |
+| **COMPONENT** | Chromosomal aneuploidy likelihood analysis |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Plas.cfDNA |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | NIPS |
+| **CLASS** | MOLPATH.TRISOMY |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | This term represents indicates the presence of an aneuploidy involving chromosome 13, 18, 21, X, or Y in the fetus, as determined by noninvasive prenatal screening (NIPS) using cell-free DNA (cfDNA) a |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Document; Finding; Findings; Molecular pathology; MOLPATH; MOLPATH.TRISOMY; Pl; Plasma; Plsm; Point in time; Random; Ts |
+| **SHORTNAME** | Chromosomal aneuploidy likelihood analysis Plas.cfDNA NIPS |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Chromosomal aneuploidy likelihood analysis in Plasma cell-free DNA by NIPS |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+| **DisplayName** | Chromosomal aneuploidy likelihood analysis NIPS Doc (cfDNA) |
+
+---
+
+## MOLPATH.TRNLOC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101395-2 |
+| **COMPONENT** | Translocation analysis |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Embryo |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | MOLPATH.TRNLOC |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Document; Finding; Findings; Molecular genetics; Molecular pathology; MOLPATH; MOLPATH.TRANSLOCATION; PCR; Point in time; Random |
+| **SHORTNAME** | Translocation analysis Embryo |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Translocation analysis in Embryo by Molecular genetics method |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Translocation analysis Molgen Doc (embryo) |
+
+---
+
+## NEMSIS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 67471-3 |
+| **COMPONENT** | Pregnancy |
+| **PROPERTY** | Hx |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | NEMSIS |
+| **VersionLastChanged** | 2.56 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **SURVEY_QUEST_TEXT** | Indication of the possibility by the patient's history of current pregnancy |
+| **SURVEY_QUEST_SRC** | EHistory.18 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Gestation; Gestations; Gravida; History; NEMSIS; Ordinal; Point in time; Pregnancies; QL; Qual; Qualitative; Random; Screen |
+| **SHORTNAME** | Hx of Pregnancy |
+| **LONG_COMMON_NAME** | History of Pregnancy |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## NEONAT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 111474-3 |
+| **COMPONENT** | Associated risk factor |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Newborn |
+| **SCALE_TYP** | Nom |
+| **CLASS** | NEONAT |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | This term represents an assessment of risk factors in newborns that may indicate an increased likelihood of physical abuse occurring after the newborn period. It is based on observational evaluation o |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Assoc; Fac; Fact; NB; NEONAT; New born; Nominal; Point in time; Random; Typ |
+| **SHORTNAME** | Associated risk factor NB |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Associated risk factor Newborn |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## NEURO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103812-4 |
+| **COMPONENT** | Patient state index |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cerebral cortex |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | EEG |
+| **CLASS** | NEURO |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | PSi (Patient State index) is a processed EEG parameter related to the effect of anesthetic agents provided during neurosurgery and major back surgery.    PSI has no units and ranges from 0 (fully supp |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cereb; Ctx; Electroencephalogram; NEURO; Point in time; PSi; QNT; Quan; Quant; Quantitative; Random; Scale; Scre |
+| **SHORTNAME** | PSi Scre Ctx EEG |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Patient state index Cerebral cortex Electroencephalogram (EEG) |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## NIH.COGNITIVE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 84439-9 |
+| **COMPONENT** | Picture Sequence Memory Test - national percentile |
+| **PROPERTY** | Prctl |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | NIH Toolbox |
+| **CLASS** | NIH.COGNITIVE |
+| **VersionLastChanged** | 2.59 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Mental health; MentalHealth; Percentile; Picture memory national prctl; Point in time; Psych; Psychiatry; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Picture memory national prctl NIH |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006-2016 National Institutes of Health and Northwestern University. Used with permission. |
+| **EXAMPLE_UNITS** | % |
+| **LONG_COMMON_NAME** | Picture Sequence Memory Test - national percentile [NIH Toolbox] |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **CHANGE_REASON_PUBLIC** | Added EXTERNAL_COPYRIGHT_NOTICE that was inadvertently omitted when the term was first released. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NIH_Tbox |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## NIH.MOTOR
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 83146-1 |
+| **COMPONENT** | Able to hold position for 50S - trial 1^eyes open+on solid surface |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | NIH Toolbox |
+| **CLASS** | NIH.MOTOR |
+| **VersionLastChanged** | 2.59 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Was participant able to hold position for 50 seconds with eyes open on a solid surface? If no, record the duration the patient held the position in seconds. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | eyes open+solid; Finding; Findings; Hold 50S trial 1; i; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Surf |
+| **SHORTNAME** | Hold 50S trial 1 eyes open+solid NIH |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006-2016 National Institutes of Health and Northwestern University. Used with permission. |
+| **LONG_COMMON_NAME** | Able to hold position for 50 seconds - trial 1 [NIH Toolbox] --eyes open and on solid surface |
+| **CHANGE_REASON_PUBLIC** | Added EXTERNAL_COPYRIGHT_NOTICE that was inadvertently omitted when the term was first released. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NIH_Tbox |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## NIH.SENSORY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 83446-5 |
+| **COMPONENT** | How difficult is it for you to read small print |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | NIH.SENSORY |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Difficulty w small print; Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen |
+| **SHORTNAME** | Difficulty w small print |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | How difficult is it for you to read small print |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## NR STATS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48178-8 |
+| **COMPONENT** | Reference change value 0.99 |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | XXX |
+| **SYSTEM** | ^Population |
+| **SCALE_TYP** | Qn |
+| **CLASS** | NR STATS |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term is used to convey the difference value between two analytical observations that are greater than or equal to 99% of all difference values. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ?Tm; Cnt; Count; Exchange; NR Stats; Number; QNT; Quan; Quant; Quantitative; RCV 0.99; Replace |
+| **SHORTNAME** | RCV 0.99 ?Tm Pop |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Reference change value 0.99 [#] in unspecified time Population |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.21 |
+| **DisplayName** | Reference change value 0.99 Unsp time (population) [#] |
+
+---
+
+## NUTRITION&DIETETICS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101807-6 |
+| **COMPONENT** | Malnutrition risk screen results indicator |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | Nutrition and dietetics |
+| **CLASS** | NUTRITION&DIETETICS |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Malnut risk scn resu; Nominal; Nutr+diet; Nutrition+Dietetics; Point in time; Random; Scn; Scr; Scrn; SDOH; Typ |
+| **SHORTNAME** | Malnut risk scn resu |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © Skipper A, Coltman A, Tomesko J, et al. Position of the Academy of Nutrition and Dietetics: Malnutrition (Undernutrition) Screening Tools for All Adults. J Acad Nutr Diet. Apr 2020;120(4):709-713. d |
+| **LONG_COMMON_NAME** | Malnutrition risk screen results indicator |
+| **CHANGE_REASON_PUBLIC** | Release 2.79: FORMULA: Removed incorrect value from formula; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | AND_MALR |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## OB.US
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 11878-6 |
+| **COMPONENT** | Fetuses |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | US |
+| **CLASS** | OB.US |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | AOEObservation; Cnt; Count; Echography; Fetal; Gyn; Gynecology; Number; OB; ObGyn; OBSTERICAL; OBSTERICAL.ULTRASOUND; Obstetrical; Obstetrics; Point in time; QNT; Quan; Quant; Quantitative; Random; So |
+| **SHORTNAME** | # Fetuses US |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | # |
+| **LONG_COMMON_NAME** | Number of fetuses by US |
+| **EXAMPLE_UCUM_UNITS** | {#} |
+| **COMMON_TEST_RANK** | 1584 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0j-a |
+
+---
+
+## OBGYN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101572-6 |
+| **COMPONENT** | Prenatal visits for this pregnancy |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | OBGYN |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Gestation; Gestations; Gravida; OBGYN; Ordinal; Point in time; Pregnancies; Prenatal visits this preg; Ql; Qual; Qualitative; Random; Screen |
+| **SHORTNAME** | Prenatal visits this preg |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Prenatal visits for this pregnancy |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## ONCOLOGY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101658-3 |
+| **COMPONENT** | Cancer staging after multimodality therapy |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cancer.XXX |
+| **SCALE_TYP** | Nom |
+| **CLASS** | ONCOLOGY |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CA; Ca staging aft multimodality thrpy; Cancer; Finding; Findings; Misc; Miscellaneous; Nominal; ONCOLOGY; Other; Point in time; Random; Spec; TNM staging after multimodality therapy; To be specified  |
+| **SHORTNAME** | Ca staging aft multimodality thrpy |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Cancer staging after multimodality therapy |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## PANEL.ABXBACT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101505-6 |
+| **COMPONENT** | Bacterial susceptibility panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld.pos growth |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | MIC.VOC detection |
+| **CLASS** | PANEL.ABXBACT |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ANTIBIOTIC SUSCEPTIBILITIES; Bact; Bacterial Susc Pnl; Bld Pos; Blood; Minimum inhibitory concentration; Pan; PANEL.ANTIBIOTIC SUSCEPTIBILITIES; Panl; Pnl; Point in time; Random; Sus; Susc; Suscept; S |
+| **SHORTNAME** | Bacterial Susc Pnl Bld Pos MIC.VOC det |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Bacterial susceptibility panel by Minimum inhibitory concentration VOC detection |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Bacterial susceptibility panel MIC.VOC detection (Pos bld culture) |
+
+---
+
+## PANEL.ADMIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104922-0 |
+| **COMPONENT** | Laboratory test details panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.ADMIN |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ADMIN; Pan; PANEL.ADMIN; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | Laboratory test details panel |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Laboratory test details panel |
+| **CHANGE_REASON_PUBLIC** | Release 2.79: ORDER_OBS: Panel code; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## PANEL.ALLERGY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100751-7 |
+| **COMPONENT** | Galactose-alpha-1,3-galactose panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser/Plas |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.ALLERGY |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | A1; Alfa; Allergen; Allergens; ALLERGY TESTING; Alpha-Gal; Alpha-Gal panel; Cerebrose; i; III; lone star tick; meat allergy; o215; Pan; PANEL.ALLERGY; Panl; Pl; Plasma; Plsm; Pnl; Point in time; Rando |
+| **SHORTNAME** | Alpha-Gal panel SerPl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Galactose-alpha-1,3-galactose (Alpha-Gal) panel - Serum or Plasma |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Galactose-alpha-1,3-galactose (Alpha-Gal) panel |
+
+---
+
+## PANEL.APTA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 76452-2 |
+| **COMPONENT** | APTA Registry patient registration panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.APTA |
+| **VersionLastChanged** | 2.56 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | APTA Reg pt reg pnl; Pan; PANEL.APTA; Panl; Physical Therapy; Pnl; PT |
+| **SHORTNAME** | APTA Reg pt reg pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | APTA Registry patient registration panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## PANEL.ART
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 47245-6 |
+| **COMPONENT** | HIV Rx Form |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Form |
+| **SCALE_TYP** | Doc |
+| **CLASS** | PANEL.ART |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The collection of specific observations that are valid when passing summary HIV and ART information as defined by the WHO Monitoring Guidelines |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | AIDS; Anti-retroviral therapy; ART; Document; Human immunodeficiency virus; Pan; Panel; PANEL.ANTIRETROVIRAL THERAPY; Panl; Pnl; Point in time; Random; Treatment |
+| **SHORTNAME** | HIV Rx Form Doc |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006 World Health Organization. Used with permission. Publications of the World Health Organization can be obtained from WHO Press, World Health Organization, 20 Avenue Appia, 1211 Geneva  |
+| **LONG_COMMON_NAME** | HIV treatment form Document |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | WHO_HIV |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.22 |
+
+---
+
+## PANEL.ATTACH.MOD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 29488-4 |
+| **COMPONENT** | LOINC attachment modifier codes |
+| **PROPERTY** | Cmplx |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **CLASS** | PANEL.ATTACH.MOD |
+| **VersionLastChanged** | 2.56 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This does NOT define an attachment. We use this class code simply to gather the three different kinds of modifier class. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 3 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Complex; Logical Observation Identifiers Names and Codes; Pan; Panel; Panl; Pnl |
+| **LONG_COMMON_NAME** | LOINC attachment modifier codes |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.03 |
+
+---
+
+## PANEL.BDYTMP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 35095-9 |
+| **COMPONENT** | Body temperature panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.BDYTMP |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Bdy temp; Bdy temp Pnl; bod; Bodies; Pan; Panel.bdytmp; Panl; Pnl; Point in time; Random; Temp |
+| **SHORTNAME** | Bdy temp Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Body temperature panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.11 |
+
+---
+
+## PANEL.BLDBK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100990-1 |
+| **COMPONENT** | Blood group antigens panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | RBC^Father |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.BLDBK |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Ag; Bld Grp Ag Pnl; BLOOD BANK; Erythrocytes; Pan; PANEL.BLOODBANK; Panl; Pnl; Point in time; Random; Red blood cells; Red blood corpusles |
+| **SHORTNAME** | Bld Grp Ag Pnl RBC Father |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Fathers Blood group antigens panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Blood group antigens panel (RBC Father) |
+
+---
+
+## PANEL.BLDBK.GENOTYPE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 92514-9 |
+| **COMPONENT** | Blood group Ag & Hemoglobin S inferred phenotype panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | PANEL.BLDBK.GENOTYPE |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | This panel is used to report a patient's predicted blood group antigen profile.  Results are based on DNA analysis of specific variants associated with each phenotype.  This panel was created for, but |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | Blood; BLOOD BANK; Blood group Ag + Hgb S inferred panel; Haemoglobin; Hb; HBs; Hgb; Hgb S; Molecular genetics; Pan; PANEL.BLDBK.GENO; PANEL.BLOODBANK; Panl; PCR; Pnl; Point in time; Random; S prime;  |
+| **SHORTNAME** | Blood group Ag + Hgb S inferred panel |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Blood group Ag and Hemoglobin S inferred panel - Blood or Tissue by Molecular genetics method |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.66 |
+| **DisplayName** | Blood group Ag & Hemoglobin S predicted phenotype panel Molgen (Bld/Tiss) |
+
+---
+
+## PANEL.BP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 34553-8 |
+| **COMPONENT** | Orthostatic blood pressure panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Arterial system |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.BP |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Art sys; BP; BP Pnl; Orthostatic BP; Orthostatic BP Pnl; Pan; PANEL.BP; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | Orthostatic BP Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Orthostatic blood pressure panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.10 |
+
+---
+
+## PANEL.CARDIAC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100224-5 |
+| **COMPONENT** | Segmental wall motion panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Heart.ventricle.left |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | US |
+| **CLASS** | PANEL.CARDIAC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Left ventricular (LV) segmental wall motion (SWM) is used to evaluate LV function. Each segment corresponds to a specific perfusion territory and is evaluated independently. A 17-segment model is usua |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cardiac; Cardiac LV SWM Pnl; Echography; Hrt; Hrt ventr; L; LT; LV; Pan; PANEL.CARDIAC; Panl; Pnl; Point in time; Random; Segment; Segment appearance; Sonogram; Sonograph; Sonography; SWM; ULS; Ultras |
+| **SHORTNAME** | Cardiac LV SWM Pnl LV US |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Cardiac left ventricular segmental wall motion by echo panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## PANEL.CELLMARK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100429-0 |
+| **COMPONENT** | Lipopolysaccharide-responsive beige-like anchor protein deficiency panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.CELLMARK |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; CELL MARKERS; LRBA deficiency panel; Pan; PANEL.CELLMARK; Panl; Pnl; Point in time; PR; Prot; Random; WB; Whole blood |
+| **SHORTNAME** | LRBA deficiency panel Bld |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | LRBA deficiency panel - Blood |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | LRBA deficiency panel (Bld) |
+
+---
+
+## PANEL.CHAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100968-7 |
+| **COMPONENT** | Bovine Tuberculosis Comparative Cervical Test panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Skin |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.CHAL |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Beef; Bovine Tub comp cervical tst panel; Cerv; CHEMISTRY.CHALLENGE TESTING; Dermatologic; Epidermis; Integument; Pan; PANEL.CHALLENGE; Panl; Pnl; Point in time; Random; Skn; TB |
+| **SHORTNAME** | Bovine Tub comp cervical tst panel Skin |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Bovine tuberculosis comparative cervical test panel - Skin |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Bovine tuberculosis comparative cervical test panel (Skin) |
+
+---
+
+## PANEL.CHEM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100149-4 |
+| **COMPONENT** | 6-oxo-piperidine-2-carboxylate & 6(R+S)-oxo-propylpiperidine-2-carboxylate panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Urine+Ser/Plas |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.CHEM |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | 6-oxo-pipecolinic acid and 6(R+S)-2-oxo-propylpipecolinic acid levels are measured in urine and plasma for the diagnosis and therapy of pyridoxin dependent epilepsy (PDE). |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 2-OPP; 2-oxopropylpiperidine-2-carobylic acid; 2S,6S-/2S,6R-oxopropylpiperidine-2-carboxylic acid; 6(R+S)-OPP; 6-oxo-PIP + 6(R+S)-OPP; 6-oxo-pipecolic acid; 6-oxo-piperidine-2-carboxylic acid; Chemist |
+| **SHORTNAME** | 6-oxo-PIP + 6(R+S)-OPP Ur+SerPl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | 6-oxo-piperidine-2-carboxylate and 6(R+S)-oxo-propylpiperidine-2-carboxylate panel - Urine and Serum or Plasma |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+| **DisplayName** | 6-oxo-piperidine-2-carboxylate and 6(R+S)-oxo-propylpiperidine-2-carboxylate panel (U+S/P) |
+
+---
+
+## PANEL.CLIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100062-9 |
+| **COMPONENT** | Standard Dermatology Outcome Measures panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | SDOM |
+| **CLASS** | PANEL.CLIN |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Standard Dermatology Outcome Measures (SDOM) is a modification of the Skindex Mini questionnaire [LOINC: 96034-4] and includes patient reported scores for itch, response to treatment, treatment ad |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CLIN; Pan; PANEL.CLINICAL; Panl; Pnl; Point in time; Random; SDOM panel |
+| **SHORTNAME** | SDOM panel |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2016 The Regents of the University of California and Emory University. Used with permission. |
+| **LONG_COMMON_NAME** | Standard Dermatology Outcome Measures panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | UCSF_EU |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.CLIN.RISK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101438-0 |
+| **COMPONENT** | CHAMPS pediatric fall risk assessment |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | CHAMPS |
+| **CLASS** | PANEL.CLIN.RISK |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CLIN; CLIN.RISK; Pan; Panel; PANEL.CLINICAL; Panl; PEDS; Pnl; Point in time; Random |
+| **SHORTNAME** | CHAMPS ped fall risk |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006 Razmus & Wilson. Used with permission. |
+| **LONG_COMMON_NAME** | CHAMPS pediatric fall risk assessment |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | R&W |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## PANEL.CLIN.VET
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 106804-8 |
+| **COMPONENT** | Feline Grimace Scale Panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Animal |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Feline grimace scale |
+| **CLASS** | PANEL.CLIN.VET |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CLIN; CLIN.VET; FGS; FGS panel; Pan; PANEL.CLIN.VET; PANEL.CLINICAL; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | FGS panel |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | FELINE GRIMACE SCALE © 2019 UNIVERSITE DE MONTREAL. Used with permission. |
+| **LONG_COMMON_NAME** | Feline Grimace Scale Panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | UDMFGS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.79 |
+
+---
+
+## PANEL.COAG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101790-4 |
+| **COMPONENT** | Platelet function panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Plas |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Coag |
+| **CLASS** | PANEL.COAG |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Closure time; Closure Tme; Clot; Clottable; COAGULATION; Coagulation assay; FCN; Func; Funct; Pan; PANEL.COAGULATION; Panl; Pl; Plasma; Platelet Fn Pnl; Platelets; Platelt; Plsm; Plt; Pnl; Point in ti |
+| **SHORTNAME** | Platelet Fn Pnl in plas |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Platelet function profile in plasma |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.75 |
+| **DisplayName** | Platelet function panel Coag (P) |
+
+---
+
+## PANEL.CV
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 45033-8 |
+| **COMPONENT** | Cardiovascular assessment panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.CV |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CV assess; CV Assessment Pnl; Pan; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | CV Assessment + EKG Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Cardiovascular physiologic and EKG assessment panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.17 |
+
+---
+
+## PANEL.DEVICES
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 43142-9 |
+| **COMPONENT** | Height measurement device panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.DEVICES |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Height Measurement Device Pnl; Pan; Panel.devices; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | Height Measurement Device Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Height measurement device panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.16 |
+
+---
+
+## PANEL.DOC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100971-1 |
+| **COMPONENT** | Clinical record panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.DOC |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Clin rec panel; Pan; PANEL.DOC; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | Clin rec panel |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Clinical record panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.74 |
+
+---
+
+## PANEL.DRUG/TOX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100734-3 |
+| **COMPONENT** | traMADol & metabolites panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Urine |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Confirm |
+| **CLASS** | PANEL.DRUG/TOX |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cfm; CNFR; CNFRM; Conf; Confirmation; Confirmatory; DRUG/TOXICOLOGY; Drugs; GCMS; LC/MS/MS; Metabolite; Metb; Pan; PANEL.DRUG & TOXICOLOGY; Panl; Pnl; Point in time; Random; Tramal; UA; Ultram; UR; Ur |
+| **SHORTNAME** | Ur Cfm |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | traMADol and Metabolites Panel - Urine by Confirmatory method |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | traMADol and Metabolites Panel Confirm (U) |
+
+---
+
+## PANEL.ED
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 55168-9 |
+| **COMPONENT** | Data Elements for Emergency Department Systems (DEEDS) Release 1.1 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.ED |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | DEEDS; DEEDS 1.1; Emergency Department; EMERGENCY DEPARTMENT (DEEDS); EMERGENCY DEPARTMENT (DEEDS) PANEL; Pan; Panel; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | DEEDS 1.1 |
+| **LONG_COMMON_NAME** | Data Elements for Emergency Department Systems (DEEDS) Release 1.1 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.27 |
+
+---
+
+## PANEL.EYE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 57119-0 |
+| **COMPONENT** | Optical coherence tomography panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Eye |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | OCT |
+| **CLASS** | PANEL.EYE |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Eye; Eyeball; Occular; Oculis; Ophthalmologic; Ophthalmology; Ophtho; Ophthy; Optic globe; Optical coherence tomo Pnl; Optical Coherence Tomography; Pan; PANEL.EYE; Panl; Pnl; Point in time; QNT; Quan |
+| **SHORTNAME** | Optical coherence tomography Pnl |
+| **LONG_COMMON_NAME** | Optical coherence tomography panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.29 |
+
+---
+
+## PANEL.FERT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101569-2 |
+| **COMPONENT** | Semen & urine analysis fertility panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.FERT |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | FERTILITY TESTING; Misc; Miscellaneous; Other; Pan; PANEL.FERTILITY; Panl; Pnl; Point in time; Random; Spec; To be specified in another part of the message; Unspecified |
+| **SHORTNAME** | Spec |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Semen and urine analysis fertility panel - Specimen |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Semen & urine analysis fertility panel (Specimen) |
+
+---
+
+## PANEL.FUNCTION
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 35088-4 |
+| **COMPONENT** | Glasgow coma scale |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.FUNCTION |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Glasgow Coma Scale is a neurological scale for assessing a person's level of consciousness, both for initial as well as continuing assessment. A patient is assessed against the criteria of the sca |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | FCN; Func; Funct; Function; GCS; Pan; Panel; Panel.function; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | Glasgow coma scale |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Glasgow coma scale |
+| **COMMON_TEST_RANK** | 3505 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.11 |
+
+---
+
+## PANEL.H&P
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100230-2 |
+| **COMPONENT** | Routine prenatal assessment panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.H&P |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | This panel contains terms to record the routine observations that occur during prenatal visits, such as weight, fundal height, urine protein, glucose, and albumin, and fetal heart rate. [PMID: 2450612 |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | H+P; P prime; Pan; PANEL.H&P; Panl; Pnl; Point in time; Random; Routine prenatal pnl |
+| **SHORTNAME** | Routine prenatal pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Routine prenatal assessment panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## PANEL.HEM/BC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100848-1 |
+| **COMPONENT** | Cell count & Differential panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Amnio fld |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Manual count |
+| **CLASS** | PANEL.HEM/BC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | AF; Amn; Amn fl; Amnio; Amniotic flu; Amniotic fluid; Cell Cnt + Diff Pnl; Diff; Diff Pnl; Differl; Differn; HEMATOLOGY/CELL COUNTS; Manl; Pan; PANEL.HEMATOLOGY& CELL COUNTS; Panl; Pnl; Point in time; |
+| **SHORTNAME** | Cell Cnt + Diff Pnl Amn Manual |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Cell count and Differential panel - Amniotic fluid by Manual count |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Cell count and Differential panel Manual cnt (Amn fld) |
+
+---
+
+## PANEL.HL7.CCDA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75911-8 |
+| **COMPONENT** | Advance directives panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.HL7.CCDA |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Used to group together a set of advance directive observations, such as directives for medications, transfer of care, treatment, procedures, intubation and/or diagnostic tests. This term was created f |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Advance Directives Pnl; Advanced; HL7CCDA; Pan; Panl; Pnl; Pnl HL7 CCDA; Point in time; Random |
+| **SHORTNAME** | Advance Directives Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Advance directives panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.HL7.CYTOGEN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 62343-9 |
+| **COMPONENT** | Chromosome analysis copy number change panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Microarray |
+| **CLASS** | PANEL.HL7.CYTOGEN |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The microarray chromosome analysis for copy number change |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | arrCGH; Blood; Chrom analy; Chromosom; Chromosomes; CMA # change pnl; Cytogenetics; Exchange; Genetics; Heredity; Heritable; HL7.CYTOGEN; Inherited; Karyotype; No; Num; Pan; PANEL.HL7.CYTOGEN; Panl; P |
+| **SHORTNAME** | CMA # change pnl Microarray |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Chromosome analysis copy number change panel by Microarray |
+| **CHANGE_REASON_PUBLIC** | Updated Method from arr.CGH to Microarray based on the ISCN representation of microarray-based methods. |
+| **COMMON_TEST_RANK** | 9117 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.34 |
+| **DisplayName** | Chr analysis copy number change panel Microarray (Bld/Tiss) |
+
+---
+
+## PANEL.HL7.GENETICS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48015-2 |
+| **COMPONENT** | Individual allele panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | PANEL.HL7.GENETICS |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | A set of observations which comprise the definition of an individual allele for a gene. This is intended for use in the individual allele identification panel in genetic test reporting. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; Genetic; Genetics; Genomic; Heredity; Heritable; HL7.GENETICS; Individual Allele Pnl; Inherited; Molecular genetics; MOLPATH.GENERAL; Pan; PANEL.HL7.GENETICS; Panl; PCR; Pnl; Point in time; Ran |
+| **SHORTNAME** | Individual Allele Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Individual allele panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.21 |
+| **DisplayName** | Individual allele panel Molgen (Bld/Tiss) |
+
+---
+
+## PANEL.HLA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 102092-4 |
+| **COMPONENT** | HLA-ABDR typing panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.HLA |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | HLA Order Panels. Need to keep the system as Bld/Tiss for 3LRD and PLRD since this LOINC code will also be used for the HLA panels that are specific to the recipient results- much how like how we mode |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; HLA ANTIGEN; Human Leukocyte Antigen; Pan; PANEL.HLA; Panl; Pnl; Point in time; Random; Tissue; Tissue, unspecified; WB; Whole blood; Whole blood or Tissue |
+| **SHORTNAME** | HLA-ABDR typing Bld/T |
+| **LONG_COMMON_NAME** | HLA-ABDR typing panel - Blood or Tissue |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.77 |
+| **DisplayName** | HLA-ABDR typing panel (Bld/Tiss) |
+
+---
+
+## PANEL.HNA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 72905-3 |
+| **COMPONENT** | Neutrophil Ab & HLA Ab screen panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser/Plas |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.HNA |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Both Neutrophil antibody and HLA antibody screens are performed. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | Cytotoxic-lymphocytic antibody; Granulocytic Ab; HNA; Human Leukocyte Antigen; Human Neutrophil Antigen; Human Neutrophil Antigens; Lymphocyte antibody; Lymphocytotoxic antibody; Neut; Neutr; Neutroph |
+| **SHORTNAME** | Neutrophil+HLA Ab screen pnl SerPl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Neutrophil Ab and HLA Ab screen panel - Serum or Plasma |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.44 |
+| **DisplayName** | Neutrophil Ab and HLA Ab screen panel |
+
+---
+
+## PANEL.HPA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 50604-8 |
+| **COMPONENT** | HPA panel |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | Nom |
+| **CLASS** | PANEL.HPA |
+| **VersionLastChanged** | 2.22 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; HPA antigen; HPA Pnl; Human Platelet Antigen; Nominal; Pan; PANEL.HPA; Panl; Platelet antigen genotyping panel; Pnl; Point in time; Random; Typ; WB; Whole blood |
+| **SHORTNAME** | HPA Pnl Bld |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | HPA panel [Type] in Blood |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.22 |
+| **DisplayName** | HPA panel Nom (Bld) |
+
+---
+
+## PANEL.IEEE ROSETTA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75885-4 |
+| **COMPONENT** | IEEE Rosetta panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | - |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.IEEE ROSETTA |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | IEEE Rosetta Pnl; Pan; PANEL.IEEE ROSETTA; Panl; Pnl |
+| **SHORTNAME** | IEEE Rosetta Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | IEEE 11073 Rosetta panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Convenience group |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## PANEL.IO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 34536-3 |
+| **COMPONENT** | Fluid intake & output panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | 24H |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.IO |
+| **VersionLastChanged** | 2.38 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 1 day; 24 hours; 24HR; Fld; Fluid IO Pnl; IO; Pan; PANEL.IO; Panl; Pnl |
+| **SHORTNAME** | Fluid IO Pnl 24h |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Fluid intake and output panel 24 hour |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.10 |
+
+---
+
+## PANEL.MEDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104825-5 |
+| **COMPONENT** | Medication strength presentation information |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Medication |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.MEDS |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The strength of a medication presented as a ratio or fraction with a numerator and denominator. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Med; Med strength; Med strength present info; MEDS; Pan; Panel; PANEL.MEDS; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | Med strength present info Medication |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Medication strength presentation information Medication |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## PANEL.MICRO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100088-4 |
+| **COMPONENT** | Taenia solium larva Ab bands panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | IB |
+| **CLASS** | PANEL.MICRO |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blt; Cysticercosis; Cysticercus; Immune blot; Immunobl; Immunoblot; Microbiology; Pan; PANEL.MICROBIOLOGY; Panl; Pnl; Point in time; Random; RIBA; Serum; SR; T sol; T sol lar; T solium; T solium Ab ba |
+| **SHORTNAME** | T solium Ab bands Pnl Ser IB |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Taenia solium larva Ab bands panel - Serum by Immunoblot |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+| **DisplayName** | Taenia solium larva Ab bands panel IB (S) |
+
+---
+
+## PANEL.MISC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 11529-5 |
+| **COMPONENT** | Surgical pathology study |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | Surgical pathology |
+| **CLASS** | PANEL.MISC |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | Document; Finding; Findings; MISC; Pan; Panel; PANEL.MISC; Panl; Path; Path study; Pnl; Point in time; Random; Study report; Surg; Surg Path Study; Surg Pathology; UniversalLabOrders |
+| **SHORTNAME** | Surgical pathology study |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Surgical pathology study |
+| **CHANGE_REASON_PUBLIC** | Release 2.75: PanelType: Missing panel type; CLASS: Incorrect class; Release 2.72: COMPONENT: Update naming convention for studies.; CLASS: Greater specification.; |
+| **COMMON_TEST_RANK** | 384 |
+| **COMMON_ORDER_RANK** | 70 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 1.0j-a |
+| **DisplayName** | Surgical pathology study |
+
+---
+
+## PANEL.MOLPATH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101471-1 |
+| **COMPONENT** | Alpha globin gene deletion panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.MOLPATH |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Alfa; Blood; Molecular pathology; MOLPATH; Pan; Panel.molpath; Panl; Pnl; Point in time; Random; WB; Whole blood |
+| **SHORTNAME** | Alpha globin gene deletion panel Bld |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Alpha globin gene deletion panel - Blood |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Alpha globin gene deletion panel (Bld) |
+
+---
+
+## PANEL.MOLPATH.PHARMG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 54450-2 |
+| **COMPONENT** | CYP2C9 & VKORC1 panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld/Tiss |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Molgen |
+| **CLASS** | PANEL.MOLPATH.PHARMG |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; CYP2C9 + VKORC1 Pnl; Molecular genetics; Molecular pathology; MOLPATH; MOLPATH.PHARMG; Pan; Panel.molpath; Panel.molpath.pharmg; Panl; PCR; Pnl; Point in time; Random; Tissue; Tissue, unspecifi |
+| **SHORTNAME** | CYP2C9 + VKORC1 Pnl Bld/T |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | CYP2C9 and VKORC1 panel - Blood or Tissue by Molecular genetics method |
+| **CHANGE_REASON_PUBLIC** | Release 2.67:  CLASS: Updated to PANEL.MOLPATH.PHARMG, the more representative LOINC Class for this concept. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.27 |
+| **DisplayName** | CYP2C9 and VKORC1 panel Molgen (Bld/Tiss) |
+
+---
+
+## PANEL.NEMSIS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 67658-5 |
+| **COMPONENT** | EMS exposures or injuries of EMS personnel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Provider |
+| **SCALE_TYP** | Nar |
+| **METHOD_TYP** | NEMSIS |
+| **CLASS** | PANEL.NEMSIS |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | e.g. EMT exposure, needle stick, etc |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **SURVEY_QUEST_SRC** | EExposure-Injuries |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Emergency Medical Service(s); EMS; Expos inj EMS person; Narrative; National EMS Information Services; NEMSIS; Pan; Panel; PANEL.NEMSIS; Panl; Pnl; Point in time; Random; Report |
+| **SHORTNAME** | Expos inj EMS person Provider NEMSIS |
+| **LONG_COMMON_NAME** | EMS exposures or injuries of EMS personnel Provider Narrative NEMSIS |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## PANEL.NEONAT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101967-8 |
+| **COMPONENT** | Neonatal infant pain scale panel (NIPS) |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NIPS |
+| **CLASS** | PANEL.NEONAT |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Neonatal Infant Pain Scale (NIPS) is a behavioral pain scale that was developed by the Children's Hospital of Eastern Ontario.  It can be utilized with both full-term and pre-term infants.  CHEO r |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | NIPS panel; Pan; PANEL.NEONAT; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | NIPS panel |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 1989, Children's Hospital of Eastern Ontario. Used with permission. |
+| **LONG_COMMON_NAME** | Neonatal infant pain scale panel (NIPS) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CHEO_NIPS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## PANEL.NEURO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 98604-2 |
+| **COMPONENT** | Nerve conduction study panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Nerve |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.NEURO |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | This panel contains individual panels that hold the collections of terms used to report the discrete results for various parts of a nerve conduction study (NCS), including sensory, motor, F-wave, repe |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | NCS; Nerve conduction study Pnl; Neuro; Neurology; Pan; PANEL.NEURO; Panl; Pnl; Point in time; Random; Study report |
+| **SHORTNAME** | Nerve conduction study Pnl Nerve |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Nerve conduction study panel Nerve |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.NIH.COGNITIVE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 84432-4 |
+| **COMPONENT** | Dimensional Change Card Sort Test |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NIH Toolbox |
+| **CLASS** | PANEL.NIH.COGNITIVE |
+| **VersionLastChanged** | 2.59 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | DCCS; Exchange; Pan; Panel; Panl; Pnl; Point in time; Random; Replace |
+| **SHORTNAME** | DCCS NIH |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006-2016 National Institutes of Health and Northwestern University. Used with permission. |
+| **LONG_COMMON_NAME** | Dimensional Change Card Sort Test [NIH Toolbox] |
+| **CHANGE_REASON_PUBLIC** | Added EXTERNAL_COPYRIGHT_NOTICE that was inadvertently omitted when the term was first released. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NIH_Tbox |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## PANEL.NIH.MOTOR
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 83141-2 |
+| **COMPONENT** | 9-Hole Pegboard Dexterity Test |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NIH Toolbox |
+| **CLASS** | PANEL.NIH.MOTOR |
+| **VersionLastChanged** | 2.59 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Pan; Panel; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | Pegboard NIH |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006-2016 National Institutes of Health and Northwestern University. Used with permission. |
+| **LONG_COMMON_NAME** | 9-Hole Pegboard Dexterity Test [NIH Toolbox] |
+| **CHANGE_REASON_PUBLIC** | Added EXTERNAL_COPYRIGHT_NOTICE that was inadvertently omitted when the term was first released. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NIH_Tbox |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## PANEL.NUTRITION&DIET
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101789-6 |
+| **COMPONENT** | Malnutrition risk screening panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Nutrition and dietetics |
+| **CLASS** | PANEL.NUTRITION&DIET |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Validated screening tool for risk malnutrition completed by a nursing professional or registered dietary nutritionist (RDN) in the acute inpatient setting. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Asympt; Asymptomatic; Nutr+diet; Nutrition+Dietetics; Nutrsksc; Nutrsksc pnl; Pan; Panl; Pnl; Point in time; Random; Scn; SDOH |
+| **SHORTNAME** | Malnut scn risk |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © Skipper A, Coltman A, Tomesko J, et al. Position of the Academy of Nutrition and Dietetics: Malnutrition (Undernutrition) Screening Tools for All Adults. J Acad Nutr Diet. Apr 2020;120(4):709-713. d |
+| **LONG_COMMON_NAME** | Malnutrition risk screening |
+| **CHANGE_REASON_PUBLIC** | Release 2.79: FORMULA: Removed incorrect value from formula; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | AND_MALR |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## PANEL.OB.US
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 35096-7 |
+| **COMPONENT** | OB ultrasound panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.OB.US |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Gyn; Gynecology; OB; OB US Pnl; ObGyn; OBSTERICAL; OBSTERICAL.ULTRASOUND; Obstetrical; Obstetrics; Pan; Panel.ob.us; Panl; Pnl; Point in time; Random; Ultrasound |
+| **SHORTNAME** | OB US Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | OB ultrasound panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.11 |
+
+---
+
+## PANEL.OBS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 24364-2 |
+| **COMPONENT** | Obstetric 1996 panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser+Bld |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.OBS |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The components of this panel were defined by HCFA (now CMS) |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **RELATEDNAMES2** | 96; Blood; Both serum and blood; Gyn; Gynecology; OB; ObGyn; Obstetric 1996 Pnl; Obstetrical; Obstetrics; Pan; PANEL.OBS; Panl; Pnl; Point in time; Pregnancy; Prenatal; Random; SerBld; Serum; Serum or |
+| **SHORTNAME** | Obstetric 1996 Pnl Ser+Bld |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Obstetric 1996 panel - Serum and Blood |
+| **CHANGE_REASON_PUBLIC** | Per discussion with ACLA, revised the Obstetric panel to correspond to the AMA requirements and to current practice (April 2011). These changes include the use of IgG rather than IgM antibodies for Ru |
+| **COMMON_TEST_RANK** | 8338 |
+| **COMMON_ORDER_RANK** | 314 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 1.0o |
+| **DisplayName** | Obstetric 1996 panel (S+Bld) |
+
+---
+
+## PANEL.ONCO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75620-5 |
+| **COMPONENT** | TNM clinical staging before treatment panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cancer.XXX |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.ONCO |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | CA; Misc; Miscellaneous; Oncology; Other; Pan; Panl; Pnl; PNL.ONCO; Point in time; Random; Spec; TNM clinical staging Pnl; To be specified in another part of the message; Tumor, node, metastasis; Tx;  |
+| **SHORTNAME** | TNM clinical staging Pnl Cancer |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | TNM clinical staging before treatment panel Cancer |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.PATH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 64433-6 |
+| **COMPONENT** | Fragile X protein (FMRP) panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Bld |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.PATH |
+| **VersionLastChanged** | 2.42 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Blood; Fragile X protein (FMRP) pnl; Pan; PANEL.PATH; Panl; Pathology; Pnl; Point in time; PR; Prot; Random; WB; Whole blood |
+| **SHORTNAME** | Fragile X protein (FMRP) pnl Bld |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Fragile X protein (FMRP) panel - Blood |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.36 |
+| **DisplayName** | Fragile X protein (FMRP) panel (Bld) |
+
+---
+
+## PANEL.PATIENT SAFETY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103764-7 |
+| **COMPONENT** | Scientific theories are trustworthy |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | PANEL.PATIENT SAFETY |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Pan; Panel; Panel.patientsafety; Panl; Patient safety; Pnl; Point in time; QL; Qual; Qualitative; Random; Sci theories are trustworthy; Screen |
+| **SHORTNAME** | Sci theories are trustworthy |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | 2014 © Nadelson, L., Jorcyk, C., Yang, D., Jarratt Smith, M., Matson, S., Cornell, K., & Husting, V. (2014). I just don't trust them: the development and validation of an assessment instrument to meas |
+| **LONG_COMMON_NAME** | Scientific theories are trustworthy |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | TSST |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## PANEL.PHENX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104559-0 |
+| **COMPONENT** | PhenX - job insecurity protocol 280301 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PhenX |
+| **CLASS** | PANEL.PHENX |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Job Insecurity measure is a measurement of the perceived stability of one's current job and ability to find jobs with similar salary and benefits. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Occupation; Pan; Panel; PANEL.PHENX; Panl; PhenX job insecur protc; Pnl; Point in time; Random; Work |
+| **SHORTNAME** | PhenX job insecur protc |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | PhenX - job insecurity protocol 280301 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## PANEL.PHR
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 55399-0 |
+| **COMPONENT** | Diabetes tracking panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.PHR |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Diabetes tracking Pnl; Pan; Panl; PHR panels; Pnl; Point in time; Random |
+| **SHORTNAME** | Diabetes tracking Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Diabetes tracking panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.27 |
+
+---
+
+## PANEL.PULM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 69999-1 |
+| **COMPONENT** | Positive airway pressure panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.PULM |
+| **VersionLastChanged** | 2.40 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.PULMONARY; Panl; PAP pnl; Pnl; Point in time; Pos; PULMONARY; Random |
+| **SHORTNAME** | PAP pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Positive airway pressure panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## PANEL.RAD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 38269-7 |
+| **COMPONENT** | Study report |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Whole body>Skeletal system |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | DXA |
+| **CLASS** | PANEL.RAD |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | bod; Bodies; Bone Densiometry; Bone Density Scan; Densiometry; DEX; DEXA; Document; Dual Energy X Ray Absorptiometry; Finding; Findings; Imaging; Pan; Panel; PANEL.RADIOLOGY; Panl; Pnl; Point in time; |
+| **SHORTNAME** | Study report Skeletal DXA |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Study report Skeletal system DXA |
+| **CHANGE_REASON_PUBLIC** | Release 2.72: ORDER_OBS: Updated Order to Both as the panel can also be resulted; Previous Releases: Updated Method from XR.DXA to DXA per the LOINC/RadLex unified model |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.14 |
+
+---
+
+## PANEL.SERO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 101447-1 |
+| **COMPONENT** | Contactin-associated protein 1 Ab.IgG & Neurofascin155 Ab.IgG4 panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser/Plas |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SERO |
+| **VersionLastChanged** | 2.75 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Assoc; CASPR1; CASPR1 Ab; CASPR1 Ab.IgG; CASPR1 IgG & Neurofascin155 IgG4 pnl; i; Immune globulin G; Immunoglobulin G; Pan; PANEL.SEROLOGY; Panl; Pl; Plasma; Plsm; Pnl; Point in time; PR; Prot; Random |
+| **SHORTNAME** | CASPR1 IgG + NF155 IgG4 pnl SerPl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Contactin-associated protein 1 Ab.IgG and Neurofascin155 Ab.IgG4 panel - Serum or Plasma |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Contactin-associated protein 1 Ab.IgG & Neurofascin155 Ab.IgG4 panel |
+
+---
+
+## PANEL.SPEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 68992-7 |
+| **COMPONENT** | Specimen-related information panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Specimen |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SPEC |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.SPEC; Panl; Pnl; Point in time; Random; Spec; Specimen-related info pnl |
+| **SHORTNAME** | Specimen-related info pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Specimen-related information panel |
+| **COMMON_TEST_RANK** | 6361 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.38 |
+| **DisplayName** | Specimen-related information panel (Spec) |
+
+---
+
+## PANEL.SURG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 81679-3 |
+| **COMPONENT** | Preoperative measures for patient safety panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURG |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Preoperative measures for patient safety include procedures that are intended to ensure patient safety in that the correct procedure is performed on the correct patient and patient body site and facil |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Pan; PANEL.SURG; Panl; Pnl; Point in time; Pre-Op; Preop measures for pt safety pnl; Random; SURG |
+| **SHORTNAME** | Preop measures for pt safety pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Preoperative measures for patient safety panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.56 |
+
+---
+
+## PANEL.SURVEY.ACT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82674-3 |
+| **COMPONENT** | Asthma Control Test |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | 4W |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | ACT |
+| **CLASS** | PANEL.SURVEY.ACT |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Asthma Control Test (ACT) is a patient-reported measure that assesses the degree of asthma control based on asthma symptoms, use of rescue medications, and effect of asthma on daily function. The  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 4 weeks; Pan; Panel; Panl; Pnl; Survey |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Portions © OPTUMInsight, Inc. Used with permission. |
+| **LONG_COMMON_NAME** | Asthma Control Test [ACT] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | OPTUM |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## PANEL.SURVEY.ADVAULT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75772-4 |
+| **COMPONENT** | Advance directives panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | ADVault |
+| **CLASS** | PANEL.SURVEY.ADVAULT |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This code includes a battery of questions established by ADVault which are answered by the patient to express their care wishes. The battery organizes a set of advance directive observations which des |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Advance Directives Pnl; Advanced; Pan; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2014 ADVault, Inc. Used with permission. |
+| **LONG_COMMON_NAME** | Advance directives panel [ADVault] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | ADVault |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.SURVEY.AHRQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 74078-7 |
+| **COMPONENT** | Medication or other substance details panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Medication |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | AHRQ |
+| **CLASS** | PANEL.SURVEY.AHRQ |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Agency for Healthcare Research and Quality; AHRQ survey Pnl; Med; Med or substance details Pnl; Othr; Pan; Panl; Pnl; Point in time; Random; Subs; Survey; SURVEY.AHRQ |
+| **ORDER_OBS** | Subset |
+| **LONG_COMMON_NAME** | Medication or other substance details panel [AHRQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.46 |
+
+---
+
+## PANEL.SURVEY.ALSFRSR
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82954-9 |
+| **COMPONENT** | Amyotrophic lateral sclerosis functional rating scale - revised (ALSFRS-R) |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | ALSFRS-R |
+| **CLASS** | PANEL.SURVEY.ALSFRSR |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The ALS Functional Rating Scale - Revised is a physician-administered rating scale designed to measure and monitor the progression of disability in patients with amyotrophic lateral sclerosis. [PMID:1 |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | ALS Functional Rating Scale - Revised; Lat; Pan; Panel; Panl; Pnl; Point in time; R prime; Random; Right; Survey |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1996 Regeneron Pharmaceuticals. Used with permission. |
+| **LONG_COMMON_NAME** | Amyotrophic lateral sclerosis functional rating scale - revised [ALSFRS-R] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | Regeneron |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## PANEL.SURVEY.AMNART
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77547-8 |
+| **COMPONENT** | American National Adult Reading Test panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.AMNART |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The American National Adult Reading Test (AmNART) is the American version of the NART, an oral reading test containing words with atypical grapheme to phoneme associations making it difficult to prono |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | AmNART; Pan; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | American National Adult Reading Test (AmNART) panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## PANEL.SURVEY.BDI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 89210-9 |
+| **COMPONENT** | Beck Depression Inventory II |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | BDI |
+| **CLASS** | PANEL.SURVEY.BDI |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Beck Depression Inventory II (BDI II) is a 21-item patient survey for the evaluation of depression symptoms. The BDI II aligns with the diagnostic criteria for depression as defined by the Diagnos |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 2; BDI II; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2017 NCS Pearson, Inc. Used with permission. |
+| **LONG_COMMON_NAME** | Beck Depression Inventory II [BDI] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | BDI_Pearson |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.64 |
+
+---
+
+## PANEL.SURVEY.BIMS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 52491-8 |
+| **COMPONENT** | Brief interview for mental status |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | BIMS |
+| **CLASS** | PANEL.SURVEY.BIMS |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Brief Interview for Mental Status (BIMS) Pnl; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Brief interview for mental status [BIMS] |
+| **CHANGE_REASON_PUBLIC** | Removed (BIMS) since included in LNC override; Added Method of BIMS to include across CMS panels |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.24 |
+
+---
+
+## PANEL.SURVEY.BPI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77564-3 |
+| **COMPONENT** | Brief Pain Inventory short form - pain interference panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | 24H |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.BPI |
+| **VersionLastChanged** | 2.52 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This panel represents the pain interference portion of the Brief Pain Inventory (BPI) Short Form. The patient is asked to describe on a scale from 0-10 how, during the past 24 hours, pain has interfer |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 day; 24 hours; 24HR; BPI Short Pain Interference Pnl; Pan; PANEL.SURVEY.BPI; Panl; Pnl; Survey; SURVEY.BPI |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1991 Dr. Charles S. Cleeland Used with permission. |
+| **LONG_COMMON_NAME** | Brief Pain Inventory Short Form - pain interference panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | BPI |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## PANEL.SURVEY.BRIEF
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95866-0 |
+| **COMPONENT** | BRIEF health literacy screening tool |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | BRIEF |
+| **CLASS** | PANEL.SURVEY.BRIEF |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Asympt; Asymptomatic; Pan; Panel; PANEL.SURVEY.BRIEF; Panl; Pnl; Point in time; Random; Scn; SDOH; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | BRIEF health literacy screening tool [BRIEF] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.69 |
+
+---
+
+## PANEL.SURVEY.CARE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 52451-2 |
+| **COMPONENT** | Continuity assessment record and evaluation tool - master document - core and supplemental items |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.CARE |
+| **VersionLastChanged** | 2.42 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Assessment; CARE; CARE Survey; Continuity Assessment Record and Evaluation (CARE) Pnl; Eval; H&P; History and physical; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **LONG_COMMON_NAME** | Continuity Assessment Record and Evaluation (CARE) tool - Master Document - Core and Supplemental Items |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.27 |
+
+---
+
+## PANEL.SURVEY.CBS-8
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99577-9 |
+| **COMPONENT** | Columbia Behavior Scale for Dementia panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | CBS-8 |
+| **CLASS** | PANEL.SURVEY.CBS-8 |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The CBS-8 (Columbia Behavior Scale for Dementia)  is used by healthcare professionals, caregivers, and other stakeholders in dementia care to improve the management and treatment of Behavioral and Psy |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CBS-8 panel; Pan; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2020 Dr. William Mansbach. Used with permission |
+| **LONG_COMMON_NAME** | Columbia Behavior Scale for Dementia panel [CBS-8] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CBS8 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.SURVEY.CDC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 68998-4 |
+| **COMPONENT** | U.S. standard certificate of live birth - 2003 revision |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **CLASS** | PANEL.SURVEY.CDC |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Certificate of live birth-2003; Document; Pan; Panel; PANEL.SURVEY.CDC; Panl; Pnl; Point in time; Random; S prime; Survey; SURVEY.CDC |
+| **LONG_COMMON_NAME** | U.S. standard certificate of live birth - 2003 revision |
+| **CHANGE_REASON_PUBLIC** | Changed Scale from - to Doc since this term was meant to represent a document in either structured format or as a whole document (e.g. PDF file). |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **AssociatedObservations** | 86347-2 |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## PANEL.SURVEY.CESD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 89207-5 |
+| **COMPONENT** | Center for Epidemiologic Studies Depression Scale-Revised |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Center for Epidemiologic Studies Depression Scale-Revised |
+| **CLASS** | PANEL.SURVEY.CESD |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Center for Epidemiologic Studies Depression Scale-Revised (CESD-R) is a 20-item self report measure for the evaluation of depression. [PMID: 20843557] |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | CESD-R; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Center for Epidemiologic Studies Depression Scale-Revised [CESD-R] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.64 |
+
+---
+
+## PANEL.SURVEY.CHILD-PUGH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 98153-0 |
+| **COMPONENT** | Child-Pugh panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.CHILD-PUGH |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Child-Pugh Score is used to estimate mortality in patients with cirrhosis. Scores for encephalopathy, ascites, bilirubin, albumin, and prothrombin time or international normalized ratio (INR) are  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Hepatology; Liver; Pan; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Child-Pugh panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.71 |
+
+---
+
+## PANEL.SURVEY.CNPI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99287-5 |
+| **COMPONENT** | Checklist of nonverbal pain indicators panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | CNPI |
+| **CLASS** | PANEL.SURVEY.CNPI |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Checklist of Nonverbal Pain Indicators (CNPI) evaluates six pain behaviors in patients with cognitive impairment. [PMID: 11706452] Each pain behavior is scored as 0 (absent) or 1 (present) both du |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CNPI panel; Nonverb pain ind; Pan; Panl; Pnl; Point in time; Random; Survey; SURVEY.CNPI |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright. Karen S. Feldt, PhD, RN, GNP-BC Used with permission |
+| **LONG_COMMON_NAME** | Checklist of nonverbal pain indicators panel [CNPI] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CNPI |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.SURVEY.COOP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75742-7 |
+| **COMPONENT** | Dartmouth COOP Functional Assessment Charts - 2 weeks |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.COOP |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | II; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2009 Trustees of Dartmouth College/COOP Project. Used with permission. |
+| **LONG_COMMON_NAME** | Dartmouth COOP Functional Assessment Charts - 2 weeks |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | COOP |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.SURVEY.COVID
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104052-6 |
+| **COMPONENT** | Lifestyle Factors panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.COVID |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Lifestyle Factors panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## PANEL.SURVEY.CSSRS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 93245-9 |
+| **COMPONENT** | Columbia - suicide severity rating scale - lifetime recent |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | C-SSRS |
+| **CLASS** | PANEL.SURVEY.CSSRS |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | C-SSRS Lifetime/Recent; Pan; Panel; PANEL.SURVEY.CSSRS; Panl; Pnl; Point in time; Random; Survey; SURVEY.CSSRS |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2008 Research Foundation of Mental Hygiene, Inc. Used with permission |
+| **LONG_COMMON_NAME** | Columbia - suicide severity rating scale - lifetime recent [C-SSRS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CSSRS_RFMH |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.67 |
+
+---
+
+## PANEL.SURVEY.DAST
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82664-4 |
+| **COMPONENT** | Drug Abuse Screening Test |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | 12Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | DAST |
+| **CLASS** | PANEL.SURVEY.DAST |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Drug Abuse Screening Test screens for over-use of prescription drugs and non-medical use of drugs over the past 12 months. This 28-item, self-report tool is used for both clinical screening and tr |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 year; 12Mos; Asympt; Asymptomatic; Drugs; Pan; Panel; Panl; Pnl; Scn; Survey |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1982 Center for Addiction and Mental Health. Used with permission. |
+| **LONG_COMMON_NAME** | Drug Abuse Screening Test [DAST] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CAMH_DAST |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## PANEL.SURVEY.DUKE-AD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 90854-1 |
+| **COMPONENT** | Duke Anxiety Depression Scale |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | DUKE-AD |
+| **CLASS** | PANEL.SURVEY.DUKE-AD |
+| **VersionLastChanged** | 2.65 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Duke Anxiety-Depression Scale (DUKE-AD) is a 7-item patient survey used to identify patients with anxiety and depression symptoms. The DUKE-AD consists of the 7 anxiety and depression items from t |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1994 Department of Community and Family Medicine, Duke University Medical Center, Durham, NC, USA. Used with permission. |
+| **LONG_COMMON_NAME** | Duke Anxiety Depression Scale [DUKE-AD] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | Duke-AD |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.65 |
+
+---
+
+## PANEL.SURVEY.EPDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 71354-5 |
+| **COMPONENT** | Edinburgh Postnatal Depression Scale |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | EPDS |
+| **CLASS** | PANEL.SURVEY.EPDS |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | PANEL |
+| **DefinitionDescription** | The Edinburgh Postnatal Depression Scale (EPDS) was as a simple means of screening for postnatal depression in health care settings. It can also be used by researchers seeking information on factors t |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panel; PANEL.SURVEY.EPDS; Panl; Pnl; Point in time; Random; Survey; SURVEY.EPDS |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © The Royal College of Psychiatrists The Edinburgh Postnatal Depression Scale may be photocopied by individual researchers or clinicians for their own use without seeking permission from the |
+| **LONG_COMMON_NAME** | Edinburgh Postnatal Depression Scale [EPDS] |
+| **CHANGE_REASON_PUBLIC** | Release 2.72: DefinitionDescription: Expanded definition to include further detail on scoring and to provide reference link.; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | RCP |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## PANEL.SURVEY.ESRD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 64323-9 |
+| **COMPONENT** | End stage renal disease facility survey - OMB CMS form 2744 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Facility |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.ESRD |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Admin; Dis; Diseases; Dz; End Stage Renal Disease (ESDR) pnl; End-stage renal disease; ESRD; ESRD CMS Form 2744; ESRD survey; Fclty; Kidney; Nephrology; Pan; Panel; Panl; Pnl; Point in time; Random; R |
+| **LONG_COMMON_NAME** | End Stage Renal Disease (ESRD) Facility Survey - OMB CMS form 2744 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.36 |
+
+---
+
+## PANEL.SURVEY.GDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48542-5 |
+| **COMPONENT** | Geriatric depression scale (GDS) panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.GDS |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Geriatric Depression Scale (GDS) is a 30-item self-report assessment used as a basic screening measure of depression in the elderly. Many translations of the original instrument are available from |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | GDS Pnl; GDS Survey; Geriatric Depression Scale; Geriatric Depression Scale (GDS) Pnl; Pan; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Geriatric depression scale (GDS) panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.21 |
+
+---
+
+## PANEL.SURVEY.GNHLTH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100197-3 |
+| **COMPONENT** | Exercise activity & pain severity panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.GNHLTH |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Activ; Actvty; EXCZ; Movements; Pan; PANEL.SURVEY.GNHLTH; Panl; Pnl; Point in time; Random; Survey; SURVEY.GNHLTH |
+| **ORDER_OBS** | Subset |
+| **LONG_COMMON_NAME** | Exercise activity and pain severity panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Organizer |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## PANEL.SURVEY.GPCOG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79104-6 |
+| **COMPONENT** | Recall |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | GPCOG |
+| **CLASS** | PANEL.SURVEY.GPCOG |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | What was the name and address I asked you to remember? |
+| **SURVEY_QUEST_SRC** | GPCOG.Patient examination_Recall |
+| **RELATEDNAMES2** | General Practitioner Assessment of Cognition; Pan; Panel; PANEL.SURVEY.GPCOG; Panl; Pnl; Point in time; Random; Survey; SURVEY.GPCOG |
+| **ORDER_OBS** | Subset |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2002 University of New South Wales as represented by the Dementia Collaborative Research Centre – Assessment and Better Care Used with permission. |
+| **LONG_COMMON_NAME** | Recall [GPCOG] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | GPCOG |
+| **PanelType** | Organizer |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## PANEL.SURVEY.HAQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 71950-0 |
+| **COMPONENT** | Health assessment questionnaire |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | HAQ |
+| **CLASS** | PANEL.SURVEY.HAQ |
+| **VersionLastChanged** | 2.65 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The HAQ was developed as a comprehensive measure of outcome in patients with a wide variety of rheumatic diseases, including rheumatoid arthritis, osteoarthritis, juvenile rheumatoid arthritis, lupus, |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | HAQ; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © Stanford University. Used with permission. |
+| **LONG_COMMON_NAME** | Health Assessment Questionnaire [HAQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | HAQ |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## PANEL.SURVEY.HARK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 76499-3 |
+| **COMPONENT** | Humiliation, Afraid, Rape, and Kick questionnaire |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | HARK |
+| **CLASS** | PANEL.SURVEY.HARK |
+| **VersionLastChanged** | 2.52 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The HARK (Humiliation, Afraid, Rape, Kick) questionnaire is a four-question, self-reported instrument that represents different components of interpersonal violence (IPV), including emotional, sexual, |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | HARK questionnaire; Pan; Panel; PANEL.SURVEY.HARK; Panl; Pnl; Point in time; Random; SDOH; Survey; SURVEY.HARK |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Humiliation, Afraid, Rape, and Kick questionnaire [HARK] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## PANEL.SURVEY.HENDRICH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104028-6 |
+| **COMPONENT** | Hendrich II fall risk |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Hendrich II |
+| **CLASS** | PANEL.SURVEY.HENDRICH |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 2; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2012 AHI of Indiana. Used with permission. |
+| **LONG_COMMON_NAME** | Hendrich II fall risk model [Hendrich II] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | AHI |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## PANEL.SURVEY.HHCC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48546-6 |
+| **COMPONENT** | Clinical Care Classification (CCC) v2.5 panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.HHCC |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This panel contains observations from the Clinical Care Classification (CCC) System Version 2.5 (2012). The CCC System is used for assessing, documenting, and classifying patient care by nurses and ot |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CCC v2.5 Pnl; Pan; PANEL.SURVEY.HHCC; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Clinical Care Classification (CCC) v2.5 panel |
+| **CHANGE_REASON_PUBLIC** | Added version to Component name to reflect that the items included in this panel are based on v2.5 of the Clinical Care Classification (CCC) System. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.21 |
+
+---
+
+## PANEL.SURVEY.HHS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 86636-8 |
+| **COMPONENT** | Family planning report - FPAR 2.0 set |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.HHS |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This panel contains the set of LOINC codes for data elements in the Family Planning Annual Report and Health Information Technology (Health IT) (FPAR 2.0) specification. The FPAR 2.0 set includes both |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Pan; Panel; PANEL.SURVEY.HHS; Panl; Pnl; Point in time; Random; Survey; SURVEY.HHS |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Family planning report - FPAR 2.0 set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Convenience group |
+| **VersionFirstReleased** | 2.61 |
+
+---
+
+## PANEL.SURVEY.HITS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95619-3 |
+| **COMPONENT** | Hurts, insults, threatens, and screams |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | 12Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | HITS |
+| **CLASS** | PANEL.SURVEY.HITS |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | PANEL |
+| **DefinitionDescription** | The Hurt-Insult-Threaten-Scream (HITS) screening tool was developed as a quick, four question, domestic violence screen. Each response has a corresponding numeric value, ranging from 1(rarely) to 5 (f |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 year; 12Mos; Pan; Panel; Panl; Pnl; SDOH; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2005 Kevin Sherin, M.D. Used with permission |
+| **LONG_COMMON_NAME** | Hurts, insults, threatens, and screams [HITS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | K_Sherin |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.69 |
+
+---
+
+## PANEL.SURVEY.HIV-SSC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48549-0 |
+| **COMPONENT** | HIV-Signs and Symptoms Checklist (SSC) panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.HIV-SSC |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | AIDS; HIV-Signs and Symptoms Checklist (SSC) Pnl; Human immunodeficiency virus; Pan; PANEL.SURVEY.HIV-SSC; Panl; Pnl; Point in time; Random; Survey; Sx |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | HIV-Signs and Symptoms Checklist (SSC) panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.21 |
+
+---
+
+## PANEL.SURVEY.IPAQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77582-5 |
+| **COMPONENT** | International Physical Activity Questionnaire self-administered short form |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | IPAQ |
+| **CLASS** | PANEL.SURVEY.IPAQ |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The International Physical Activity Questionnaire (IPAQ) Self-Administered Short Form asks about three specific types of activity: 1. walking; 2. moderate intensity; and 3. vigorous intensity. These a |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Activ; Activity; Actvty; Exercise; IPAQ SA Short Form; Movements; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | International Physical Activity Questionnaire Self-Administered Short Form [IPAQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.61 |
+
+---
+
+## PANEL.SURVEY.LIV-HIV
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48548-2 |
+| **COMPONENT** | Living with HIV (LIV-HIV) panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.LIV-HIV |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | AIDS; Human immunodeficiency virus; Living with HIV (LIV-HIV) Pnl; Pan; PANEL.SURVEY.LIV-HIV; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Living with HIV (LIV-HIV) panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.21 |
+
+---
+
+## PANEL.SURVEY.LKSS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99583-7 |
+| **COMPONENT** | Lysholm Knee Scoring Scale |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | LKSS |
+| **CLASS** | PANEL.SURVEY.LKSS |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Lysholm Knee Scoring Scale assesses improvement, be it post-injury or post-surgery, in eight aspects of knee functionality: limp while walking, locking, pain, climbing stairs, use of support, inst |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Lower extremity joint; Pan; Panel; PANEL.SURVEY.LKSS; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Lysholm Knee Scoring Scale [LKSS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.SURVEY.MDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 45964-4 |
+| **COMPONENT** | Identification information section |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.MDS |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panel; Panl; Pnl; Point in time; Random; Survey; SURVEY.MDS |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | InterRAI holds the copyright to Version 2.0 of the RAI for long term care outside of the US. Supplemental help and contextual information for MDS items in LOINC was derived from Version 2.0 of the RAI |
+| **LONG_COMMON_NAME** | Identification information section |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | interRAI |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.17 |
+
+---
+
+## PANEL.SURVEY.MEPS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104003-9 |
+| **COMPONENT** | Medical Expenditure Panel Survey (MEPS) Health Insurance (HX) Section |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | MEPS.HX |
+| **CLASS** | PANEL.SURVEY.MEPS |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Medical Expenditure Panel Survey (MEPS) is a set of large-scale surveys of families and individuals, their medical providers, and employers across the United States. MEPS is the most complete sour |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | MEPS Health insurance; Pan; PANEL.SURVEY.MEPS; Panl; Pnl; Point in time; Random |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Medical Expenditure Panel Survey (MEPS) Health Insurance (HX) Section [MEPS.HX] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## PANEL.SURVEY.MFS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 59453-1 |
+| **COMPONENT** | Morse Fall Scale panel |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | PANEL.SURVEY.MFS |
+| **VersionLastChanged** | 2.32 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Morse Fall Scale (MFS) is a rapid and simple method of determining a patient's likelihood of falling. A large majority of nurses (82.9%) rate the scale as quick and easy to use, and 54% estimated  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; MFS; Morse Fall Score; Ordinal; Pan; PANEL.SURVEY.MFS; Panl; Pnl; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.MFS |
+| **LONG_COMMON_NAME** | Morse Fall Scale panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.32 |
+
+---
+
+## PANEL.SURVEY.MLHFQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 71939-3 |
+| **COMPONENT** | Minnesota Living with Heart Failure Questionnaire |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | MLHFQ |
+| **CLASS** | PANEL.SURVEY.MLHFQ |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Minnesota Living with Heart Failure Questionnaire (R) (MLHFQ) was designed to measure the effects of heart failure and treatments for heart failure on an individual's quality of life. The 21-item  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | MLHFQ; Pan; Panel; PANEL.MLHFQ; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright ©1986 Regents of the University of Minnesota, All rights reserved. Do not copy or reproduce without permission. LIVING WITH HEART FAILURE® is a registered trademark of the Regents of the Uni |
+| **LONG_COMMON_NAME** | Minnesota Living with Heart Failure Questionnaire [MLHFQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | MLHFQ |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## PANEL.SURVEY.MTLHLTH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100280-7 |
+| **COMPONENT** | Five Facet Mindfulness Questionnaire panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | FFMQ |
+| **CLASS** | PANEL.SURVEY.MTLHLTH |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Five Facet Mindfulness Questionnaire (FFMQ) is a self reported evaluation of five areas of mindfulness, Observing, Describing, Acting with Awareness, Nonjudging, and Nonreactivity.  The FFMQ can b |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.SURVEY.MTLHLTH; Panl; Pnl; Point in time; Random; Survey; SURVEY.MTLHLTH |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Five Facet Mindfulness Questionnaire panel [FFMQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## PANEL.SURVEY.NEURO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 111779-5 |
+| **COMPONENT** | Dental status |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.NEURO |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | NEURO; Pan; Panel; PANEL.SURVEY.NEURO; Panl; Pnl; Point in time; Random; Survey; SURVEY.NEURO |
+| **ORDER_OBS** | Subset |
+| **LONG_COMMON_NAME** | Dental status |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Organizer |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## PANEL.SURVEY.NEUROQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 67889-6 |
+| **COMPONENT** | Neuro-Qol item bank - anxiety - version 1.0 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NeuroQol |
+| **CLASS** | PANEL.SURVEY.NEUROQ |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Unpleasant thoughts and/or feelings related to fear (e.g., fearfulness, feelings of panic), helplessness, worry and hyperarousal (e.g., tension, nervousness, restlessness). |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_SRC** | NeuroQ-anx |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | NeuroQol; NeuroQol - anxiety - v1.0; Pan; Panel; PANEL.SURVEY.NEUROQ; Panl; Pnl; Point in time; Random; Survey; SURVEY.NEUROQ |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2010 David Cella, PhD. Used with permission. All of these Neuro-QOL instruments can be used at no charge. We do ask, however, that you contact Neuro-QOL project manager, Vitali Ustsinovich |
+| **LONG_COMMON_NAME** | Neuro-Qol item bank - anxiety - version 1.0 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | DC |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## PANEL.SURVEY.NHANES
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 76506-5 |
+| **COMPONENT** | Social connection and isolation panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.NHANES |
+| **VersionLastChanged** | 2.52 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Social connection and isolation panel is a set of five questions used to assess the number of types of social relationships on which a patient is connected and not isolated. Individuals receive on |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Isol; Pan; PANEL.SURVEY.NHANES; Panl; Pnl; Point in time; Random; SDOH; Survey; SURVEY.NHANES |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Social connection and isolation panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## PANEL.SURVEY.NICHQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 106345-2 |
+| **COMPONENT** | NICHQ Vanderbilt Assessment Scale - Parent Informant |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | 6Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.NICHQ |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | NICHQ Vanderbilt Assessment Scale - parent informant |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | NICHQ Scale; Pan; Panel; PANEL.SURVEY.NICHQ; Panl; Pnl; Survey; SURVEY.NICHQ |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | NICHQ Vanderbilt Assessment Scale - Parent Informant |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## PANEL.SURVEY.NIDA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95480-0 |
+| **COMPONENT** | Other substances that have caused a friend or relative or anyone else to ever express concern about your use of other substances |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NIDA |
+| **CLASS** | PANEL.SURVEY.NIDA |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_SRC** | NIDA.6j |
+| **RELATEDNAMES2** | Othr; Pan; Panel; Panl; Pnl; Point in time; Random; Rel; Survey; SURVEY.NIDA |
+| **ORDER_OBS** | Subset |
+| **LONG_COMMON_NAME** | Other substances that have caused a friend or relative or anyone else to ever express concern about your use of other substances [NIDA] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Organizer |
+| **VersionFirstReleased** | 2.69 |
+
+---
+
+## PANEL.SURVEY.NIH.EMO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 84798-8 |
+| **COMPONENT** | Perceived Stress Survey - parent report - fixed length form - ages 8-12 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NIH Toolbox |
+| **CLASS** | PANEL.SURVEY.NIH.EMO |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Len; Pan; Panel; Panl; Pnl; Point in time; Random |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006-2016 National Institutes of Health and Northwestern University. Used with permission. |
+| **LONG_COMMON_NAME** | Perceived Stress Survey - parent report - fixed length form - ages 8-12 [NIH Toolbox] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NIH_Tbox |
+| **VersionFirstReleased** | 2.66 |
+
+---
+
+## PANEL.SURVEY.NMMDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 52826-5 |
+| **COMPONENT** | Nursing management minimum data set panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Facility |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NMMDS |
+| **CLASS** | PANEL.SURVEY.NMMDS |
+| **VersionLastChanged** | 2.52 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Nursing Management Minimum Data Set (NMMDS) is a minimum collection of core variables needed by nurse managers to make decisions and compare nursing practice across institutions and geographical a |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Fclty; MDS; NMMDS Pnl; Nursing Management Minimum Data Set; Pan; PANEL.SURVEY.NMMDS; Panl; Pnl; Point in time; Random; Survey; SURVEY.NMMDS |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006 Diane Huber and Connie Delaney. Used with permission. |
+| **LONG_COMMON_NAME** | Nursing Management Minimum Data Set panel [NMMDS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NMMDS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.24 |
+
+---
+
+## PANEL.SURVEY.NORTON
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75243-6 |
+| **COMPONENT** | Norton scale panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.NORTON |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Norton Scale Pnl; Pan; PANEL.SURVEY.NORTON; Panl; Pnl; Point in time; Random; Survey; SURVEY.NORTON |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1962 Centre for Policy on Ageing (formerly NCCOP), London, UK. Reproduced with permission. |
+| **LONG_COMMON_NAME** | Norton scale panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CPA |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.48 |
+
+---
+
+## PANEL.SURVEY.NSRAS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 73790-8 |
+| **COMPONENT** | Neonatal skin risk assessment scale panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NSRAS |
+| **CLASS** | PANEL.SURVEY.NSRAS |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Neonatal Skin Risk Assessment Scale (NSRAS) was developed to assess neonates risk for skin breakdown.  It is based on the Braden Scale for Predicting Pressure Sore Risk in adults. Under each clini |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Neonatal Skin Risk Assessment Scale (NSRAS) Panel |
+| **RELATEDNAMES2** | Integument; NSRAS pnl; Pan; PANEL.SURVEY.NSRAS; Panl; Pnl; Point in time; Random; Survey; SURVEY.NSRAS |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1997 Barbara Huffines. Used with permission. |
+| **LONG_COMMON_NAME** | Neonatal skin risk assessment scale panel [NSRAS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NSRAS_BH |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.44 |
+
+---
+
+## PANEL.SURVEY.OASIS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 57041-6 |
+| **COMPONENT** | Patient history and diagnoses |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.OASIS |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | PANEL |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Hx; Outcome and assessment information set; Pan; Panel; PANEL.SURVEY.OASIS; Panl; Patient Hx; Pnl; Point in time; Random; Survey; Survey.OASIS |
+| **LONG_COMMON_NAME** | Patient history and diagnoses |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.29 |
+
+---
+
+## PANEL.SURVEY.OMAHA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48547-4 |
+| **COMPONENT** | Omaha System 2005 panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.OMAHA |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Omaha System is a comprehensive, research-based classification system designed for use in diverse community, case management, long-term care, and educational settings to enhance health care practi |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Misc; Miscellaneous; Omaha System 2005 Pnl; Other; Pan; PANEL.SURVEY.OMAHA; Panl; Pnl; Point in time; Random; Spec; Survey; To be specified in another part of the message; Unspecified |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Omaha System 2005 panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.21 |
+
+---
+
+## PANEL.SURVEY.OPTIMAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 69492-7 |
+| **COMPONENT** | Outpatient physical therapy improvement in movement assessment log |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | OPTIMAL |
+| **CLASS** | PANEL.SURVEY.OPTIMAL |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The American Physical Therapy Association's Outpatient Physical Therapy Improvement in Movement Assessment Log (OPTIMAL) is an instrument that measures difficulty and self-confidence in performing 21  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_SRC** | OPTIMAL PANEL |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | OP; OPTIMAL; OPTIMAL panel; Pan; Panel; PANEL.SURVEY.OPTIMAL; Panl; Pnl; Point in time; PT; Random; Survey; SURVEY.OPTIMAL |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2012, 2006, 2005 American Physical Therapy Association. All rights reserved. Used with permission per LOINC Terms of Use, and in addition: Any further distribution or reproduction must inc |
+| **LONG_COMMON_NAME** | Outpatient physical therapy improvement in movement assessment log [OPTIMAL] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | APTA |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## PANEL.SURVEY.ORTHOPEDICS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100159-3 |
+| **COMPONENT** | Knee Society Score pre-op panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Knee Society Score |
+| **CLASS** | PANEL.SURVEY.ORTHOPEDICS |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The new Knee Society Scoring System (KSS) integrates physician and patient derived components during the pre-operative period and post-operative period. The new KSS examines five components including  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Before; KSS; KSS Pre-Op; Lower extremity joint; Ortho; Pan; Panl; Pnl; Point in time; Random; Survey; Systemic Coronary Risk Evaluation |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © by The Knee Society. All rights reserved. Reproduced with permission. |
+| **LONG_COMMON_NAME** | Knee Society Score pre-op panel [Knee Society Score] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | KSS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## PANEL.SURVEY.PAIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 106448-4 |
+| **COMPONENT** | Part 1 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | WHYMPI |
+| **CLASS** | PANEL.SURVEY.PAIN |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | i; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Subset |
+| **LONG_COMMON_NAME** | Part 1 [WHYMPI] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Organizer |
+| **VersionFirstReleased** | 2.81 |
+| **DisplayName** | A. |
+
+---
+
+## PANEL.SURVEY.PAS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75877-1 |
+| **COMPONENT** | Patient activity scale |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PAS |
+| **CLASS** | PANEL.SURVEY.PAS |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Patient Activity Scale (PAS) questionnaire contains a combination of single measures from the Health Assessment Questionnaire (HAQ) as well as the patient's assessment of pain in the past week and |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Activ; Actvty; Movements; Pan; Panel; Panl; Patient Activity Scale; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2005 The Journal of Rheumatology. Used with permission. |
+| **LONG_COMMON_NAME** | Patient activity scale [PAS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | JRheu_PAS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.SURVEY.PASII
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75876-3 |
+| **COMPONENT** | Patient activity scale II |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PASII |
+| **CLASS** | PANEL.SURVEY.PASII |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Patient Activity Scale II (PAS-II) questionnaire contains a combination of single measures from the Health Assessment Questionnaire II (HAQ-II) as well as the patient's assessment of pain in the p |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 2; Activ; Actvty; Movements; Pan; Panel; Panl; Patient Activity Scale; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2005 The Journal of Rheumatology. Used with permission. |
+| **LONG_COMMON_NAME** | Patient activity scale II [PASII] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | JRheu_PAS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.SURVEY.PCORI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75418-4 |
+| **COMPONENT** | PCORI patient-reported outcomes common measures - core and recommended |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PROMIS |
+| **CLASS** | PANEL.SURVEY.PCORI |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The PCORI patient-reported outcomes common measures - core and recommended panel includes adult and pediatric items from PROMIS (Patient Reported Outcomes Measurement Information System), AHRQ (Agency |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Pan; Panel; Panl; Patient Reported Outcomes Information System; PCORI PRO common measures; Pnl; Point in time; promise; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2010 PROMIS Health Organization or other individuals/entities that have contributed information and materials to Assessment Center, and are being used with the permission of the copyright  |
+| **LONG_COMMON_NAME** | PCORI patient-reported outcomes common measures - core and recommended [PROMIS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | PROMIS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.SURVEY.PCORNET
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75854-0 |
+| **COMPONENT** | PCORnet common data model set - version 1.0 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PCORnet |
+| **CLASS** | PANEL.SURVEY.PCORNET |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | PANEL |
+| **DefinitionDescription** | This panel contains observations included in the National Patient-Centered Clinical Research Network Common Data Model (PCORnet CDM). The PCORnet CDM version 1.0 is used to integrate common data eleme |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Pan; Panel; PANEL.SURVEY.PCORNET; Panl; PCORnet CDM v1.0; Pnl; Point in time; Random; Survey; SURVEY.PCORNET |
+| **LONG_COMMON_NAME** | PCORnet common data model set - version 1.0 [PCORnet] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Convenience group |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## PANEL.SURVEY.PHQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 44249-1 |
+| **COMPONENT** | PHQ-9 quick depression assessment panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Reported.PHQ |
+| **CLASS** | PANEL.SURVEY.PHQ |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Patient Health Questionnaire is a self-administered version of the PRIME-MD diagnostic instrument for common mental disorders. The PHQ-9 is the depression module, which scores each of the 9 DSM-IV |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Mental health; MentalHealth; Pan; PANEL.SURVEY.PHQ; Panl; Patient Health Questionnaire; PHQ9; PHQ-9 quick depression assessment Pnl; Pnl; Point in time; Psych; Psychiatry; Random; Survey; SURVEY.PHQ |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © Pfizer Inc. All rights reserved. Developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc. No permission required to |
+| **LONG_COMMON_NAME** | PHQ-9 quick depression assessment panel [Reported.PHQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | Pfizer |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.17 |
+
+---
+
+## PANEL.SURVEY.PNDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100017-3 |
+| **COMPONENT** | Perioperative nursing data set outcomes panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PNDS |
+| **CLASS** | PANEL.SURVEY.PNDS |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Perioperative Nursing Data Set (PNDS) outcomes developed by the Association of periOperative Registered Nurses (AORN) are used to assess currently five domains in perioperative care, including saf |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panl; PNDS outcomes panel; Pnl; Point in time; Random; Survey; SURVEY.PNDS |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | ©AORN Syntegrity, Inc. Used with permission.Commercial or facility use requires a license from AORN Syntegrity or an authorized reseller. |
+| **LONG_COMMON_NAME** | Perioperative nursing data set outcomes panel [PNDS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | PNDS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.SURVEY.PROMIS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 106881-6 |
+| **COMPONENT** | PROMIS Item Bank v1.0 - Emotional Distress - Anxiety - Short Form 8a |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PROMIS |
+| **CLASS** | PANEL.SURVEY.PROMIS |
+| **VersionLastChanged** | 2.79 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The PROMIS Item Bank v1.0 - Emotional Distress - Anxiety - Short Form 8a is a collection of eight items drawn from PROMIS item bank - emotional distress - anxiety - version 1.0 (61922-1).    PROMIS® ( |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panel; PANEL.SURVEY.PROMIS; Panl; Patient Reported Outcomes Information System; Pnl; Point in time; PROMIS v1.0 - Emotion Dist - Anx - SF8a; promise; Random; Survey; SURVEY.PROMIS |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2010 PROMIS Health Organization or other individuals/entities that have contributed information and materials to Assessment Center, and are being used with the permission of the copyright  |
+| **LONG_COMMON_NAME** | PROMIS Item Bank v1.0 - Emotional Distress - Anxiety - Short Form 8a |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | PROMIS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.79 |
+
+---
+
+## PANEL.SURVEY.PROWL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99192-7 |
+| **COMPONENT** | Patient-reported outcomes with LASIK - pre-operative panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | PROWL |
+| **CLASS** | PANEL.SURVEY.PROWL |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Patient-reported outcomes with LASIK (PROWL) survey instrument is used to assess visual symptoms both before and after LASIK eye surgery to identify changes over time and to measure the impact sym |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Before; Pan; Panl; Pnl; Point in time; PROWL; PROWL pre-op; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Patient-reported outcomes with LASIK - pre-operative panel [Patient reported outcomes with LASIK] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.SURVEY.QAM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48550-8 |
+| **COMPONENT** | Quality Audit Marker (QAM) panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.QAM |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Mark; Pan; Panel.survey.QAM; Panl; Pnl; Point in time; Quality Audit Marker (QAM) Pnl; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Quality Audit Marker (QAM) panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.21 |
+
+---
+
+## PANEL.SURVEY.QRDA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 55181-2 |
+| **COMPONENT** | Quality Reporting Document Architecture panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | XXX |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.QRDA |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | HL7 Quality Reporting Document Architecture (QRDA) is a standard document format for the exchange of clinical quality measures. It is used to report quality measure data to organizations that will ana |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Misc; Miscellaneous; Other; Pan; PANEL.SURVEY.QRDA; Panl; Pnl; Point in time; QRDA; QRDA Pnl; Random; Spec; Survey; SURVEY.QRDA; To be specified in another part of the message; Unspecified |
+| **LONG_COMMON_NAME** | Quality Reporting Document Architecture panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.27 |
+
+---
+
+## PANEL.SURVEY.R-OUTCOMES
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100921-6 |
+| **COMPONENT** | User satisfaction panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | R-Outcomes |
+| **CLASS** | PANEL.SURVEY.R-OUTCOMES |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The user satisfaction panel captures patients' perception of innovation usability, effectiveness, and overall satisfaction. Each level is indicated using a traffic-light metaphor with written labels,  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.SURVEY.R-OUTCOMES; Panl; Pnl; Point in time; R prime; Random; Right; Survey; SURVEY.R-OUTCOMES |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2008-2021 R-Outcomes Ltd. All rights reserved.Users should notify Tim Benson by email: tim.benson@r-outcomes.com Used with permission |
+| **LONG_COMMON_NAME** | User satisfaction panel [R-Outcomes] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | RHO |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## PANEL.SURVEY.RFC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 46611-0 |
+| **COMPONENT** | Mental residual functional capacity (RFC) assessment form |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.RFC |
+| **VersionLastChanged** | 2.29 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Mental RFC assessment form; Pan; Panel; Panl; Pnl; Point in time; Random; Residual Functional Capacity; Residual Functional Capacity Assessment (RFC); Survey; Survey.RFC |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Mental residual functional capacity (RFC) assessment form |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.19 |
+
+---
+
+## PANEL.SURVEY.RMDQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99574-6 |
+| **COMPONENT** | Roland Morris Disability Questionnaire panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | RMDQ |
+| **CLASS** | PANEL.SURVEY.RMDQ |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Roland-Morris Disability Questionnaire (RDQ) is specifically designed for use by patients with low back pain, as an assessment of physical disability. The RDQ is comprised of 24 terms that origina |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.SURVEY.RMDQ; Panl; Pnl; Point in time; Random; RMDQ panel; Survey; SURVEY.RMDQ |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Roland Morris Disability Questionnaire panel [RMDQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.SURVEY.RSS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 105042-6 |
+| **COMPONENT** | Ramsay sedation scale |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | Reported.RSS |
+| **CLASS** | PANEL.SURVEY.RSS |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panel; PANEL.SURVEY.RSS; Panl; Pnl; Point in time; Random; Survey; SURVEY.RSS |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Ramsay sedation scale [Reported.RSS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## PANEL.SURVEY.RUDAS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 98093-8 |
+| **COMPONENT** | Rowland Universal Dementia Assessment Scale |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | RUDAS |
+| **CLASS** | PANEL.SURVEY.RUDAS |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Rowland Universal Dementia Assessment Scale was originally designed to assess dementia in the elderly across various culturally and linguistically distinct populations. The scale consists of six t |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Neuro; Neurology; Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Rowland Universal Dementia Assessment Scale [RUDAS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.71 |
+
+---
+
+## PANEL.SURVEY.SAMHSA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 68899-4 |
+| **COMPONENT** | Core behavioral and psychosocial data elements for the electronic health record |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | SAMHSA |
+| **CLASS** | PANEL.SURVEY.SAMHSA |
+| **VersionLastChanged** | 2.46 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Behav psych data elements HER; Pan; Panel; PANEL.SURVEY.SAMHSA; Panl; Pnl; Point in time; Random; SAMSHA; Substance Abuse and Mental Health Services Administration; Survey; SURVEY.SAMHSA |
+| **LONG_COMMON_NAME** | Core behavioral and psychosocial data elements for the electronic health record [SAMHSA] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## PANEL.SURVEY.SDOH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100353-2 |
+| **COMPONENT** | Norwalk Community Health Center Screening Tool |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | NCHC |
+| **CLASS** | PANEL.SURVEY.SDOH |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Norwalk Community Health Center Screening Tool contains additional questions not included in this LOINC panel |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Activity; Asympt; Asymptomatic; Exercise; Pan; Panel; Panl; Pnl; Point in time; Random; Scn; SDOH; Survey |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Norwalk Community Health Center Screening Tool [NCHC] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## PANEL.SURVEY.SEEK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95403-2 |
+| **COMPONENT** | Safe Environment for Every Kid parent questionnaire - revised |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Caregiver |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | SEEK |
+| **CLASS** | PANEL.SURVEY.SEEK |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Safe Environment for every Kid (SEEK) Parent Questionnaire - Revised (PQ-R) is a screener for parental psychosocial problems that have been show to affect child development. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Pan; Panel; Panl; Pnl; Point in time; Random; SDOH; SEEK-R; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2019 SEEK Used with permission. Please visit www.SEEKwellbeing.org to access the SEEK model and training resources. |
+| **LONG_COMMON_NAME** | Safe Environment for Every Kid parent questionnaire - revised [SEEK] Caregiver |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | SEEK |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.68 |
+
+---
+
+## PANEL.SURVEY.SLP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99788-2 |
+| **COMPONENT** | Functional Communication Measure - Cognition ages 6 or older panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | ASHA NOMS |
+| **CLASS** | PANEL.SURVEY.SLP |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.SURVEY.SLP; Panl; Pnl; Point in time; Random; SLP; Survey; SURVEY.SLP |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Functional Communication Measure - Cognition ages 6 or older panel [ASHA NOMS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## PANEL.SURVEY.UNMETHELNEED
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104040-1 |
+| **COMPONENT** | Unmet Healthcare Needs panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.SURVEY.UNMETHELNEED |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.SURVEY.UNMETHELNEED; Panl; Pnl; Point in time; Random; Survey; SURVEY.UNMETHELNEED |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Unmet Healthcare Needs panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## PANEL.SURVEY.USSGFHT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 54114-4 |
+| **COMPONENT** | Family member health history |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Family member |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | USSG-FHT |
+| **CLASS** | PANEL.SURVEY.USSGFHT |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Fam Mem; Family member health Hx; FHH; Hx; Pan; Panel; Panl; Pnl; Point in time; Random; Survey; SURVEY.USSGFHT; US Surgeon General; US Surgeon General family health portrait; USSGFHT |
+| **LONG_COMMON_NAME** | Family member health history [USSG-FHT] Family member |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.26 |
+
+---
+
+## PANEL.SURVEY.WELLRX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 93667-4 |
+| **COMPONENT** | WellRx Questionnaire - revised |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | WellRx |
+| **CLASS** | PANEL.SURVEY.WELLRX |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The WellRx Questionnaire is patient-reported screening tool for the assessment of social determinants of health. This panel represents a revised version WellRx that includes more targeted questions ab |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | WellRX Questionnaire |
+| **RELATEDNAMES2** | Pan; Panel; Panl; Pnl; Point in time; Random; Survey |
+| **ORDER_OBS** | Order |
+| **EXTERNAL_COPYRIGHT_NOTICE** | ©2016 Journal of the American Board of Family Medicine Used with permission |
+| **LONG_COMMON_NAME** | WellRx Questionnaire - revised |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | JABFM_WellRX |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.67 |
+
+---
+
+## PANEL.SURVEY.WHYMPI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 106444-3 |
+| **COMPONENT** | West Haven-Yale multidimensional pain inventory |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | WHYMPI |
+| **CLASS** | PANEL.SURVEY.WHYMPI |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The West Haven-Yale Multidimensional Pain Inventory (WHYMPI) is designed to provide a brief, psychometrically-sound, and comprehensive assessment of the important components of the chronic pain experi |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panel; PANEL.SURVEY.WHYMPI; Panl; Pnl; Point in time; Random; Survey; SURVEY.WHYMPI; WHYMPI/MPI |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | West Haven-Yale multidimensional pain inventory [WHYMPI] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.81 |
+
+---
+
+## PANEL.TIMP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 60687-1 |
+| **COMPONENT** | Test of Infant Motor Performance Version 5.1 |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.TIMP |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | GENERAL DIRECTIONS  1. All observations and test procedures should be carried out when the infant is in state 3, 4 or 5 (as described in Brazelton, TB: Neonatal Behavioral Assessment Scale. Philadelph |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panel; PANEL.TIMP; Panl; Pnl; Point in time; Random; Test of Infant Motor Performance; TIMP |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2001 IMPS, LLC. Authors: Suzann K. Campbell, Gay L. Girolami, Thubi, H. A. Kolobe, Elizabeth T. Osten, Maureen C. Lenke. All rights reserved. Used with permission. |
+| **LONG_COMMON_NAME** | Test of Infant Motor Performance Version 5.1 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | IMPS |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.34 |
+
+---
+
+## PANEL.TRAUMA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 87825-6 |
+| **COMPONENT** | National Trauma Data Standard - version 2018 set |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | {Setting} |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.TRAUMA |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | PANEL |
+| **DefinitionDescription** | This panel contains the set of LOINC codes used in the 2018 National Trauma Data Standard data dictionary, which is used as a national standard in the United States for the exchange of trauma registry |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | NTDS 2018 set; Pan; Panel; PANEL.TRAUMA; Panl; Pnl; Point in time; Random |
+| **SHORTNAME** | NTDS 2018 set |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | National Trauma Data Standard - version 2018 set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.63 |
+
+---
+
+## PANEL.TUMRRGT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 46438-8 |
+| **COMPONENT** | Cancer identification section |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **METHOD_TYP** | NAACCR v.11 |
+| **CLASS** | PANEL.TUMRRGT |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cancer ID section; North American Association of Central Cancer Registries; Pan; Panel; Panl; Pnl; Point in time; Random; TUMOR REGISTRY(NAACCR) |
+| **SHORTNAME** | Cancer ID section NAACCR v.11 |
+| **LONG_COMMON_NAME** | Cancer identification section Set NAACCR v.11 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Organizer |
+| **VersionFirstReleased** | 2.19 |
+
+---
+
+## PANEL.UA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 108289-0 |
+| **COMPONENT** | Yeast susceptibility limited panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Isolate |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | MIC |
+| **CLASS** | PANEL.UA |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Islt; Isol; LMTED; LTD; Minimum inhibitory concentration; Pan; PANEL.URINALYSIS; Panl; Pnl; Point in time; Random; Sus; Susc; Suscept; Susceptibilities; Susceptibilty; URINALYSIS; Yeast susc lim pnl |
+| **SHORTNAME** | Yeast susc lim pnl Islt MIC |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Yeast susceptibility limited panel - Isolate by Minimum inhibitory concentration (MIC) |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.81 |
+| **DisplayName** | Yeast susceptibility limited panel MIC (Isol) |
+
+---
+
+## PANEL.UPDRS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77717-7 |
+| **COMPONENT** | Unified Parkinson's Disease Rating Scale panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.UPDRS |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Dis; Diseases; Dz; Neuro; Neurology; Pan; Panl; Pnl; Point in time; Random; S prime; UPDRS Panel |
+| **SHORTNAME** | UPDRS Panel |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Unified Parkinson's Disease Rating Scale (UPDRS) panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## PANEL.US.URO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 35092-6 |
+| **COMPONENT** | Urology testicular ultrasound |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.US.URO |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; Panel; Panel.us.uro; Panl; Pnl; Point in time; Random; Testicular US Pnl; UROLOGIC.ULTRASOUND |
+| **SHORTNAME** | Testicular US Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Urology testicular ultrasound |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.11 |
+
+---
+
+## PANEL.VACCIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 55140-8 |
+| **COMPONENT** | Vaccine Adverse Event Reporting System panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.VACCIN |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | AE; Pan; PANEL.VACCIN; Panl; Pnl; Point in time; Random; VAERS Pnl |
+| **SHORTNAME** | VAERS Pnl |
+| **LONG_COMMON_NAME** | Vaccine Adverse Event Reporting System (VAERS) panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.27 |
+
+---
+
+## PANEL.VITALS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 34565-2 |
+| **COMPONENT** | Vital signs, weight & height panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **CLASS** | PANEL.VITALS |
+| **VersionLastChanged** | 2.38 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Pan; PANEL.VITAL SIGNS; Panl; Pnl; Point in time; Random; Vital Signs, Weight & Height Pnl; Wt |
+| **SHORTNAME** | Vital Signs, Weight & Height Pnl |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Vital signs, weight and height panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.10 |
+
+---
+
+## PATH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100969-5 |
+| **COMPONENT** | Pathology report.additional specified observation |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Specimen |
+| **SCALE_TYP** | Nar |
+| **CLASS** | PATH |
+| **VersionLastChanged** | 2.74 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Add; Finding; Findings; Narrative; Path; Path report.add spec obs; Pathology; Point in time; Random; Report; Spec |
+| **SHORTNAME** | Path report.add spec obs Spec |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Pathology report additional specified observation in Specimen Narrative |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.74 |
+| **DisplayName** | Pathology report additional specified observation Nar (Spec) |
+
+---
+
+## PATH.HISTO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 33731-1 |
+| **COMPONENT** | Histology type |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Cancer specimen |
+| **SCALE_TYP** | Nar |
+| **CLASS** | PATH.HISTO |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CA; Ca spec; Finding; Findings; Narrative; PATH.HISTO; PATHOLOGY; Point in time; Random; Report; Spec |
+| **SHORTNAME** | Histology type Ca spec |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Histology type in Cancer specimen Narrative |
+| **CHANGE_REASON_PUBLIC** | Updated System from Cancer.XXX to clarify that the test is performed on a cancer specimen. Removed Method of CAP cancer protocols and the Copyright since this is not a CAP-specfic concept. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.09 |
+| **DisplayName** | Histology type Nar (Cancer specimen) |
+
+---
+
+## PATH.PROTOCOLS.BRST
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 44628-6 |
+| **COMPONENT** | Reason specimen size cannot be determined |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Breast tumor |
+| **SCALE_TYP** | Nar |
+| **CLASS** | PATH.PROTOCOLS.BRST |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | NAM |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Brst; BT; Cancer; Finding; Findings; Narrative; Pathology; PATHOLOGY PROTOCOLS; PATHOLOGY PROTOCOLS BREAST; Point in time; Random; Reas spec size not det; Report; Spec; tumors; tumour; tumours |
+| **SHORTNAME** | Reas spec size not det BT |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Reason specimen size cannot be determined in Breast tumor |
+| **CHANGE_REASON_PUBLIC** | Updated Component from Specimen size.cannot be determined to clarify meaning, removed Method of CAP because this is not a CAP-specific term, and changed Property from Arb to Find. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.17 |
+| **DisplayName** | Reason specimen size cannot be determined Nar (Breast tumor) |
+
+---
+
+## PATH.PROTOCOLS.GENER
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 33723-8 |
+| **COMPONENT** | Specimen length |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Specimen |
+| **SCALE_TYP** | Qn |
+| **CLASS** | PATH.PROTOCOLS.GENER |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Len; Length; Pathology; PATHOLOGY PROTOCOLS; PATHOLOGY PROTOCOLS general; Point in time; QNT; Quan; Quant; Quantitative; Random; Spec |
+| **SHORTNAME** | Specimen length |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | cm |
+| **LONG_COMMON_NAME** | Specimen length |
+| **EXAMPLE_UCUM_UNITS** | cm |
+| **CHANGE_REASON_PUBLIC** | Removed Method since this term is not specific to CAP cancer protocols. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.09 |
+| **DisplayName** | Specimen length (Spec) [Length] |
+
+---
+
+## PATH.PROTOCOLS.PROST
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 44618-7 |
+| **COMPONENT** | Total linear mm of carcinoma |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Specimen |
+| **SCALE_TYP** | Qn |
+| **CLASS** | PATH.PROTOCOLS.PROST |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Length; Pathology; PATHOLOGY PROTOCOLS; PATHOLOGY PROTOCOLS PROSTATE; Point in time; QNT; Quan; Quant; Quantitative; Random; Spec; Tot; Total len of Ca; Totl |
+| **SHORTNAME** | Total len of Ca |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | mm |
+| **LONG_COMMON_NAME** | Total linear mm of carcinoma |
+| **EXAMPLE_UCUM_UNITS** | mm |
+| **CHANGE_REASON_PUBLIC** | Removed method of CAP cancer protocols because this term is not a CAP cancer protocol-specific concept and can be used across various cancer protocols. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.17 |
+| **DisplayName** | Total linear mm of carcinoma (Spec) [Length] |
+
+---
+
+## PATH.PROTOCOLS.SKIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 44623-7 |
+| **COMPONENT** | Matted nodes |
+| **PROPERTY** | Prid |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Specimen |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | CAP cancer protocols |
+| **CLASS** | PATH.PROTOCOLS.SKIN |
+| **VersionLastChanged** | 2.36 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CAP prot; Identity or presence; Integument; Nominal; Pathology; PATHOLOGY PROTOCOLS; PATHOLOGY PROTOCOLS SKIN; Point in time; Random; Spec |
+| **SHORTNAME** | Matted nodes CAP prot |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Matted nodes by CAP cancer protocols |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.17 |
+| **DisplayName** | Matted nodes CAP Nom (Spec) |
+
+---
+
+## PATIENT SAFETY
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103752-2 |
+| **COMPONENT** | In general do you think that most people can be trusted or that you can't be careful enough when dealing with other people |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | PATIENT SAFETY |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **SURVEY_QUEST_TEXT** | In general do you think that most people can be trusted or that you can't be careful enough when dealing with other people? |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Can people be trusted; Finding; Findings; Ordinal; Othr; Patient safety; Point in time; QL; Qual; Qualitative; Random; Screen; T prime |
+| **SHORTNAME** | Can people be trusted |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | 2014 © Nadelson, L., Jorcyk, C., Yang, D., Jarratt Smith, M., Matson, S., Cornell, K., & Husting, V. (2014). I just don't trust them: the development and validation of an assessment instrument to meas |
+| **LONG_COMMON_NAME** | In general do you think that most people can be trusted or that you can't be careful enough when dealing with other people |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | TSST |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## PUBLICHEALTH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 112506-1 |
+| **COMPONENT** | Facility context-entire or subunit for reporting |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Facility |
+| **SCALE_TYP** | Nom |
+| **CLASS** | PUBLICHEALTH |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Fclty; Fclty cntxt-ent or subunit for rep; Nominal; Point in time; Public Health; PUBLICHEALTH; Random; Typ |
+| **SHORTNAME** | Fclty cntxt-ent or subunit for rep |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | # |
+| **LONG_COMMON_NAME** | Facility context-entire or subunit for reporting |
+| **EXAMPLE_UCUM_UNITS** | {#} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## PULM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100758-2 |
+| **COMPONENT** | Estimated lung age |
+| **PROPERTY** | Time |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Based on clinical data |
+| **CLASS** | PULM |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | from clin data; Point in time; PULMONARY; QNT; Quan; Quant; Quantitative; Random |
+| **SHORTNAME** | Estimated lung age from clin data |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | years |
+| **LONG_COMMON_NAME** | Estimated lung age by based on clinical data |
+| **EXAMPLE_UCUM_UNITS** | a |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## RAD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 36643-5 |
+| **COMPONENT** | Views 2 |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Chest |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | XR |
+| **CLASS** | RAD |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 2V; 2VW; Cardio; Cardiology; CorePlaybook; CXR; Document; Films; Finding; Findings; Heart Disease; II; Imaging; Lung; Plain Films; Playbook; Point in time; Pulmonary; Pulmonology; Rad; RADIOLOGY; Rand |
+| **SHORTNAME** | XR Chest 2V |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | XR Chest 2 Views |
+| **CHANGE_REASON_PUBLIC** | The scale has been changed from Nar to Doc to fit with the CDA model. |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **HL7_ATTACHMENT_STRUCTURE** | IG exists |
+| **AssociatedObservations** | 81220-6;72230-6 |
+| **VersionFirstReleased** | 2.14 |
+
+---
+
+## RESP.ATOM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 10324-2 |
+| **COMPONENT** | Institution inventory number |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Breath rate device |
+| **SCALE_TYP** | Nom |
+| **CLASS** | RESP.ATOM |
+| **VersionLastChanged** | 2.29 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Breathing rate; Facility; Ident; Identifier; Inventory #; No; Nominal; Num; Point in time; Random; RESP.ATOM; RESPIRATORY; Respiratory rate |
+| **SHORTNAME** | Breath Rate Device Inventory # |
+| **LONG_COMMON_NAME** | Breath rate device Institution inventory number |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0i |
+
+---
+
+## RESP.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103218-4 |
+| **COMPONENT** | Minimum respiratory rate |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | XXX^min |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | RESP.MOLEC |
+| **VersionLastChanged** | 2.76 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ?Tm; Count/time; Min resp rate; Minimal; minimum; nRate; Number rate; Number Rate = Count/Time; QNT; Quan; Quant; Quantitative; RESP.MOLEC |
+| **SHORTNAME** | Min RR |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | /min |
+| **LONG_COMMON_NAME** | Minimum respiratory rate |
+| **EXAMPLE_UCUM_UNITS** | /min |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.75 |
+
+---
+
+## RESP.TIMED.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 11291-2 |
+| **COMPONENT** | Breaths |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | Enctr^frst |
+| **SYSTEM** | Respiratory system |
+| **SCALE_TYP** | Qn |
+| **CLASS** | RESP.TIMED.MOLEC |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | 1st; Breathing; Count/time; Encounter; Lungs; nRate; Number rate; Number Rate = Count/Time; QNT; Quan; Quant; Quantitative; RESP.TIMED.MOLEC; Respiratory rate; RS |
+| **SHORTNAME** | Resp rate 1st enctr |
+| **EXAMPLE_UNITS** | breaths/min |
+| **LONG_COMMON_NAME** | Respiratory rate at First encounter |
+| **EXAMPLE_UCUM_UNITS** | {breaths}/min |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0j-a |
+
+---
+
+## SERO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100371-4 |
+| **COMPONENT** | Titin Ab |
+| **PROPERTY** | ACnc |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Ser |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | IA |
+| **CLASS** | SERO |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ABS; Aby; Antby; Anti; Antibodies; Antibody; Arbitrary concentration; Autoantibodies; Autoantibody; EIA; ELFA; ELISA; Enzyme immunoassay; IAA; MEIA; Myasthenia gravis; Paraneoplastic neurological synd |
+| **SHORTNAME** | Titin Ab Ser IA-aCnc |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | index value |
+| **LONG_COMMON_NAME** | Titin Ab [Units/volume] in Serum by Immunoassay |
+| **EXAMPLE_UCUM_UNITS** | {Index_val} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Titin Ab IA Qn (S) |
+
+---
+
+## SKNFLD.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8353-5 |
+| **COMPONENT** | Skin fold thickness |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Thigh |
+| **SCALE_TYP** | Qn |
+| **CLASS** | SKNFLD.MOLEC |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Femoral; Femur; Integument; Length; Lower extremity; Point in time; QNT; Quan; Quant; Quantitative; Random; SKIN FOLD.MOLEC; Thick |
+| **SHORTNAME** | Skin fold thickness Thigh |
+| **EXAMPLE_UNITS** | mm |
+| **LONG_COMMON_NAME** | Skin fold thickness Thigh |
+| **EXAMPLE_UCUM_UNITS** | mm |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(2) |
+
+---
+
+## SPEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100154-4 |
+| **COMPONENT** | Collection supervision level |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Specimen |
+| **SCALE_TYP** | Nom |
+| **CLASS** | SPEC |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The level of supervision that occurred during the specimen collection. For example, a specimen may be collected by healthcare professional, by a patient in person or virtual and supervised, or by a pa |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Coll; Collect; Collect supervision level; Collected; Finding; Findings; Levels; Levl; LV; LVL; Nominal; Point in time; Random; Spec |
+| **SHORTNAME** | Spec collect supervision level |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Specimen collection supervision level |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+| **DisplayName** | Collection supervision level Nom (Spec) |
+
+---
+
+## SURG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100216-1 |
+| **COMPONENT** | Synoptic report |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **METHOD_TYP** | Surgery |
+| **CLASS** | SURG |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Document; Finding; Findings; Point in time; Random; Surg |
+| **SHORTNAME** | Surgical synoptic rep |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Surgical synoptic report |
+| **CHANGE_REASON_PUBLIC** | Release 2.75: Status: Agreed by LOINC weekly lab team on 6/15/2023 to edit the trial to active and create synoptic reports in LOINC; PanelType: Did not have a panel type; CLASS: Needs to have a  panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Surgical synoptic report |
+
+---
+
+## SURVEY.AAOS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 71483-2 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | HKOI |
+| **CLASS** | SURVEY.AAOS |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Hip and Knee Outcomes Instrument - American Academy of Orthopaedic Surgeons; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; SURVEY.AAOS; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © American Academy of Orthopaedic Surgeons. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [HKOI] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | HKOI |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## SURVEY.ACT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82668-5 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | 4W |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | ACT |
+| **CLASS** | SURVEY.ACT |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Each item is scored on a scale of 1-5, with higher scores indicating greater asthma control. A total score of 20 or higher indicates well-controlled asthma [PMID: 19767070], while a total score of 19  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 4 weeks; QNT; Quan; Quant; Quantitative; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Portions © OPTUMInsight, Inc. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [ACT] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | OPTUM |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## SURVEY.ADHD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 78369-6 |
+| **COMPONENT** | ADHD hyperactive symptoms mean score difference |
+| **PROPERTY** | PctDiff |
+| **TIME_ASPCT** | RptPeriod |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Calculated |
+| **CLASS** | SURVEY.ADHD |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term represents the percent change in the mean ADHD hyperactive symptoms score over time. It was created for, but is not limited in use to, the  NCQA ADHD: Symptom Reduction in Follow-up Period e |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **FORMULA** | Percent change in symptoms over time = [(Baseline mean hyperactive score - follow-up mean hyperactive score)/baseline mean hyperactive score] * 100 |
+| **RELATEDNAMES2** | ADHD hyper symp mean score; ADHD hyper symp mean score diff; Average; Avg; Calc; Calculation; QNT; Quan; Quant; Quantitative; Report period; Survey; SURVEY.ADHD; Sx |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Portions Copyright © 2002 American Academy of Pediatrics. Used with permission. |
+| **EXAMPLE_UNITS** | % |
+| **LONG_COMMON_NAME** | ADHD hyperactive symptoms mean score percent difference [Calculated] |
+| **EXAMPLE_UCUM_UNITS** | % |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | AAP |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## SURVEY.ADVAULT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103978-3 |
+| **COMPONENT** | Information to tell doctors if you have a sudden injury or illness with a good chance of recovery |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nar |
+| **METHOD_TYP** | Reported |
+| **CLASS** | SURVEY.ADVAULT |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Imagine a sudden injury or illness, like a car accident or COVID-19. Doctors believe there is a good chance of recovery to your previous quality of life. What life-sustaining treatments would you want |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Narrative; Point in time; Random; Report; Survey; Ulcer |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Information to tell doctors if you have a sudden injury or illness with a good chance of recovery [Reported] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## SURVEY.AHRQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 74050-6 |
+| **COMPONENT** | Actual route of administration - attempted or completed |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | AHRQ |
+| **CLASS** | SURVEY.AHRQ |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | What was the actual route of administration (attempted or completed)? |
+| **SURVEY_QUEST_SRC** | Medications.Q29 |
+| **RELATEDNAMES2** | Agency for Healthcare Research and Quality; Finding; Findings; Nominal; Point in time; Random; Survey; SURVEY.AHRQ |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Actual route of administration - attempted or completed [AHRQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.46 |
+
+---
+
+## SURVEY.ALSFRSR
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82940-8 |
+| **COMPONENT** | Speech |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | ALSFRS-R |
+| **CLASS** | SURVEY.ALSFRSR |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Speech |
+| **SURVEY_QUEST_SRC** | 1 |
+| **RELATEDNAMES2** | ALS Functional Rating Scale - Revised; Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; R prime; Random; Right; Screen; Survey |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1996 Regeneron Pharmaceuticals. Used with permission. |
+| **LONG_COMMON_NAME** | Speech [ALSFRS-R] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | Regeneron |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## SURVEY.AMNART
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77498-4 |
+| **COMPONENT** | Can pronounce ache |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | AmNART |
+| **CLASS** | SURVEY.AMNART |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | American National Adult Reading Test (AmNART); Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Can pronounce ache [AmNART] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## SURVEY.BCAT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 107582-9 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Verbal Test of Practical Judgment |
+| **CLASS** | SURVEY.BCAT |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; SURVEY.BCAT; Tot; Totl; VPJ |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2012 Dr. William Mansbach. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [Verbal Test of Practical Judgment] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | MHT_BCAT |
+| **VersionFirstReleased** | 2.81 |
+
+---
+
+## SURVEY.BDI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 89208-3 |
+| **COMPONENT** | Beck Depression Inventory Fast Screen total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | BDI |
+| **CLASS** | SURVEY.BDI |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Beck Depression Inventory Fast Screen (BDI FS) total score is the sum of the 7 item scores. Higher total scores indicate more severe depression, as evaluated by this instrument. [PMID: 19010075] |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | BDI FS; BDI FS total score; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scn; Scr; Scrn; Survey; Tot; Totl |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2017 NCS Pearson, Inc. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Beck Depression Inventory Fast Screen total score [BDI] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | BDI_Pearson |
+| **VersionFirstReleased** | 2.64 |
+
+---
+
+## SURVEY.BPI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77565-0 |
+| **COMPONENT** | Pain interference score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | 24H |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | BPI.short |
+| **CLASS** | SURVEY.BPI |
+| **VersionLastChanged** | 2.52 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Brief Pain Interference (BPI) short form pain interference is typically scored as the mean of the seven interference item scores for general activity, walking, work, mood, enjoyment of life, relat |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 day; 24 hours; 24HR; Ordinal; Ql; Qual; Qualitative; Scale; Scre; Screen; Survey; SURVEY.BPI |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1991 Dr. Charles S. Cleeland Used with permission. |
+| **LONG_COMMON_NAME** | Pain interference score [BPI Short Form] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | BPI |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## SURVEY.BRIEF
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95871-0 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | BRIEF |
+| **CLASS** | SURVEY.BRIEF |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The BRIEF Health Literacy score is a summation of score values for the four contributing questions. Each question is scored from 1-5, resulting in total score range of 4-20. Total score health literac |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [BRIEF] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **CHANGE_REASON_PUBLIC** | Release 2.72: DefinitionDescription: Updated to include scoring instructions.; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.69 |
+
+---
+
+## SURVEY.CARE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 52458-7 |
+| **COMPONENT** | Name |
+| **PROPERTY** | Pn |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Provider |
+| **SCALE_TYP** | Nom |
+| **CLASS** | SURVEY.CARE |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CARE Survey; Nominal; Person name; Point in time; Random; Survey |
+| **LONG_COMMON_NAME** | Name Provider |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.26 |
+
+---
+
+## SURVEY.CBS-8
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99578-7 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | CBS-8 |
+| **CLASS** | SURVEY.CBS-8 |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2020 Dr. William Mansbach. Used with permission |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [CBS-8] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CBS8 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## SURVEY.CDC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 68492-8 |
+| **COMPONENT** | Date last prenatal visit |
+| **PROPERTY** | Date |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | SURVEY.CDC |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Date of last prenatal care visit |
+| **SURVEY_QUEST_SRC** | BC29b_FDFWS6b_FDR23b |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Past; Point in time; QNT; Quan; Quant; Quantitative; Random; Survey; SURVEY.CDC |
+| **EXAMPLE_UNITS** | MMDDYY |
+| **LONG_COMMON_NAME** | Date last prenatal visit |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## SURVEY.CESD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 89205-9 |
+| **COMPONENT** | Center for Epidemiologic Studies Depression Scale-Revised total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Center for Epidemiologic Studies Depression Scale-Revised |
+| **CLASS** | SURVEY.CESD |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Center for Epidemiologic Studies Depression Scale-Revised (CESD-R) total score is the sum of the 20 item scores. Higher total scores indicate more severe depression, as evaluated by this instrumen |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | CESD-R; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Center for Epidemiologic Studies Depression Scale-Revised total score [CESD-R] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.64 |
+
+---
+
+## SURVEY.CHILD-PUGH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 98150-6 |
+| **COMPONENT** | Encephalopathy grade |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.CHILD-PUGH |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Neuro; Neurology; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Encephalopathy grade |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.71 |
+
+---
+
+## SURVEY.CNPI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99289-1 |
+| **COMPONENT** | Nonverbal vocal complaints during movement |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.CNPI |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Nonverb complaint during movement; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.CNPI |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Nonverbal vocal complaints during movement |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## SURVEY.COOP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75698-1 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | COOP.WONCA |
+| **CLASS** | SURVEY.COOP |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The developers of the COOP instruments do not recommend a summative score. Typically, the patient's answers, or scores, for each Chart are simply recorded as-is in the patient's medical record; no sco |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2009 Trustees of Dartmouth College/COOP Project. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [COOP.WONCA] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | COOP |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## SURVEY.COVID
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103846-2 |
+| **COMPONENT** | How many H per D have you spent surfing the net over the past 2W |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.COVID |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Dextro; Finding; Findings; Last; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | How many hours per day have you spent surfing the net over the last 2 weeks |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## SURVEY.CSSRS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 93246-7 |
+| **COMPONENT** | Wish to be dead |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 1Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.CSSRS |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 month; 1 month (30 days); 30 days; Finding; Findings; Ordinal; Ql; Qual; Qualitative; Screen; Survey; SURVEY.CSSRS |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Wish to be dead 1 month |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.67 |
+
+---
+
+## SURVEY.DAST
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 82665-1 |
+| **COMPONENT** | Total Score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | 12Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | DAST |
+| **CLASS** | SURVEY.DAST |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Each of the 28 DAST items receive a score of 0 or 1. The total score is the sum of the item scores. A total score of 6 or above may indicate a substance abuse or dependence problem; however, some rese |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 year; 12Mos; Drug Abuse Screening Test; QNT; Quan; Quant; Quantitative; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1982 Center for Addiction and Mental Health. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [DAST] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CAMH_DAST |
+| **VersionFirstReleased** | 2.58 |
+
+---
+
+## SURVEY.DUKE-AD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 90853-3 |
+| **COMPONENT** | Final score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | DUKE-AD |
+| **CLASS** | SURVEY.DUKE-AD |
+| **VersionLastChanged** | 2.65 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Duke Anxiety Depression Scale (DUKE-AD) final score is the sum of the 7 item scores, multiplied by 7.143. On a scale of 0 to 100, 0 indicates the lowest symptom level and 100 indicates the highest |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Duke Anxiety Depression Scale; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1994 Department of Community and Family Medicine, Duke University Medical Center, Durham, NC, USA. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Final score [DUKE-AD] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | Duke-AD |
+| **VersionFirstReleased** | 2.65 |
+
+---
+
+## SURVEY.EPDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 71344-6 |
+| **COMPONENT** | I have been able to laugh and see the funny side of things in the past 7D |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 7D |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | EPDS |
+| **CLASS** | SURVEY.EPDS |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | I have been able to laugh and see the funny side of things |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Able to laugh see funny side of things past 7D; Edinburgh Postnatal Depression Scale; Finding; Findings; Last; Ordinal; Ql; Qual; Qualitative; Screen; Survey; SURVEY.EPDS |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © The Royal College of Psychiatrists The Edinburgh Postnatal Depression Scale may be photocopied by individual researchers or clinicians for their own use without seeking permission from the |
+| **LONG_COMMON_NAME** | I have been able to laugh and see the funny side of things in the past 7 days [EPDS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | RCP |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## SURVEY.ESRD
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 64301-5 |
+| **COMPONENT** | Full time dietitian staff positions filled at end of period |
+| **PROPERTY** | Num |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Population |
+| **SCALE_TYP** | Qn |
+| **CLASS** | SURVEY.ESRD |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Cnt; Count; ESRD; ESRD survey; Number; Point in time; QNT; Quan; Quant; Quantitative; Random; Survey |
+| **EXAMPLE_UNITS** | # |
+| **LONG_COMMON_NAME** | Full time dietitian staff positions filled at end of period Population # |
+| **EXAMPLE_UCUM_UNITS** | {#} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.36 |
+
+---
+
+## SURVEY.GDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 48512-8 |
+| **COMPONENT** | Are you basically satisfied with your life |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | GDS |
+| **CLASS** | SURVEY.GDS |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; GDS Survey; Geriatric Depression Scale; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey |
+| **LONG_COMMON_NAME** | Are you basically satisfied with your life [GDS] |
+| **CHANGE_REASON_PUBLIC** | Changed Method to GDS based on current LOINC model |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.21 |
+
+---
+
+## SURVEY.GPCOG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 79105-3 |
+| **COMPONENT** | Can provide correct date |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | GPCOG |
+| **CLASS** | SURVEY.GPCOG |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Time Orientation.What is the date? |
+| **SURVEY_QUEST_SRC** | GPCOG.Patient examination_Time Orientation |
+| **RELATEDNAMES2** | Finding; Findings; General Practitioner Assessment of Cognition; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.GPCOG |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2002 University of New South Wales as represented by the Dementia Collaborative Research Centre – Assessment and Better Care Used with permission. |
+| **LONG_COMMON_NAME** | Can provide correct date [GPCOG] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | GPCOG |
+| **VersionFirstReleased** | 2.54 |
+
+---
+
+## SURVEY.HAQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75820-1 |
+| **COMPONENT** | Over the past W, are you able to dress yourself, including shoelaces and buttons |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 1W |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | HAQ |
+| **CLASS** | SURVEY.HAQ |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Over the past week, are you able to dress yourself, including shoelaces and buttons? |
+| **RELATEDNAMES2** | 1 week; Finding; Findings; Health Assessment Questionnaire; Last; Ordinal; Ql; Qual; Qualitative; Screen; Survey |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © Stanford University. Used with permission. |
+| **LONG_COMMON_NAME** | Over the past week, are you able to dress yourself, including shoelaces and buttons [HAQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | HAQ |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## SURVEY.HARK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 76500-8 |
+| **COMPONENT** | Within the last Y, have you been humiliated or emotionally abused in other ways by your partner or ex-partner |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 1Y |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.HARK |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Within the last year, have you been humiliated or emotionally abused in other ways by your partner or ex-partner? |
+| **SURVEY_QUEST_SRC** | HARK_H |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Othr; Past; QL; Qual; Qualitative; Screen; Survey; SURVEY.HARK |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Within the last year, have you been humiliated or emotionally abused in other ways by your partner or ex-partner |
+| **CHANGE_REASON_PUBLIC** | Release 2.70: ANSWER_LIST_TYPE: Updated from Normative to Example to increase usability; METHOD_TYP: Removed Method because this concept is not specific to HARK; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## SURVEY.HHS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 69855-5 |
+| **COMPONENT** | Race |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | HHS.ACA Section 4302 |
+| **CLASS** | SURVEY.HHS |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This term is used for reporting race based on the Department of Health and Human Services, Affordable Care Act Section 4302. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | What is your race? |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Department of Health and Human Services, Affordable Care Act Section 4302; Ethnicity; HHS.ACASec4302; Nominal; Point in time; Random; Survey; SURVEY.HHS; Typ |
+| **HL7_FIELD_SUBFIELD_ID** | PID-10 |
+| **LONG_COMMON_NAME** | Race [HHS.ACA Section 4302] |
+| **CHANGE_REASON_PUBLIC** | Release 2.67: AnswerListId: Updated to match LA codes to CMS_IRF-PAI v4.0 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## SURVEY.HITS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95614-4 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | HITS |
+| **CLASS** | SURVEY.HITS |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; SDOH; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2005 Kevin Sherin, M.D. Used with permission |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [HITS] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | K_Sherin |
+| **VersionFirstReleased** | 2.69 |
+
+---
+
+## SURVEY.HWS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77244-2 |
+| **COMPONENT** | Total combined household income range in last 12Mo |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | 12Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.HWS |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 year; 12Mos; Count/time; nRate; Number rate; Number Rate = Count/Time; Ordinal; Past; QL; Qual; Qualitative; Rnge; Screen; SDOH; Survey; SURVEY.HWS; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Total combined household income range in last year |
+| **CHANGE_REASON_PUBLIC** | Release 2.72: Status: Moved from Trial to Active for increased usability; SURVEY_QUEST_TEXT: Moved from the individual term level to the instance of this term in the panel.; SURVEY_QUEST_SRC: Moved fr |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## SURVEY.IPAQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 77583-3 |
+| **COMPONENT** | During the last 7D, on how many D did you do vigorous physical activities like heavy lifting, digging, aerobics, or fast bicycling for at least 10M at a time |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | 7D |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | IPAQ |
+| **CLASS** | SURVEY.IPAQ |
+| **VersionLastChanged** | 2.64 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_SRC** | IPAQ_Short_Q1 |
+| **RELATEDNAMES2** | Count/time; Dextro; nRate; Number rate; Number Rate = Count/Time; Past; QNT; Quan; Quant; Quantitative; Survey |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | d/wk |
+| **LONG_COMMON_NAME** | During the last 7 days, on how many days did you do vigorous physical activities like heavy lifting, digging, aerobics, or fast bicycling for at least 10 minutes at a time [IPAQ] |
+| **EXAMPLE_UCUM_UNITS** | d/wk |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.61 |
+
+---
+
+## SURVEY.LKSS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99592-8 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | LKSS |
+| **CLASS** | SURVEY.LKSS |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [LKSS] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## SURVEY.MFS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 59454-9 |
+| **COMPONENT** | History of falling; immediate or within 3Mo |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Morse Fall Scale |
+| **CLASS** | SURVEY.MFS |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; H/O; Hx; MFS; Morse Fall Score; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.MFS |
+| **LONG_COMMON_NAME** | History of falling; immediate or within 3 months [Morse Fall Scale] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.32 |
+
+---
+
+## SURVEY.MISC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 74466-4 |
+| **COMPONENT** | Feedback to user^post question response |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Question |
+| **SCALE_TYP** | Nom |
+| **CLASS** | SURVEY.MISC |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Feedback text shown to a user after they provide a response to a specific question. This term was created for, but not limited in use to, the Question Feedback Pattern observation in the CDA Questionn |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | After; Feedbk to user; Finding; Findings; MISC; Nominal; p quest respon; Point in time; PST; Random; Survey; Survey.Misc |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Feedback to user--post question response |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.46 |
+
+---
+
+## SURVEY.MLHFQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 71938-5 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | MLHFQ |
+| **CLASS** | SURVEY.MLHFQ |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The total score in the Minnesota Living With Heart Failure Questionnaire is the sum of the responses to all 21 questions. Based on the 6-point, zero to five, Likert scale to show how much each of 21 l |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Minnesota Living with Heart Failure Questionnaire; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright ©1986 Regents of the University of Minnesota, All rights reserved. Do not copy or reproduce without permission. LIVING WITH HEART FAILURE® is a registered trademark of the Regents of the Uni |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [MLHFQ] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | MLHFQ |
+| **VersionFirstReleased** | 2.40 |
+
+---
+
+## SURVEY.MTLHLTH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100232-8 |
+| **COMPONENT** | Impacts of Events Scale-Revised panel |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | 7D |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | IES-R |
+| **CLASS** | SURVEY.MTLHLTH |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Impacts of Events Scale-Revised (IES-R) can be used to assess traumatic stress. It expands upon the original Impacts of Events Scale by Horowitz, Wilner & Alvarez, by including questions to evalua |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | IES-R panel; Pan; Panl; Pnl; R prime; Right; Survey; SURVEY.MTLHLTH |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Impacts of Events Scale-Revised panel |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## SURVEY.NEURO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 111770-4 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | AIMS |
+| **CLASS** | SURVEY.NEURO |
+| **VersionLastChanged** | 2.82 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Scoring Procedure Complete the examination procedure before making ratings. For the movement ratings (the first three categories below), rate the highest severity observed. 0 = none, 1 = minimal (may  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | NEURO; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; SURVEY.NEURO; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [AIMS] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.82 |
+
+---
+
+## SURVEY.NEUROQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 67915-9 |
+| **COMPONENT** | I felt nervous when my normal routine was disturbed in the past 7D |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 7D |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | NeuroQol |
+| **CLASS** | SURVEY.NEUROQ |
+| **VersionLastChanged** | 2.54 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | In the past 7 days I felt nervous when my normal routine was disturbed. |
+| **SURVEY_QUEST_SRC** | NQANX07 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Control; Finding; Findings; Last; Nervous when normal routine disturbed; Ordinal; QL; Qual; Qualitative; Screen; Survey; SURVEY.NEUROQ |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2010 David Cella, PhD. Used with permission. All of these Neuro-QOL instruments can be used at no charge. We do ask, however, that you contact Neuro-QOL project manager, Vitali Ustsinovich |
+| **LONG_COMMON_NAME** | I felt nervous when my normal routine was disturbed in the past 7 days [NeuroQol] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | DC |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## SURVEY.NHANES
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 76508-1 |
+| **COMPONENT** | In a typical W, how many times do you talk on the telephone with family, friends, or neighbors |
+| **PROPERTY** | NRat |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | NHANES III |
+| **CLASS** | SURVEY.NHANES |
+| **VersionLastChanged** | 2.52 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | In a typical week, how many times do you talk on the telephone with family, friends, or neighbors? |
+| **SURVEY_QUEST_SRC** | NHANES III |
+| **RELATEDNAMES2** | 3; Count/time; nRate; Number rate; Number Rate = Count/Time; Patient Telephone; Point in time; QNT; Quan; Quant; Quantitative; Random; Survey; SURVEY.NHANES |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | #/wk |
+| **LONG_COMMON_NAME** | In a typical week, how many times do you talk on the telephone with family, friends, or neighbors [NHANES III] |
+| **EXAMPLE_UCUM_UNITS** | {#}/wk |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.52 |
+
+---
+
+## SURVEY.NHCS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75610-6 |
+| **COMPONENT** | Oxygen therapy at arrival |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.NHCS |
+| **VersionLastChanged** | 2.52 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Finding; Findings; O2; O2 therapy; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.NHCS; tO2 |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Oxygen therapy at arrival |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## SURVEY.NICHQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104141-7 |
+| **COMPONENT** | Trouble concentrating on things like school work, reading, or watching TV in last 2W |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 2W |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.NICHQ |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | MAJ |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Trouble concentrating on things like school work, reading, or watching TV in last 2 weeks |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 14 days; 2 weeks; Finding; Findings; Job; Occupation; Ordinal; Past; QL; Qual; Qualitative; Screen; Survey; SURVEY.NICHQ; Trouble concentrating on things like school work, reading, or watching TV in l |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Trouble concentrating on things like school work, reading, or watching TV in last 2 weeks |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## SURVEY.NIDA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95430-5 |
+| **COMPONENT** | During the past 3Mo, how often have you used cannabis |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 3Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.NIDA |
+| **VersionLastChanged** | 2.69 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 3 months; Finding; Findings; Last; Mental health; MentalHealth; Ordinal; Psych; Psychiatry; Ql; Qual; Qualitative; Screen; Survey; SURVEY.NIDA |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | During the past 3 months, how often have you used cannabis |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.69 |
+
+---
+
+## SURVEY.NIH.EMO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 84775-6 |
+| **COMPONENT** | Positive Affect Survey - unadjusted scale score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | NIH Toolbox |
+| **CLASS** | SURVEY.NIH.EMO |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Point in time; Pos; QNT; Quan; Quant; Quantitative; Random; Scale; Scre |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006-2016 National Institutes of Health and Northwestern University. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Positive Affect Survey - self-report - unadjusted scale score [NIH Toolbox] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NIH_Tbox |
+| **VersionFirstReleased** | 2.66 |
+
+---
+
+## SURVEY.NIH_TOOLBOX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75413-5 |
+| **COMPONENT** | I have a good life |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | NIH Toolbox |
+| **CLASS** | SURVEY.NIH_TOOLBOX |
+| **VersionLastChanged** | 2.65 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Indicate how much you agree or disagree - I have a good life |
+| **SURVEY_QUEST_SRC** | PA070 |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.NIH_TOOLBOX |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2006-2016 National Institutes of Health and Northwestern University. Used with permission. |
+| **LONG_COMMON_NAME** | I have a good life [NIH Toolbox] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NIH_Tbox |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## SURVEY.NMMDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 52828-1 |
+| **COMPONENT** | Federal provider name |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Facility |
+| **SCALE_TYP** | Nom |
+| **CLASS** | SURVEY.NMMDS |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Admin; Fclty; Ident; Identifier; Nominal; Nursing Management Minimum Data Set; Point in time; Random; Survey; SURVEY.NMMDS |
+| **LONG_COMMON_NAME** | Federal provider name Facility |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.24 |
+
+---
+
+## SURVEY.NORTON
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75244-4 |
+| **COMPONENT** | Physical condition |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Observed.Norton scale |
+| **CLASS** | SURVEY.NORTON |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.NORTON |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1962 Centre for Policy on Ageing (formerly NCCOP), London, UK. Reproduced with permission. |
+| **LONG_COMMON_NAME** | Physical condition [Norton scale] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | CPA |
+| **VersionFirstReleased** | 2.48 |
+
+---
+
+## SURVEY.NSRAS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 73782-5 |
+| **COMPONENT** | Neonatal pressure injury risk evaluation |
+| **PROPERTY** | Imp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | NSRAS |
+| **CLASS** | SURVEY.NSRAS |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | NAM |
+| **DefinitionDescription** | Interpretation of the total score for the neonatal pressure ulcer risk evaluation [LOINC: 73783-3]. A critical cut-off score of 5 on the NSRAS© was determined to indicate neonates are at risk for skin |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Pressure Ulcer Risk Evaluation |
+| **RELATEDNAMES2** | Assessment; Eval; H&P; History and physical; Impression; Impression/interpretation of study; Impressions; Interp; Interpretation; Neonate ulcer risk eval; Ordinal; Point in time; pressure injury; Pres |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 1997 Barbara Huffines. Used with permission. |
+| **LONG_COMMON_NAME** | Neonatal pressure ulcer risk evaluation [NSRAS] |
+| **CHANGE_REASON_PUBLIC** | Release 2.73: COMPONENT: Update older ulcer terms to pressure injury; Previous Releases: Changed Scale from Nom to Ord since results are ordinal (At risk/No risk). |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | NSRAS_BH |
+| **VersionFirstReleased** | 2.44 |
+
+---
+
+## SURVEY.NURSE.HHCC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28079-2 |
+| **COMPONENT** | Activities of daily living alteration |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Observed.CCC |
+| **CLASS** | SURVEY.NURSE.HHCC |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Change in or modification of ability to maintain oneself |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_SRC** | CLINICAL CARE CLASSIFICATION O38.1 |
+| **RELATEDNAMES2** | ADLS; Clinical Care Classification; Finding; Findings; nursing; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.NURSING.HHCC |
+| **LONG_COMMON_NAME** | Activities of daily living alteration [CCC] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## SURVEY.NURSE.HIV-SSC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28375-4 |
+| **COMPONENT** | Anxiety |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 24H |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Reported.HIV-SSC |
+| **CLASS** | SURVEY.NURSE.HIV-SSC |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Sign and Symptom Checklist for persons with HIV disease |
+| **RELATEDNAMES2** | 1 day; 24 hours; 24HR; Finding; Findings; nursing; Ordinal; QL; Qual; Qualitative; Screen; Sign and Symptom Check-List for Persons with HIV Disease; Survey; SURVEY.NURSING.HIV-SSC |
+| **LONG_COMMON_NAME** | Anxiety [HIV-SSC] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## SURVEY.NURSE.LIV-HIV
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28158-4 |
+| **COMPONENT** | May choose to self-deliver at the end |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Reported.living-HIV |
+| **CLASS** | SURVEY.NURSE.LIV-HIV |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Living with HIV/AIDS -I may choose to self-deliver (suicide) near the end |
+| **RELATEDNAMES2** | Finding; Findings; nursing; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.NURSING.LIV-HIV |
+| **LONG_COMMON_NAME** | May choose to self-deliver at the end [Living with HIV] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## SURVEY.NURSE.OMAHA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28217-8 |
+| **COMPONENT** | Sanitation.behavior |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Family |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Observed.OMAHA |
+| **CLASS** | SURVEY.NURSE.OMAHA |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_SRC** | OMAHA I.02 |
+| **RELATEDNAMES2** | Finding; Findings; nursing; Ordinal; Point in time; QL; Qual; Qualitative; Random; Sanitation Behavior; Screen; Survey; SURVEY.NURSING.OMAHA |
+| **LONG_COMMON_NAME** | Sanitation Behavior Family [OMAHA] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## SURVEY.NURSE.QAM
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 28362-2 |
+| **COMPONENT** | Anxiety |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Observed.QAM |
+| **CLASS** | SURVEY.NURSE.QAM |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Quality Audit Marker item 10 |
+| **RELATEDNAMES2** | Finding; Findings; nursing; Ordinal; Point in time; QL; Qual; Qualitative; Quality Audit Marker; Random; Screen; Survey; SURVEY.NURSING.QAM |
+| **LONG_COMMON_NAME** | Anxiety [QAM] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.00 |
+
+---
+
+## SURVEY.OASIS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 46456-0 |
+| **COMPONENT** | CMS certification number |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Agency |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | OASIS |
+| **CLASS** | SURVEY.OASIS |
+| **VersionLastChanged** | 2.61 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The National Provider Identifier (NPI) will replace the Medicare/Medicaid Provider Number on Medicare claims. The NPI will assume the Medicare/Medicaid Provider Number's role as a primary identifier.  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | CCN; CMS certification #; Ident; Identifier; No; Nominal; Num; Outcome and assessment information set; Point in time; Random; Survey; Survey.OASIS |
+| **LONG_COMMON_NAME** | CMS certification number (CCN) Agency [OASIS] |
+| **CHANGE_REASON_PUBLIC** | Added CCN to Long Common Name for consistency in LOINC modeling |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.19 |
+
+---
+
+## SURVEY.OPTIMAL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 69491-9 |
+| **COMPONENT** | Mobility aids |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | OPTIMAL |
+| **CLASS** | SURVEY.OPTIMAL |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_SRC** | OPTIMAL_9 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Nominal; Outpatient Physical Therapy Improvement in Movement Assessment Log; Point in time; Random; Survey; SURVEY.OPTIMAL |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2012, 2006, 2005 American Physical Therapy Association. All rights reserved. Used with permission per LOINC Terms of Use, and in addition: Any further distribution or reproduction must inc |
+| **LONG_COMMON_NAME** | Mobility aids [OPTIMAL] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | APTA |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## SURVEY.ORTHOPEDICS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100170-0 |
+| **COMPONENT** | Knee feels normal |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.ORTHOPEDICS |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Control; Finding; Findings; Lower extremity joint; Ordinal; Ortho; Point in time; QL; Qual; Qualitative; Random; Screen; Survey |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Knee feels normal |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## SURVEY.PAIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100030-6 |
+| **COMPONENT** | Axis I: Temporal aspects score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Mainz Pain Staging System |
+| **CLASS** | SURVEY.PAIN |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The Axis I: temporal aspects of pain score is determined by three items including: patterns of occurrence, pain duration, and change of pain intensity. Individual items are scored from 1-3. Items are  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | MPSS; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 1999 H.U. Gerbershagen, J. Korb, B. Nagel, P. Nilges. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Axis I: Temporal aspects score [Mainz Pain Staging System] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | MAINZ |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## SURVEY.PAS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75840-9 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | PAS |
+| **CLASS** | SURVEY.PAS |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Patient Activity Scale (PAS), or PAS total score, is derived from the patient's Health Assessment Questionnaire (HAQ), pain, and global severity scores. The PAS is calculated by multiplying the HA |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **FORMULA** | PAS total score= (<Pain severity score>+<PtGA score>+[<HAQ score> * 3.33])/3 |
+| **RELATEDNAMES2** | Patient Activity Scale; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2005 The Journal of Rheumatology. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [PAS] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | JRheu_PAS |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## SURVEY.PASII
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75841-7 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | PASII |
+| **CLASS** | SURVEY.PASII |
+| **VersionLastChanged** | 2.58 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Patient Activity Scale II (PASII), or PAS-II total score, is derived from the patient's Health Assessment Questionnaire II (HAQ-II), pain, and global severity scores. The PAS-II is calculated by m |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **FORMULA** | PAS-II total score= (<Pain severity score>+<PtGA score>+[<HAQ-II score> * 3.33])/3 |
+| **RELATEDNAMES2** | Patient Activity Scale; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2005 The Journal of Rheumatology. Used with permission. |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [PASII] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | JRheu_PAS |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## SURVEY.PCORNET
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 75519-9 |
+| **COMPONENT** | Encounter identifier |
+| **PROPERTY** | ID |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | SURVEY.PCORNET |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | An arbitrary identifier (ID) assigned to a patient encounter. The Encounter ID is used by the PCORnet Common Data Model (CDM) Specification (v1.0) to link patient data for each encounter across tables |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Ident; Identifier; Nominal; Point in time; Random; Survey; SURVEY.PCORNET |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Encounter identifier |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.50 |
+
+---
+
+## SURVEY.PEG
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 91145-3 |
+| **COMPONENT** | What number best describes how pain has interfered with your enjoyment of life during the past W |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 1W |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.PEG |
+| **VersionLastChanged** | 2.65 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | On a 0 to 10 scale, where 0 is does not interfere at all and 10 is completely interferes, what number best describes how pain has interfered with the enjoyment of life during the past week. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | 1 week; Finding; Findings; Last; No; Num; Ordinal; Ql; Qual; Qualitative; Screen; Survey; SURVEY.PEG |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | What number best describes how pain has interfered with your enjoyment of life during the past week |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.65 |
+
+---
+
+## SURVEY.PHQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104135-9 |
+| **COMPONENT** | Feeling down, depressed, irritable, or hopeless in last 2W |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 2W |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Reported.PHQ |
+| **CLASS** | SURVEY.PHQ |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 14 days; 2 weeks; Feel down, depre, irrit, hopeless; Feeling down, depressed, irritable, or hopeless in last 2 weeks; Finding; Findings; Ordinal; Past; Patient Health Questionnaire; QL; Qual; Qualitat |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Feeling down, depressed, irritable, or hopeless in last 2 weeks [Reported.PHQ] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## SURVEY.PNDS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100002-5 |
+| **COMPONENT** | Specimen care is maintained |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.PNDS |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Spec; Survey; SURVEY.PNDS |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Specimen care is maintained |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## SURVEY.PRAPARE
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 93027-1 |
+| **COMPONENT** | Are you a refugee |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.PRAPARE |
+| **VersionLastChanged** | 2.66 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Are you a refugee? |
+| **SURVEY_QUEST_SRC** | PRAPARE_19 |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey; SURVEY.PRAPARE |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Are you a refugee |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.66 |
+
+---
+
+## SURVEY.PROWL
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99194-3 |
+| **COMPONENT** | Could accept less than perfect vision if able to see well enough to drive without corrective lenses |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.PROWL |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Acpt vis if drive w/o corr lens; Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Survey |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Could accept less than perfect vision if able to see well enough to drive without corrective lenses |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## SURVEY.QRDA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 55182-0 |
+| **COMPONENT** | Quality Reporting Document Architecture incidence report |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Doc |
+| **CLASS** | SURVEY.QRDA |
+| **VersionLastChanged** | 2.63 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The Quality Reporting Document Architecture Incidence Report (QRDA Category I) is an individual patient quality report. Each report contains quality data for one patient for one or more quality measur |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Document; Finding; Findings; Point in time; QRDA; QRDA incidence report; Random; Survey; SURVEY.QRDA |
+| **LONG_COMMON_NAME** | Quality Reporting Document Architecture incidence report Document |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.27 |
+
+---
+
+## SURVEY.R-OUTCOMES
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100916-6 |
+| **COMPONENT** | User satisfaction score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | R-Outcomes |
+| **CLASS** | SURVEY.R-OUTCOMES |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | Each level is indicated using a traffic-light metaphor with written labels, color, position and emojis. For individuals, each item response level is scored on a 0-3 ordinal scale, with strongly agree  |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; R prime; Random; Right; Scale; Scre; Survey; SURVEY.R-OUTCOMES |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2008-2021 R-Outcomes Ltd. All rights reserved.Users should notify Tim Benson by email: tim.benson@r-outcomes.com Used with permission |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | User satisfaction score [R-Outcomes] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | RHO |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## SURVEY.RFC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 46612-8 |
+| **COMPONENT** | Summary conclusions |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Set |
+| **CLASS** | SURVEY.RFC |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | This section is for recording summary conclusions derived from the evidence in file.  Each mental activity is to be within the context of the individual's capacity to sustain that activity over a norm |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; Random; Residual Functional Capacity; Survey; Survey.RFC |
+| **ORDER_OBS** | Order |
+| **LONG_COMMON_NAME** | Summary conclusions Set |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **PanelType** | Panel |
+| **VersionFirstReleased** | 2.19 |
+
+---
+
+## SURVEY.RMDQ
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 99575-3 |
+| **COMPONENT** | Total Score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | RMDQ |
+| **CLASS** | SURVEY.RMDQ |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; SURVEY.RMDQ; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [RMDQ] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## SURVEY.RSS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 105043-4 |
+| **COMPONENT** | Sedation level |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | Reported.RSS |
+| **CLASS** | SURVEY.RSS |
+| **VersionLastChanged** | 2.78 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Levels; Levl; LV; LVL; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Sed lvl; Survey; SURVEY.RSS |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Sedation level [Reported.RSS] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.78 |
+
+---
+
+## SURVEY.RUDAS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 98094-6 |
+| **COMPONENT** | Total score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | RUDAS |
+| **CLASS** | SURVEY.RUDAS |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; SDOH; Survey; Tot; Totl |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Total score [RUDAS] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.71 |
+
+---
+
+## SURVEY.SAMHSA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 68503-2 |
+| **COMPONENT** | How well do you speak English |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | SAMHSA |
+| **CLASS** | SURVEY.SAMHSA |
+| **VersionLastChanged** | 2.70 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | How would you rate your ability to speak and understand English OR  How well do you speak English? |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; How well speak English; Ordinal; Point in time; QL; Qual; Qualitative; Random; SAMSHA; Screen; SDOH; Substance Abuse and Mental Health Services Administration; Survey; SURVEY.SAMHSA |
+| **LONG_COMMON_NAME** | How well do you speak English [SAMHSA] |
+| **CHANGE_REASON_PUBLIC** | Release 2.70: COMPONENT: Corrected capitalization; |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.38 |
+
+---
+
+## SURVEY.SDOH
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 103981-7 |
+| **COMPONENT** | Do you feel physically or emotionally unsafe where you currently live |
+| **PROPERTY** | - |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | - |
+| **METHOD_TYP** | SDOH |
+| **CLASS** | SURVEY.SDOH |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Point in time; Random; SDOH; Survey |
+| **ORDER_OBS** | Both |
+| **LONG_COMMON_NAME** | Do you feel physically or emotionally unsafe where you currently live |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## SURVEY.SEEK
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 95387-7 |
+| **COMPONENT** | Safe Environment for Every Kid Impression |
+| **PROPERTY** | Imp |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Caregiver |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | SEEK |
+| **CLASS** | SURVEY.SEEK |
+| **VersionLastChanged** | 2.68 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The SEEK Parent Questionnaire screens caregivers for 5 psychosocial problems that affect children's health, development and safety: Parental depression, Parental substance abuse, Major parental stress |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **RELATEDNAMES2** | Imp; Impression; Impression/interpretation of study; Impressions; Interp; Interpretation; Nominal; Point in time; Random; SDOH; Survey |
+| **ORDER_OBS** | Both |
+| **EXTERNAL_COPYRIGHT_NOTICE** | © 2019 SEEK Used with permission. Please visit www.SEEKwellbeing.org to access the SEEK model and training resources. |
+| **LONG_COMMON_NAME** | Safe Environment for Every Kid Impression Caregiver [SEEK] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | SEEK |
+| **VersionFirstReleased** | 2.68 |
+
+---
+
+## SURVEY.SLP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100354-0 |
+| **COMPONENT** | Frequency of participating in multi-modal communication without assistance |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.SLP |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; SLP; Survey; SURVEY.SLP |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Frequency of participating in multi-modal communication without assistance |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## SURVEY.UNMETHELNEED
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 104039-3 |
+| **COMPONENT** | Have you had a delay in healthcare due to time to obtain an appointment in past 12M |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 12Mo |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **CLASS** | SURVEY.UNMETHELNEED |
+| **VersionLastChanged** | 2.77 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | Have you experienced a delay in getting health care in the past 12 months because the time needed to obtain an appointment was too long? |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | 1 year; 12Mos; Finding; Findings; Last; Ordinal; Ql; Qual; Qualitative; Screen; Survey; SURVEY.UNMETHELNEED |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Have you experienced a delay in healthcare due to time needed to obtain an appointment was too long in past 12 months |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.77 |
+
+---
+
+## SURVEY.USSGFHT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 54112-8 |
+| **COMPONENT** | Cause of death |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Family member |
+| **SCALE_TYP** | Nom |
+| **METHOD_TYP** | USSG-FHT |
+| **CLASS** | SURVEY.USSGFHT |
+| **VersionLastChanged** | 2.44 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Fam Mem; FHH; Finding; Findings; Nominal; Point in time; Random; Survey; SURVEY.USSGFHT; US Surgeon General; US Surgeon General family health portrait |
+| **LONG_COMMON_NAME** | Cause of death Family member [USSG-FHT] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.26 |
+
+---
+
+## SURVEY.WELLRX
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 93668-2 |
+| **COMPONENT** | Did you or others you live with eat smaller meals or skip meals because you didn't have money for food in the past 2M |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | 2M |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | WellRx |
+| **CLASS** | SURVEY.WELLRX |
+| **VersionLastChanged** | 2.67 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **SURVEY_QUEST_TEXT** | In the past 2 months, did you or others you live with eat smaller meals or skip meals because you didn't have money for food? |
+| **SURVEY_QUEST_SRC** | WellRX.1 |
+| **RELATEDNAMES2** | Finding; Findings; Last; Ordinal; Ql; Qual; Qualitative; Screen; SDOH; Survey; T prime |
+| **ORDER_OBS** | Observation |
+| **EXTERNAL_COPYRIGHT_NOTICE** | ©2016 Journal of the American Board of Family Medicine Used with permission |
+| **LONG_COMMON_NAME** | Did you or others you live with eat smaller meals or skip meals because you didn't have money for food in the past 2 months [WellRx] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | JABFM_WellRX |
+| **VersionFirstReleased** | 2.67 |
+
+---
+
+## SURVEY.WHYMPI
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 106469-0 |
+| **COMPONENT** | Part 1 Score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | WHYMPI |
+| **CLASS** | SURVEY.WHYMPI |
+| **VersionLastChanged** | 2.81 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | i; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre; Survey; SURVEY.WHYMPI |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Part 1 Score [WHYMPI] |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.81 |
+
+---
+
+## TIMP
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 60691-3 |
+| **COMPONENT** | Head in midline |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | TIMP |
+| **CLASS** | TIMP |
+| **VersionLastChanged** | 2.50 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | The head is held within 15 degrees of midline for at least 2 seconds. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 4 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; Random; Screen; Test of Infant Motor Performance |
+| **EXTERNAL_COPYRIGHT_NOTICE** | Copyright © 2001 IMPS, LLC. Authors: Suzann K. Campbell, Gay L. Girolami, Thubi, H. A. Kolobe, Elizabeth T. Osten, Maureen C. Lenke. All rights reserved. Used with permission. |
+| **LONG_COMMON_NAME** | Head in midline [TIMP] |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **EXTERNAL_COPYRIGHT_LINK** | IMPS |
+| **VersionFirstReleased** | 2.34 |
+
+---
+
+## TRAUMA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100034-8 |
+| **COMPONENT** | Provider of automated external defibrillator use |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Nom |
+| **CLASS** | TRAUMA |
+| **VersionLastChanged** | 2.72 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The type of person (e.g. lay person, physician, paramedic) who applied the AED to the patient. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Auto; Automated detection; Elec; Elect; Electr; EXT; Nominal; Point in time; Random; TRAUMA; Typ |
+| **SHORTNAME** | Provider of AED |
+| **ORDER_OBS** | Observation |
+| **LONG_COMMON_NAME** | Provider of automated external defibrillator use |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.72 |
+
+---
+
+## TRNSPLNT.ORGAN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100348-2 |
+| **COMPONENT** | Model for end-stage liver disease sodium score |
+| **PROPERTY** | Score |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | TRNSPLNT.ORGAN |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **DefinitionDescription** | The MELDNa (MELD Sodium score) is a disease severity scoring system applied to adult liver patients that incorporates the serum sodium. It is calculated based on hemodialysis, serum sodium, serum crea |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Dis; Diseases; Dz; MELDNa score; Na; Na+; Organ Transplant; Point in time; QNT; Quan; Quant; Quantitative; Random; Scale; Scre |
+| **SHORTNAME** | MELDNa score |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | score |
+| **LONG_COMMON_NAME** | Model for end-stage liver disease sodium score |
+| **EXAMPLE_UCUM_UNITS** | {score} |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+
+---
+
+## TUMRRGT
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 21827-1 |
+| **COMPONENT** | Transmitted record type |
+| **PROPERTY** | Type |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | NAACCR message |
+| **SCALE_TYP** | Nom |
+| **CLASS** | TUMRRGT |
+| **VersionLastChanged** | 2.27 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Generated field that identifies which of the seven NAACCR data exchange record types is being used in a file of data exchange records. A file should have records of only one type... NAACCR Data Standa |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Nominal; North American Association of Central Cancer Registries; Oncology; Point in time; Random; TUMOR REGISTRY(NAACCR); Typ |
+| **SHORTNAME** | Transmitted record type NAACCR Message |
+| **LONG_COMMON_NAME** | Transmitted record type NAACCR message |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0m |
+
+---
+
+## UA
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 100158-5 |
+| **COMPONENT** | Albumin |
+| **PROPERTY** | MCnc |
+| **TIME_ASPCT** | XXX |
+| **SYSTEM** | Urine |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | Detection limit <= 20 mg/L |
+| **CLASS** | UA |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | ADD |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 1 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | ?Tm; Alb; DL=20 mg/L; Left; Level; Levo; MA; Malb; Mass concentration; Micro albumin; Microalbumin; Protein.albumin; QNT; Quan; Quant; Quantitative; UA; UR; URINALYSIS; Urn |
+| **SHORTNAME** | Microalbumin ?Tm Ur-mCnc |
+| **ORDER_OBS** | Both |
+| **EXAMPLE_UNITS** | mg/L |
+| **LONG_COMMON_NAME** | Microalbumin [Mass/volume] in Urine collected for unspecified duration |
+| **EXAMPLE_UCUM_UNITS** | mg/L |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.73 |
+| **DisplayName** | Albumin Unsp time DL <= 20 mg/L (U) [Mass/Vol] |
+
+---
+
+## UPDRS
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 65695-9 |
+| **COMPONENT** | Finger taps - right |
+| **PROPERTY** | Find |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Ord |
+| **METHOD_TYP** | UPDRS |
+| **CLASS** | UPDRS |
+| **VersionLastChanged** | 2.71 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Patient taps thumb with index finger in rapid succession with widest amplitude possible, each hand separately. |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **SURVEY_QUEST_TEXT** | Finger taps - right |
+| **SURVEY_QUEST_SRC** | PX130101060100 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Finding; Findings; Ordinal; Point in time; QL; Qual; Qualitative; R; Random; RT; Screen; Unified Parkinson's Disease Rating Scale (UPDRS) |
+| **SHORTNAME** | Finger taps - right UPDRS |
+| **LONG_COMMON_NAME** | Finger taps - right [UPDRS] |
+| **CHANGE_REASON_PUBLIC** | The original source for this term is the Unified Parkinson's Disease Rating Scale (UPDRS). Changed Method and Class from PhenX.; Updated the PhenX ID from PhenX.<ID> to PX<ID> in Survey Question Sourc |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.36 |
+
+---
+
+## US.URO
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 15286-8 |
+| **COMPONENT** | Height |
+| **PROPERTY** | Len |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Kidney.left |
+| **SCALE_TYP** | Qn |
+| **METHOD_TYP** | US.measured |
+| **CLASS** | US.URO |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **DefinitionDescription** | Measured in mm; height=vertical axis |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | Y |
+| **RELATEDNAMES2** | Echography; Genitourinary; GU; Kidney; Kidney depth; Kidney-L; L; Length; LT; Nephric; Nephrology; Point in time; QNT; Quan; Quant; Quantitative; Random; Renal; Sonogram; Sonograph; Sonography; ULS; U |
+| **SHORTNAME** | Height Kidney-L US.meas |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | cm |
+| **LONG_COMMON_NAME** | Kidney - left Height by US |
+| **EXAMPLE_UCUM_UNITS** | cm |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0k |
+
+---
+
+## VACCIN
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 29768-9 |
+| **COMPONENT** | Date vaccine information statement published |
+| **PROPERTY** | Date |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | ^Patient |
+| **SCALE_TYP** | Qn |
+| **CLASS** | VACCIN |
+| **VersionLastChanged** | 2.73 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **UNITSREQUIRED** | N |
+| **RELATEDNAMES2** | Date vaccine info published; Point in time; QNT; Quan; Quant; Quantitative; Random; Vaccine Info Stat; VIS |
+| **SHORTNAME** | Date vaccine info published |
+| **ORDER_OBS** | Observation |
+| **EXAMPLE_UNITS** | MMDDYY |
+| **LONG_COMMON_NAME** | Date vaccine information statement published |
+| **COMMON_TEST_RANK** | 352 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 2.03 |
+
+---
+
+## VOLUME.MOLEC
+
+| Field | Value |
+|---|---|
+| **LOINC_NUM** | 8297-4 |
+| **COMPONENT** | Volume |
+| **PROPERTY** | Vol |
+| **TIME_ASPCT** | Pt |
+| **SYSTEM** | Foot.left |
+| **SCALE_TYP** | Qn |
+| **CLASS** | VOLUME.MOLEC |
+| **VersionLastChanged** | 2.48 |
+| **CHNG_TYPE** | MIN |
+| **STATUS** | ACTIVE |
+| **CLASSTYPE** | 2 |
+| **RELATEDNAMES2** | Ft-L; L; Lower extremity; LT; Point in time; QNT; Quan; Quant; Quantitative; Random; Vol; Volume; VOLUME.MOLEC |
+| **SHORTNAME** | Volume Ft-L |
+| **EXAMPLE_UNITS** | cm3 |
+| **LONG_COMMON_NAME** | Volume Foot - left |
+| **EXAMPLE_UCUM_UNITS** | cm3 |
+| **COMMON_TEST_RANK** | 0 |
+| **COMMON_ORDER_RANK** | 0 |
+| **VersionFirstReleased** | 1.0h(2) |
+
+---
+
