@@ -5024,6 +5024,51 @@
     "CARD.US": "Cardiac US",
     "EKG.MEAS": "ECG",
   };
+  // Indian lab abbreviations → LOINC-searchable terms
+  const INDIAN_LAB_ALIASES = {
+    ESR: "erythrocyte sedimentation rate",
+    KFT: "renal function panel",
+    RFT: "renal function panel",
+    LFT: "hepatic function panel",
+    TFT: "thyroid function panel",
+    TSH: "thyrotropin",
+    T3: "triiodothyronine",
+    T4: "thyroxine",
+    HBA1C: "hemoglobin A1c",
+    HBSAG: "hepatitis B surface antigen",
+    "PT INR": "prothrombin time INR",
+    APTT: "activated partial thromboplastin",
+    GBP: "peripheral blood smear",
+    PBS: "peripheral blood smear",
+    MP: "malaria parasite",
+    WIDAL: "salmonella antibody",
+    "LIPID PROFILE": "lipid panel",
+    "URINE R/M": "urinalysis",
+    "URINE ROUTINE": "urinalysis complete panel",
+    ABG: "blood gas arterial panel",
+    DENGUE: "dengue virus",
+    ANA: "antinuclear antibodies",
+    "RA FACTOR": "rheumatoid factor",
+    ASO: "antistreptolysin O",
+    "BLOOD SUGAR": "glucose serum",
+    FBS: "glucose fasting",
+    PPBS: "glucose post meal",
+    RBS: "glucose random",
+    OGTT: "glucose tolerance",
+    "S. CREATININE": "creatinine serum",
+    BUN: "urea nitrogen serum",
+    "S. URIC ACID": "urate serum",
+    "S. CALCIUM": "calcium serum",
+    "S. PHOSPHORUS": "phosphate serum",
+    ELECTROLYTES: "electrolytes panel",
+    "BLOOD CULTURE": "bacteria identified blood culture",
+    "URINE CULTURE": "bacteria identified urine culture",
+    "CSF ANALYSIS": "cerebrospinal fluid",
+    "STOOL R/M": "ova and parasites stool",
+    MANTOUX: "tuberculin skin test",
+    HEMOGRAM: "complete blood count",
+    "COMPLETE HEMOGRAM": "complete blood count",
+  };
   let _invDebounce = null;
   const INVESTIGATIONS_OFFLINE = [
     { name: "Complete Blood Count (CBC)", loinc: "58410-2", cat: "Hematology" },
@@ -5201,8 +5246,11 @@
       if (!listEl) return;
       listEl.innerHTML =
         '<div style="padding:10px;color:var(--ink3);font-size:12px">Searching...</div>';
+      // Expand Indian abbreviations
+      const alias = INDIAN_LAB_ALIASES[q.toUpperCase()] || null;
+      const searchTerm = alias || q;
       try {
-        // Try full-text search RPC first
+        // Try full-text search RPC first (with alias-expanded term)
         const rpcRes = await fetch(SB + "/rest/v1/rpc/search_investigations", {
           method: "POST",
           headers: {
@@ -5210,7 +5258,7 @@
             Authorization: "Bearer " + KEY,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ query: q, lim: 30 }),
+          body: JSON.stringify({ query: searchTerm, lim: 30 }),
         });
         if (rpcRes.ok) {
           const rows = await rpcRes.json();
@@ -5219,12 +5267,17 @@
             return;
           }
         }
-        // Fallback: ilike search
+        // Fallback: ilike search on component, long_name, and related_names
+        const enc = encodeURIComponent(searchTerm);
         const ilikeRes = await fetch(
           SB +
-            "/rest/v1/loinc_investigations?component=ilike.*" +
-            encodeURIComponent(q) +
-            "*&active=eq.true&order=common_test_rank.asc.nullslast&limit=30",
+            "/rest/v1/loinc_investigations?or=(component.ilike.*" +
+            enc +
+            "*,long_name.ilike.*" +
+            enc +
+            "*,related_names.ilike.*" +
+            enc +
+            "*)&active=eq.true&order=common_test_rank.asc.nullslast&limit=30",
           {
             headers: { apikey: KEY, Authorization: "Bearer " + KEY },
           },
