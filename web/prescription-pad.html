@@ -3991,12 +3991,19 @@
         ".adj-btn, .item-remove, .add-item-btn, .ep-apply, .ep-cancel",
       )
       .forEach((el) => {
-        el.style.display = "";
+        el.style.removeProperty("display");
+        el.disabled = false;
       });
-    // Reset expansion panels (remove inline display:none so toggleEP works)
+    // Reset expansion panels — remove ALL inline styles so CSS classes work
     wrap.querySelectorAll(".ep").forEach((el) => {
-      el.style.display = "";
+      el.style.removeProperty("display");
       el.classList.remove("open");
+    });
+    // Re-enable ALL inputs and buttons inside dose adjustment panels
+    wrap.querySelectorAll(".ep input, .ep button, .ep select").forEach((el) => {
+      el.disabled = false;
+      el.style.removeProperty("display");
+      el.style.opacity = "1";
     });
     // Fix dose adjustment panel values from prescription data
     (rxData.medicines || []).forEach((m, idx) => {
