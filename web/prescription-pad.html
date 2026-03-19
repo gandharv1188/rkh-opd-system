@@ -3854,10 +3854,11 @@
     rxData.patient.weight_kg = wt;
     m.dose_mg_per_kg = mgkg;
     m.dose_per_day_divided = freq;
+    const form = m.formulation || "syrup";
     // Update Row 1 if concentration changed
     if (cmg !== m.concentration_mg || cml !== m.concentration_per_ml) {
       const drugName = (m.row1_en || "").split("(")[0].trim();
-      const unit = form === "tablet" || form === "capsule" ? "mg" : "mg";
+      const unit = "mg";
       const perUnit = form === "tablet" || form === "capsule" ? "tablet" : "ml";
       const newR1 = `${drugName} (${cmg}${unit}/${cml}${perUnit} ${form})`;
       document.getElementById(pid + "-r1").textContent = newR1;
@@ -3870,7 +3871,6 @@
     const dur = durM ? durM[0] : "";
     const instrM = m.row2_en.match(/\.(.*)/);
     const instr = instrM ? instrM[1].trim() : "";
-    const form = m.formulation || "syrup";
     const ROUTE_EN = {
       syrup: "orally",
       drops: "orally (drops)",
