@@ -3597,7 +3597,29 @@
         <div class="ep" id="${pid}-ep">
           <div class="ep-title">Dose adjustment — ${esc((m.row1_en || "").split("(")[0].trim())}</div>
           ${(() => {
-            const dn = (m.row1_en || "").split("(")[0].trim().toUpperCase();
+            let dn = (m.row1_en || "").split("(")[0].trim().toUpperCase();
+            // Strip form words from drug name to match formulary cache key
+            const _fw = [
+              "SYRUP",
+              "TABLET",
+              "CAPSULE",
+              "DROPS",
+              "INJECTION",
+              "CREAM",
+              "OINTMENT",
+              "INHALER",
+              "SUSPENSION",
+              "ORAL DROPS",
+              "SUPPOSITORY",
+              "RESPULES",
+              "NEBULISATION",
+            ];
+            for (const w of _fw) {
+              if (dn.endsWith(" " + w)) {
+                dn = dn.slice(0, -w.length - 1).trim();
+                break;
+              }
+            }
             const fc = formularyCache[dn];
             const forms = fc?.formulations || [];
             return forms.length >= 1
