@@ -2076,6 +2076,18 @@
         "done:",
         doneIds.size,
       );
+      // Auto-select first pending patient if none currently selected
+      if (!selectedPatient) {
+        const firstPendingIdx = todayPatients.findIndex((p) => !p.done);
+        if (firstPendingIdx >= 0) {
+          onPatientSelect(firstPendingIdx);
+          if (inp)
+            inp.value =
+              todayPatients[firstPendingIdx].name +
+              " — " +
+              todayPatients[firstPendingIdx].id;
+        }
+      }
     } catch (e) {
       console.warn("loadTodayPatients:", e);
     }
