@@ -1280,7 +1280,8 @@
   <!-- HEADER -->
   <div class="hdr">
     <div class="hdr-l" id="hdr-doctor">
-      Dr. Lokender Goyal<br />MD Pediatrics (PGI)<br />HMC HN 21452
+      Dr. Lokender Goyal<br />MD Pediatrics (PGI Chandigarh)<br />HMC HN 21452 ·
+      PMC 23168
     </div>
     <div class="hdr-c">
       <h1>Radhakishan Hospital</h1>
@@ -1660,7 +1661,6 @@
       degree: "MD Pediatrics (PGI Chandigarh)",
       reg: "HMC HN 21452 / PMC 23168",
       spec: "Pediatrics & Neonatology",
-      short: "MD Pediatrics",
       regShort: "HMC HN 21452 · PMC 23168",
     },
     "DR-GANDHARV": {
@@ -1668,7 +1668,6 @@
       degree: "MBBS (AIIMS, New Delhi)",
       reg: "DMC/R/0632",
       spec: "General Medicine",
-      short: "MBBS, AIIMS",
       regShort: "DMC/R/0632",
     },
   };
@@ -1681,7 +1680,7 @@
     const el = document.getElementById("hdr-doctor");
     if (el)
       el.innerHTML =
-        esc(doc.name) + "<br>" + esc(doc.short) + "<br>" + esc(doc.regShort);
+        esc(doc.name) + "<br>" + esc(doc.degree) + "<br>" + esc(doc.regShort);
   }
 
   const MODS = {
@@ -2669,7 +2668,7 @@
               signoff.innerHTML = `<span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription saved — ${esc(rxId)}</span>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <button class="sign-btn" onclick="printRx()" style="background:var(--blue)">Print now</button>
-                <button class="sign-btn" onclick="enableUpdateMode()" style="background:#b8860b">Update Prescription</button>
+                <button class="sign-btn" onclick="enableUpdateMode()" style="background:#b8860b">Edit</button>
                 <button class="back-btn" onclick="showView('pad')">View note</button>
                 <button class="back-btn" onclick="resetPad()">New prescription</button>
               </div>`;
@@ -4357,7 +4356,7 @@
         <span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription ${saved !== false ? "saved" : "generated"} — ${esc(rxId)}</span>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="sign-btn" onclick="printRx()" style="background:var(--blue)">Print now</button>
-          <button class="sign-btn" onclick="enableUpdateMode()" style="background:#b8860b">Update Prescription</button>
+          <button class="sign-btn" onclick="enableUpdateMode()" style="background:#b8860b">Edit</button>
           <button class="back-btn" onclick="showView('pad')">View note</button>
           <button class="back-btn" onclick="resetPad()">New prescription</button>
         </div>`;
