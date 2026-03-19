@@ -4944,12 +4944,159 @@
     showView("rx");
   }
 
-  // ===== REVIEW EDIT: Add Investigation =====
+  // ===== REVIEW EDIT: Add Investigation (searchable popup) =====
+  const INVESTIGATIONS = [
+    { name: "Complete Blood Count (CBC)", loinc: "58410-2", cat: "Hematology" },
+    { name: "Hemoglobin", loinc: "718-7", cat: "Hematology" },
+    { name: "TLC (WBC)", loinc: "6690-2", cat: "Hematology" },
+    { name: "Platelet Count", loinc: "777-3", cat: "Hematology" },
+    { name: "ESR", loinc: "4537-7", cat: "Hematology" },
+    { name: "Peripheral Smear", loinc: "34994-4", cat: "Hematology" },
+    { name: "Reticulocyte Count", loinc: "4679-7", cat: "Hematology" },
+    { name: "Blood Group & Rh", loinc: "882-1", cat: "Hematology" },
+    { name: "Prothrombin Time (PT/INR)", loinc: "5902-2", cat: "Hematology" },
+    { name: "aPTT", loinc: "3173-2", cat: "Hematology" },
+    { name: "CRP", loinc: "1988-5", cat: "Biochemistry" },
+    { name: "Procalcitonin", loinc: "75241-0", cat: "Biochemistry" },
+    { name: "S. Creatinine", loinc: "2160-0", cat: "Biochemistry" },
+    { name: "Blood Urea", loinc: "3094-0", cat: "Biochemistry" },
+    { name: "S. Electrolytes (Na)", loinc: "2951-2", cat: "Biochemistry" },
+    { name: "S. Electrolytes (K)", loinc: "2823-3", cat: "Biochemistry" },
+    { name: "S. Calcium", loinc: "17861-6", cat: "Biochemistry" },
+    { name: "SGPT/ALT", loinc: "1742-6", cat: "Biochemistry" },
+    { name: "SGOT/AST", loinc: "1920-8", cat: "Biochemistry" },
+    { name: "Bilirubin (Total)", loinc: "1975-2", cat: "Biochemistry" },
+    { name: "Bilirubin (Direct)", loinc: "1968-7", cat: "Biochemistry" },
+    { name: "S. Albumin", loinc: "1751-7", cat: "Biochemistry" },
+    { name: "Total Protein", loinc: "2885-2", cat: "Biochemistry" },
+    { name: "Alkaline Phosphatase", loinc: "6768-6", cat: "Biochemistry" },
+    { name: "Blood Sugar (Random)", loinc: "2345-7", cat: "Biochemistry" },
+    { name: "Blood Sugar (Fasting)", loinc: "1558-6", cat: "Biochemistry" },
+    { name: "HbA1c", loinc: "4548-4", cat: "Biochemistry" },
+    { name: "S. Ferritin", loinc: "2276-4", cat: "Biochemistry" },
+    { name: "S. Iron", loinc: "2498-4", cat: "Biochemistry" },
+    { name: "TIBC", loinc: "2500-7", cat: "Biochemistry" },
+    { name: "TSH", loinc: "3016-3", cat: "Biochemistry" },
+    { name: "Free T4", loinc: "3024-7", cat: "Biochemistry" },
+    { name: "Vit D (25-OH)", loinc: "1989-3", cat: "Biochemistry" },
+    { name: "LDH", loinc: "2532-0", cat: "Biochemistry" },
+    { name: "Uric Acid", loinc: "3084-1", cat: "Biochemistry" },
+    { name: "Lipid Profile", loinc: "57698-3", cat: "Biochemistry" },
+    { name: "S. Magnesium", loinc: "19123-9", cat: "Biochemistry" },
+    { name: "S. Phosphorus", loinc: "2777-1", cat: "Biochemistry" },
+    { name: "Blood Culture", loinc: "600-7", cat: "Microbiology" },
+    { name: "Urine Culture", loinc: "630-4", cat: "Microbiology" },
+    { name: "Urine Routine", loinc: "24356-8", cat: "Microbiology" },
+    { name: "Stool Routine", loinc: "56875-8", cat: "Microbiology" },
+    { name: "Widal Test", loinc: "5765-4", cat: "Microbiology" },
+    { name: "Dengue NS1", loinc: "75377-2", cat: "Microbiology" },
+    { name: "Dengue IgM/IgG", loinc: "29676-2", cat: "Microbiology" },
+    { name: "Malaria Antigen (RDT)", loinc: "51587-0", cat: "Microbiology" },
+    { name: "Rapid Strep Test", loinc: "78012-2", cat: "Microbiology" },
+    { name: "Mantoux/TB Gold", loinc: "71774-4", cat: "Microbiology" },
+    { name: "Throat Swab Culture", loinc: "11475-1", cat: "Microbiology" },
+    { name: "Stool for Ova & Cyst", loinc: "673-2", cat: "Microbiology" },
+    { name: "Chest X-Ray", loinc: "36643-5", cat: "Imaging" },
+    { name: "X-Ray Abdomen", loinc: "36572-6", cat: "Imaging" },
+    { name: "X-Ray Extremity", loinc: null, cat: "Imaging" },
+    { name: "USG Abdomen", loinc: "24531-6", cat: "Imaging" },
+    { name: "USG KUB", loinc: "24957-3", cat: "Imaging" },
+    { name: "USG Cranial", loinc: null, cat: "Imaging" },
+    { name: "ECHO (2D)", loinc: "34552-0", cat: "Imaging" },
+    { name: "CT Scan Head", loinc: "30799-1", cat: "Imaging" },
+    { name: "CT Scan Chest", loinc: null, cat: "Imaging" },
+    { name: "CT Scan Abdomen", loinc: null, cat: "Imaging" },
+    { name: "MRI Brain", loinc: null, cat: "Imaging" },
+    { name: "EEG", loinc: null, cat: "Neurophysiology" },
+    { name: "ECG", loinc: "11524-6", cat: "Cardiology" },
+    { name: "Pulmonary Function Test", loinc: null, cat: "Pulmonology" },
+    {
+      name: "ABG (Arterial Blood Gas)",
+      loinc: "24336-0",
+      cat: "Critical Care",
+    },
+    {
+      name: "Lumbar Puncture / CSF Analysis",
+      loinc: "29587-1",
+      cat: "Critical Care",
+    },
+  ];
   function addInvestigation() {
-    const name = prompt("Investigation name (e.g. CBC, CRP, Chest X-Ray):");
-    if (!name?.trim()) return;
+    const overlay = document.createElement("div");
+    overlay.className = "add-med-popup";
+    overlay.id = "add-inv-overlay";
+    overlay.innerHTML = `<div class="add-med-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <strong style="font-size:14px;color:var(--red)">Add Investigation</strong>
+        <button onclick="document.getElementById('add-inv-overlay').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink3)">×</button>
+      </div>
+      <input class="add-med-search" id="add-inv-search" placeholder="Search investigation..." oninput="filterAddInv()" autofocus>
+      <div class="add-med-list" id="add-inv-list">${renderInvList("")}</div>
+    </div>`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    document.getElementById("add-inv-search").focus();
+  }
+  function renderInvList(q) {
+    q = q.toUpperCase().trim();
+    let items = INVESTIGATIONS;
+    if (q) {
+      items = INVESTIGATIONS.map((inv) => {
+        const n = inv.name.toUpperCase();
+        let s = n.includes(q) ? 3 : 0;
+        if (
+          !s &&
+          n.replace(/[^A-Z0-9]/g, "").includes(q.replace(/[^A-Z0-9]/g, ""))
+        )
+          s = 2;
+        if (!s) {
+          for (let i = 0; i < q.length && q.length > 2; i++) {
+            if (n.includes(q.slice(0, i) + q.slice(i + 1))) {
+              s = 1;
+              break;
+            }
+          }
+        }
+        return { ...inv, s };
+      })
+        .filter((x) => x.s > 0)
+        .sort((a, b) => b.s - a.s);
+    }
+    if (!items.length)
+      return '<div style="padding:10px;color:var(--ink3);font-size:12px">No matches — <a href="#" onclick="addCustomInv();return false" style="color:var(--blue)">add custom investigation</a></div>';
+    return items
+      .slice(0, 30)
+      .map(
+        (inv) =>
+          `<div class="add-med-item" onclick="selectInv('${esc(inv.name)}','${esc(inv.loinc || "")}')"><strong>${esc(inv.name)}</strong> <span style="font-size:10px;color:var(--ink3)">${esc(inv.cat)}${inv.loinc ? " · LOINC: " + esc(inv.loinc) : ""}</span></div>`,
+      )
+      .join("");
+  }
+  function filterAddInv() {
+    const q = document.getElementById("add-inv-search")?.value || "";
+    document.getElementById("add-inv-list").innerHTML = renderInvList(q);
+  }
+  function selectInv(name, loinc) {
+    document.getElementById("add-inv-overlay")?.remove();
     const indication =
       prompt("Indication (e.g. Rule out bacterial infection):") || "";
+    if (!rxData.investigations) rxData.investigations = [];
+    rxData.investigations.push({
+      name,
+      indication: indication.trim(),
+      urgency: "routine",
+      loinc_code: loinc || null,
+    });
+    renderReview();
+    showView("rx");
+  }
+  function addCustomInv() {
+    document.getElementById("add-inv-overlay")?.remove();
+    const name = prompt("Custom investigation name:");
+    if (!name?.trim()) return;
+    const indication = prompt("Indication:") || "";
     if (!rxData.investigations) rxData.investigations = [];
     rxData.investigations.push({
       name: name.trim(),
