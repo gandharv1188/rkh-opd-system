@@ -17,14 +17,24 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+const PAD_SYSTEM_PROMPT = `You are a medical document transcription assistant for a pediatric hospital.`;
+
 const SYSTEM_PROMPT = `You are a medical document OCR assistant for a pediatric hospital in India. Extract structured data from medical documents (lab reports, prescriptions, discharge summaries, radiology reports).
 
 RETURN ONLY valid JSON (no markdown, no code fences) with this structure:
 {
   "document_type": "lab_report|prescription|discharge_summary|radiology|other",
-  "summary": "Brief 1-2 sentence description of the document",
+  "summary": "Comprehensive clinical summary of the ENTIRE document — include patient demographics, admission/discharge details, key clinical findings, course of treatment, investigations done, procedures performed, condition at discharge, and follow-up advice. This summary will be shown to the treating doctor as context. Write 3-6 sentences in clinical note style.",
   "lab_values": [
-    { "test_name": "Hemoglobin", "value": "11.2", "unit": "g/dL", "flag": "normal|low|high|critical" }
+    {
+      "test_name": "Hemoglobin",
+      "value": "11.2",
+      "unit": "g/dL",
+      "flag": "normal|low|high|critical",
+      "test_category": "Hematology|Biochemistry|Microbiology|Imaging",
+      "reference_range": "11.5-16.5 g/dL",
+      "report_date": "YYYY-MM-DD or null"
+    }
   ],
   "diagnoses": ["diagnosis text"],
   "medications": [
@@ -34,6 +44,20 @@ RETURN ONLY valid JSON (no markdown, no code fences) with this structure:
   "lab_name": "name of lab or hospital if visible",
   "report_date": "YYYY-MM-DD if date is visible, otherwise null"
 }
+
+DOCUMENT-TYPE SPECIFIC RULES:
+
+For LAB REPORTS:
+- Extract ALL lab values visible in the document.
+
+For DISCHARGE SUMMARIES:
+- Lab values: extract ONLY the MOST RECENT / LATEST value for each test. Discharge summaries often contain serial monitoring values (e.g., 7 TSB readings across days). Return only the last one. Set report_date to the date that value was measured.
+- Medications: extract only DISCHARGE medications (medications at the time of discharge / "medications on discharge" / "discharge advice"). Do NOT include historical in-hospital medications.
+- Extract all diagnoses (primary + secondary).
+
+For PRESCRIPTIONS:
+- Extract medications with dose, frequency, duration.
+- Extract diagnoses if present.
 
 TEST NAME NORMALIZATION — always use the standard name:
 - Hb, Hemoglobin → Hemoglobin
@@ -63,6 +87,13 @@ TEST NAME NORMALIZATION — always use the standard name:
 - T3, Total T3 → T3
 - T4, Total T4 → T4
 - Urine R/M, Urine Routine → Urine Routine
+- TSB, Total Serum Bilirubin → Total Serum Bilirubin
+
+TEST CATEGORY — assign one of:
+- "Hematology" — CBC, Hb, TLC, RBC, Platelets, ESR, blood film, coagulation
+- "Biochemistry" — LFT, KFT, electrolytes, glucose, bilirubin, thyroid, CRP, HbA1c
+- "Microbiology" — cultures, sensitivity, urine R/M, stool R/M, rapid tests
+- "Imaging" — X-ray, USG, CT, MRI findings
 
 FLAGS:
 - "normal" — within reference range
@@ -70,11 +101,8 @@ FLAGS:
 - "high" — above reference range
 - "critical" — dangerously abnormal
 
-RULES:
-- Extract ALL lab values visible in the document
-- If a value has a reference range printed and the result is outside it, flag accordingly
-- For prescriptions, extract medications with dose, frequency, duration
-- For discharge summaries, extract diagnoses, medications, and clinical notes
+GENERAL RULES:
+- If a value has a reference range printed, include it in reference_range and flag accordingly
 - If the document is unclear or illegible, still return the JSON structure with empty arrays and note "partially legible" in summary
 - Dates should be in YYYY-MM-DD format
 - Return empty arrays [] for fields with no data (never omit fields)`;
@@ -111,29 +139,42 @@ serve(async (req: Request) => {
       );
     }
 
-    let base64: string;
+    // Determine media type and build the content source for Claude
+    let contentSource: any;
     let mediaType: string;
 
     if (image_base64) {
       // Direct base64 from client (prescription pad attach flow — no storage)
-      base64 = image_base64;
       mediaType = reqMediaType || "image/jpeg";
+      const isPdf = mediaType === "application/pdf";
+      contentSource = {
+        type: isPdf ? "document" : "image",
+        source: {
+          type: "base64",
+          media_type: mediaType,
+          data: image_base64,
+        },
+      };
     } else {
-      // Fetch from URL (registration upload flow)
-      const imageRes = await fetch(image_url);
-      if (!imageRes.ok)
-        throw new Error(`Failed to fetch image: ${imageRes.status}`);
-      const imageBytes = new Uint8Array(await imageRes.arrayBuffer());
-      // Convert to base64 in chunks to avoid stack overflow on large files
-      let binary = "";
-      const chunkSize = 32768;
-      for (let i = 0; i < imageBytes.length; i += chunkSize) {
-        binary += String.fromCharCode(...imageBytes.subarray(i, i + chunkSize));
+      // URL-based source — let Claude fetch directly (no chunked base64 conversion)
+      // Detect media type from URL extension or HEAD request
+      const urlLower = image_url.toLowerCase();
+      const isPdf =
+        urlLower.endsWith(".pdf") ||
+        urlLower.includes("content-type=application/pdf");
+      if (isPdf) {
+        mediaType = "application/pdf";
+        contentSource = {
+          type: "document",
+          source: { type: "url", url: image_url },
+        };
+      } else {
+        mediaType = "image/jpeg"; // Claude auto-detects actual type from URL
+        contentSource = {
+          type: "image",
+          source: { type: "url", url: image_url },
+        };
       }
-      base64 = btoa(binary);
-      const contentType = imageRes.headers.get("content-type") || "image/jpeg";
-      // Support PDFs (Claude Vision handles application/pdf natively)
-      mediaType = contentType.split(";")[0] || "image/jpeg";
     }
 
     // Build the user message with context
@@ -165,42 +206,26 @@ Rules:
         ? `Extract all medical data from this document.\n\nContext: ${contextParts.join(", ")}`
         : "Extract all medical data from this document.";
 
-    // Call Claude Vision API
+    // Use separate system prompt for pad mode
+    const systemPrompt = isPadMode ? PAD_SYSTEM_PROMPT : SYSTEM_PROMPT;
+
+    // Call Claude Vision API (PDF support is GA — no beta header needed)
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-api-key": ANTHROPIC_API_KEY,
         "anthropic-version": "2023-06-01",
-        ...(mediaType === "application/pdf"
-          ? { "anthropic-beta": "pdfs-2024-09-25" }
-          : {}),
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
         max_tokens: 2048,
-        system: SYSTEM_PROMPT,
+        system: systemPrompt,
         messages: [
           {
             role: "user",
             content: [
-              mediaType === "application/pdf"
-                ? {
-                    type: "document",
-                    source: {
-                      type: "base64",
-                      media_type: "application/pdf",
-                      data: base64,
-                    },
-                  }
-                : {
-                    type: "image",
-                    source: {
-                      type: "base64",
-                      media_type: mediaType,
-                      data: base64,
-                    },
-                  },
+              contentSource,
               {
                 type: "text",
                 text: userText,
@@ -284,34 +309,54 @@ Rules:
     // Server-side save: if patient_id, visit_id, and doc_url provided, save directly to DB
     const doc_url = image_url;
     if (patient_id && visit_id && !isPadMode) {
-      const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || ANON_KEY;
+      const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+      if (!SERVICE_KEY)
+        console.warn("SUPABASE_SERVICE_ROLE_KEY not set — DB writes may fail");
+      const dbKey = SERVICE_KEY || ANON_KEY;
       const dbHeaders = {
-        apikey: SERVICE_KEY,
-        Authorization: `Bearer ${SERVICE_KEY}`,
+        apikey: dbKey,
+        Authorization: `Bearer ${dbKey}`,
         "Content-Type": "application/json",
         Prefer: "return=minimal",
       };
 
       // Save lab values to lab_results table
+      let savedCount = 0;
       if (extracted.lab_values?.length) {
         for (const lab of extracted.lab_values) {
-          await fetch(`${SUPABASE_URL}/rest/v1/lab_results`, {
-            method: "POST",
-            headers: dbHeaders,
-            body: JSON.stringify({
-              patient_id,
-              visit_id,
-              test_name: lab.test_name,
-              value: lab.value,
-              value_numeric: parseFloat(lab.value) || null,
-              unit: lab.unit || null,
-              flag: lab.flag || "normal",
-              test_date: doc_date || new Date().toISOString().split("T")[0],
-              source: "ai_extracted",
-            }),
-          }).catch((e: any) => console.warn("Lab save error:", e.message));
+          try {
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/lab_results`, {
+              method: "POST",
+              headers: dbHeaders,
+              body: JSON.stringify({
+                patient_id,
+                visit_id,
+                test_name: lab.test_name,
+                value: lab.value,
+                value_numeric: isNaN(parseFloat(lab.value))
+                  ? null
+                  : parseFloat(lab.value),
+                unit: lab.unit || null,
+                flag: lab.flag || "normal",
+                test_category: lab.test_category || null,
+                reference_range: lab.reference_range || null,
+                lab_name: extracted.lab_name || null,
+                test_date:
+                  lab.report_date ||
+                  doc_date ||
+                  new Date().toISOString().split("T")[0],
+                source: "ai_extracted",
+              }),
+            });
+            if (res.ok) savedCount++;
+            else console.warn("Lab save failed:", res.status);
+          } catch (e: any) {
+            console.warn("Lab save error:", e.message);
+          }
         }
-        console.log(`Saved ${extracted.lab_values.length} lab results to DB`);
+        console.log(
+          `Saved ${savedCount}/${extracted.lab_values.length} lab results to DB`,
+        );
       }
 
       // Update attached_documents with OCR summary
@@ -346,8 +391,8 @@ Rules:
         }
       }
 
-      extracted._saved_to_db = true;
-      extracted._lab_count_saved = extracted.lab_values?.length || 0;
+      extracted._saved_to_db = savedCount > 0;
+      extracted._lab_count_saved = savedCount;
     }
 
     return new Response(JSON.stringify(extracted), {

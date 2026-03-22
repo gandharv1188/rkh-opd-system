@@ -907,6 +907,9 @@
 
   // ===== Render the full registration form =====
   function renderForm(patient) {
+    docUploadCount = 0;
+    _preOcrResults = {};
+    _ocrPromises = [];
     const isNew = !patient;
     const p = patient || {};
     vaxRows = 0;
@@ -2378,6 +2381,12 @@
   }
 
   // ===== DOCUMENT UPLOAD =====
+  const OCR_CATEGORIES = [
+    "lab_report",
+    "radiology",
+    "prescription",
+    "discharge_summary",
+  ];
   const DOC_CATEGORIES = [
     { value: "lab_report", label: "Lab Investigation Report" },
     { value: "radiology", label: "Radiology / Imaging (X-ray, USG, CT, MRI)" },
@@ -2961,7 +2970,9 @@
 
     return new Promise((resolve) => {
       const img = new Image();
+      const objectUrl = URL.createObjectURL(file);
       img.onload = () => {
+        URL.revokeObjectURL(objectUrl);
         try {
           // Step 1: Draw to canvas, resize to max 1920px
           const maxW = 1920;
@@ -2996,8 +3007,11 @@
           resolve(file);
         }
       };
-      img.onerror = () => resolve(file); // Fallback to original on error
-      img.src = URL.createObjectURL(file);
+      img.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        resolve(file);
+      }; // Fallback to original on error
+      img.src = objectUrl;
     });
   }
 
@@ -3053,94 +3067,8 @@
     ctx.putImageData(imageData, 0, 0);
   }
 
-  async function extractDocumentData(
-    imageUrl,
-    patientId,
-    visitId,
-    category,
-    docDate,
-  ) {
-    try {
-      const res = await fetch(SB + "/functions/v1/process-document", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + KEY,
-        },
-        body: JSON.stringify({
-          image_url: imageUrl,
-          patient_id: patientId,
-          category,
-          doc_date: docDate,
-        }),
-      });
-      if (!res.ok) {
-        console.warn("OCR failed:", res.status);
-        return;
-      }
-      const data = await res.json();
-      if (data.lab_values && data.lab_values.length) {
-        // Auto-populate lab results with source=ai_extracted
-        for (const lab of data.lab_values) {
-          await q("lab_results", "", "POST", {
-            patient_id: patientId,
-            visit_id: visitId,
-            test_name: lab.test_name,
-            value: lab.value,
-            value_numeric: parseFloat(lab.value) || null,
-            unit: lab.unit || null,
-            flag: lab.flag || "normal",
-            test_date: docDate || new Date().toISOString().split("T")[0],
-            loinc_code: null,
-            source: "ai_extracted",
-          });
-        }
-        showToast(
-          `Extracted ${data.lab_values.length} lab values from document`,
-        );
-        console.log(
-          "OCR extracted:",
-          data.lab_values.length,
-          "lab values, summary:",
-          data.summary,
-        );
-      }
-      // Save OCR summary back to attached_documents metadata
-      if (data.summary || (data.lab_values && data.lab_values.length)) {
-        try {
-          const vr = await q(
-            `visits?id=eq.${visitId}`,
-            `&select=attached_documents`,
-          );
-          if (vr.ok) {
-            const vdata = await vr.json();
-            const existingDocs = vdata[0]?.attached_documents || [];
-            const docIdx = existingDocs.findIndex((d) => d.url === imageUrl);
-            if (docIdx >= 0) {
-              existingDocs[docIdx].ocr_summary = data.summary || null;
-              existingDocs[docIdx].ocr_lab_count = data.lab_values?.length || 0;
-              existingDocs[docIdx].ocr_diagnoses = data.diagnoses || [];
-              await q(`visits?id=eq.${visitId}`, "", "PATCH", {
-                attached_documents: existingDocs,
-                updated_at: new Date().toISOString(),
-              });
-              console.log(
-                "OCR summary saved to attached_documents for:",
-                imageUrl,
-              );
-            }
-          }
-        } catch (ocrSaveErr) {
-          console.warn("Failed to save OCR summary:", ocrSaveErr.message);
-        }
-      }
-    } catch (e) {
-      console.warn("Document OCR error:", e.message);
-    }
-  }
-
   // Pre-computed OCR results (keyed by doc row index)
-  const _preOcrResults = {};
+  let _preOcrResults = {};
   let _ocrPromises = [];
 
   async function onDocFileSelected(idx) {
@@ -3151,15 +3079,7 @@
     const statusEl = document.getElementById("doc-ocr-status-" + idx);
 
     // Only run OCR for medical document categories
-    if (
-      ![
-        "lab_report",
-        "radiology",
-        "prescription",
-        "discharge_summary",
-        "discharge",
-      ].some((t) => cat.includes(t))
-    ) {
+    if (!OCR_CATEGORIES.some((t) => cat.includes(t))) {
       if (statusEl) statusEl.textContent = "✓ File selected: " + file.name;
       return;
     }
@@ -3183,7 +3103,7 @@
         reader.readAsDataURL(processed);
       });
       const isPdf = file.type === "application/pdf";
-      const mediaType = isPdf ? "application/pdf" : "image/jpeg";
+      const mediaType = isPdf ? "application/pdf" : file.type || "image/jpeg";
 
       // Call OCR with base64 directly (no Storage URL needed yet)
       const res = await fetch(SB + "/functions/v1/process-document", {
@@ -3287,11 +3207,8 @@
           }
           // Send to Edge Function for server-side DB save (lab results + OCR summary update)
           // Non-blocking — Edge Function saves directly to database
-          if (
-            ["lab_report", "radiology", "prescription", "discharge"].some((t) =>
-              cat.includes(t),
-            )
-          ) {
+          // Skip if pre-OCR already succeeded (data is already in docEntry)
+          if (!preOcr && OCR_CATEGORIES.some((t) => cat.includes(t))) {
             _ocrPromises.push(
               fetch(SB + "/functions/v1/process-document", {
                 method: "POST",
@@ -3442,6 +3359,9 @@
     currentPatient = null;
     currentVisitId = null;
     proceduresList = [];
+    docUploadCount = 0;
+    _preOcrResults = {};
+    _ocrPromises = [];
   }
 
   async function editVisit() {

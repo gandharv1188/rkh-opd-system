@@ -2759,7 +2759,7 @@
       if (doc.ocr_summary)
         html += `<div style="font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.3;max-height:60px;overflow:hidden">${esc(doc.ocr_summary)}</div>`;
       if (doc.ocr_lab_count)
-        html += `<div style="font-size:10px;color:var(--blue);margin-top:2px">${doc.ocr_lab_count} lab values extracted</div>`;
+        html += `<div style="font-size:10px;color:var(--blue);margin-top:2px">${esc(String(doc.ocr_lab_count))} lab values extracted</div>`;
       html += `</div>`;
 
       // Inline preview panel (hidden by default, shown on card click)
