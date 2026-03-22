@@ -1604,6 +1604,12 @@
       existingVax.some(
         (v) => v.vaccine_name === name && v.dose_number === dose,
       );
+    const getGivenDate = (name, dose) => {
+      const rec = existingVax.find(
+        (v) => v.vaccine_name === name && v.dose_number === dose,
+      );
+      return rec?.date_given || null;
+    };
 
     let h = '<div style="font-size:11px">';
     for (const milestone of activeVaxSchedule === "nhm"
@@ -1615,12 +1621,20 @@
         <div style="font-size:10px;font-weight:600;color:${isPast ? "var(--ink2)" : "var(--blue)"};margin-bottom:2px">${milestone.age}${!isPast ? " (upcoming)" : ""}</div>`;
       for (const v of milestone.vax) {
         const given = isGiven(v.n, v.d);
+        const givenDate = getGivenDate(v.n, v.d);
         const key = `vax-${v.n}-${v.d}`.replace(/[^a-zA-Z0-9-]/g, "_");
         const overdue = isPast && !given;
+        const dateLabel = givenDate
+          ? new Date(givenDate).toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "2-digit",
+            })
+          : "Done";
         h += `<label style="display:flex;align-items:center;gap:6px;padding:1px 0;font-size:11px;${overdue ? "color:var(--red)" : ""}">
           <input type="checkbox" id="${key}" data-vax="${esc(v.n)}" data-dose="${v.d}" ${given ? "checked disabled" : ""} style="margin:0" />
           ${esc(v.n)} — Dose ${v.d}
-          ${given ? '<span style="color:var(--green);font-size:10px">✓</span>' : ""}
+          ${given ? '<span style="color:var(--green);font-size:10px;margin-left:auto">\u2713 ' + esc(dateLabel) + "</span>" : ""}
           ${overdue ? '<span style="font-size:9px;color:var(--red)">OVERDUE</span>' : ""}
           ${!given ? '<input type="date" id="' + key + '-date" style="margin-left:auto;padding:1px 4px;border:1px solid var(--brd);border-radius:var(--r);font-size:10px;width:110px" />' : ""}
         </label>`;
@@ -1932,18 +1946,18 @@
       // Save vaccination records from checklist
       const newVax = getCheckedVaccines();
       for (const v of newVax) {
-        await q("vaccinations", "", "POST", {
+        const vaxRecord = {
           patient_id: patientId,
           visit_id: visitId,
           vaccine_name: v.vaccine_name,
           dose_number: v.dose_number,
-          date_given:
-            v.date_given ||
-            document.getElementById("f-visit-date")?.value ||
-            new Date().toISOString().split("T")[0],
           given_by: document.getElementById("f-doctor")?.value || "DR-LOKENDER",
           free_or_paid: "free_uip",
-        });
+        };
+        // Only set date_given if user explicitly entered a date
+        // If no date entered, leave null (means "done but date unknown")
+        if (v.date_given) vaxRecord.date_given = v.date_given;
+        await q("vaccinations", "", "POST", vaxRecord);
       }
       if (newVax.length) console.log("Vaccinations saved:", newVax.length);
 

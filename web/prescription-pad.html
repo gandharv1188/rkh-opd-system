@@ -2845,18 +2845,33 @@
     try {
       const r = await q(
         "vaccinations",
-        `?patient_id=eq.${encodeURIComponent(patientId)}&date_given=not.is.null&select=vaccine_name,dose_number,date_given&order=date_given.desc`,
+        `?patient_id=eq.${encodeURIComponent(patientId)}&select=vaccine_name,dose_number,date_given&order=date_given.desc.nullslast`,
       );
       if (!r.ok) return "";
       const vaxList = await r.json();
-      const givenCount = vaxList.length;
-      if (!givenCount) return "";
-      const latest = vaxList[0];
-      const latestDate = new Date(latest.date_given).toLocaleDateString(
-        "en-IN",
-        { day: "2-digit", month: "short" },
-      );
-      return `<div class="vi-row"><span class="vi-label">Vaccines</span><div style="font-size:11px">${givenCount} doses recorded · Last: ${esc(latest.vaccine_name)} Dose ${latest.dose_number} (${latestDate})</div></div>`;
+      if (!vaxList.length) return "";
+      const withDate = vaxList.filter((v) => v.date_given);
+      const withoutDate = vaxList.filter((v) => !v.date_given);
+      let info = vaxList.length + " doses recorded";
+      if (withDate.length) {
+        const latest = withDate[0];
+        const latestDate = new Date(latest.date_given).toLocaleDateString(
+          "en-IN",
+          { day: "2-digit", month: "short" },
+        );
+        info +=
+          " · Last: " +
+          esc(latest.vaccine_name) +
+          " Dose " +
+          latest.dose_number +
+          " (" +
+          latestDate +
+          ")";
+      }
+      if (withoutDate.length) {
+        info += " · " + withoutDate.length + " prior (date unknown)";
+      }
+      return `<div class="vi-row"><span class="vi-label">Vaccines</span><div style="font-size:11px">${info}</div></div>`;
     } catch (e) {
       console.warn("loadVaxStatus:", e.message);
       return "";
@@ -3028,20 +3043,31 @@
       try {
         const vaxR = await q(
           "vaccinations",
-          `?patient_id=eq.${encodeURIComponent(p.id)}&date_given=not.is.null&select=vaccine_name,dose_number,date_given&order=date_given.desc`,
+          `?patient_id=eq.${encodeURIComponent(p.id)}&select=vaccine_name,dose_number,date_given&order=date_given.desc.nullslast`,
         );
         if (vaxR.ok) {
           const vaxList = await vaxR.json();
           if (vaxList.length) {
-            ctx +=
-              `\nVACCINATION HISTORY (${vaxList.length} doses recorded): ` +
-              vaxList
+            const withDate = vaxList.filter((v) => v.date_given);
+            const withoutDate = vaxList.filter((v) => !v.date_given);
+            let vaxCtx = `\nVACCINATION HISTORY (${vaxList.length} doses recorded): `;
+            if (withDate.length) {
+              vaxCtx += withDate
                 .map(
                   (v) =>
                     `${v.vaccine_name} Dose ${v.dose_number} (${v.date_given})`,
                 )
-                .join(", ") +
-              ". ";
+                .join(", ");
+            }
+            if (withoutDate.length) {
+              if (withDate.length) vaxCtx += "; ";
+              vaxCtx +=
+                "Also completed (date unknown): " +
+                withoutDate
+                  .map((v) => `${v.vaccine_name} Dose ${v.dose_number}`)
+                  .join(", ");
+            }
+            ctx += vaxCtx + ". ";
           } else {
             ctx +=
               "\nVACCINATION HISTORY: No records — assume vaccinations are up to date for age. Only suggest upcoming/next-due vaccines. ";
