@@ -3276,46 +3276,39 @@
             url,
             size_bytes: processedFile.size || file.size,
           };
-          // Use pre-computed OCR result if available (ran when file was selected)
+          // Use pre-computed OCR if available (ran when file was selected)
           const preOcr = _preOcrResults[i];
           if (preOcr) {
             docEntry.ocr_summary = preOcr.summary || null;
             docEntry.ocr_lab_count = preOcr.lab_values?.length || 0;
             docEntry.ocr_diagnoses = preOcr.diagnoses || [];
-            // Save extracted lab values to database
-            if (preOcr.lab_values?.length) {
-              for (const lab of preOcr.lab_values) {
-                q("lab_results", "", "POST", {
-                  patient_id: patientId,
-                  visit_id: visitId,
-                  test_name: lab.test_name,
-                  value: lab.value,
-                  value_numeric: parseFloat(lab.value) || null,
-                  unit: lab.unit || null,
-                  flag: lab.flag || "normal",
-                  test_date: date || new Date().toISOString().split("T")[0],
-                  source: "ai_extracted",
-                }).catch((e) => console.warn("Lab save error:", e.message));
-              }
-              showToast(
-                "Extracted " +
-                  preOcr.lab_values.length +
-                  " lab values from " +
-                  file.name,
-              );
-            }
+            docEntry.ocr_medications = preOcr.medications || [];
             console.log("Using pre-computed OCR for:", file.name);
-          } else if (
+          }
+          // Send to Edge Function for server-side DB save (lab results + OCR summary update)
+          // Non-blocking — Edge Function saves directly to database
+          if (
             ["lab_report", "radiology", "prescription", "discharge"].some((t) =>
               cat.includes(t),
             )
           ) {
-            // OCR wasn't pre-computed (user didn't select category before file, or OCR failed)
-            // Run it now in background
             _ocrPromises.push(
-              extractDocumentData(url, patientId, visitId, cat, date).catch(
-                (e) => console.warn("OCR skipped:", e.message),
-              ),
+              fetch(SB + "/functions/v1/process-document", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + KEY,
+                },
+                body: JSON.stringify({
+                  image_url: url,
+                  patient_id: patientId,
+                  visit_id: visitId,
+                  category: cat,
+                  doc_date: date,
+                }),
+              })
+                .then((r) => (r.ok ? r.json() : null))
+                .catch((e) => console.warn("OCR skipped:", e.message)),
             );
           }
           uploaded.push(docEntry);

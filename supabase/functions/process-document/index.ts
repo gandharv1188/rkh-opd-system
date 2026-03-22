@@ -95,6 +95,7 @@ serve(async (req: Request) => {
       image_base64,
       media_type: reqMediaType,
       patient_id,
+      visit_id,
       category,
       doc_date,
       mode,
@@ -279,6 +280,75 @@ Rules:
     console.log(
       `Extracted: type=${extracted.document_type}, labs=${extracted.lab_values?.length || 0}, meds=${extracted.medications?.length || 0}`,
     );
+
+    // Server-side save: if patient_id, visit_id, and doc_url provided, save directly to DB
+    const doc_url = image_url;
+    if (patient_id && visit_id && !isPadMode) {
+      const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || ANON_KEY;
+      const dbHeaders = {
+        apikey: SERVICE_KEY,
+        Authorization: `Bearer ${SERVICE_KEY}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      };
+
+      // Save lab values to lab_results table
+      if (extracted.lab_values?.length) {
+        for (const lab of extracted.lab_values) {
+          await fetch(`${SUPABASE_URL}/rest/v1/lab_results`, {
+            method: "POST",
+            headers: dbHeaders,
+            body: JSON.stringify({
+              patient_id,
+              visit_id,
+              test_name: lab.test_name,
+              value: lab.value,
+              value_numeric: parseFloat(lab.value) || null,
+              unit: lab.unit || null,
+              flag: lab.flag || "normal",
+              test_date: doc_date || new Date().toISOString().split("T")[0],
+              source: "ai_extracted",
+            }),
+          }).catch((e: any) => console.warn("Lab save error:", e.message));
+        }
+        console.log(`Saved ${extracted.lab_values.length} lab results to DB`);
+      }
+
+      // Update attached_documents with OCR summary
+      if (doc_url) {
+        try {
+          const vRes = await fetch(
+            `${SUPABASE_URL}/rest/v1/visits?id=eq.${visit_id}&select=attached_documents`,
+            { headers: dbHeaders },
+          );
+          if (vRes.ok) {
+            const vData = await vRes.json();
+            const docs = vData[0]?.attached_documents || [];
+            const docIdx = docs.findIndex((d: any) => d.url === doc_url);
+            if (docIdx >= 0) {
+              docs[docIdx].ocr_summary = extracted.summary || null;
+              docs[docIdx].ocr_lab_count = extracted.lab_values?.length || 0;
+              docs[docIdx].ocr_diagnoses = extracted.diagnoses || [];
+              docs[docIdx].ocr_medications = extracted.medications || [];
+              await fetch(`${SUPABASE_URL}/rest/v1/visits?id=eq.${visit_id}`, {
+                method: "PATCH",
+                headers: dbHeaders,
+                body: JSON.stringify({
+                  attached_documents: docs,
+                  updated_at: new Date().toISOString(),
+                }),
+              });
+              console.log("OCR summary saved to attached_documents");
+            }
+          }
+        } catch (e: any) {
+          console.warn("Failed to save OCR summary:", e.message);
+        }
+      }
+
+      extracted._saved_to_db = true;
+      extracted._lab_count_saved = extracted.lab_values?.length || 0;
+    }
 
     return new Response(JSON.stringify(extracted), {
       status: 200,
