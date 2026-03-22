@@ -2946,8 +2946,8 @@
         <button type="button" onclick="document.getElementById('doc-row-${idx}').remove()" style="padding:2px 8px;background:none;border:1px solid var(--brd);border-radius:var(--r);cursor:pointer;color:var(--red);font-size:14px">×</button>
       </div>
       <input type="text" id="doc-desc-${idx}" placeholder="Brief description (e.g., CBC from City Lab, Dr. XYZ referral)" style="width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;margin-bottom:6px;box-sizing:border-box" />
-      <input type="file" id="doc-file-${idx}" accept="image/*,.pdf,.jpg,.jpeg,.png,.heic" style="font-size:11px" />
-      <div style="font-size:10px;color:var(--ink3);margin-top:2px">Accepted: Photos, scans, PDFs (max 10 MB)</div>
+      <input type="file" id="doc-file-${idx}" accept="image/*,.pdf,.jpg,.jpeg,.png,.heic" style="font-size:11px" onchange="onDocFileSelected(${idx})" />
+      <div id="doc-ocr-status-${idx}" style="font-size:10px;color:var(--ink3);margin-top:2px">Accepted: Photos, scans, PDFs (max 10 MB)</div>
     `;
     container.appendChild(div);
   }
@@ -3139,7 +3139,97 @@
     }
   }
 
+  // Pre-computed OCR results (keyed by doc row index)
+  const _preOcrResults = {};
   let _ocrPromises = [];
+
+  async function onDocFileSelected(idx) {
+    const fileInput = document.getElementById("doc-file-" + idx);
+    const file = fileInput?.files?.[0];
+    if (!file) return;
+    const cat = document.getElementById("doc-cat-" + idx)?.value || "other";
+    const statusEl = document.getElementById("doc-ocr-status-" + idx);
+
+    // Only run OCR for medical document categories
+    if (
+      ![
+        "lab_report",
+        "radiology",
+        "prescription",
+        "discharge_summary",
+        "discharge",
+      ].some((t) => cat.includes(t))
+    ) {
+      if (statusEl) statusEl.textContent = "✓ File selected: " + file.name;
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      if (statusEl) statusEl.textContent = "⚠ File too large (max 10 MB)";
+      return;
+    }
+
+    if (statusEl)
+      statusEl.innerHTML =
+        '<span style="color:var(--blue)">⏳ Reading document with AI...</span>';
+
+    try {
+      // Process image (compress) then convert to base64
+      const processed = await processImage(file);
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(processed);
+      });
+      const isPdf = file.type === "application/pdf";
+      const mediaType = isPdf ? "application/pdf" : "image/jpeg";
+
+      // Call OCR with base64 directly (no Storage URL needed yet)
+      const res = await fetch(SB + "/functions/v1/process-document", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + KEY,
+        },
+        body: JSON.stringify({
+          image_base64: base64,
+          media_type: mediaType,
+          category: cat,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        _preOcrResults[idx] = data;
+        const labCount = data.lab_values?.length || 0;
+        const summary = data.summary || "";
+        if (statusEl)
+          statusEl.innerHTML =
+            '<span style="color:var(--green)">✓ AI extracted: ' +
+            (summary ? esc(summary.substring(0, 80)) + "... " : "") +
+            (labCount ? "(" + labCount + " lab values) " : "") +
+            "</span>";
+        console.log(
+          "Pre-OCR complete for doc",
+          idx,
+          ":",
+          summary.substring(0, 100),
+        );
+      } else {
+        if (statusEl)
+          statusEl.innerHTML =
+            '<span style="color:var(--ink3)">✓ File selected (AI extraction skipped)</span>';
+        console.warn("Pre-OCR failed:", res.status);
+      }
+    } catch (e) {
+      if (statusEl)
+        statusEl.innerHTML =
+          '<span style="color:var(--ink3)">✓ File selected</span>';
+      console.warn("Pre-OCR error:", e.message);
+    }
+  }
+
   async function uploadDocuments(patientId, visitId) {
     _ocrPromises = [];
     const uploaded = [];
@@ -3178,27 +3268,58 @@
         );
         if (uploadRes.ok) {
           const url = SB + "/storage/v1/object/public/documents/" + path;
-          uploaded.push({
+          const docEntry = {
             category: cat,
             date,
             description: desc,
             filename: file.name,
             url,
             size_bytes: processedFile.size || file.size,
-          });
-          console.log("Uploaded:", cat, file.name, "→", url);
-          // Start OCR immediately — collect promise, await later
-          if (
+          };
+          // Use pre-computed OCR result if available (ran when file was selected)
+          const preOcr = _preOcrResults[i];
+          if (preOcr) {
+            docEntry.ocr_summary = preOcr.summary || null;
+            docEntry.ocr_lab_count = preOcr.lab_values?.length || 0;
+            docEntry.ocr_diagnoses = preOcr.diagnoses || [];
+            // Save extracted lab values to database
+            if (preOcr.lab_values?.length) {
+              for (const lab of preOcr.lab_values) {
+                q("lab_results", "", "POST", {
+                  patient_id: patientId,
+                  visit_id: visitId,
+                  test_name: lab.test_name,
+                  value: lab.value,
+                  value_numeric: parseFloat(lab.value) || null,
+                  unit: lab.unit || null,
+                  flag: lab.flag || "normal",
+                  test_date: date || new Date().toISOString().split("T")[0],
+                  source: "ai_extracted",
+                }).catch((e) => console.warn("Lab save error:", e.message));
+              }
+              showToast(
+                "Extracted " +
+                  preOcr.lab_values.length +
+                  " lab values from " +
+                  file.name,
+              );
+            }
+            console.log("Using pre-computed OCR for:", file.name);
+          } else if (
             ["lab_report", "radiology", "prescription", "discharge"].some((t) =>
               cat.includes(t),
             )
           ) {
+            // OCR wasn't pre-computed (user didn't select category before file, or OCR failed)
+            // Run it now in background
             _ocrPromises.push(
               extractDocumentData(url, patientId, visitId, cat, date).catch(
                 (e) => console.warn("OCR skipped:", e.message),
               ),
             );
           }
+          uploaded.push(docEntry);
+          console.log("Uploaded:", cat, file.name, "→", url);
         } else {
           const errText = await uploadRes.text().catch(() => "");
           console.error("Upload failed:", file.name, uploadRes.status, errText);
@@ -3556,6 +3677,7 @@
     addLabEntry,
     removeLabEntry,
     addDocUpload,
+    onDocFileSelected,
     cancelForm,
     saveAndCreateVisit,
     printToken,
