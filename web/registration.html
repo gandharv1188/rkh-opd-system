@@ -1924,6 +1924,9 @@
           updated_at: new Date().toISOString(),
         });
         console.log("Documents uploaded:", uploadedDocs.length);
+        showToast(
+          "✓ " + uploadedDocs.length + " document(s) uploaded successfully",
+        );
       }
 
       // Save vaccination records from checklist
@@ -3145,10 +3148,16 @@
             );
           }
         } else {
-          console.warn("Upload failed:", file.name, uploadRes.status);
+          const errText = await uploadRes.text().catch(() => "");
+          console.error("Upload failed:", file.name, uploadRes.status, errText);
+          showToast(
+            "⚠ Upload failed: " + file.name + " (" + uploadRes.status + ")",
+            true,
+          );
         }
       } catch (e) {
-        console.warn("Upload error:", file.name, e.message);
+        console.error("Upload error:", file.name, e.message);
+        showToast("⚠ Upload error: " + file.name + " — " + e.message, true);
       }
     }
     return uploaded;
