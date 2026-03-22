@@ -122,12 +122,17 @@ serve(async (req: Request) => {
       const imageRes = await fetch(image_url);
       if (!imageRes.ok)
         throw new Error(`Failed to fetch image: ${imageRes.status}`);
-      const imageBytes = await imageRes.arrayBuffer();
-      base64 = btoa(String.fromCharCode(...new Uint8Array(imageBytes)));
+      const imageBytes = new Uint8Array(await imageRes.arrayBuffer());
+      // Convert to base64 in chunks to avoid stack overflow on large files
+      let binary = "";
+      const chunkSize = 32768;
+      for (let i = 0; i < imageBytes.length; i += chunkSize) {
+        binary += String.fromCharCode(...imageBytes.subarray(i, i + chunkSize));
+      }
+      base64 = btoa(binary);
       const contentType = imageRes.headers.get("content-type") || "image/jpeg";
-      mediaType = contentType.startsWith("image/")
-        ? contentType.split(";")[0]
-        : "image/jpeg";
+      // Support PDFs (Claude Vision handles application/pdf natively)
+      mediaType = contentType.split(";")[0] || "image/jpeg";
     }
 
     // Build the user message with context
@@ -166,6 +171,9 @@ Rules:
         "Content-Type": "application/json",
         "x-api-key": ANTHROPIC_API_KEY,
         "anthropic-version": "2023-06-01",
+        ...(mediaType === "application/pdf"
+          ? { "anthropic-beta": "pdfs-2024-09-25" }
+          : {}),
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
@@ -175,14 +183,23 @@ Rules:
           {
             role: "user",
             content: [
-              {
-                type: "image",
-                source: {
-                  type: "base64",
-                  media_type: mediaType,
-                  data: base64,
-                },
-              },
+              mediaType === "application/pdf"
+                ? {
+                    type: "document",
+                    source: {
+                      type: "base64",
+                      media_type: "application/pdf",
+                      data: base64,
+                    },
+                  }
+                : {
+                    type: "image",
+                    source: {
+                      type: "base64",
+                      media_type: mediaType,
+                      data: base64,
+                    },
+                  },
               {
                 type: "text",
                 text: userText,
