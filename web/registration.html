@@ -2007,6 +2007,14 @@
             String(Math.floor(Math.random() * 99999) + 1).padStart(5, "0");
       }
 
+      // Wait for OCR processing to complete (started during upload)
+      if (_ocrPromises.length) {
+        if (btn) btn.textContent = "Processing documents…";
+        await Promise.all(_ocrPromises);
+        _ocrPromises = [];
+        console.log("OCR processing complete");
+      }
+
       // Save form values before clearing
       const doctor = "Dr. Lokender Goyal";
       const visitType = document.getElementById("f-visit-type")?.value || "new";
@@ -3131,7 +3139,9 @@
     }
   }
 
+  let _ocrPromises = [];
   async function uploadDocuments(patientId, visitId) {
+    _ocrPromises = [];
     const uploaded = [];
     for (let i = 0; i < docUploadCount; i++) {
       const row = document.getElementById("doc-row-" + i);
@@ -3177,14 +3187,16 @@
             size_bytes: processedFile.size || file.size,
           });
           console.log("Uploaded:", cat, file.name, "→", url);
-          // OCR: extract data from medical documents (non-blocking)
+          // Start OCR immediately — collect promise, await later
           if (
             ["lab_report", "radiology", "prescription", "discharge"].some((t) =>
               cat.includes(t),
             )
           ) {
-            extractDocumentData(url, patientId, visitId, cat, date).catch((e) =>
-              console.warn("OCR skipped:", e.message),
+            _ocrPromises.push(
+              extractDocumentData(url, patientId, visitId, cat, date).catch(
+                (e) => console.warn("OCR skipped:", e.message),
+              ),
             );
           }
         } else {
