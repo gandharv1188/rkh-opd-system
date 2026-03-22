@@ -3083,8 +3083,34 @@
           data.summary,
         );
       }
-      if (data.summary) {
-        console.log("Document summary:", data.summary);
+      // Save OCR summary back to attached_documents metadata
+      if (data.summary || (data.lab_values && data.lab_values.length)) {
+        try {
+          const vr = await q(
+            `visits?id=eq.${visitId}`,
+            `&select=attached_documents`,
+          );
+          if (vr.ok) {
+            const vdata = await vr.json();
+            const existingDocs = vdata[0]?.attached_documents || [];
+            const docIdx = existingDocs.findIndex((d) => d.url === imageUrl);
+            if (docIdx >= 0) {
+              existingDocs[docIdx].ocr_summary = data.summary || null;
+              existingDocs[docIdx].ocr_lab_count = data.lab_values?.length || 0;
+              existingDocs[docIdx].ocr_diagnoses = data.diagnoses || [];
+              await q(`visits?id=eq.${visitId}`, "", "PATCH", {
+                attached_documents: existingDocs,
+                updated_at: new Date().toISOString(),
+              });
+              console.log(
+                "OCR summary saved to attached_documents for:",
+                imageUrl,
+              );
+            }
+          }
+        } catch (ocrSaveErr) {
+          console.warn("Failed to save OCR summary:", ocrSaveErr.message);
+        }
       }
     } catch (e) {
       console.warn("Document OCR error:", e.message);
