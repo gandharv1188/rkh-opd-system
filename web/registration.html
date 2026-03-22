@@ -1920,7 +1920,7 @@
             .join("\n");
         await q(`visits?id=eq.${visitId}`, "", "PATCH", {
           clinical_notes: existingNotes + docSummary,
-          raw_dictation: JSON.stringify(uploadedDocs),
+          attached_documents: uploadedDocs,
           updated_at: new Date().toISOString(),
         });
         console.log("Documents uploaded:", uploadedDocs.length);

@@ -268,6 +268,9 @@ create table visits (
   -- AI-generated summary of previous visits (created at registration for returning patients)
   visit_summary       text,
 
+  -- Attached document metadata (uploaded at registration)
+  attached_documents  jsonb,
+
   created_at      timestamptz default now(),
   updated_at      timestamptz default now()
 );

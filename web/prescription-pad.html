@@ -344,6 +344,136 @@
     flex-direction: column;
     flex: 1;
   }
+  /* Visit Summary Panel */
+  .visit-summary-panel {
+    margin: 8px 14px 0;
+    background: var(--blue-lt);
+    border: 1px solid var(--bdr);
+    border-radius: var(--r);
+    font-size: 12px;
+    color: var(--ink2);
+    overflow: hidden;
+  }
+  .visit-summary-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    color: var(--blue);
+    font-size: 12px;
+  }
+  .visit-summary-header:hover {
+    background: rgba(30, 58, 107, 0.06);
+  }
+  .visit-summary-body {
+    padding: 0 12px 8px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: system-ui, sans-serif;
+  }
+  .visit-summary-toggle {
+    font-size: 14px;
+    color: var(--ink3);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+  }
+
+  /* Documents View */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    padding: 14px;
+  }
+  .doc-card {
+    background: var(--bg2);
+    border: 1px solid var(--bdr);
+    border-radius: var(--r);
+    padding: 12px;
+    cursor: pointer;
+    transition: box-shadow 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .doc-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--bdr2);
+  }
+  .doc-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .doc-badge-lab_report {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+  .doc-badge-radiology {
+    background: #ede9fe;
+    color: #6b21a8;
+  }
+  .doc-badge-prescription {
+    background: #ffedd5;
+    color: #9a3412;
+  }
+  .doc-badge-discharge_summary {
+    background: #dcfce7;
+    color: #166534;
+  }
+  .doc-badge-other {
+    background: #f3f4f6;
+    color: #4b5563;
+  }
+  .doc-badge-vaccination {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  .doc-badge-referral {
+    background: #fce7f3;
+    color: #9d174d;
+  }
+  .doc-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    word-break: break-word;
+  }
+  .doc-date {
+    font-size: 11px;
+    color: var(--ink3);
+  }
+  .doc-thumb {
+    width: 100%;
+    max-height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: var(--bg);
+  }
+  .doc-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    border-radius: 4px;
+    font-size: 24px;
+    color: var(--ink3);
+  }
+
   .pad-hint {
     padding: 8px 20px 0;
     font-size: 12px;
@@ -1333,6 +1463,28 @@
     <button class="tab" id="tab-rx" onclick="showView('rx')">
       Review &amp; edit
     </button>
+    <button
+      class="tab"
+      id="tab-docs"
+      onclick="showView('docs')"
+      style="display: none; font-size: 11px"
+    >
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        style="vertical-align: -1px; margin-right: 3px"
+      >
+        <path
+          d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"
+        /></svg
+      ><span id="tab-docs-label">Docs</span>
+    </button>
     <span style="flex: 1"></span>
     <span
       id="save-indicator"
@@ -1452,6 +1604,29 @@
     <div class="notepad-surface">
       <div id="pt-info-panel"></div>
       <div id="visit-info-panel"></div>
+
+      <!-- Visit Summary (read-only, collapsible) -->
+      <div
+        id="visit-summary-panel"
+        class="visit-summary-panel"
+        style="display: none"
+      >
+        <div class="visit-summary-header" onclick="toggleVisitSummary()">
+          <span id="visit-summary-arrow">&#9660;</span>&nbsp; Previous Visit
+          Summary
+          <button
+            class="visit-summary-toggle"
+            onclick="
+              event.stopPropagation();
+              toggleVisitSummary();
+            "
+            title="Toggle summary"
+          >
+            &times;
+          </button>
+        </div>
+        <div id="visit-summary-body" class="visit-summary-body"></div>
+      </div>
 
       <div class="pad-hint">
         Write or dictate freely — name, age, weight, complaints, diagnosis. AI
@@ -1615,6 +1790,26 @@
         Doctor approved — sign &amp; save
       </button>
     </div>
+  </div>
+
+  <!-- DOCUMENTS VIEW -->
+  <div id="view-docs" style="display: none">
+    <div
+      style="
+        padding: 10px 14px 4px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <button class="back-btn" onclick="showView('pad')" style="margin: 0">
+        ← Back to pad
+      </button>
+      <span style="font-size: 13px; font-weight: 600; color: var(--blue)"
+        >Attached Documents</span
+      >
+    </div>
+    <div id="docs-content" class="docs-grid"></div>
   </div>
 
   <!-- SAVE STATUS -->
@@ -2023,7 +2218,7 @@
     try {
       const vr = await q(
         "visits",
-        `?visit_date=eq.${today}&select=id,patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,bp_systolic,bp_diastolic,map_mmhg,chief_complaints,doctor_id,visit_summary,raw_dictation,created_at&order=created_at.asc`,
+        `?visit_date=eq.${today}&select=id,patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,bp_systolic,bp_diastolic,map_mmhg,chief_complaints,doctor_id,visit_summary,raw_dictation,attached_documents,created_at&order=created_at.asc`,
       );
       if (!vr.ok) return;
       const visits = await vr.json();
@@ -2344,6 +2539,201 @@
     return h;
   }
 
+  // ===== VISIT SUMMARY TOGGLE =====
+  function toggleVisitSummary() {
+    const body = document.getElementById("visit-summary-body");
+    const arrow = document.getElementById("visit-summary-arrow");
+    if (!body) return;
+    if (body.style.display === "none") {
+      body.style.display = "";
+      if (arrow) arrow.innerHTML = "&#9660;";
+    } else {
+      body.style.display = "none";
+      if (arrow) arrow.innerHTML = "&#9654;";
+    }
+  }
+
+  // ===== DOCUMENTS =====
+  function loadDocuments(patientId, visit) {
+    const docsTab = document.getElementById("tab-docs");
+    const docsContent = document.getElementById("docs-content");
+    if (!docsTab || !docsContent) return;
+
+    let docs = [];
+
+    // 1. Check visit.attached_documents (JSONB array)
+    if (
+      visit?.attached_documents &&
+      Array.isArray(visit.attached_documents) &&
+      visit.attached_documents.length
+    ) {
+      docs = visit.attached_documents;
+    }
+
+    // 2. Fallback: parse clinical_notes for "ATTACHED DOCUMENTS:" section
+    if (
+      !docs.length &&
+      visit?.clinical_notes &&
+      typeof visit.clinical_notes === "string"
+    ) {
+      const marker = "ATTACHED DOCUMENTS:";
+      const idx = visit.clinical_notes.indexOf(marker);
+      if (idx >= 0) {
+        const section = visit.clinical_notes
+          .substring(idx + marker.length)
+          .trim();
+        // Try to parse as JSON array
+        try {
+          const parsed = JSON.parse(section);
+          if (Array.isArray(parsed)) docs = parsed;
+        } catch (_) {
+          // Parse line-by-line: "- description (category)"
+          section.split("\n").forEach((line) => {
+            line = line.trim().replace(/^[-*]\s*/, "");
+            if (line) {
+              const catMatch = line.match(/\((\w+)\)\s*$/);
+              docs.push({
+                description: catMatch
+                  ? line.replace(catMatch[0], "").trim()
+                  : line,
+                category: catMatch ? catMatch[1] : "other",
+              });
+            }
+          });
+        }
+      }
+    }
+
+    // 3. Fallback: parse raw_dictation if it starts with "[" (legacy JSON format)
+    if (
+      !docs.length &&
+      visit?.raw_dictation &&
+      typeof visit.raw_dictation === "string" &&
+      visit.raw_dictation.trim().startsWith("[")
+    ) {
+      try {
+        const parsed = JSON.parse(visit.raw_dictation);
+        if (Array.isArray(parsed)) {
+          docs = parsed.filter(
+            (d) => d && (d.url || d.file_name || d.description),
+          );
+        }
+      } catch (_) {}
+    }
+
+    // 4. Fallback: fetch from Supabase Storage if no attached_documents
+    if (!docs.length && sbConnected && patientId) {
+      fetchStorageDocs(patientId, docsTab, docsContent);
+      // Hide tab for now, fetchStorageDocs will show it if docs found
+      docsTab.style.display = "none";
+      docsContent.innerHTML = "";
+      return;
+    }
+
+    // Render documents
+    if (docs.length) {
+      docsTab.style.display = "";
+      document.getElementById("tab-docs-label").textContent =
+        "Docs (" + docs.length + ")";
+      renderDocCards(docs, docsContent);
+    } else {
+      docsTab.style.display = "none";
+      docsContent.innerHTML = "";
+    }
+  }
+
+  async function fetchStorageDocs(patientId, docsTab, docsContent) {
+    try {
+      const r = await fetch(
+        SB +
+          "/storage/v1/object/list/documents/" +
+          encodeURIComponent(patientId),
+        { headers: { apikey: KEY, Authorization: "Bearer " + KEY } },
+      );
+      if (!r.ok) return;
+      const files = await r.json();
+      if (!files || !files.length) return;
+      const docs = files.map((f) => ({
+        file_name: f.name,
+        url:
+          SB +
+          "/storage/v1/object/public/documents/" +
+          encodeURIComponent(patientId) +
+          "/" +
+          encodeURIComponent(f.name),
+        category: guessCategory(f.name),
+        uploaded_at: f.created_at || f.updated_at || "",
+      }));
+      docsTab.style.display = "";
+      document.getElementById("tab-docs-label").textContent =
+        "Docs (" + docs.length + ")";
+      renderDocCards(docs, docsContent);
+    } catch (e) {
+      console.warn("fetchStorageDocs:", e.message);
+    }
+  }
+
+  function guessCategory(filename) {
+    const f = (filename || "").toLowerCase();
+    if (/lab|report|cbc|lft|rft|blood|urine/.test(f)) return "lab_report";
+    if (/xray|ct|mri|usg|radio|scan|echo/.test(f)) return "radiology";
+    if (/rx|presc/.test(f)) return "prescription";
+    if (/discharge|summary/.test(f)) return "discharge_summary";
+    if (/vax|vaccin|immun/.test(f)) return "vaccination";
+    if (/refer/.test(f)) return "referral";
+    return "other";
+  }
+
+  function renderDocCards(docs, container) {
+    const categoryLabels = {
+      lab_report: "Lab Report",
+      radiology: "Radiology",
+      prescription: "Prescription",
+      discharge_summary: "Discharge Summary",
+      vaccination: "Vaccination",
+      referral: "Referral",
+      other: "Document",
+    };
+
+    let html = "";
+    docs.forEach((doc) => {
+      const cat = doc.category || "other";
+      const label = categoryLabels[cat] || categoryLabels.other;
+      const name = doc.description || doc.file_name || doc.name || "Untitled";
+      const url = doc.url || doc.file_url || "#";
+      const dateStr = doc.uploaded_at || doc.date || doc.created_at || "";
+      const fmtDate = dateStr
+        ? new Date(dateStr).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "2-digit",
+          })
+        : "";
+      const isImage =
+        /\.(jpg|jpeg|png|gif|webp|bmp)$/i.test(url) ||
+        (doc.mime_type && doc.mime_type.startsWith("image/"));
+      const isPdf =
+        /\.pdf$/i.test(url) ||
+        (doc.mime_type && doc.mime_type === "application/pdf");
+
+      html += `<div class="doc-card" onclick="window.open('${esc(url)}','_blank')" title="${esc(name)}">`;
+      html += `<span class="doc-badge doc-badge-${esc(cat)}">${esc(label)}</span>`;
+
+      if (isImage && url !== "#") {
+        html += `<img class="doc-thumb" src="${esc(url)}" alt="${esc(name)}" onerror="this.style.display='none'">`;
+      } else if (isPdf) {
+        html += `<div class="doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><text x="8" y="18" font-size="6" fill="currentColor" stroke="none" font-weight="bold">PDF</text></svg></div>`;
+      } else {
+        html += `<div class="doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>`;
+      }
+
+      html += `<div class="doc-name">${esc(name)}</div>`;
+      if (fmtDate) html += `<div class="doc-date">${esc(fmtDate)}</div>`;
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+  }
+
   // ===== CLINICAL TRACKING: Growth Trend, Labs, Vaccination Status =====
 
   async function loadGrowthTrend(patientId) {
@@ -2640,10 +3030,25 @@
           }
         }
       } catch (_) {}
-      // Append previous visit summary (generated at registration for returning patients)
-      if (visit?.visit_summary) ctx += "\n\n" + visit.visit_summary;
+      // Visit summary now shown in its own read-only panel (not in notepad)
       document.getElementById("pad-ta").value = ctx;
     }
+
+    // Populate visit summary panel (read-only, collapsible)
+    const summaryPanel = document.getElementById("visit-summary-panel");
+    const summaryBody = document.getElementById("visit-summary-body");
+    if (visit?.visit_summary && summaryPanel && summaryBody) {
+      summaryBody.textContent = visit.visit_summary;
+      summaryPanel.style.display = "";
+      summaryBody.style.display = "";
+      const arrow = document.getElementById("visit-summary-arrow");
+      if (arrow) arrow.innerHTML = "&#9660;";
+    } else if (summaryPanel) {
+      summaryPanel.style.display = "none";
+    }
+
+    // Load attached documents
+    loadDocuments(p.id, visit);
 
     // If patient already has today's prescription, load it into review
     if (p.done) {
@@ -2738,6 +3143,14 @@
     const cb = document.getElementById("pt-clear-btn");
     if (cb) cb.style.display = "none";
     document.getElementById("pad-ta").value = "";
+    // Hide visit summary panel
+    const sp = document.getElementById("visit-summary-panel");
+    if (sp) sp.style.display = "none";
+    // Hide docs tab
+    const dt = document.getElementById("tab-docs");
+    if (dt) dt.style.display = "none";
+    const dc = document.getElementById("docs-content");
+    if (dc) dc.innerHTML = "";
   }
 
   /* ===== VOICE (GPT-4o Transcribe primary, Web Speech API fallback) ===== */
@@ -3236,7 +3649,7 @@
   /* ===== VIEW SWITCHING ===== */
   function showView(v) {
     // Hide all standard views
-    ["pad", "loading", "error", "rx"].forEach((x) => {
+    ["pad", "loading", "error", "rx", "docs"].forEach((x) => {
       const el = document.getElementById("view-" + x);
       if (el) el.style.display = "none";
     });
@@ -3253,6 +3666,12 @@
       "tab" + (v === "pad" ? " active" : "");
     document.getElementById("tab-rx").className =
       "tab" + (v === "rx" ? " active" : "");
+    const docsTab = document.getElementById("tab-docs");
+    if (docsTab)
+      docsTab.className =
+        "tab" +
+        (v === "docs" ? " active" : "") +
+        (docsTab.style.display === "none" ? "" : "");
     historyTabs.forEach((t) => {
       const tabEl = document.getElementById("tab-hist-" + t.id);
       if (tabEl)
@@ -5423,6 +5842,14 @@
       const k = el.id.replace("chip-", "");
       el.classList.toggle("on", activeMods.has(k));
     });
+    // Hide visit summary panel
+    const sp = document.getElementById("visit-summary-panel");
+    if (sp) sp.style.display = "none";
+    // Hide docs tab
+    const dt = document.getElementById("tab-docs");
+    if (dt) dt.style.display = "none";
+    const dc = document.getElementById("docs-content");
+    if (dc) dc.innerHTML = "";
     showView("pad");
   }
 
@@ -5568,6 +5995,8 @@
     loadGrowthTrend,
     loadRecentLabs,
     loadVaxStatus,
+    toggleVisitSummary,
+    loadDocuments,
   });
 
   // Auto-connect on page load
