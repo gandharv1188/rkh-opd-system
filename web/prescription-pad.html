@@ -2554,20 +2554,44 @@
   }
 
   // ===== DOCUMENTS =====
-  function loadDocuments(patientId, visit) {
+  async function loadDocuments(patientId, visit) {
     const docsTab = document.getElementById("tab-docs");
     const docsContent = document.getElementById("docs-content");
     if (!docsTab || !docsContent) return;
 
     let docs = [];
 
-    // 1. Check visit.attached_documents (JSONB array)
+    // 1. Check today's visit attached_documents (JSONB array)
     if (
       visit?.attached_documents &&
       Array.isArray(visit.attached_documents) &&
       visit.attached_documents.length
     ) {
-      docs = visit.attached_documents;
+      docs = [...visit.attached_documents];
+    }
+
+    // 1b. Also fetch documents from ALL past visits for this patient
+    if (sbConnected && patientId) {
+      try {
+        const pastR = await q(
+          "visits",
+          `?patient_id=eq.${encodeURIComponent(patientId)}&attached_documents=not.is.null&select=attached_documents,visit_date&order=visit_date.desc&limit=10`,
+        );
+        if (pastR.ok) {
+          const pastVisits = await pastR.json();
+          pastVisits.forEach((pv) => {
+            if (Array.isArray(pv.attached_documents)) {
+              pv.attached_documents.forEach((d) => {
+                // Avoid duplicates (same URL)
+                if (!docs.some((existing) => existing.url === d.url)) {
+                  d._from_date = pv.visit_date;
+                  docs.push(d);
+                }
+              });
+            }
+          });
+        }
+      } catch (_) {}
     }
 
     // 2. Fallback: parse clinical_notes for "ATTACHED DOCUMENTS:" section
