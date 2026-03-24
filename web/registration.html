@@ -649,6 +649,34 @@
     return fetch(SB + "/rest/v1/" + t + p, o);
   }
 
+  // ===== Sequential Receipt Number Generation =====
+  let _procReceiptSeq = 0; // per-session procedure receipt counter
+  async function generateReceiptNo(prefix) {
+    const now = new Date();
+    const dateStr =
+      String(now.getFullYear() % 100).padStart(2, "0") +
+      String(now.getMonth() + 1).padStart(2, "0") +
+      String(now.getDate()).padStart(2, "0");
+    const fullPrefix = prefix + "-" + dateStr + "-";
+    try {
+      // Query visits table for today's receipts to find highest sequence
+      const today = now.toISOString().split("T")[0];
+      const r = await q(
+        "visits",
+        `?visit_date=eq.${today}&select=receipt_no&order=receipt_no.desc&limit=1`,
+      );
+      if (r.ok) {
+        const rows = await r.json();
+        if (rows.length && rows[0].receipt_no) {
+          const lastSeq =
+            parseInt(rows[0].receipt_no.split("-").pop(), 10) || 0;
+          return fullPrefix + String(lastSeq + 1).padStart(3, "0");
+        }
+      }
+    } catch (_) {}
+    return fullPrefix + "001";
+  }
+
   // ===== UHID Generation =====
   async function generateUHID() {
     const now = new Date();
@@ -1480,7 +1508,11 @@
       charge,
       payMode,
       status: "paid",
-      receiptNo: "RKH-PRC-" + rcptDate + "-" + Date.now().toString().slice(-6),
+      receiptNo:
+        "RKH-PRC-" +
+        rcptDate +
+        "-" +
+        String(++_procReceiptSeq).padStart(3, "0"),
     };
     proceduresList.push(proc);
     document.getElementById("f-proc-name").value = "";
@@ -1937,6 +1969,10 @@
       console.log("Visit payload:", JSON.stringify(visitPayload, null, 2));
       let visitId;
       const isNewVisit = !currentVisitId;
+      // Generate sequential receipt number for new visits
+      if (!currentVisitId) {
+        visitPayload.receipt_no = await generateReceiptNo("RKH-RCT");
+      }
       if (currentVisitId) {
         // Edit mode — update existing visit
         visitPayload.updated_at = new Date().toISOString();
@@ -2054,24 +2090,13 @@
         }
       }
 
-      // Generate receipt number — only for NEW visits, reuse for updates
-      let receiptNo;
-      if (isNewVisit) {
-        const now = new Date();
-        const rcptDate =
-          String(now.getFullYear() % 100).padStart(2, "0") +
-          String(now.getMonth() + 1).padStart(2, "0") +
-          String(now.getDate()).padStart(2, "0");
-        const rcptSeq = Date.now().toString().slice(-6);
-        receiptNo = "RKH-RCT-" + rcptDate + "-" + rcptSeq;
-      } else {
-        receiptNo =
-          lastToken?.receiptNo ||
-          "RKH-RCT-" +
-            new Date().toISOString().slice(2, 10).replace(/-/g, "") +
-            "-" +
-            Date.now().toString().slice(-6);
-      }
+      // Use receipt number from visit payload (already generated for new visits)
+      const receiptNo =
+        visitPayload.receipt_no ||
+        lastToken?.receiptNo ||
+        "RKH-RCT-" +
+          new Date().toISOString().slice(2, 10).replace(/-/g, "") +
+          "-001";
 
       // Wait for OCR processing to complete (started during upload)
       if (_ocrPromises.length) {

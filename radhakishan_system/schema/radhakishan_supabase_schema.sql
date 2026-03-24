@@ -259,6 +259,7 @@ create table visits (
   map_mmhg        numeric check (map_mmhg between 20 and 200),
   bmi             numeric,
   vax_schedule    text check (vax_schedule in ('nhm', 'iap')),
+  receipt_no      text,                           -- Sequential: RKH-RCT-YYMMDD-NNN
 
   -- Clinical
   chief_complaints    text,
