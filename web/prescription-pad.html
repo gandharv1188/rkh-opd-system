@@ -4582,7 +4582,7 @@
         { l: "HCZ", v: g.hcaz },
       ].filter((f) => has(f.v));
       h += `<div class="rv-sec"><div class="rv-hdr">Growth · ${esc(g.chart) || "WHO 2006"}</div>
-    ${zfs.length ? `<div class="z-row">${zfs.map((f) => `<span class="z-chip ${zc(f.v)}">${esc(f.l)}: ${esc(f.v)}</span>`).join("")}${g.muac ? `<span class="z-chip z-ok">MUAC: ${esc(g.muac)}cm</span>` : ""}</div>` : ""}
+    ${zfs.length ? `<div class="z-row">${zfs.map((f) => `<span class="z-chip ${zc(f.v)}">${esc(f.l)}: ${esc(f.v)}</span>`).join("")}${g.muac && !isNaN(parseFloat(g.muac)) ? `<span class="z-chip z-ok">MUAC: ${esc(parseFloat(g.muac))} cm</span>` : ""}</div>` : ""}
     <div class="info-block" contenteditable="true" spellcheck="false">${esc(g.comment)}</div>
     </div>`;
     }

@@ -149,12 +149,12 @@ Generate this exact structure. Field names MUST match exactly.
   ],
   "growth": {
     "chart": "WHO2006|IAP2015|Fenton2013",
-    "waz": "string",
-    "haz": "string",
-    "whz": "string",
-    "hcaz": "string",
-    "muac": "string",
-    "classification": "string",
+    "waz": "string (Z-score, e.g. '-1.5')",
+    "haz": "string (Z-score)",
+    "whz": "string (Z-score)",
+    "hcaz": "string (Z-score)",
+    "muac": "string or null (measured MUAC value only, e.g. '14.5'. Null if not measured. Do NOT estimate or write 'age-appropriate'.)",
+    "classification": "string (e.g. 'Normal', 'Moderate acute malnutrition', 'Severe acute malnutrition')",
     "comment": "string"
   },
   "vaccinations": {
