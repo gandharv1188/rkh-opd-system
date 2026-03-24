@@ -570,7 +570,8 @@
   .mod-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 4px;
+    align-items: center;
   }
   .mod-chip {
     padding: 3px 8px;
@@ -1701,12 +1702,19 @@
         <div class="mod-chip" id="chip-neo" onclick="toggleMod('neo')">
           <span class="chip-dot"></span>Neonatal
         </div>
-        <div style="margin-left: auto; display: flex; align-items: center">
+        <div
+          style="
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            position: relative;
+          "
+        >
           <select
             id="rx-lang"
             style="
               font-size: 11px;
-              padding: 3px 6px 3px 6px;
+              padding: 3px 20px 3px 8px;
               border-radius: 99px;
               border: 0.5px solid var(--bdr2);
               background: var(--bg2);
@@ -1715,10 +1723,6 @@
               font-family: inherit;
               appearance: none;
               -webkit-appearance: none;
-              background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22><path d=%225 6L0 0h10z%22 fill=%22%237a7a60%22/></svg>&quot;);
-              background-repeat: no-repeat;
-              background-position: right 8px center;
-              padding-right: 22px;
             "
             title="Counselling & warning signs language"
           >
@@ -1726,6 +1730,18 @@
             <option value="hindi">हिंदी</option>
             <option value="english">English</option>
           </select>
+          <span
+            style="
+              position: absolute;
+              right: 7px;
+              top: 50%;
+              transform: translateY(-50%);
+              font-size: 8px;
+              color: var(--ink3);
+              pointer-events: none;
+            "
+            >&#9660;</span
+          >
         </div>
       </div>
     </div>

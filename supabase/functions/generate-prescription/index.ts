@@ -278,6 +278,8 @@ async function executeGetPreviousRx(
           overall_status: g.safety?.overall_status,
         },
         followup_days: g.followup_days,
+        admission_recommended: g.admission_recommended || null,
+        warning_signs: g.warning_signs || [],
         doctor_notes: g.doctor_notes,
         vaccinations: g.vaccinations,
         growth: g.growth,
