@@ -4878,8 +4878,10 @@
     const form = parts[0] || "syrup";
     const concQty = parseFloat(parts[1]) || 0;
     const concUnit = parts[2] || "mg";
-    const perQty = parseFloat(parts[3]) || 5;
+    let perQty = parseFloat(parts[3]) || 5;
     const perUnit = parts[4] || "ml";
+    // If concentration is per-drop, convert to per-ml for calcDose (1 ml = 20 drops)
+    if (perUnit === "drop") perQty = perQty / 20;
     // Update the concentration fields in the adjustment panel
     const cmgEl = document.getElementById(pid + "-cmg");
     const cmlEl = document.getElementById(pid + "-cml");
