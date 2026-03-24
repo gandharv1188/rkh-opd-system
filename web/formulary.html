@@ -1056,6 +1056,30 @@
           style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px"
         ></div>
       </div>
+      <div style="flex: 0 0 140px">
+        <label
+          style="
+            font-size: 10px;
+            color: var(--ink3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          "
+          >Form</label
+        >
+        <select
+          id="filter-form-select"
+          onchange="applyFilters()"
+          style="
+            width: 100%;
+            font-size: 12px;
+            padding: 6px 8px;
+            border: 1px solid var(--brd);
+            border-radius: 6px;
+          "
+        >
+          <option value="">All forms</option>
+        </select>
+      </div>
       <button
         onclick="clearFilters()"
         style="
@@ -1071,23 +1095,7 @@
         Clear
       </button>
     </div>
-
-    <div class="filter-row-extra">
-      <div class="ff-filter">
-        <label>Form</label>
-        <select id="filter-form-select" onchange="applyFilters()">
-          <option value="">All forms</option>
-        </select>
-      </div>
-      <div class="ff-filter">
-        <label>Brand search</label>
-        <input
-          id="filter-brand-input"
-          placeholder="Search Indian brands..."
-          oninput="applyFilters()"
-        />
-      </div>
-    </div>
+    <!-- Brand search removed — main search bar now searches brand_names + indian_brands -->
 
     <div class="tbl-wrap">
       <table class="tbl">
@@ -1831,11 +1839,16 @@
 
   function _drugMatchesBrandSearch(d, searchStr) {
     const sl = searchStr.toLowerCase();
+    // Search brand_names[] array (e.g., "Wicoryl (Alkem)")
+    if ((d.brand_names || []).some((b) => b.toLowerCase().includes(sl)))
+      return true;
+    // Search indian_brands[] inside formulations (SNOMED brands)
     return (d.formulations || []).some((f) =>
       (f.indian_brands || []).some(
         (ib) =>
           (ib.name || "").toLowerCase().includes(sl) ||
-          (ib.manufacturer || "").toLowerCase().includes(sl),
+          (ib.manufacturer || "").toLowerCase().includes(sl) ||
+          (ib.trade_name || "").toLowerCase().includes(sl),
       ),
     );
   }
@@ -1861,10 +1874,7 @@
           (fm.form || "").toLowerCase().includes(formVal.toLowerCase()),
         ),
       );
-    // Brand filter
-    const brandInp = document.getElementById("filter-brand-input");
-    const brandVal = brandInp ? brandInp.value.trim() : "";
-    if (brandVal) f = f.filter((d) => _drugMatchesBrandSearch(d, brandVal));
+    // Brand search is now handled by the main search box via _drugMatchesBrandSearch
     if (q)
       f = f.filter(
         (d) =>
@@ -1927,8 +1937,7 @@
     document.getElementById("filter-drugclass-input").value = "";
     const formSel = document.getElementById("filter-form-select");
     if (formSel) formSel.value = "";
-    const brandInp = document.getElementById("filter-brand-input");
-    if (brandInp) brandInp.value = "";
+    document.getElementById("srch").value = "";
     applyFilters();
   }
   function setupFilterInputs() {

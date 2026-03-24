@@ -212,16 +212,69 @@ function condenseDrugForAI(drug: any): any {
 }
 
 async function executeGetFormulary(drugNames: string[]): Promise<string> {
+  const selectCols =
+    "generic_name,drug_class,licensed_in_children,unlicensed_note,formulations,dosing_bands,interactions,contraindications,cross_reactions,black_box_warnings,pediatric_specific_warnings,monitoring_parameters,renal_adjustment_required,renal_bands,hepatic_adjustment_required,hepatic_note,administration,food_instructions,notes,snomed_code,snomed_display,brand_names";
+  const headers = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
+
   try {
+    // Strategy 1: Search by generic_name (primary — most drugs match this way)
     const orFilter = drugNames
       .map((d) => `generic_name.ilike.%25${encodeURIComponent(d.trim())}%25`)
       .join(",");
-    const url = `${SUPABASE_URL}/rest/v1/formulary?or=(${orFilter})&select=generic_name,drug_class,licensed_in_children,unlicensed_note,formulations,dosing_bands,interactions,contraindications,cross_reactions,black_box_warnings,pediatric_specific_warnings,monitoring_parameters,renal_adjustment_required,renal_bands,hepatic_adjustment_required,hepatic_note,administration,food_instructions,notes,snomed_code,snomed_display&active=eq.true`;
-    const res = await fetch(url, {
-      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
+    const url1 = `${SUPABASE_URL}/rest/v1/formulary?or=(${orFilter})&select=${selectCols}&active=eq.true`;
+    const res1 = await fetch(url1, { headers });
+    if (!res1.ok) return `Formulary query error: HTTP ${res1.status}`;
+    let drugs = await res1.json();
+
+    // Strategy 2: For any names NOT found, search brand_names array
+    // This catches brand lookups like "Wikoryl", "Augmentin", "Crocin"
+    const foundNames = new Set(
+      drugs.map((d: any) => d.generic_name.toUpperCase()),
+    );
+    const notFound = drugNames.filter((n) => {
+      const nl = n.trim().toUpperCase();
+      return !drugs.some((d: any) => d.generic_name.toUpperCase().includes(nl));
     });
-    if (!res.ok) return `Formulary query error: HTTP ${res.status}`;
-    const drugs = await res.json();
+
+    if (notFound.length) {
+      // Search brand_names text[] array using ilike on each element
+      // Supabase PostgREST: brand_names filter via full-text or manual iteration
+      // Simplest: fetch all active drugs and filter client-side (679 drugs is small)
+      const url2 = `${SUPABASE_URL}/rest/v1/formulary?select=${selectCols}&active=eq.true`;
+      const res2 = await fetch(url2, { headers });
+      if (res2.ok) {
+        const allDrugs = await res2.json();
+        for (const searchName of notFound) {
+          const sl = searchName.trim().toLowerCase();
+          const match = allDrugs.find((d: any) => {
+            // Search brand_names[] array
+            if (
+              (d.brand_names || []).some((b: string) =>
+                b.toLowerCase().includes(sl),
+              )
+            )
+              return true;
+            // Search indian_brands inside formulations
+            if (
+              (d.formulations || []).some((f: any) =>
+                (f.indian_brands || []).some(
+                  (ib: any) =>
+                    (ib.name || "").toLowerCase().includes(sl) ||
+                    (ib.trade_name || "").toLowerCase().includes(sl),
+                ),
+              )
+            )
+              return true;
+            return false;
+          });
+          if (match && !foundNames.has(match.generic_name.toUpperCase())) {
+            drugs.push(match);
+            foundNames.add(match.generic_name.toUpperCase());
+          }
+        }
+      }
+    }
+
     if (!drugs.length)
       return `No formulary entries found for: ${drugNames.join(", ")}. Use your clinical training knowledge for dosing.`;
     // Condense for AI — strips indian_brands and SNOMED metadata (~83% token savings)
