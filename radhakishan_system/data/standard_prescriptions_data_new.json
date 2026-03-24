@@ -14,15 +14,24 @@
         "drug": "Sodium Chloride Nasal Drops",
         "notes": "0.65% normal saline, 2-3 drops each nostril 4-6 times/day",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Chlorpheniramine + Phenylephrine",
         "notes": "Antihistamine-decongestant drops, dose as per weight, TDS, max 5 days. Use cautiously in infants",
         "is_new_2024_2025": false
+      },
+      {
+        "drug": "Karvol Plus Capsule (Inhalation)",
+        "notes": "Add in warm water or inhalation cloth, 2-3 times/day for congestion relief",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Cough Management (Honey + Warm Fluids)",
+        "notes": "Honey (>1 year only) + warm fluids. Avoid strong cough syrups in infants",
+        "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Viral illness, self-limiting 5-7 days. No routine antibiotics. Symptomatic management is mainstay. Honey for cough (>1 year only). Steam/menthol inhalation 2-3 times/day for congestion relief. Antibiotics only if secondary bacterial infection suspected.",
     "source": "IAP 2024, WHO 2023, ACCP 2017",
     "guideline_changes": "IAP 2024: Continued emphasis on no routine antibiotics or OTC cough/cold medicines in children; ACCP: Recommends against OTC cough suppressants in pediatric URI; No major guideline changes in 2024-2025 for common cold management",
@@ -92,9 +101,7 @@
         "drug": "Calcium Supplement",
         "notes": "50-75 mg/kg/day elemental calcium PO once daily, for bone mineralization and prevention of osteopenia of prematurity",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "MCT Oil",
         "notes": "1-5 ml/day divided with feeds PO, for increased caloric intake and weight gain",
@@ -104,8 +111,14 @@
         "drug": "Dicyclomine",
         "notes": "5-6 drops SOS PO, only if symptomatic infantile colic. Avoid routine use",
         "is_new_2024_2025": false
+      },
+      {
+        "drug": "Preterm Formula / Fortified Feeds",
+        "notes": "Pediasure or preterm formula if poor weight gain, 1/7 scoop per extra feed. Prefer breastfeeding first",
+        "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Goals: adequate weight gain (15-20 g/kg/day), prevent nutritional deficiencies (iron, calcium, Vitamin D), monitor neurodevelopment, prevent anemia/rickets/infections. Exclusive breastfeeding till 6 months corrected age, feeds every 2-3 hours. Fortified feeds if poor weight gain. Use CORRECTED age for growth/development, CHRONOLOGICAL age for vaccinations. Catch-up growth expected by 1-2 years.",
     "source": "IAP 2024 Neonatal Guidelines, WHO 2022 Preterm Care Recommendations, AAP 2023",
     "guideline_changes": "IAP 2025: New consensus on developmentally supportive follow-up with color-coded risk stratification and validated screening tools; WHO 2022: 11 new recommendations for preterm/LBW care including home visits by trained health workers; AAP 2023: Primary care framework for neurodevelopmental monitoring of preterm infants",
@@ -170,6 +183,11 @@
     "category": "Respiratory",
     "severity": "any",
     "first_line_drugs": [
+      {
+        "drug": "Oxygen Therapy",
+        "notes": "If SpO2 <92%, nasal prongs/hood/HFNC, target SpO2 92-94%. HFNC 1-2 L/kg/min for moderate-severe distress",
+        "is_new_2024_2025": false
+      },
       {
         "drug": "Normal Saline Nebulization",
         "notes": "3 ml NEB q4-6h, preferred nebulization for bronchiolitis",
@@ -270,9 +288,7 @@
         "drug": "Prednisolone",
         "notes": "1-2 mg/kg/day PO for 3-5 days, for moderate-severe episodes. Reduces airway inflammation and prevents worsening",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Fexofenadine",
         "notes": "Age-appropriate dose PO BD, if allergic component present",
@@ -284,6 +300,7 @@
         "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Nebulization is first-line. Steroids reduce relapse. Transition to inhaler therapy (MDI + Spacer) for long-term: Salbutamol inhaler as reliever, Budesonide/Fluticasone as controller. Inhaler > Syrup for long-term management. Avoid triggers (dust, smoke, cold). Avoid overuse of cough syrups. Antibiotics not required unless infection suspected.",
     "source": "GINA 2024/2025, IAP Asthma Guidelines 2024",
     "guideline_changes": "GINA 2025: New diagnostic criteria for asthma in children <5 years (3 required: recurrent wheezing, no alternative cause, response to asthma meds); GINA 2024: Updated stepwise approach emphasizing early ICS; IAP 2024: Inhaler therapy preferred over oral medications for long-term control",
@@ -347,9 +364,7 @@
         "drug": "Budesonide Inhaler",
         "notes": "100-200 mcg/puff MDI, 1 puff BD (q12h) via spacer. Controller - minimum 3 months, then step-down. Do NOT stop abruptly",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Levosalbutamol",
         "notes": "NEB: <10 kg 0.63 mg, >=10 kg 1.25 mg, every 20 min x3 doses for acute relief, then q6-8h",
@@ -366,6 +381,7 @@
         "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Inhaler therapy is the GOLD STANDARD - faster action, fewer side effects than oral drugs. Spacer + Mask mandatory for proper drug delivery in infants and young children. GINA Stepwise: Step 1 SABA PRN, Step 2 low-dose ICS, Step 3 ICS+LABA, Step 4 specialist referral. ICS is preventive (not immediate relief). SABA is rescue drug. Early inhaler use reduces hospital admissions.",
     "source": "GINA 2024/2025, IAP Asthma Guidelines 2024",
     "guideline_changes": "GINA 2025: New diagnostic criteria for asthma in children <5 years; expanded role of T2 biomarkers (blood eosinophils, FeNO) in assessment; GINA 2024: MDI+Spacer remains preferred delivery for all ages; Step-down only after 3 months symptom-free on low-dose ICS",
@@ -433,9 +449,7 @@
         "drug": "Oxygen",
         "notes": "Nasal cannula/mask, 2-6 L/min, target SpO2 >=94%",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Magnesium Sulphate",
         "notes": "25-50 mg/kg IV in 30-50 ml NS over 20-30 min, for severe cases. Bronchodilator effect, reduces ICU need",
@@ -452,6 +466,7 @@
         "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Golden Hour: Oxygen + aggressive nebulization + systemic steroids. Monitoring: SpO2 continuous, RR/HR/work of breathing hourly, ABG if severe. Fluids 100 ml/kg/day, avoid overload. Antibiotics NOT routine - only if fever + infection suspected. Escalation: HFNC if moderate distress, NIV if worsening, mechanical ventilation as last resort. Step-down: transition to MDI+Spacer (Salbutamol reliever + Budesonide controller) and oral steroids before discharge.",
     "source": "GINA 2024/2025, IAP Guidelines 2024, AIIMS Protocol, NABH HCO 6th Edition",
     "guideline_changes": "GINA 2025: IV isotonic MgSO4 may be considered in children >=2 years with severe exacerbations; GINA 2024: Early systemic steroids within first hour remain critical; Ipratropium bromide add-on for severe episodes; Emphasis on step-down to MDI+Spacer before discharge with written action plan",
@@ -610,6 +625,11 @@
         "drug": "Ibuprofen",
         "notes": "5-10 mg/kg/dose PO 6-8 hourly SOS, for fever and throat pain",
         "is_new_2024_2025": false
+      },
+      {
+        "drug": "Warm Saline Gargles",
+        "notes": "If child >5 years, adequate hydration, soft diet (khichdi, soups). Avoid cold items",
+        "is_new_2024_2025": false
       }
     ],
     "second_line_drugs": [
@@ -687,15 +707,14 @@
         "drug": "Normal Saline Nasal Drops",
         "notes": "2-3 drops each nostril 2-3 times/day, clears allergens and improves drug delivery",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Azelastine + Fluticasone Nasal Spray",
         "notes": "1 puff each nostril BD, for moderate-severe or persistent rhinitis, faster symptom relief",
         "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "ARIA classification: Intermittent (<4 days/week) vs Persistent (>4 days/week); Mild vs Moderate-Severe. Intranasal steroid is gold standard. Allergen avoidance is essential: dust, smoke, perfumes, cold exposure, pets, house dust mites.",
     "source": "ARIA-EAACI Guidelines 2024-2025, IAP Allergy Protocol, GINA",
     "guideline_changes": "ARIA-EAACI 2024-2025: Combined intranasal antihistamine + corticosteroid (INAH+INCS) recommended over monotherapy for moderate-severe AR; INCS preferred over INAH alone; digital shared decision-making algorithms introduced; pediatric considerations updated for preschool and school-age children; emphasis on step-up/step-down approach based on symptom control",
@@ -754,12 +773,15 @@
         "drug": "Mometasone Furoate 0.1% Cream",
         "notes": "Apply thin layer once daily for 5-7 days acute flare, then taper to 2 times/week maintenance, avoid prolonged use on face",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Mometasone Furoate 0.1% Lotion",
         "notes": "Apply once daily at night for scalp/extensive lesions, 1-2 weeks then taper",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Coconut Oil / Aloe Vera Lotion",
+        "notes": "Natural moisturization, coconut oil in summer, aloe vera-based lotion in winter, safe and soothing",
         "is_new_2024_2025": false
       },
       {
@@ -773,6 +795,7 @@
         "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Treatment principles: restore skin barrier, reduce inflammation, control itching, prevent relapse. Moisturizer is cornerstone. Steroid for flare only - avoid overuse. Lukewarm water bath, mild soap-free cleanser, apply moisturizer within 3 minutes after bath. Avoid harsh soaps, woolen clothes, dust/allergens.",
     "source": "AAP Atopic Dermatitis Clinical Report 2025, AAD Guidelines 2024, AAAAI/ACAAI Joint Task Force 2023, NICE",
     "guideline_changes": "AAP 2025: Updated clinical report on skin-directed management - daily bathing with lukewarm water and gentle cleanser, moisturizer within minutes of bath; proactive intermittent topical anti-inflammatory maintenance to prevent flares; AAD 2024: Updated treatment guidelines with expanded role of topical calcineurin inhibitors and JAK inhibitors for moderate-severe disease; AAAAI 2023: Dupilumab recommended for moderate-severe AD in children >=6 months",
@@ -837,20 +860,24 @@
         "drug": "Liquid Paraffin + Milk of Magnesia",
         "notes": "5-10 ml PO at bedtime for 5-7 days, stool bulking and smooth passage",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
-        "drug": "Ispaghula Husk",
-        "notes": "1 teaspoon (3-5 g) in 1 glass water at bedtime OD for 5-7 days, fiber supplement for stool consistency",
+        "drug": "Sitz Bath (Potassium Permanganate)",
+        "notes": "Warm water with light pink KMnO4 solution, 10-15 minutes 2-3 times/day, promotes healing and reduces pain",
         "is_new_2024_2025": false
       },
       {
         "drug": "Glycerin Suppository",
         "notes": "SOS for acute constipation, short-term use only",
         "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ispaghula Husk",
+        "notes": "1 teaspoon (3-5 g) in 1 glass water at bedtime OD for 5-7 days, fiber supplement for stool consistency",
+        "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Treatment principles: soften stool, relieve pain, heal fissure, prevent recurrence. Sitz bath with warm water + potassium permanganate (light pink solution) for 10-15 min 2-3 times/day is essential. High fiber diet: papaya, banana, vegetables. Adequate water intake. Avoid junk food and excess milk.",
     "source": "IAP Pediatric Surgery Guidelines, ASCRS Anal Fissure Guidelines 2023, ESPGHAN Constipation Guidelines",
     "guideline_changes": "ASCRS 2023: Topical calcium channel blockers (diltiazem) recommended as first-line pharmacotherapy for chronic fissures with better side-effect profile than GTN; conservative management (stool softeners, fiber, sitz baths) remains first-choice for acute fissures in children; IAP Pediatric Surgery 2024: PEG-based laxatives preferred over lactulose for chronic constipation-associated fissures",
@@ -914,9 +941,7 @@
         "drug": "Zinc",
         "notes": "<6 months: 10 mg/day; >=6 months: 20 mg/day PO for 14 days, reduces severity and recurrence",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Metronidazole",
         "notes": "10 mg/kg/dose TDS PO for 5 days, for suspected amoebic or mixed infection",
@@ -925,6 +950,18 @@
       {
         "drug": "Saccharomyces boulardii",
         "notes": "Once or twice daily PO for 5 days, probiotic to restore gut flora and reduce diarrhea duration",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Dicyclomine + Simethicone",
+        "notes": "Age/weight appropriate dose TDS PO, short-term, for abdominal pain/cramps",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Colistin",
+        "notes": "Consider for persistent diarrhea or resistant infection, not routine first-line",
         "is_new_2024_2025": false
       }
     ],
@@ -1002,14 +1039,14 @@
         "drug": "Saccharomyces boulardii",
         "notes": "OD-BD PO x 5 days, probiotic to restore gut flora",
         "is_new_2024_2025": false
+      },
+      {
+        "drug": "Dicyclomine + Simethicone",
+        "notes": "Age-appropriate dose TDS PO, short-term, only if significant abdominal pain",
+        "is_new_2024_2025": false
       }
     ],
     "second_line_drugs": [
-      {
-        "drug": "Dicyclomine",
-        "notes": "Age-appropriate dose TDS PO, short-term, only if significant abdominal pain",
-        "is_new_2024_2025": false
-      },
       {
         "drug": "Cefixime",
         "notes": "8-10 mg/kg/day div BD PO x 5 days, only if dysentery/high fever/toxic child",
@@ -1085,17 +1122,10 @@
         "drug": "ORS",
         "notes": "Small frequent sips PO, especially if vomiting or mild diarrhoea",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Pantoprazole",
         "notes": "1 mg/kg/day OD PO before meals x 7-10 days, alternative PPI",
-        "is_new_2024_2025": false
-      },
-      {
-        "drug": "Ranitidine",
-        "notes": "2-4 mg/kg/dose BD PO x 7-10 days, if PPI not available/tolerated",
         "is_new_2024_2025": false
       },
       {
@@ -1106,6 +1136,13 @@
       {
         "drug": "Dicyclomine",
         "notes": "Age-appropriate dose TDS PO, short-term, only if significant abdominal pain",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Ranitidine",
+        "notes": "2-4 mg/kg/dose BD PO x 7-10 days, if PPI not available/tolerated",
         "is_new_2024_2025": false
       }
     ],
@@ -1175,6 +1212,11 @@
       {
         "drug": "Ondansetron",
         "notes": "0.1-0.15 mg/kg/dose IV 8 hourly for vomiting",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "IV Fluids (DNS / Normal Saline)",
+        "notes": "Maintenance rate per Holliday-Segar formula (~60-80 ml/hr adjust clinically), maintain hydration and correct electrolytes",
         "is_new_2024_2025": false
       }
     ],
@@ -1259,17 +1301,20 @@
         "drug": "Dexamethasone",
         "notes": "0.15-0.6 mg/kg single dose PO/IM/IV, max 16 mg; gold standard, reduces airway edema",
         "is_new_2024_2025": false
-      }
-    ],
-    "second_line_drugs": [
+      },
       {
         "drug": "Epinephrine (nebulisation)",
         "notes": "0.5 ml/kg of 1:1000 solution (max 5 ml) nebulised, repeat after 20-30 min if needed; for moderate-severe cases with stridor at rest",
         "is_new_2024_2025": false
       },
       {
-        "drug": "Levosalbutamol",
-        "notes": "Age/weight appropriate dose nebulised or PO, optional bronchial support, not primary treatment for croup",
+        "drug": "Oxygen Therapy",
+        "notes": "If SpO2 < 92%, via nasal prongs or mask",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Levosalbutamol + Ambroxol",
+        "notes": "Age/weight appropriate dose nebulised or PO, optional bronchial/cough support, not primary treatment for croup",
         "is_new_2024_2025": false
       },
       {
@@ -1278,6 +1323,7 @@
         "is_new_2024_2025": false
       }
     ],
+    "second_line_drugs": [],
     "notes": "Dexamethasone single dose is the single most effective treatment. Adrenaline nebulisation for emergency relief in moderate-severe cases - observe 2-4 hours after dose for recurrence. Keep child calm (crying worsens stridor). Humidified air, adequate fluids. Avoid unnecessary antibiotics. Severity: Mild = barking cough no stridor at rest; Moderate = stridor at rest with mild retractions; Severe = marked distress with hypoxia.",
     "source": "IAP 2024, AAP Croup Guidelines, WHO",
     "guideline_changes": "2024 cohort data: single-dose dexamethasone (0.6 mg/kg) remains gold standard; repeat dosing in hospitalised children showed longer LOS without benefit on 30-day ED return; 0.15 mg/kg may suffice for mild croup; nebulised epinephrine observation period confirmed at 2-4 hr.",
@@ -1337,6 +1383,11 @@
         "drug": "Amoxicillin-Clavulanate",
         "notes": "40-45 mg/kg/day (amoxicillin component) div BD PO x 5-7 days, drug of choice",
         "is_new_2024_2025": false
+      },
+      {
+        "drug": "Phenylephrine + Chlorpheniramine",
+        "notes": "Age-appropriate dose TDS PO, short duration, nasal decongestant to improve Eustachian tube function",
+        "is_new_2024_2025": false
       }
     ],
     "second_line_drugs": [
@@ -1346,8 +1397,8 @@
         "is_new_2024_2025": false
       },
       {
-        "drug": "Phenylephrine + Chlorpheniramine",
-        "notes": "Age-appropriate dose TDS PO, short duration, nasal decongestant to improve Eustachian tube function",
+        "drug": "Ear Drops (Oto-AC / Otoban)",
+        "notes": "2-3 drops TDS in affected ear, only if external ear involvement or discharge; avoid if tympanic membrane perforation",
         "is_new_2024_2025": false
       }
     ],
@@ -1407,8 +1458,23 @@
         "is_new_2024_2025": false
       },
       {
+        "drug": "Liver Support Syrup (Dynabile / Livoluk)",
+        "notes": "3-5 ml BD PO, age-appropriate dose, appetite improvement and hepatoprotective support",
+        "is_new_2024_2025": false
+      },
+      {
         "drug": "Lactulose",
         "notes": "1-2 ml/kg/day PO, adjust to maintain 2 soft stools/day, prevents encephalopathy",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "N-Acetylcysteine",
+        "notes": "IV infusion per paracetamol-poisoning protocol dosing, for severe hepatitis/rising liver enzymes in admitted cases",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Hydration (ORS / IV fluids)",
+        "notes": "ORS and oral fluids; IV fluids if vomiting prevents oral intake",
         "is_new_2024_2025": false
       }
     ],
@@ -1416,11 +1482,6 @@
       {
         "drug": "Vitamin K (Phytonadione)",
         "notes": "5-10 mg IM/IV x 3 days, if INR prolonged/coagulation deranged",
-        "is_new_2024_2025": false
-      },
-      {
-        "drug": "N-Acetylcysteine",
-        "notes": "IV infusion per paracetamol-poisoning protocol dosing, for severe hepatitis/rising liver enzymes in admitted cases",
         "is_new_2024_2025": false
       }
     ],
@@ -1606,6 +1667,11 @@
         "drug": "Ascorbic Acid",
         "notes": "Age-appropriate dose OD PO for 2-4 weeks, improves capillary strength",
         "is_new_2024_2025": false
+      },
+      {
+        "drug": "First-Aid Management (non-pharmacological)",
+        "notes": "Sit child upright, tilt head slightly forward, pinch soft part of nose for 10 minutes, apply cold compress",
+        "is_new_2024_2025": false
       }
     ],
     "second_line_drugs": [
@@ -1669,6 +1735,21 @@
     "category": "Urology",
     "severity": "any",
     "first_line_drugs": [
+      {
+        "drug": "Reassurance (non-pharmacological)",
+        "notes": "Explain to parents: common condition, improves with age, not child's fault; mandatory first step",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Behavioral Therapy (non-pharmacological)",
+        "notes": "Fluid management (avoid excess after 6-7 PM), timed voiding before bed, bladder training (hold urine for increasing intervals), positive reinforcement with bladder diary",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Enuresis Alarm (non-pharmacological)",
+        "notes": "Most effective long-term therapy, use for 3-4 months if available",
+        "is_new_2024_2025": false
+      },
       {
         "drug": "Desmopressin",
         "notes": "0.2 mg (200 mcg) PO at bedtime, can increase to 0.4 mg if needed; duration 4-12 weeks then taper; restrict fluids after dose",
@@ -1821,8 +1902,23 @@
     "severity": "any",
     "first_line_drugs": [
       {
+        "drug": "Reassurance (non-pharmacological)",
+        "notes": "Explain to parents: common condition, self-limiting (peaks at 6-8 weeks), resolves by 3-4 months",
+        "is_new_2024_2025": false
+      },
+      {
         "drug": "Simethicone",
         "notes": "0.3 ml (as per preparation) TDS PO after feeds, preferred for gas relief and safety",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Feeding Support (non-pharmacological)",
+        "notes": "Proper latching technique, burping after every feed, avoid overfeeding",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Supplements (Multivitamin Drops + Vitamin D3 400 IU + Iron if indicated)",
+        "notes": "As per standard practice; Multivitamin drops + Vitamin D3 400 IU daily + Iron supplementation if indicated",
         "is_new_2024_2025": false
       }
     ],
@@ -1830,6 +1926,11 @@
       {
         "drug": "Dicyclomine",
         "notes": "5-7 drops TDS PO (morning, evening, night), short duration only, avoid routine long-term use",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Amlexanox Gel / Zytee",
+        "notes": "Apply 2-3 times/day for oral/gum care, only if associated irritability",
         "is_new_2024_2025": false
       }
     ],
@@ -1884,8 +1985,23 @@
     "severity": "any",
     "first_line_drugs": [
       {
+        "drug": "Positional Therapy (non-pharmacological)",
+        "notes": "Keep baby head elevated ~30 degrees, hold upright 15-20 min after feeds, avoid immediate lying after feeding; first-line treatment",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Feeding Modification (non-pharmacological)",
+        "notes": "Small frequent feeds, avoid overfeeding, proper burping after feeds; reduces reflux episodes",
+        "is_new_2024_2025": false
+      },
+      {
         "drug": "Lansoprazole",
         "notes": "1-2 mg/kg/day OD PO for 2-4 weeks trial, only if symptomatic GERD; not for simple GER",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Thickened Feeds (non-pharmacological)",
+        "notes": "Thickened formula or rice cereal if bottle-fed; reduces regurgitation",
         "is_new_2024_2025": false
       }
     ],
