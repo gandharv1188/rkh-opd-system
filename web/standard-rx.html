@@ -940,6 +940,21 @@
             </div>
           </div>
           <div class="fs">
+            <div class="fs-title">Warning signs (English — AI translates to Hindi)</div>
+            <div
+              class="ti-wrap"
+              id="ws-wrap"
+              onclick="document.getElementById('ws-i').focus()"
+            >
+              <input
+                class="ti"
+                id="ws-i"
+                placeholder="e.g. Fast breathing or chest indrawing…"
+                onkeydown="addTag(event, 'ws')"
+              />
+            </div>
+          </div>
+          <div class="fs">
             <div class="fs-title">Referral criteria</div>
             <div class="ff">
               <textarea
@@ -1347,7 +1362,9 @@
     drugCnt = { fl: 0, al: 0 };
     invCnt = 0;
     tags.csl = [];
+    tags.ws = [];
     renderTags("csl");
+    renderTags("ws");
   }
   function populate(d) {
     sv("d-icd", d.icd10);
@@ -1371,7 +1388,9 @@
     (d.second_line_drugs || []).forEach((x) => addDrug("al-list", "al", x));
     (d.investigations || []).forEach((x) => addInv(x));
     tags.csl = d.counselling || [];
+    tags.ws = d.warning_signs || [];
     renderTags("csl");
+    renderTags("ws");
   }
 
   function addDrug(listId, pfx, d) {
@@ -1521,6 +1540,7 @@
       second_line_drugs: getDrugs("al", drugCnt.al),
       investigations: getInvs(),
       counselling: tags.csl || [],
+      warning_signs: tags.ws || [],
       referral_criteria: v("d-ref"),
       hospitalisation_criteria: v("d-hosp"),
       notes: v("d-notes"),
