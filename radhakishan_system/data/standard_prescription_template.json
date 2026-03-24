@@ -53,5 +53,23 @@
   "duration_days_default": 5,
   "active": true,
   "guideline_changes": "Any recent 2024-2025 guideline updates (or null if none)",
-  "snomed_code": null
+  "snomed_code": null,
+
+  "expected_course": "Timeline of illness (e.g., Fever: 2-3 days. Cough: 5-7 days. Full recovery: 7-10 days.)",
+  "key_clinical_points": [
+    "Clinical pearl 1 (e.g., Lactulose = cornerstone of treatment)",
+    "Clinical pearl 2 (e.g., Avoid unnecessary antibiotics)",
+    "Clinical pearl 3 (e.g., Monitor hydration closely)"
+  ],
+  "severity_assessment": {
+    "mild": "Description of mild presentation (e.g., Occasional cough, no distress)",
+    "moderate": "Description of moderate (e.g., Tachypnea, mild retractions)",
+    "severe": "Description of severe (e.g., Marked distress, hypoxia, poor feeding)"
+  },
+  "monitoring_parameters": [
+    { "parameter": "Temperature", "frequency": "4-hourly" },
+    { "parameter": "Pulse and BP", "frequency": "4-hourly" },
+    { "parameter": "Strict I/O", "frequency": "Continuous" },
+    { "parameter": "Weight", "frequency": "Daily" }
+  ]
 }

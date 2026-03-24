@@ -183,6 +183,10 @@ create table standard_prescriptions (
   -- Array of English strings: ["Fast breathing", "Bluish lips", ...]. AI translates to Hindi at prescription time.
   referral_criteria     text,
   hospitalisation_criteria text,
+  expected_course       text,                       -- e.g. "Fever: 2-3 days. Cough: 5-7 days. Full recovery: 7-10 days."
+  key_clinical_points   text[],                     -- Clinical pearls for the doctor, e.g. ["Lactulose = cornerstone", "Avoid unnecessary antibiotics"]
+  severity_assessment   jsonb,                      -- {mild: "description", moderate: "description", severe: "description"}
+  monitoring_parameters jsonb,                      -- [{parameter: "Temperature", frequency: "4-hourly"}, ...]
   notes                 text,
   source                text,
   guideline_changes     text,

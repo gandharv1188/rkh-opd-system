@@ -940,7 +940,9 @@
             </div>
           </div>
           <div class="fs">
-            <div class="fs-title">Warning signs (English — AI translates to Hindi)</div>
+            <div class="fs-title">
+              Warning signs (English — AI translates to Hindi)
+            </div>
             <div
               class="ti-wrap"
               id="ws-wrap"
@@ -980,6 +982,72 @@
                 placeholder="e.g. High-dose Amoxicillin preferred for AOM per IAP 2024. Watchful waiting appropriate for mild AOM >2yr. Substitute Amox-Clav if treatment failure at 48-72h."
                 rows="4"
               ></textarea>
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Expected course</div>
+            <div class="ff">
+              <textarea
+                id="d-course"
+                placeholder="e.g. Fever: 2-3 days. Cough: 5-7 days. Full recovery: 7-10 days."
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Key clinical points</div>
+            <div
+              class="ti-wrap"
+              id="kcp-wrap"
+              onclick="document.getElementById('kcp-i').focus()"
+            >
+              <input
+                class="ti"
+                id="kcp-i"
+                placeholder="e.g. Lactulose = cornerstone of treatment…"
+                onkeydown="addTag(event, 'kcp')"
+              />
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Severity assessment</div>
+            <div class="fg g3" style="margin-bottom: 8px">
+              <div class="ff">
+                <label>Mild</label
+                ><input
+                  id="d-sev-mild"
+                  placeholder="e.g. Occasional cough, no distress"
+                />
+              </div>
+              <div class="ff">
+                <label>Moderate</label
+                ><input
+                  id="d-sev-mod"
+                  placeholder="e.g. Tachypnea, mild retractions"
+                />
+              </div>
+              <div class="ff">
+                <label>Severe</label
+                ><input
+                  id="d-sev-sev"
+                  placeholder="e.g. Marked distress, hypoxia, poor feeding"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="fs">
+            <div class="fs-title">Monitoring parameters</div>
+            <div
+              class="ti-wrap"
+              id="mp-wrap"
+              onclick="document.getElementById('mp-i').focus()"
+            >
+              <input
+                class="ti"
+                id="mp-i"
+                placeholder="e.g. Temperature 4-hourly, Strict I/O, Weight daily…"
+                onkeydown="addTag(event, 'mp')"
+              />
             </div>
           </div>
         </div>
@@ -1363,8 +1431,16 @@
     invCnt = 0;
     tags.csl = [];
     tags.ws = [];
+    tags.kcp = [];
+    tags.mp = [];
     renderTags("csl");
     renderTags("ws");
+    renderTags("kcp");
+    renderTags("mp");
+    ["d-course", "d-sev-mild", "d-sev-mod", "d-sev-sev"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.value = "";
+    });
   }
   function populate(d) {
     sv("d-icd", d.icd10);
@@ -1389,8 +1465,22 @@
     (d.investigations || []).forEach((x) => addInv(x));
     tags.csl = d.counselling || [];
     tags.ws = d.warning_signs || [];
+    tags.kcp = d.key_clinical_points || [];
+    tags.mp = (d.monitoring_parameters || []).map((m) =>
+      typeof m === "string"
+        ? m
+        : m.parameter + (m.frequency ? " — " + m.frequency : ""),
+    );
     renderTags("csl");
     renderTags("ws");
+    renderTags("kcp");
+    renderTags("mp");
+    sv("d-course", d.expected_course || "");
+    if (d.severity_assessment) {
+      sv("d-sev-mild", d.severity_assessment.mild || "");
+      sv("d-sev-mod", d.severity_assessment.moderate || "");
+      sv("d-sev-sev", d.severity_assessment.severe || "");
+    }
   }
 
   function addDrug(listId, pfx, d) {
@@ -1543,6 +1633,22 @@
       warning_signs: tags.ws || [],
       referral_criteria: v("d-ref"),
       hospitalisation_criteria: v("d-hosp"),
+      expected_course: v("d-course") || null,
+      key_clinical_points: tags.kcp?.length ? tags.kcp : null,
+      severity_assessment:
+        v("d-sev-mild") || v("d-sev-mod") || v("d-sev-sev")
+          ? {
+              mild: v("d-sev-mild"),
+              moderate: v("d-sev-mod"),
+              severe: v("d-sev-sev"),
+            }
+          : null,
+      monitoring_parameters: tags.mp?.length
+        ? tags.mp.map((m) => {
+            const parts = m.split(" — ");
+            return { parameter: parts[0], frequency: parts[1] || null };
+          })
+        : null,
       notes: v("d-notes"),
       snomed_code: v("d-snomed") || null,
       last_reviewed_date: document.getElementById("d-rev").value || null,
