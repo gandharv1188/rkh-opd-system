@@ -72,7 +72,7 @@ const tools = [
   {
     name: "get_formulary",
     description:
-      "Look up drugs in the hospital formulary. Returns Indian formulations (concentrations), dosing_bands (dose ranges by age/weight/indication), interactions, contraindications, cross_reactions, renal_bands, and administration instructions. ALWAYS call this for every drug you plan to prescribe.",
+      "Look up drugs in the hospital formulary. Returns ABDM FHIR-compliant formulations with ingredients[] (each having strength_numerator/strength_denominator), indian_brands[], indian_conc_note, dosing_bands (dose ranges by age/weight/indication), interactions, contraindications, cross_reactions, renal_bands, and administration instructions. ALWAYS call this for every drug you plan to prescribe.",
     input_schema: {
       type: "object",
       properties: {

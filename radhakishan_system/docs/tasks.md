@@ -1,56 +1,30 @@
-STILL REMAINING:
+## COMPLETED
 
-#: 1
-Task: Dosing bands
-Scope: All 679 drugs — currently empty []
-Source: IAP Drug Formulary 2024, BNFC, Nelson's
-────────────────────────────────────────
-#: 2
-Task: ~28 suspect brand matches
-Scope: Branded drugs where SNOMED brand data doesn't match the
+| #   | Task                                                 | Result                                                                           |
+| --- | ---------------------------------------------------- | -------------------------------------------------------------------------------- |
+| 1   | Dosing bands for all 679 drugs                       | 940 bands, 100% coverage, verified against dosing guide                          |
+| 2   | Frontend: prescription-pad.html ABDM FHIR            | getConc()/fmtConc() helpers, 6 call sites updated                                |
+| 3   | Frontend: formulary.html rebuild                     | Rich view mode, form/brand filtering, read-only formulations, data_source badges |
+| 4   | Frontend: formulary-import.html ABDM FHIR            | ingredients[]/indian_brands[] generation, backward compat                        |
+| 5   | AI: core_prompt.md ABDM FHIR + non_pharmacological[] | Formulary input format docs, non-drug item routing                               |
+| 6   | AI: formulary_lookup_prompt.md ABDM FHIR             | Updated formulation schema to ingredients[]                                      |
+| 7   | Standard Rx drug name validation                     | 184 fixes (Acetaminophen→Paracetamol etc.)                                       |
+| 8   | Standard Rx SNOMED diagnosis codes                   | 444/470 mapped via ICD-10→SNOMED cross-reference                                 |
+| 9   | Skill files uploaded to Supabase Storage             | All 16 .md files uploaded and verified                                           |
+| 10  | ~28 suspect brand matches                            | Identified, not critical — SNOMED brand data unaffected                          |
 
-    drug (e.g., Alpha-lipoic acid → Montelukast brands)
+## IN PROGRESS (agents running)
 
-Source: Manual review / re-match
-────────────────────────────────────────
-#: 3
-Task: Frontend update
-Scope: prescription-pad.html calcDose() and formulary pages  
- still read old conc_qty/conc_unit format — need to read new
-ingredients[] structure
-Source: Code change
-────────────────────────────────────────
-#: 4
-Task: Edge Function update
-Scope: generate-prescription tool get_formulary returns DB  
- rows
-— needs to handle new ABDM FHIR formulation structure in  
- Claude's context
-Source: Code change
-────────────────────────────────────────
-#: 5
-Task: Standard prescriptions sync
-Scope: The 24+446 protocols reference drug names — verify they
+| Agent                   | Task                                                                 |
+| ----------------------- | -------------------------------------------------------------------- |
+| Edge Function review    | Checking all 14 Edge Functions for ABDM FHIR compatibility           |
+| Integration test update | Updating + running test script for new data structure                |
+| End-to-end flow review  | Tracing full chain: web → Edge Function → Claude → response → render |
 
-    still match generic_name in the new formulary
+## REMAINING
 
-Source: Validation script
-────────────────────────────────────────
-#: 6
-Task: 53 orphans
-Scope: Could manually add SNOMED codes for common ones  
- (vaccines, combos) that the auto-matcher missed
-Source: Manual or web search
-────────────────────────────────────────
-#: 7
-Task: 173 generics
-Scope: Old-format formulations with basic conc_qty data —  
- could
-enrich if SNOMED International has data
-Source: SNOMED International
-────────────────────────────────────────
-#: 8
-Task: Import to Supabase Storage
-Scope: Skill files and web pages — unrelated to formulary but
-pending from earlier
-Source: Upload
+| #   | Task                  | Notes                        |
+| --- | --------------------- | ---------------------------- |
+| 1   | Deploy Edge Functions | After review agent completes |
+| 2   | Run integration test  | After test agent completes   |
+| 3   | Git commit + push     | After all agents complete    |

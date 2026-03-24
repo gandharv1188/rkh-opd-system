@@ -2635,6 +2635,7 @@
 
   /* ===== View monograph (rich read-only) ===== */
   let _viewMode = false;
+  let _editBodyHtml = ""; // saved on first use
 
   function _renderViewFormulations(forms) {
     if (!forms || !forms.length)
@@ -2907,6 +2908,9 @@
   function viewDrug(id) {
     const d = drugs.find((x) => x.id === id);
     if (!d) return;
+    // Save original edit body HTML before replacing
+    const drwBody = document.getElementById("drw-body");
+    if (!_editBodyHtml) _editBodyHtml = drwBody.innerHTML;
     _viewMode = true;
     // Open the overlay
     document.getElementById("ov").classList.add("open");
@@ -3000,6 +3004,10 @@
           "</button>",
       )
       .join("");
+    // Restore edit body HTML
+    if (_editBodyHtml) {
+      document.getElementById("drw-body").innerHTML = _editBodyHtml;
+    }
   }
 
   /* ===== Helpers ===== */

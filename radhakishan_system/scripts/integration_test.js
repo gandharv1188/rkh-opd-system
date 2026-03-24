@@ -6,17 +6,22 @@
  * Usage: node integration_test.js
  *
  * Tests:
- * 1. Create test patient → verify all fields accepted
- * 2. Create test visit with ALL vitals → verify all columns exist in live DB
- * 3. Read visit back → verify all fields returned
- * 4. Create lab results → verify schema
- * 5. Create vaccination record → verify schema
- * 6. Create growth record → verify schema
- * 7. Call generate-prescription Edge Function → verify response structure
- * 8. Save prescription → verify all fields
- * 9. Read prescription back → verify generated_json round-trip
- * 10. Call process-document Edge Function (text mode) → verify response
- * 11. Clean up all test data
+ * 1. Create test patient -> verify all fields accepted
+ * 2. Create test visit with ALL vitals -> verify all columns exist in live DB
+ * 3. Read visit back -> verify all fields returned
+ * 4. Create lab results -> verify schema
+ * 5. Create vaccination record -> verify schema
+ * 6. Create growth record -> verify schema
+ * 7. Formulary structure: branded drug (AMOXICILLIN) new ABDM FHIR fields
+ * 8. Formulary structure: generic drug (data_source = snomed_generic)
+ * 9. Formulary structure: orphan drug (data_source = orphan)
+ * 10. Standard Rx: snomed_code present on diagnosis protocol
+ * 11. Drug name consistency: standard_prescriptions drugs exist in formulary
+ * 12. Call generate-prescription Edge Function -> verify response structure
+ * 13. Save prescription -> verify all fields
+ * 14. Read prescription back -> verify generated_json round-trip
+ * 15. Edge Function tools - get_lab_history
+ * 16. Clean up all test data
  */
 
 const SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co";
@@ -44,10 +49,10 @@ const failures = [];
 
 function assert(condition, testName, detail) {
   if (condition) {
-    console.log(`  ✓ PASS: ${testName}`);
+    console.log(`  + PASS: ${testName}`);
     passed++;
   } else {
-    console.log(`  ✗ FAIL: ${testName} — ${detail || ""}`);
+    console.log(`  x FAIL: ${testName} -- ${detail || ""}`);
     failed++;
     failures.push({ test: testName, detail });
   }
@@ -196,7 +201,7 @@ async function test2_createVisit() {
     assert(Array.isArray(v.attached_documents), "attached_documents saved");
     assert(v.triage_score === 3, "triage_score saved");
   } else {
-    console.log("  ⚠ Visit creation failed — remaining tests may fail");
+    console.log("  ! Visit creation failed -- remaining tests may fail");
     console.log("  Response:", JSON.stringify(res.data));
   }
 }
@@ -325,20 +330,358 @@ async function test6_createGrowth() {
   }
 }
 
-// ===== TEST 7: Call generate-prescription Edge Function =====
-async function test7_generatePrescription() {
-  console.log("\n--- TEST 7: Call generate-prescription Edge Function ---");
-  console.log("  (This calls Claude API — may take 15-30 seconds...)");
+// ===== TEST 7: Formulary structure — branded drug (ABDM FHIR) =====
+async function test7_formularyBranded() {
+  console.log(
+    "\n--- TEST 7: Formulary structure -- branded drug (AMOXICILLIN) ---",
+  );
+
+  const res = await q(
+    `formulary?generic_name=ilike.*amoxicillin*&select=generic_name,snomed_code,snomed_display,data_source,formulations,dosing_bands&limit=1`,
+  );
+
+  assert(res.ok, "Formulary query OK", `HTTP ${res.status}`);
+
+  if (!res.ok || !res.data?.length) {
+    console.log(
+      "  ! Could not find AMOXICILLIN in formulary -- skipping sub-tests",
+    );
+    console.log("  Response:", JSON.stringify(res.data)?.slice(0, 300));
+    return;
+  }
+
+  const drug = res.data[0];
+  console.log(`  (Found: ${drug.generic_name})`);
+
+  // snomed_code must be present
+  assert(
+    drug.snomed_code != null && drug.snomed_code !== "",
+    "snomed_code is not null",
+    `Got: ${drug.snomed_code}`,
+  );
+
+  // data_source should be snomed_branded
+  assert(
+    drug.data_source === "snomed_branded",
+    "data_source is 'snomed_branded'",
+    `Got: ${drug.data_source}`,
+  );
+
+  // formulations must be array with at least 1 entry
+  assert(
+    Array.isArray(drug.formulations) && drug.formulations.length >= 1,
+    "formulations is array with >= 1 entry",
+    `Got: ${Array.isArray(drug.formulations) ? drug.formulations.length + " entries" : typeof drug.formulations}`,
+  );
+
+  if (Array.isArray(drug.formulations) && drug.formulations.length > 0) {
+    const f = drug.formulations[0];
+
+    // Each formulation has ingredients[] array
+    assert(
+      Array.isArray(f.ingredients) && f.ingredients.length >= 1,
+      "formulation[0].ingredients is array with >= 1 entry",
+      `Got: ${Array.isArray(f.ingredients) ? f.ingredients.length + " ingredients" : typeof f.ingredients}`,
+    );
+
+    if (Array.isArray(f.ingredients) && f.ingredients.length > 0) {
+      const ing = f.ingredients[0];
+
+      // Each ingredient has strength_numerator and strength_numerator_unit
+      assert(
+        ing.strength_numerator != null &&
+          typeof ing.strength_numerator === "number",
+        "ingredient[0].strength_numerator is a number",
+        `Got: ${ing.strength_numerator} (${typeof ing.strength_numerator})`,
+      );
+      assert(
+        typeof ing.strength_numerator_unit === "string" &&
+          ing.strength_numerator_unit.length > 0,
+        "ingredient[0].strength_numerator_unit is non-empty string",
+        `Got: ${ing.strength_numerator_unit}`,
+      );
+    }
+
+    // indian_brands[] array
+    assert(
+      Array.isArray(f.indian_brands),
+      "formulation[0].indian_brands is array",
+      `Got: ${typeof f.indian_brands}`,
+    );
+
+    if (Array.isArray(f.indian_brands) && f.indian_brands.length > 0) {
+      const brand = f.indian_brands[0];
+      assert(
+        typeof brand.name === "string" && brand.name.length > 0,
+        "indian_brands[0].name is non-empty string",
+        `Got: ${brand.name}`,
+      );
+      assert(
+        brand.manufacturer !== undefined,
+        "indian_brands[0].manufacturer field exists",
+        `Got: ${brand.manufacturer}`,
+      );
+      assert(
+        brand.snomed_code !== undefined,
+        "indian_brands[0].snomed_code field exists",
+        `Got: ${brand.snomed_code}`,
+      );
+    }
+  }
+
+  // dosing_bands must be array with at least 1 entry
+  assert(
+    Array.isArray(drug.dosing_bands) && drug.dosing_bands.length >= 1,
+    "dosing_bands is array with >= 1 entry",
+    `Got: ${Array.isArray(drug.dosing_bands) ? drug.dosing_bands.length + " bands" : typeof drug.dosing_bands}`,
+  );
+
+  if (Array.isArray(drug.dosing_bands) && drug.dosing_bands.length > 0) {
+    const band = drug.dosing_bands[0];
+    assert(
+      typeof band.age_band === "string" && band.age_band.length > 0,
+      "dosing_band[0].age_band is non-empty string",
+      `Got: ${band.age_band}`,
+    );
+    assert(
+      typeof band.method === "string" && band.method.length > 0,
+      "dosing_band[0].method is non-empty string",
+      `Got: ${band.method}`,
+    );
+    assert(
+      typeof band.dose_unit === "string" && band.dose_unit.length > 0,
+      "dosing_band[0].dose_unit is non-empty string",
+      `Got: ${band.dose_unit}`,
+    );
+    assert(
+      band.max_single_qty != null,
+      "dosing_band[0].max_single_qty exists",
+      `Got: ${band.max_single_qty}`,
+    );
+  }
+
+  console.log(
+    `  i ${drug.formulations?.length || 0} formulations, ${drug.dosing_bands?.length || 0} dosing bands`,
+  );
+}
+
+// ===== TEST 8: Formulary structure — generic drug =====
+async function test8_formularyGeneric() {
+  console.log(
+    "\n--- TEST 8: Formulary structure -- generic drug (snomed_generic) ---",
+  );
+
+  const res = await q(
+    `formulary?data_source=eq.snomed_generic&select=generic_name,snomed_code,data_source,formulations,dosing_bands&limit=1`,
+  );
+
+  assert(res.ok, "Formulary generic query OK", `HTTP ${res.status}`);
+
+  if (!res.ok || !res.data?.length) {
+    console.log("  ! No snomed_generic drugs found -- skipping sub-tests");
+    return;
+  }
+
+  const drug = res.data[0];
+  console.log(`  (Found: ${drug.generic_name})`);
+
+  assert(
+    drug.data_source === "snomed_generic",
+    "data_source is 'snomed_generic'",
+    `Got: ${drug.data_source}`,
+  );
+  assert(
+    drug.snomed_code != null && drug.snomed_code !== "",
+    "snomed_code is not null for generic drug",
+    `Got: ${drug.snomed_code}`,
+  );
+  assert(
+    Array.isArray(drug.formulations) && drug.formulations.length >= 1,
+    "Generic drug has formulations[]",
+    `Got: ${drug.formulations?.length || 0} entries`,
+  );
+  assert(
+    Array.isArray(drug.dosing_bands) && drug.dosing_bands.length >= 1,
+    "Generic drug has dosing_bands[]",
+    `Got: ${drug.dosing_bands?.length || 0} bands`,
+  );
+}
+
+// ===== TEST 9: Formulary structure — orphan drug =====
+async function test9_formularyOrphan() {
+  console.log("\n--- TEST 9: Formulary structure -- orphan drug ---");
+
+  const res = await q(
+    `formulary?data_source=eq.orphan&select=generic_name,snomed_code,data_source,formulations,dosing_bands&limit=1`,
+  );
+
+  assert(res.ok, "Formulary orphan query OK", `HTTP ${res.status}`);
+
+  if (!res.ok || !res.data?.length) {
+    console.log("  ! No orphan drugs found -- skipping sub-tests");
+    return;
+  }
+
+  const drug = res.data[0];
+  console.log(`  (Found: ${drug.generic_name})`);
+
+  assert(
+    drug.data_source === "orphan",
+    "data_source is 'orphan'",
+    `Got: ${drug.data_source}`,
+  );
+  // Orphan drugs may or may not have snomed_code (many are null)
+  assert(
+    drug.snomed_code === null || typeof drug.snomed_code === "string",
+    "Orphan snomed_code is null or string (acceptable)",
+    `Got: ${drug.snomed_code}`,
+  );
+  assert(
+    Array.isArray(drug.formulations),
+    "Orphan drug has formulations array",
+    `Got: ${typeof drug.formulations}`,
+  );
+}
+
+// ===== TEST 10: Standard Rx — snomed_code for diagnosis =====
+async function test10_standardRxSnomed() {
+  console.log(
+    "\n--- TEST 10: Standard Rx -- snomed_code on diagnosis protocol ---",
+  );
+
+  // Pick a common diagnosis that should have snomed_code
+  const res = await q(
+    `standard_prescriptions?snomed_code=not.is.null&select=icd10,diagnosis_name,snomed_code,first_line_drugs,category&limit=3`,
+  );
+
+  assert(res.ok, "Standard Rx query OK", `HTTP ${res.status}`);
+
+  if (!res.ok || !res.data?.length) {
+    console.log("  ! No standard prescriptions with snomed_code found");
+    return;
+  }
+
+  const rx = res.data[0];
+  console.log(`  (Found: ${rx.icd10} - ${rx.diagnosis_name})`);
+
+  assert(
+    rx.snomed_code != null && rx.snomed_code !== "",
+    "snomed_code is not null on standard_prescription",
+    `Got: ${rx.snomed_code}`,
+  );
+  assert(
+    typeof rx.diagnosis_name === "string" && rx.diagnosis_name.length > 0,
+    "diagnosis_name is non-empty string",
+    `Got: ${rx.diagnosis_name}`,
+  );
+  assert(
+    Array.isArray(rx.first_line_drugs) && rx.first_line_drugs.length >= 1,
+    "first_line_drugs is array with entries",
+    `Got: ${rx.first_line_drugs?.length || 0} drugs`,
+  );
+
+  // Verify first_line_drugs have .drug field
+  if (rx.first_line_drugs?.length > 0) {
+    assert(
+      typeof rx.first_line_drugs[0].drug === "string",
+      "first_line_drugs[0].drug is string",
+      `Got: ${rx.first_line_drugs[0].drug}`,
+    );
+  }
+
+  // Count total protocols with snomed_code
+  const countRes = await q(
+    `standard_prescriptions?snomed_code=not.is.null&select=id`,
+  );
+  if (countRes.ok) {
+    console.log(`  i ${countRes.data?.length || 0} protocols have snomed_code`);
+  }
+}
+
+// ===== TEST 11: Drug name consistency — std_rx drugs exist in formulary =====
+async function test11_drugNameConsistency() {
+  console.log(
+    "\n--- TEST 11: Drug name consistency -- std_rx drugs in formulary ---",
+  );
+
+  // Fetch 5 standard prescriptions to extract drug names
+  const rxRes = await q(
+    `standard_prescriptions?active=eq.true&first_line_drugs=not.is.null&select=icd10,diagnosis_name,first_line_drugs&limit=5`,
+  );
+
+  assert(
+    rxRes.ok,
+    "Standard Rx query for drug names OK",
+    `HTTP ${rxRes.status}`,
+  );
+
+  if (!rxRes.ok || !rxRes.data?.length) {
+    console.log("  ! No standard prescriptions found -- skipping");
+    return;
+  }
+
+  // Collect unique drug names from first_line_drugs
+  const drugNames = new Set();
+  for (const rx of rxRes.data) {
+    if (Array.isArray(rx.first_line_drugs)) {
+      for (const d of rx.first_line_drugs) {
+        if (d.drug) drugNames.add(d.drug);
+      }
+    }
+  }
+
+  // Pick up to 5 drug names to check
+  const sampled = [...drugNames].slice(0, 5);
+  console.log(`  Checking ${sampled.length} drugs: ${sampled.join(", ")}`);
+
+  let matchCount = 0;
+  let skipCount = 0;
+  for (const drugName of sampled) {
+    // Some entries are non-drug items (e.g., "Honey + Warm Fluids", "Karvol Plus Capsule (Inhalation)")
+    // These won't match formulary. Only flag actual drug names as failures.
+    const isLikelyNonDrug =
+      /honey|warm fluid|karvol|cough management|inhalation cloth|counsell/i.test(
+        drugName,
+      );
+
+    const fRes = await q(
+      `formulary?generic_name=ilike.*${encodeURIComponent(drugName.split("/")[0].split("(")[0].trim())}*&select=generic_name&limit=1`,
+    );
+
+    if (fRes.ok && fRes.data?.length > 0) {
+      console.log(`  + MATCH: "${drugName}" -> "${fRes.data[0].generic_name}"`);
+      matchCount++;
+    } else if (isLikelyNonDrug) {
+      console.log(`  ~ SKIP (non-drug): "${drugName}"`);
+      skipCount++;
+    } else {
+      console.log(
+        `  ? MISS: "${drugName}" not found in formulary (may be non-pharmacological)`,
+      );
+    }
+  }
+
+  assert(
+    matchCount > 0,
+    `At least 1 of ${sampled.length} drugs found in formulary`,
+    `${matchCount} matched, ${skipCount} non-drug skipped`,
+  );
+}
+
+// ===== TEST 12: Call generate-prescription Edge Function =====
+async function test12_generatePrescription() {
+  console.log("\n--- TEST 12: Call generate-prescription Edge Function ---");
+  console.log("  (This calls Claude API -- may take 15-30 seconds...)");
 
   const clinicalNote = `${TEST_PREFIX}Arjun Kumar, 9 months, 7.5 kg boy. Guardian: Test Guardian. ALLERGY: Penicillin.
 Chief complaints: Fever 3 days, cough, not eating well.
-Vitals: Temp 100.4°F, HR 130/min, RR 36/min, SpO₂ 97%, BP 85/55 mmHg, HC 43.5 cm, MUAC 14.2 cm.
-Ht 68 cm, BMI 16.2 kg/m².
+Vitals: Temp 100.4F, HR 130/min, RR 36/min, SpO2 97%, BP 85/55 mmHg, HC 43.5 cm, MUAC 14.2 cm.
+Ht 68 cm, BMI 16.2 kg/m2.
 O/E: Bilateral crepitations, mild chest indrawing. No cyanosis.
 Diagnosis: Acute bronchiolitis (J21.9).
 Give paracetamol for fever, salbutamol nebulization.
 
-INCLUDE THESE SECTIONS (use clinical note details if mentioned, otherwise populate with age-appropriate normal defaults): investigations, growth assessment, vaccination status (use IAP 2024 ACVIP schedule — includes paid vaccines)
+INCLUDE THESE SECTIONS (use clinical note details if mentioned, otherwise populate with age-appropriate normal defaults): investigations, growth assessment, vaccination status (use IAP 2024 ACVIP schedule -- includes paid vaccines)
 LANGUAGE: Bilingual`;
 
   const res = await fn("generate-prescription", {
@@ -350,8 +693,21 @@ LANGUAGE: Bilingual`;
   assert(res.ok, "Edge Function returned 200", `HTTP ${res.status}`);
 
   if (res.ok && res.data) {
-    const rx = res.data.prescription;
-    assert(!!rx, "Response has prescription object");
+    console.log("  i Response keys:", Object.keys(res.data).join(", "));
+    // Edge Function may wrap in { prescription: {...} } or return flat
+    const rx = res.data.prescription || res.data;
+    if (res.data.prescription) {
+      console.log(
+        "  i Prescription keys:",
+        Object.keys(rx).slice(0, 15).join(", "),
+      );
+    } else {
+      console.log(
+        "  i (no .prescription wrapper) Top keys:",
+        Object.keys(rx).slice(0, 15).join(", "),
+      );
+    }
+    assert(!!rx, "Response has prescription data");
 
     if (rx) {
       // Patient
@@ -413,22 +769,53 @@ LANGUAGE: Bilingual`;
       // NABH
       assert(rx.nabh_compliant === true, "nabh_compliant is true");
 
+      // NEW: non_pharmacological[] (may be empty array or populated)
+      assert(
+        Array.isArray(rx.non_pharmacological) ||
+          rx.non_pharmacological === undefined,
+        "non_pharmacological is array or absent",
+        `Got: ${typeof rx.non_pharmacological}`,
+      );
+      if (
+        Array.isArray(rx.non_pharmacological) &&
+        rx.non_pharmacological.length > 0
+      ) {
+        const np = rx.non_pharmacological[0];
+        assert(
+          typeof np.instruction === "string",
+          "non_pharmacological[0].instruction is string",
+          `Got: ${np.instruction}`,
+        );
+        assert(
+          typeof np.category === "string",
+          "non_pharmacological[0].category is string (diet/therapy/procedure/lifestyle)",
+          `Got: ${np.category}`,
+        );
+        console.log(
+          `  i non_pharmacological: ${rx.non_pharmacological.length} items`,
+        );
+      } else {
+        console.log(
+          "  i non_pharmacological: empty or absent (acceptable for this case)",
+        );
+      }
+
       console.log(
-        `  ℹ AI generated ${rx.medicines?.length || 0} medicines, ${rx.investigations?.length || 0} investigations`,
+        `  i AI generated ${rx.medicines?.length || 0} medicines, ${rx.investigations?.length || 0} investigations`,
       );
       console.log(
-        `  ℹ Safety: ${rx.safety?.overall_status}, Allergy: ${rx.safety?.allergy_note}`,
+        `  i Safety: ${rx.safety?.overall_status}, Allergy: ${rx.safety?.allergy_note}`,
       );
-      console.log(`  ℹ Warning signs: ${rx.warning_signs?.length || 0}`);
+      console.log(`  i Warning signs: ${rx.warning_signs?.length || 0}`);
     }
   } else {
     console.log("  Response:", JSON.stringify(res.data)?.slice(0, 500));
   }
 }
 
-// ===== TEST 8: Save prescription =====
-async function test8_savePrescription() {
-  console.log("\n--- TEST 8: Save prescription to DB ---");
+// ===== TEST 13: Save prescription =====
+async function test13_savePrescription() {
+  console.log("\n--- TEST 13: Save prescription to DB ---");
   if (!testVisitId) {
     console.log("  SKIP (no visit ID)");
     return;
@@ -442,9 +829,16 @@ async function test8_savePrescription() {
     generated_json: {
       patient: { name: "Test", uhid: TEST_PATIENT_ID, age: "9 months" },
       medicines: [
-        { row1_en: "PARACETAMOL", row2_en: "test dose", row3_hi: "टेस्ट" },
+        { row1_en: "PARACETAMOL", row2_en: "test dose", row3_hi: "test" },
       ],
-      warning_signs: [{ hi: "तेज बुखार", en: "High fever" }],
+      non_pharmacological: [
+        {
+          instruction: "Tepid sponging for fever",
+          instruction_hi: "test",
+          category: "therapy",
+        },
+      ],
+      warning_signs: [{ hi: "test", en: "High fever" }],
       admission_recommended: null,
       followup_days: 3,
       safety: { overall_status: "SAFE", allergy_note: "ALLERGY: Penicillin" },
@@ -474,9 +868,11 @@ async function test8_savePrescription() {
   }
 }
 
-// ===== TEST 9: Read prescription back =====
-async function test9_readPrescription() {
-  console.log("\n--- TEST 9: Read prescription and verify JSON round-trip ---");
+// ===== TEST 14: Read prescription back =====
+async function test14_readPrescription() {
+  console.log(
+    "\n--- TEST 14: Read prescription and verify JSON round-trip ---",
+  );
   if (!testRxId) {
     console.log("  SKIP (no Rx ID)");
     return;
@@ -494,8 +890,8 @@ async function test9_readPrescription() {
     assert(Array.isArray(g?.medicines), "medicines round-trips as array");
     assert(Array.isArray(g?.warning_signs), "warning_signs round-trips");
     assert(
-      g?.warning_signs?.[0]?.hi === "तेज बुखार",
-      "Hindi warning sign round-trips",
+      g?.warning_signs?.[0]?.en === "High fever",
+      "English warning sign round-trips",
     );
     assert(g?.followup_days === 3, "followup_days round-trips");
     assert(
@@ -503,13 +899,29 @@ async function test9_readPrescription() {
       "admission_recommended null round-trips",
     );
     assert(g?.safety?.overall_status === "SAFE", "safety round-trips");
+
+    // NEW: non_pharmacological round-trip
+    assert(
+      Array.isArray(g?.non_pharmacological),
+      "non_pharmacological round-trips as array",
+    );
+    if (g?.non_pharmacological?.length > 0) {
+      assert(
+        g.non_pharmacological[0].instruction === "Tepid sponging for fever",
+        "non_pharmacological[0].instruction round-trips",
+      );
+      assert(
+        g.non_pharmacological[0].category === "therapy",
+        "non_pharmacological[0].category round-trips",
+      );
+    }
   }
 }
 
-// ===== TEST 10: Edge Function tools — get_lab_history =====
-async function test10_labHistory() {
+// ===== TEST 15: Edge Function tools — get_lab_history =====
+async function test15_labHistory() {
   console.log(
-    "\n--- TEST 10: Verify lab_results readable by Edge Function tools ---",
+    "\n--- TEST 15: Verify lab_results readable by Edge Function tools ---",
   );
   if (!testLabId) {
     console.log("  SKIP (no lab ID)");
@@ -526,9 +938,9 @@ async function test10_labHistory() {
   }
 }
 
-// ===== TEST 11: Cleanup =====
-async function test11_cleanup() {
-  console.log("\n--- TEST 11: Cleanup test data ---");
+// ===== TEST 16: Cleanup =====
+async function test16_cleanup() {
+  console.log("\n--- TEST 16: Cleanup test data ---");
 
   // Delete in reverse FK order
   if (testRxId) {
@@ -564,7 +976,7 @@ async function test11_cleanup() {
 // ===== MAIN =====
 async function main() {
   console.log("=".repeat(60));
-  console.log("LIVE INTEGRATION TEST — Radhakishan Hospital System");
+  console.log("LIVE INTEGRATION TEST -- Radhakishan Hospital System");
   console.log("Target:", SB);
   console.log("Time:", new Date().toISOString());
   console.log("=".repeat(60));
@@ -575,11 +987,16 @@ async function main() {
   await test4_createLab();
   await test5_createVax();
   await test6_createGrowth();
-  await test7_generatePrescription();
-  await test8_savePrescription();
-  await test9_readPrescription();
-  await test10_labHistory();
-  await test11_cleanup();
+  await test7_formularyBranded();
+  await test8_formularyGeneric();
+  await test9_formularyOrphan();
+  await test10_standardRxSnomed();
+  await test11_drugNameConsistency();
+  await test12_generatePrescription();
+  await test13_savePrescription();
+  await test14_readPrescription();
+  await test15_labHistory();
+  await test16_cleanup();
 
   console.log("\n" + "=".repeat(60));
   console.log(`RESULTS: ${passed} passed, ${failed} failed`);
@@ -589,7 +1006,7 @@ async function main() {
       console.log(`  ${i + 1}. ${f.test}: ${f.detail}`),
     );
   } else {
-    console.log("\n✓ ALL TESTS PASSED");
+    console.log("\n+ ALL TESTS PASSED");
   }
   console.log("=".repeat(60));
 

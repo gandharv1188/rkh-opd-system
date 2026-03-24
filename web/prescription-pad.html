@@ -2196,11 +2196,11 @@
       const [fr, sr] = await Promise.all([
         q(
           "formulary",
-          "?select=generic_name,dosing_bands,formulations,contraindications,interactions,black_box_warnings,notes&active=eq.true",
+          "?select=generic_name,dosing_bands,formulations,contraindications,interactions,black_box_warnings,notes,snomed_code,snomed_display&active=eq.true",
         ),
         q(
           "standard_prescriptions",
-          "?select=icd10,diagnosis_name,first_line_drugs,second_line_drugs,investigations,counselling,referral_criteria,hospitalisation_criteria,notes,duration_days_default&active=eq.true",
+          "?select=icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,warning_signs,referral_criteria,hospitalisation_criteria,notes,duration_days_default&active=eq.true",
         ),
       ]);
       if (fr.ok) {
@@ -4605,6 +4605,12 @@
       h += `</div>`;
     }
 
+    if (has(r.non_pharmacological)) {
+      h += `<div class="rv-sec"><div class="rv-hdr blue">Non-Pharmacological</div>
+    ${r.non_pharmacological.map((np, i) => `<div class="info-block" contenteditable="true" spellcheck="false" style="margin-bottom:4px"><strong>${esc(np.instruction)}</strong>${np.instruction_hi ? "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;color:var(--ink2)\">" + esc(np.instruction_hi) + "</span>" : ""}${np.category ? ' <span style="font-size:10px;color:var(--ink3);background:var(--blue-lt);padding:1px 6px;border-radius:3px;margin-left:6px">' + esc(np.category) + "</span>" : ""}</div>`).join("")}
+    </div>`;
+    }
+
     if (has(r.investigations)) {
       h += `<div class="rv-sec"><div class="rv-hdr red">Investigations</div>
     ${r.investigations.map((inv, i) => `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><div class="inv-block" id="inv${i}-text" contenteditable="true" spellcheck="false" style="flex:1"><strong>${esc(inv.name)}</strong> — ${esc(inv.indication)}${inv.urgency === "same-day" ? ' <span style="font-size:11px;color:var(--red)">(Same day)</span>' : ""}</div><button class="item-remove" onclick="toggleStrike('inv',${i})" id="inv${i}-rm" title="Remove investigation">Remove</button></div>`).join("")}
@@ -5625,6 +5631,10 @@
         h += `<div class="med"><div class="med-text"><div class="med-r1">${esc(m.number)}. ${esc(m.row1_en || "")}</div><div class="med-r2">${esc(m.row2_en || "")}</div><div class="med-r3">${esc(m.row3_hi || "")}</div>${m.flag ? `<div class="med-flag">⚠ ${esc(m.flag)}</div>` : ""}</div>${renderPictogram(m)}</div>`;
       });
       h += `</div>`;
+    }
+    // Non-Pharmacological
+    if (r.non_pharmacological?.length) {
+      h += `<div class="sec"><div class="sec-title blue">Non-Pharmacological Advice</div>${r.non_pharmacological.map((np) => `<div style="margin-bottom:4px"><strong>${esc(np.instruction)}</strong>${np.instruction_hi ? "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;font-size:11px;color:#333\">" + esc(np.instruction_hi) + "</span>" : ""}</div>`).join("")}</div>`;
     }
     // IV Fluids
     if (r.iv_fluids?.length) {

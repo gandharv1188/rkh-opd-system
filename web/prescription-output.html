@@ -768,6 +768,10 @@
       });
       h += `</div>`;
     }
+    // Non-Pharmacological
+    if (r.non_pharmacological?.length) {
+      h += `<div class="sec"><div class="sec-title blue">Non-Pharmacological Advice</div>${r.non_pharmacological.map((np) => `<div style="margin-bottom:4px"><strong>${esc(np.instruction)}</strong>${np.instruction_hi ? "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;font-size:11px;color:#333\">" + esc(np.instruction_hi) + "</span>" : ""}</div>`).join("")}</div>`;
+    }
     // IV Fluids
     if (r.iv_fluids?.length) {
       h += `<div class="sec"><div class="sec-title">IV Fluids</div>${r.iv_fluids.map((f) => (typeof f === "string" ? `<div>${esc(f)}</div>` : `<div>${esc(f.fluid || "")}${f.volume_ml ? " \u2014 " + esc(f.volume_ml) + " ml" : ""}${f.rate_ml_hr ? " @ " + esc(f.rate_ml_hr) + " ml/hr" : ""}${f.additives ? " + " + esc(f.additives) : ""}</div>`)).join("")}</div>`;
