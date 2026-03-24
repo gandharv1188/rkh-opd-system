@@ -45,15 +45,18 @@ Dear Dr. Lokender Goyal, here is a summary of all recent changes to your prescri
 
 ### Admit Button
 
-- On the prescription pad, after generating a prescription, click the **Admit** button
-- The follow-up section will automatically change to show "ADMISSION RECOMMENDED"
-- The printed prescription will reflect this
+- On the prescription pad, in the "Include in prescription" section, click the red **Admit** chip before generating
+- Alternatively, write "admit" or "admission" in your clinical note — the AI will detect it
+- Either way, the follow-up section will show "ADMISSION RECOMMENDED" with the reason
+- The sign-off button turns red: "Approve ADMISSION & save"
+- The printed prescription shows "ADMISSION RECOMMENDED" instead of a follow-up date
 
 ### Language Switch
 
-- On the prescription output screen, look for the **Language** toggle (English / Hindi / Bilingual)
-- Select your preferred language before printing
-- The counselling and parental advice section will switch to that language
+- On the prescription pad, look for the **language dropdown** in the "Include in prescription" section (right side, next to the chip buttons)
+- Choose **Bilingual** (default), **Hindi**, or **English** before generating the prescription
+- The counselling and warning signs sections will be in the selected language
+- Medicine Row 3 (Hindi dosing instructions) is always included regardless of this setting
 
 ### Vaccination Status
 
@@ -66,9 +69,52 @@ Dear Dr. Lokender Goyal, here is a summary of all recent changes to your prescri
 
 ---
 
+## Standard Prescription Protocols
+
+Your hospital's 24 standard treatment protocols from the clinical PDF have been imported into the system:
+
+- **Respiratory**: Common Cold, Bronchiolitis, Asthma (OPD Oral, Inhaler-Based, Severe Indoor), Croup
+- **GI**: Gastroenteritis (OPD + Indoor), Gastritis, Dysentery, Anal Fissure, Infantile Colic, GERD
+- **Infectious**: Pyrexia, Enteric Fever, Viral Hepatitis
+- **ENT**: Tonsillitis, Allergic Rhinitis, Otitis Media, Epistaxis
+- **Others**: Prematurity Follow-up, Atopic Dermatitis, Enuresis, Normal Baby Follow-up
+
+Each protocol now includes:
+
+- First-line and second-line drugs with doses
+- Investigations with indications and urgency
+- Counselling points for parents
+- Warning signs (6-8 per diagnosis, specific to the condition)
+- Referral and hospitalisation criteria
+- SNOMED CT codes and ICD-10 codes
+- 2024-2025 guideline updates
+- **NEW**: Expected course, key clinical points, severity assessment, and monitoring parameters (fields available — being populated)
+
+When the AI generates a prescription, it automatically fetches the matching protocol and uses these standard warning signs, drug choices, and counselling points as a starting base.
+
+### Editing Protocols
+
+- Open the **Standard Rx** page from the home screen
+- Click any protocol to edit it
+- The **Guidance tab** now has fields for: counselling, warning signs, expected course, severity (mild/moderate/severe), key clinical points, and monitoring parameters
+- Click **AI Update** to have AI enrich an existing protocol with latest guidelines
+- Your edits are saved directly to the database and used in future prescriptions
+
+### Adding New Protocols
+
+- Click **+ Add** on the Standard Rx page
+- Enter the ICD-10 code and diagnosis name
+- Click **AI Lookup** to have AI pre-fill all fields from latest guidelines
+- Review, modify, and save
+- A blank template is available at `standard_prescription_template.json` if you prefer to fill in offline
+
+---
+
 ## Notes
 
 - Draft prescriptions are saved locally in your browser. If you switch to a different computer, drafts from the first computer will not appear.
 - The BMI-based diet advice is a suggestion from the AI — please review and modify as you see fit.
 - Vaccination card extraction works best with clear, well-lit photos of the card.
+- Warning signs in the protocol database are stored in English. The AI translates them to Hindi automatically based on the language switch setting.
 - All other features (voice dictation, QR scanning, print layout) continue to work as before.
+- The system was verified with a live integration test: 94 out of 94 checks passed against the production database.
