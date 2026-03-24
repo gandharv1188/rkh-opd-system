@@ -40,43 +40,68 @@
         margin-top: 2px;
       }
       .nav {
-        max-width: 700px;
+        max-width: 900px;
         margin: 30px auto;
         padding: 0 16px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
       }
       .nav-card {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         background: #fff;
         border: 1px solid #ddd;
         border-radius: 10px;
-        padding: 20px 24px;
-        margin-bottom: 14px;
+        padding: 20px 16px;
         text-decoration: none;
         color: inherit;
+        aspect-ratio: 1;
         transition:
           border-color 0.15s,
-          box-shadow 0.15s;
+          box-shadow 0.15s,
+          transform 0.15s;
       }
       .nav-card:hover {
         border-color: #1e3a6b;
         box-shadow: 0 2px 12px rgba(30, 58, 107, 0.1);
+        transform: translateY(-2px);
       }
       .nav-card h2 {
-        font-size: 17px;
+        font-size: 15px;
         color: #1e3a6b;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
       }
       .nav-card .role {
-        font-size: 11px;
+        font-size: 9px;
         color: #7a7a60;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         margin-bottom: 6px;
       }
       .nav-card p {
-        font-size: 13px;
+        font-size: 11px;
         color: #555;
-        line-height: 1.5;
+        line-height: 1.4;
+      }
+      .nav-sep {
+        grid-column: 1 / -1;
+        border: none;
+        border-top: 1px solid #eee;
+        margin: 4px 0;
+      }
+      @media (max-width: 700px) {
+        .nav {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+        .nav-card {
+          aspect-ratio: auto;
+          padding: 16px 12px;
+        }
       }
       .footer {
         text-align: center;
@@ -131,7 +156,7 @@
           trends, reuse previous prescriptions.
         </p>
       </a>
-      <hr style="margin: 20px 0; border: none; border-top: 1px solid #eee" />
+      <hr class="nav-sep" />
       <a class="nav-card" href="formulary.html">
         <div class="role">Admin</div>
         <h2>Formulary Manager</h2>
