@@ -4193,9 +4193,11 @@
     const fd = capped ? maxS : perDose;
     let vol, enD, hiD;
     if (form === "drops") {
-      // Drops: 1 ml = 5 drops. Calculate ml then convert to drops, round to nearest whole drop.
+      // Drops: 1 ml = 5 drops. All formulary concentrations MUST be per-ml.
+      // If per_unit was "drop" in formulary, it was pre-converted: per_qty = 0.2ml (1 drop).
       const mlPerDose = (fd / cmg) * cml;
-      const drops = Math.round(mlPerDose * 5); // 5 drops per ml
+      const drops = Math.round(mlPerDose * 5); // 5 drops per ml — always correct when conc is per-ml
+        : Math.round(mlPerDose * 5); // 5 drops per ml
       vol = drops + " drops";
       enD = drops + " drops";
       const DN = {

@@ -231,9 +231,11 @@ Every medicine MUST be written in exactly 3 rows:
 - **Row 1 (`row1_en`)**: GENERIC NAME IN CAPITALS + Indian concentration
   Example: `PARACETAMOL SUSPENSION (120 mg / 5 ml)`
 - **Row 2 (`row2_en`)**: Calculated dose + Route + Frequency + Duration + English instructions
-  Example: `4.5 ml orally every 6 hours as needed for fever. Max 4 doses/day.`
+  Syrup example: `4.5 ml orally every 6 hours as needed for fever. Max 4 doses/day.`
+  Drops example: `4 drops orally three times a day for 5 days.`
 - **Row 3 (`row3_hi`)**: Hindi translation in Devanagari for parents
-  Example: `4.5 ml बुखार होने पर हर 6 घंटे में मुँह से दें। दिन में 4 बार से ज़्यादा न दें।`
+  Syrup example: `4.5 ml बुखार होने पर हर 6 घंटे में मुँह से दें। दिन में 4 बार से ज़्यादा न दें।`
+  Drops example: `4 बूंदें मुँह से दिन में 3 बार 5 दिन तक दें।`
 
 **Hindi rules:** Use spoken Hindi (not formal). "Orally" = "मुँह से दें". "Teaspoon" = "चम्मच". Drug names stay in English. Frequency: "हर 6 घंटे" / "दिन में 3 बार". Duration: "5 दिन तक". "As needed" = "ज़रूरत पड़ने पर".
 
