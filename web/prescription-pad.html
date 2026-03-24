@@ -1665,6 +1665,15 @@
     <div class="mods">
       <div class="mod-lbl">Include in prescription</div>
       <div class="mod-chips">
+        <div
+          class="mod-chip"
+          id="chip-stdrx"
+          onclick="toggleMod('stdrx')"
+          style="border-color: rgba(30, 88, 107, 0.4); font-weight: 600"
+        >
+          <span class="chip-dot" style="border-color: var(--blue-mid)"></span
+          >Std Rx
+        </div>
         <div class="mod-chip on" id="chip-inv" onclick="toggleMod('inv')">
           <span class="chip-dot"></span>Investigations
         </div>
@@ -3902,6 +3911,8 @@
   }
   function getSelectedSections() {
     const sectionNames = {
+      stdrx:
+        "USE STANDARD PRESCRIPTION — include ALL first-line drugs from the hospital standard protocol for this diagnosis. Do not omit any protocol drug.",
       inv: "investigations",
       "vax-nhm":
         "vaccination status (use NHM-UIP government schedule — free vaccines only)",
