@@ -369,89 +369,118 @@ async function toolUseLoop(
   let totalInputTokens = 0;
   let totalOutputTokens = 0;
 
-  for (let round = 1; round <= MAX_TOOL_LOOPS; round++) {
-    console.log(`Round ${round}: calling Claude API...`);
+  // Timeout: abort entire loop after 120 seconds
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 120_000);
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 8192,
-        system: systemPrompt,
-        messages,
-        tools,
-      }),
-    });
+  // Track last tool call to detect repeated identical calls
+  let lastToolCallKey = "";
 
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(
-        err.error?.message || `Claude API error: ${response.status}`,
-      );
-    }
+  try {
+    for (let round = 1; round <= MAX_TOOL_LOOPS; round++) {
+      console.log(`Round ${round}: calling Claude API...`);
 
-    const data = await response.json();
-    totalInputTokens += data.usage?.input_tokens || 0;
-    totalOutputTokens += data.usage?.output_tokens || 0;
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+        },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 8192,
+          system: systemPrompt,
+          messages,
+          tools,
+        }),
+        signal: controller.signal,
+      });
 
-    // Add assistant response to message history
-    messages.push({ role: "assistant", content: data.content });
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(
+          err.error?.message || `Claude API error: ${response.status}`,
+        );
+      }
 
-    if (data.stop_reason === "end_turn") {
-      // Extract text from final response
-      const text = data.content
-        .filter((b: ContentBlock) => b.type === "text")
-        .map((b: ContentBlock) => b.text || "")
-        .join("");
-      console.log(
-        `Completed in ${round} round(s). Tokens: ${totalInputTokens} in, ${totalOutputTokens} out.`,
-      );
-      return { text, totalInputTokens, totalOutputTokens, rounds: round };
-    }
+      const data = await response.json();
+      totalInputTokens += data.usage?.input_tokens || 0;
+      totalOutputTokens += data.usage?.output_tokens || 0;
 
-    if (data.stop_reason === "tool_use") {
-      const toolBlocks = data.content.filter(
-        (b: ContentBlock) => b.type === "tool_use",
-      );
-      if (!toolBlocks.length) {
-        // No tool calls despite tool_use stop reason — treat as end
+      // Add assistant response to message history
+      messages.push({ role: "assistant", content: data.content });
+
+      if (data.stop_reason === "end_turn") {
+        // Extract text from final response
+        const text = data.content
+          .filter((b: ContentBlock) => b.type === "text")
+          .map((b: ContentBlock) => b.text || "")
+          .join("");
+        console.log(
+          `Completed in ${round} round(s). Tokens: ${totalInputTokens} in, ${totalOutputTokens} out.`,
+        );
+        return { text, totalInputTokens, totalOutputTokens, rounds: round };
+      }
+
+      if (data.stop_reason === "tool_use") {
+        const toolBlocks = data.content.filter(
+          (b: ContentBlock) => b.type === "tool_use",
+        );
+        if (!toolBlocks.length) {
+          // No tool calls despite tool_use stop reason — treat as end
+          const text = data.content
+            .filter((b: ContentBlock) => b.type === "text")
+            .map((b: ContentBlock) => b.text || "")
+            .join("");
+          return { text, totalInputTokens, totalOutputTokens, rounds: round };
+        }
+
+        console.log(`  ${toolBlocks.length} tool call(s) in round ${round}`);
+
+        // Detect repeated identical tool calls to avoid infinite loops
+        const currentToolCallKey = toolBlocks
+          .map((b: ContentBlock) => `${b.name}:${JSON.stringify(b.input)}`)
+          .sort()
+          .join("|");
+        if (currentToolCallKey === lastToolCallKey) {
+          console.warn(
+            "Skipping repeated identical tool call(s), ending loop.",
+          );
+          const text = data.content
+            .filter((b: ContentBlock) => b.type === "text")
+            .map((b: ContentBlock) => b.text || "")
+            .join("");
+          return { text, totalInputTokens, totalOutputTokens, rounds: round };
+        }
+        lastToolCallKey = currentToolCallKey;
+
+        // Execute all tools IN PARALLEL for speed
+        const toolResults = await Promise.all(
+          toolBlocks.map(async (block: ContentBlock) => ({
+            type: "tool_result",
+            tool_use_id: block.id,
+            content: await executeTool(block.name!, block.input!),
+          })),
+        );
+
+        // Add tool results as user message
+        messages.push({ role: "user", content: toolResults });
+      } else {
+        // Unexpected stop reason (max_tokens, etc.)
+        console.warn(`Unexpected stop_reason: ${data.stop_reason}`);
         const text = data.content
           .filter((b: ContentBlock) => b.type === "text")
           .map((b: ContentBlock) => b.text || "")
           .join("");
         return { text, totalInputTokens, totalOutputTokens, rounds: round };
       }
-
-      console.log(`  ${toolBlocks.length} tool call(s) in round ${round}`);
-
-      // Execute all tools IN PARALLEL for speed
-      const toolResults = await Promise.all(
-        toolBlocks.map(async (block: ContentBlock) => ({
-          type: "tool_result",
-          tool_use_id: block.id,
-          content: await executeTool(block.name!, block.input!),
-        })),
-      );
-
-      // Add tool results as user message
-      messages.push({ role: "user", content: toolResults });
-    } else {
-      // Unexpected stop reason (max_tokens, etc.)
-      console.warn(`Unexpected stop_reason: ${data.stop_reason}`);
-      const text = data.content
-        .filter((b: ContentBlock) => b.type === "text")
-        .map((b: ContentBlock) => b.text || "")
-        .join("");
-      return { text, totalInputTokens, totalOutputTokens, rounds: round };
     }
-  }
 
-  throw new Error(`Tool-use loop exceeded ${MAX_TOOL_LOOPS} rounds`);
+    throw new Error(`Tool-use loop exceeded ${MAX_TOOL_LOOPS} rounds`);
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }
 
 // ===== FALLBACK: Single-shot with full skill.md =====
@@ -461,7 +490,8 @@ async function singleShotFallback(
   userMessage: string,
 ): Promise<string> {
   console.log("Falling back to single-shot with full skill.md...");
-  const skillUrl = SUPABASE_URL + "/storage/v1/object/public/website/skill.md";
+  const skillUrl =
+    SUPABASE_URL + "/storage/v1/object/public/website/skill/core_prompt.md";
   const skill = await fetchCached(skillUrl, "full-skill");
   const systemPrompt =
     "SINGLE-SHOT MODE: Generate the COMPLETE prescription JSON immediately. Output ONLY raw JSON.\n\n" +
@@ -508,7 +538,16 @@ function extractJSON(raw: string): any {
   if (start !== -1 && end !== -1) {
     cleaned = cleaned.slice(start, end + 1);
   }
-  return JSON.parse(cleaned);
+  try {
+    return JSON.parse(cleaned);
+  } catch (e) {
+    console.error("extractJSON parse failed. Raw text:", raw.substring(0, 500));
+    return {
+      error: "Failed to parse prescription JSON",
+      parse_error: e.message,
+      raw_preview: raw.substring(0, 200),
+    };
+  }
 }
 
 // ===== MAIN HANDLER =====

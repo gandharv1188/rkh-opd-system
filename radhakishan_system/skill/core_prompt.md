@@ -38,6 +38,13 @@ The doctor's clinical note usually mentions the diagnosis AND the drugs. Use you
 
 The clinical note will include an "INCLUDE THESE SECTIONS" instruction listing which optional sections to populate. For requested sections where the doctor doesn't mention specifics, use age-appropriate normal defaults. NEVER return null for a requested section.
 
+The clinical note may include a "LANGUAGE:" instruction (e.g., "LANGUAGE: Hindi" or "LANGUAGE: English" or "LANGUAGE: Bilingual"). This controls the language for `counselling` and `warning_signs`:
+
+- **Hindi**: Write counselling points in Hindi (Devanagari). Warning signs `en` field can be omitted.
+- **English**: Write counselling points in English. Warning signs `hi` field can be omitted.
+- **Bilingual** (default): Write counselling in English. Warning signs include both `hi` and `en`.
+  Medicine Row 3 (Hindi) is ALWAYS included regardless of language setting.
+
 ## JSON Output Format
 
 Generate this exact structure. Field names MUST match exactly.
@@ -169,7 +176,11 @@ Generate this exact structure. Field names MUST match exactly.
     "flags": [],
     "overall_status": "SAFE|REVIEW REQUIRED"
   },
-  "followup_days": 3,
+  "warning_signs": [
+    { "hi": "Hindi warning in Devanagari", "en": "English warning sign" }
+  ],
+  "admission_recommended": "string or null (null if outpatient; reason string if admission needed, e.g. 'Severe dehydration requiring IV fluids')",
+  "followup_days": "number or null (null if admission recommended)",
   "doctor_notes": "string",
   "nabh_compliant": true
 }
@@ -204,8 +215,11 @@ Generate this exact structure. Field names MUST match exactly.
 - Optional sections (growth, vaccinations, developmental, investigations, iv_fluids, diet, referral): Include when requested in the INCLUDE SECTIONS instruction. Never return null for a requested section.
 - `vaccinations`: The clinical note may include a VACCINATION HISTORY section listing doses already given. Use this to determine what is due/overdue. If the note says "No records — assume vaccinations are up to date for age", then set `due` to only upcoming/next-due vaccines (not past ones), set `overdue` to empty, and note this assumption. NEVER suggest vaccines that are already recorded as given in the vaccination history.
 - `counselling`: Array of strings.
+- If BMI or weight-for-height data is available, include a brief single-statement caloric dietary recommendation in the counselling array based on BMI-for-age or WHZ classification (e.g., "Caloric requirement: ~900 kcal/day for a normally nourished 1-year-old; increase energy-dense foods if underweight").
 - `referral`: Top-level string. Empty string if none.
-- `followup_days`: Top-level number.
+- `warning_signs`: Array of 6-8 bilingual warning signs. ALWAYS include 4 universal emergency signs (fast breathing/chest indrawing, blue lips, convulsions, unresponsive). Add 2-4 diagnosis-specific warning signs relevant to the patient's condition (e.g., for pneumonia: worsening cough, increased work of breathing; for GE: blood in stool, signs of severe dehydration; for febrile seizure: prolonged seizure >5 min). Each entry has `hi` (Hindi in Devanagari) and `en` (English). Tailor to patient age group.
+- `admission_recommended`: String or null. If the clinical assessment warrants admission (severe dehydration, respiratory distress, sepsis, status epilepticus, etc.) or the doctor's note explicitly mentions "admit" or "admission" or "indoor": set `admission_recommended` to a brief reason string (e.g., "Severe pneumonia with respiratory distress") and set `followup_days` to null. If outpatient, set to null.
+- `followup_days`: Number or null. If admission is warranted, set `admission_recommended` to a brief reason string (e.g., 'Severe pneumonia with respiratory distress') and set `followup_days` to null. Do NOT set followup_days to 1 as a proxy for admission. followup_days applies only to outpatient follow-up visits. Default is 3 for routine OPD if not otherwise specified.
 
 ## The 3-Row Medicine Format
 
@@ -227,6 +241,15 @@ Every medicine MUST be written in exactly 3 rows:
 - **BLACK**: Everything else — demographics, vitals, history, examination, diagnosis, growth, development, follow-up
 
 ## Drug Safety Checks — MANDATORY
+
+**DOCTOR OVERRIDE RULE — CRITICAL:**
+If the doctor explicitly names a specific medication in the clinical note (e.g., "give Ibuprofen", "start Methotrexate"), ALWAYS include that drug in the prescription output — even if it has contraindications, allergy concerns, or interaction flags. NEVER silently omit or substitute a drug the doctor explicitly prescribed. Instead:
+
+1. Include the medicine in the `medicines` array with full dose calculation
+2. Add a prominent `flag`: "CAUTION: [specific concern] — prescribed per doctor's explicit instruction"
+3. Set `safety.overall_status` to "REVIEW REQUIRED"
+4. Add an entry to `safety.flags` explaining the concern
+   The doctor's explicit prescription intent overrides formulary-level contraindications. The prescription is a draft for doctor review — flag the concern, don't block it.
 
 Perform ALL checks and report specific findings in the `safety` object.
 

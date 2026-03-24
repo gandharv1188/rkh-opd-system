@@ -91,7 +91,7 @@ RLS enabled with anon_full_access policy for POC. ON DELETE RESTRICT. CHECK cons
 - **Colour coding**: Blue = medicines, Red = investigations, Black = everything else.
 - **6 dosing methods**: Weight-based, BSA, GFR-adjusted, fixed, infusion, age/GA-tier. NEVER exceed max dose.
 - **Rounding**: Syrups → 0.5ml, drops → 0.1ml, tablets → ¼ tab.
-- **Preterms**: CORRECTED age for growth/development, CHRONOLOGICAL age for vaccinations. Neonatal chip auto-activates for age < 28d, GA < 37wk, BW < 2.5kg.
+- **Preterms**: CORRECTED age for growth/development, CHRONOLOGICAL age for vaccinations. Neonatal chip auto-activates for age < 90d, GA < 37wk, BW < 2.5kg.
 - **Vaccination**: Split "NHM Vacc." / "IAP Vacc." buttons (mutually exclusive, neither pre-selected). Haryana: PCV + Rotavirus free, no JE.
 - **Safety checks**: allergy_note, interactions, per-medicine max_dose_check, overall_status (SAFE/REVIEW REQUIRED).
 - **NABH compliance**: Mandatory on every prescription. Claude always fetches nabh_compliance reference.

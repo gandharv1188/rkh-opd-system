@@ -2308,6 +2308,9 @@
     if (r.ok) {
       showToast("Drug removed");
       loadDrugs();
+    } else {
+      const e = await r.json().catch(() => ({}));
+      alert("Delete failed: " + (e.message || r.status));
     }
   }
 

@@ -900,6 +900,7 @@
   // ===== New patient form =====
   function showNewPatientForm() {
     currentPatient = null;
+    currentVisitId = null;
     document.getElementById("results").innerHTML = "";
     document.getElementById("srch").value = "";
     renderForm(null);
@@ -964,7 +965,7 @@
               <option value="Other" ${p.guardian_relation === "Other" ? "selected" : ""}>Other</option>
             </select>
           </div>
-          <div class="ff"><label>Address</label><input id="f-addr" value="" placeholder="Village/City, District" /></div>
+          <!-- Address field removed: no address column in patients table -->
         </div>
       </div>
     </div>`;
@@ -1080,10 +1081,11 @@
       <div class="fs-hdr">Vitals & Measurements <span class="badge">Nurse station</span></div>
       <div class="fs-body">
         <div class="fg fg4" style="margin-bottom:10px">
-          <div class="ff"><label>Weight (kg) *</label><input type="number" id="f-wt" step="0.1" placeholder="e.g. 7.2" /></div>
-          <div class="ff"><label>Height/Length (cm)</label><input type="number" id="f-ht" step="0.1" placeholder="e.g. 67" /></div>
+          <div class="ff"><label>Weight (kg) *</label><input type="number" id="f-wt" step="0.1" placeholder="e.g. 7.2" oninput="calcBMI()" /></div>
+          <div class="ff"><label>Height/Length (cm)</label><input type="number" id="f-ht" step="0.1" placeholder="e.g. 67" oninput="calcBMI()" /></div>
           <div class="ff"><label>Head Circumference (cm)</label><input type="number" id="f-hc" step="0.1" placeholder="e.g. 43" /></div>
           <div class="ff"><label>MUAC (cm)</label><input type="number" id="f-muac" step="0.1" placeholder="e.g. 13.5" /></div>
+          <div class="ff"><label>BMI</label><div id="bmi-display" style="font-size:14px;font-weight:600;padding:6px 0;color:var(--blue)">—</div></div>
         </div>
         <div class="fg fg4" style="margin-bottom:10px">
           <div class="ff"><label>Temperature (°F)</label><input type="number" id="f-temp" step="0.1" placeholder="e.g. 99.4" /></div>
@@ -1146,7 +1148,7 @@
     h += `<div class="form-section">
       <div class="fs-hdr" style="display:flex;justify-content:space-between;align-items:center">Vaccination History
         <div style="display:flex;gap:0">
-          <button type="button" id="vax-btn-iap" onclick="switchVaxSchedule('iap')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-radius:var(--r) 0 0 var(--r);cursor:pointer;font-family:inherit;background:var(--blue);color:#fff;font-weight:600">IAP</button>
+          <button type="button" id="vax-btn-iap" onclick="switchVaxSchedule('iap')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-radius:var(--r) 0 0 var(--r);cursor:pointer;font-family:inherit;background:var(--bg2);color:var(--ink3)">IAP</button>
           <button type="button" id="vax-btn-nhm" onclick="switchVaxSchedule('nhm')" style="padding:3px 10px;font-size:10px;border:1px solid var(--brd);border-left:none;border-radius:0 var(--r) var(--r) 0;cursor:pointer;font-family:inherit;background:var(--bg2);color:var(--ink3)">NHM-UIP</button>
         </div>
       </div>
@@ -1323,7 +1325,6 @@
       mo: 9,
       vax: [
         { n: "MR", d: 1 },
-        { n: "JE", d: 1 },
         { n: "PCV Booster", d: 1 },
         { n: "Vitamin A", d: 1 },
       ],
@@ -1335,7 +1336,6 @@
         { n: "DPT Booster", d: 1 },
         { n: "MR", d: 2 },
         { n: "OPV Booster", d: 1 },
-        { n: "JE", d: 2 },
         { n: "Vitamin A", d: 2 },
       ],
     },
@@ -1343,7 +1343,7 @@
     { age: "10 years", mo: 120, vax: [{ n: "TT", d: 1 }] },
     { age: "16 years", mo: 192, vax: [{ n: "TT", d: 2 }] },
   ];
-  let activeVaxSchedule = "iap";
+  let activeVaxSchedule = null;
 
   function switchVaxSchedule(schedule) {
     activeVaxSchedule = schedule;
@@ -1390,6 +1390,29 @@
     [17, 106, 120, 124, 66, 78, 80],
     [18, 108, 122, 126, 68, 80, 82],
   ];
+  function calcBMI() {
+    const wt = parseFloat(document.getElementById("f-wt")?.value);
+    const ht = parseFloat(document.getElementById("f-ht")?.value);
+    const el = document.getElementById("bmi-display");
+    if (!el) return;
+    if (!wt || !ht || ht < 30) {
+      el.textContent = "—";
+      return;
+    }
+    const bmi = (wt / (ht / 100) ** 2).toFixed(1);
+    let cls = "";
+    // Simplified pediatric BMI classification
+    const bmiNum = parseFloat(bmi);
+    if (bmiNum < 14) cls = "Underweight";
+    else if (bmiNum < 18.5) cls = "Normal";
+    else if (bmiNum < 25) cls = "Normal/Overweight";
+    else cls = "Obese";
+    el.innerHTML =
+      bmi +
+      ' <span style="font-size:11px;font-weight:400;color:var(--ink3)">kg/m² (' +
+      cls +
+      ")</span>";
+  }
   function calcMAP() {
     const sys = parseInt(document.getElementById("f-bp-sys")?.value);
     const dia = parseInt(document.getElementById("f-bp-dia")?.value);
@@ -1457,11 +1480,7 @@
       charge,
       payMode,
       status: "paid",
-      receiptNo:
-        "RKH-PRC-" +
-        rcptDate +
-        "-" +
-        String(Math.floor(Math.random() * 99999) + 1).padStart(5, "0"),
+      receiptNo: "RKH-PRC-" + rcptDate + "-" + Date.now().toString().slice(-6),
     };
     proceduresList.push(proc);
     document.getElementById("f-proc-name").value = "";
@@ -1579,7 +1598,12 @@
         if (daysDiff <= 7) {
           // Auto-set to follow-up and apply 50% discount
           const vtSel = document.getElementById("f-visit-type");
-          if (vtSel && vtSel.value === "new") vtSel.value = "followup";
+          if (vtSel && vtSel.value === "new") {
+            vtSel.value = "followup";
+            showToast(
+              "Auto-detected follow-up visit within 7 days — fee adjusted to \u20B9150",
+            );
+          }
           feeEl.value = 150;
         } else {
           feeEl.value = 300;
@@ -1597,6 +1621,11 @@
     if (!dob) {
       container.innerHTML =
         '<div style="color:var(--ink3);font-size:11px">Enter DOB to show age-based vaccination checklist</div>';
+      return;
+    }
+    if (!activeVaxSchedule) {
+      container.innerHTML =
+        '<div style="color:var(--ink3);font-size:11px">Select IAP or NHM-UIP schedule above to show vaccination checklist</div>';
       return;
     }
 
@@ -1790,12 +1819,11 @@
         }
       } else {
         // New patient
-        patientId = await generateUHID();
         const allergyVal = (
           document.getElementById("f-allergy")?.value || ""
         ).trim();
-        const payload = {
-          id: patientId,
+        const buildPayload = (pid) => ({
+          id: pid,
           name,
           dob: document.getElementById("f-dob")?.value || null,
           sex: document.getElementById("f-sex")?.value || null,
@@ -1819,10 +1847,31 @@
             (document.getElementById("f-abha-addr")?.value || "").trim() ||
             null,
           is_active: true,
-        };
-        const pr = await q("patients", "", "POST", payload);
-        if (!pr.ok)
-          throw new Error("Registration failed: " + (await pr.text()));
+        });
+        // Retry up to 3 times on UHID conflict (race condition)
+        let inserted = false;
+        for (let attempt = 0; attempt < 3; attempt++) {
+          patientId = await generateUHID();
+          const pr = await q("patients", "", "POST", buildPayload(patientId));
+          if (pr.ok) {
+            inserted = true;
+            break;
+          }
+          const errText = await pr.text();
+          if (
+            pr.status === 409 ||
+            errText.includes("duplicate") ||
+            errText.includes("unique")
+          ) {
+            console.warn(
+              "UHID conflict on attempt " + (attempt + 1) + ", retrying...",
+            );
+            continue;
+          }
+          throw new Error("Registration failed: " + errText);
+        }
+        if (!inserted)
+          throw new Error("Registration failed: UHID conflict after 3 retries");
       }
 
       // Generate visit summary for returning patients
@@ -1852,6 +1901,17 @@
         height_cm: parseFloat(document.getElementById("f-ht")?.value) || null,
         hc_cm: parseFloat(document.getElementById("f-hc")?.value) || null,
         muac_cm: parseFloat(document.getElementById("f-muac")?.value) || null,
+        bmi:
+          parseFloat(document.getElementById("f-wt")?.value) &&
+          parseFloat(document.getElementById("f-ht")?.value)
+            ? parseFloat(
+                (
+                  parseFloat(document.getElementById("f-wt").value) /
+                  (parseFloat(document.getElementById("f-ht").value) / 100) ** 2
+                ).toFixed(1),
+              )
+            : null,
+        vax_schedule: activeVaxSchedule || null,
         temp_f: parseFloat(document.getElementById("f-temp")?.value) || null,
         hr_per_min: parseInt(document.getElementById("f-hr")?.value) || null,
         rr_per_min: parseInt(document.getElementById("f-rr")?.value) || null,
@@ -1900,25 +1960,26 @@
       }
       currentVisitId = visitId;
 
-      // Save structured lab results (skip on edit to avoid duplicates)
+      // Save structured lab results (batch insert, skip on edit to avoid duplicates)
       const labs = getLabEntries();
       if (labs.length && isNewVisit) {
-        for (const lab of labs) {
-          await q("lab_results", "", "POST", {
-            patient_id: patientId,
-            visit_id: visitId,
-            test_name: lab.test_name,
-            test_category: lab.cat,
-            value: lab.value,
-            value_numeric: parseFloat(lab.value) || null,
-            unit: lab.unit,
-            reference_range: lab.ref,
-            flag: lab.flag,
-            test_date: lab.test_date,
-            loinc_code: lab.loinc || null,
-            source: "manual",
-          });
-        }
+        const labPayload = labs.map((lab) => ({
+          patient_id: patientId,
+          visit_id: visitId,
+          test_name: lab.test_name,
+          test_category: lab.cat,
+          value: lab.value,
+          value_numeric: parseFloat(lab.value) || null,
+          unit: lab.unit,
+          reference_range: lab.ref,
+          flag: lab.flag,
+          test_date: lab.test_date,
+          loinc_code: lab.loinc || null,
+          source: "manual",
+        }));
+        const labRes = await q("lab_results", "", "POST", labPayload);
+        if (!labRes.ok)
+          console.warn("Lab batch insert error:", await labRes.text());
         console.log("Lab results saved:", labs.length);
       }
 
@@ -1946,23 +2007,28 @@
         );
       }
 
-      // Save vaccination records from checklist
+      // Save vaccination records from checklist (batch insert)
       const newVax = getCheckedVaccines();
-      for (const v of newVax) {
-        const vaxRecord = {
-          patient_id: patientId,
-          visit_id: visitId,
-          vaccine_name: v.vaccine_name,
-          dose_number: v.dose_number,
-          given_by: document.getElementById("f-doctor")?.value || "DR-LOKENDER",
-          free_or_paid: "free_uip",
-        };
-        // Only set date_given if user explicitly entered a date
-        // If no date entered, leave null (means "done but date unknown")
-        if (v.date_given) vaxRecord.date_given = v.date_given;
-        await q("vaccinations", "", "POST", vaxRecord);
+      if (newVax.length) {
+        const givenBy =
+          document.getElementById("f-doctor")?.value || "DR-LOKENDER";
+        const vaxPayload = newVax.map((v) => {
+          const rec = {
+            patient_id: patientId,
+            visit_id: visitId,
+            vaccine_name: v.vaccine_name,
+            dose_number: v.dose_number,
+            given_by: givenBy,
+            free_or_paid: "free_uip",
+          };
+          if (v.date_given) rec.date_given = v.date_given;
+          return rec;
+        });
+        const vaxRes = await q("vaccinations", "", "POST", vaxPayload);
+        if (!vaxRes.ok)
+          console.warn("Vax batch insert error:", await vaxRes.text());
+        console.log("Vaccinations saved:", newVax.length);
       }
-      if (newVax.length) console.log("Vaccinations saved:", newVax.length);
 
       // Save manual vaccine rows if any
       const manualVaxList = document.getElementById("vax-manual-list");
@@ -1996,10 +2062,7 @@
           String(now.getFullYear() % 100).padStart(2, "0") +
           String(now.getMonth() + 1).padStart(2, "0") +
           String(now.getDate()).padStart(2, "0");
-        const rcptSeq = String(Math.floor(Math.random() * 99999) + 1).padStart(
-          5,
-          "0",
-        );
+        const rcptSeq = Date.now().toString().slice(-6);
         receiptNo = "RKH-RCT-" + rcptDate + "-" + rcptSeq;
       } else {
         receiptNo =
@@ -2007,7 +2070,7 @@
           "RKH-RCT-" +
             new Date().toISOString().slice(2, 10).replace(/-/g, "") +
             "-" +
-            String(Math.floor(Math.random() * 99999) + 1).padStart(5, "0");
+            Date.now().toString().slice(-6);
       }
 
       // Wait for OCR processing to complete (started during upload)
@@ -2057,13 +2120,14 @@
         payStatus: document.getElementById("f-pay-status")?.value || "pending",
       };
 
+      // Read fee/payment values BEFORE clearing the form
+      const feeAmt = lastToken?.feeAmt || "0";
+      const payMode = lastToken?.payMode || "cash";
+      const payStatus = lastToken?.payStatus || "pending";
+
       // Show success ticket
       document.getElementById("form-area").innerHTML = "";
       document.getElementById("status-bar").style.display = "none";
-      const feeAmt = document.getElementById("f-fee")?.value || "0";
-      const payMode = document.getElementById("f-pay-mode")?.value || "cash";
-      const payStatus =
-        document.getElementById("f-pay-status")?.value || "pending";
       document.getElementById("ticket-area").innerHTML = `
         <div class="ticket">
           <div style="font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Radhakishan Hospital — OPD Receipt</div>
@@ -2102,8 +2166,12 @@
     } catch (e) {
       alert("Error: " + e.message);
     } finally {
-      btn.disabled = false;
-      btn.textContent = currentVisitId ? "Update Visit" : "Save & Create Visit";
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = currentVisitId
+          ? "Update Visit"
+          : "Save & Create Visit";
+      }
     }
   }
 
@@ -2158,6 +2226,10 @@
     document.getElementById("form-area").innerHTML = "";
     document.getElementById("status-bar").style.display = "none";
     currentPatient = null;
+    labEntries = [];
+    existingVax = [];
+    proceduresList = [];
+    currentVisitId = null;
   }
 
   // ===== EXTERNAL RECORDS: Dictation (AI primary with VAD, Web Speech fallback) =====
@@ -2989,19 +3061,27 @@
           ctx.drawImage(img, 0, 0, w, h);
 
           // Step 2: Enhance contrast (make text crisp, background whiter)
-          enhanceDocument(ctx, w, h);
+          // NOTE: enhanceDocument() is CPU-intensive pixel manipulation.
+          // Wrapped in setTimeout(0) to yield to the event loop and avoid blocking UI.
+          setTimeout(() => {
+            try {
+              enhanceDocument(ctx, w, h);
+            } catch (enhErr) {
+              console.warn("Enhancement skipped:", enhErr.message);
+            }
 
-          // Step 3: Compress as JPEG 85%
-          canvas.toBlob(
-            (blob) => {
-              console.log(
-                `Image processed: ${file.name} ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB (${w}×${h})`,
-              );
-              resolve(blob || file);
-            },
-            "image/jpeg",
-            0.85,
-          );
+            // Step 3: Compress as JPEG 85%
+            canvas.toBlob(
+              (blob) => {
+                console.log(
+                  `Image processed: ${file.name} ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB (${w}×${h})`,
+                );
+                resolve(blob || file);
+              },
+              "image/jpeg",
+              0.85,
+            );
+          }, 0); // end setTimeout yield
         } catch (e) {
           console.warn("Image processing failed, using original:", e.message);
           resolve(file);
@@ -3358,71 +3438,19 @@
     document.getElementById("results").innerHTML = "";
     currentPatient = null;
     currentVisitId = null;
+    labEntries = [];
+    existingVax = [];
     proceduresList = [];
     docUploadCount = 0;
     _preOcrResults = {};
     _ocrPromises = [];
   }
 
-  async function editVisit() {
-    if (!currentVisitId) {
-      alert("No visit to edit.");
-      return;
-    }
-    // Fetch the current visit data
-    try {
-      const vr = await q("visits", `?id=eq.${currentVisitId}&select=*`);
-      if (!vr.ok) throw new Error("Could not load visit");
-      const visits = await vr.json();
-      if (!visits.length) throw new Error("Visit not found");
-      const visit = visits[0];
-      // Fetch the patient
-      const pr = await q(
-        "patients",
-        `?id=eq.${encodeURIComponent(visit.patient_id)}&select=*`,
-      );
-      if (!pr.ok) throw new Error("Could not load patient");
-      const patients = await pr.json();
-      if (!patients.length) throw new Error("Patient not found");
-      currentPatient = patients[0];
-      // Clear ticket, show form
-      document.getElementById("ticket-area").innerHTML = "";
-      document.getElementById("status-bar").style.display = "flex";
-      renderForm(currentPatient);
-      // Pre-fill visit fields
-      setTimeout(() => {
-        const setVal = (id, v) => {
-          const el = document.getElementById(id);
-          if (el && v != null) el.value = v;
-        };
-        setVal("f-visit-date", visit.visit_date);
-        setVal("f-doctor", visit.doctor_id);
-        setVal("f-wt", visit.weight_kg);
-        setVal("f-ht", visit.height_cm);
-        setVal("f-hc", visit.hc_cm);
-        setVal("f-muac", visit.muac_cm);
-        setVal("f-temp", visit.temp_f);
-        setVal("f-hr", visit.hr_per_min);
-        setVal("f-rr", visit.rr_per_min);
-        setVal("f-spo2", visit.spo2_pct);
-        setVal("f-complaints", visit.chief_complaints);
-        setVal("f-ext-notes", visit.clinical_notes);
-        // Update save button to indicate edit mode
-        const saveBtn = document.getElementById("save-btn");
-        if (saveBtn) {
-          saveBtn.textContent = "Update Visit";
-          saveBtn.style.background = "#2d5aa0";
-        }
-      }, 100);
-      showToast("Editing visit — make changes and click Update Visit");
-    } catch (e) {
-      alert("Error loading visit: " + e.message);
-    }
-  }
+  // editVisit() removed — was dead code (never called from UI)
 
   function calcAge(dob) {
     if (!dob) return "";
-    const d = new Date(dob),
+    const d = new Date(dob + "T00:00:00"),
       now = new Date();
     const days = Math.floor((now - d) / 86400000);
     if (days < 0) return "";
@@ -3440,11 +3468,13 @@
     return y + " years";
   }
 
-  function showToast(msg) {
+  function showToast(msg, isError) {
     const t = document.getElementById("toast");
     t.textContent = msg;
+    t.style.background = isError ? "var(--red)" : "var(--green)";
+    t.style.color = "#fff";
     t.classList.add("show");
-    setTimeout(() => t.classList.remove("show"), 3000);
+    setTimeout(() => t.classList.remove("show"), 2500);
   }
 
   // ===== QR Scanner =====
@@ -3595,13 +3625,14 @@
     saveAndCreateVisit,
     printToken,
     resetAll,
+    calcBMI,
   });
 
   // ===== ABDM ABHA Verification =====
   async function verifyAbha() {
     const abhaNum = (document.getElementById("f-abha")?.value || "").trim();
     if (!abhaNum) {
-      toast("Enter ABHA number first", "warn");
+      showToast("Enter ABHA number first");
       return;
     }
     const statusEl = document.getElementById("abha-status-ff");
@@ -3619,14 +3650,13 @@
       // Placeholder: will call ABDM sandbox API via Edge Function
       statusEl.innerHTML =
         '<span style="color:#f39c12;font-size:11px">ABHA recorded (verification pending ABDM sandbox)</span>';
-      toast(
+      showToast(
         "ABHA number recorded. Full verification requires ABDM sandbox integration.",
-        "info",
       );
     } catch (e) {
       statusEl.innerHTML =
         '<span style="color:#e74c3c;font-size:11px">Verification failed</span>';
-      toast("ABHA verification error: " + e.message, "err");
+      showToast("ABHA verification error: " + e.message, true);
     }
   }
 

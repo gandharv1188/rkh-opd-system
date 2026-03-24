@@ -166,7 +166,7 @@
     background: var(--bg3);
     border-bottom: 1px solid var(--bdr2);
     position: sticky;
-    top: 0;
+    top: 74px;
     z-index: 99;
   }
   .tab {
@@ -675,7 +675,7 @@
     background: var(--ink2);
   }
   .gen-btn.secondary:hover {
-    background: var(--ink1);
+    background: var(--ink2);
   }
   .paste-area {
     margin-top: 10px;
@@ -687,7 +687,7 @@
     padding: 10px;
     font-family: monospace;
     font-size: 12px;
-    border: 1px solid var(--brd);
+    border: 1px solid var(--bdr2);
     border-radius: var(--r2);
     resize: vertical;
     box-sizing: border-box;
@@ -1495,6 +1495,24 @@
         display: none;
       "
     ></span>
+    <select
+      id="rx-lang"
+      style="
+        font-size: 11px;
+        padding: 2px 6px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        background: transparent;
+        color: #fff;
+        margin-left: auto;
+        cursor: pointer;
+      "
+      title="Counselling language"
+    >
+      <option value="bilingual" style="color: #000">Bilingual</option>
+      <option value="hindi" style="color: #000">Hindi</option>
+      <option value="english" style="color: #000">English</option>
+    </select>
     <button
       id="conn-btn"
       onclick="connectSB()"
@@ -2218,7 +2236,7 @@
     try {
       const vr = await q(
         "visits",
-        `?visit_date=eq.${today}&select=id,patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,bp_systolic,bp_diastolic,map_mmhg,chief_complaints,doctor_id,visit_summary,raw_dictation,attached_documents,created_at&order=created_at.asc`,
+        `?visit_date=eq.${today}&select=id,patient_id,weight_kg,height_cm,hc_cm,muac_cm,temp_f,hr_per_min,rr_per_min,spo2_pct,bp_systolic,bp_diastolic,map_mmhg,chief_complaints,doctor_id,visit_summary,raw_dictation,attached_documents,vax_schedule,created_at&order=created_at.asc`,
       );
       if (!vr.ok) return;
       const visits = await vr.json();
@@ -2764,9 +2782,9 @@
 
       // Inline preview panel (hidden by default, shown on card click)
       if (isImage && url !== "#") {
-        html += `<div id="doc-preview-${idx}" style="display:none;grid-column:1/-1;border:1px solid var(--brd);border-radius:8px;overflow:hidden;background:#fff;margin-bottom:8px"><img src="${esc(url)}" style="width:100%;height:auto" alt="${esc(name)}"></div>`;
+        html += `<div id="doc-preview-${idx}" style="display:none;grid-column:1/-1;border:1px solid var(--bdr2);border-radius:8px;overflow:hidden;background:#fff;margin-bottom:8px"><img src="${esc(url)}" style="width:100%;height:auto" alt="${esc(name)}"></div>`;
       } else if (isPdf && url !== "#") {
-        html += `<div id="doc-preview-${idx}" style="display:none;grid-column:1/-1;border:1px solid var(--brd);border-radius:8px;overflow:hidden;background:#fff;margin-bottom:8px"><iframe src="${esc(url)}" style="width:100%;height:500px;border:none" title="${esc(name)}"></iframe></div>`;
+        html += `<div id="doc-preview-${idx}" style="display:none;grid-column:1/-1;border:1px solid var(--bdr2);border-radius:8px;overflow:hidden;background:#fff;margin-bottom:8px"><iframe src="${esc(url)}" style="width:100%;height:500px;border:none" title="${esc(name)}"></iframe></div>`;
       }
     });
     container.innerHTML = html;
@@ -2905,6 +2923,8 @@
   // ===== AUTO-SAVE NOTE =====
   let autoSaveTimer = null;
   let autoSaveVisitId = null;
+  let _autoSaveInputHandler = null;
+  let _patientLoadId = 0;
 
   function setupAutoSave(visitId) {
     if (autoSaveTimer) clearInterval(autoSaveTimer);
@@ -2914,11 +2934,14 @@
     if (!ta) return;
     // Save on input, debounced 3 seconds
     let saveTimeout = null;
-    ta.addEventListener("input", () => {
+    if (_autoSaveInputHandler)
+      ta.removeEventListener("input", _autoSaveInputHandler);
+    _autoSaveInputHandler = () => {
       showSaveStatus("Editing…", "var(--ink3)");
       if (saveTimeout) clearTimeout(saveTimeout);
       saveTimeout = setTimeout(() => saveNote(), 3000);
-    });
+    };
+    ta.addEventListener("input", _autoSaveInputHandler);
     // Also save every 30 seconds if there's content
     autoSaveTimer = setInterval(() => saveNote(), 30000);
   }
@@ -2929,6 +2952,7 @@
     el.textContent = text;
     el.style.color = color || "var(--ink3)";
     el.style.display = "inline";
+    delete el.dataset.error;
   }
 
   async function saveNote() {
@@ -2938,10 +2962,11 @@
     if (!note) return;
     showSaveStatus("Saving…", "var(--ink3)");
     try {
-      await q(`visits?id=eq.${autoSaveVisitId}`, "", "PATCH", {
+      const r = await q(`visits?id=eq.${autoSaveVisitId}`, "", "PATCH", {
         raw_dictation: note,
         updated_at: new Date().toISOString(),
       });
+      if (!r.ok) throw new Error("HTTP " + r.status);
       const time = new Date().toLocaleTimeString("en-IN", {
         hour: "2-digit",
         minute: "2-digit",
@@ -2960,7 +2985,11 @@
     }
     const p = todayPatients[parseInt(idx)];
     if (!p) return;
+    const myLoadId = ++_patientLoadId;
     selectedPatient = p;
+    // Clear stale prescription state from previous patient
+    rxData = null;
+    rxId = null;
     const visit = p.visit;
 
     // Reset section chips to defaults (clear patient-specific auto-selections)
@@ -2971,6 +3000,15 @@
       const k = el.id.replace("chip-", "");
       el.classList.toggle("on", activeMods.has(k));
     });
+
+    // Auto-activate vaccination schedule from registration
+    if (visit?.vax_schedule === "nhm") {
+      activeMods.add("vax-nhm");
+      document.getElementById("chip-vax-nhm")?.classList.add("on");
+    } else if (visit?.vax_schedule === "iap") {
+      activeMods.add("vax-iap");
+      document.getElementById("chip-vax-iap")?.classList.add("on");
+    }
 
     // Build medical info panel
     const panel = document.getElementById("pt-info-panel");
@@ -2998,6 +3036,10 @@
       const vitals = [];
       if (visit.weight_kg) vitals.push(`Wt: ${esc(visit.weight_kg)} kg`);
       if (visit.height_cm) vitals.push(`Ht: ${esc(visit.height_cm)} cm`);
+      if (visit.weight_kg && visit.height_cm) {
+        const bmi = (visit.weight_kg / (visit.height_cm / 100) ** 2).toFixed(1);
+        vitals.push(`BMI: ${esc(bmi)} kg/m²`);
+      }
       if (visit.hc_cm) vitals.push(`HC: ${esc(visit.hc_cm)} cm`);
       if (visit.muac_cm) vitals.push(`MUAC: ${esc(visit.muac_cm)} cm`);
       if (visit.temp_f) vitals.push(`Temp: ${esc(fmtTemp(visit.temp_f))}`);
@@ -3029,6 +3071,7 @@
       loadRecentLabs(p.id),
       loadVaxStatus(p.id, p.dob),
     ]);
+    if (_patientLoadId !== myLoadId) return;
     vi += growthHtml + labsHtml + vaxHtml;
 
     if (vi) {
@@ -3051,6 +3094,11 @@
       let ctx = `${p.name}, `;
       if (p.dob) ctx += calcAge(p.dob) + ", ";
       if (visit?.weight_kg) ctx += visit.weight_kg + " kg, ";
+      if (visit?.height_cm) ctx += "Ht " + visit.height_cm + " cm, ";
+      if (visit?.weight_kg && visit?.height_cm) {
+        const bmi = (visit.weight_kg / (visit.height_cm / 100) ** 2).toFixed(1);
+        ctx += "BMI " + bmi + " kg/m², ";
+      }
       if (p.sex) ctx += p.sex + ". ";
       if (p.guardian_name) ctx += `Guardian: ${p.guardian_name}. `;
       if (p.known_allergies?.length) {
@@ -3060,9 +3108,24 @@
       }
       if (visit?.chief_complaints)
         ctx += `Chief complaints: ${visit.chief_complaints}. `;
-      if (visit?.temp_f) ctx += `Temp ${fmtTemp(visit.temp_f)}. `;
+      // Vitals
+      let vCtx = [];
+      if (visit?.temp_f) vCtx.push("Temp " + fmtTemp(visit.temp_f));
+      if (visit?.hr_per_min) vCtx.push("HR " + visit.hr_per_min + "/min");
+      if (visit?.rr_per_min) vCtx.push("RR " + visit.rr_per_min + "/min");
+      if (visit?.spo2_pct) vCtx.push("SpO₂ " + visit.spo2_pct + "%");
       if (visit?.bp_systolic && visit?.bp_diastolic)
-        ctx += `BP ${visit.bp_systolic}/${visit.bp_diastolic} mmHg${visit.map_mmhg ? " (MAP " + visit.map_mmhg + ")" : ""}. `;
+        vCtx.push(
+          "BP " +
+            visit.bp_systolic +
+            "/" +
+            visit.bp_diastolic +
+            " mmHg" +
+            (visit.map_mmhg ? " (MAP " + visit.map_mmhg + ")" : ""),
+        );
+      if (visit?.hc_cm) vCtx.push("HC " + visit.hc_cm + " cm");
+      if (visit?.muac_cm) vCtx.push("MUAC " + visit.muac_cm + " cm");
+      if (vCtx.length) ctx += "Vitals: " + vCtx.join(", ") + ". ";
       // Add vaccination history if available
       try {
         const vaxR = await q(
@@ -3115,7 +3178,27 @@
     // Load attached documents
     loadDocuments(p.id, visit);
 
+    // Check for unsaved draft prescription
+    if (!p.done) {
+      try {
+        const draftKey = "rx-draft-" + (visit?.id || p.id);
+        const draft = localStorage.getItem(draftKey);
+        if (draft) {
+          const parsed = JSON.parse(draft);
+          if (parsed?.patient?.name) {
+            rxData = parsed;
+            if (selectedPatient?.id && rxData.patient)
+              rxData.patient.uhid = selectedPatient.id;
+            await renderReview();
+            showView("rx");
+            showToast("Restored unsaved prescription draft");
+          }
+        }
+      } catch (_) {}
+    }
+
     // If patient already has today's prescription, load it into review
+    if (_patientLoadId !== myLoadId) return;
     if (p.done) {
       try {
         const today = new Date().toISOString().split("T")[0];
@@ -3617,6 +3700,7 @@
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
+        URL.revokeObjectURL(img.src);
         const maxW = 1200; // Enough for OCR, keeps tokens low
         let w = img.width,
           h = img.height;
@@ -3658,6 +3742,7 @@
         );
       };
       img.onerror = () => {
+        URL.revokeObjectURL(img.src);
         // Fallback: use original base64
         const reader = new FileReader();
         reader.onload = () => resolve({ base64: reader.result.split(",")[1] });
@@ -3811,7 +3896,12 @@
       ? "\n\nINCLUDE THESE SECTIONS (use clinical note details if mentioned, otherwise populate with age-appropriate normal defaults): " +
         sections.join(", ")
       : "";
-    const fullNote = note + sectionsNote;
+    const rxLang = document.getElementById("rx-lang")?.value || "bilingual";
+    const langNote =
+      rxLang !== "bilingual"
+        ? "\nLANGUAGE: " + (rxLang === "hindi" ? "Hindi" : "English")
+        : "";
+    const fullNote = note + sectionsNote + langNote;
 
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];
@@ -3873,11 +3963,18 @@
       if (data.error) throw new Error(data.error);
 
       rxData = data.prescription;
+      rxData._lang = rxLang;
       console.log("AI Response JSON:", JSON.stringify(rxData, null, 2));
       // Inject UHID from selected patient if available
       if (selectedPatient?.id && rxData.patient) {
         rxData.patient.uhid = selectedPatient.id;
       }
+      // Auto-save draft to localStorage
+      try {
+        const draftKey =
+          "rx-draft-" + (selectedPatient.visit?.id || selectedPatient.id);
+        localStorage.setItem(draftKey, JSON.stringify(rxData));
+      } catch (_) {}
       await renderReview();
 
       // Update button to success, then switch to review
@@ -3905,12 +4002,14 @@
       saveInd.textContent = "Error: " + e.message;
       saveInd.style.color = "#c0392b";
       saveInd.style.display = "inline";
+      saveInd.dataset.error = "1";
       console.error("Prescription generation error:", e.message);
       // Auto-clear error after 8 seconds
       setTimeout(() => {
-        if (saveInd.style.color === "rgb(192, 57, 43)") {
+        if (saveInd.dataset.error === "1") {
           saveInd.style.display = "none";
           saveInd.textContent = "";
+          delete saveInd.dataset.error;
         }
       }, 8000);
     }
@@ -4035,7 +4134,7 @@
 
     h += `<div class="pt-strip">
     <div>
-      <div class="pt-strip-name">${esc(r.patient.name) || "Patient"} <span class="pt-strip-meta">${esc(r.patient.age)} · ${esc(r.patient.sex)} · ${r.patient.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
+      <div class="pt-strip-name">${esc(r.patient.name) || "Patient"} <span class="pt-strip-meta">${esc(r.patient.age)}${r.neonatal?.corrected ? " (Corrected: " + esc(r.neonatal.corrected) + ")" : ""} · ${esc(r.patient.sex)} · ${r.patient.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
       <div class="pt-strip-dx">Provisional Diagnosis: ${(r.diagnosis || []).map((d) => esc(d.name) + (d.icd10 ? " (" + esc(d.icd10) + ")" : "") + (d.type ? " [" + esc(d.type) + "]" : "")).join(" · ")}</div>
     </div>
     <div style="font-size:11px;color:var(--ink3);text-align:right">UHID: ${esc(uhid)}<br>${today}</div>
@@ -4356,16 +4455,24 @@
       h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div>
     <div style="font-size:13px;color:var(--ink2);font-family:system-ui,sans-serif;line-height:2">${r.counselling.map((c) => `<span style="margin-right:14px">✓ ${esc(c)}</span>`).join("")}</div></div>`;
     }
+    // Use AI-generated warning signs if available, fallback to hardcoded
     const patientAgeMonths = rxData?.patient?.age
       ? parseAgeMonths(rxData.patient.age)
       : null;
-    const emergSigns = getEmergencySigns(patientAgeMonths);
+    const warnSigns = r.warning_signs?.length
+      ? r.warning_signs
+      : getEmergencySigns(patientAgeMonths);
+    const warnLang = rxData._lang || "bilingual";
     h += `<div class="rv-sec"><div class="rv-hdr red">Emergency warning signs — तुरंत वापस आएं</div>
-  <div class="emerg-grid">${emergSigns.map((s) => `<div class="emerg-item"><div class="emerg-dot"></div><div><strong>${s.hi}</strong><br><span style="color:var(--ink3);font-size:11px">${s.en}</span></div></div>`).join("")}</div></div>`;
+  <div class="emerg-grid">${warnSigns.map((s) => `<div class="emerg-item"><div class="emerg-dot"></div><div>${warnLang !== "english" && s.hi ? `<strong>${esc(s.hi)}</strong><br>` : ""}${warnLang !== "hindi" && s.en ? `<span style="color:var(--ink3);font-size:11px">${esc(s.en)}</span>` : ""}</div></div>`).join("")}</div></div>`;
 
     h += `<div class="fu-bar">
-    <div><div style="font-size:10px;color:var(--ink3);font-family:system-ui,sans-serif;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.05em">Return after</div>
-    <div style="display:flex;align-items:baseline;gap:4px"><input class="fu-edit" id="fu-days" type="number" value="${esc(r.followup_days || 3)}" min="1" max="90"> <span style="font-size:14px;color:var(--blue);font-weight:700">days</span></div></div>
+    <div>${
+      r.admission_recommended
+        ? `<div style="font-size:14px;font-weight:700;color:var(--red)">ADMISSION RECOMMENDED</div><div style="font-size:11px;color:var(--ink3)">${esc(r.admission_recommended)}</div>`
+        : `<div style="font-size:10px;color:var(--ink3);font-family:system-ui,sans-serif;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.05em">Return after</div>
+    <div style="display:flex;align-items:baseline;gap:4px"><input class="fu-edit" id="fu-days" type="number" value="${esc(r.followup_days || 3)}" min="1" max="90"> <span style="font-size:14px;color:var(--blue);font-weight:700">days</span></div>`
+    }</div>
     ${r.doctor_notes ? `<div style="flex:1;font-size:13px;color:var(--ink2);border-left:0.5px solid var(--bdr);padding-left:14px;outline:none;font-family:system-ui,sans-serif" contenteditable="true" spellcheck="false">${esc(r.doctor_notes)}</div>` : ""}
   </div>`;
 
@@ -4378,6 +4485,16 @@
   </div>`;
 
     document.getElementById("review-wrap").innerHTML = h;
+
+    // Update signoff bar to reflect admission if recommended
+    const signBtn = document.getElementById("sign-btn");
+    if (signBtn && r.admission_recommended) {
+      signBtn.innerHTML = "Approve ADMISSION &amp; save";
+      signBtn.style.background = "var(--red, #8b1a1a)";
+    } else if (signBtn) {
+      signBtn.innerHTML = "Doctor approved — sign &amp; save";
+      signBtn.style.background = "";
+    }
   }
 
   /* ===== DOSE ADJUSTMENT ===== */
@@ -4592,8 +4709,10 @@
 
   /* ===== UPDATE MODE: Re-enable editing on a finalized prescription ===== */
   let isUpdateMode = false;
+  let _preUpdateRxData = null;
   function enableUpdateMode() {
     isUpdateMode = true;
+    _preUpdateRxData = JSON.parse(JSON.stringify(rxData));
     const wrap = document.getElementById("review-wrap");
     if (!wrap) return;
     // Re-enable contenteditable
@@ -4700,8 +4819,44 @@
 
   function cancelUpdate() {
     isUpdateMode = false;
-    // Reload the saved prescription to discard changes
-    if (selectedPatient) {
+    // Restore cached prescription data instead of expensive full patient reload
+    if (_preUpdateRxData) {
+      rxData = _preUpdateRxData;
+      _preUpdateRxData = null;
+      renderReview().then(() => {
+        showView("rx");
+        // Disable editing on restored prescription (same as initial load)
+        const wrap = document.getElementById("review-wrap");
+        wrap?.querySelectorAll("[contenteditable]").forEach((el) => {
+          el.removeAttribute("contenteditable");
+        });
+        wrap
+          ?.querySelectorAll(
+            ".adj-btn, .ep, .ep-apply, .item-remove, .add-item-btn",
+          )
+          .forEach((el) => {
+            el.style.display = "none";
+          });
+        wrap
+          ?.querySelectorAll(
+            ".vax-check, .vax-status, .vax-date, .fu-edit, input, select",
+          )
+          .forEach((el) => {
+            el.disabled = true;
+            el.style.opacity = "0.6";
+          });
+        const signoff = document.querySelector(".signoff");
+        if (signoff)
+          signoff.innerHTML = `<span style="color:#1a6b3a;font-weight:600;font-size:13px">✓ Prescription saved — ${esc(rxId)}</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="sign-btn" onclick="printRx()" style="background:var(--blue)">Print now</button>
+            <button class="sign-btn" onclick="enableUpdateMode()" style="background:#b8860b">Edit</button>
+            <button class="back-btn" onclick="showView('pad')">View note</button>
+            <button class="back-btn" onclick="resetPad()">New prescription</button>
+          </div>`;
+      });
+    } else if (selectedPatient) {
+      // Fallback: full reload if no cached data
       const idx = todayPatients.findIndex((p) => p.id === selectedPatient.id);
       if (idx >= 0) onPatientSelect(idx);
     }
@@ -4766,19 +4921,25 @@
       if (rxData.vaccinations) {
         const checkedDue = [];
         const checkedOverdue = [];
+        const givenToday = [];
         reviewWrap.querySelectorAll(".vax-check:checked").forEach((cb) => {
           const nameEl = cb.closest("label")?.querySelector(".vax-name");
           const name = nameEl?.textContent?.trim();
           if (!name) return;
+          // Find corresponding status dropdown in the same row
+          const row = cb.closest(".vax-row");
+          const statusSel = row?.querySelector(".vax-status");
+          const status = statusSel?.value || "";
           if (cb.dataset.type === "due") checkedDue.push(name);
           else if (cb.dataset.type === "overdue") checkedOverdue.push(name);
+          // Only mark as given_today if status is "completed" (actually administered)
+          if (status === "completed") {
+            givenToday.push(name);
+          }
         });
-        if (checkedDue.length || checkedOverdue.length) {
-          rxData.vaccinations.given_today = [
-            ...checkedDue,
-            ...checkedOverdue,
-          ].map((v) => ({ vaccine_name: v }));
-        }
+        rxData.vaccinations.given_today = givenToday.map((v) => ({
+          vaccine_name: v,
+        }));
         rxData.vaccinations.due = checkedDue;
         rxData.vaccinations.overdue = checkedOverdue;
         const nextDueEl = document.getElementById("vax-next-due");
@@ -4792,7 +4953,11 @@
 
     if (!sbConnected) {
       // Offline mode — just show the success screen
-      rxId = "RX-" + Date.now().toString().slice(-8);
+      rxId =
+        "RX-" +
+        new Date().toISOString().slice(2, 10).replace(/-/g, "") +
+        "-" +
+        String(Math.floor(Math.random() * 999) + 1).padStart(3, "0");
       showSaveSuccess(null, false);
       return;
     }
@@ -4800,7 +4965,7 @@
     try {
       const today = new Date().toISOString().split("T")[0];
       const doctor = document.getElementById("doctor-sel").value;
-      if (!isUpdateMode) rxId = "RX-" + Date.now().toString().slice(-8);
+      if (!isUpdateMode) rxId = await generateRxId();
 
       // 1. Ensure patient exists (skip in update mode)
       let patientId = selectedPatient?.id;
@@ -4949,8 +5114,8 @@
         );
       }
 
-      // 6. Generate PDF and upload to Supabase Storage
-      const pdfUrl = await generateAndUploadPDF(patientId, rxId);
+      // 6. Generate Rx text and upload to Supabase Storage
+      const pdfUrl = await generateAndUploadRxText(patientId, rxId);
       if (pdfUrl && rxRes.ok) {
         await q("prescriptions", "?id=eq." + rxId, "PATCH", {
           pdf_url: pdfUrl,
@@ -5021,10 +5186,10 @@
     }
   }
 
-  async function generateAndUploadPDF(patientId, rxId) {
+  async function generateAndUploadRxText(patientId, rxId) {
     if (!sbConnected) return null;
     try {
-      // Build minimal HTML for PDF
+      // Build plain-text prescription for storage (not PDF despite legacy variable names)
       const r = rxData;
       const today = new Date().toLocaleDateString("en-IN", {
         day: "2-digit",
@@ -5070,7 +5235,7 @@
       }
       return null;
     } catch (e) {
-      console.warn("PDF upload skipped:", e.message);
+      console.warn("Rx text upload skipped:", e.message);
       return null;
     }
   }
@@ -5146,7 +5311,7 @@
     // Patient meta
     h += `<div class="meta">
       <div class="meta-item"><span class="meta-lbl">Patient</span><span class="meta-val">${esc(r.patient?.name || "")}</span></div>
-      <div class="meta-item"><span class="meta-lbl">Age · Sex · Weight</span><span class="meta-val">${esc(r.patient?.age || "")} · ${esc(r.patient?.sex || "")} · ${r.patient?.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
+      <div class="meta-item"><span class="meta-lbl">Age · Sex · Weight</span><span class="meta-val">${esc(r.patient?.age || "")}${r.neonatal?.corrected ? " (Corrected: " + esc(r.neonatal.corrected) + ")" : ""} · ${esc(r.patient?.sex || "")} · ${r.patient?.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
       <div class="meta-item"><span class="meta-lbl">Guardian</span><span class="meta-val">${esc(r.patient?.guardian || "")}</span></div>
     </div>`;
     // Chief complaints first
@@ -5260,10 +5425,13 @@
     const printAgeMonths = r.patient?.age
       ? parseAgeMonths(r.patient.age)
       : null;
-    const printEmerg = getEmergencySigns(printAgeMonths);
-    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs — तुरंत वापस आएं</div><div class="emerg-grid">${printEmerg.map((s) => `<div><strong>${esc(s.hi)}</strong><br><span>${esc(s.en)}</span></div>`).join("")}</div></div>`;
+    const printWarnSigns = r.warning_signs?.length
+      ? r.warning_signs
+      : getEmergencySigns(printAgeMonths);
+    const printLang = rxData._lang || "bilingual";
+    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs — तुरंत वापस आएं</div><div class="emerg-grid">${printWarnSigns.map((s) => `<div>${printLang !== "english" && s.hi ? `<strong>${esc(s.hi)}</strong><br>` : ""}${printLang !== "hindi" && s.en ? `<span>${esc(s.en)}</span>` : ""}</div>`).join("")}</div></div>`;
     // Follow-up
-    h += `<div class="sec"><div class="sec-title">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
+    h += `<div class="sec"><div class="sec-title">Follow-up</div><div>${r.admission_recommended ? '<strong style="color:#8b1a1a">ADMISSION RECOMMENDED</strong> — ' + esc(r.admission_recommended) : "Return after <strong>" + (r.followup_days || 3) + " days</strong>"}${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
     // Footer with QR
     // QR: verification URL (works for both re-registration and external verification)
     const qrHash = await (async (s) => {
@@ -5294,6 +5462,10 @@
     </div>`;
 
     const w = window.open("", "_blank");
+    if (!w) {
+      alert("Please allow pop-ups for printing.");
+      return;
+    }
     w.document
       .write(`<!DOCTYPE html><html><head><title>Rx ${esc(rxId || "")}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap">
@@ -5351,7 +5523,9 @@
       .dose-meta svg { width:12px; height:12px; stroke:#666; fill:none; stroke-width:1.5; }
     </style></head><body>${h}</body></html>`);
     w.document.close();
-    setTimeout(() => w.print(), 600);
+    w.document.fonts?.ready
+      ?.then(() => w.print())
+      .catch(() => setTimeout(() => w.print(), 800));
   }
 
   // ===== REVIEW EDIT: Toggle strike-through on items =====
@@ -5729,7 +5903,8 @@
         const specimen = esc(r.system_specimen || "");
         const cat = esc(CLASS_LABELS[r.class] || r.class || "");
         const units = esc(r.example_units || "");
-        return `<div class="add-med-item" onclick="selectInv('${full}','${esc(r.loinc_code || "")}','${units}')"><strong>${common}</strong><br><span style="font-size:10px;color:#555">${full}</span><br><span style="font-size:10px;color:var(--ink3)">${cat}${specimen ? " · " + specimen : ""}${units ? " · " + units : ""}</span></div>`;
+        const loinc = esc(r.loinc_code || "");
+        return `<div class="add-med-item" data-inv-name="${full}" data-inv-loinc="${loinc}" data-inv-units="${units}" onclick="selectInv(this.dataset.invName,this.dataset.invLoinc,this.dataset.invUnits)"><strong>${common}</strong><br><span style="font-size:10px;color:#555">${full}</span><br><span style="font-size:10px;color:var(--ink3)">${cat}${specimen ? " · " + specimen : ""}${units ? " · " + units : ""}</span></div>`;
       })
       .join("");
   }
@@ -5764,7 +5939,7 @@
       .slice(0, 30)
       .map(
         (inv) =>
-          `<div class="add-med-item" onclick="selectInv('${esc(inv.name)}','${esc(inv.loinc || "")}','')"><strong>${esc(inv.name)}</strong> <span style="font-size:10px;color:var(--ink3)">${esc(inv.cat)}${inv.loinc ? " · LOINC: " + esc(inv.loinc) : ""}</span></div>`,
+          `<div class="add-med-item" data-inv-name="${esc(inv.name)}" data-inv-loinc="${esc(inv.loinc || "")}" data-inv-units="" onclick="selectInv(this.dataset.invName,this.dataset.invLoinc,this.dataset.invUnits)"><strong>${esc(inv.name)}</strong> <span style="font-size:10px;color:var(--ink3)">${esc(inv.cat)}${inv.loinc ? " · LOINC: " + esc(inv.loinc) : ""}</span></div>`,
       )
       .join("");
   }
@@ -5918,6 +6093,28 @@
     showView("pad");
   }
 
+  async function generateRxId() {
+    const now = new Date();
+    const yy = String(now.getFullYear()).slice(-2);
+    const mm = String(now.getMonth() + 1).padStart(2, "0");
+    const dd = String(now.getDate()).padStart(2, "0");
+    const prefix = "RX-" + yy + mm + dd + "-";
+    try {
+      const r = await q(
+        "prescriptions",
+        `?id=like.${encodeURIComponent(prefix + "*")}&select=id&order=id.desc&limit=1`,
+      );
+      if (r.ok) {
+        const rows = await r.json();
+        if (rows.length) {
+          const lastSeq = parseInt(rows[0].id.split("-").pop(), 10) || 0;
+          return prefix + String(lastSeq + 1).padStart(3, "0");
+        }
+      }
+    } catch (_) {}
+    return prefix + "001";
+  }
+
   /* Helpers */
   function calcAge(dob) {
     if (!dob) return "";
@@ -5931,12 +6128,18 @@
       dd = n.getDate() - d.getDate();
     if (dd < 0) {
       m--;
+      dd += new Date(n.getFullYear(), n.getMonth(), 0).getDate();
     }
     if (m < 0) {
       y--;
       m += 12;
     }
-    if (y === 0) return m + " months";
+    if (y === 0)
+      return (
+        m +
+        (m === 1 ? " month" : " months") +
+        (dd > 0 ? " " + dd + (dd === 1 ? " day" : " days") : "")
+      );
     if (y < 2) return y + " yr " + m + " mo";
     return y + " years";
   }

@@ -86,8 +86,7 @@ async function importFormulary() {
     } catch (e) {
       process.stdout.write("X");
       failed++;
-      if (failed <= 3)
-        console.error(`\n  Error: ${drug.generic_name}: ${e.message}`);
+      console.error(`\n  Error: ${drug.generic_name}: ${e.message}`);
     }
   }
   console.log(`\nFormulary: ${success} imported, ${failed} failed.`);
@@ -107,9 +106,12 @@ async function importStandardPrescriptions() {
     failed = 0;
   for (const proto of protocols) {
     try {
-      // Use diagnosis_name as the unique key (icd10 may be duplicated)
+      // Use composite key: diagnosis_name + icd10 (icd10 alone may be duplicated)
+      const icd10Filter = proto.icd10
+        ? `&icd10=eq.${encodeURIComponent(proto.icd10)}`
+        : `&icd10=is.null`;
       const checkRes = await fetch(
-        `${SB}/rest/v1/standard_prescriptions?diagnosis_name=eq.${encodeURIComponent(proto.diagnosis_name)}&select=id`,
+        `${SB}/rest/v1/standard_prescriptions?diagnosis_name=eq.${encodeURIComponent(proto.diagnosis_name)}${icd10Filter}&select=id`,
         {
           headers: {
             apikey: KEY,
@@ -134,8 +136,7 @@ async function importStandardPrescriptions() {
     } catch (e) {
       process.stdout.write("X");
       failed++;
-      if (failed <= 3)
-        console.error(`\n  Error: ${proto.diagnosis_name}: ${e.message}`);
+      console.error(`\n  Error: ${proto.diagnosis_name}: ${e.message}`);
     }
   }
   console.log(

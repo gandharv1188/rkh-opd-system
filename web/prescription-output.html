@@ -928,6 +928,7 @@
         }
       }
 
+      displayedRxRows = allRxRows;
       populateDropdown(allRxRows);
       showToast(`Loaded ${allRxRows.length} prescription(s) for today`);
     } catch (e) {
@@ -958,12 +959,15 @@
     });
   }
 
+  let displayedRxRows = [];
+
   function filterRxList() {
     const term = document
       .getElementById("search-input")
       .value.toLowerCase()
       .trim();
     if (!term) {
+      displayedRxRows = allRxRows;
       populateDropdown(allRxRows);
       return;
     }
@@ -983,6 +987,7 @@
         ptName.includes(term) || uhid.includes(term) || rxIdStr.includes(term)
       );
     });
+    displayedRxRows = filtered;
     populateDropdown(filtered);
     // Auto-select if only one result
     if (filtered.length === 1) {
@@ -999,31 +1004,7 @@
         `<div class="empty-state"><div class="icon">&#x1F4C4;</div><div>Select a prescription from the dropdown to preview and print.</div></div>`;
       return;
     }
-    // Find the actual row — could be from filtered list
-    const term = document
-      .getElementById("search-input")
-      .value.toLowerCase()
-      .trim();
-    let rows = allRxRows;
-    if (term) {
-      rows = allRxRows.filter((r) => {
-        const rxJson =
-          typeof r.generated_json === "string"
-            ? JSON.parse(r.generated_json)
-            : r.generated_json;
-        const ptName = (
-          r._patient_name ||
-          rxJson?.patient?.name ||
-          ""
-        ).toLowerCase();
-        const uhid = (r.patient_id || "").toLowerCase();
-        const rxIdStr = (r.id || "").toLowerCase();
-        return (
-          ptName.includes(term) || uhid.includes(term) || rxIdStr.includes(term)
-        );
-      });
-    }
-    const row = rows[parseInt(idx)];
+    const row = displayedRxRows[parseInt(idx)];
     if (row) renderRx(row);
   }
 

@@ -4,8 +4,7 @@
 -- Version 2026 | Run this in Supabase SQL Editor
 -- ============================================================
 
--- Enable UUID extension
-create extension if not exists "pgcrypto";
+-- PostgreSQL 13+ has gen_random_uuid() natively; no extension needed.
 
 -- ============================================================
 -- DROP EXISTING TABLES (clean slate — comment out if updating)
@@ -33,8 +32,7 @@ create table formulary (
   category                    text,
   brand_names                 text[],
   therapeutic_use             text[],
-  licensed_in_children        text default 'true'
-    check (licensed_in_children in ('true', 'partial', 'false')),
+  licensed_in_children        boolean default true,
   unlicensed_note             text,
 
   -- Formulations
@@ -120,11 +118,12 @@ create table formulary (
 );
 
 -- Indexes
-create index idx_formulary_name    on formulary(generic_name);
 create index idx_formulary_cat     on formulary(category);
 create index idx_formulary_active  on formulary(active);
 create index idx_formulary_brands  on formulary using gin(brand_names);
 create index idx_formulary_use     on formulary using gin(therapeutic_use);
+create index if not exists idx_formulary_interactions on formulary using gin(interactions);
+create index if not exists idx_formulary_dosing on formulary using gin(dosing_bands);
 
 -- ============================================================
 -- 2. DOCTORS
@@ -194,6 +193,7 @@ create table standard_prescriptions (
 );
 
 create index idx_stdpx_icd10  on standard_prescriptions(icd10);
+create index if not exists idx_stdpx_icd10_partial on standard_prescriptions(icd10) where icd10 is not null;
 create index idx_stdpx_name   on standard_prescriptions(diagnosis_name);
 create index idx_stdpx_cat    on standard_prescriptions(category);
 create index idx_stdpx_active on standard_prescriptions(active);
@@ -215,7 +215,7 @@ create table patients (
   guardian_relation text,
   contact_phone   text,
 
-  blood_group     text,
+  blood_group     text check (blood_group is null or blood_group in ('A+','A-','B+','B-','AB+','AB-','O+','O-','Unknown')),
   known_allergies text[],
   -- e.g. {'Penicillin', 'Sulfa drugs', 'Peanuts'} or empty
 
@@ -240,7 +240,7 @@ create table visits (
   patient_id      text not null references patients(id) on delete restrict,
 
   visit_date      date not null default current_date,
-  doctor_id       text,
+  doctor_id       text references doctors(id),
   -- 'DR-LOKENDER' etc.
 
   -- Anthropometry at this visit
@@ -250,10 +250,15 @@ create table visits (
   muac_cm         numeric check (muac_cm between 5 and 30),
 
   -- Vitals
-  temp_f          numeric check (temp_f between 85 and 110),
-  hr_per_min      integer check (hr_per_min between 20 and 300),
+  temp_f          numeric check (temp_f between 90 and 108),
+  hr_per_min      integer check (hr_per_min between 30 and 300),
   rr_per_min      integer check (rr_per_min between 5 and 120),
-  spo2_pct        numeric check (spo2_pct between 0 and 100),
+  spo2_pct        numeric check (spo2_pct between 50 and 100),
+  bp_systolic     integer check (bp_systolic between 30 and 250),
+  bp_diastolic    integer check (bp_diastolic between 15 and 150),
+  map_mmhg        numeric check (map_mmhg between 20 and 200),
+  bmi             numeric,
+  vax_schedule    text check (vax_schedule in ('nhm', 'iap')),
 
   -- Clinical
   chief_complaints    text,
@@ -287,6 +292,8 @@ create table prescriptions (
   -- Format: RX-XXXXXXXX
 
   visit_id        uuid not null references visits(id) on delete restrict,
+  -- NOTE: patient_id is denormalized (also derivable via visit_id→visits.patient_id)
+  -- Kept for query performance. Consistency enforced at application layer.
   patient_id      text not null references patients(id) on delete restrict,
 
   -- Full generated prescription JSON (as produced by AI)
@@ -326,8 +333,8 @@ create index idx_rx_date     on prescriptions(created_at);
 -- 6. VACCINATIONS
 -- ============================================================
 create table vaccinations (
-  id              serial primary key,
-  patient_id      text references patients(id) on delete restrict,
+  id              uuid default gen_random_uuid() primary key,
+  patient_id      text not null references patients(id) on delete restrict,
 
   vaccine_name    text not null,
   dose_number     integer,
@@ -353,8 +360,8 @@ create index idx_vax_patient_name on vaccinations(patient_id, vaccine_name);
 -- 7. GROWTH RECORDS
 -- ============================================================
 create table growth_records (
-  id              serial primary key,
-  patient_id      text references patients(id) on delete restrict,
+  id              uuid default gen_random_uuid() primary key,
+  patient_id      text not null references patients(id) on delete restrict,
   visit_id        uuid references visits(id),
 
   recorded_date   date default current_date,
@@ -393,7 +400,7 @@ create index idx_growth_patient_date on growth_records(patient_id, recorded_date
 -- Structured lab/investigation results for trend analysis
 -- ============================================================
 create table lab_results (
-  id              serial primary key,
+  id              uuid default gen_random_uuid() primary key,
   patient_id      text not null references patients(id) on delete restrict,
   visit_id        uuid references visits(id),
 
@@ -425,7 +432,7 @@ create index idx_lab_test         on lab_results(test_name);
 -- from prescriptions.generated_json for queryability.
 -- ============================================================
 create table developmental_screenings (
-  id              serial primary key,
+  id              uuid default gen_random_uuid() primary key,
   patient_id      text not null references patients(id) on delete restrict,
   visit_id        uuid references visits(id),
   screening_date  date default current_date,
@@ -461,6 +468,33 @@ create index idx_devscreen_patient on developmental_screenings(patient_id);
 create index idx_devscreen_date    on developmental_screenings(patient_id, screening_date desc);
 
 -- ============================================================
+-- 8b. LOINC INVESTIGATIONS
+-- Reference table for LOINC codes, imported from LOINC v2.82
+-- ============================================================
+create table if not exists loinc_investigations (
+  id uuid default gen_random_uuid() primary key,
+  loinc_code text unique not null,
+  component text,
+  long_name text,
+  short_name text,
+  display_name text,
+  consumer_name text,
+  class text,
+  class_type text,
+  system_specimen text,
+  property text,
+  scale text,
+  method text,
+  example_units text,
+  example_ucum_units text,
+  order_obs text,
+  related_names text,
+  common_test_rank integer,
+  common_order_rank integer,
+  created_at timestamptz default now()
+);
+
+-- ============================================================
 -- 9. ROW LEVEL SECURITY
 -- Enabled on all tables. Current policy: authenticated users
 -- have full access. Per-doctor policies to be added when
@@ -474,6 +508,7 @@ alter table prescriptions enable row level security;
 alter table vaccinations enable row level security;
 alter table growth_records enable row level security;
 alter table developmental_screenings enable row level security;
+alter table loinc_investigations enable row level security;
 
 -- Policy: authenticated users can perform all operations
 -- Replace with per-doctor policies in production
@@ -492,6 +527,8 @@ create policy "authenticated_full_access" on vaccinations
 create policy "authenticated_full_access" on growth_records
   for all using (auth.role() = 'authenticated');
 create policy "authenticated_full_access" on developmental_screenings
+  for all using (auth.role() = 'authenticated');
+create policy "authenticated_full_access" on loinc_investigations
   for all using (auth.role() = 'authenticated');
 
 -- ============================================================
@@ -542,5 +579,6 @@ create trigger trg_devscreenings_updated
 -- DONE — schema is ready
 -- Tables created: formulary, doctors, standard_prescriptions, patients,
 --                 visits, prescriptions, vaccinations,
---                 growth_records
+--                 growth_records, lab_results, developmental_screenings,
+--                 loinc_investigations
 -- ============================================================
