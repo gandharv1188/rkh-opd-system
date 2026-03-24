@@ -2453,11 +2453,23 @@
   }
 
   // ===== DOCUMENT UPLOAD =====
+  // All document categories generate OCR summaries (no restriction)
   const OCR_CATEGORIES = [
     "lab_report",
     "radiology",
     "prescription",
     "discharge_summary",
+    "referral_letter",
+    "vaccination_card",
+    "growth_chart",
+    "insurance",
+    "consent_form",
+    "birth_certificate",
+    "allergy_card",
+    "surgical_notes",
+    "developmental_report",
+    "diet_chart",
+    "other",
   ];
   const DOC_CATEGORIES = [
     { value: "lab_report", label: "Lab Investigation Report" },

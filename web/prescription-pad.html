@@ -4525,8 +4525,8 @@
     ) {
       const v = r.vaccinations;
       h += `<div class="rv-sec"><div class="rv-hdr">Vaccination — ${esc(v.schedule_used || "IAP 2024")}</div>
-    ${(v.due || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="due" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="due" data-idx="${i}">${esc(x)}</span></label><select class="vax-status" data-type="due" data-idx="${i}" style="font-size:10px;padding:2px 4px;border:1px solid var(--bdr);border-radius:3px;color:var(--green);background:var(--green-lt);font-weight:600"><option value="due" selected>Due today</option><option value="administered">Administered</option><option value="deferred">Deferred</option><option value="refused">Refused</option></select><input type="date" class="vax-date" data-type="due" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
-    ${(v.overdue || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="overdue" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="overdue" data-idx="${i}">${esc(x)}</span></label><select class="vax-status" data-type="overdue" data-idx="${i}" style="font-size:10px;padding:2px 4px;border:1px solid var(--bdr);border-radius:3px;color:var(--red);background:var(--red-lt);font-weight:600"><option value="overdue" selected>Overdue</option><option value="administered">Administered</option><option value="deferred">Deferred</option><option value="refused">Refused</option></select><input type="date" class="vax-date" data-type="overdue" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
+    ${(v.due || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="due" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="due" data-idx="${i}">${esc(x)}</span></label><select class="vax-status" data-type="due" data-idx="${i}" style="font-size:10px;padding:2px 4px;border:1px solid var(--bdr);border-radius:3px;color:var(--green);background:var(--green-lt);font-weight:600"><option value="due" selected>Due today</option><option value="administered">Administered</option><option value="previously_given">Previously given</option><option value="deferred">Deferred</option><option value="refused">Refused</option></select><input type="date" class="vax-date" data-type="due" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
+    ${(v.overdue || []).map((x, i) => `<div class="vax-row"><label style="display:flex;align-items:center;gap:6px;flex:1;cursor:pointer"><input type="checkbox" checked class="vax-check" data-type="overdue" data-idx="${i}"> <span contenteditable="true" spellcheck="false" class="vax-name" data-type="overdue" data-idx="${i}">${esc(x)}</span></label><select class="vax-status" data-type="overdue" data-idx="${i}" style="font-size:10px;padding:2px 4px;border:1px solid var(--bdr);border-radius:3px;color:var(--red);background:var(--red-lt);font-weight:600"><option value="overdue" selected>Overdue</option><option value="administered">Administered</option><option value="previously_given">Previously given</option><option value="deferred">Deferred</option><option value="refused">Refused</option></select><input type="date" class="vax-date" data-type="overdue" data-idx="${i}" value="${new Date().toISOString().split("T")[0]}" style="font-size:10px;padding:1px 4px;border:1px solid var(--bdr);border-radius:3px;width:110px;color:var(--ink3)"></div>`).join("")}
     ${v.next_due ? `<div style="font-size:11px;color:var(--ink3);padding:5px 0;font-family:system-ui,sans-serif">Next due: <span contenteditable="true" spellcheck="false" id="vax-next-due">${esc(v.next_due)}</span></div>` : ""}
     ${v.notes ? `<div style="font-size:11px;color:var(--ink2);padding:3px 0;font-family:system-ui,sans-serif" contenteditable="true" spellcheck="false" id="vax-notes">${esc(v.notes)}</div>` : ""}
     <button class="add-item-btn" onclick="addVaccination()">+ Add vaccine</button>
@@ -5016,24 +5016,31 @@
         const checkedDue = [];
         const checkedOverdue = [];
         const givenToday = [];
+        const previouslyGiven = [];
         reviewWrap.querySelectorAll(".vax-check:checked").forEach((cb) => {
           const nameEl = cb.closest("label")?.querySelector(".vax-name");
           const name = nameEl?.textContent?.trim();
           if (!name) return;
-          // Find corresponding status dropdown in the same row
           const row = cb.closest(".vax-row");
           const statusSel = row?.querySelector(".vax-status");
           const status = statusSel?.value || "";
+          const dateEl = row?.querySelector(".vax-date");
+          const dateVal = dateEl?.value || "";
           if (cb.dataset.type === "due") checkedDue.push(name);
           else if (cb.dataset.type === "overdue") checkedOverdue.push(name);
-          // Only mark as given_today if status is "administered" (actually given)
           if (status === "administered") {
             givenToday.push(name);
+          } else if (status === "previously_given") {
+            previouslyGiven.push({
+              vaccine_name: name,
+              date_given: dateVal || null,
+            });
           }
         });
         rxData.vaccinations.given_today = givenToday.map((v) => ({
           vaccine_name: v,
         }));
+        rxData.vaccinations.previously_given = previouslyGiven;
         rxData.vaccinations.due = checkedDue;
         rxData.vaccinations.overdue = checkedOverdue;
         const nextDueEl = document.getElementById("vax-next-due");
@@ -5205,6 +5212,23 @@
         console.log(
           "Vaccinations saved:",
           rxData.vaccinations.given_today.length,
+        );
+      }
+      // 5b. Save previously given vaccinations (reported by parent, not given today)
+      if (!isUpdateMode && has(rxData.vaccinations?.previously_given)) {
+        for (const vax of rxData.vaccinations.previously_given) {
+          await q("vaccinations", "", "POST", {
+            patient_id: patientId,
+            vaccine_name: vax.vaccine_name,
+            dose_number: null,
+            date_given: vax.date_given || null,
+            given_by: "reported_by_parent",
+            free_or_paid: "unknown",
+          });
+        }
+        console.log(
+          "Previously given vaccines recorded:",
+          rxData.vaccinations.previously_given.length,
         );
       }
 
