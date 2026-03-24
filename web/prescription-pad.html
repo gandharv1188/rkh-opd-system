@@ -1039,16 +1039,220 @@
     border-color: var(--blue);
     background: #fff;
   }
+  /* ===== Smart Dose Panel ===== */
+  .dose-ref {
+    background: rgba(30, 58, 107, 0.06);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 var(--r) var(--r) 0;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: var(--blue);
+    line-height: 1.5;
+  }
+  .dose-ref-note {
+    display: block;
+    font-size: 10px;
+    color: var(--ink3);
+    margin-top: 2px;
+  }
+  .dose-ref-toggle {
+    font-size: 10px;
+    color: var(--blue);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 2px 0;
+    text-decoration: underline;
+    font-family: inherit;
+  }
+  .dose-ref-band {
+    padding: 4px 0;
+    border-top: 0.5px solid rgba(30, 58, 107, 0.1);
+    margin-top: 4px;
+  }
+
+  /* Radio button groups */
+  .dp-radios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 4px 0 8px;
+  }
+  .dp-radios label {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 4px 10px;
+    border: 1px solid var(--bdr2);
+    border-radius: 99px;
+    font-size: 11px;
+    cursor: pointer;
+    background: var(--bg2);
+    transition: all 0.15s;
+  }
+  .dp-radios input {
+    display: none;
+  }
+  .dp-radios input:checked + span {
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .dp-radios label:has(input:checked) {
+    background: var(--blue-lt);
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .dp-row {
+    margin-bottom: 6px;
+  }
+  .dp-row-label {
+    font-size: 10px;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  /* Range slider with color zones */
+  .dp-slider-wrap {
+    position: relative;
+    margin: 12px 0 6px;
+  }
+  .dp-slider-track {
+    position: relative;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(
+      to right,
+      #f87171 0%,
+      #f87171 var(--zone-red-left),
+      #4ade80 var(--zone-red-left),
+      #4ade80 var(--zone-red-right),
+      #f87171 var(--zone-red-right),
+      #f87171 100%
+    );
+  }
+  .dp-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  .dp-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    margin-top: -6px;
+    cursor: grab;
+  }
+  .dp-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+  }
+  .dp-slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--ink3);
+    margin-top: 2px;
+  }
+  .dp-slider-labels .dp-rec {
+    color: var(--green);
+    font-weight: 600;
+  }
+  .dp-slider-val {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 4px 0;
+  }
+  .dp-slider-val.dp-warn {
+    color: var(--red);
+  }
+  .dp-slider-val.dp-safe {
+    color: var(--green);
+  }
+  .dp-freq-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+  }
+  .dp-freq-row label {
+    font-size: 11px;
+    color: var(--ink3);
+  }
+  .dp-freq-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--bdr2);
+    background: var(--bg2);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .dp-freq-btn:hover {
+    background: var(--blue-lt);
+  }
+  .dp-freq-val {
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  /* Result */
   .ep-result {
     background: var(--green-lt);
     border: 0.5px solid rgba(26, 92, 53, 0.2);
     border-radius: var(--r);
-    padding: 9px 12px;
-    font-size: 13px;
+    padding: 12px 14px;
+    font-size: 16px;
     color: var(--green);
-    margin-bottom: 10px;
-    font-family: system-ui, sans-serif;
+    margin: 10px 0;
     min-height: 44px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  .ep-result .ep-hindi {
+    font-family: "Noto Sans Devanagari", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink2);
+  }
+  .ep-result .ep-calc-detail {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+  .ep-adv summary {
+    font-size: 11px;
+    color: var(--ink3);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .ep-adv .ep-grid {
+    margin-top: 6px;
   }
   .ep-warn {
     background: var(--amber-lt);
@@ -2028,6 +2232,313 @@
       p: "e.g. 28wks GA, postnatal day 14, BW 1.1kg, on EBM",
     },
   };
+  // ===== SMART DOSE PANEL HELPERS =====
+  // Simplify SNOMED form names to doctor-friendly categories
+  function simplifyForm(form) {
+    const fl = (form || "").toLowerCase();
+    if (
+      fl.includes("drop") &&
+      (fl.includes("eye") || fl.includes("ophthalmic"))
+    )
+      return "Eye drops";
+    if (fl.includes("drop") && (fl.includes("ear") || fl.includes("otic")))
+      return "Ear drops";
+    if (fl.includes("drop") && fl.includes("nasal")) return "Nasal drops";
+    if (fl.includes("drop")) return "Drops";
+    if (
+      fl.includes("syrup") ||
+      (fl.includes("suspension") && fl.includes("oral"))
+    )
+      return "Syrup";
+    if (fl.includes("dispersible") || fl.includes("chewable")) return "DT";
+    if (
+      fl.includes("tablet") &&
+      !fl.includes("dispersible") &&
+      !fl.includes("chewable")
+    )
+      return "Tablet";
+    if (fl.includes("capsule")) return "Capsule";
+    if (fl.includes("injection") || fl.includes("infusion")) return "Injection";
+    if (fl.includes("cream")) return "Cream";
+    if (fl.includes("ointment")) return "Ointment";
+    if (
+      fl.includes("inhaler") ||
+      fl.includes("inhalation") ||
+      fl.includes("puff")
+    )
+      return "Inhaler";
+    if (fl.includes("nebuli")) return "Nebulisation";
+    if (fl.includes("suppository") || fl.includes("rectal"))
+      return "Suppository";
+    if (fl.includes("gel")) return "Gel";
+    if (fl.includes("powder") && fl.includes("oral")) return "Dry syrup";
+    if (fl.includes("spray") && fl.includes("nasal")) return "Nasal spray";
+    if (fl.includes("lotion")) return "Lotion";
+    if (fl.includes("sachet") || fl.includes("granule")) return "Sachet";
+    if (fl.includes("patch")) return "Patch";
+    return form || "Other";
+  }
+
+  // Get applicable output units for a given form
+  function getUnitOptions(form) {
+    const fl = (form || "").toLowerCase();
+    if (fl.includes("drop")) return ["drops", "mL"];
+    if (fl === "syrup" || fl === "dry syrup") return ["mL", "tsp", "drops"];
+    if (fl === "tablet" || fl === "dt") return ["tablet"];
+    if (fl === "capsule") return ["capsule"];
+    if (fl === "inhaler") return ["puffs"];
+    if (fl === "nebulisation") return ["mL"];
+    if (fl === "injection") return ["mL"];
+    if (fl === "suppository") return ["mg"];
+    if (fl === "cream" || fl === "ointment" || fl === "gel" || fl === "lotion")
+      return ["application"];
+    if (fl === "nasal spray") return ["sprays"];
+    if (fl === "sachet") return ["sachet"];
+    return ["mL", "drops"];
+  }
+
+  // Cascade: form radio changed → rebuild strength + unit radios, recalculate
+  function dpFormChanged(pid, idx) {
+    const sel = document.querySelector(
+      'input[name="' + pid + '-form-r"]:checked',
+    );
+    if (!sel) return;
+    const form = sel.value;
+    const m = rxData.medicines[idx];
+    const genericName = (m.row1_en || "")
+      .split("(")[0]
+      .trim()
+      .toUpperCase()
+      .replace(
+        /\s+(SYRUP|TABLET|CAPSULE|DROPS|INJECTION|CREAM|OINTMENT|INHALER|SUSPENSION|ORAL DROPS|SUPPOSITORY|DISPERSIBLE TABLET|CHEWABLE TABLET|DRY SYRUP|NASAL DROPS|NASAL SPRAY|EYE DROPS|EYE OINTMENT|EAR DROPS|GEL|LOTION|PASTE|SPRAY|PATCH|SACHETS|POWDER|GRANULES|ENEMA|PESSARY|RESPULES|NEBULISATION|IV INFUSION|IM INJECTION|SC INJECTION)\s*$/i,
+        "",
+      );
+    const drugForms = formularyCache[genericName]?.formulations || [];
+
+    // Filter strengths for this form
+    const strengths = [];
+    drugForms.forEach((f) => {
+      if (simplifyForm(f.form) === form) {
+        const c = getConc(f);
+        const key =
+          c.concQty + "|" + c.concUnit + "|" + c.perQty + "|" + c.perUnit;
+        if (!strengths.find((s) => s.key === key)) {
+          strengths.push({ key, c, form: f.form });
+        }
+      }
+    });
+
+    // Rebuild strength radios
+    const strEl = document.getElementById(pid + "-dp-strengths");
+    if (strEl) {
+      let h = "";
+      strengths.forEach((s, i) => {
+        h +=
+          '<label><input type="radio" name="' +
+          pid +
+          '-str-r" value="' +
+          esc(s.key) +
+          '"' +
+          (i === 0 ? " checked" : "") +
+          " onchange=\"dpStrengthChanged('" +
+          pid +
+          "'," +
+          idx +
+          ')"><span>' +
+          esc(s.c.concQty + s.c.concUnit + "/" + s.c.perQty + s.c.perUnit) +
+          "</span></label>";
+      });
+      if (!strengths.length)
+        h =
+          '<label><input type="radio" name="' +
+          pid +
+          '-str-r" value="0|mg|5|mL" checked><span>Manual entry</span></label>';
+      strEl.innerHTML = h;
+    }
+
+    // Rebuild unit radios
+    const unitEl = document.getElementById(pid + "-dp-units");
+    if (unitEl) {
+      const units = getUnitOptions(form);
+      unitEl.innerHTML = units
+        .map(
+          (u, i) =>
+            '<label><input type="radio" name="' +
+            pid +
+            '-unit-r" value="' +
+            esc(u) +
+            '"' +
+            (i === 0 ? " checked" : "") +
+            " onchange=\"dpUnitChanged('" +
+            pid +
+            "'," +
+            idx +
+            ')"><span>' +
+            esc(u) +
+            "</span></label>",
+        )
+        .join("");
+    }
+
+    // Update hidden fields + formulation name
+    m.formulation = form.toLowerCase();
+    dpStrengthChanged(pid, idx);
+  }
+
+  // Strength radio changed → update concentration, recalculate
+  function dpStrengthChanged(pid, idx) {
+    const sel = document.querySelector(
+      'input[name="' + pid + '-str-r"]:checked',
+    );
+    if (!sel) return;
+    const parts = sel.value.split("|");
+    const cmg = parseFloat(parts[0]) || 0;
+    const cml = parseFloat(parts[2]) || 5;
+    document.getElementById(pid + "-cmg").value = cmg;
+    document.getElementById(pid + "-cml").value = cml;
+    const m = rxData.medicines[idx];
+    m.concentration_mg = cmg;
+    m.concentration_per_ml = cml;
+    dpRecalc(pid, idx);
+  }
+
+  // Unit radio changed → recalculate display
+  function dpUnitChanged(pid, idx) {
+    dpRecalc(pid, idx);
+  }
+
+  // Slider changed → update dose, recalculate
+  function dpSliderChanged(pid, idx) {
+    const slider = document.getElementById(pid + "-slider");
+    if (!slider) return;
+    const dose = parseFloat(slider.value);
+    document.getElementById(pid + "-mgkg").value = dose;
+
+    // Update slider value display with color
+    const valEl = document.getElementById(pid + "-sliderval");
+    const ref = getDoseRef(rxData.medicines[idx].row1_en, rxData.patient?.age);
+    const band = ref?.bands?.[0];
+    const dMin = band?.dose_min_qty || 0;
+    const dMax = band?.dose_max_qty || 999;
+    const doseUnit = band?.dose_unit || "mg/kg/day";
+    const inRange = dose >= dMin && dose <= dMax;
+    if (valEl) {
+      valEl.textContent = dose + " " + doseUnit;
+      valEl.className = "dp-slider-val " + (inRange ? "dp-safe" : "dp-warn");
+    }
+    dpRecalc(pid, idx);
+  }
+
+  // Frequency +/- buttons
+  function dpFreqChange(pid, idx, delta) {
+    const el = document.getElementById(pid + "-freqval");
+    const hiddenFreq = document.getElementById(pid + "-freq");
+    let cur = parseInt(hiddenFreq.value) || 3;
+    cur = Math.max(1, Math.min(6, cur + delta));
+    hiddenFreq.value = cur;
+    if (el) el.textContent = cur + "×/day";
+    dpRecalc(pid, idx);
+  }
+
+  // Master recalculate: reads all panel state, calls calcDose, shows result
+  function dpRecalc(pid, idx) {
+    const wt = parseFloat(document.getElementById(pid + "-wt").value);
+    const mgkg = parseFloat(document.getElementById(pid + "-mgkg").value);
+    const freq = parseFloat(document.getElementById(pid + "-freq").value);
+    const cmg = parseFloat(document.getElementById(pid + "-cmg").value);
+    const cml = parseFloat(document.getElementById(pid + "-cml").value) || 5;
+    const maxS =
+      parseFloat(document.getElementById(pid + "-max").value) || null;
+    const m = rxData.medicines[idx];
+    const form = m.formulation || "syrup";
+
+    if (isNaN(wt) || isNaN(mgkg) || isNaN(freq) || isNaN(cmg)) {
+      document.getElementById(pid + "-res").textContent =
+        "Adjust the slider to calculate.";
+      return;
+    }
+
+    const r = calcDose(wt, mgkg, freq, cmg, cml, maxS, form);
+
+    // Get selected output unit
+    const unitSel = document.querySelector(
+      'input[name="' + pid + '-unit-r"]:checked',
+    );
+    const unit = unitSel ? unitSel.value : "mL";
+
+    // Convert result to selected unit
+    let displayEn = r.enD;
+    let displayHi = r.hiD;
+    const mlPerDose = (r.fd / cmg) * cml;
+
+    if (unit === "drops" && !form.includes("drop")) {
+      const drops = Math.round(mlPerDose * 20);
+      const DN = {
+        1: "एक",
+        2: "दो",
+        3: "तीन",
+        4: "चार",
+        5: "पाँच",
+        6: "छह",
+        7: "सात",
+        8: "आठ",
+        9: "नौ",
+        10: "दस",
+        12: "बारह",
+        15: "पंद्रह",
+        20: "बीस",
+        24: "चौबीस",
+        25: "पच्चीस",
+      };
+      displayEn = drops + " drops";
+      displayHi = (DN[drops] || drops) + " बूंदें";
+    } else if (unit === "tsp") {
+      const tsp = Math.round((mlPerDose / 5) * 2) / 2;
+      displayEn = tsp + " tsp (" + Math.round(mlPerDose * 2) / 2 + " mL)";
+      const TN = {
+        0.5: "आधा",
+        1: "एक",
+        1.5: "डेढ़",
+        2: "दो",
+        2.5: "ढाई",
+        3: "तीन",
+      };
+      displayHi = (TN[tsp] || tsp) + " चम्मच";
+    } else if (unit === "mL" && form.includes("drop")) {
+      // Override drops form to show mL instead
+      displayEn = Math.round(mlPerDose * 10) / 10 + " mL";
+      displayHi = Math.round(mlPerDose * 10) / 10 + " mL";
+    }
+
+    const freqEn = FW[freq] || freq + " times";
+    const freqHi = FH[freq] || freq + " बार";
+
+    const resEl = document.getElementById(pid + "-res");
+    resEl.innerHTML =
+      "➜ <strong>" +
+      esc(displayEn) +
+      "</strong> " +
+      esc(freqEn) +
+      " daily" +
+      '<div class="ep-hindi">➜ ' +
+      esc(displayHi) +
+      " दिन में " +
+      esc(freqHi) +
+      "</div>" +
+      '<div class="ep-calc-detail">' +
+      esc(r.calc) +
+      "</div>";
+
+    const warnEl = document.getElementById(pid + "-warn");
+    if (r.capped) {
+      warnEl.style.display = "block";
+      warnEl.textContent =
+        "⚠ Max dose limit applied (" + maxS + "mg). Verify clinically.";
+    } else {
+      warnEl.style.display = "none";
+    }
+  }
+
   // Format temperature: strip duplicate units, preserve °C if Celsius
   function fmtTemp(v) {
     if (!v) return "";
@@ -2081,6 +2592,109 @@
     if (dayMatch && !yrMatch && !moMatch) months = 0; // days old = 0 months
     return months || (dayMatch ? 0 : null);
   }
+
+  // Look up dosing reference from formularyCache for a drug and patient age
+  function getDoseRef(drugName, patientAge) {
+    // Extract generic name: "AMOXICILLIN SYRUP (125mg/5mL)" → "AMOXICILLIN"
+    let genericName = (drugName || "").split("(")[0].trim().toUpperCase();
+    const _formWords = [
+      "SYRUP",
+      "TABLET",
+      "CAPSULE",
+      "DROPS",
+      "INJECTION",
+      "CREAM",
+      "OINTMENT",
+      "INHALER",
+      "SUSPENSION",
+      "ORAL DROPS",
+      "SUPPOSITORY",
+      "RESPULES",
+      "NEBULISATION",
+      "DRY SYRUP",
+      "DISPERSIBLE TABLET",
+      "CHEWABLE TABLET",
+      "NASAL DROPS",
+      "NASAL SPRAY",
+      "EYE DROPS",
+      "EYE OINTMENT",
+      "EAR DROPS",
+      "GEL",
+      "LOTION",
+      "PASTE",
+      "SPRAY",
+      "PATCH",
+      "SACHETS",
+      "POWDER",
+      "GRANULES",
+      "ENEMA",
+      "PESSARY",
+      "IV INFUSION",
+      "IM INJECTION",
+      "SC INJECTION",
+    ];
+    for (const w of _formWords) {
+      if (genericName.endsWith(" " + w)) {
+        genericName = genericName.slice(0, -w.length - 1).trim();
+        break;
+      }
+    }
+    const drug = formularyCache[genericName];
+    if (!drug || !drug.dosing_bands || !drug.dosing_bands.length) return null;
+
+    // Determine age_band from patient age in months
+    const ageMonths =
+      typeof patientAge === "number" ? patientAge : parseAgeMonths(patientAge);
+    let ageBand = "child";
+    if (ageMonths !== null) {
+      if (ageMonths < 1) ageBand = "neonate";
+      else if (ageMonths < 12) ageBand = "infant";
+      else if (ageMonths < 144) ageBand = "child";
+      else ageBand = "adolescent";
+    }
+
+    const bands = drug.dosing_bands;
+    const matched = bands.filter(
+      (b) => b.age_band === ageBand || b.age_band === "all",
+    );
+    return {
+      bands: matched.length ? matched : [bands[0]],
+      allBands: bands,
+      ageBand,
+    };
+  }
+
+  // Format a single dosing band for display
+  function fmtDoseBand(b) {
+    let line = "";
+    if (b.dose_min_qty != null && b.dose_max_qty != null) {
+      if (b.dose_min_qty === b.dose_max_qty) {
+        line += b.dose_min_qty + " " + (b.dose_min_unit || "mg/kg");
+      } else {
+        line +=
+          b.dose_min_qty +
+          "-" +
+          b.dose_max_qty +
+          " " +
+          (b.dose_min_unit || "mg/kg");
+      }
+    } else if (b.dose_min_qty != null) {
+      line += b.dose_min_qty + " " + (b.dose_min_unit || "mg/kg");
+    }
+    if (b.is_per_day) line += "/day";
+    else if (b.dose_basis === "per_kg") line += "/dose";
+    if (b.frequency_per_day) {
+      const freqNames = { 1: "OD", 2: "BD", 3: "TDS", 4: "QID" };
+      line +=
+        ", " +
+        (freqNames[b.frequency_per_day] || b.frequency_per_day + "x/day");
+    }
+    if (b.max_single_qty)
+      line +=
+        ", max " + b.max_single_qty + (b.max_single_unit || "mg") + "/dose";
+    return line;
+  }
+
   function getEmergencySigns(ageMonths) {
     if (ageMonths != null && ageMonths < 12)
       return [...EMERGENCY_BASE, ...EMERGENCY_INFANT];
@@ -4424,178 +5038,305 @@
         <div class="ep" id="${pid}-ep">
           <div class="ep-title">Dose adjustment — ${esc((m.row1_en || "").split("(")[0].trim())}</div>
           ${(() => {
-            let dn = (m.row1_en || "").split("(")[0].trim().toUpperCase();
-            // Strip form words from drug name to match formulary cache key
-            const _fw = [
-              "SYRUP",
-              "TABLET",
-              "CAPSULE",
-              "DROPS",
-              "INJECTION",
-              "CREAM",
-              "OINTMENT",
-              "INHALER",
-              "SUSPENSION",
-              "ORAL DROPS",
-              "SUPPOSITORY",
-              "RESPULES",
-              "NEBULISATION",
-            ];
-            for (const w of _fw) {
-              if (dn.endsWith(" " + w)) {
-                dn = dn.slice(0, -w.length - 1).trim();
-                break;
-              }
-            }
-            const fc = formularyCache[dn];
-            const drugForms = fc?.formulations || [];
-            // Standard pharmaceutical dose forms (universal)
-            const STD_FORMS = [
-              "syrup",
-              "tablet",
-              "capsule",
-              "drops",
-              "oral drops",
-              "injection",
-              "IV infusion",
-              "IM injection",
-              "SC injection",
-              "cream",
-              "ointment",
-              "gel",
-              "lotion",
-              "inhaler (MDI)",
-              "inhaler (DPI)",
-              "nebulisation",
-              "respules",
-              "suppository",
-              "nasal drops",
-              "nasal spray",
-              "eye drops",
-              "eye ointment",
-              "ear drops",
-              "suspension",
-              "dry syrup",
-              "dispersible tablet",
-              "chewable tablet",
-              "sublingual tablet",
-              "effervescent tablet",
-              "sachets",
-              "powder",
-              "granules",
-              "paste",
-              "spray",
-              "patch",
-              "pessary",
-              "enema",
-            ];
-            let opts = "";
-            if (drugForms.length) {
-              opts += '<optgroup label="Available for this drug">';
-              drugForms.forEach((f) => {
-                const c = getConc(f);
-                const val =
-                  f.form +
-                  "|" +
-                  (c.concQty || "") +
-                  "|" +
-                  (c.concUnit || "") +
-                  "|" +
-                  (c.perQty || "") +
-                  "|" +
-                  (c.perUnit || "");
-                const sel =
-                  c.concQty == m.concentration_mg &&
-                  c.perQty == m.concentration_per_ml
-                    ? " selected"
-                    : "";
-                const label =
-                  esc(f.form) +
-                  " " +
-                  esc(fmtConc(f)) +
-                  (c.brandName ? " (" + esc(c.brandName) + ")" : "");
-                opts +=
-                  '<option value="' +
-                  esc(val) +
-                  '"' +
-                  sel +
-                  ">" +
-                  label +
-                  "</option>";
-              });
-              opts += "</optgroup>";
-            }
-            opts += '<optgroup label="All standard forms">';
-            STD_FORMS.forEach((sf) => {
-              const val =
-                sf +
-                "|||1|" +
-                (sf.includes("tablet") || sf.includes("capsule")
-                  ? "tablet"
-                  : "ml");
-              opts +=
-                '<option value="' +
-                esc(val) +
-                '">' +
-                esc(sf) +
-                " (enter concentration manually)</option>";
+            const genericName = (m.row1_en || "")
+              .split("(")[0]
+              .trim()
+              .toUpperCase()
+              .replace(
+                /\s+(SYRUP|TABLET|CAPSULE|DROPS|INJECTION|CREAM|OINTMENT|INHALER|SUSPENSION|ORAL DROPS|SUPPOSITORY|DISPERSIBLE TABLET|CHEWABLE TABLET|DRY SYRUP|NASAL DROPS|NASAL SPRAY|EYE DROPS|EYE OINTMENT|EAR DROPS|GEL|LOTION|PASTE|SPRAY|PATCH|SACHETS|POWDER|GRANULES|ENEMA|PESSARY|RESPULES|NEBULISATION|IV INFUSION|IM INJECTION|SC INJECTION)\s*$/i,
+                "",
+              );
+            const drugForms = formularyCache[genericName]?.formulations || [];
+            const formGroups = {};
+            drugForms.forEach((f) => {
+              const c = getConc(f);
+              const formKey = simplifyForm(f.form || "other");
+              if (!formGroups[formKey]) formGroups[formKey] = [];
+              const key =
+                c.concQty + "|" + c.concUnit + "|" + c.perQty + "|" + c.perUnit;
+              if (!formGroups[formKey].find((s) => s.key === key))
+                formGroups[formKey].push({ key, c, form: f.form });
             });
-            opts += "</optgroup>";
-            return (
-              '<div class="epf" style="margin-bottom:6px"><label>Formulation</label><select id="' +
+            const formKeys = Object.keys(formGroups);
+            const curForm = simplifyForm(m.formulation || "syrup");
+            const curCmg = m.concentration_mg || 0;
+            const curCml = m.concentration_per_ml || 5;
+            const ref = getDoseRef(m.row1_en, r.patient?.age);
+            const band = ref?.bands?.[0];
+            let html = "";
+
+            // FORM RADIOS
+            html +=
+              '<div class="dp-row"><div class="dp-row-label">Form</div><div class="dp-radios" id="' +
               pid +
-              '-form" onchange="switchFormulation(\'' +
+              '-dp-forms">';
+            formKeys.forEach((fk) => {
+              const checked = fk === curForm ? " checked" : "";
+              html +=
+                '<label><input type="radio" name="' +
+                pid +
+                '-form-r" value="' +
+                esc(fk) +
+                '"' +
+                checked +
+                " onchange=\"dpFormChanged('" +
+                pid +
+                "'," +
+                idx +
+                ')"><span>' +
+                esc(fk) +
+                "</span></label>";
+            });
+            if (!formKeys.length)
+              html +=
+                '<label><input type="radio" name="' +
+                pid +
+                '-form-r" value="' +
+                esc(curForm) +
+                '" checked><span>' +
+                esc(curForm) +
+                "</span></label>";
+            html += "</div></div>";
+
+            // STRENGTH RADIOS
+            html +=
+              '<div class="dp-row"><div class="dp-row-label">Strength</div><div class="dp-radios" id="' +
               pid +
-              "\'," +
+              '-dp-strengths">';
+            const curStrengths =
+              formGroups[curForm] || formGroups[formKeys[0]] || [];
+            curStrengths.forEach((s, si) => {
+              const checked =
+                s.c.concQty == curCmg ? " checked" : si === 0 ? " checked" : "";
+              html +=
+                '<label><input type="radio" name="' +
+                pid +
+                '-str-r" value="' +
+                esc(s.key) +
+                '"' +
+                checked +
+                " onchange=\"dpStrengthChanged('" +
+                pid +
+                "'," +
+                idx +
+                ')"><span>' +
+                esc(
+                  s.c.concQty + s.c.concUnit + "/" + s.c.perQty + s.c.perUnit,
+                ) +
+                "</span></label>";
+            });
+            if (!curStrengths.length)
+              html +=
+                '<label><input type="radio" name="' +
+                pid +
+                '-str-r" value="' +
+                curCmg +
+                "|mg|" +
+                curCml +
+                '|mL" checked><span>' +
+                curCmg +
+                "mg/" +
+                curCml +
+                "mL</span></label>";
+            html += "</div></div>";
+
+            // UNIT RADIOS
+            const unitOpts = getUnitOptions(curForm);
+            html +=
+              '<div class="dp-row"><div class="dp-row-label">Prescribe as</div><div class="dp-radios" id="' +
+              pid +
+              '-dp-units">';
+            unitOpts.forEach((u, ui) => {
+              html +=
+                '<label><input type="radio" name="' +
+                pid +
+                '-unit-r" value="' +
+                esc(u) +
+                '"' +
+                (ui === 0 ? " checked" : "") +
+                " onchange=\"dpUnitChanged('" +
+                pid +
+                "'," +
+                idx +
+                ')"><span>' +
+                esc(u) +
+                "</span></label>";
+            });
+            html += "</div></div>";
+
+            // DOSING REFERENCE
+            if (ref && band) {
+              html +=
+                '<div class="dose-ref" id="' +
+                pid +
+                '-doseref"><strong style="font-size:11px;letter-spacing:0.03em">RECOMMENDED:</strong> ' +
+                esc(fmtDoseBand(band));
+              if (band.indication)
+                html +=
+                  '<span class="dose-ref-note">' +
+                  esc(band.indication) +
+                  (band.notes ? " — " + esc(band.notes) : "") +
+                  "</span>";
+              if (ref.allBands.length > 1) {
+                html += '<div id="' + pid + '-morebands" style="display:none">';
+                ref.allBands.slice(1).forEach((b) => {
+                  html += '<div class="dose-ref-band">' + esc(fmtDoseBand(b));
+                  if (b.indication)
+                    html +=
+                      '<span class="dose-ref-note">' +
+                      esc(b.indication) +
+                      "</span>";
+                  html += "</div>";
+                });
+                html +=
+                  '</div><button class="dose-ref-toggle" onclick="const el=document.getElementById(\'' +
+                  pid +
+                  "-morebands');el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'Other indications ▾':'Hide ▴'\">Other indications ▾</button>";
+              }
+              html += "</div>";
+            }
+
+            // DOSE SLIDER
+            const dMin = band?.dose_min_qty || m.dose_mg_per_kg * 0.5 || 5;
+            const dMax = band?.dose_max_qty || m.dose_mg_per_kg * 1.5 || 50;
+            const sliderMin = Math.max(0, Math.floor(dMin * 0.5));
+            const sliderMax = Math.ceil(dMax * 1.5);
+            const curDose = m.dose_mg_per_kg || (dMin + dMax) / 2;
+            const greenLeft =
+              ((dMin - sliderMin) / (sliderMax - sliderMin)) * 100;
+            const greenRight =
+              ((dMax - sliderMin) / (sliderMax - sliderMin)) * 100;
+            const isInRange = curDose >= dMin && curDose <= dMax;
+            const doseUnit = band?.dose_unit || "mg/kg/day";
+
+            html += '<div class="dp-slider-wrap">';
+            html +=
+              '<div class="dp-slider-val' +
+              (isInRange ? " dp-safe" : " dp-warn") +
+              '" id="' +
+              pid +
+              '-sliderval">' +
+              curDose +
+              " " +
+              esc(doseUnit) +
+              "</div>";
+            html +=
+              '<div class="dp-slider-track" style="--zone-red-left:' +
+              greenLeft +
+              "%;--zone-red-right:" +
+              greenRight +
+              '%"></div>';
+            html +=
+              '<input type="range" class="dp-slider" id="' +
+              pid +
+              '-slider" min="' +
+              sliderMin +
+              '" max="' +
+              sliderMax +
+              '" step="0.5" value="' +
+              curDose +
+              '" oninput="dpSliderChanged(\'' +
+              pid +
+              "'," +
               idx +
-              ')" style="width:100%;padding:5px;border:1px solid var(--bdr2);border-radius:var(--r);font-size:12px;font-family:inherit">' +
-              opts +
-              "</select></div>"
-            );
-          })()}
-          <div class="ep-grid">
-            <div class="epf"><label>Weight (kg)</label><input type="number" step="0.1" id="${pid}-wt" value="${esc(r.patient.weight_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>${esc(m.dose_mg_per_kg ? (m.method === "bsa" ? "mg/m²/day" : "mg/kg/day") : "mg/kg/day")}</label><input type="number" step="0.5" id="${pid}-mgkg" value="${esc(m.dose_mg_per_kg)}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Times/day</label><input type="number" id="${pid}-freq" value="${(() => {
+              ')">';
+            html +=
+              '<div class="dp-slider-labels"><span>' +
+              sliderMin +
+              '</span><span class="dp-rec">\u25C4 ' +
+              dMin +
+              " — " +
+              dMax +
+              " \u25BA</span><span>" +
+              sliderMax +
+              "</span></div>";
+            html += "</div>";
+
+            // FREQUENCY
+            const curFreq = (() => {
               const v = Math.round(m.dose_per_day_divided);
-              if (v >= 1 && v <= 4) return v;
+              if (v >= 1 && v <= 6) return v;
               const txt = (m.row2_en || "").toLowerCase();
+              if (txt.includes("qid") || txt.includes("q6h")) return 4;
               if (
-                txt.includes("four times") ||
-                txt.includes("qid") ||
-                txt.includes("q6h")
-              )
-                return 4;
-              if (
-                txt.includes("three times") ||
                 txt.includes("tds") ||
                 txt.includes("tid") ||
                 txt.includes("q8h")
               )
                 return 3;
               if (
-                txt.includes("twice") ||
                 txt.includes("bd") ||
                 txt.includes("bid") ||
                 txt.includes("q12h")
               )
                 return 2;
-              if (
-                txt.includes("once") ||
-                txt.includes("od") ||
-                txt.includes("daily")
-              )
-                return 1;
+              if (txt.includes("od") || txt.includes("daily")) return 1;
               return v || 3;
-            })()}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Conc. (${esc(m.formulation === "tablet" || m.formulation === "capsule" ? "mg/tab" : "mg")})</label><input type="number" id="${pid}-cmg" value="${esc(m.concentration_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Per (${esc(m.formulation === "tablet" || m.formulation === "capsule" ? "tab" : "mL")})</label><input type="number" id="${pid}-cml" value="${esc(m.concentration_per_ml || 5)}" oninput="liveCalc('${pid}',${idx})"></div>
-            <div class="epf"><label>Max single (mg)</label><input type="number" id="${pid}-max" value="${esc(m.max_dose_single_mg)}" oninput="liveCalc('${pid}',${idx})"></div>
-          </div>
-          <div class="ep-result" id="${pid}-res">Fill fields above to recalculate.</div>
+            })();
+            html += '<div class="dp-freq-row"><label>Frequency:</label>';
+            html +=
+              '<button class="dp-freq-btn" onclick="dpFreqChange(\'' +
+              pid +
+              "'," +
+              idx +
+              ',-1)">\u2212</button>';
+            html +=
+              '<span class="dp-freq-val" id="' +
+              pid +
+              '-freqval">' +
+              curFreq +
+              "\u00D7/day</span>";
+            html +=
+              '<button class="dp-freq-btn" onclick="dpFreqChange(\'' +
+              pid +
+              "'," +
+              idx +
+              ',1)">+</button>';
+            html += "</div>";
+
+            // HIDDEN FIELDS (needed by calcDose/applyDose)
+            html +=
+              '<input type="hidden" id="' +
+              pid +
+              '-wt" value="' +
+              esc(r.patient.weight_kg) +
+              '">';
+            html +=
+              '<input type="hidden" id="' +
+              pid +
+              '-mgkg" value="' +
+              esc(curDose) +
+              '">';
+            html +=
+              '<input type="hidden" id="' +
+              pid +
+              '-freq" value="' +
+              curFreq +
+              '">';
+            html +=
+              '<input type="hidden" id="' +
+              pid +
+              '-cmg" value="' +
+              esc(m.concentration_mg) +
+              '">';
+            html +=
+              '<input type="hidden" id="' +
+              pid +
+              '-cml" value="' +
+              esc(m.concentration_per_ml || 5) +
+              '">';
+            html +=
+              '<input type="hidden" id="' +
+              pid +
+              '-max" value="' +
+              esc(m.max_dose_single_mg) +
+              '">';
+            return html;
+          })()}
+          <div class="ep-result" id="${pid}-res"></div>
           <div class="ep-warn" id="${pid}-warn"></div>
           <div class="ep-btns">
-            <button class="ep-apply" onclick="applyDose('${pid}',${idx})">Apply & update</button>
+            <button class="ep-apply" onclick="applyDose('${pid}',${idx})">Apply &amp; update</button>
             <button class="ep-cancel" onclick="toggleEP('${pid}',${idx})">Cancel</button>
           </div>
         </div>
@@ -4734,38 +5475,8 @@
     }
   }
   function liveCalc(pid, idx) {
-    const wt = parseFloat(document.getElementById(pid + "-wt")?.value);
-    const mgkg = parseFloat(document.getElementById(pid + "-mgkg")?.value);
-    const freq = parseFloat(document.getElementById(pid + "-freq")?.value);
-    const cmg = parseFloat(document.getElementById(pid + "-cmg")?.value);
-    const cml = parseFloat(document.getElementById(pid + "-cml")?.value) || 5;
-    const maxS =
-      parseFloat(document.getElementById(pid + "-max")?.value) || null;
-    const res = document.getElementById(pid + "-res");
-    const warn = document.getElementById(pid + "-warn");
-    const m = rxData.medicines[idx];
-    if (isNaN(wt) || isNaN(mgkg) || isNaN(freq) || isNaN(cmg)) {
-      res.textContent = "Fill all fields to calculate.";
-      warn.style.display = "none";
-      return;
-    }
-    const r = calcDose(
-      wt,
-      mgkg,
-      freq,
-      cmg,
-      cml,
-      maxS,
-      m.formulation || "syrup",
-    );
-    res.innerHTML = `<strong>${esc(r.vol)}</strong> per dose · ${freq}× daily<br><span style="font-size:11px;opacity:0.8">${esc(r.calc)}</span>`;
-    if (r.capped) {
-      warn.style.display = "block";
-      warn.textContent =
-        "Max dose limit applied (" + maxS + "mg). Verify clinically.";
-    } else {
-      warn.style.display = "none";
-    }
+    // Delegate to smart dose panel recalculator
+    dpRecalc(pid, idx);
   }
   function applyDose(pid, idx) {
     const wt = parseFloat(document.getElementById(pid + "-wt").value);
@@ -4953,6 +5664,39 @@
     const newR1 = `${drugName} (${concQty}${concUnit}/${perQty}${perUnit} ${form})`;
     document.getElementById(pid + "-r1").textContent = newR1;
     m.row1_en = newR1;
+    // Refresh dosing reference (volume changes with different concentration)
+    const refEl = document.getElementById(pid + "-doseref");
+    if (refEl) {
+      const ref = getDoseRef(m.row1_en, rxData.patient?.age);
+      if (ref) {
+        const primary = ref.bands[0];
+        let html =
+          '<strong style="font-size:11px;letter-spacing:0.03em">RECOMMENDED:</strong> ' +
+          esc(fmtDoseBand(primary));
+        if (primary.indication)
+          html +=
+            '<span class="dose-ref-note">' +
+            esc(primary.indication) +
+            (primary.notes ? " — " + esc(primary.notes) : "") +
+            "</span>";
+        if (ref.allBands.length > 1) {
+          html += '<div id="' + pid + '-morebands" style="display:none">';
+          ref.allBands.slice(1).forEach((b) => {
+            html += '<div class="dose-ref-band">' + esc(fmtDoseBand(b));
+            if (b.indication)
+              html +=
+                '<span class="dose-ref-note">' + esc(b.indication) + "</span>";
+            html += "</div>";
+          });
+          html += "</div>";
+          html +=
+            '<button class="dose-ref-toggle" onclick="const el=document.getElementById(\'' +
+            pid +
+            "-morebands');el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'Other indications \u25BE':'Hide \u25B4'\">Other indications \u25BE</button>";
+        }
+        refEl.innerHTML = html;
+      }
+    }
     // Auto-apply: recalculate dose and update Row 2/Row 3 with new formulation-appropriate instructions
     applyDose(pid, idx);
   }
@@ -6547,6 +7291,14 @@
     resetPad,
     applyDose,
     liveCalc,
+    dpFormChanged,
+    dpStrengthChanged,
+    dpUnitChanged,
+    dpSliderChanged,
+    dpFreqChange,
+    dpRecalc,
+    simplifyForm,
+    getUnitOptions,
     renderPictogram,
     renderDoseIcon,
     clearHistoryTabs,
