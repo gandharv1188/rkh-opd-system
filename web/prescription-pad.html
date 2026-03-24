@@ -2356,47 +2356,74 @@
     }
   }
 
+  function _renderPatientRow(p, i, isMatch) {
+    const age = calcAge(p.dob);
+    if (p.done) {
+      return `<div onclick="selectFromList(${i})" style="padding:5px 12px;cursor:pointer;border-bottom:1px solid #f0f0ea;font-size:11px;color:var(--ink3);background:${isMatch ? "#f0f5ff" : "#f9f9f5"};" onmouseover="this.style.background='#f0f0ea'" onmouseout="this.style.background='${isMatch ? "#f0f5ff" : "#f9f9f5"}'">
+        <strong>${i + 1}.</strong> ${esc(p.name)} <span style="color:#aaa">— ${esc(p.id)}</span> · ${esc(age)} · ✓
+      </div>`;
+    }
+    const allergy = p.known_allergies?.length
+      ? ' <span style="color:var(--red)">⚠ ' +
+        p.known_allergies.map((a) => esc(a)).join(", ") +
+        "</span>"
+      : "";
+    return `<div onclick="selectFromList(${i})" style="padding:7px 12px;cursor:pointer;border-bottom:1px solid #f0f0ea;font-size:12px;transition:background 0.1s;${isMatch ? "background:#f0f5ff;" : ""}" onmouseover="this.style.background='var(--blue-lt)'" onmouseout="this.style.background='${isMatch ? "#f0f5ff" : ""}'">
+      <strong style="color:var(--blue)">${i + 1}.</strong> ${esc(p.name)} <span style="color:var(--ink3)">— ${esc(p.id)}</span> · ${esc(age)} · ${esc(p.sex || "")}${allergy}
+      ${p.guardian_name ? '<br><span style="font-size:10px;color:var(--ink3)">Guardian: ' + esc(p.guardian_name) + "</span>" : ""}
+      ${p.visit?.chief_complaints ? '<br><span style="font-size:10px;color:var(--ink2)">' + esc(p.visit.chief_complaints.slice(0, 60)) + "</span>" : ""}
+    </div>`;
+  }
+
   function renderPatientList(filter) {
     const list = document.getElementById("pt-list");
     if (!list) return;
     const f = (filter || "").toLowerCase();
-    const pending = [];
-    const done = [];
+    // Split into: search matches (top) and rest (below separator)
+    const matches = [],
+      rest = [];
     todayPatients.forEach((p, i) => {
       const searchText =
         `${i + 1} ${p.name} ${p.id} ${p.guardian_name || ""} ${p.contact_phone || ""}`.toLowerCase();
-      if (f && !searchText.includes(f)) return;
-      (p.done ? done : pending).push({ p, i });
+      if (f && searchText.includes(f)) matches.push({ p, i });
+      else rest.push({ p, i });
     });
     let h = "";
-    if (!pending.length && !done.length) {
+    if (f && !matches.length && !rest.length) {
       h =
-        '<div style="padding:10px;color:var(--ink3);font-size:12px;text-align:center">' +
-        (f ? "No matching patients" : "No patients registered today") +
-        "</div>";
-    }
-    pending.forEach(({ p, i }) => {
-      const age = calcAge(p.dob);
-      const allergy = p.known_allergies?.length
-        ? ' <span style="color:var(--red)">⚠ ' +
-          p.known_allergies.map((a) => esc(a)).join(", ") +
-          "</span>"
-        : "";
-      h += `<div onclick="selectFromList(${i})" style="padding:7px 12px;cursor:pointer;border-bottom:1px solid #f0f0ea;font-size:12px;transition:background 0.1s;" onmouseover="this.style.background='var(--blue-lt)'" onmouseout="this.style.background=''">
-        <strong style="color:var(--blue)">${i + 1}.</strong> ${esc(p.name)} <span style="color:var(--ink3)">— ${esc(p.id)}</span> · ${esc(age)} · ${esc(p.sex || "")}${allergy}
-        ${p.guardian_name ? '<br><span style="font-size:10px;color:var(--ink3)">Guardian: ' + esc(p.guardian_name) + "</span>" : ""}
-        ${p.visit?.chief_complaints ? '<br><span style="font-size:10px;color:var(--ink2)">' + esc(p.visit.chief_complaints.slice(0, 60)) + "</span>" : ""}
-      </div>`;
-    });
-    if (done.length) {
-      h +=
-        '<div style="padding:5px 12px;background:var(--bg3);font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;border-top:2px solid var(--bdr2)">✓ Consultation Completed</div>';
-      done.forEach(({ p, i }) => {
-        const age = calcAge(p.dob);
-        h += `<div onclick="selectFromList(${i})" style="padding:5px 12px;cursor:pointer;border-bottom:1px solid #f0f0ea;font-size:11px;color:var(--ink3);background:#f9f9f5;" onmouseover="this.style.background='#f0f0ea'" onmouseout="this.style.background='#f9f9f5'">
-          <strong>${i + 1}.</strong> ${esc(p.name)} <span style="color:#aaa">— ${esc(p.id)}</span> · ${esc(age)} · ✓
-        </div>`;
+        '<div style="padding:10px;color:var(--ink3);font-size:12px;text-align:center">No matching patients</div>';
+    } else if (!todayPatients.length) {
+      h =
+        '<div style="padding:10px;color:var(--ink3);font-size:12px;text-align:center">No patients registered today</div>';
+    } else if (f && matches.length) {
+      // Search results at top
+      matches.forEach(({ p, i }) => {
+        h += _renderPatientRow(p, i, true);
       });
+      if (rest.length) {
+        h +=
+          '<div style="padding:4px 12px;background:var(--bg3);font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;border-top:1px solid var(--bdr2);border-bottom:1px solid var(--bdr2)">Other patients</div>';
+        rest.forEach(({ p, i }) => {
+          h += _renderPatientRow(p, i, false);
+        });
+      }
+    } else {
+      // No filter — show pending first, then done
+      const pending = [],
+        done = [];
+      todayPatients.forEach((p, i) => {
+        (p.done ? done : pending).push({ p, i });
+      });
+      pending.forEach(({ p, i }) => {
+        h += _renderPatientRow(p, i, false);
+      });
+      if (done.length) {
+        h +=
+          '<div style="padding:5px 12px;background:var(--bg3);font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;border-top:2px solid var(--bdr2)">✓ Consultation Completed</div>';
+        done.forEach(({ p, i }) => {
+          h += _renderPatientRow(p, i, false);
+        });
+      }
     }
     list.innerHTML = h;
   }
@@ -2406,7 +2433,10 @@
     document.getElementById("pt-list").style.display = "block";
   }
   function showPatientList() {
-    renderPatientList(document.getElementById("pt-search")?.value);
+    // On focus: select all text so user can immediately type to search
+    const inp = document.getElementById("pt-search");
+    if (inp && inp.value) inp.select();
+    renderPatientList(inp?.value);
     document.getElementById("pt-list").style.display = "block";
   }
   function selectFromList(idx) {
