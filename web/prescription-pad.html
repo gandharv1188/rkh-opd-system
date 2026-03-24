@@ -4209,10 +4209,9 @@
       form === "nasal drops" ||
       form === "ear drops"
     ) {
-      // Drops: 1 ml = 5 drops. All formulary concentrations MUST be per-ml.
-      // If per_unit was "drop" in formulary, it was pre-converted: per_qty = 0.2ml (1 drop).
+      // Drops: 1 ml = 20 drops (standard medical dropper). All formulary concentrations MUST be per-ml.
       const mlPerDose = (fd / cmg) * cml;
-      const drops = Math.round(mlPerDose * 5); // 5 drops per ml — always correct when conc is per-ml
+      const drops = Math.round(mlPerDose * 20); // 20 drops per ml (standard)
       vol = drops + " drops";
       enD = drops + " drops";
       const DN = {
