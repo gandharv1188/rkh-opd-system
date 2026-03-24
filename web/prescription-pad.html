@@ -4192,10 +4192,31 @@
     const capped = maxS && perDose > maxS;
     const fd = capped ? maxS : perDose;
     let vol, enD, hiD;
-    if (form === "syrup" || form === "drops") {
+    if (form === "drops") {
+      // Drops: 1 ml = 5 drops. Calculate ml then convert to drops, round to nearest whole drop.
+      const mlPerDose = (fd / cmg) * cml;
+      const drops = Math.round(mlPerDose * 5); // 5 drops per ml
+      vol = drops + " drops";
+      enD = drops + " drops";
+      const DN = {
+        1: "एक",
+        2: "दो",
+        3: "तीन",
+        4: "चार",
+        5: "पाँच",
+        6: "छह",
+        7: "सात",
+        8: "आठ",
+        9: "नौ",
+        10: "दस",
+        12: "बारह",
+        15: "पंद्रह",
+        20: "बीस",
+      };
+      hiD = (DN[drops] || drops) + " बूंदें";
+    } else if (form === "syrup") {
       const v = (fd / cmg) * cml;
-      const r =
-        form === "syrup" ? Math.round(v * 2) / 2 : Math.round(v * 10) / 10;
+      const r = Math.round(v * 2) / 2; // round to nearest 0.5 ml
       const tsp = r / 5;
       vol = r + "ml";
       enD = r + "ml";

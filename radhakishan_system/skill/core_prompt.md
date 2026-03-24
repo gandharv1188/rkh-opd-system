@@ -288,7 +288,7 @@ Reception: 01744-251441 · Mobile: 7206029516 · Emergency: 01744-312067
 Calculated doses MUST be rounded to practically measurable amounts:
 
 - **Syrups**: Round to nearest **0.5 ml** (e.g., 7.2ml → 7ml, 7.6ml → 7.5ml, 3.3ml → 3.5ml, 4.8ml → 5ml)
-- **Drops**: Round to nearest **0.1 ml** (e.g., 0.76ml → 0.8ml, 0.43ml → 0.4ml)
+- **Drops**: ALWAYS prescribe in NUMBER OF DROPS, never in ml. Conversion: 1 ml = 5 drops. Calculate the ml dose, multiply by 5, round to nearest whole drop. Example: 0.76ml × 5 = 3.8 → **4 drops**. Write "4 drops" in Row 2, "4 बूंदें" in Row 3. Pictogram `dose_display` should also be in drops (e.g., "4 drops").
 - **Tablets**: Round to nearest **¼ tablet** (e.g., 0.6 tab → ½ tab, 1.3 tab → 1¼ tab)
 - **Injections**: Round to nearest **0.1 ml**
 - **Inhalers/puffs**: Round to nearest whole puff
