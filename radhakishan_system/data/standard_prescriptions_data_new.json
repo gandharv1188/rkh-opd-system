@@ -24,8 +24,8 @@
       }
     ],
     "notes": "Viral illness, self-limiting 5-7 days. No routine antibiotics. Symptomatic management is mainstay. Honey for cough (>1 year only). Steam/menthol inhalation 2-3 times/day for congestion relief. Antibiotics only if secondary bacterial infection suspected.",
-    "source": "IAP Guidelines, WHO",
-    "guideline_changes": null,
+    "source": "IAP 2024, WHO 2023, ACCP 2017",
+    "guideline_changes": "IAP 2024: Continued emphasis on no routine antibiotics or OTC cough/cold medicines in children; ACCP: Recommends against OTC cough suppressants in pediatric URI; No major guideline changes in 2024-2025 for common cold management",
     "active": true,
     "duration_days_default": 5,
     "counselling": [
@@ -55,7 +55,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "82272006"
   },
   {
     "icd10": "P07.3",
@@ -97,8 +97,8 @@
       }
     ],
     "notes": "Goals: adequate weight gain (15-20 g/kg/day), prevent nutritional deficiencies (iron, calcium, Vitamin D), monitor neurodevelopment, prevent anemia/rickets/infections. Exclusive breastfeeding till 6 months corrected age, feeds every 2-3 hours. Fortified feeds if poor weight gain. Use CORRECTED age for growth/development, CHRONOLOGICAL age for vaccinations. Catch-up growth expected by 1-2 years.",
-    "source": "IAP Neonatal Guidelines, WHO Preterm Follow-up",
-    "guideline_changes": null,
+    "source": "IAP 2024 Neonatal Guidelines, WHO 2022 Preterm Care Recommendations, AAP 2023",
+    "guideline_changes": "IAP 2025: New consensus on developmentally supportive follow-up with color-coded risk stratification and validated screening tools; WHO 2022: 11 new recommendations for preterm/LBW care including home visits by trained health workers; AAP 2023: Primary care framework for neurodevelopmental monitoring of preterm infants",
     "active": true,
     "duration_days_default": 90,
     "counselling": [
@@ -142,7 +142,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "395507008"
   },
   {
     "icd10": "J21.9",
@@ -179,8 +179,8 @@
       }
     ],
     "notes": "Viral infection (commonly RSV), self-limiting (peak Day 3-5, recovery 10-14 days). Oxygen therapy if SpO2 <92%, target 92-94%. HFNC for moderate-severe distress (1-2 L/kg/min). Bronchodilators NOT routine. Steroids NOT routinely recommended. Antibiotics NOT indicated unless secondary bacterial infection. Maintain hydration 100-120 ml/kg/day. Continue breastfeeding if possible. NG feeds/IV fluids if feeding difficulty.",
-    "source": "IAP Guidelines, WHO, AIIMS Protocol",
-    "guideline_changes": null,
+    "source": "AAP 2014 (reaffirmed 2024), IAP 2024, WHO 2023, AIIMS Protocol",
+    "guideline_changes": "AAP 2014/2024: No routine albuterol, epinephrine, hypertonic saline, or chest physiotherapy in outpatient bronchiolitis; supportive care only (oxygen + hydration); AAP 2024: Nirsevimab recommended for RSV prophylaxis in all infants <8 months entering first RSV season; IAP 2024: Aligned with AAP on no routine nebulization",
     "active": true,
     "duration_days_default": 7,
     "counselling": [
@@ -223,7 +223,7 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "4120002"
   },
   {
     "icd10": "J45",
@@ -255,8 +255,8 @@
       }
     ],
     "notes": "Nebulization is first-line. Steroids reduce relapse. Transition to inhaler therapy (MDI + Spacer) for long-term: Salbutamol inhaler as reliever, Budesonide/Fluticasone as controller. Inhaler > Syrup for long-term management. Avoid triggers (dust, smoke, cold). Avoid overuse of cough syrups. Antibiotics not required unless infection suspected.",
-    "source": "GINA 2024, IAP Asthma Guidelines",
-    "guideline_changes": null,
+    "source": "GINA 2024/2025, IAP Asthma Guidelines 2024",
+    "guideline_changes": "GINA 2025: New diagnostic criteria for asthma in children <5 years (3 required: recurrent wheezing, no alternative cause, response to asthma meds); GINA 2024: Updated stepwise approach emphasizing early ICS; IAP 2024: Inhaler therapy preferred over oral medications for long-term control",
     "active": true,
     "duration_days_default": 5,
     "counselling": [
@@ -290,7 +290,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "195967001"
   },
   {
     "icd10": "J45",
@@ -327,8 +327,8 @@
       }
     ],
     "notes": "Inhaler therapy is the GOLD STANDARD - faster action, fewer side effects than oral drugs. Spacer + Mask mandatory for proper drug delivery in infants and young children. GINA Stepwise: Step 1 SABA PRN, Step 2 low-dose ICS, Step 3 ICS+LABA, Step 4 specialist referral. ICS is preventive (not immediate relief). SABA is rescue drug. Early inhaler use reduces hospital admissions.",
-    "source": "GINA 2024, IAP Asthma Guidelines",
-    "guideline_changes": null,
+    "source": "GINA 2024/2025, IAP Asthma Guidelines 2024",
+    "guideline_changes": "GINA 2025: New diagnostic criteria for asthma in children <5 years; expanded role of T2 biomarkers (blood eosinophils, FeNO) in assessment; GINA 2024: MDI+Spacer remains preferred delivery for all ages; Step-down only after 3 months symptom-free on low-dose ICS",
     "active": true,
     "duration_days_default": 90,
     "counselling": [
@@ -361,7 +361,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "195967001"
   },
   {
     "icd10": "J45.5",
@@ -403,8 +403,8 @@
       }
     ],
     "notes": "Golden Hour: Oxygen + aggressive nebulization + systemic steroids. Monitoring: SpO2 continuous, RR/HR/work of breathing hourly, ABG if severe. Fluids 100 ml/kg/day, avoid overload. Antibiotics NOT routine - only if fever + infection suspected. Escalation: HFNC if moderate distress, NIV if worsening, mechanical ventilation as last resort. Step-down: transition to MDI+Spacer (Salbutamol reliever + Budesonide controller) and oral steroids before discharge.",
-    "source": "GINA 2024, IAP Guidelines, AIIMS Protocol, NABH HCO 6th Edition",
-    "guideline_changes": null,
+    "source": "GINA 2024/2025, IAP Guidelines 2024, AIIMS Protocol, NABH HCO 6th Edition",
+    "guideline_changes": "GINA 2025: IV isotonic MgSO4 may be considered in children >=2 years with severe exacerbations; GINA 2024: Early systemic steroids within first hour remain critical; Ipratropium bromide add-on for severe episodes; Emphasis on step-down to MDI+Spacer before discharge with written action plan",
     "active": true,
     "duration_days_default": 5,
     "counselling": [
@@ -446,7 +446,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "304527002"
   },
   {
     "icd10": "R50.9",
@@ -473,8 +473,8 @@
       }
     ],
     "notes": "Symptomatic treatment first. Avoid unnecessary antibiotics unless persistent fever >3 days, toxic child, raised CRP/Procalcitonin, or localizing signs. Supportive: adequate fluids (ORS, water, coconut water), light diet, tepid sponging, rest.",
-    "source": "IAP Fever Guidelines, AIIMS Protocol",
-    "guideline_changes": null,
+    "source": "IAP Fever Guidelines, AIIMS Febrile Child Protocol, NICE Fever in Under 5s",
+    "guideline_changes": "IAP 2024: Procalcitonin recommended as key biomarker to differentiate bacterial vs viral fever; emphasis on avoiding empirical antibiotics in first 72 hours unless toxic appearance or positive cultures; AIIMS Protocol: Structured fever workup with CBC, CRP, urine R/M, blood culture for fever >3 days; NICE 2024: Age-stratified approach - infants <3 months with fever require urgent evaluation and empiric antibiotics",
     "active": true,
     "duration_days_default": 5,
     "counselling": [
@@ -518,7 +518,7 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "386661006"
   },
   {
     "icd10": "J03.9",
@@ -550,8 +550,8 @@
       }
     ],
     "notes": "Start antibiotic if high-grade fever with follicles or toxic child. Supportive: warm saline gargles (if child >5 years), adequate hydration, soft diet. Avoid cold items.",
-    "source": "IAP Guidelines, IDSA Pharyngitis Guidelines",
-    "guideline_changes": null,
+    "source": "IAP Guidelines, IDSA Pharyngitis Guidelines 2012/2024 update, AHA Rheumatic Fever Prevention",
+    "guideline_changes": "IDSA 2024: Continued emphasis on rapid antigen detection test (RADT) or culture before starting antibiotics for pharyngitis; Centor/McIsaac scoring to guide testing; Penicillin V or amoxicillin remain first-line for confirmed GAS; IAP 2024: Antibiotic stewardship - avoid empirical antibiotics for viral tonsillitis; reserve cephalosporins for penicillin-allergic patients",
     "active": true,
     "duration_days_default": 7,
     "counselling": [
@@ -585,7 +585,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "17741008"
   },
   {
     "icd10": "J30.9",
@@ -617,8 +617,8 @@
       }
     ],
     "notes": "ARIA classification: Intermittent (<4 days/week) vs Persistent (>4 days/week); Mild vs Moderate-Severe. Intranasal steroid is gold standard. Allergen avoidance is essential: dust, smoke, perfumes, cold exposure, pets, house dust mites.",
-    "source": "ARIA Guidelines, IAP Allergy Protocol, GINA",
-    "guideline_changes": null,
+    "source": "ARIA-EAACI Guidelines 2024-2025, IAP Allergy Protocol, GINA",
+    "guideline_changes": "ARIA-EAACI 2024-2025: Combined intranasal antihistamine + corticosteroid (INAH+INCS) recommended over monotherapy for moderate-severe AR; INCS preferred over INAH alone; digital shared decision-making algorithms introduced; pediatric considerations updated for preschool and school-age children; emphasis on step-up/step-down approach based on symptom control",
     "active": true,
     "duration_days_default": 14,
     "counselling": [
@@ -647,7 +647,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "61582004"
   },
   {
     "icd10": "L20.9",
@@ -684,8 +684,8 @@
       }
     ],
     "notes": "Treatment principles: restore skin barrier, reduce inflammation, control itching, prevent relapse. Moisturizer is cornerstone. Steroid for flare only - avoid overuse. Lukewarm water bath, mild soap-free cleanser, apply moisturizer within 3 minutes after bath. Avoid harsh soaps, woolen clothes, dust/allergens.",
-    "source": "IAP Dermatology Guidelines, AAD Atopic Dermatitis Guidelines, NICE",
-    "guideline_changes": null,
+    "source": "AAP Atopic Dermatitis Clinical Report 2025, AAD Guidelines 2024, AAAAI/ACAAI Joint Task Force 2023, NICE",
+    "guideline_changes": "AAP 2025: Updated clinical report on skin-directed management - daily bathing with lukewarm water and gentle cleanser, moisturizer within minutes of bath; proactive intermittent topical anti-inflammatory maintenance to prevent flares; AAD 2024: Updated treatment guidelines with expanded role of topical calcineurin inhibitors and JAK inhibitors for moderate-severe disease; AAAAI 2023: Dupilumab recommended for moderate-severe AD in children >=6 months",
     "active": true,
     "duration_days_default": 14,
     "counselling": [
@@ -715,7 +715,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "24079001"
   },
   {
     "icd10": "K60.0",
@@ -752,8 +752,8 @@
       }
     ],
     "notes": "Treatment principles: soften stool, relieve pain, heal fissure, prevent recurrence. Sitz bath with warm water + potassium permanganate (light pink solution) for 10-15 min 2-3 times/day is essential. High fiber diet: papaya, banana, vegetables. Adequate water intake. Avoid junk food and excess milk.",
-    "source": "IAP Pediatric Surgery Guidelines",
-    "guideline_changes": null,
+    "source": "IAP Pediatric Surgery Guidelines, ASCRS Anal Fissure Guidelines 2023, ESPGHAN Constipation Guidelines",
+    "guideline_changes": "ASCRS 2023: Topical calcium channel blockers (diltiazem) recommended as first-line pharmacotherapy for chronic fissures with better side-effect profile than GTN; conservative management (stool softeners, fiber, sitz baths) remains first-choice for acute fissures in children; IAP Pediatric Surgery 2024: PEG-based laxatives preferred over lactulose for chronic constipation-associated fissures",
     "active": true,
     "duration_days_default": 7,
     "counselling": [
@@ -766,8 +766,24 @@
     ],
     "referral_criteria": "Refer to pediatric surgeon if chronic fissure not healing after 4-6 weeks of conservative treatment, recurrent fissures, or suspected underlying condition (Crohn disease, anorectal anomaly)",
     "hospitalisation_criteria": "Admit if significant rectal bleeding, suspected perianal abscess, or need for examination under anesthesia",
-    "investigations": [],
-    "snomed_code": null
+    "investigations": [
+      {
+        "name": "Stool routine and microscopy",
+        "indication": "Rule out occult blood, parasites, or infection if recurrent",
+        "urgency": "routine"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "Assess for anemia if significant or recurrent bleeding",
+        "urgency": "routine"
+      },
+      {
+        "name": "Stool occult blood test",
+        "indication": "Confirm GI bleeding if history of blood in stool",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "30037006"
   },
   {
     "icd10": "A03.9",
@@ -804,8 +820,8 @@
       }
     ],
     "notes": "ORS + Zinc = cornerstone of therapy. Continue normal feeding. Antibiotic indicated for bloody dysentery. Preferred diet: curd, buttermilk, khichdi, rice, banana, coconut water. Avoid junk food and sugary drinks.",
-    "source": "IAP Diarrhea Guidelines, WHO Diarrheal Disease Management",
-    "guideline_changes": null,
+    "source": "IAP Diarrhea Guidelines, WHO Diarrheal Disease Management, CDC Shigella Treatment Guidelines 2024, IDSA Infectious Diarrhea Guidelines",
+    "guideline_changes": "WHO 2024: Rising antimicrobial resistance in Shigella globally - azithromycin resistance increased significantly; CDC 2023: Alert on extensively drug-resistant (XDR) Shigella strains; ceftriaxone or azithromycin recommended where ciprofloxacin resistance is high; stool culture and sensitivity recommended for non-responding cases; IAP 2024: ORS + Zinc remains cornerstone; cefixime preferred empiric oral antibiotic for pediatric bloody dysentery in India",
     "active": true,
     "duration_days_default": 5,
     "counselling": [
@@ -840,7 +856,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "36188001"
   },
   {
     "icd10": "K52.9",
@@ -888,7 +904,7 @@
     ],
     "notes": "ORS + Zinc = gold standard. Continue feeding. Avoid unnecessary antibiotics. Antibiotics only for dysentery, high fever, or toxic child. Assess dehydration status at each visit.",
     "source": "IAP 2024, WHO Diarrhoea Management Guidelines",
-    "guideline_changes": null,
+    "guideline_changes": "WHO 2024: conditional recommendation for reduced zinc dose (5 mg/day) in children up to 10 yr to lower vomiting risk while preserving efficacy; probiotics not recommended due to low-certainty evidence; ondansetron endorsed for single-dose anti-emetic use in ED/OPD before ORS.",
     "active": true,
     "duration_days_default": 5,
     "counselling": [
@@ -918,7 +934,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "25374005"
   },
   {
     "icd10": "K29.0",
@@ -966,7 +982,7 @@
     ],
     "notes": "Ondansetron for vomiting control. PPI (Omeprazole) is first-line acid suppression, preferred over H2 blockers. Maintain hydration. Avoid unnecessary antibiotics. Small frequent meals.",
     "source": "IAP 2024, Pediatric GI Guidelines",
-    "guideline_changes": null,
+    "guideline_changes": "ESPGHAN/NASPGHAN 2024: updated H. pylori guidelines with bismuth-based quadruple therapy for resistant strains; PPIs remain first-line acid suppression in children; PPI deprescription emphasized after 4-8 wk courses; ACG 2024 highlights rising clarithromycin resistance.",
     "active": true,
     "duration_days_default": 7,
     "counselling": [
@@ -1000,7 +1016,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "25458004"
   },
   {
     "icd10": "A01.0",
@@ -1038,7 +1054,7 @@
     ],
     "notes": "Indoor protocol. Ceftriaxone is first-line IV drug. IV fluids (DNS/NS) as per Holliday-Segar maintenance. Monitor temperature 4-hourly, pulse/BP 4-hourly, strict I/O charting, daily sensorium and abdominal exam. Step-down to oral antibiotics when afebrile 48-72 hrs. Complete 10-14 days total therapy. Watch for intestinal perforation, GI bleeding, encephalopathy, shock.",
     "source": "IAP 2024, WHO Typhoid Guidelines, AIIMS Protocol",
-    "guideline_changes": null,
+    "guideline_changes": "WHO/CDC 2024: azithromycin elevated as co-first-line with ceftriaxone due to rising XDR S. Typhi (especially South Asia); meropenem recommended for XDR strains; blood culture before antibiotics strongly emphasized; TCV single-dose conjugate vaccine now in routine immunisation in endemic countries.",
     "active": true,
     "duration_days_default": 10,
     "counselling": [
@@ -1083,7 +1099,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "4834000"
   },
   {
     "icd10": "J05.0",
@@ -1116,7 +1132,7 @@
     ],
     "notes": "Dexamethasone single dose is the single most effective treatment. Adrenaline nebulisation for emergency relief in moderate-severe cases - observe 2-4 hours after dose for recurrence. Keep child calm (crying worsens stridor). Humidified air, adequate fluids. Avoid unnecessary antibiotics. Severity: Mild = barking cough no stridor at rest; Moderate = stridor at rest with mild retractions; Severe = marked distress with hypoxia.",
     "source": "IAP 2024, AAP Croup Guidelines, WHO",
-    "guideline_changes": null,
+    "guideline_changes": "2024 cohort data: single-dose dexamethasone (0.6 mg/kg) remains gold standard; repeat dosing in hospitalised children showed longer LOS without benefit on 30-day ED return; 0.15 mg/kg may suffice for mild croup; nebulised epinephrine observation period confirmed at 2-4 hr.",
     "active": true,
     "duration_days_default": 3,
     "counselling": [
@@ -1141,7 +1157,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "71186008"
   },
   {
     "icd10": "H66.9",
@@ -1179,7 +1195,7 @@
     ],
     "notes": "Pain control is the priority. Amox-Clav is first-line antibiotic. Avoid dual antibiotic therapy (Amox-Clav + Cefpodoxime simultaneously not recommended). Ear drops only if external ear involvement or discharge (avoid if TM perforation unless appropriate drops). Non-pharmacological: warm compress over ear, adequate hydration, keep ear dry.",
     "source": "IAP 2024, AAP AOM Guidelines",
-    "guideline_changes": null,
+    "guideline_changes": "AAP 2024 reaffirms watchful waiting for mild unilateral AOM in children >=2 yr; high-dose amoxicillin (80-90 mg/kg/day) remains first-line; amoxicillin-clavulanate for treatment failure or beta-lactamase producers; Italian intersociety 2024 consensus aligns with AAP on shortened 5-day courses for uncomplicated AOM in children >=2 yr.",
     "active": true,
     "duration_days_default": 7,
     "counselling": [
@@ -1209,7 +1225,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "3110003"
   },
   {
     "icd10": "B17.9",
@@ -1242,7 +1258,7 @@
     ],
     "notes": "Mostly supportive treatment. No routine antivirals needed for HAV/HEV. Diet + hydration = main treatment. High carbohydrate, low fat diet with frequent small meals. Monitor INR carefully. ORS/fluids orally; IV fluids if vomiting. NAC infusion in all admitted cases with severe hepatitis. Recovery in 2-4 weeks, full normalization in 4-6 weeks.",
     "source": "IAP 2024, WHO Hepatitis Guidelines, AIIMS Protocol",
-    "guideline_changes": null,
+    "guideline_changes": "INASL/AASLD 2024: IV NAC recommended in all non-acetaminophen acute liver failure (150 mg/kg loading then 50+100 mg/kg maintenance); early NAC initiation critical for better outcomes; no routine antivirals for HAV/HEV; EASL 2025 updated chronic HBV guidelines but acute management remains supportive.",
     "active": true,
     "duration_days_default": 14,
     "counselling": [
@@ -1288,7 +1304,7 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "3738000"
   },
   {
     "icd10": "K52.9",
@@ -1345,8 +1361,8 @@
       }
     ],
     "notes": "IV fluids are the cornerstone. Maintenance fluid per Holliday-Segar: 100 ml/kg first 10 kg + 50 ml/kg next 10 kg. Avoid routine triple antibiotics unless clearly indicated. Early transition to ORS. Continue feeding as early as possible (curd, khichdi, banana, coconut water).",
-    "source": "IAP 2024, WHO Diarrheal Disease Guidelines",
-    "guideline_changes": null,
+    "source": "IAP 2024 Diarrhea Guidelines, WHO Diarrheal Disease Management, NASPGHAN 2024 AGE Clinical Pathway",
+    "guideline_changes": "NASPGHAN 2024 AGE update: Lactobacillus not routinely recommended (two large RCTs showed no benefit); ondansetron preferred antiemetic for children >=6 months; early oral rehydration emphasized over IV where possible; Saccharomyces boulardii retains moderate evidence for reducing diarrhea duration.",
     "active": true,
     "duration_days_default": 5,
     "counselling": [
@@ -1380,7 +1396,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "25374005"
   },
   {
     "icd10": "R04.0",
@@ -1417,8 +1433,8 @@
       }
     ],
     "notes": "Most cases are benign anterior bleeds from Kiesselbach plexus due to nose picking or dry mucosa. Moisturization is the cornerstone. Teach first aid: sit upright, tilt head forward, pinch soft nose for 10 min, cold compress. Keep nails short. Avoid nose picking, forceful blowing, dry air.",
-    "source": "IAP ENT Guidelines, AAP Epistaxis Management",
-    "guideline_changes": null,
+    "source": "AAO-HNS Clinical Practice Guideline: Nosebleed (2020, AAP-endorsed), IAP ENT Guidelines",
+    "guideline_changes": "AAO-HNS 2020 CPG (AAP-endorsed): sustained pressure for minimum 5 minutes on lower third of nose; topical tranexamic acid now recommended as superior to other agents for stopping bleeding in first 10 minutes; oxymetazoline preferred topical vasoconstrictor. No major 2024-2025 pediatric-specific updates.",
     "active": true,
     "duration_days_default": 14,
     "counselling": [
@@ -1447,7 +1463,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "12441001"
   },
   {
     "icd10": "N39.44",
@@ -1461,10 +1477,26 @@
         "is_new_2024_2025": false
       }
     ],
-    "second_line_drugs": [],
+    "second_line_drugs": [
+      {
+        "drug": "Imipramine",
+        "notes": "0.9-1.5 mg/kg/dose PO at bedtime (max 50 mg for <12y, 75 mg for >=12y); use only if desmopressin fails; monitor for cardiac side effects; avoid in overdose-risk families",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Oxybutynin",
+        "notes": "0.2-0.3 mg/kg/dose BD-TDS PO (max 5 mg TDS); useful when overactive bladder component present; may combine with desmopressin for refractory cases",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Tolterodine",
+        "notes": "1-2 mg PO at bedtime; alternative anticholinergic if oxybutynin not tolerated; fewer side effects than oxybutynin",
+        "is_new_2024_2025": false
+      }
+    ],
     "notes": "Behavioral therapy is first-line: fluid restriction after 6-7 PM, timed voiding before bed, wake child once at night, bladder training with increasing daytime holding intervals, positive reinforcement with reward calendar. Enuresis alarm is the most effective long-term therapy (use 3-4 months). Medication only if moderate-severe or significant social impact. Monitor for hyponatremia on desmopressin. Never punish the child.",
-    "source": "ICCS Guidelines, IAP Enuresis Protocol",
-    "guideline_changes": null,
+    "source": "ICCS 2020 Standardization Document, IAP Enuresis Protocol, J Pediatr Urol 2024",
+    "guideline_changes": "ICCS 2020 updated standardization: active therapy from age 6 years; enuresis alarm remains most effective long-term treatment (3-4 months); combination desmopressin + imipramine shown more effective than desmopressin + oxybutynin for refractory cases (2024 study). No major 2024-2025 ICCS guideline revision.",
     "active": true,
     "duration_days_default": 56,
     "counselling": [
@@ -1499,7 +1531,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "8009008"
   },
   {
     "icd10": "Z00.1",
@@ -1536,8 +1568,8 @@
       }
     ],
     "notes": "Preventive pediatric care protocol. Ensure exclusive breastfeeding till 6 months, feed every 2-3 hours, proper burping. Monthly growth monitoring (weight, length, head circumference) on WHO charts. Follow National Immunization Schedule. Monitor developmental milestones (social smile, head control, activity). Adequate sunlight exposure. Avoid overcrowding.",
-    "source": "IAP Preventive Pediatric Care, WHO Infant Care Guidelines",
-    "guideline_changes": null,
+    "source": "IAP Preventive Pediatric Care 2024, WHO Infant Care Guidelines, NNF (National Neonatology Forum) India",
+    "guideline_changes": "IAP 2024: Vitamin D 400 IU/day universally recommended from birth; iron supplementation from 6 weeks for LBW/preterm, 6 months for term; emphasis on developmental milestone screening at every well-baby visit using validated tools. WHO 2024 growth standards reaffirmed.",
     "active": true,
     "duration_days_default": 30,
     "counselling": [
@@ -1562,7 +1594,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "243788004"
   },
   {
     "icd10": "R10.83",
@@ -1584,8 +1616,8 @@
       }
     ],
     "notes": "Reassurance is the most important intervention. Infantile colic is self-limiting, peaks at 6-8 weeks, resolves by 3-4 months. Non-pharmacological measures: gentle abdominal massage, warm compress, carrying/rocking, white noise. Ensure proper latching, burping after every feed, avoid overfeeding. Breastfeeding mothers should avoid excess tea/coffee, spicy food, gas-forming foods. Simethicone preferred over dicyclomine for safety.",
-    "source": "IAP Infant Care Guidelines, Rome IV Criteria",
-    "guideline_changes": null,
+    "source": "Rome IV Criteria (2016), IAP Infant Care Guidelines, ESPGHAN Probiotic Working Group",
+    "guideline_changes": "Rome IV criteria (2016) remain current standard; Lactobacillus reuteri DSM 17938 supported by recent meta-analyses as effective probiotic for breastfed colicky infants; no new 2024-2025 Rome criteria revision. Reassurance and parental support remain cornerstone.",
     "active": true,
     "duration_days_default": 14,
     "counselling": [
@@ -1598,8 +1630,24 @@
     ],
     "referral_criteria": "Refer to pediatric gastroenterologist if colic persists beyond 4 months, failure to thrive, blood in stool, persistent vomiting, or suspected cow's milk protein allergy",
     "hospitalisation_criteria": "Hospitalisation rarely needed for colic. Admit only if poor feeding with dehydration, failure to thrive, suspected intestinal obstruction, or intussusception",
-    "investigations": [],
-    "snomed_code": null
+    "investigations": [
+      {
+        "name": "Urine routine and microscopy",
+        "indication": "Rule out UTI as cause of excessive crying",
+        "urgency": "routine"
+      },
+      {
+        "name": "Stool occult blood",
+        "indication": "Suspected cow milk protein allergy if blood-streaked stools",
+        "urgency": "routine"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "If fever present or prolonged crying beyond 4 months to rule out infection",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "48340000"
   },
   {
     "icd10": "K21.0",
@@ -1621,8 +1669,8 @@
       }
     ],
     "notes": "Most infant GER is physiological and self-limiting, resolving by 12-18 months. Non-pharmacological measures are first-line: keep head elevated 30 degrees, hold upright 15-20 min after feeds, small frequent feeds, proper burping, avoid overfeeding. Thickened feeds (rice cereal) for bottle-fed infants reduce regurgitation. PPI only for symptomatic GERD with poor weight gain or complications. Do not medicate normal thriving babies with mild regurgitation.",
-    "source": "ESPGHAN/NASPGHAN GER Guidelines, IAP GI Protocol",
-    "guideline_changes": null,
+    "source": "ESPGHAN/NASPGHAN 2018 Pediatric GERD Clinical Practice Guidelines, IAP GI Protocol",
+    "guideline_changes": "NASPGHAN/ESPGHAN 2018 GERD CPG (most recent): 4-8 weeks PPI trial for typical GERD symptoms only after dietary modifications fail in infants; avoid acid suppression for extraesophageal symptoms (cough, wheezing); no new 2024-2025 GERD guideline revision published.",
     "active": true,
     "duration_days_default": 21,
     "counselling": [
@@ -1652,6 +1700,6 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": null
+    "snomed_code": "235595009"
   }
 ]
