@@ -55,7 +55,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "82272006"
+    "snomed_code": "82272006",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or refusal to eat",
+      "Persistent vomiting",
+      "Fever not responding to medication for more than 3 days",
+      "Drop in oxygen saturation"
+    ]
   },
   {
     "icd10": "P07.3",
@@ -142,7 +152,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "395507008"
+    "snomed_code": "395507008",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or poor weight gain",
+      "Repeated vomiting",
+      "Seizures or abnormal movements",
+      "Breathing difficulty"
+    ]
   },
   {
     "icd10": "J21.9",
@@ -223,7 +243,17 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "4120002"
+    "snomed_code": "4120002",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Apnea or breathing pauses",
+      "Drop in oxygen saturation below 90%",
+      "Poor feeding or taking less than half of usual feeds",
+      "Severe chest retractions"
+    ]
   },
   {
     "icd10": "J45",
@@ -290,7 +320,17 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "195967001"
+    "snomed_code": "195967001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Severe breathing difficulty or unable to speak",
+      "Unable to feed or drink",
+      "Drop in oxygen saturation below 92%",
+      "No response to nebulization or inhaler"
+    ]
   },
   {
     "icd10": "J45",
@@ -361,7 +401,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "195967001"
+    "snomed_code": "195967001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Severe chest retractions",
+      "Drop in oxygen saturation below 92%",
+      "No response to inhaler treatment",
+      "Feeding difficulty or unable to eat"
+    ]
   },
   {
     "icd10": "J45.5",
@@ -446,7 +496,17 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "304527002"
+    "snomed_code": "304527002",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Drop in oxygen saturation below 90% despite oxygen",
+      "Silent chest on auscultation",
+      "Exhaustion or increasing drowsiness",
+      "No improvement despite aggressive treatment"
+    ]
   },
   {
     "icd10": "R50.9",
@@ -518,7 +578,17 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "386661006"
+    "snomed_code": "386661006",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent fever for more than 3 days",
+      "Vomiting or signs of dehydration",
+      "Rash or any bleeding from skin or gums",
+      "Altered sensorium or confusion"
+    ]
   },
   {
     "icd10": "J03.9",
@@ -585,7 +655,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "17741008"
+    "snomed_code": "17741008",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent fever for more than 3 days",
+      "Difficulty swallowing saliva or drooling",
+      "Swelling in the neck region",
+      "Recurrent vomiting"
+    ]
   },
   {
     "icd10": "J30.9",
@@ -647,7 +727,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "61582004"
+    "snomed_code": "61582004",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Severe nasal blockage causing difficulty breathing",
+      "Disturbed sleep or mouth breathing at night",
+      "Symptoms not improving despite regular medication",
+      "Associated wheezing or breathing difficulty"
+    ]
   },
   {
     "icd10": "L20.9",
@@ -715,7 +805,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "24079001"
+    "snomed_code": "24079001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Oozing or pus from skin lesions suggesting infection",
+      "Severe redness or swelling of affected skin",
+      "Fever developing with skin lesions",
+      "No response to treatment after one week"
+    ]
   },
   {
     "icd10": "K60.0",
@@ -783,7 +883,16 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "30037006"
+    "snomed_code": "30037006",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent or increasing bleeding during stools",
+      "Severe pain not relieved by medication",
+      "No improvement in symptoms after 5 to 7 days"
+    ]
   },
   {
     "icd10": "A03.9",
@@ -856,7 +965,17 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "36188001"
+    "snomed_code": "36188001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Increasing blood in stools",
+      "Persistent vomiting or unable to drink",
+      "No urine output for more than 6 hours",
+      "Signs of severe dehydration such as sunken eyes or dry mouth"
+    ]
   },
   {
     "icd10": "K52.9",
@@ -934,7 +1053,17 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "25374005"
+    "snomed_code": "25374005",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Blood in stool increasing",
+      "Persistent vomiting or unable to drink",
+      "No urine output for more than 6 hours",
+      "Signs of severe dehydration such as sunken eyes or dry mouth"
+    ]
   },
   {
     "icd10": "K29.0",
@@ -1016,7 +1145,16 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "25458004"
+    "snomed_code": "25458004",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent vomiting or blood in vomit",
+      "Severe abdominal pain not relieved by medication",
+      "Signs of dehydration such as dry mouth or no urine"
+    ]
   },
   {
     "icd10": "A01.0",
@@ -1099,7 +1237,17 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "4834000"
+    "snomed_code": "4834000",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Abdominal distension or severe abdominal pain",
+      "Signs of GI bleeding such as blood in stool or black stools",
+      "Altered sensorium or confusion",
+      "Persistent high fever despite treatment for more than 5 days"
+    ]
   },
   {
     "icd10": "J05.0",
@@ -1157,7 +1305,17 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "71186008"
+    "snomed_code": "71186008",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Stridor at rest that does not improve",
+      "Severe chest retractions",
+      "SpO2 dropping below 92 percent",
+      "Poor oral intake or refusal to drink"
+    ]
   },
   {
     "icd10": "H66.9",
@@ -1225,7 +1383,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "3110003"
+    "snomed_code": "3110003",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent ear pain beyond 48 hours despite treatment",
+      "High fever not responding to medication",
+      "Ear discharge or pus from the ear",
+      "Swelling behind the ear suggesting mastoiditis"
+    ]
   },
   {
     "icd10": "B17.9",
@@ -1304,7 +1472,17 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "3738000"
+    "snomed_code": "3738000",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent vomiting or inability to eat",
+      "Altered sensorium or excessive drowsiness",
+      "Bleeding tendency such as nose bleed or blood in vomit",
+      "Increasing jaundice or dark urine"
+    ]
   },
   {
     "icd10": "K52.9",
@@ -1396,7 +1574,17 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "25374005"
+    "snomed_code": "25374005",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Signs of severe dehydration such as sunken eyes or no tears",
+      "Electrolyte imbalance symptoms such as muscle cramps or weakness",
+      "No urine output for more than 6 hours",
+      "Signs of shock such as cold hands or weak pulse"
+    ]
   },
   {
     "icd10": "R04.0",
@@ -1463,7 +1651,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "12441001"
+    "snomed_code": "12441001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Bleeding lasting more than 15 to 20 minutes despite pressure",
+      "Recurrent frequent nosebleed episodes",
+      "Bleeding from other sites such as gums or skin bruises",
+      "Pallor or weakness suggesting significant blood loss"
+    ]
   },
   {
     "icd10": "N39.44",
@@ -1531,7 +1729,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "8009008"
+    "snomed_code": "8009008",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Daytime incontinence in addition to bedwetting",
+      "Weak urine stream or straining to urinate",
+      "Recurrent urinary tract infections",
+      "Secondary enuresis after being dry for more than 6 months"
+    ]
   },
   {
     "icd10": "Z00.1",
@@ -1594,7 +1802,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "243788004"
+    "snomed_code": "243788004",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or refusal to feed",
+      "Excessive crying that is inconsolable",
+      "Fever in a newborn or young infant",
+      "Delayed developmental milestones"
+    ]
   },
   {
     "icd10": "R10.83",
@@ -1647,7 +1865,17 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "48340000"
+    "snomed_code": "48340000",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or refusal to feed",
+      "Vomiting especially if bilious or forceful",
+      "Blood in stool",
+      "Failure to gain weight adequately"
+    ]
   },
   {
     "icd10": "K21.0",
@@ -1700,6 +1928,16 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "235595009"
+    "snomed_code": "235595009",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor weight gain or failure to thrive",
+      "Persistent vomiting or blood in vomit",
+      "Apnea or choking episodes",
+      "Severe irritability or refusal to feed"
+    ]
   }
 ]
