@@ -836,7 +836,14 @@
     const warnSigns = r.warning_signs?.length
       ? r.warning_signs
       : getEmergencySigns(ageMonths);
-    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs \u2014 \u0924\u0941\u0930\u0902\u0924 \u0935\u093e\u092a\u0938 \u0906\u090f\u0902</div><div class="emerg-grid">${warnSigns.map((s) => `<div>${s.hi ? `<strong>${esc(s.hi)}</strong><br>` : ""}${s.en ? `<span>${esc(s.en)}</span>` : ""}</div>`).join("")}</div></div>`;
+    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs \u2014 \u0924\u0941\u0930\u0902\u0924 \u0935\u093e\u092a\u0938 \u0906\u090f\u0902</div><div class="emerg-grid">${warnSigns
+      .map((s) => {
+        const hi = typeof s === "string" ? null : s.hi;
+        const en = typeof s === "string" ? s : s.en;
+        if (!hi && !en) return "";
+        return `<div>${hi ? `<strong>${esc(hi)}</strong><br>` : ""}${en ? `<span>${esc(en)}</span>` : ""}</div>`;
+      })
+      .join("")}</div></div>`;
     // Follow-up / Admission
     h += `<div class="sec"><div class="sec-title">Follow-up</div><div>${r.admission_recommended ? '<strong style="color:#8b1a1a">ADMISSION RECOMMENDED</strong> \u2014 ' + esc(r.admission_recommended) : "Return after <strong>" + (r.followup_days || 3) + " days</strong>"}${r.doctor_notes ? " \u2014 " + esc(r.doctor_notes) : ""}</div></div>`;
     // Footer with QR

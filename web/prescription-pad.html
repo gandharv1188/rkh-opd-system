@@ -4625,7 +4625,15 @@
       : getEmergencySigns(patientAgeMonths);
     const warnLang = rxData._lang || "bilingual";
     h += `<div class="rv-sec"><div class="rv-hdr red">Emergency warning signs — तुरंत वापस आएं</div>
-  <div class="emerg-grid">${warnSigns.map((s) => `<div class="emerg-item"><div class="emerg-dot"></div><div>${warnLang !== "english" && s.hi ? `<strong>${esc(s.hi)}</strong><br>` : ""}${warnLang !== "hindi" && s.en ? `<span style="color:var(--ink3);font-size:11px">${esc(s.en)}</span>` : ""}</div></div>`).join("")}</div></div>`;
+  <div class="emerg-grid">${warnSigns
+    .map((s) => {
+      // Handle both object {hi, en} and plain string formats
+      const hi = typeof s === "string" ? null : s.hi;
+      const en = typeof s === "string" ? s : s.en;
+      if (!hi && !en) return "";
+      return `<div class="emerg-item"><div class="emerg-dot"></div><div>${warnLang !== "english" && hi ? `<strong>${esc(hi)}</strong><br>` : ""}${warnLang !== "hindi" && en ? `<span style="color:var(--ink3);font-size:11px">${esc(en)}</span>` : ""}</div></div>`;
+    })
+    .join("")}</div></div>`;
 
     h += `<div class="fu-bar">
     <div>${
@@ -5638,7 +5646,14 @@
       ? r.warning_signs
       : getEmergencySigns(printAgeMonths);
     const printLang = rxData._lang || "bilingual";
-    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs — तुरंत वापस आएं</div><div class="emerg-grid">${printWarnSigns.map((s) => `<div>${printLang !== "english" && s.hi ? `<strong>${esc(s.hi)}</strong><br>` : ""}${printLang !== "hindi" && s.en ? `<span>${esc(s.en)}</span>` : ""}</div>`).join("")}</div></div>`;
+    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs — तुरंत वापस आएं</div><div class="emerg-grid">${printWarnSigns
+      .map((s) => {
+        const hi = typeof s === "string" ? null : s.hi;
+        const en = typeof s === "string" ? s : s.en;
+        if (!hi && !en) return "";
+        return `<div>${printLang !== "english" && hi ? `<strong>${esc(hi)}</strong><br>` : ""}${printLang !== "hindi" && en ? `<span>${esc(en)}</span>` : ""}</div>`;
+      })
+      .join("")}</div></div>`;
     // Follow-up
     h += `<div class="sec"><div class="sec-title">Follow-up</div><div>${r.admission_recommended ? '<strong style="color:#8b1a1a">ADMISSION RECOMMENDED</strong> — ' + esc(r.admission_recommended) : "Return after <strong>" + (r.followup_days || 3) + " days</strong>"}${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
     // Footer with QR
