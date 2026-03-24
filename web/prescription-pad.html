@@ -4192,12 +4192,16 @@
     const capped = maxS && perDose > maxS;
     const fd = capped ? maxS : perDose;
     let vol, enD, hiD;
-    if (form === "drops" || form === "eye drops" || form === "nasal drops" || form === "ear drops") {
+    if (
+      form === "drops" ||
+      form === "eye drops" ||
+      form === "nasal drops" ||
+      form === "ear drops"
+    ) {
       // Drops: 1 ml = 5 drops. All formulary concentrations MUST be per-ml.
       // If per_unit was "drop" in formulary, it was pre-converted: per_qty = 0.2ml (1 drop).
       const mlPerDose = (fd / cmg) * cml;
       const drops = Math.round(mlPerDose * 5); // 5 drops per ml — always correct when conc is per-ml
-        : Math.round(mlPerDose * 5); // 5 drops per ml
       vol = drops + " drops";
       enD = drops + " drops";
       const DN = {
@@ -4782,15 +4786,26 @@
     let routeEn = ROUTE_EN[form] || "orally";
     let routeHi = ROUTE_HI[form] || "मुँह से दें";
     if (form === "drops" || (form && form.toLowerCase().includes("drop"))) {
-      const fl = (m.row1_en || "").toLowerCase() + " " + (m.formulation || "").toLowerCase();
+      const fl =
+        (m.row1_en || "").toLowerCase() +
+        " " +
+        (m.formulation || "").toLowerCase();
       if (fl.includes("eye") || fl.includes("ophthalmic")) {
-        routeEn = "in the affected eye"; routeHi = "आँख में";
+        routeEn = "in the affected eye";
+        routeHi = "आँख में";
       } else if (fl.includes("nasal") || fl.includes("nose")) {
-        routeEn = "intranasally"; routeHi = "नाक में";
-      } else if (fl.includes("ear") || fl.includes("otic") || fl.includes("aural")) {
-        routeEn = "in the affected ear"; routeHi = "कान में";
+        routeEn = "intranasally";
+        routeHi = "नाक में";
+      } else if (
+        fl.includes("ear") ||
+        fl.includes("otic") ||
+        fl.includes("aural")
+      ) {
+        routeEn = "in the affected ear";
+        routeHi = "कान में";
       } else {
-        routeEn = "orally"; routeHi = "मुँह से";
+        routeEn = "orally";
+        routeHi = "मुँह से";
       }
     }
     const newR2 = `${r.enD} ${routeEn} ${FW[freq] || freq + "×"} daily.${dur ? " " + dur + "." : ""}`;
@@ -6398,7 +6413,12 @@
 
   function renderDoseIcon(p) {
     if (p.form === "syrup") return DOSE_SVG.spoon;
-    if (p.form === "drops" || p.form === "eye drops" || p.form === "nasal drops" || p.form === "ear drops") {
+    if (
+      p.form === "drops" ||
+      p.form === "eye drops" ||
+      p.form === "nasal drops" ||
+      p.form === "ear drops"
+    ) {
       return `<span style="display:inline-block;width:16px;height:16px;vertical-align:middle">${DOSE_SVG.drop}</span>`;
     }
     if (p.form === "tablet" || p.form === "capsule") {
