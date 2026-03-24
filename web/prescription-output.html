@@ -831,12 +831,14 @@
     if (r.counselling?.length) {
       h += `<div class="sec"><div class="sec-title">Counselling</div><div>${r.counselling.map((c) => `\u2713 ${esc(c)}`).join(" &nbsp; ")}</div></div>`;
     }
-    // Emergency signs (age-appropriate)
+    // Emergency signs — use AI-generated if available, fallback to hardcoded
     const ageMonths = r.patient?.age ? parseAgeMonths(r.patient.age) : null;
-    const emergSigns = getEmergencySigns(ageMonths);
-    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs \u2014 \u0924\u0941\u0930\u0902\u0924 \u0935\u093e\u092a\u0938 \u0906\u090f\u0902</div><div class="emerg-grid">${emergSigns.map((s) => `<div><strong>${esc(s.hi)}</strong><br><span>${esc(s.en)}</span></div>`).join("")}</div></div>`;
-    // Follow-up
-    h += `<div class="sec"><div class="sec-title">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " \u2014 " + esc(r.doctor_notes) : ""}</div></div>`;
+    const warnSigns = r.warning_signs?.length
+      ? r.warning_signs
+      : getEmergencySigns(ageMonths);
+    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs \u2014 \u0924\u0941\u0930\u0902\u0924 \u0935\u093e\u092a\u0938 \u0906\u090f\u0902</div><div class="emerg-grid">${warnSigns.map((s) => `<div>${s.hi ? `<strong>${esc(s.hi)}</strong><br>` : ""}${s.en ? `<span>${esc(s.en)}</span>` : ""}</div>`).join("")}</div></div>`;
+    // Follow-up / Admission
+    h += `<div class="sec"><div class="sec-title">Follow-up</div><div>${r.admission_recommended ? '<strong style="color:#8b1a1a">ADMISSION RECOMMENDED</strong> \u2014 ' + esc(r.admission_recommended) : "Return after <strong>" + (r.followup_days || 3) + " days</strong>"}${r.doctor_notes ? " \u2014 " + esc(r.doctor_notes) : ""}</div></div>`;
     // Footer with QR
     // QR: verification URL
     const rxIdForQr = r._rxId || "";

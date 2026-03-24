@@ -573,18 +573,18 @@
     gap: 5px;
   }
   .mod-chip {
-    padding: 4px 11px;
+    padding: 3px 8px;
     border-radius: 99px;
     border: 0.5px solid var(--bdr2);
     background: var(--bg2);
-    font-size: 12px;
+    font-size: 11px;
     color: var(--ink2);
     cursor: pointer;
     transition: all 0.1s;
     user-select: none;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
   }
   .mod-chip.on {
     background: var(--blue-lt);
@@ -600,6 +600,16 @@
   .mod-chip.on .chip-dot {
     background: var(--blue);
     border-color: var(--blue);
+  }
+  .mod-chip.admit-on {
+    background: var(--red-lt);
+    color: var(--red);
+    border-color: rgba(139, 26, 26, 0.4);
+    font-weight: 600;
+  }
+  .mod-chip.admit-on .chip-dot {
+    background: var(--red);
+    border-color: var(--red);
   }
   .extra-mods {
     padding: 0 18px;
@@ -1680,6 +1690,14 @@
         <div class="mod-chip" id="chip-ref" onclick="toggleMod('ref')">
           <span class="chip-dot"></span>Referral
         </div>
+        <div
+          class="mod-chip"
+          id="chip-admit"
+          onclick="toggleAdmit()"
+          style="border-color: rgba(139, 26, 26, 0.3)"
+        >
+          <span class="chip-dot" style="border-color: var(--red)"></span>Admit
+        </div>
         <div class="mod-chip" id="chip-neo" onclick="toggleMod('neo')">
           <span class="chip-dot"></span>Neonatal
         </div>
@@ -1687,8 +1705,8 @@
           <select
             id="rx-lang"
             style="
-              font-size: 12px;
-              padding: 4px 8px 4px 8px;
+              font-size: 11px;
+              padding: 3px 6px 3px 6px;
               border-radius: 99px;
               border: 0.5px solid var(--bdr2);
               background: var(--bg2);
@@ -3771,6 +3789,18 @@
     if (el) el.classList.toggle("on", activeMods.has(k));
   }
 
+  // Admit toggle — red styling, mutually affects follow-up display
+  function toggleAdmit() {
+    const el = document.getElementById("chip-admit");
+    if (activeMods.has("admit")) {
+      activeMods.delete("admit");
+      if (el) el.classList.remove("admit-on");
+    } else {
+      activeMods.add("admit");
+      if (el) el.classList.add("admit-on");
+    }
+  }
+
   // Split vaccination toggle — only one schedule can be active at a time
   function toggleVax(schedule) {
     const key = "vax-" + schedule;
@@ -3799,6 +3829,8 @@
       diet: "diet & nutrition",
       iv: "IV fluids",
       ref: "referral",
+      admit:
+        "ADMISSION RECOMMENDED — patient requires indoor admission. Set admission_recommended to a brief reason, set followup_days to null",
       neo: "neonatal details",
     };
     return [...activeMods].map((k) => sectionNames[k]).filter(Boolean);
@@ -6256,6 +6288,7 @@
     generatePrescription,
     toggleMod,
     toggleVax,
+    toggleAdmit,
     toggleEP,
     showView,
     signOff,
