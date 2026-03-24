@@ -801,6 +801,42 @@
 
 ---
 
+## Post-Review Fixes (2026-03-24)
+
+### Chip button sizing
+
+**Issue:** Mod-chip buttons in "Include in prescription" section were too large, overflowing to second line.
+**Fix:** Reduced `.mod-chip` from `font-size:12px; padding:4px 11px` to `font-size:11px; padding:3px 8px`. Gap reduced from 5px to 4px. Language dropdown similarly reduced.
+
+### Language dropdown chevron missing
+
+**Issue:** The language `<select>` had a broken SVG data URI for the dropdown arrow, rendering no chevron.
+**Fix:** Replaced SVG data URI with a Unicode triangle (`▼`) positioned absolutely (`position:absolute; right:7px; pointer-events:none`). Cross-browser reliable.
+
+### Medication Restore button unclickable
+
+**Issue:** After striking through a medication via "Remove", the "Restore" button was blocked by `pointer-events: none` inherited from `.item-struck` on the parent `.med-top`.
+**Fix:** Added CSS rule `.item-struck .item-remove { pointer-events: auto; opacity: 1; text-decoration: none }` plus `pointer-events: auto; position: relative; z-index: 2` on `.item-remove.struck`. Restore button now remains clickable in both pre-signoff review and post-signoff edit modes.
+
+- File: `web/prescription-pad.html`, `.item-remove.struck` and `.item-struck .item-remove` CSS rules.
+
+### Admit button added to "Include in prescription"
+
+**Issue:** No explicit UI control for doctor to indicate admission. Relied on referral text.
+**Fix:** Added red-themed "Admit" chip button (`id="chip-admit"`) with `toggleAdmit()` function. When active: red background (`--red-lt`), red text, bold. Sends explicit admission instruction via `getSelectedSections()`. CSS class `.admit-on` with matching `.chip-dot` styling. Exposed in `window` object.
+
+### Print station missing admission + warning signs support
+
+**Issue:** `prescription-output.html` had no `admission_recommended` or `warning_signs` support — always showed hardcoded emergency signs and "Return after X days".
+**Fix:** Updated `buildRxHtml()` to use AI-generated `r.warning_signs` with fallback to `getEmergencySigns()`. Follow-up section now checks `r.admission_recommended` and shows "ADMISSION RECOMMENDED" with reason.
+
+### Edge Function: admission_recommended in previous Rx passthrough
+
+**Issue:** `get_previous_rx` tool in `generate-prescription` Edge Function stripped `admission_recommended` and `warning_signs` from previous prescription data returned to Claude.
+**Fix:** Added `admission_recommended: g.admission_recommended || null` and `warning_signs: g.warning_signs || []` to the cleaned Rx object. Redeployed.
+
+---
+
 ## Deferred Issues (ABHA/ABDM/FHIR)
 
 The following 10 issues were deferred as they depend on ABDM sandbox integration, FHIR bundle generation, or ABHA verification infrastructure that is not yet deployed:

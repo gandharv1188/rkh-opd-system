@@ -304,6 +304,27 @@ All 11 user-reported issues (A1-A11) have been implemented and verified. Three i
 
 ---
 
+## Post-Review Corrections (2026-03-24)
+
+### A3 — Draft not cleared after sign-off
+
+**Correction:** Removed `localStorage.removeItem` call from `signOff()`. Doctor may need to revisit the prescription after signing. Draft now persists until the next generation for the same visit overwrites it.
+
+### A7 — Language switch relocated to "Include in prescription" section
+
+**Correction:** Moved `<select id="rx-lang">` from the sticky tabs bar to the mod-chips area. Styled as a pill-shaped dropdown matching chip design. Uses Unicode `▼` chevron positioned absolutely (cross-browser). Options: "Bilingual" (default), "हिंदी", "English".
+
+### A8 — Explicit `admission_recommended` field replacing referral-based admission
+
+**Correction:** Added `admission_recommended` field to core prompt JSON schema. Replaced `r.followup_days == null && r.referral` checks with `r.admission_recommended`. Added red "Admit" chip button to the "Include in prescription" section with `toggleAdmit()` function and `admit-on` CSS class. Sign-off button changes to "Approve ADMISSION & save" (red). Print station (`prescription-output.html`) also updated. Edge Function's `get_previous_rx` tool now passes `admission_recommended` and `warning_signs` through.
+
+### Medication Restore button fix
+
+**Issue:** After striking through (removing) a medication, the "Restore" button was unclickable. Root cause: `.item-struck { pointer-events: none }` on `.med-top` blocked ALL clicks inside the struck card.
+**Fix:** Added `.item-struck .item-remove { pointer-events: auto; opacity: 1; text-decoration: none }` so the Restore button remains clickable while the rest of the card is struck through. Works in both pre-signoff and post-signoff edit modes.
+
+---
+
 ## File Change Summary
 
 | File                                      | Changes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Issues Addressed           |
