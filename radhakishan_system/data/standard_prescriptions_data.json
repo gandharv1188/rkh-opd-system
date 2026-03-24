@@ -731,7 +731,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "61462000"
+    "snomed_code": "18342001",
+    "snomed_display": "Algid malaria - malarial shock"
   },
   {
     "icd10": "R56.00",
@@ -1339,7 +1340,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "253520009"
+    "snomed_code": "448743001",
+    "snomed_display": "Abnormality of aortic valve"
   },
   {
     "icd10": "Q21.1",
@@ -1642,7 +1644,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "56786000"
+    "snomed_code": "253587003",
+    "snomed_display": "Dome-shaped pulmonary valve"
   },
   {
     "icd10": "Q21.3",
@@ -1796,7 +1799,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "204377008"
+    "snomed_code": "448727008",
+    "snomed_display": "Total anomalous pulmonary venous connections of mixed type"
   },
   {
     "icd10": "Q20.3",
@@ -2042,7 +2046,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "50920009"
+    "snomed_code": "155336004",
+    "snomed_display": "Acute myocarditis"
   },
   {
     "icd10": "I42",
@@ -2298,7 +2303,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "3238004"
+    "snomed_code": "194902002",
+    "snomed_display": "Pericardial effusion - acute"
   },
   {
     "icd10": "I38",
@@ -2790,7 +2796,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "11092001"
+    "snomed_code": "12026006",
+    "snomed_display": "PT - Paroxysmal tachycardia"
   },
   {
     "icd10": "Q26",
@@ -2862,7 +2869,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "13213009"
+    "snomed_code": "205845004",
+    "snomed_display": "[X]Congenital malformations of the nervous system"
   },
   {
     "icd10": "L23",
@@ -3001,7 +3009,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "111210003"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "L22",
@@ -3135,7 +3144,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "238578002"
+    "snomed_code": "110979008",
+    "snomed_display": "Irritant contact dermatitis"
   },
   {
     "icd10": "L28",
@@ -3202,7 +3212,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "238546001"
+    "snomed_code": "201020007",
+    "snomed_display": "Lichenification and lichen simplex chronicus"
   },
   {
     "icd10": "L30",
@@ -3423,7 +3434,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "86708008"
+    "snomed_code": "200764003",
+    "snomed_display": "Seborrheic dermatitis (& capitis)"
   },
   {
     "icd10": "L25.9",
@@ -3695,7 +3707,8 @@
     "referral_criteria": "Referral usually not needed; refer to dermatologist if miliaria profunda (deep, persistent variant) or recurrent severe episodes",
     "hospitalisation_criteria": "Hospitalisation not needed for miliaria; consider only if secondary bacterial infection (miliaria pustulosa) with systemic symptoms",
     "investigations": [],
-    "snomed_code": "72000004"
+    "snomed_code": "63951004",
+    "snomed_display": "Miliaria"
   },
   {
     "icd10": "B37.2",
@@ -4343,7 +4356,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "89886004"
+    "snomed_code": "205845004",
+    "snomed_display": "[X]Congenital malformations of the nervous system"
   },
   {
     "icd10": "L81",
@@ -4425,7 +4439,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "56727007"
+    "snomed_code": "190302002",
+    "snomed_display": "Other disorders of thyroid"
   },
   {
     "icd10": "K02",
@@ -4579,7 +4594,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "109564008"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "K05",
@@ -4738,7 +4754,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "26284000"
+    "snomed_code": "186673008",
+    "snomed_display": "Other diseases of conjunctiva due to viruses and chlamydiae NEC"
   },
   {
     "icd10": "H90",
@@ -4825,7 +4842,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "15188001"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "H91",
@@ -5123,7 +5141,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "65363002"
+    "snomed_code": "65363002",
+    "snomed_display": "OM - Otitis media"
   },
   {
     "icd10": "H72",
@@ -5518,7 +5537,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "95727004"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "H52",
@@ -5913,7 +5933,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "302926009"
+    "snomed_code": "40481000087105",
+    "snomed_display": "Foreign body in right external ear"
   },
   {
     "icd10": "T15",
@@ -5995,7 +6016,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "269072004"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "T18",
@@ -6072,7 +6094,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "56251009"
+    "snomed_code": "157561003",
+    "snomed_display": "Foreign body in alimentary tract"
   },
   {
     "icd10": "J35",
@@ -6154,7 +6177,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "68381009"
+    "snomed_code": "191428009",
+    "snomed_display": "[X]Anemia in other chronic diseases classified elsewhere"
   },
   {
     "icd10": "R04.0",
@@ -6231,7 +6255,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "12441001"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "J35.2",
@@ -6308,7 +6333,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "441789001"
+    "snomed_code": "39323002",
+    "snomed_display": "Hyperplasia of adenoids"
   },
   {
     "icd10": "J35.1",
@@ -6385,7 +6411,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "81381009"
+    "snomed_code": "46689006",
+    "snomed_display": "Tonsillar enlargement"
   },
   {
     "icd10": "T71",
@@ -6467,7 +6494,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "66466001"
+    "snomed_code": "386732003",
+    "snomed_display": "Traumatic asphyxial state"
   },
   {
     "icd10": "T30",
@@ -6636,7 +6664,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "48333001"
+    "snomed_code": "212049006",
+    "snomed_display": "Burn - % body"
   },
   {
     "icd10": "T74",
@@ -6795,7 +6824,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "242784006"
+    "snomed_code": "269431000",
+    "snomed_display": "Non-fatal electric shock"
   },
   {
     "icd10": "S06",
@@ -6969,7 +6999,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "397881000"
+    "snomed_code": "34011000087104",
+    "snomed_display": "Multiple injuries of spinal region"
   },
   {
     "icd10": "T14.1",
@@ -7481,7 +7512,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "39355002"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "E87.2",
@@ -8080,7 +8112,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "238150007"
+    "snomed_code": "238149007",
+    "snomed_display": "Systemic inflammatory response syndrome"
   },
   {
     "icd10": "T42",
@@ -8239,7 +8272,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "212730000"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "T39",
@@ -8321,7 +8355,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "212555007"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "T51",
@@ -8408,7 +8443,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "212602001"
+    "snomed_code": "67426006",
+    "snomed_display": "Alcohol causing toxic effect"
   },
   {
     "icd10": "T54",
@@ -8490,7 +8526,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "212638009"
+    "snomed_code": "10186000",
+    "snomed_display": "Toxic effect of selenium compound"
   },
   {
     "icd10": "T60",
@@ -8572,7 +8609,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "212693002"
+    "snomed_code": "10186000",
+    "snomed_display": "Toxic effect of selenium compound"
   },
   {
     "icd10": "T63",
@@ -8659,7 +8697,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "212729005"
+    "snomed_code": "10186000",
+    "snomed_display": "Toxic effect of selenium compound"
   },
   {
     "icd10": "E27.4",
@@ -9024,7 +9063,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "190745003"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "E76.0",
@@ -9096,7 +9136,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "65636009"
+    "snomed_code": "26745009",
+    "snomed_display": "Mucopolysaccharidosis type I-H/S"
   },
   {
     "icd10": "E72",
@@ -9168,7 +9209,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "360397003"
+    "snomed_code": "190302002",
+    "snomed_display": "Other disorders of thyroid"
   },
   {
     "icd10": "E74",
@@ -9240,7 +9282,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "190747006"
+    "snomed_code": "190302002",
+    "snomed_display": "Other disorders of thyroid"
   },
   {
     "icd10": "E70.0",
@@ -9538,7 +9581,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "238107002"
+    "snomed_code": "190605005",
+    "snomed_display": "Mild protein energy malnutrition"
   },
   {
     "icd10": "E43",
@@ -9615,7 +9659,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "238108007"
+    "snomed_code": "360549009",
+    "snomed_display": "Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight)"
   },
   {
     "icd10": "E46",
@@ -9692,7 +9737,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "238109004"
+    "snomed_code": "70241007",
+    "snomed_display": "Nutritional deficiencies"
   },
   {
     "icd10": "E84",
@@ -10603,7 +10649,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "64226004"
+    "snomed_code": "20759009",
+    "snomed_display": "Dietetic jejunitis"
   },
   {
     "icd10": "A04",
@@ -10685,7 +10732,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "111838007"
+    "snomed_code": "186109009",
+    "snomed_display": "Other bacterial food poisoning"
   },
   {
     "icd10": "A03",
@@ -11065,7 +11113,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "367494004"
+    "snomed_code": "721608001",
+    "snomed_display": "Rectosigmoid Hirschsprung disease"
   },
   {
     "icd10": "K56.6",
@@ -11214,7 +11263,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "47610002"
+    "snomed_code": "49723003",
+    "snomed_display": "Intestinal intussusception"
   },
   {
     "icd10": "K20",
@@ -11291,7 +11341,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "235595009"
+    "snomed_code": "235598006",
+    "snomed_display": "Non-reflux esophagitis"
   },
   {
     "icd10": "K29",
@@ -11676,7 +11727,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "66071002"
+    "snomed_code": "76795007",
+    "snomed_display": "Acute hepatitis B"
   },
   {
     "icd10": "B17.1",
@@ -11748,7 +11800,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "50711007"
+    "snomed_code": "235866006",
+    "snomed_display": "Acute hepatitis C"
   },
   {
     "icd10": "K74",
@@ -11999,7 +12052,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "10625341000119101"
+    "snomed_code": "197329009",
+    "snomed_display": "Liver abscess via umbilicus"
   },
   {
     "icd10": "K76",
@@ -12153,7 +12207,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "235889003"
+    "snomed_code": "194519009",
+    "snomed_display": "[X]Other inflammatory polyneuropathies"
   },
   {
     "icd10": "K76.6",
@@ -12876,7 +12931,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "62315008"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "K92.2",
@@ -13117,7 +13173,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "17226007"
+    "snomed_code": "192597006",
+    "snomed_display": "[X]Conduct disorders"
   },
   {
     "icd10": "F94",
@@ -13194,7 +13251,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "95664001"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "F93",
@@ -13353,7 +13411,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "78405007"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "R62.0",
@@ -13753,7 +13812,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "8009008"
+    "snomed_code": "450842007",
+    "snomed_display": "Non-organic primary nocturnal enuresis"
   },
   {
     "icd10": "R63.4",
@@ -14168,7 +14228,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "6471006"
+    "snomed_code": "61152003",
+    "snomed_display": "Moderate intellectual development disorder"
   },
   {
     "icd10": "F51",
@@ -14245,7 +14306,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "39898005"
+    "snomed_code": "192460004",
+    "snomed_display": "[X]Other nonorganic sleep disorders"
   },
   {
     "icd10": "D52",
@@ -14312,7 +14374,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "1085421000119107"
+    "snomed_code": "85649008",
+    "snomed_display": "Folic acid deficiency anaemia"
   },
   {
     "icd10": "D50",
@@ -14518,7 +14581,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "281411007"
+    "snomed_code": "66612000",
+    "snomed_display": "Nutritional anaemia"
   },
   {
     "icd10": "D51",
@@ -14590,7 +14654,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "190606006"
+    "snomed_code": "191140004",
+    "snomed_display": "Vitamin B12 deficiency anemia (& pleural)"
   },
   {
     "icd10": "D61",
@@ -14975,7 +15040,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "1563006"
+    "snomed_code": "438372000",
+    "snomed_display": "Hereditary factor IX deficiency disease with inhibitor"
   },
   {
     "icd10": "D68",
@@ -15206,7 +15272,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "61261009"
+    "snomed_code": "154802007",
+    "snomed_display": "Acquired hemolytic anemia"
   },
   {
     "icd10": "D58",
@@ -15278,7 +15345,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "362970003"
+    "snomed_code": "267556002",
+    "snomed_display": "(Hereditary haemolytic anaemia) or (haemoglobinopathy)"
   },
   {
     "icd10": "D57",
@@ -16741,7 +16809,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "4834000"
+    "snomed_code": "154306001",
+    "snomed_display": "Meningococcal infection"
   },
   {
     "icd10": "A38",
@@ -17101,7 +17170,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "86406008"
+    "snomed_code": "186706006",
+    "snomed_display": "HIV - Human immunodeficiency virus infection constitutional disease"
   },
   {
     "icd10": "B27",
@@ -17240,7 +17310,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "2778004"
+    "snomed_code": "111910009",
+    "snomed_display": "Amebiasis"
   },
   {
     "icd10": "B77",
@@ -17354,7 +17425,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "266174004"
+    "snomed_code": "266162007",
+    "snomed_display": "Enterobiosis"
   },
   {
     "icd10": "B76",
@@ -17416,7 +17488,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "105691000119101"
+    "snomed_code": "187533003",
+    "snomed_display": "[X]Other hookworm diseases"
   },
   {
     "icd10": "B82.9",
@@ -17478,7 +17551,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "105629000"
+    "snomed_code": "240344008",
+    "snomed_display": "Parasitic food poisoning"
   },
   {
     "icd10": "B81",
@@ -17540,7 +17614,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "128869009"
+    "snomed_code": "187170004",
+    "snomed_display": "Other intestinal helminthiases"
   },
   {
     "icd10": "A07",
@@ -17741,7 +17816,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "6142004"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "J11",
@@ -18096,7 +18172,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "10001005"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "L03",
@@ -18255,7 +18332,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "154283005"
+    "snomed_code": "182159002",
+    "snomed_display": "Miliary tuberculosis"
   },
   {
     "icd10": "A17",
@@ -18337,7 +18415,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "58750007"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "A18",
@@ -18419,7 +18498,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "56717001"
+    "snomed_code": "186247008",
+    "snomed_display": "Tuberculosis of other organs"
   },
   {
     "icd10": "A92.0",
@@ -18553,7 +18633,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "38362002"
+    "snomed_code": "38362002",
+    "snomed_display": "Breakbone fever"
   },
   {
     "icd10": "A91",
@@ -18630,7 +18711,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "20927009"
+    "snomed_code": "186599009",
+    "snomed_display": "Dengue hemorrhagic fever"
   },
   {
     "icd10": "A27",
@@ -18841,7 +18923,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "30020002"
+    "snomed_code": "62676009",
+    "snomed_display": "Plasmodium falciparum malaria"
   },
   {
     "icd10": "B51",
@@ -18908,7 +18991,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "48750004"
+    "snomed_code": "186792002",
+    "snomed_display": "Plasmodium vivax malaria with rupture of spleen"
   },
   {
     "icd10": "A75.3",
@@ -19295,7 +19379,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "266113007"
+    "snomed_code": "240482001",
+    "snomed_display": "Enteroviral exanthem"
   },
   {
     "icd10": "B05",
@@ -19486,7 +19571,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "58320003"
+    "snomed_code": "402420001",
+    "snomed_display": "Human herpes virus 6 infection of skin"
   },
   {
     "icd10": "B06",
@@ -19754,7 +19840,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "367540003"
+    "snomed_code": "890228005",
+    "snomed_display": "Congenital atresia of bilateral anterior nares"
   },
   {
     "icd10": "Q42.2",
@@ -19826,7 +19913,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "204731002"
+    "snomed_code": "204721004",
+    "snomed_display": "Congenital occlusion of anus with fistula"
   },
   {
     "icd10": "Q79.0",
@@ -19965,7 +20053,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "204543001"
+    "snomed_code": "204671009",
+    "snomed_display": "Congenital pyloric stenosis"
   },
   {
     "icd10": "Q41.0",
@@ -20032,7 +20121,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "17333001"
+    "snomed_code": "51118003",
+    "snomed_display": "Atresia of duodenum"
   },
   {
     "icd10": "Q39.0",
@@ -20248,7 +20338,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "34783003"
+    "snomed_code": "204697003",
+    "snomed_display": "Congenital absence of ileum"
   },
   {
     "icd10": "Q41.1",
@@ -20315,7 +20406,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "48876002"
+    "snomed_code": "721650001",
+    "snomed_display": "Multiple atresias of jejunum type IV"
   },
   {
     "icd10": "Q79.2",
@@ -20459,7 +20551,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "26179003"
+    "snomed_code": "788869006",
+    "snomed_display": "Atresia of esophagus with esophagobronchial fistula"
   },
   {
     "icd10": "P92.9",
@@ -20531,7 +20624,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "276507002"
+    "snomed_code": "276717003",
+    "snomed_display": "Neonatal poor feeding"
   },
   {
     "icd10": "P76.9",
@@ -20608,7 +20702,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "206525008"
+    "snomed_code": "276521007",
+    "snomed_display": "Perinatal intestinal obstruction"
   },
   {
     "icd10": "P77",
@@ -20690,7 +20785,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "398254007"
+    "snomed_code": "788989006",
+    "snomed_display": "Necrotizing enterocolitis of newborn stage 2B Bell's classification"
   },
   {
     "icd10": "P07.2",
@@ -20772,7 +20868,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "395507008"
+    "snomed_code": "15887011000119107",
+    "snomed_display": "Baby premature 24 weeks"
   },
   {
     "icd10": "P05.9",
@@ -20911,7 +21008,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "199614003"
+    "snomed_code": "15635491000119102",
+    "snomed_display": "LGA (large for gestational age) newborn"
   },
   {
     "icd10": "P07.1",
@@ -21055,7 +21153,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "4966006"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "P07",
@@ -21137,7 +21236,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "362383003"
+    "snomed_code": "44247006",
+    "snomed_display": "Prematurity of foetus"
   },
   {
     "icd10": "P05.1",
@@ -21209,7 +21309,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "276612004"
+    "snomed_code": "722525006",
+    "snomed_display": "Symmetrical small for gestational age foetus"
   },
   {
     "icd10": "P07.0",
@@ -21363,7 +21464,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "387700001"
+    "snomed_code": "206431009",
+    "snomed_display": "Hemolytic disease due to isoimmunization NOS"
   },
   {
     "icd10": "P53",
@@ -21430,7 +21532,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "23510001"
+    "snomed_code": "24149006",
+    "snomed_display": "Haemorrhagic disease of the newborn due to factor II deficiency"
   },
   {
     "icd10": "P61",
@@ -21497,7 +21600,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "276546003"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "P61.1",
@@ -21559,7 +21663,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "276548002"
+    "snomed_code": "737210007",
+    "snomed_display": "Neonatal polycythemia due to intra-uterine growth retardation"
   },
   {
     "icd10": "P61.0",
@@ -21626,7 +21731,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "276552006"
+    "snomed_code": "206512000",
+    "snomed_display": "Transient neonatal thrombocytopenia due to isoimmunization"
   },
   {
     "icd10": "P35.1",
@@ -21765,7 +21871,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "64190007"
+    "snomed_code": "1857005",
+    "snomed_display": "Congenital rubella syndrome"
   },
   {
     "icd10": "P37.1",
@@ -21904,7 +22011,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "206385003"
+    "snomed_code": "276675009",
+    "snomed_display": "Neonatal infection of the eye"
   },
   {
     "icd10": "P37.9",
@@ -21981,7 +22089,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "276666009"
+    "snomed_code": "82353009",
+    "snomed_display": "Congenital infection"
   },
   {
     "icd10": "P36.9",
@@ -22058,7 +22167,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "206297002"
+    "snomed_code": "713854001",
+    "snomed_display": "Perinatal sepsis"
   },
   {
     "icd10": "P36.9",
@@ -22140,7 +22250,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "206297002"
+    "snomed_code": "713854001",
+    "snomed_display": "Perinatal sepsis"
   },
   {
     "icd10": "A33",
@@ -22212,7 +22323,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "35920009"
+    "snomed_code": "43424001",
+    "snomed_display": "Tetanus neonatorum"
   },
   {
     "icd10": "P38",
@@ -22284,7 +22396,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "206390005"
+    "snomed_code": "289332002",
+    "snomed_display": "Umbilical cord stump base inflamed"
   },
   {
     "icd10": "P81",
@@ -22356,7 +22469,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "206487009"
+    "snomed_code": "68550008",
+    "snomed_display": "Neonatal disturbance of temperature regulation"
   },
   {
     "icd10": "P74.1",
@@ -22433,7 +22547,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "276508007"
+    "snomed_code": "78812008",
+    "snomed_display": "Neonatal dehydration"
   },
   {
     "icd10": "P70.4",
@@ -22659,7 +22774,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "206488004"
+    "snomed_code": "206488006",
+    "snomed_display": "Other transitory neonatal electrolyte disturbance"
   },
   {
     "icd10": "P96.1",
@@ -22731,7 +22847,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "206351006"
+    "snomed_code": "414819007",
+    "snomed_display": "Neonatal substance withdrawal syndrome"
   },
   {
     "icd10": "P96.8",
@@ -22813,7 +22930,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "206356001"
+    "snomed_code": "17849001",
+    "snomed_display": "Fetal and/or neonatal disorder of respiratory system"
   },
   {
     "icd10": "P21.9",
@@ -22890,7 +23008,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "67569000"
+    "snomed_code": "28314004",
+    "snomed_display": "Asphyxia in liveborn infant"
   },
   {
     "icd10": "P12.0",
@@ -22952,7 +23071,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "206281001"
+    "snomed_code": "206200000",
+    "snomed_display": "Cephalohematoma due to birth trauma"
   },
   {
     "icd10": "P91.6",
@@ -23029,7 +23149,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "309541009"
+    "snomed_code": "126945001",
+    "snomed_display": "Perinatal hypoxic - ischemic encephalopathy"
   },
   {
     "icd10": "P52",
@@ -23101,7 +23222,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "206311004"
+    "snomed_code": "206417009",
+    "snomed_display": "Intracranial nontraumatic haemorrhage of foetus and newborn"
   },
   {
     "icd10": "P90",
@@ -23178,7 +23300,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "206335002"
+    "snomed_code": "87476004",
+    "snomed_display": "Neonatal seizure"
   },
   {
     "icd10": "P23",
@@ -23332,7 +23455,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "276534001"
+    "snomed_code": "86649001",
+    "snomed_display": "Meconium pneumonitis"
   },
   {
     "icd10": "P28.4",
@@ -23404,7 +23528,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "206333004"
+    "snomed_code": "70073005",
+    "snomed_display": "Perinatal apnoeic spells"
   },
   {
     "icd10": "P25",
@@ -23471,7 +23596,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "276536004"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "P22.9",
@@ -23548,7 +23674,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "46177005"
+    "snomed_code": "1179634008",
+    "snomed_display": "Respiratory distress in early neonatal period"
   },
   {
     "icd10": "P29.3",
@@ -23635,7 +23762,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "233947005"
+    "snomed_code": "233815004",
+    "snomed_display": "Persistent neonatal pulmonary hypertension"
   },
   {
     "icd10": "P26",
@@ -23717,7 +23845,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "206538002"
+    "snomed_code": "206306009",
+    "snomed_display": "Other specified perinatal pulmonary hemorrhage"
   },
   {
     "icd10": "P22.0",
@@ -23794,7 +23923,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "46177005"
+    "snomed_code": "46775006",
+    "snomed_display": "Respiratory distress syndrome in neonate"
   },
   {
     "icd10": "P22.1",
@@ -23866,7 +23996,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "276523002"
+    "snomed_code": "7550008",
+    "snomed_display": "Neonatal transitory tachypnoea"
   },
   {
     "icd10": "N31",
@@ -24020,7 +24151,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "34000006"
+    "snomed_code": "197858004",
+    "snomed_display": "Other disorders of bladder"
   },
   {
     "icd10": "Q62",
@@ -24092,7 +24224,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "95568003"
+    "snomed_code": "236807008",
+    "snomed_display": "Congenital obstructive azoospermia"
   },
   {
     "icd10": "Q61",
@@ -24169,7 +24302,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "236466005"
+    "snomed_code": "236439005",
+    "snomed_display": "Cystic kidney disease"
   },
   {
     "icd10": "Q54",
@@ -24313,7 +24447,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "77272007"
+    "snomed_code": "297163001",
+    "snomed_display": "Congenital urethral valve"
   },
   {
     "icd10": "Q60",
@@ -24385,7 +24520,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "70811002"
+    "snomed_code": "204938007",
+    "snomed_display": "Renal agenesis and dysgenesis"
   },
   {
     "icd10": "Q53",
@@ -24658,7 +24794,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "36171008"
+    "snomed_code": "61503006",
+    "snomed_display": "Acute nephritic syndrome"
   },
   {
     "icd10": "N04",
@@ -24894,7 +25031,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "197587000"
+    "snomed_code": "197698000",
+    "snomed_display": "Recurrent or persistent haematuria"
   },
   {
     "icd10": "N05",
@@ -25197,7 +25335,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "236627007"
+    "snomed_code": "197764002",
+    "snomed_display": "Reflux nephropathy"
   },
   {
     "icd10": "N17",
@@ -25500,7 +25639,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "55999004"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "N45",
@@ -25629,7 +25769,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "54949006"
+    "snomed_code": "69282001",
+    "snomed_display": "Torsion of epididymis"
   },
   {
     "icd10": "R31",
@@ -25922,7 +26063,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "67746002"
+    "snomed_code": "1092831000119109",
+    "snomed_display": "Toxoplasma tubulointerstitial nephropathy"
   },
   {
     "icd10": "N39.0",
@@ -26076,7 +26218,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "1829003"
+    "snomed_code": "127551000119100",
+    "snomed_display": "Congenital hypoplasia of brain"
   },
   {
     "icd10": "Q04",
@@ -26230,7 +26373,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "248269005"
+    "snomed_code": "401169009",
+    "snomed_display": "Not yet walking"
   },
   {
     "icd10": "F82",
@@ -26302,7 +26446,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "4631006"
+    "snomed_code": "268674003",
+    "snomed_display": "Developmental disorder of motor function"
   },
   {
     "icd10": "F80",
@@ -26975,7 +27120,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "17190001"
+    "snomed_code": "156894003",
+    "snomed_display": "Congenital hydrocephalus"
   },
   {
     "icd10": "G81",
@@ -27124,7 +27270,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "19127002"
+    "snomed_code": "267687006",
+    "snomed_display": "(Child cerebral degeneration) or (hydrocephalus) or (senile brain degeneration)"
   },
   {
     "icd10": "R27.0",
@@ -27365,7 +27512,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "83996005"
+    "snomed_code": "267580003",
+    "snomed_display": "Other extrapyramidal disease and abnormal movement disorders"
   },
   {
     "icd10": "G61.0",
@@ -27596,7 +27744,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "129565002"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "G71",
@@ -28170,7 +28319,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "230456004"
+    "snomed_code": "230456007",
+    "snomed_display": "SE - status epilepticus"
   },
   {
     "icd10": "G47.9",
@@ -28540,7 +28690,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "707444001"
+    "snomed_code": "10675551000119104",
+    "snomed_display": "Acute severe exacerbation of severe persistent asthma co-occurrent with allergic rhinitis"
   },
   {
     "icd10": "R06.2",
@@ -28848,7 +28999,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "232324006"
+    "snomed_code": "262599003",
+    "snomed_display": "Foreign body in respiratory tract"
   },
   {
     "icd10": "J21",
@@ -28992,7 +29144,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "55735004"
+    "snomed_code": "57089007",
+    "snomed_display": "Respiratory syncytial virus bronchiolitis"
   },
   {
     "icd10": "J20",
@@ -29131,7 +29284,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "312116003"
+    "snomed_code": "195742007",
+    "snomed_display": "Acute lower respiratory tract infection"
   },
   {
     "icd10": "J15.9",
@@ -29372,7 +29526,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "41381004"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "J90",
@@ -29531,7 +29686,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "278516003"
+    "snomed_code": "266350000",
+    "snomed_display": "Pneumococcal lobar pneumonia"
   },
   {
     "icd10": "J14",
@@ -29608,7 +29764,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "195878008"
+    "snomed_code": "10625231000119106",
+    "snomed_display": "Bronchopneumonia caused by Haemophilus influenzae"
   },
   {
     "icd10": "J18.9",
@@ -29921,7 +30078,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "154283005"
+    "snomed_code": "186192006",
+    "snomed_display": "Respiratory tuberculosis, bacteriologically and histologically confirmed"
   },
   {
     "icd10": "A16",
@@ -30070,7 +30228,8 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "6142004"
+    "snomed_code": "195679003",
+    "snomed_display": "Acute laryngitis and tracheitis"
   },
   {
     "icd10": "J00",
@@ -30979,7 +31138,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "398130009"
+    "snomed_code": "194464009",
+    "snomed_display": "[X]Other systemic atrophy affecting the central nervous system in neoplastic disease classified elsewhere"
   },
   {
     "icd10": "M32",
@@ -31148,7 +31308,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "698093001"
+    "snomed_code": "234538002",
+    "snomed_display": "Periodic fever - Dutch type"
   },
   {
     "icd10": "D81",
@@ -31307,7 +31468,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "36138009"
+    "snomed_code": "191010004",
+    "snomed_display": "Primary hypogammaglobulinemia"
   },
   {
     "icd10": "D82",
@@ -31394,7 +31556,8 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "234532001"
+    "snomed_code": "191029005",
+    "snomed_display": "[X]Immunodeficiency associated with other specified major defects"
   },
   {
     "icd10": "D80",
@@ -31471,7 +31634,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "234532001"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "D84",
@@ -31779,7 +31943,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "1071000119107"
+    "snomed_code": "197150008",
+    "snomed_display": "Anal fissure and fistula"
   },
   {
     "icd10": "Q90",
@@ -32179,7 +32344,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "403760006"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "Q92",
@@ -32256,7 +32422,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "55505009"
+    "snomed_code": null,
+    "snomed_display": null
   },
   {
     "icd10": "Q96",
@@ -32671,7 +32838,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "57148006"
+    "snomed_code": "205845004",
+    "snomed_display": "[X]Congenital malformations of the nervous system"
   },
   {
     "icd10": "K40",
@@ -32795,7 +32963,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "396233005"
+    "snomed_code": "396347007",
+    "snomed_display": "Exumbilication"
   },
   {
     "icd10": "Q66",
@@ -33021,7 +33190,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "268340004"
+    "snomed_code": "205117007",
+    "snomed_display": "Congenital musculoskeletal deformity NOS"
   },
   {
     "icd10": "Q78.0",
@@ -33252,7 +33422,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "59042003"
+    "snomed_code": "205955001",
+    "snomed_display": "[X]Other reduction defects of upper limb(s)"
   },
   {
     "icd10": "Q71",
@@ -33329,7 +33500,8 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "31216007"
+    "snomed_code": "205955001",
+    "snomed_display": "[X]Other reduction defects of upper limb(s)"
   },
   {
     "icd10": "Q70",
@@ -33488,6 +33660,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "66308009"
+    "snomed_code": "192956008",
+    "snomed_display": "Other congenital cerebral palsy"
   }
 ]

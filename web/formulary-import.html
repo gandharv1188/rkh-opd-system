@@ -536,6 +536,27 @@
     return d.innerHTML;
   }
 
+  /* ===== ABDM FHIR formulation helper (backward compatible) ===== */
+  function getConc(f) {
+    if (f.ingredients && f.ingredients.length) {
+      const p = f.ingredients.find((i) => i.is_primary) || f.ingredients[0];
+      return {
+        cq: p.strength_numerator || 0,
+        cu: p.strength_numerator_unit || "mg",
+        pq: p.strength_denominator || 1,
+        pu: p.strength_denominator_unit || "ml",
+        brand: (f.indian_brands || [])[0]?.name || "",
+      };
+    }
+    return {
+      cq: f.conc_qty || 0,
+      cu: f.conc_unit || "mg",
+      pq: f.per_qty || 1,
+      pu: f.per_unit || "ml",
+      brand: f.indian_brand || "",
+    };
+  }
+
   let SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co",
     KEY =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg",
@@ -686,28 +707,52 @@
         forms = [
           {
             form: form || "syrup",
-            conc_qty: parseFloat(cq) || null,
-            conc_unit: "mg",
-            per_qty: 5,
-            per_unit: "ml",
             route: "oral",
+            unit_of_presentation: "mL",
+            ingredients: [
+              {
+                name: name,
+                is_primary: true,
+                strength_numerator: parseFloat(cq) || null,
+                strength_numerator_unit: "mg",
+                strength_denominator: 5,
+                strength_denominator_unit: "mL",
+              },
+            ],
+            indian_brands: [],
           },
         ];
     }
     if (Array.isArray(forms)) {
       forms = forms.map((f) => {
-        if (typeof f === "string") return parseFormString(f);
+        if (typeof f === "string") return parseFormString(f, name);
+        // If already in new ABDM FHIR format, pass through
+        if (f.ingredients && Array.isArray(f.ingredients)) return f;
+        // Convert old format or flexible input to new structure
+        const cq =
+          parseFloat(
+            f.conc_qty || f.concentration || f.strength || f.mg || 0,
+          ) || null;
+        const cu = f.conc_unit || f.unit || "mg";
+        const pq = parseFloat(f.per_qty || f.per || f.per_ml || 5) || null;
+        const pu = f.per_unit || f.volume_unit || "mL";
+        const brandStr = f.indian_brand || f.brand || f.brands || "";
         return {
           form: f.form || f.type || f.dosage_form || "syrup",
-          conc_qty:
-            parseFloat(
-              f.conc_qty || f.concentration || f.strength || f.mg || 0,
-            ) || null,
-          conc_unit: f.conc_unit || f.unit || "mg",
-          per_qty: parseFloat(f.per_qty || f.per || f.per_ml || 5) || null,
-          per_unit: f.per_unit || f.volume_unit || "ml",
           route: f.route || "oral",
-          indian_brand: f.indian_brand || f.brand || f.brands || "",
+          unit_of_presentation: pu,
+          ingredients: [
+            {
+              name: name,
+              is_primary: true,
+              strength_numerator: cq,
+              strength_numerator_unit: cu,
+              strength_denominator: pq,
+              strength_denominator_unit: pu,
+            },
+          ],
+          indian_brands: brandStr ? [{ name: brandStr }] : [],
+          indian_conc_note: cq ? `${name} ${cq} ${cu} / ${pq} ${pu}` : null,
         };
       });
     }
@@ -833,44 +878,60 @@
     return band;
   }
 
-  function parseFormString(s) {
+  function parseFormString(s, drugName) {
     // Handle strings like "Syrup 125mg/5ml" or "Tab 500mg"
-    const f = {
-      form: "syrup",
-      conc_qty: null,
-      conc_unit: "mg",
-      per_qty: 5,
-      per_unit: "ml",
-      route: "oral",
-    };
+    // Returns new ABDM FHIR structure
+    let form = "syrup",
+      route = "oral",
+      pq = 5,
+      pu = "mL",
+      cq = null,
+      cu = "mg";
     if (/tab|tablet/i.test(s)) {
-      f.form = "tablet";
-      f.per_qty = 1;
-      f.per_unit = "tablet";
-      f.rounding_rule = "quarter_tab";
+      form = "tablet";
+      pq = 1;
+      pu = "tablet";
     } else if (/drop/i.test(s)) {
-      f.form = "drops";
-      f.per_qty = 1;
-      f.per_unit = "ml";
+      form = "drops";
+      pq = 1;
+      pu = "mL";
     } else if (/cap/i.test(s)) {
-      f.form = "capsule";
-      f.per_qty = 1;
-      f.per_unit = "capsule";
+      form = "capsule";
+      pq = 1;
+      pu = "capsule";
     } else if (/inj|injection|iv|im/i.test(s)) {
-      f.form = "injection";
-      f.route = "iv";
+      form = "injection";
+      route = "iv";
     }
     const m = s.match(/(\d+\.?\d*)\s*(mg|mcg|g|units?)/i);
     if (m) {
-      f.conc_qty = parseFloat(m[1]);
-      f.conc_unit = m[2].toLowerCase();
+      cq = parseFloat(m[1]);
+      cu = m[2].toLowerCase();
     }
     const pm = s.match(/\/\s*(\d+\.?\d*)\s*(ml|tablet|dose)/i);
     if (pm) {
-      f.per_qty = parseFloat(pm[1]);
-      f.per_unit = pm[2].toLowerCase();
+      pq = parseFloat(pm[1]);
+      pu = pm[2].toLowerCase();
     }
-    return f;
+    return {
+      form,
+      route,
+      unit_of_presentation: pu,
+      ingredients: [
+        {
+          name: drugName || "",
+          is_primary: true,
+          strength_numerator: cq,
+          strength_numerator_unit: cu,
+          strength_denominator: pq,
+          strength_denominator_unit: pu,
+        },
+      ],
+      indian_brands: [],
+      indian_conc_note: cq
+        ? `${drugName || ""} ${cq} ${cu} / ${pq} ${pu}`
+        : null,
+    };
   }
 
   const CAT_MAP = {
@@ -940,10 +1001,10 @@
             .join(", ") || "—";
         const formSummary =
           forms
-            .map(
-              (f) =>
-                `${esc(f.form)} ${esc(f.conc_qty || "?")}${esc(f.conc_unit || "mg")}`,
-            )
+            .map((f) => {
+              const c = getConc(f);
+              return `${esc(f.form)} ${esc(c.cq || "?")}${esc(c.cu || "mg")}`;
+            })
             .join(", ") || "—";
         return `<tr class="${d._valid ? "valid" : "invalid"}">
       <td>${i + 1}</td>
@@ -1058,30 +1119,54 @@
       ],
       formulations: [
         {
-          form: "syrup",
-          conc_qty: 125,
-          conc_unit: "mg",
-          per_qty: 5,
-          per_unit: "ml",
-          route: "oral",
-          indian_brand: "Novamox 125mg/5ml",
+          form: "Oral suspension",
+          route: "PO",
+          unit_of_presentation: "mL",
+          ingredients: [
+            {
+              name: "Amoxicillin",
+              is_primary: true,
+              strength_numerator: 125,
+              strength_numerator_unit: "mg",
+              strength_denominator: 5,
+              strength_denominator_unit: "mL",
+            },
+          ],
+          indian_brands: [{ name: "Novamox" }],
+          indian_conc_note: "Amoxicillin 125 mg / 5 mL",
         },
         {
-          form: "syrup",
-          conc_qty: 250,
-          conc_unit: "mg",
-          per_qty: 5,
-          per_unit: "ml",
-          route: "oral",
-          indian_brand: "Ranbaxy Amoxil 250mg/5ml",
+          form: "Oral suspension",
+          route: "PO",
+          unit_of_presentation: "mL",
+          ingredients: [
+            {
+              name: "Amoxicillin",
+              is_primary: true,
+              strength_numerator: 250,
+              strength_numerator_unit: "mg",
+              strength_denominator: 5,
+              strength_denominator_unit: "mL",
+            },
+          ],
+          indian_brands: [{ name: "Ranbaxy Amoxil" }],
+          indian_conc_note: "Amoxicillin 250 mg / 5 mL",
         },
         {
-          form: "tablet",
-          conc_qty: 500,
-          conc_unit: "mg",
-          per_qty: 1,
-          per_unit: "tablet",
-          route: "oral",
+          form: "Tablet",
+          route: "PO",
+          unit_of_presentation: "tablet",
+          ingredients: [
+            {
+              name: "Amoxicillin",
+              is_primary: true,
+              strength_numerator: 500,
+              strength_numerator_unit: "mg",
+              strength_denominator: 1,
+              strength_denominator_unit: "tablet",
+            },
+          ],
+          indian_brands: [],
         },
       ],
       dosing_bands: [
@@ -1131,30 +1216,54 @@
       brand_names: ["Calpol", "Tylenol", "Panadol", "Metacin"],
       formulations: [
         {
-          form: "syrup",
-          conc_qty: 120,
-          conc_unit: "mg",
-          per_qty: 5,
-          per_unit: "ml",
-          route: "oral",
-          indian_brand: "Calpol 120mg/5ml",
+          form: "Oral suspension",
+          route: "PO",
+          unit_of_presentation: "mL",
+          ingredients: [
+            {
+              name: "Paracetamol",
+              is_primary: true,
+              strength_numerator: 120,
+              strength_numerator_unit: "mg",
+              strength_denominator: 5,
+              strength_denominator_unit: "mL",
+            },
+          ],
+          indian_brands: [{ name: "Calpol" }],
+          indian_conc_note: "Paracetamol 120 mg / 5 mL",
         },
         {
-          form: "syrup",
-          conc_qty: 250,
-          conc_unit: "mg",
-          per_qty: 5,
-          per_unit: "ml",
-          route: "oral",
-          indian_brand: "Calpol 250mg/5ml",
+          form: "Oral suspension",
+          route: "PO",
+          unit_of_presentation: "mL",
+          ingredients: [
+            {
+              name: "Paracetamol",
+              is_primary: true,
+              strength_numerator: 250,
+              strength_numerator_unit: "mg",
+              strength_denominator: 5,
+              strength_denominator_unit: "mL",
+            },
+          ],
+          indian_brands: [{ name: "Calpol" }],
+          indian_conc_note: "Paracetamol 250 mg / 5 mL",
         },
         {
-          form: "tablet",
-          conc_qty: 500,
-          conc_unit: "mg",
-          per_qty: 1,
-          per_unit: "tablet",
-          route: "oral",
+          form: "Tablet",
+          route: "PO",
+          unit_of_presentation: "tablet",
+          ingredients: [
+            {
+              name: "Paracetamol",
+              is_primary: true,
+              strength_numerator: 500,
+              strength_numerator_unit: "mg",
+              strength_denominator: 1,
+              strength_denominator_unit: "tablet",
+            },
+          ],
+          indian_brands: [],
         },
       ],
       dosing_bands: [
@@ -1192,21 +1301,38 @@
       brand_names: ["Garamycin", "Gentakind"],
       formulations: [
         {
-          form: "injection",
-          conc_qty: 10,
-          conc_unit: "mg",
-          per_qty: 1,
-          per_unit: "ml",
-          route: "iv",
-          indian_brand: "Gentakind 40mg/2ml ampoule",
+          form: "Injection",
+          route: "IV",
+          unit_of_presentation: "mL",
+          ingredients: [
+            {
+              name: "Gentamicin",
+              is_primary: true,
+              strength_numerator: 10,
+              strength_numerator_unit: "mg",
+              strength_denominator: 1,
+              strength_denominator_unit: "mL",
+            },
+          ],
+          indian_brands: [{ name: "Gentakind" }],
+          indian_conc_note: "Gentamicin 10 mg / 1 mL",
         },
         {
-          form: "injection",
-          conc_qty: 40,
-          conc_unit: "mg",
-          per_qty: 2,
-          per_unit: "ml",
-          route: "iv",
+          form: "Injection",
+          route: "IV",
+          unit_of_presentation: "mL",
+          ingredients: [
+            {
+              name: "Gentamicin",
+              is_primary: true,
+              strength_numerator: 40,
+              strength_numerator_unit: "mg",
+              strength_denominator: 2,
+              strength_denominator_unit: "mL",
+            },
+          ],
+          indian_brands: [],
+          indian_conc_note: "Gentamicin 40 mg / 2 mL",
         },
       ],
       dosing_bands: [
@@ -1334,21 +1460,15 @@
     "licensed_in_children": "true",
     "formulations": [
       {
-        "form": "injection",
-        "conc_qty": 200,
-        "conc_unit": "mg",
-        "per_qty": 1,
-        "per_unit": "ml",
-        "route": "iv",
-        "indian_brand": "Gardenal 200mg/ml"
+        "form": "Injection", "route": "IV", "unit_of_presentation": "mL",
+        "ingredients": [{"name": "Phenobarbitone", "is_primary": true, "strength_numerator": 200, "strength_numerator_unit": "mg", "strength_denominator": 1, "strength_denominator_unit": "mL"}],
+        "indian_brands": [{"name": "Gardenal"}],
+        "indian_conc_note": "Phenobarbitone 200 mg / 1 mL"
       },
       {
-        "form": "tablet",
-        "conc_qty": 30,
-        "conc_unit": "mg",
-        "per_qty": 1,
-        "per_unit": "tablet",
-        "route": "oral"
+        "form": "Tablet", "route": "PO", "unit_of_presentation": "tablet",
+        "ingredients": [{"name": "Phenobarbitone", "is_primary": true, "strength_numerator": 30, "strength_numerator_unit": "mg", "strength_denominator": 1, "strength_denominator_unit": "tablet"}],
+        "indian_brands": []
       }
     ],
     "dosing_bands": [

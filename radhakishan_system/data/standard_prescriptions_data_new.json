@@ -165,7 +165,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "395507008",
+    "snomed_code": "15750041000119101",
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -175,7 +175,8 @@
       "Repeated vomiting",
       "Seizures or abnormal movements",
       "Breathing difficulty"
-    ]
+    ],
+    "snomed_display": "Baby premature 29 weeks"
   },
   {
     "icd10": "J21.9",
@@ -1090,7 +1091,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "25374005",
+    "snomed_code": "20759009",
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -1100,7 +1101,8 @@
       "Persistent vomiting or unable to drink",
       "No urine output for more than 6 hours",
       "Signs of severe dehydration such as sunken eyes or dry mouth"
-    ]
+    ],
+    "snomed_display": "Dietetic jejunitis"
   },
   {
     "icd10": "K29.0",
@@ -1533,7 +1535,7 @@
         "urgency": "stat"
       }
     ],
-    "snomed_code": "3738000",
+    "snomed_code": "722865001",
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -1543,7 +1545,8 @@
       "Altered sensorium or excessive drowsiness",
       "Bleeding tendency such as nose bleed or blood in vomit",
       "Increasing jaundice or dark urine"
-    ]
+    ],
+    "snomed_display": "Subacute hepatic failure caused by hepatitis virus"
   },
   {
     "icd10": "K52.9",
@@ -1635,7 +1638,7 @@
         "urgency": "urgent"
       }
     ],
-    "snomed_code": "25374005",
+    "snomed_code": "20759009",
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -1645,7 +1648,8 @@
       "Electrolyte imbalance symptoms such as muscle cramps or weakness",
       "No urine output for more than 6 hours",
       "Signs of shock such as cold hands or weak pulse"
-    ]
+    ],
+    "snomed_display": "Dietetic jejunitis"
   },
   {
     "icd10": "R04.0",
@@ -1717,7 +1721,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "12441001",
+    "snomed_code": null,
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -1727,7 +1731,8 @@
       "Recurrent frequent nosebleed episodes",
       "Bleeding from other sites such as gums or skin bruises",
       "Pallor or weakness suggesting significant blood loss"
-    ]
+    ],
+    "snomed_display": null
   },
   {
     "icd10": "N39.44",
@@ -1810,7 +1815,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "8009008",
+    "snomed_code": "236660009",
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -1820,7 +1825,8 @@
       "Weak urine stream or straining to urinate",
       "Recurrent urinary tract infections",
       "Secondary enuresis after being dry for more than 6 months"
-    ]
+    ],
+    "snomed_display": "Giggle incontinence of urine"
   },
   {
     "icd10": "Z00.1",
@@ -1883,7 +1889,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "243788004",
+    "snomed_code": "424056003",
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -1893,7 +1899,8 @@
       "Excessive crying that is inconsolable",
       "Fever in a newborn or young infant",
       "Delayed developmental milestones"
-    ]
+    ],
+    "snomed_display": "Difficulty performing normal routines due to substance use"
   },
   {
     "icd10": "R10.83",
@@ -1966,7 +1973,7 @@
         "urgency": "routine"
       }
     ],
-    "snomed_code": "48340000",
+    "snomed_code": "139306005",
     "warning_signs": [
       "Fast breathing or chest indrawing",
       "Bluish discoloration of lips or tongue",
@@ -1976,7 +1983,8 @@
       "Vomiting especially if bilious or forceful",
       "Blood in stool",
       "Failure to gain weight adequately"
-    ]
+    ],
+    "snomed_display": "Abdominal colic"
   },
   {
     "icd10": "K21.0",

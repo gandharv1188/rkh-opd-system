@@ -1,0 +1,1027 @@
+{
+  "batch_size": 12,
+  "total_batches": 57,
+  "batches": [
+    {
+      "batch_id": 1,
+      "drugs": [
+        "Ibuprofen",
+        "Paracetamol",
+        "Ceftriaxone",
+        "IVIG",
+        "Prednisolone",
+        "Amoxicillin",
+        "Azithromycin",
+        "Furosemide",
+        "Vancomycin",
+        "Acyclovir",
+        "Clindamycin",
+        "Dexamethasone"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 2,
+      "drugs": [
+        "Metronidazole",
+        "Meropenem",
+        "Ondansetron",
+        "Cephalexin",
+        "Mycophenolate mofetil",
+        "Epinephrine",
+        "Enalapril",
+        "Amoxicillin-Clavulanate",
+        "Cetirizine",
+        "Hydrocortisone 1% cream",
+        "Rituximab",
+        "Propranolol"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 3,
+      "drugs": [
+        "Fexofenadine",
+        "Levetiracetam",
+        "Montelukast",
+        "Spironolactone",
+        "Naproxen",
+        "Hydroxyzine",
+        "Methotrexate",
+        "Cefotaxime",
+        "Penicillin V",
+        "Prostaglandin E1",
+        "Diphenhydramine",
+        "Doxycycline"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 4,
+      "drugs": [
+        "Dextrose 10%",
+        "Sodium Bicarbonate",
+        "Morphine",
+        "Norepinephrine",
+        "Hydrocortisone",
+        "Piperacillin-tazobactam",
+        "Botulinum toxin A",
+        "Omeprazole",
+        "Azathioprine",
+        "Ampicillin",
+        "Rifampicin",
+        "Levofloxacin"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 5,
+      "drugs": [
+        "Phenobarbital",
+        "Digoxin",
+        "Milrinone",
+        "Prednisone",
+        "Methylprednisolone",
+        "Saccharomyces boulardii",
+        "Tranexamic Acid",
+        "Oxybutynin",
+        "Folic acid",
+        "Albendazole",
+        "Mebendazole",
+        "Ivermectin"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 6,
+      "drugs": [
+        "Gentamicin",
+        "Isoniazid (H)",
+        "Pyrazinamide (Z)",
+        "Ethambutol",
+        "Caffeine citrate",
+        "Erythropoietin",
+        "Acetazolamide",
+        "Cefixime",
+        "Zinc sulfate",
+        "Lactulose",
+        "Amlodipine",
+        "Loratadine"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 7,
+      "drugs": [
+        "Ampicillin + Gentamicin",
+        "Benzathine penicillin G",
+        "Clotrimazole 1% cream",
+        "Valacyclovir",
+        "Diazepam",
+        "Cholecalciferol",
+        "Racecadotril",
+        "Ciprofloxacin",
+        "Cyproheptadine",
+        "Risperidone",
+        "Fluoxetine",
+        "Clonidine"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 8,
+      "drugs": [
+        "Topiramate",
+        "Methylphenidate",
+        "Desmopressin",
+        "Valproate",
+        "Fluconazole",
+        "Oseltamivir",
+        "Cyclophosphamide",
+        "DICYCLOMINE",
+        "Dupilumab",
+        "Carvedilol",
+        "Amiodarone",
+        "Colchicine"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 9,
+      "drugs": [
+        "Erythromycin",
+        "Lactated Ringer",
+        "Ketamine",
+        "Fentanyl",
+        "Midazolam",
+        "Naloxone",
+        "Lorazepam",
+        "Calcium Gluconate 10%",
+        "Octreotide",
+        "Glucagon",
+        "Esomeprazole",
+        "Clarithromycin"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 10,
+      "drugs": [
+        "Sucralfate",
+        "Ursodeoxycholic acid",
+        "Cyclosporine",
+        "Aripiprazole",
+        "Imipramine",
+        "Melatonin",
+        "Eltrombopag",
+        "Pyrantel pamoate",
+        "Amikacin",
+        "Linezolid",
+        "Artemether-lumefantrine",
+        "Magnesium sulfate"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 11,
+      "drugs": [
+        "Baclofen",
+        "Intrathecal baclofen",
+        "Ipratropium bromide",
+        "Azithromycin prophylaxis",
+        "LEVOSALBUTAMOL",
+        "CEFPODOXIME",
+        "Nirsevimab",
+        "Nitrofurantoin",
+        "Guanfacine ER",
+        "Hydrochlorothiazide",
+        "Aspirin",
+        "Sacubitril-Valsartan"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 12,
+      "drugs": [
+        "Anakinra",
+        "Rilonacept",
+        "Sildenafil",
+        "Epoprostenol",
+        "Adenosine",
+        "Flecainide",
+        "Gabapentin",
+        "Ketoconazole 2% shampoo",
+        "Zinc pyrithione 1% shampoo",
+        "Ketoconazole 2% cream",
+        "CALAMINE LOTION",
+        "Itraconazole oral"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 13,
+      "drugs": [
+        "Adalimumab",
+        "Cyclopentolate 1% ophthalmic",
+        "Silver Sulfadiazine 1%",
+        "Oxandrolone",
+        "Mannitol",
+        "Pentobarbital",
+        "Flumazenil",
+        "Atropine",
+        "Fludrocortisone",
+        "Diazoxide",
+        "Thiamine",
+        "L-Carnitine"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 14,
+      "drugs": [
+        "Imiglucerase",
+        "Miglustat",
+        "Testosterone",
+        "Vitamin C",
+        "Vitamin E",
+        "Vitamin A",
+        "Calcitriol",
+        "Probiotics (LGG)",
+        "Lansoprazole",
+        "Cholestyramine",
+        "Metformin",
+        "Loperamide"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 15,
+      "drugs": [
+        "Amitriptyline",
+        "Sertraline",
+        "Tetrabenazine",
+        "Pyridoxine (vitamin B6)",
+        "Deferoxamine",
+        "G-CSF (Filgrastim)",
+        "Cefazolin",
+        "Foscarnet",
+        "Valganciclovir",
+        "Ganciclovir",
+        "Tinidazole",
+        "Remdesivir"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 16,
+      "drugs": [
+        "Tocilizumab",
+        "Baloxavir marboxil",
+        "Zanamivir",
+        "Peramivir",
+        "Dextrose gel 40%",
+        "Dopamine",
+        "Tolterodine",
+        "Mirabegron",
+        "Betamethasone 0.05%",
+        "Nifedipine",
+        "Rizatriptan",
+        "IV methylprednisolone"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 17,
+      "drugs": [
+        "Trihexyphenidyl",
+        "Nebulized hypertonic saline",
+        "Ribavirin",
+        "Omalizumab",
+        "Abatacept",
+        "Tofacitinib",
+        "Hydroxychloroquine",
+        "Botulinum toxin injection",
+        "FERROUS ASCORBATE + FOLIC ACID",
+        "PEG 3350 (Polyethylene Glycol)",
+        "Ruxolitinib cream 1.5%",
+        "IV Artesunate"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 18,
+      "drugs": [
+        "Artesunate-Pyronaridine",
+        "Atomoxetine",
+        "Insulin Glargine",
+        "Lisinopril",
+        "Losartan",
+        "Infliximab",
+        "Intranasal Fluticasone",
+        "Atenolol",
+        "Captopril",
+        "Mavacamten",
+        "Nafcillin",
+        "Bosentan"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 19,
+      "drugs": [
+        "Treprostinil",
+        "Macitentan",
+        "Selexipag",
+        "Warfarin",
+        "Sotalol",
+        "Esmolol",
+        "Sirolimus",
+        "Zinc oxide ointment",
+        "Petrolatum barrier ointment",
+        "Ciclopirox 1% cream/shampoo",
+        "Benzoyl peroxide 2.5-5%",
+        "Adapalene 0.1% gel"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 20,
+      "drugs": [
+        "Sarecycline",
+        "Isotretinoin",
+        "Clindamycin 1% lotion",
+        "Hydrocortisone 0.5-1% cream",
+        "Anhydrous lanolin",
+        "Ciclopirox 8% nail lacquer",
+        "Griseofulvin microsize oral",
+        "Potassium iodide",
+        "Calcipotriene 0.005% cream",
+        "Betamethasone dipropionate 0.05%",
+        "Hydrocortisone 2.5% cream",
+        "Apremilast"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 21,
+      "drugs": [
+        "Ustekinumab",
+        "Pimecrolimus 1% cream",
+        "Hydroquinone 2-4% cream",
+        "Azelaic acid 15-20% cream",
+        "Chlorhexidine gluconate 0.12%",
+        "Hydrogen peroxide 1.5% rinse",
+        "Sodium bicarbonate ear drops 5%",
+        "Acetic acid 2% otic solution",
+        "Neomycin/Polymyxin B/Hydrocortisone otic",
+        "Cefdinir",
+        "Polymyxin B-Trimethoprim drops",
+        "Artificial tears (preservative-free)"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 22,
+      "drugs": [
+        "Azithromycin 1% ophthalmic",
+        "Ketotifen 0.025% ophthalmic (OTC)",
+        "Fortified tobramycin 1.4% + cefazolin 5%",
+        "Gatifloxacin 0.5% ophthalmic",
+        "Botulinum toxin A injection",
+        "Petroleum jelly (Vaseline)",
+        "Fluticasone propionate nasal spray",
+        "Desloratadine",
+        "Mafenide Acetate",
+        "Albumin 5%",
+        "Phenytoin",
+        "Lidocaine 1%"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 23,
+      "drugs": [
+        "Insulin (Regular)",
+        "Salbutamol (Albuterol)",
+        "Sodium Polystyrene Sulfonate",
+        "Patiromer",
+        "Tris-Hydroxymethyl Aminomethane",
+        "Dobutamine",
+        "Lipid Emulsion 20%",
+        "N-Acetylcysteine (NAC)",
+        "Fomepizole",
+        "Folinic Acid (Leucovorin)",
+        "Proton Pump Inhibitor",
+        "Pralidoxime (2-PAM)"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 24,
+      "drugs": [
+        "Glycopyrrolate",
+        "Obidoxime",
+        "Crotalidae Polyvalent Immune Fab (CroFab)",
+        "IV Hydrocortisone",
+        "Crinecerfont",
+        "Regular insulin IV infusion",
+        "Potassium phosphate",
+        "Idursulfase",
+        "Galsulfase (MPS VI)",
+        "Pyridoxine (B6)",
+        "Betaine (trimethylglycine)",
+        "Allopurinol"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 25,
+      "drugs": [
+        "Sapropterin (BH4)",
+        "Pegvaliase",
+        "Arimoclomol (NPC)",
+        "Velaglucerase alfa",
+        "Semaglutide",
+        "Liraglutide (Saxenda)",
+        "Orlistat",
+        "Phentermine/topiramate",
+        "Elexacaftor/tezacaftor/ivacaftor",
+        "Dornase alfa",
+        "Ivacaftor (Kalydeco)",
+        "Coenzyme Q10"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 26,
+      "drugs": [
+        "Alpha-lipoic acid",
+        "Letrozole",
+        "Leuprolide acetate",
+        "Histrelin implant",
+        "Triptorelin",
+        "Somatropin",
+        "Levothyroxine",
+        "Methimazole",
+        "Radioactive iodine (I-131)",
+        "Retinol (Vitamin A)",
+        "Ergocalciferol (Vitamin D2)",
+        "Lactobacillus rhamnosus GG"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 27,
+      "drugs": [
+        "Pivmecillinam",
+        "Ertapenem",
+        "Bismuth subsalicylate",
+        "Ranitidine/Famotidine",
+        "Famotidine",
+        "Entecavir",
+        "Tenofovir disoproxil",
+        "Sofosbuvir/Velpatasvir",
+        "Glecaprevir/pibrentasvir (Mavyret)",
+        "Ledipasvir/sofosbuvir (Harvoni)",
+        "Tacrolimus",
+        "Ketorolac"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 28,
+      "drugs": [
+        "Peppermint oil (enteric-coated)",
+        "Probiotics (S. boulardii)",
+        "Promethazine",
+        "Dimenhydrinate",
+        "Metoclopramide",
+        "Lithium",
+        "Fluvoxamine",
+        "Duloxetine",
+        "Escitalopram",
+        "Guanfacine",
+        "Fluphenazine",
+        "Polyethylene Glycol 3350 (MiraLAX)"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 29,
+      "drugs": [
+        "Glycerin suppositories",
+        "Folic acid (parenteral)",
+        "Folic acid high-dose",
+        "Ferrous sulfate",
+        "Ferrous fumarate",
+        "Iron polymaltose (Fe3+)",
+        "IV iron (ferric carboxymaltose)",
+        "EPO (erythropoietin)",
+        "Copper supplementation",
+        "Cyanocobalamin (IM)",
+        "Cyanocobalamin",
+        "Hydroxocobalamin (IM)"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 30,
+      "drugs": [
+        "Emicizumab",
+        "Factor VIII",
+        "Marstacimab",
+        "Extended half-life FIX (rIX-FP)",
+        "Factor IX",
+        "Fitusiran",
+        "Romiplostim",
+        "Prednis(ol)one",
+        "Hydroxyurea",
+        "Deferasirox",
+        "Deferiprone",
+        "Inotuzumab ozogamicin"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 31,
+      "drugs": [
+        "Nelarabine",
+        "Etoposide",
+        "Gemtuzumab ozogamicin",
+        "Intrathecal cytarabine",
+        "CPX-351 (liposomal Ara-C/dauno)",
+        "Brentuximab vedotin + AVEPC",
+        "Nivolumab",
+        "Brentuximab vedotin (single)",
+        "Brentuximab vedotin",
+        "Ifosfamide + Etoposide",
+        "Temozolomide",
+        "Bevacizumab"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 32,
+      "drugs": [
+        "Ifosfamide + Doxorubicin",
+        "Actinomycin D + Vincristine (EE-4A)",
+        "Doxorubicin",
+        "Pegfilgrastim",
+        "Famciclovir",
+        "Diphtheria antitoxin (DAT)",
+        "Penicillin G procaine",
+        "Nystatin",
+        "Clotrimazole troches",
+        "Micafungin",
+        "Amphotericin B",
+        "Cidofovir"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 33,
+      "drugs": [
+        "Dolutegravir (DTG)",
+        "Abacavir/Lamivudine",
+        "Tenofovir DF/Emtricitabine",
+        "Lopinavir/Ritonavir",
+        "Raltegravir",
+        "Efavirenz",
+        "Paromomycin (luminal agent)",
+        "Iodoquinol",
+        "Praziquantel",
+        "Nitazoxanide",
+        "Paromomycin",
+        "Nirmatrelvir/Ritonavir"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 34,
+      "drugs": [
+        "Baricitinib",
+        "Alternating acetaminophen/ibuprofen",
+        "Cefepime",
+        "Ethionamide",
+        "Colloid (Dextran 40)",
+        "Artesunate-amodiaquine",
+        "Quinine",
+        "DHA-piperaquine",
+        "Chloroquine",
+        "Primaquine (radical cure)",
+        "Tafenoquine",
+        "Chloramphenicol"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 35,
+      "drugs": [
+        "Permethrin 1% lotion",
+        "Dimethicone 4% lotion",
+        "Ivermectin 0.5% lotion",
+        "Spinosad 0.9% topical",
+        "HRIG (Human Rabies Ig)",
+        "Equine RIG (ERIG)",
+        "Permethrin 5% cream",
+        "Precipitated sulfur 5-10%",
+        "Crotamiton 10% cream",
+        "Atropine sulfate",
+        "Probiotics (prevention)",
+        "Pyrimethamine"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 36,
+      "drugs": [
+        "Sulfadiazine",
+        "Leucovorin (folinic acid)",
+        "Azithromycin oral",
+        "Human TIG",
+        "Dextrose infusion",
+        "Methadone",
+        "Doxapram",
+        "Recombinant Factor VIIa",
+        "Tolvaptan",
+        "Pravastatin",
+        "GnRH (Buserelin)",
+        "Bacitracin ointment"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 37,
+      "drugs": [
+        "Albumin + Furosemide",
+        "Tamsulosin",
+        "Potassium citrate",
+        "Rasburicase",
+        "Calcium carbonate",
+        "Sevelamer",
+        "Darbepoetin",
+        "Almotriptan",
+        "Tizanidine",
+        "Dantrolene",
+        "Riluzole",
+        "Omaveloxolone"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 38,
+      "drugs": [
+        "Levodopa/carbidopa",
+        "Clonazepam",
+        "Benztropine",
+        "Valbenazine",
+        "Pyridostigmine",
+        "Eculizumab",
+        "Deflazacort",
+        "Ataluren",
+        "Eteplirsen",
+        "Carbamazepine",
+        "Ethosuximide",
+        "Lamotrigine"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 39,
+      "drugs": [
+        "Oxcarbazepine",
+        "Cenobamate",
+        "Fosphenytoin",
+        "Trazodone",
+        "Palivizumab",
+        "Dextromethorphan",
+        "Intrapleural urokinase",
+        "Baloxavir marboxil (if influenza)",
+        "Nebulized epinephrine",
+        "Budesonide nebulized",
+        "Nasal saline drops/spray",
+        "Etanercept"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 40,
+      "drugs": [
+        "Emapalumab",
+        "Sulfasalazine",
+        "Belimumab",
+        "Voclosporin",
+        "Canakinumab",
+        "Budesonide",
+        "Hyaluronidase-facilitated SCIG",
+        "Diclofenac",
+        "Growth hormone therapy",
+        "IV pamidronate",
+        "IV zoledronic acid",
+        "Risedronate"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 41,
+      "drugs": [
+        "Denosumab",
+        "GH therapy (PWS)",
+        "MEFENAMIC ACID",
+        "LEVOCETIRIZINE",
+        "ORAL REHYDRATION SALTS",
+        "PANTOPRAZOLE",
+        "DOMPERIDONE"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 42,
+      "drugs": [
+        "Ampicillin-sulbactam",
+        "Artesunate",
+        "Budesonide-Formoterol",
+        "Carbamide peroxide 6.5%",
+        "Ciprofloxacin otic preparations",
+        "Clindamycin 1% + Benzoyl peroxide 5% gel",
+        "Clobetasol propionate 0.05%",
+        "Docusate sodium 1% drops",
+        "Indomethacin",
+        "Natamycin",
+        "Epinephrine nasal spray (Neffy)",
+        "Cisatracurium"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 43,
+      "drugs": [
+        "Normal Saline (0.9% Sodium Chloride)",
+        "Ofloxacin 0.3% otic",
+        "Olopatadine",
+        "Oral Vitamin K (Phytomenadione)",
+        "Budesonide (oral viscous)",
+        "Penicillin G (Benzylpenicillin)",
+        "Penicillin V (prophylaxis)",
+        "Riboflavin (Vitamin B2)",
+        "Selenium sulfide 2.5%",
+        "Estradiol",
+        "Fluocinonide",
+        "Miconazole"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 44,
+      "drugs": [
+        "Mometasone",
+        "Moxifloxacin (ophthalmic)",
+        "Mupirocin",
+        "Sumatriptan",
+        "Surfactant (Poractant alfa)",
+        "Fluticasone (swallowed)",
+        "Terbinafine",
+        "Terbutaline",
+        "Triamcinolone",
+        "Estradiol (transdermal)",
+        "Lidocaine (viscous)",
+        "Voriconazole"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 45,
+      "drugs": [
+        "ACECLOFENAC+PARACETAMOL+SERRATIOPEPTIDASE",
+        "ALPRAZOLAM",
+        "AMLODIPINE+HYDROCHLOROTHIAZIDE",
+        "ANTACID (ALUMINIUM HYDROXIDE+MAGNESIUM HYDROXIDE+SIMETHICONE)",
+        "ANTI-D IMMUNOGLOBULIN",
+        "ANTISNAKE VENOM (POLYVALENT)",
+        "ATORVASTATIN",
+        "BACILLUS CLAUSII",
+        "BETAMETHASONE+CLIOQUINOL",
+        "BETAMETHASONE+NEOMYCIN",
+        "BISACODYL",
+        "BUPIVACAINE"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 46,
+      "drugs": [
+        "BUSPIRONE",
+        "BUTORPHANOL",
+        "CALCIUM+VITAMIN D3",
+        "CARBETOCIN",
+        "CARBIMAZOLE",
+        "CARBOPROST",
+        "CEFOPERAZONE+SULBACTAM",
+        "CEFTAZIDIME",
+        "CEFUROXIME",
+        "CHLORPHENIRAMINE MALEATE",
+        "CLOBAZAM",
+        "CLOTRIMAZOLE+BECLOMETHASONE"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 47,
+      "drugs": [
+        "COLISTIMETHATE SODIUM",
+        "DEXMEDETOMIDINE",
+        "DISODIUM HYDROGEN CITRATE",
+        "DROTAVERINE",
+        "FAROPENEM",
+        "FLUOROMETHOLONE",
+        "FOSFOMYCIN",
+        "FRAMYCETIN",
+        "GLICLAZIDE",
+        "GLYCEROL",
+        "HEPARIN SODIUM",
+        "HEPATITIS-B VACCINE"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 48,
+      "drugs": [
+        "IBUPROFEN+PARACETAMOL",
+        "L-ARGININE",
+        "LABETALOL",
+        "MEFENAMIC ACID+PARACETAMOL",
+        "MEPHENTERMINE",
+        "METOPROLOL",
+        "MONTELUKAST+LEVOCETIRIZINE",
+        "NAPROXEN+DOMPERIDONE",
+        "NEOSTIGMINE",
+        "NORFLOXACIN",
+        "OXYTOCIN",
+        "PHENIRAMINE MALEATE"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 49,
+      "drugs": [
+        "POVIDONE IODINE",
+        "PREGABALIN+METHYLCOBALAMIN",
+        "PROGESTERONE",
+        "PROPOFOL",
+        "RAMIPRIL",
+        "SEVOFLURANE",
+        "SIMETHICONE+DILL OIL+FENNEL OIL",
+        "SODIUM CHLORIDE+DEXTROSE",
+        "SODIUM PICOSULFATE",
+        "STREPTOKINASE",
+        "SUCCINYLCHOLINE",
+        "TELMISARTAN"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 50,
+      "drugs": [
+        "TELMISARTAN+AMLODIPINE",
+        "THEOPHYLLINE+ETOPHYLLINE",
+        "THIOPENTONE SODIUM",
+        "TIGECYCLINE",
+        "TOBRAMYCIN",
+        "TORSEMIDE",
+        "TRAMADOL",
+        "TRICLOFOS",
+        "TROPICAMIDE",
+        "TRYPSIN-CHYMOTRYPSIN",
+        "VASOPRESSIN",
+        "VECURONIUM"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 51,
+      "drugs": [
+        "SODIUM CHLORIDE 0.9% (NORMAL SALINE)",
+        "DEXTROSE + SODIUM CHLORIDE (DNS)",
+        "POTASSIUM CHLORIDE INJECTION",
+        "CALCIUM GLUCONATE INJECTION",
+        "MAGNESIUM SULPHATE INJECTION",
+        "MANNITOL INFUSION",
+        "ALBUMIN HUMAN INFUSION",
+        "DOPAMINE INJECTION",
+        "DOBUTAMINE INJECTION",
+        "EPINEPHRINE (ADRENALINE) INJECTION",
+        "NOREPINEPHRINE (NORADRENALINE) INJECTION",
+        "PHENYLEPHRINE INJECTION"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 52,
+      "drugs": [
+        "ADENOSINE INJECTION",
+        "AMIODARONE INJECTION",
+        "LIDOCAINE (LIGNOCAINE) INJECTION",
+        "NALOXONE INJECTION",
+        "ALPROSTADIL (PROSTAGLANDIN E1) INJECTION",
+        "SODIUM NITROPRUSSIDE INJECTION",
+        "MIDAZOLAM INJECTION",
+        "KETAMINE INJECTION",
+        "ROCURONIUM INJECTION",
+        "ESMOLOL INJECTION",
+        "HYDRALAZINE INJECTION",
+        "CHLORPHENAMINE MALEATE + PHENYLEPHRINE HYDROCHLORIDE"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 53,
+      "drugs": [
+        "Aminophylline",
+        "Atropine 0.05% eye drops",
+        "Atropine 1% eye drops (penalization)",
+        "Calcium gluconate (neonatal)",
+        "Insulin Aspart",
+        "Oxymetazoline",
+        "Senna (Sennosides)",
+        "Diltiazem (topical)",
+        "Proparacaine",
+        "ATRACURIUM",
+        "B-COMPLEX",
+        "BENZALKONIUM CHLORIDE+ZINC OXIDE (CREAM)"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 54,
+      "drugs": [
+        "CLOBETASONE+MICONAZOLE",
+        "COLISTIN SULPHATE",
+        "ENOXAPARIN SODIUM",
+        "FUSIDIC ACID+HYDROCORTISONE",
+        "HEPATITIS-A VACCINE",
+        "HEPATITIS-B IMMUNOGLOBULIN",
+        "ISOFLURANE",
+        "MEASLES VACCINE",
+        "MENINGOCOCCAL CONJUGATE VACCINE",
+        "MISOPROSTOL",
+        "MULTIVITAMIN+MULTIMINERAL+AMINO ACID",
+        "NALBUPHINE"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 55,
+      "drugs": [
+        "NEOMYCIN+POLYMYXIN B+BACITRACIN ZINC",
+        "ORAL POLIO VACCINE",
+        "PIROXICAM",
+        "ROTAVIRUS VACCINE",
+        "TELMISARTAN+HYDROCHLOROTHIAZIDE+AMLODIPINE",
+        "TERLIPRESSIN",
+        "TETANUS VACCINE",
+        "VARICELLA VACCINE",
+        "WATER FOR INJECTION",
+        "NEOMYCIN+POLYMYXIN B+BACITRACIN+HYDROCORTISONE",
+        "CLOBETASOL+NEOMYCIN+MICONAZOLE",
+        "Casgevy (exagamglogene autotemcel)"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 56,
+      "drugs": [
+        "Phytonadione (Vitamin K1)",
+        "Lyfgenia (lovotibeglogene autotemcel)",
+        "Methylcobalamin",
+        "TMP-SMX (Cotrimoxazole)",
+        "Phytonadione",
+        "CROMOLYN SODIUM",
+        "ISOLYTE-P",
+        "CARBOXYMETHYLCELLULOSE (EYE DROPS)",
+        "PARACETAMOL + CHLORPHENAMINE MALEATE + PHENYLEPHRINE",
+        "NEOGADINE ELIXIR (MULTIVITAMIN + MULTIMINERAL)",
+        "Pancreatic enzyme replacement (Pancrelipase)",
+        "Pancreatic enzymes (Pancrelipase) for CF"
+      ],
+      "status": "pending"
+    },
+    {
+      "batch_id": 57,
+      "drugs": [
+        "ACECLOFENAC",
+        "CLOBETASONE",
+        "HYOSCINE BUTYLBROMIDE",
+        "JAPANESE ENCEPHALITIS VACCINE",
+        "LIQUID PARAFFIN+MILK OF MAGNESIA",
+        "LIQUID PARAFFIN",
+        "LOTEPREDNOL ETABONATE",
+        "NORETHISTERONE",
+        "PENTAZOCINE",
+        "PNEUMOCOCCAL CONJUGATE VACCINE",
+        "ROSUVASTATIN",
+        "VALETHEMATE"
+      ],
+      "status": "pending"
+    }
+  ]
+}

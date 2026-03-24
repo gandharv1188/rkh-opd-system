@@ -1926,6 +1926,45 @@
     return d.innerHTML;
   }
 
+  // Extract concentration from ABDM FHIR formulation (backward compatible with old format)
+  function getConc(f) {
+    if (f.ingredients && f.ingredients.length) {
+      const pri = f.ingredients.find((i) => i.is_primary) || f.ingredients[0];
+      return {
+        concQty: pri.strength_numerator || 0,
+        concUnit: pri.strength_numerator_unit || "mg",
+        perQty: pri.strength_denominator || 1,
+        perUnit: pri.strength_denominator_unit || "ml",
+        brandName:
+          f.indian_brands && f.indian_brands[0]
+            ? f.indian_brands[0].name +
+              (f.indian_brands[0].manufacturer
+                ? " (" + f.indian_brands[0].manufacturer + ")"
+                : "")
+            : null,
+      };
+    }
+    return {
+      concQty: f.conc_qty || 0,
+      concUnit: f.conc_unit || "mg",
+      perQty: f.per_qty || 1,
+      perUnit: f.per_unit || "ml",
+      brandName: f.indian_brand || null,
+    };
+  }
+
+  // Format concentration string for display
+  function fmtConc(f) {
+    const c = getConc(f);
+    return (
+      (c.concQty || "") +
+      (c.concUnit || "") +
+      "/" +
+      (c.perQty || "") +
+      (c.perUnit || "")
+    );
+  }
+
   // Doctor profiles — dynamically switch based on dropdown selection
   const DOCTORS = {
     "DR-LOKENDER": {
@@ -3977,10 +4016,7 @@
       mentionedDrugs.forEach((d) => {
         const f = formularyCache[d];
         const forms = (f.formulations || [])
-          .map(
-            (fm) =>
-              `${fm.form} ${fm.conc_qty}${fm.conc_unit}/${fm.per_qty}${fm.per_unit}`,
-          )
+          .map((fm) => `${fm.form} ${fmtConc(fm)}`)
           .join(", ");
         const bands = (f.dosing_bands || [])
           .map(
@@ -4457,32 +4493,27 @@
             if (drugForms.length) {
               opts += '<optgroup label="Available for this drug">';
               drugForms.forEach((f) => {
+                const c = getConc(f);
                 const val =
                   f.form +
                   "|" +
-                  (f.conc_qty || "") +
+                  (c.concQty || "") +
                   "|" +
-                  (f.conc_unit || "") +
+                  (c.concUnit || "") +
                   "|" +
-                  (f.per_qty || "") +
+                  (c.perQty || "") +
                   "|" +
-                  (f.per_unit || "");
+                  (c.perUnit || "");
                 const sel =
-                  f.conc_qty == m.concentration_mg &&
-                  f.per_qty == m.concentration_per_ml
+                  c.concQty == m.concentration_mg &&
+                  c.perQty == m.concentration_per_ml
                     ? " selected"
                     : "";
                 const label =
                   esc(f.form) +
                   " " +
-                  esc(
-                    (f.conc_qty || "") +
-                      (f.conc_unit || "") +
-                      "/" +
-                      (f.per_qty || "") +
-                      (f.per_unit || ""),
-                  ) +
-                  (f.indian_brand ? " (" + esc(f.indian_brand) + ")" : "");
+                  esc(fmtConc(f)) +
+                  (c.brandName ? " (" + esc(c.brandName) + ")" : "");
                 opts +=
                   '<option value="' +
                   esc(val) +
@@ -5811,7 +5842,7 @@
           .slice(0, 50)
           .map(
             (d) =>
-              `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + (f.conc_qty || "") + (f.conc_unit || "") + "/" + (f.per_qty || "") + (f.per_unit || "")).join(", ")}</div></div>`,
+              `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + fmtConc(f)).join(", ")}</div></div>`,
           )
           .join("")}
       </div>
@@ -5866,7 +5897,7 @@
       .trim();
     const list = document.getElementById("add-med-list");
     const renderItem = (d) =>
-      `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + (f.conc_qty || "") + (f.conc_unit || "") + "/" + (f.per_qty || "") + (f.per_unit || "")).join(", ")}</div></div>`;
+      `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + fmtConc(f)).join(", ")}</div></div>`;
     if (!q) {
       list.innerHTML = Object.keys(formularyCache)
         .sort()
@@ -5900,7 +5931,7 @@
           forms
             .map(
               (fm, i) =>
-                `<div class="add-med-item" onclick="confirmAddMed('${esc(drugName)}',${i})"><strong>${esc(fm.form)}</strong> — ${esc((fm.conc_qty || "") + (fm.conc_unit || "") + "/" + (fm.per_qty || "") + (fm.per_unit || ""))}${fm.indian_brand ? ' <span style="color:var(--ink3);font-size:10px">(' + esc(fm.indian_brand) + ")</span>" : ""}</div>`,
+                `<div class="add-med-item" onclick="confirmAddMed('${esc(drugName)}',${i})"><strong>${esc(fm.form)}</strong> — ${esc(fmtConc(fm))}${getConc(fm).brandName ? ' <span style="color:var(--ink3);font-size:10px">(' + esc(getConc(fm).brandName) + ")</span>" : ""}</div>`,
             )
             .join("");
       }
@@ -5914,14 +5945,15 @@
     const f = formularyCache[drugName];
     if (!f) return;
     const form = f.formulations?.[formIdx] || f.formulations?.[0] || {};
+    const fc = getConc(form);
     const band = f.dosing_bands?.[0] || {};
     const wt = rxData?.patient?.weight_kg || 0;
     const newMed = {
       number: (rxData.medicines?.length || 0) + 1,
-      row1_en: `${drugName} (${form.conc_qty || ""}${form.conc_unit || ""}/${form.per_qty || ""}${form.per_unit || ""} ${form.form || ""})`,
+      row1_en: `${drugName} (${fc.concQty || ""}${fc.concUnit || ""}/${fc.perQty || ""}${fc.perUnit || ""} ${form.form || ""})`,
       row2_en:
         wt && band.dose_min_qty
-          ? `${((wt * band.dose_min_qty) / (band.frequency_per_day || 1)).toFixed(1)} ${form.per_unit || "ml"} ${form.form === "tablet" ? "orally" : "orally"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days_default || "?"} days`
+          ? `${((wt * band.dose_min_qty) / (band.frequency_per_day || 1)).toFixed(1)} ${fc.perUnit || "ml"} ${form.form === "tablet" ? "orally" : "orally"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days_default || "?"} days`
           : "Enter dosing instructions",
       row3_hi:
         "\u0939\u093f\u0902\u0926\u0940 \u0928\u093f\u0930\u094d\u0926\u0947\u0936 \u092f\u0939\u093e\u0901 \u0932\u093f\u0916\u0947\u0902",
@@ -5932,8 +5964,8 @@
       flag: "",
       dose_mg_per_kg: band.dose_min_qty || 0,
       dose_per_day_divided: band.frequency_per_day || 1,
-      concentration_mg: form.conc_qty || 0,
-      concentration_per_ml: form.per_qty || 5,
+      concentration_mg: fc.concQty || 0,
+      concentration_per_ml: fc.perQty || 5,
       max_dose_single_mg: band.max_single_qty || 0,
       formulation: form.form || "syrup",
       snomed_code: f.snomed_code || null,

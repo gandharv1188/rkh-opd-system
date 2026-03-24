@@ -276,7 +276,100 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Varicella (chickenpox) - oral",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 20,
+        "dose_max_qty": 20,
+        "dose_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "duration_days": 5,
+        "duration_note": "5 days; start within 24h of rash onset",
+        "max_single_qty": 800,
+        "max_single_unit": "mg",
+        "max_daily_qty": 3200,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "Oral for immunocompetent children >=2y. 20 mg/kg QID (max 800mg/dose)"
+      },
+      {
+        "indication": "HSV encephalitis / Severe HSV",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 10,
+        "dose_max_qty": 20,
+        "dose_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 21,
+        "duration_note": "HSV encephalitis: 21 days IV. Mucocutaneous: 7-14 days",
+        "max_single_qty": 20,
+        "max_single_unit": "mg/kg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg/kg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "3m-12y: 20 mg/kg q8h IV; >12y: 10 mg/kg q8h IV. Ensure hydration for renal protection"
+      },
+      {
+        "indication": "Neonatal HSV",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 20,
+        "dose_max_qty": 20,
+        "dose_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 21,
+        "duration_note": "SEM disease: 14d; CNS/disseminated: 21d. Then suppressive 300 mg/m2 TDS x 6mo",
+        "max_single_qty": 20,
+        "max_single_unit": "mg/kg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg/kg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "High-dose 60 mg/kg/day. Follow with oral suppression. Monitor ANC"
+      },
+      {
+        "indication": "Herpes zoster (immunocompromised)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 10,
+        "dose_max_qty": 10,
+        "dose_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 10,
+        "duration_note": "7-10 days IV for immunocompromised; oral 800mg 5x/day for immunocompetent >12y",
+        "max_single_qty": 800,
+        "max_single_unit": "mg",
+        "max_daily_qty": 4000,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "IV for immunocompromised. 10 mg/kg q8h. Maintain hydration"
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -416,7 +509,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Niemann-Pick disease type C",
+        "age_band": "child",
+        "method": "bsa",
+        "dose_min_qty": 150,
+        "dose_max_qty": 150,
+        "dose_unit": "mg/m²",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": null,
+        "duration_note": "TDS oral; lifelong",
+        "max_single_qty": 200,
+        "max_single_unit": "mg",
+        "max_daily_qty": 600,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_cap",
+        "notes": "Miplyffa: 150 mg/m² TDS. BSA ≥0.4: dose by BSA. Max 200 mg TDS. Open capsule and mix with soft food if cannot swallow. Licensed ≥2 yr for NPC."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": true,
@@ -498,7 +613,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "AML — therapy-related / MDS-related",
+        "age_band": "child",
+        "method": "bsa",
+        "dose_min_qty": 44,
+        "dose_max_qty": 44,
+        "dose_unit": "units/m²",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "IV on days 1, 3, 5 of induction (1 unit = 1mg cytarabine + 0.44mg daunorubicin)",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "1st induction: 44 units/m² (= 44mg cytarabine + 19.4mg daunorubicin per m²) on d1, d3, d5. 2nd induction: d1, d3. Off-label in children."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": true,
@@ -646,7 +783,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Plaque psoriasis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "application",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 1,
+        "dose_max_unit": "application",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 56,
+        "duration_note": "8 weeks; may use long-term with monitoring",
+        "max_single_qty": 1,
+        "max_single_unit": "application",
+        "max_daily_qty": 2,
+        "max_daily_unit": "applications",
+        "rounding_rule": "whole_unit",
+        "notes": ">=2 years. Thin layer BD. Vitamin D analogue. Max 45 g/week (adults); proportionally less in children. Monitor serum calcium if large area. Avoid face."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -733,7 +899,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Sickle cell disease / Transfusion-dependent beta-thalassaemia — gene therapy",
+        "age_band": "child",
+        "method": "fixed",
+        "dose_min_qty": 3,
+        "dose_max_qty": 3,
+        "dose_unit": "x10⁶ CD34+ cells/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single IV infusion after myeloablative conditioning",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "CRISPR-edited autologous HSC. Minimum ≥3 x10⁶ CD34+ cells/kg. Requires busulfan myeloablative conditioning. Licensed ≥12 yr for SCD and TDT. Specialist transplant centre only."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -953,7 +1141,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Skin & soft tissue infections / UTI / Pharyngitis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 25,
+        "dose_max_qty": 50,
+        "dose_unit": "mg/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 7,
+        "duration_note": "7-10 days; skin infections 5-7 days",
+        "max_single_qty": 500,
+        "max_single_unit": "mg",
+        "max_daily_qty": 2000,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "First-generation cephalosporin. Max 100 mg/kg/day for severe infections"
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -1063,7 +1275,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Pruritus secondary to cholestasis / Bile acid malabsorption",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 240,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 240,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": "Long-term for cholestatic pruritus",
+        "max_single_qty": 4000,
+        "max_single_unit": "mg",
+        "max_daily_qty": 8000,
+        "max_daily_unit": "mg",
+        "rounding_rule": "nearest_sachet",
+        "notes": "240 mg/kg/day divided BD-TDS. Give before breakfast (peak bile acid release). Separate from other medications by 1h before or 4-6h after. May impair fat-soluble vitamin absorption — supplement ADEK."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -1247,7 +1488,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Congenital adrenal hyperplasia (CAH)",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 25,
+        "dose_max_qty": 50,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "duration_days": null,
+        "duration_note": "BD; adjunct to glucocorticoid replacement",
+        "max_single_qty": 100,
+        "max_single_unit": "mg",
+        "max_daily_qty": 200,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_tab_or_sachet",
+        "notes": "CRF1 antagonist for CAH. ≥2 yr. Dose by weight: <20 kg 25 mg BD; 20-50 kg 50 mg BD; >50 kg 100 mg BD. Allows glucocorticoid dose reduction. Licensed 2024."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": true,
@@ -1459,7 +1722,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Nephrotic syndrome (SSNS / SRNS)",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 3,
+        "dose_max_qty": 6,
+        "dose_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "duration_days": null,
+        "duration_note": "BD; 6-24 months; TDM essential",
+        "max_single_qty": 200,
+        "max_single_unit": "mg",
+        "max_daily_qty": 6,
+        "max_daily_unit": "mg/kg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Start 4-6 mg/kg/day BD. Target trough 80-150 ng/mL (SSNS) or 100-200 ng/mL (SRNS). Monitor Cr, LFT, lipids, K+, Mg2+, gingival hyperplasia, hirsutism. KDIGO 2025."
+      },
+      {
+        "indication": "Transplant — maintenance",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 3,
+        "dose_max_qty": 8,
+        "dose_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "duration_days": null,
+        "duration_note": "Lifelong post-transplant; TDM essential",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Post-transplant: initially 8-15 mg/kg/day BD (varies). Maintenance 3-8 mg/kg/day. Target C0 or C2 levels per protocol. Use same brand consistently (bioavailability differs)."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -1630,7 +1936,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Uncomplicated P. falciparum malaria",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 2,
+        "dose_max_qty": 4,
+        "dose_unit": "mg DHA/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": 3,
+        "duration_note": "3 days once daily. DHA 2-4 mg/kg + piperaquine 16-32 mg/kg",
+        "max_single_qty": 160,
+        "max_single_unit": "mg DHA",
+        "max_daily_qty": 160,
+        "max_daily_unit": "mg DHA",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_tab",
+        "notes": "DHA:PPQ ratio 1:8. Take on empty stomach. Monitor QTc in prolonged use; Per day; divide by frequency"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": true,
@@ -1734,7 +2064,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Head lice",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_max_qty": 1,
+        "dose_unit": "application",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "duration_days": 1,
+        "duration_note": "Apply to dry hair. Leave 8h or overnight. Comb out. Repeat day 7",
+        "max_single_qty": 1,
+        "max_single_unit": "application",
+        "max_daily_qty": 1,
+        "max_daily_unit": "application",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Physical mode of action (suffocates lice). No resistance. Safe for all ages. Non-toxic"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -1881,7 +2235,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Chemotherapy-induced neutropenia",
+        "age_band": "all",
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_max_qty": 10,
+        "dose_unit": "mcg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "Start 24h after chemo; continue until ANC recovery >10,000",
+        "max_single_qty": 300,
+        "max_single_unit": "mcg",
+        "max_daily_qty": 300,
+        "max_daily_unit": "mcg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "5 mcg/kg/day SC or IV. May increase to 10 mcg/kg for severe congenital neutropenia. Round to nearest vial size (300 mcg, 480 mcg). Monitor FBC."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -2070,7 +2446,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Prader-Willi syndrome — growth hormone",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 0.035,
+        "dose_max_qty": 0.035,
+        "dose_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "Daily SC; start after sleep study excludes severe OSA",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": 2.7,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "PWS: 0.035 mg/kg/day (1 mg/m²/day). Start <2 yr age. Mandatory polysomnography before and 6 wk after start. Risk of sleep apnoea worsening."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -2234,7 +2632,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Premedication — antisialagogue",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 4,
+        "dose_max_qty": 9,
+        "dose_unit": "mcg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single dose 30-60 min before anesthesia",
+        "max_single_qty": 0.2,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "IM: 4 mcg/kg (up to 9 mcg/kg if <2yr). IV intraop: 4 mcg/kg, max 0.1 mg single dose, repeat q2-3min PRN. Does not cross BBB."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -2342,7 +2762,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Central precocious puberty",
+        "age_band": "child",
+        "method": "fixed",
+        "dose_min_qty": 20,
+        "dose_max_qty": 40,
+        "dose_unit": "mcg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": null,
+        "duration_note": "Intranasal or SC TDS; until appropriate puberty age",
+        "max_single_qty": 200,
+        "max_single_unit": "mcg",
+        "max_daily_qty": 600,
+        "max_daily_unit": "mcg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Buserelin nasal spray: 100-200 mcg TDS (each nostril). SC: 20-40 mcg/kg/day. Less commonly used now (depot GnRH agonists preferred)."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -2450,7 +2892,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Rabies post-exposure prophylaxis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 20,
+        "dose_max_qty": 20,
+        "dose_unit": "IU/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "duration_days": 1,
+        "duration_note": "Single dose. Infiltrate as much as possible around wound. Remainder IM at distant site",
+        "max_single_qty": 20,
+        "max_single_unit": "IU/kg",
+        "max_daily_qty": 20,
+        "max_daily_unit": "IU/kg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "20 IU/kg once. Maximum wound infiltration. Do NOT repeat even if late presentation. Give with day 0 vaccine; Per dose"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -2600,7 +3066,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Sickle cell disease",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 15,
+        "dose_max_qty": 35,
+        "dose_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "Lifelong; start 15-20 mg/kg OD, escalate to MTD",
+        "max_single_qty": 35,
+        "max_single_unit": "mg/kg",
+        "max_daily_qty": 35,
+        "max_daily_unit": "mg/kg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "Start 15-20 mg/kg OD. Escalate by 5 mg/kg q8wk to MTD (25-35 mg/kg) or ANC 2000-4000. Monitor FBC q4-8 wk. Licensed ≥2 yr for SCD (REACH/BABY HUG). Max adult 35 mg/kg or 2 g."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -2740,7 +3228,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Allergic rhinitis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_max_qty": 2,
+        "dose_unit": "sprays",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "Ongoing during season or perennial. >=4y: 1 spray/nostril OD; >=12y: 2 sprays",
+        "max_single_qty": 2,
+        "max_single_unit": "sprays/nostril",
+        "max_daily_qty": 200,
+        "max_daily_unit": "mcg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_unit",
+        "notes": "50 mcg/spray. 4-11y: 1 spray/nostril (100 mcg/day). >=12y: 2 sprays (200 mcg/day); Per nostril per dose"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -2870,7 +3382,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Iron deficiency anemia — IV",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 15,
+        "dose_max_qty": 20,
+        "dose_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single dose infusion over ≥15 min; may repeat at 7 days if needed",
+        "max_single_qty": 750,
+        "max_single_unit": "mg",
+        "max_daily_qty": 750,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Licensed ≥14 yr. Off-label in younger children: 15-20 mg/kg (max 750 mg) IV over 15-30 min. Calculate total dose by: weight x (target Hb - actual Hb) x 2.4 + 500 depot."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -3035,7 +3569,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Pulse therapy — autoimmune / inflammatory",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 15,
+        "dose_max_qty": 30,
+        "dose_unit": "mg/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": 3,
+        "duration_note": "3 consecutive days per pulse; cycles as per protocol",
+        "max_single_qty": 1000,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1000,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "15-30 mg/kg/day (max 1000 mg) IV over 1-2h for 3 days. Indications: epileptic encephalopathy, acute demyelination, lupus nephritis, nephrotic syndrome relapse, ADEM. Monitor BP, glucose, potassium during infusion."
+      },
+      {
+        "indication": "Acute spinal cord injury / Severe inflammation",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 10,
+        "dose_max_qty": 30,
+        "dose_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single dose or 3-day course per specialist protocol",
+        "max_single_qty": 1000,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1000,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Dose varies by condition: lupus nephritis 30 mg/kg (max 1g) x3 days; MS relapse 20-30 mg/kg (max 1g) x3-5 days; nephrotic relapse 10-15 mg/kg (max 1g) x3 days alternate day."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -3205,7 +3782,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Adrenal crisis / Septic shock / Stress dosing",
+        "age_band": "neonate",
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_max_qty": 2,
+        "dose_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": null,
+        "duration_note": "IV/IM; stress dose for illness/surgery",
+        "max_single_qty": 25,
+        "max_single_unit": "mg",
+        "max_daily_qty": 100,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": 2,
+        "loading_dose_unit": "mg/kg",
+        "rounding_rule": "exact",
+        "notes": "Stress dose: 2 mg/kg IV stat, then 1-2 mg/kg q6-8h. Relative adrenal insufficiency in septic shock: 1 mg/kg q8h."
+      },
+      {
+        "indication": "Adrenal crisis / Stress dosing",
+        "age_band": "child",
+        "method": "bsa",
+        "dose_min_qty": 50,
+        "dose_max_qty": 100,
+        "dose_unit": "mg/m²",
+        "is_per_day": true,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "duration_days": null,
+        "duration_note": "IV q6h during acute illness; taper over 3 days",
+        "max_single_qty": 100,
+        "max_single_unit": "mg",
+        "max_daily_qty": 400,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Stress dose: 50-100 mg/m²/day IV divided q6h. Standard adrenal crisis boluses: <1yr 25 mg, 1-5yr 50 mg, >5yr 100 mg."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -3368,7 +3988,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Osteogenesis imperfecta / Osteoporosis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "Given over 3 days; repeat every 2-4 months",
+        "max_single_qty": 60,
+        "max_single_unit": "mg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg",
+        "rounding_rule": "exact",
+        "notes": "OI: 0.5-1 mg/kg/day x 3 days, repeated q2-4 months (cumulative 9 mg/kg/year). Infuse over 4h. Supplement calcium and vitamin D. Monitor Ca, PO4, renal function."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -3513,7 +4162,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Osteogenesis imperfecta / Severe osteoporosis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.025,
+        "dose_min_unit": "mg/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.05,
+        "dose_max_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "Single infusion; repeat every 6 months",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 5,
+        "max_daily_unit": "mg",
+        "rounding_rule": "exact",
+        "notes": "0.025-0.05 mg/kg IV over >=30 min. Repeat q6 months. Pre-hydrate. Flu-like symptoms common after first dose. Supplement calcium and vitamin D."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -3730,7 +4408,92 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Kawasaki disease",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 2,
+        "dose_min_unit": "g/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 2,
+        "dose_max_unit": "g/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "Single infusion over 10-12 hours; within 10 days of onset",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "exact",
+        "notes": "2 g/kg single infusion over 10-24h. Give with high-dose aspirin (30-50 mg/kg/day). If IVIG-resistant: second dose 2 g/kg. Start slow and increase rate per protocol."
+      },
+      {
+        "indication": "ITP (Immune thrombocytopenia)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.8,
+        "dose_min_unit": "g/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1,
+        "dose_max_unit": "g/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "Single dose; may repeat if needed",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "exact",
+        "notes": "0.8-1 g/kg single dose (ASH guideline). Alternative: 0.4 g/kg/day x 5 days. For active hemorrhage."
+      },
+      {
+        "indication": "Primary immunodeficiency — replacement",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.4,
+        "dose_min_unit": "g/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.6,
+        "dose_max_unit": "g/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 672,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 365,
+        "duration_note": "Every 3-4 weeks; lifelong for PID",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "rounding_rule": "exact",
+        "notes": "0.4-0.6 g/kg every 3-4 weeks IV. Target trough IgG >5 g/L. Monitor for infusion reactions."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -3875,7 +4638,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Complicated parapneumonic effusion / Empyema",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 40000,
+        "dose_max_qty": 40000,
+        "dose_unit": "IU",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "duration_days": 3,
+        "duration_note": "40,000 units in 40mL NS q12h x 3 days via chest drain. Clamp 4h then drain",
+        "max_single_qty": 40000,
+        "max_single_unit": "units",
+        "max_daily_qty": 80000,
+        "max_daily_unit": "units",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Intrapleural fibrinolytic. 40,000 units in 40mL NS. Dwell time 4h. 6 doses over 3 days"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -4040,7 +4827,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Spasticity — screening trial",
+        "age_band": "child",
+        "method": "fixed",
+        "dose_min_qty": 25,
+        "dose_max_qty": 100,
+        "dose_unit": "mcg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single bolus test dose; observe for 4-8h",
+        "max_single_qty": 100,
+        "max_single_unit": "mcg",
+        "max_daily_qty": 100,
+        "max_daily_unit": "mcg",
+        "loading_dose_qty": 50,
+        "loading_dose_unit": "mcg",
+        "rounding_rule": "exact",
+        "notes": "Screening: start 25-50 mcg IT bolus. Observe 4-8h for spasticity reduction. If no response, may try 75 mcg then 100 mcg at 24h intervals. Non-responders at 100 mcg are not candidates for pump.; Age 4+ years"
+      },
+      {
+        "indication": "Spasticity — pump infusion",
+        "age_band": "child",
+        "method": "fixed",
+        "dose_min_qty": 22,
+        "dose_max_qty": 1400,
+        "dose_unit": "mcg",
+        "is_per_day": true,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Continuous IT infusion; lifelong with pump refills",
+        "max_single_qty": 1500,
+        "max_single_unit": null,
+        "max_daily_qty": 1400,
+        "max_daily_unit": "mcg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Initial daily dose = 2x effective screening dose (or 1x if effect lasted >8h). Titrate by 5-15% per day. Maintenance range: 90-703 mcg/day (typical). Max 1400 mcg/day. Abrupt withdrawal is life-threatening (fever, seizures, rhabdomyolysis). Specialist only.; Age 4+ years; Per day"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [
       {
@@ -4178,7 +5008,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "CNS prophylaxis/treatment — ALL",
+        "age_band": "child",
+        "method": "age",
+        "dose_min_qty": 30,
+        "dose_max_qty": 70,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Per protocol schedule; age-based fixed dosing",
+        "max_single_qty": 70,
+        "max_single_unit": "mg",
+        "max_daily_qty": 70,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "IT doses by age: <1 yr: 20 mg; 1 yr: 30 mg; 2 yr: 50 mg; ≥3 yr: 70 mg. Preservative-free only. Per ALL protocol."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [
       {
@@ -4309,7 +5161,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Luminal amoebiasis (alternative to paromomycin)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 30,
+        "dose_max_qty": 40,
+        "dose_unit": "mg/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 20,
+        "duration_note": "20 days. Take with food",
+        "max_single_qty": 650,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1950,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_tab",
+        "notes": "30-40 mg/kg/day div TDS x 20d. Max 2g/day. Alternative luminal agent. Contains iodine"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [
       {
@@ -4464,7 +5340,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Primary carnitine deficiency / Organic acidaemias",
+        "age_band": "all",
+        "method": "weight",
+        "dose_min_qty": 50,
+        "dose_max_qty": 100,
+        "dose_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": null,
+        "duration_note": "TDS; lifelong for primary deficiency",
+        "max_single_qty": 1000,
+        "max_single_unit": "mg",
+        "max_daily_qty": 3000,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "Primary deficiency: 50-100 mg/kg/day TDS oral (max 3 g/day). IV for acute metabolic crisis: 50-100 mg/kg/day. Valproate-induced: 100 mg/kg/day."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -4603,7 +5501,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Central precocious puberty",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 50,
+        "dose_max_qty": 50,
+        "dose_unit": "mcg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "IM every 28 days (monthly depot); or 3-monthly depot",
+        "max_single_qty": 7.5,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Monthly depot: 50 mcg/kg/dose (min 3.75 mg) IM q28d. <25 kg: 3.75 mg; 25-37.5 kg: 7.5 mg; >37.5 kg: 11.25 mg. 3-monthly depot: 11.25 or 22.5 mg q12wk. Licensed ≥2 yr."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [
       {
@@ -4711,7 +5631,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Severe croup / Post-extubation stridor",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_max_qty": 0.5,
+        "dose_unit": "mL/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "duration_days": 1,
+        "duration_note": "L-epinephrine 1:1000: 0.5 mL/kg (max 5mL) or racemic epi 2.25%: 0.05 mL/kg (max 0.5mL)",
+        "max_single_qty": 5,
+        "max_single_unit": "mL",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "L-epinephrine (1:1000): 0.5 mL/kg (max 5mL) nebulized. Observe 2-3h for rebound stridor; Per dose"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -4839,7 +5783,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Acute bronchiolitis",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 4,
+        "dose_max_qty": 4,
+        "dose_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 3,
+        "duration_note": "3% NaCl: 4mL q6-8h for inpatients with bronchiolitis. Duration of admission",
+        "max_single_qty": 4,
+        "max_single_unit": "mL",
+        "max_daily_qty": 16,
+        "max_daily_unit": "mL",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "3% NaCl nebulized. May reduce hospital stay in bronchiolitis. Pre-dose with salbutamol; Fixed volume per dose"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -4955,7 +5923,92 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Functional constipation — maintenance",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.4,
+        "dose_min_unit": "g/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.8,
+        "dose_max_unit": "g/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 14,
+        "duration_note": "May use long-term; titrate to effect",
+        "max_single_qty": 17,
+        "max_single_unit": "g",
+        "max_daily_qty": 17,
+        "max_daily_unit": "g",
+        "rounding_rule": "nearest_sachet",
+        "notes": "Start 0.4 g/kg/day, titrate up. Mix powder in water or juice. Safe for long-term use."
+      },
+      {
+        "indication": "Functional constipation — maintenance",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 0.4,
+        "dose_min_unit": "g/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 0.8,
+        "dose_max_unit": "g/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": "Long-term; slow taper over weeks once regular",
+        "max_single_qty": 17,
+        "max_single_unit": "g",
+        "max_daily_qty": 17,
+        "max_daily_unit": "g",
+        "rounding_rule": "nearest_sachet",
+        "notes": "0.2-0.8 g/kg/day maintenance. Target 1-2 soft stools/day. First-line osmotic laxative per ESPGHAN/NASPGHAN."
+      },
+      {
+        "indication": "Fecal disimpaction",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_min_unit": "g/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 1.5,
+        "dose_max_unit": "g/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 3,
+        "duration_note": "3-6 days for disimpaction; then step down to maintenance",
+        "max_single_qty": 100,
+        "max_single_unit": "g",
+        "max_daily_qty": 100,
+        "max_daily_unit": "g",
+        "rounding_rule": "nearest_sachet",
+        "notes": "1-1.5 g/kg/day for 3 days (max 100 g/day). Follow with maintenance dosing. ESPGHAN first-line for disimpaction."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -5074,7 +6127,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Hemorrhagic disease — prophylaxis (IM)",
+        "age_band": "neonate",
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_max_qty": 1,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": 1,
+        "duration_note": "Single IM dose at birth",
+        "max_single_qty": 1,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "IM anterolateral thigh within 1h of birth. Term: 1 mg. Preterm <1.5 kg: 0.5 mg. BW <1 kg: 0.3 mg (some protocols). WHO/NNF recommended."
+      },
+      {
+        "indication": "VKDB treatment / warfarin reversal",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 1,
+        "dose_max_qty": 5,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single dose; repeat after 6-8h if INR remains elevated",
+        "max_single_qty": 10,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "IV (slow over 30 min) or oral. Effect in 6-12h. For bleeding: give with FFP. Anaphylactoid reactions with IV."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -5195,7 +6291,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Scabies (neonates / young infants)",
+        "age_band": "neonate",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_max_qty": 1,
+        "dose_unit": "application",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": 3,
+        "duration_note": "Apply 5-10% sulfur in petrolatum nightly x 3 nights. Bathe before reapplication",
+        "max_single_qty": 1,
+        "max_single_unit": "application",
+        "max_daily_qty": 1,
+        "max_daily_unit": "application",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Safe for neonates and infants <2 months where permethrin not recommended. Messy but safe"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -5420,7 +6540,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Nephrotic syndrome / Anti-inflammatory",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 2,
+        "dose_max_qty": 2,
+        "dose_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": 42,
+        "duration_note": "Same as prednisone; prednisolone = prednisone equivalent",
+        "max_single_qty": 60,
+        "max_single_unit": "mg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "quarter_tab",
+        "notes": "Prednisolone and prednisone are dose-equivalent. ISKDC: 2 mg/kg/day (max 60 mg) x 6 wk then alternate day taper. Liquid available (5 mg/5 mL)."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -5588,7 +6730,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Acute diarrhea / AAD prevention",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 10,
+        "dose_min_unit": "billion CFU",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 10,
+        "dose_max_unit": "billion CFU",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "5-7 days",
+        "max_single_qty": 10,
+        "max_single_unit": "billion CFU",
+        "max_daily_qty": 20,
+        "max_daily_unit": "billion CFU",
+        "rounding_rule": "whole_unit",
+        "notes": "Lactobacillus rhamnosus GG >=10 billion CFU/day. ESPGHAN: strong recommendation for acute infectious diarrhea and AAD prevention."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -5738,7 +6909,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Acute diarrhea / AAD prevention",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 250,
+        "dose_min_unit": "mg",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 250,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "5-7 days",
+        "max_single_qty": 500,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1000,
+        "max_daily_unit": "mg",
+        "rounding_rule": "nearest_sachet",
+        "notes": "Same as Saccharomyces boulardii entry. 250 mg BD (5 billion CFU/dose)."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -5863,7 +7063,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "NEC prevention — preterm VLBW",
+        "age_band": "neonate",
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_max_qty": 1,
+        "dose_unit": "billion CFU",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "Start when tolerating feeds; continue until 36 weeks corrected GA or discharge",
+        "max_single_qty": 1,
+        "max_single_unit": "billion CFU",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Lactobacillus + Bifidobacterium combination OR Saccharomyces boulardii. Mix in breast milk/formula. Evidence strongest for <1500g. Avoid if immunocompromised."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -5947,7 +7169,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Haemophilia A or B — prophylaxis (with/without inhibitors)",
+        "age_band": "child",
+        "method": "fixed",
+        "dose_min_qty": 2,
+        "dose_max_qty": 2,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "SC monthly",
+        "max_single_qty": 2,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Alhemo: 2 mg SC once monthly (fixed dose regardless of weight). Licensed >=12 yr. Anti-antithrombin siRNA. Risk of thrombosis — avoid concomitant aPCC."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -6043,7 +7287,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Sickle cell disease — gene therapy",
+        "age_band": "adolescent",
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_max_qty": 20,
+        "dose_unit": "x10⁶ transduced cells/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single IV infusion after myeloablative conditioning",
+        "max_single_qty": null,
+        "max_single_unit": null,
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Lentiviral gene addition therapy. Licensed ≥12 yr for SCD. Requires busulfan conditioning. Specialist centre only. Monitor for haematologic malignancy."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -6136,7 +7402,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Haemophilia A or B — prophylaxis",
+        "age_band": "adolescent",
+        "method": "fixed",
+        "dose_min_qty": 150,
+        "dose_max_qty": 300,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "SC weekly or every 2 weeks",
+        "max_single_qty": 300,
+        "max_single_unit": "mg",
+        "max_daily_qty": null,
+        "max_daily_unit": null,
+        "loading_dose_qty": 300,
+        "loading_dose_unit": "mg",
+        "rounding_rule": "exact",
+        "notes": "Anti-TFPI antibody. Loading: 300 mg SC, then 150 mg SC weekly. Limited paediatric data. Experimental in children — clinical trials."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -6256,7 +7544,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Hyperthyroidism (Graves disease)",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 0.2,
+        "dose_max_qty": 0.5,
+        "dose_unit": "mg/kg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "18-24 months; titrate per TFT",
+        "max_single_qty": 30,
+        "max_single_unit": "mg",
+        "max_daily_qty": 30,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "quarter_tab",
+        "notes": "Initial: 0.5 mg/kg/day (max 30 mg) OD. Maintenance: 0.2 mg/kg/day. Preferred over propylthiouracil in children (lower hepatotoxicity). Monitor FBC, LFT."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": true,
@@ -6475,7 +7785,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Vitamin B12 supplementation",
+        "age_band": "child",
+        "method": "fixed",
+        "dose_min_qty": 500,
+        "dose_max_qty": 1500,
+        "dose_unit": "mcg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "OD; ongoing for IEM",
+        "max_single_qty": 1500,
+        "max_single_unit": "mcg",
+        "max_daily_qty": 1500,
+        "max_daily_unit": "mcg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_tab_or_sachet",
+        "notes": "Active form of B12. 500-1500 mcg/day oral. Used in methylmalonic acidemia/homocystinuria at higher doses."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -6687,7 +8019,77 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "UTI / Acute otitis media / Shigellosis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 8,
+        "dose_max_qty": 10,
+        "dose_unit": "mg TMP/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "duration_days": 5,
+        "duration_note": "UTI 3-5d; shigellosis 5d; AOM 10d",
+        "max_single_qty": 160,
+        "max_single_unit": "mg TMP",
+        "max_daily_qty": 320,
+        "max_daily_unit": "mg TMP",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "Dose expressed as trimethoprim component. Ratio TMP:SMX = 1:5. Avoid <6 weeks age"
+      },
+      {
+        "indication": "PCP prophylaxis (HIV-exposed/infected)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 5,
+        "dose_max_qty": 5,
+        "dose_unit": "mg TMP/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "Daily or 3x/week (Mon-Wed-Fri). Continue until CD4 recovery",
+        "max_single_qty": 160,
+        "max_single_unit": "mg TMP",
+        "max_daily_qty": 160,
+        "max_daily_unit": "mg TMP",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "Alternative: 150 mg TMP/m2/day div BD x 3 days/week"
+      },
+      {
+        "indication": "PCP treatment (Pneumocystis jirovecii)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 15,
+        "dose_max_qty": 20,
+        "dose_unit": "mg TMP/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "duration_days": 21,
+        "duration_note": "21 days for PCP treatment",
+        "max_single_qty": 320,
+        "max_single_unit": "mg TMP",
+        "max_daily_qty": 960,
+        "max_daily_unit": "mg TMP",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "High-dose IV/oral. Add adjunctive steroids if severe hypoxia"
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -6881,7 +8283,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Herpes simplex / Herpes zoster / Varicella (oral)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 20,
+        "dose_max_qty": 20,
+        "dose_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 5,
+        "duration_note": "HSV: 5-10d; VZV: 5d; suppression: long-term",
+        "max_single_qty": 1000,
+        "max_single_unit": "mg",
+        "max_daily_qty": 3000,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "Prodrug of acyclovir. Better oral bioavailability. >=2y for varicella; >=12y for HSV labialis"
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -7024,7 +8450,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Vitamin K deficiency / Haemorrhagic disease of newborn",
+        "age_band": "neonate",
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_max_qty": 1,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single IM dose at birth (or 2 mg oral x 3 doses)",
+        "max_single_qty": 1,
+        "max_single_unit": "mg",
+        "max_daily_qty": 1,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Prophylaxis at birth: 1 mg IM (preferred) OR 2 mg oral at birth, 1 wk, 6 wk. Preterms <1.5 kg: 0.5 mg IM. Treatment of bleeding: 1-5 mg IV slow push."
+      },
+      {
+        "indication": "Warfarin reversal / Vitamin K deficiency",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 0.03,
+        "dose_max_qty": 0.03,
+        "dose_unit": "mg/kg",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Single dose; may repeat in 8h",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Warfarin reversal: 0.03 mg/kg (max 5 mg) slow IV. Non-urgent: 1-2 mg oral. Active bleeding: give with FFP/PCC."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -7219,7 +8688,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Allergic rhinitis / Asthma prophylaxis / Allergic conjunctivitis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 20,
+        "dose_max_qty": 20,
+        "dose_unit": "mg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "duration_days": null,
+        "duration_note": "Ongoing prophylaxis. Nebulized: 20mg QID. MDI: 2 puffs QID. Nasal: 1 spray each nostril QID",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 80,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Prophylactic only — no role in acute attack. Takes 2-4 weeks for full effect. >=2y"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -7320,7 +8813,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Pediatric maintenance IV fluid",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 60,
+        "dose_max_qty": 100,
+        "dose_unit": "mL/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Per Holliday-Segar formula",
+        "max_single_qty": 100,
+        "max_single_unit": null,
+        "max_daily_qty": 2400,
+        "max_daily_unit": "mL",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Isolyte-P (pediatric balanced electrolyte solution with 5% dextrose). Na+ 25 mEq/L, K+ 20 mEq/L. CAUTION: hypotonic — risk of hyponatremia in post-op/sick children. Current guidelines favor isotonic fluids."
+      },
+      {
+        "indication": "Pediatric maintenance IV fluid",
+        "age_band": "neonate",
+        "method": "weight",
+        "dose_min_qty": 60,
+        "dose_max_qty": 80,
+        "dose_unit": "mL/kg/day",
+        "is_per_day": true,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "Day 1: 60 mL/kg, increase by 10-20 mL/kg/day",
+        "max_single_qty": 100,
+        "max_single_unit": null,
+        "max_daily_qty": 150,
+        "max_daily_unit": "mL/kg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "Neonatal fluid: Day 1 60 mL/kg, Day 2 80, Day 3 100, Day 4+ 120-150. Preterm may need more. Hypotonic — use with caution. Many NICUs prefer D10W + NS-based fluids."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -7457,7 +8993,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Dry eye / Ocular surface lubrication",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "drop each eye",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 1,
+        "dose_max_unit": "drop each eye",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": "As needed; long-term use safe",
+        "max_single_qty": 1,
+        "max_single_unit": "drop",
+        "max_daily_qty": 8,
+        "max_daily_unit": "drops per eye",
+        "rounding_rule": "whole_unit",
+        "notes": "1 drop PRN (up to 6-8x/day). Preservative-free preferred for frequent use. Safe for all ages."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -7617,7 +9182,31 @@
         "display_name": "Paracetamol + Chlorphenamine + Phenylephrine syrup"
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Fever with cold symptoms / Allergic rhinitis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "age",
+        "dose_min_qty": 2.5,
+        "dose_max_qty": 10,
+        "dose_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 3,
+        "duration_note": "2-5y: 2.5mL; 6-12y: 5mL; >12y: 10mL. Short-term only (3-5 days). NOT <2y",
+        "max_single_qty": 10,
+        "max_single_unit": "mL",
+        "max_daily_qty": 30,
+        "max_daily_unit": "mL",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.5ml",
+        "notes": "Wikoryl/Sinarest type. PCM dose varies by brand — check paracetamol content. NOT for <2 years; Fixed volume per dose"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -7750,7 +9339,36 @@
         "display_name": "Neogadine Elixir (Multivitamin + Multimineral)"
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Appetite stimulation / Nutritional supplementation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 2.5,
+        "dose_min_unit": "mL",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 5,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 30,
+        "duration_note": "1-2 months",
+        "max_single_qty": 5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 10,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.5ml",
+        "notes": "<6 yr: 2.5 mL BD; >=6 yr: 5 mL BD. Contains digestive enzymes + multivitamins. Give before meals."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -7863,7 +9481,36 @@
         "display_name": "Ferrous Ascorbate + Folic Acid syrup"
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Iron deficiency anemia",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 3,
+        "dose_min_unit": "mg elemental Fe/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 6,
+        "dose_max_unit": "mg elemental Fe/kg",
+        "is_per_day": true,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 90,
+        "duration_note": "3 months treatment + 1-2 months after Hb normalizes to replete stores",
+        "max_single_qty": 100,
+        "max_single_unit": "mg elemental Fe",
+        "max_daily_qty": 200,
+        "max_daily_unit": "mg elemental Fe",
+        "rounding_rule": "0.5ml",
+        "notes": "3-6 mg elemental Fe/kg/day divided BD. Ferrous ascorbate has better absorption than ferrous sulfate. Give on empty stomach with vitamin C. Black stools are normal."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -7950,7 +9597,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Volume expansion / Shock",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 10,
+        "dose_max_qty": 20,
+        "dose_unit": "mL/kg",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "duration_days": 1,
+        "duration_note": "Bolus over 15-30 min. May repeat. Max 20 mL/kg in first hour",
+        "max_single_qty": 20,
+        "max_single_unit": "mL/kg",
+        "max_daily_qty": 50,
+        "max_daily_unit": "mL/kg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "10% Dextran 40 in NS. For refractory shock when crystalloids insufficient. Risk of anaphylaxis; Per dose"
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -8112,7 +9783,64 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Exocrine pancreatic insufficiency (CF, chronic pancreatitis)",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 2000,
+        "dose_min_unit": "lipase units",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 4000,
+        "dose_max_unit": "lipase units",
+        "is_per_day": false,
+        "frequency_per_day": 6,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 365,
+        "duration_note": "Lifelong for CF; give with every feed/meal",
+        "max_single_qty": 4000,
+        "max_single_unit": "lipase units per 120 mL formula",
+        "max_daily_qty": 10000,
+        "max_daily_unit": "lipase units/kg/day",
+        "rounding_rule": "whole_cap",
+        "notes": "Infants: 2000-4000 lipase units per 120 mL formula/breast feed. Open capsule, mix beads with acidic food (applesauce). Do not crush/chew beads."
+      },
+      {
+        "indication": "Exocrine pancreatic insufficiency (CF, chronic pancreatitis)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "weight",
+        "dose_min_qty": 1000,
+        "dose_min_unit": "lipase units/kg",
+        "dose_basis": "per_kg",
+        "dose_max_qty": 2500,
+        "dose_max_unit": "lipase units/kg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 365,
+        "duration_note": "Lifelong for CF; adjust to stool output",
+        "max_single_qty": 2500,
+        "max_single_unit": "lipase units/kg/meal",
+        "max_daily_qty": 10000,
+        "max_daily_unit": "lipase units/kg/day",
+        "rounding_rule": "whole_cap",
+        "notes": "1000-2500 lipase units/kg/meal. Snacks: half meal dose. MAX 10,000 units/kg/day or 4000 units/g fat (fibrosing colonopathy risk). Swallow capsules whole; if unable, open and mix with acidic food."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -8231,7 +9959,50 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Pancreatic exocrine insufficiency (CF)",
+        "age_band": "infant",
+        "method": "fixed",
+        "dose_min_qty": 2000,
+        "dose_max_qty": 4000,
+        "dose_unit": "lipase units/120mL feed",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "With every feed/meal; lifelong",
+        "max_single_qty": 2500,
+        "max_single_unit": "lipase units/kg/meal",
+        "max_daily_qty": 10000,
+        "max_daily_unit": "lipase units/kg/day",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_cap",
+        "notes": "Infants: 2000-4000 lipase U per 120 mL feed. Children: start 1000 U lipase/kg/meal. Max 2500 U/kg/meal or 10,000 U/kg/day. Open capsule, mix with acidic food. Do NOT crush enteric-coated microspheres."
+      },
+      {
+        "indication": "Pancreatic exocrine insufficiency (CF)",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 1000,
+        "dose_max_qty": 2500,
+        "dose_unit": "lipase units/kg/meal",
+        "is_per_day": false,
+        "frequency_per_day": null,
+        "interval_hours": null,
+        "duration_days": null,
+        "duration_note": "With each meal; half dose with snacks",
+        "max_single_qty": 2500,
+        "max_single_unit": "lipase units/kg/meal",
+        "max_daily_qty": 10000,
+        "max_daily_unit": "lipase units/kg/day",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_cap",
+        "notes": "Start 1000 U lipase/kg/meal. Adjust per stool output. Snacks: 50% of meal dose. Max 2500 U/kg/meal. >10,000 U/kg/day: risk of fibrosing colonopathy."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -8376,7 +10147,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Pain / Inflammation",
+        "age_band": "adolescent",
+        "method": "fixed",
+        "dose_min_qty": 100,
+        "dose_max_qty": 100,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "duration_days": 5,
+        "duration_note": "Short-term; minimum effective duration",
+        "max_single_qty": 100,
+        "max_single_unit": "mg",
+        "max_daily_qty": 200,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_tab",
+        "notes": "NOT recommended for children <12y (limited pediatric data). Adult dose: 100 mg BD after food. Use shortest duration. Avoid in renal impairment, GI ulcer history. Paracetamol/ibuprofen preferred in pediatrics.; Age 12+ years"
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -8532,7 +10325,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Mild-moderate eczema / Dermatitis",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "application",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 1,
+        "dose_max_unit": "application",
+        "is_per_day": false,
+        "frequency_per_day": 2,
+        "interval_hours": 12,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 14,
+        "duration_note": "Step down to emollients when controlled",
+        "max_single_qty": 1,
+        "max_single_unit": "application",
+        "max_daily_qty": 2,
+        "max_daily_unit": "applications",
+        "rounding_rule": "whole_unit",
+        "notes": "Moderate potency. Thin layer BD. Can use on face for short courses (5-7 days). Suitable for children >1 year."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -8682,7 +10504,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Abdominal colic / Smooth muscle spasm",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 10,
+        "dose_min_unit": "mg",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 10,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 5,
+        "duration_note": "Short-term for colic; max 3 days without medical review",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 60,
+        "max_daily_unit": "mg",
+        "rounding_rule": "whole_tab",
+        "notes": ">=6 years: 10 mg TDS (max 6 tablets/day). Buscopan brand. Poorly absorbed orally — acts locally in GI tract. IV/IM: 0.3-0.6 mg/kg/day in divided doses."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -8767,7 +10618,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Japanese encephalitis immunization",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_max_qty": 0.5,
+        "dose_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "duration_days": 1,
+        "duration_note": "NHM: JE at 9 months + booster 16-24m (in endemic areas). Not in Haryana schedule",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "0.5 mL SC. Live attenuated (SA 14-14-2) or inactivated. Not in Haryana NHM schedule — no JE endemic; Fixed volume per dose"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -8873,7 +10748,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Constipation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mL",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 15,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "Short-term; prefer PEG 3350 for chronic constipation",
+        "max_single_qty": 30,
+        "max_single_unit": "mL",
+        "max_daily_qty": 30,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.5ml",
+        "notes": "Cremaffin/equivalent. 3-6 yr: 5 mL at bedtime; 6-12 yr: 10 mL; >12 yr: 15-30 mL. Same aspiration precautions as liquid paraffin. Avoid <3 years."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -8985,7 +10889,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Constipation (lubricant laxative)",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_min_unit": "mL",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 15,
+        "dose_max_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 7,
+        "duration_note": "Short-term use; risk of lipoid pneumonia if aspirated",
+        "max_single_qty": 30,
+        "max_single_unit": "mL",
+        "max_daily_qty": 30,
+        "max_daily_unit": "mL",
+        "rounding_rule": "0.5ml",
+        "notes": "3-6 yr: 5 mL at bedtime; 6-12 yr: 10 mL; >12 yr: 15-30 mL. AVOID in <3 years and children with swallowing difficulties (aspiration risk → lipoid pneumonia). Give at bedtime, not with meals."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -9101,7 +11034,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Allergic conjunctivitis / Post-operative ocular inflammation",
+        "age_band": "child",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 1,
+        "dose_min_unit": "drop each eye",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 1,
+        "dose_max_unit": "drop each eye",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 14,
+        "duration_note": "2 weeks for allergy; post-op: per ophthalmologist",
+        "max_single_qty": 1,
+        "max_single_unit": "drop",
+        "max_daily_qty": 4,
+        "max_daily_unit": "drops per eye",
+        "rounding_rule": "whole_unit",
+        "notes": "0.5% suspension. 1 drop QID. Soft steroid — lower risk of IOP elevation. Use for seasonal allergic conjunctivitis >=2 years."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -9187,7 +11149,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Menstrual regulation / DUB",
+        "age_band": "adolescent",
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_max_qty": 5,
+        "dose_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": 8,
+        "duration_days": 10,
+        "duration_note": "TDS x 10 days; withdrawal bleed 2-3 days after stopping",
+        "max_single_qty": 5,
+        "max_single_unit": "mg",
+        "max_daily_qty": 15,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_tab_or_sachet",
+        "notes": "Acute DUB: 5 mg TDS x 10 days. Cycle regulation: 5 mg TDS from day 19-26. Postpone menstruation: 5 mg TDS starting 3 days before expected period."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": true,
@@ -9322,7 +11306,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Moderate-severe pain",
+        "age_band": "child",
+        "method": "weight",
+        "dose_min_qty": 0.5,
+        "dose_max_qty": 0.5,
+        "dose_unit": "mg/kg/dose",
+        "is_per_day": false,
+        "frequency_per_day": 4,
+        "interval_hours": 6,
+        "duration_days": null,
+        "duration_note": "As needed q6-8h; short-term",
+        "max_single_qty": 30,
+        "max_single_unit": "mg",
+        "max_daily_qty": 120,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "0.1ml",
+        "notes": "0.5 mg/kg IM/IV q6-8h. Ages 5-8y: 15 mg; ages >=9y: 30 mg. Mixed agonist-antagonist. May precipitate withdrawal in opioid-dependent patients. Limited pediatric data. Injection may be discontinued in some markets.; Age 1+ years"
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -9485,7 +11491,31 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Pneumococcal disease immunization",
+        "age_band": "infant",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 0.5,
+        "dose_max_qty": 0.5,
+        "dose_unit": "mL",
+        "is_per_day": false,
+        "frequency_per_day": 1,
+        "interval_hours": null,
+        "duration_days": 1,
+        "duration_note": "NHM: 6w, 14w + booster 9m. IAP: 6w, 14w + booster 9-12m (2p+1 schedule)",
+        "max_single_qty": 0.5,
+        "max_single_unit": "mL",
+        "max_daily_qty": 0.5,
+        "max_daily_unit": "mL",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "exact",
+        "notes": "0.5 mL IM. PCV10 or PCV13 or PCV15. Free under NHM in Haryana; Fixed volume per dose"
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,
@@ -9638,7 +11668,29 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Familial hypercholesterolaemia",
+        "age_band": "child",
+        "method": "fixed",
+        "dose_min_qty": 5,
+        "dose_max_qty": 20,
+        "dose_unit": "mg",
+        "is_per_day": true,
+        "frequency_per_day": 1,
+        "interval_hours": 24,
+        "duration_days": null,
+        "duration_note": "OD; licensed ≥6 yr (HeFH)",
+        "max_single_qty": 20,
+        "max_single_unit": "mg",
+        "max_daily_qty": 20,
+        "max_daily_unit": "mg",
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "rounding_rule": "whole_tab_or_sachet",
+        "notes": "HeFH: 6-9 yr start 5 mg OD (max 10 mg); ≥10 yr start 5-10 mg OD (max 20 mg). Monitor LFT, CK."
+      }
+    ],
     "renal_adjustment_required": true,
     "renal_bands": [
       {
@@ -9814,7 +11866,36 @@
         "display_name": null
       }
     ],
-    "dosing_bands": [],
+    "dosing_bands": [
+      {
+        "indication": "Smooth muscle relaxant (obstetric cervical dilation)",
+        "age_band": "adolescent",
+        "ga_weeks_min": null,
+        "ga_weeks_max": null,
+        "method": "fixed",
+        "dose_min_qty": 8,
+        "dose_min_unit": "mg",
+        "dose_basis": "per_dose",
+        "dose_max_qty": 8,
+        "dose_max_unit": "mg",
+        "is_per_day": false,
+        "frequency_per_day": 3,
+        "interval_hours": null,
+        "loading_dose_qty": null,
+        "loading_dose_unit": null,
+        "loading_dose_basis": null,
+        "maintenance_dose_qty": null,
+        "maintenance_dose_unit": null,
+        "duration_days_default": 1,
+        "duration_note": "Single use in labor; max 3 doses",
+        "max_single_qty": 8,
+        "max_single_unit": "mg",
+        "max_daily_qty": 24,
+        "max_daily_unit": "mg",
+        "rounding_rule": "exact",
+        "notes": "Epidosin. 8 mg IV q1h (max 3 doses) during active labor to facilitate cervical dilation. Obstetric use only."
+      }
+    ],
     "renal_adjustment_required": false,
     "renal_bands": [],
     "hepatic_adjustment_required": false,

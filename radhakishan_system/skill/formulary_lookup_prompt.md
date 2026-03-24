@@ -46,13 +46,22 @@ Return this EXACT structure:
   "unlicensed_note": "string or null",
   "formulations": [
     {
-      "form": "Syrup|Tablet|Drops|Injection|MDI|Nebulisation|Cream|etc.",
-      "conc_qty": 125,
-      "conc_unit": "mg",
-      "per_qty": 5,
-      "per_unit": "ml",
+      "form": "Oral suspension|Tablet|Drops|Injection|MDI|Nebulisation solution|Cream|Ointment|Eye drops|Ear drops|Dry syrup|Dispersible tablet|Suppository|etc.",
       "route": "PO|IV|IM|SC|INH|TOP|PR|SL|NASAL|OPHTHALMIC|OTIC",
-      "indian_brand": "BrandName strength (Manufacturer)"
+      "ingredients": [
+        {
+          "name": "Amoxicillin",
+          "snomed_code": "372687004 or null",
+          "is_active": true,
+          "is_primary": true,
+          "strength_numerator": 250,
+          "strength_numerator_unit": "mg",
+          "strength_denominator": 5,
+          "strength_denominator_unit": "mL"
+        }
+      ],
+      "indian_brands": [{ "name": "Novamox", "manufacturer": "Cipla" }],
+      "indian_conc_note": "250 mg / 5 mL"
     }
   ],
   "dosing_bands": [

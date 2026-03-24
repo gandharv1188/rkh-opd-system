@@ -129,6 +129,13 @@ Generate this exact structure. Field names MUST match exactly.
       }
     }
   ],
+  "non_pharmacological": [
+    {
+      "instruction": "ORS (reduced osmolarity) — 50-100 ml after each loose stool",
+      "instruction_hi": "ORS (कम नमक वाला) — हर दस्त के बाद 50-100 ml दें",
+      "category": "diet|therapy|procedure|lifestyle"
+    }
+  ],
   "investigations": [
     {
       "name": "string",
@@ -196,6 +203,40 @@ Generate this exact structure. Field names MUST match exactly.
 }
 ```
 
+## Formulary Data Format (from get_formulary)
+
+The formulary now returns ABDM FHIR-compliant structure. When you call `get_formulary`, the response for each drug includes:
+
+- `formulations[].ingredients[]`: Array of `{name, snomed_code, is_active, is_primary, strength_numerator, strength_numerator_unit, strength_denominator, strength_denominator_unit}`
+- `formulations[].indian_brands[]`: Array of `{name, manufacturer}`
+- `formulations[].indian_conc_note`: Human-readable concentration string (e.g., "250 mg / 5 mL")
+
+**How to map formulary input to your medicines[] output:**
+
+1. Find the primary ingredient (`is_primary: true`) in the formulation's `ingredients[]` array
+2. Use `strength_numerator` as `concentration_mg` (e.g., 250)
+3. Use `strength_denominator` as `concentration_per_ml` (e.g., 5)
+4. Use `indian_conc_note` for the concentration string in `row1_en` (e.g., "AMOXICILLIN SUSPENSION (250 mg / 5 mL)")
+5. The medicines[] output format (concentration_mg, concentration_per_ml, formulation, row1_en, etc.) remains unchanged
+
+For combination drugs (e.g., Amoxicillin + Clavulanic Acid), the `ingredients[]` array will have multiple entries. Use the primary ingredient for dose calculation; mention the combination in row1_en.
+
+## Non-Drug Items from Standard Protocols
+
+Standard prescriptions (`get_standard_rx`) often include non-pharmacological items in their `first_line_drugs` — things like ORS, warm compresses, saline gargles, kangaroo mother care, steam inhalation, feeding modifications, sitz baths, behavioral therapy, physiotherapy, positioning advice, etc.
+
+**These items must NEVER go into `medicines[]`.** Route them as follows:
+
+1. **`non_pharmacological[]`**: The primary destination for non-drug therapeutic instructions. Use the categories:
+   - `diet` — ORS, feeding modifications, caloric supplements, elimination diets
+   - `therapy` — physiotherapy, behavioral therapy, speech therapy, kangaroo mother care
+   - `procedure` — warm compresses, saline nasal drops, steam inhalation, saline gargles, sitz bath
+   - `lifestyle` — sleep hygiene, screen time limits, activity restrictions, positioning advice
+2. **`counselling[]`**: Also add a brief mention of key non-pharmacological items so parents see them in the counselling section
+3. **`doctor_notes`**: If the doctor specifically dictated non-drug instructions, include them here too
+
+Always provide both `instruction` (English) and `instruction_hi` (Hindi in Devanagari) for each non-pharmacological item.
+
 ## Field Rules
 
 - `vitals`: Extract from doctor's note. Null if not mentioned.
@@ -224,6 +265,7 @@ Generate this exact structure. Field names MUST match exactly.
 - `patient.uhid`: Copy the PATIENT ID from the clinical note (e.g., "RKH-25260300001"). If not present, use empty string.
 - Optional sections (growth, vaccinations, developmental, investigations, iv_fluids, diet, referral): Include when requested in the INCLUDE SECTIONS instruction. Never return null for a requested section.
 - `vaccinations`: The clinical note may include a VACCINATION HISTORY section listing doses already given. Use this to determine what is due/overdue. If the note says "No records — assume vaccinations are up to date for age", then set `due` to only upcoming/next-due vaccines (not past ones), set `overdue` to empty, and note this assumption. NEVER suggest vaccines that are already recorded as given in the vaccination history.
+- `non_pharmacological`: Array of non-drug therapeutic instructions from standard protocols. Each entry has `instruction` (English), `instruction_hi` (Hindi Devanagari), and `category` (one of: "diet", "therapy", "procedure", "lifestyle"). Include whenever `get_standard_rx` returns non-drug items or the doctor mentions non-pharmacological treatments. Empty array `[]` if none.
 - `counselling`: Array of strings.
 - If BMI or weight-for-height data is available, include a brief single-statement caloric dietary recommendation in the counselling array based on BMI-for-age or WHZ classification (e.g., "Caloric requirement: ~900 kcal/day for a normally nourished 1-year-old; increase energy-dense foods if underweight").
 - `referral`: Top-level string. Empty string if none.
