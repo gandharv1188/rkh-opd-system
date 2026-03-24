@@ -323,6 +323,38 @@ All 11 user-reported issues (A1-A11) have been implemented and verified. Three i
 **Issue:** After striking through (removing) a medication, the "Restore" button was unclickable. Root cause: `.item-struck { pointer-events: none }` on `.med-top` blocked ALL clicks inside the struck card.
 **Fix:** Added `.item-struck .item-remove { pointer-events: auto; opacity: 1; text-decoration: none }` so the Restore button remains clickable while the rest of the card is struck through. Works in both pre-signoff and post-signoff edit modes.
 
+### Patient search combo box improvement
+
+**Fix:** Auto-select text on focus so the doctor can immediately type a new search. Search results now appear at the top of the dropdown list, above the existing patient entries.
+
+### Vaccination status options expanded
+
+**Issue:** Only "Completed" and "Scheduled" statuses were available for vaccines.
+**Fix:** Changed "Completed" to "Administered". Added new statuses: "Previously given" (for vaccines given elsewhere), "Deferred", and "Refused". Previously given vaccines are saved to the database with the date from the date picker.
+
+### All document types generate OCR summaries
+
+**Issue:** OCR summary generation was limited to certain document types.
+**Fix:** All uploaded document types (lab reports, imaging, discharge summaries, etc.) now trigger OCR summary extraction via the process-document Edge Function.
+
+### Growth trend improvements
+
+**Issue:** Growth trend display required at least 2 visits and did not show time span or handle single-value cases.
+**Fix:** Time span is now shown in the trend display. Single-value support added (shows the value without a trend arrow). Relaxed the 2-visit minimum requirement so even first-visit patients see their current measurements.
+
+### Sequential receipt numbers
+
+**Issue:** Receipt numbers used timestamp-based generation which was not human-readable or sequential.
+**Fix:** Changed to sequential format `RKH-RCT-YYMMDD-NNN` where NNN resets daily. Queries Supabase for the last receipt number of the day and increments.
+
+### Live DB migration: 7 columns added to visits table
+
+**Migration:** Added 7 columns to the live `visits` table via ALTER TABLE: `bmi`, `vax_schedule`, `receipt_no`, `consultation_fee`, `payment_mode`, `payment_status`, `procedures`. All columns nullable with appropriate CHECK constraints. Committed schema DDL updated to match.
+
+### Live integration test: 94/94 PASS
+
+**Verification:** Full end-to-end integration test covering all registration, prescription pad, and print station workflows. 94 out of 94 test assertions passed with 0 failures, confirming all Section A fixes work correctly against the live database.
+
 ---
 
 ## File Change Summary

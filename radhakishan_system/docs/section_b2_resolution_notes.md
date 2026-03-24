@@ -835,6 +835,34 @@
 **Issue:** `get_previous_rx` tool in `generate-prescription` Edge Function stripped `admission_recommended` and `warning_signs` from previous prescription data returned to Claude.
 **Fix:** Added `admission_recommended: g.admission_recommended || null` and `warning_signs: g.warning_signs || []` to the cleaned Rx object. Redeployed.
 
+### Vaccination extraction from uploaded documents
+
+**Issue:** The process-document Edge Function only extracted lab results and clinical notes from uploaded documents. Vaccination records in uploaded documents (e.g., old immunization cards) were ignored.
+**Fix:** Updated the process-document Edge Function to also extract vaccination data from uploaded documents. Extracted vaccinations are returned in the OCR response and can be saved to the `vaccinations` table.
+
+### Data quality guards: skip incomplete lab/vax records
+
+**Issue:** Lab results or vaccination records with missing required fields (e.g., no date) were saved to the database, creating incomplete records that caused downstream display and query issues.
+**Fix:** Added guard checks to skip records missing critical fields. Lab results without a test date are skipped. Vaccination records without a date are skipped. A console warning is logged for each skipped record.
+
+### Schema drift: billing columns added to committed SQL
+
+**Issue:** Billing-related columns (`consultation_fee`, `payment_mode`, `payment_status`, `receipt_no`, `procedures`) existed in the live database but were missing from the committed schema DDL file.
+**Fix:** Added all billing columns to `radhakishan_system/schema/radhakishan_supabase_schema.sql` in the visits table definition with appropriate types and CHECK constraints, ensuring the committed schema matches the live database.
+
+### Core prompt: BP vitals added to JSON schema
+
+**Issue:** The core prompt's JSON schema for vitals did not include blood pressure fields, so the AI had no structured way to receive or reference BP data.
+**Fix:** Added `bp_systolic`, `bp_diastolic`, and `map_mmhg` to the vitals section of the core prompt JSON schema in `core_prompt.md`.
+
+### Live DB migration applied
+
+**Migration:** Applied ALTER TABLE migration to the live Supabase database adding 7 columns to the visits table: `bmi`, `vax_schedule`, `receipt_no`, `consultation_fee`, `payment_mode`, `payment_status`, `procedures`. All columns nullable with appropriate types and constraints.
+
+### Live integration test verified all contracts
+
+**Verification:** Full end-to-end integration test confirmed all Section B-II fixes work correctly against the live database. All data contracts between registration, prescription pad, Edge Functions, and print station verified. No regressions detected.
+
 ---
 
 ## Deferred Issues (ABHA/ABDM/FHIR)
