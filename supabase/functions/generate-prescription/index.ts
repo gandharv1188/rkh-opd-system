@@ -170,12 +170,53 @@ async function executeGetReference(name: string): Promise<string> {
   }
 }
 
+// Condense drug data for AI — strips indian_brands (77% of tokens) and SNOMED metadata
+// Keeps: identity, condensed formulations, all dosing bands, all safety data, administration
+function condenseDrugForAI(drug: any): any {
+  return {
+    generic_name: drug.generic_name,
+    snomed_code: drug.snomed_code,
+    snomed_display: drug.snomed_display,
+    drug_class: drug.drug_class,
+    licensed_in_children: drug.licensed_in_children,
+    unlicensed_note: drug.unlicensed_note,
+    formulations: (drug.formulations || []).map((f: any) => ({
+      form: f.form,
+      route: f.route,
+      unit_of_presentation: f.unit_of_presentation,
+      indian_conc_note: f.indian_conc_note,
+      ingredients: (f.ingredients || []).map((i: any) => ({
+        name: i.name,
+        is_primary: i.is_primary,
+        strength_numerator: i.strength_numerator,
+        strength_numerator_unit: i.strength_numerator_unit,
+        strength_denominator: i.strength_denominator,
+        strength_denominator_unit: i.strength_denominator_unit,
+      })),
+    })),
+    dosing_bands: drug.dosing_bands,
+    interactions: drug.interactions,
+    contraindications: drug.contraindications,
+    cross_reactions: drug.cross_reactions,
+    black_box_warnings: drug.black_box_warnings,
+    pediatric_specific_warnings: drug.pediatric_specific_warnings,
+    monitoring_parameters: drug.monitoring_parameters,
+    renal_adjustment_required: drug.renal_adjustment_required,
+    renal_bands: drug.renal_bands,
+    hepatic_adjustment_required: drug.hepatic_adjustment_required,
+    hepatic_note: drug.hepatic_note,
+    administration: drug.administration,
+    food_instructions: drug.food_instructions,
+    notes: drug.notes,
+  };
+}
+
 async function executeGetFormulary(drugNames: string[]): Promise<string> {
   try {
     const orFilter = drugNames
       .map((d) => `generic_name.ilike.%25${encodeURIComponent(d.trim())}%25`)
       .join(",");
-    const url = `${SUPABASE_URL}/rest/v1/formulary?or=(${orFilter})&select=generic_name,formulations,dosing_bands,interactions,contraindications,cross_reactions,black_box_warnings,renal_bands,administration,food_instructions,notes,snomed_code,snomed_display&active=eq.true`;
+    const url = `${SUPABASE_URL}/rest/v1/formulary?or=(${orFilter})&select=generic_name,drug_class,licensed_in_children,unlicensed_note,formulations,dosing_bands,interactions,contraindications,cross_reactions,black_box_warnings,pediatric_specific_warnings,monitoring_parameters,renal_adjustment_required,renal_bands,hepatic_adjustment_required,hepatic_note,administration,food_instructions,notes,snomed_code,snomed_display&active=eq.true`;
     const res = await fetch(url, {
       headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
     });
@@ -183,7 +224,9 @@ async function executeGetFormulary(drugNames: string[]): Promise<string> {
     const drugs = await res.json();
     if (!drugs.length)
       return `No formulary entries found for: ${drugNames.join(", ")}. Use your clinical training knowledge for dosing.`;
-    return JSON.stringify(drugs, null, 2);
+    // Condense for AI — strips indian_brands and SNOMED metadata (~83% token savings)
+    const condensed = drugs.map(condenseDrugForAI);
+    return JSON.stringify(condensed, null, 2);
   } catch (e) {
     return `Formulary query error: ${e.message}`;
   }
@@ -194,7 +237,7 @@ async function executeGetStandardRx(
   name?: string,
 ): Promise<string> {
   const select =
-    "icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,warning_signs,referral_criteria,hospitalisation_criteria,notes,duration_days_default";
+    "icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,warning_signs,referral_criteria,hospitalisation_criteria,expected_course,key_clinical_points,severity_assessment,monitoring_parameters,guideline_changes,notes,duration_days_default";
   const headers = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
 
   try {
