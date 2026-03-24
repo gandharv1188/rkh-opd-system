@@ -88,6 +88,14 @@ Return ONLY a single valid JSON object matching the schema below. No markdown, n
   ],
   "duration_days_default": 7,
   "counselling": ["practical point for parents in plain language"],
+  "warning_signs": [
+    "English warning sign for parents — e.g. Fast breathing or chest indrawing",
+    "Bluish lips or tongue",
+    "Convulsions or fits",
+    "Excessive sleepiness or unresponsive",
+    "Diagnosis-specific sign 1",
+    "Diagnosis-specific sign 2"
+  ],
   "referral_criteria": "string — when to refer to specialist",
   "hospitalisation_criteria": "string — when to admit",
   "notes": "string — additional clinical notes, age-specific caveats, watchful waiting criteria",

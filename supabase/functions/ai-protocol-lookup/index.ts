@@ -99,6 +99,9 @@ function validateProtocol(protocol: any): string[] {
   if (protocol.counselling && !Array.isArray(protocol.counselling)) {
     errors.push("counselling must be an array");
   }
+  if (protocol.warning_signs && !Array.isArray(protocol.warning_signs)) {
+    errors.push("warning_signs must be an array");
+  }
   return errors;
 }
 
