@@ -2892,26 +2892,55 @@
         seen.add(r.visit_date);
         return true;
       });
-      if (rows.length < 2) return ""; // Need at least 2 distinct visit dates for trend
+      if (!rows.length) return ""; // No weight data at all
       rows.reverse(); // Chronological order
 
-      const wtTrend = rows.map((r) => r.weight_kg).filter(Boolean);
-      const htTrend = rows.map((r) => r.height_cm).filter(Boolean);
+      const wtTrend = rows
+        .filter((r) => r.weight_kg)
+        .map((r) => ({ v: r.weight_kg, d: r.visit_date }));
+      const htTrend = rows
+        .filter((r) => r.height_cm)
+        .map((r) => ({ v: r.height_cm, d: r.visit_date }));
       const arrow = (arr) =>
         arr.length < 2
           ? "→"
-          : arr[arr.length - 1] > arr[arr.length - 2]
+          : arr[arr.length - 1].v > arr[arr.length - 2].v
             ? "↑"
-            : arr[arr.length - 1] < arr[arr.length - 2]
+            : arr[arr.length - 1].v < arr[arr.length - 2].v
               ? "↓"
               : "→";
+      const timeDiff = (arr) => {
+        if (arr.length < 2) return "";
+        const d1 = new Date(arr[0].d),
+          d2 = new Date(arr[arr.length - 1].d);
+        const days = Math.round((d2 - d1) / 86400000);
+        if (days < 30) return days + "d";
+        if (days < 365) return Math.round(days / 30) + "mo";
+        return (days / 365).toFixed(1) + "yr";
+      };
+      const arrowColor = (dir) =>
+        dir === "↑"
+          ? "var(--green)"
+          : dir === "↓"
+            ? "var(--red)"
+            : "var(--ink3)";
 
       let h =
         '<div class="vi-row"><span class="vi-label">Growth</span><div style="font-size:11px">';
-      if (wtTrend.length)
-        h += `<span>Wt: ${wtTrend.join("→")} kg <strong style="color:${arrow(wtTrend) === "↑" ? "var(--green)" : "var(--red)"}">${arrow(wtTrend)}</strong></span>`;
-      if (htTrend.length)
-        h += ` <span style="margin-left:8px">Ht: ${htTrend.join("→")} cm <strong>${arrow(htTrend)}</strong></span>`;
+      if (wtTrend.length >= 2) {
+        const dir = arrow(wtTrend);
+        h += `<span>Wt: ${wtTrend.map((t) => t.v).join(" → ")} kg <strong style="color:${arrowColor(dir)}">${dir}</strong>`;
+        h += ` <span style="font-size:9px;color:var(--ink3)">(${timeDiff(wtTrend)})</span></span>`;
+      } else if (wtTrend.length === 1) {
+        h += `<span>Wt: ${wtTrend[0].v} kg</span>`;
+      }
+      if (htTrend.length >= 2) {
+        const dir = arrow(htTrend);
+        h += ` <span style="margin-left:8px">Ht: ${htTrend.map((t) => t.v).join(" → ")} cm <strong style="color:${arrowColor(dir)}">${dir}</strong>`;
+        h += ` <span style="font-size:9px;color:var(--ink3)">(${timeDiff(htTrend)})</span></span>`;
+      } else if (htTrend.length === 1) {
+        h += ` <span style="margin-left:8px">Ht: ${htTrend[0].v} cm</span>`;
+      }
 
       // Fetch latest Z-scores
       const zr = await q(
