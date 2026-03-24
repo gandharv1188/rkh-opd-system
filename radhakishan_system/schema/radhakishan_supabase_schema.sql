@@ -179,6 +179,8 @@ create table standard_prescriptions (
 
   duration_days_default integer,
   counselling           text[],
+  warning_signs         jsonb check (warning_signs is null or jsonb_typeof(warning_signs) = 'array'),
+  -- Array of English strings: ["Fast breathing", "Bluish lips", ...]. AI translates to Hindi at prescription time.
   referral_criteria     text,
   hospitalisation_criteria text,
   notes                 text,

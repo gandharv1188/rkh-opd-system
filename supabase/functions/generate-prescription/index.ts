@@ -194,7 +194,7 @@ async function executeGetStandardRx(
   name?: string,
 ): Promise<string> {
   const select =
-    "icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,referral_criteria,hospitalisation_criteria,notes,duration_days_default";
+    "icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,warning_signs,referral_criteria,hospitalisation_criteria,notes,duration_days_default";
   const headers = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
 
   try {
