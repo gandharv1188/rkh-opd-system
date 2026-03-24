@@ -40,6 +40,9 @@ RETURN ONLY valid JSON (no markdown, no code fences) with this structure:
   "medications": [
     { "drug": "drug name", "dose": "250mg", "frequency": "TDS", "duration": "5 days" }
   ],
+  "vaccinations": [
+    { "vaccine_name": "BCG", "dose_number": 1, "date_given": "YYYY-MM-DD or null", "site": "left arm", "batch_no": "string or null" }
+  ],
   "clinical_notes": "any other relevant clinical text from the document",
   "lab_name": "name of lab or hospital if visible",
   "report_date": "YYYY-MM-DD if date is visible, otherwise null"
@@ -58,6 +61,13 @@ For DISCHARGE SUMMARIES:
 For PRESCRIPTIONS:
 - Extract medications with dose, frequency, duration.
 - Extract diagnoses if present.
+
+For VACCINATION CARDS / IMMUNIZATION RECORDS:
+- Extract ALL vaccination entries visible: vaccine name, dose number, date given, site of injection, batch number.
+- Normalize vaccine names to standard abbreviations: BCG, OPV, IPV, Hep B, DPT, DTwP, DTaP, Pentavalent, PCV, Rotavirus, MR, MMR, Typhoid, Hep A, Varicella, JE, Influenza, HPV, Td, TT.
+- If multiple doses of same vaccine, list each as a separate entry with correct dose_number (1, 2, 3, booster).
+- Date format: YYYY-MM-DD. If only month/year visible, use first day of month.
+- Return empty vaccinations array [] for non-vaccination documents.
 
 TEST NAME NORMALIZATION — always use the standard name:
 - Hb, Hemoglobin → Hemoglobin
@@ -320,10 +330,17 @@ Rules:
         Prefer: "return=minimal",
       };
 
-      // Save lab values to lab_results table
+      // Save lab values to lab_results table (only if test_name, value, and date are present)
       let savedCount = 0;
+      let skippedLabs = 0;
       if (extracted.lab_values?.length) {
         for (const lab of extracted.lab_values) {
+          // Skip incomplete records — don't pollute the database
+          const testDate = lab.report_date || doc_date || null;
+          if (!lab.test_name || !lab.value || !testDate) {
+            skippedLabs++;
+            continue;
+          }
           try {
             const res = await fetch(`${SUPABASE_URL}/rest/v1/lab_results`, {
               method: "POST",
@@ -341,10 +358,7 @@ Rules:
                 test_category: lab.test_category || null,
                 reference_range: lab.reference_range || null,
                 lab_name: extracted.lab_name || null,
-                test_date:
-                  lab.report_date ||
-                  doc_date ||
-                  new Date().toISOString().split("T")[0],
+                test_date: testDate,
                 source: "ai_extracted",
               }),
             });
@@ -355,7 +369,49 @@ Rules:
           }
         }
         console.log(
-          `Saved ${savedCount}/${extracted.lab_values.length} lab results to DB`,
+          `Saved ${savedCount}/${extracted.lab_values.length} lab results to DB` +
+            (skippedLabs
+              ? ` (${skippedLabs} skipped — missing test_name, value, or date)`
+              : ""),
+        );
+      }
+
+      // Save extracted vaccinations to vaccinations table (only with vaccine_name and date)
+      let vaxSavedCount = 0;
+      let skippedVax = 0;
+      if (extracted.vaccinations?.length) {
+        for (const vax of extracted.vaccinations) {
+          // Skip incomplete records — must have vaccine name and date to be useful
+          if (!vax.vaccine_name || !vax.date_given) {
+            skippedVax++;
+            continue;
+          }
+          try {
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/vaccinations`, {
+              method: "POST",
+              headers: dbHeaders,
+              body: JSON.stringify({
+                patient_id,
+                vaccine_name: vax.vaccine_name,
+                dose_number: vax.dose_number || null,
+                date_given: vax.date_given,
+                site: vax.site || null,
+                batch_number: vax.batch_no || null,
+                given_by: "extracted_from_document",
+                free_or_paid: "unknown",
+              }),
+            });
+            if (res.ok) vaxSavedCount++;
+            else console.warn("Vaccination save failed:", res.status);
+          } catch (e: any) {
+            console.warn("Vaccination save error:", e.message);
+          }
+        }
+        console.log(
+          `Saved ${vaxSavedCount}/${extracted.vaccinations.length} vaccination records to DB` +
+            (skippedVax
+              ? ` (${skippedVax} skipped — missing vaccine_name or date)`
+              : ""),
         );
       }
 
@@ -373,6 +429,7 @@ Rules:
             if (docIdx >= 0) {
               docs[docIdx].ocr_summary = extracted.summary || null;
               docs[docIdx].ocr_lab_count = extracted.lab_values?.length || 0;
+              docs[docIdx].ocr_vax_count = extracted.vaccinations?.length || 0;
               docs[docIdx].ocr_diagnoses = extracted.diagnoses || [];
               docs[docIdx].ocr_medications = extracted.medications || [];
               await fetch(`${SUPABASE_URL}/rest/v1/visits?id=eq.${visit_id}`, {
