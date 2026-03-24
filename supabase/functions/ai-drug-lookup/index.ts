@@ -65,7 +65,14 @@ serve(async (req: Request) => {
 
     const userMessage = `Research the drug "${cleanName}" and return a complete pediatric formulary entry as JSON.
 
-If this is a brand name, resolve it to the generic name. Include all formulations available in India, complete pediatric dosing bands per IAP guidelines, drug interactions, renal adjustments, and pediatric-specific warnings.
+IMPORTANT — EXACT BRAND NAME MATCHING:
+1. First, identify exactly what "${cleanName}" is. Look up this EXACT brand name — do not guess based on partial name similarity or category.
+2. "${cleanName}" may be a brand name (e.g., "Wikoryl AF", "EasiBreathe", "Calpol") or a generic name (e.g., "Amoxicillin", "Paracetamol").
+3. If it is a brand name, find its EXACT composition. For example: "EasiBreathe" = Menthol + Chlorothymol + Eucalyptol + Terpineol + Camphor (NOT Salbutamol). "Wikoryl AF" = Chlorpheniramine + Phenylephrine (NOT Paracetamol + Chlorpheniramine + Phenylephrine).
+4. Do NOT assume a drug is something else just because the name sounds similar to another category.
+5. Resolve to the correct generic name(s) based on the ACTUAL composition.
+
+Include all formulations available in India, complete pediatric dosing bands per IAP guidelines, drug interactions, renal adjustments, and pediatric-specific warnings.
 
 Return ONLY the JSON object — no other text.`;
 
