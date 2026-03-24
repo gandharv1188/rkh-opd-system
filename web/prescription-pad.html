@@ -902,11 +902,19 @@
     background: var(--green-lt);
     color: var(--green);
     border-color: var(--green);
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
   }
   .item-struck {
     opacity: 0.4;
     text-decoration: line-through;
     pointer-events: none;
+  }
+  .item-struck .item-remove {
+    pointer-events: auto;
+    opacity: 1;
+    text-decoration: none;
   }
   .add-item-btn {
     display: inline-flex;
