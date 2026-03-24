@@ -66,7 +66,10 @@ Generate this exact structure. Field names MUST match exactly.
     "temp_f": "string or null",
     "hr_per_min": "string or null",
     "rr_per_min": "string or null",
-    "spo2_pct": "string or null"
+    "spo2_pct": "string or null",
+    "bp_systolic": "number or null",
+    "bp_diastolic": "number or null",
+    "map_mmhg": "number or null"
   },
   "chief_complaints": "string (what the patient/parent reports)",
   "clinical_history": "string (relevant history expanded from doctor's note)",

@@ -277,6 +277,12 @@ create table visits (
   -- Attached document metadata (uploaded at registration)
   attached_documents  jsonb,
 
+  -- Billing
+  consultation_fee    numeric default 0,
+  payment_mode        text default 'cash' check (payment_mode in ('cash', 'upi', 'card', 'insurance', 'free')),
+  payment_status      text default 'pending' check (payment_status in ('pending', 'paid', 'waived')),
+  procedures          jsonb,                       -- [{name, charge, payMode, status, receiptNo}]
+
   created_at      timestamptz default now(),
   updated_at      timestamptz default now()
 );
