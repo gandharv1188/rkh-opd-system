@@ -1774,17 +1774,18 @@
     <div class="ff"><label>Unit *</label>
       <select id="${id}-cu">
         <option value="mg">mg</option><option value="mcg">mcg (μg)</option><option value="g">g</option>
-        <option value="IU">IU</option><option value="units">units</option>
+        <option value="IU">IU</option><option value="units">units</option><option value="lipase units">lipase units</option>
         <option value="mmol">mmol</option><option value="mEq">mEq</option>
-        <option value="mg/ml">mg/ml</option><option value="mg/5ml">mg/5ml</option>
-        <option value="% w/v">% w/v</option><option value="% w/w">% w/w</option>
+        <option value="%">%</option><option value="% w/v">% w/v</option><option value="% w/w">% w/w</option>
+        <option value="billion CFU">billion CFU</option>
+        <option value="mL">mL</option><option value="drops">drops</option>
       </select>
     </div>
     <div class="ff"><label>Per qty *</label><input type="number" id="${id}-pq" placeholder="e.g. 5" step="any"></div>
   </div>
   <div class="fg g3">
     <div class="ff"><label>Per unit</label>
-      <select id="${id}-pu"><option value="ml">ml</option><option value="mL">mL</option><option value="tablet">tablet</option><option value="capsule">capsule</option><option value="dose">dose</option><option value="actuation">actuation</option><option value="vial">vial</option><option value="sachet">sachet</option><option value="patch">patch</option><option value="suppository">suppository</option><option value="g">g</option></select>
+      <select id="${id}-pu"><option value="mL">mL</option><option value="5 mL">5 mL</option><option value="tablet">tablet</option><option value="capsule">capsule</option><option value="drop">drop</option><option value="puff">puff</option><option value="actuation">actuation</option><option value="spray">spray</option><option value="dose">dose</option><option value="sachet">sachet</option><option value="vial">vial</option><option value="suppository">suppository</option><option value="patch">patch</option><option value="lozenge">lozenge</option><option value="g">g</option><option value="bottle">bottle</option></select>
     </div>
     <div class="ff"><label>Route</label>
       <input id="${id}-rt" list="dl-routes" placeholder="e.g. PO, IV…" autocomplete="off">
@@ -1888,14 +1889,39 @@
     <div class="ff"><label>Dose max qty</label><input type="number" id="${id}-dmax" placeholder="e.g. 90" step="any"></div>
     <div class="ff"><label>Dose unit *</label>
       <select id="${id}-du">
-        <option value="mg/kg">mg/kg</option><option value="mg/kg/dose">mg/kg/dose</option><option value="mg/kg/day">mg/kg/day</option>
-        <option value="mcg/kg">mcg/kg</option><option value="mcg/kg/dose">mcg/kg/dose</option><option value="mcg/kg/day">mcg/kg/day</option>
-        <option value="mg">mg</option><option value="mcg">mcg (μg)</option><option value="g">g</option>
-        <option value="IU">IU</option><option value="IU/kg">IU/kg</option><option value="IU/day">IU/day</option>
-        <option value="units">units</option><option value="units/kg">units/kg</option>
-        <option value="mmol">mmol</option><option value="mEq">mEq</option>
-        <option value="mg/m2">mg/m²</option><option value="mL">mL</option><option value="mL/kg">mL/kg</option>
-        <option value="drops">drops</option><option value="puffs">puffs</option>
+        <optgroup label="Weight-based">
+          <option value="mg/kg">mg/kg</option><option value="mg/kg/dose">mg/kg/dose</option><option value="mg/kg/day">mg/kg/day</option>
+          <option value="mcg/kg">mcg/kg</option><option value="mcg/kg/dose">mcg/kg/dose</option><option value="mcg/kg/day">mcg/kg/day</option>
+          <option value="g/kg">g/kg</option><option value="mL/kg">mL/kg</option><option value="mL/kg/day">mL/kg/day</option>
+          <option value="mEq/kg">mEq/kg</option><option value="mmol/kg">mmol/kg</option>
+          <option value="IU/kg">IU/kg</option><option value="U/kg">U/kg</option><option value="units/kg">units/kg</option>
+          <option value="mg base/kg">mg base/kg</option><option value="mg TMP/kg">mg TMP/kg</option><option value="mg PE">mg PE</option>
+        </optgroup>
+        <optgroup label="Infusion rates">
+          <option value="mcg/kg/min">mcg/kg/min</option><option value="mcg/kg/hr">mcg/kg/hr</option>
+          <option value="mg/kg/hr">mg/kg/hr</option><option value="mg/kg/h">mg/kg/h</option>
+          <option value="ng/kg/min">ng/kg/min</option>
+          <option value="U/kg/hr">U/kg/hr</option><option value="IU/kg/hr">IU/kg/hr</option>
+          <option value="units/kg/hr">units/kg/hr</option><option value="units/kg/min">units/kg/min</option>
+        </optgroup>
+        <optgroup label="BSA-based">
+          <option value="mg/m2">mg/m²</option><option value="mL/m2/day">mL/m²/day</option>
+        </optgroup>
+        <optgroup label="Fixed/absolute">
+          <option value="mg">mg</option><option value="mcg">mcg (μg)</option><option value="g">g</option>
+          <option value="IU">IU</option><option value="IU/day">IU/day</option>
+          <option value="units">units</option>
+          <option value="mEq">mEq</option><option value="mmol">mmol</option>
+          <option value="mL">mL</option>
+          <option value="billion CFU">billion CFU</option><option value="lipase units">lipase units</option>
+        </optgroup>
+        <optgroup label="Discrete units">
+          <option value="drops">drops</option><option value="drop">drop</option>
+          <option value="puffs">puffs</option><option value="sprays">sprays</option>
+          <option value="tablet">tablet</option><option value="capsule">capsule</option>
+          <option value="suppository">suppository</option><option value="application">application</option>
+          <option value="thin layer">thin layer</option><option value="vial">vial</option>
+        </optgroup>
       </select>
     </div>
     <div class="ff"><label>Per day or per dose?</label>
@@ -1911,25 +1937,35 @@
   <div class="fg g4" style="margin-bottom:8px">
     <div class="ff"><label>Max single qty</label><input type="number" id="${id}-ms" placeholder="e.g. 500" step="any"></div>
     <div class="ff"><label>Max single unit</label>
-      <select id="${id}-msu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option><option value="IU">IU</option><option value="mL">mL</option><option value="puffs">puffs</option></select>
+      <select id="${id}-msu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option><option value="IU">IU</option><option value="mEq">mEq</option><option value="mmol">mmol</option><option value="mL">mL</option><option value="mL/kg">mL/kg</option><option value="mg/kg">mg/kg</option><option value="mg/kg/day">mg/kg/day</option><option value="drops">drops</option><option value="puffs">puffs</option><option value="sprays">sprays</option><option value="tablets">tablets</option><option value="capsule">capsule</option><option value="vial">vial</option></select>
     </div>
     <div class="ff"><label>Max daily qty</label><input type="number" id="${id}-md" placeholder="e.g. 3000" step="any"></div>
     <div class="ff"><label>Max daily unit</label>
-      <select id="${id}-mdu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option><option value="IU">IU</option><option value="mL">mL</option><option value="puffs">puffs</option></select>
+      <select id="${id}-mdu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option><option value="IU">IU</option><option value="mEq">mEq</option><option value="mmol">mmol</option><option value="mL">mL</option><option value="mL/kg">mL/kg</option><option value="mg/kg">mg/kg</option><option value="mg/kg/day">mg/kg/day</option><option value="drops">drops</option><option value="puffs">puffs</option><option value="sprays">sprays</option><option value="tablets">tablets</option><option value="capsule">capsule</option><option value="vial">vial</option></select>
     </div>
   </div>
   <div class="fg g3" style="margin-bottom:8px">
     <div class="ff"><label>Loading dose qty</label><input type="number" id="${id}-ld" placeholder="e.g. 20" step="any"></div>
     <div class="ff"><label>Loading dose unit</label>
-      <select id="${id}-ldu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="IU">IU</option><option value="units">units</option><option value="mg/kg">mg/kg</option><option value="mcg/kg">mcg/kg</option><option value="IU/kg">IU/kg</option><option value="mL">mL</option></select>
+      <select id="${id}-ldu"><option value="mg">mg</option><option value="mg/kg">mg/kg</option><option value="mcg">mcg</option><option value="mcg/kg">mcg/kg</option><option value="g">g</option><option value="g/kg/day">g/kg/day</option><option value="IU">IU</option><option value="IU/kg">IU/kg</option><option value="units">units</option><option value="units/kg">units/kg</option><option value="mL">mL</option><option value="mL/kg">mL/kg</option><option value="mg PE/kg">mg PE/kg</option><option value="mEq">mEq</option><option value="mEq/kg">mEq/kg</option></select>
     </div>
     <div class="ff"><label>Rounding rule</label>
       <select id="${id}-rnd">
-        <option value="0.5ml">Nearest 0.5 ml (syrup)</option>
-        <option value="0.1ml">Nearest 0.1 ml (drops/injection)</option>
-        <option value="quarter_tab">Nearest ¼ tablet</option>
-        <option value="whole_unit">Nearest whole unit (insulin/heparin)</option>
+        <option value="nearest_0.5_mL">Nearest 0.5 mL (syrup)</option>
+        <option value="nearest_0.1_mL">Nearest 0.1 mL (injection/drops)</option>
+        <option value="nearest_quarter_tablet">Nearest ¼ tablet</option>
+        <option value="nearest_half_tablet">Nearest ½ tablet</option>
+        <option value="nearest_tablet">Nearest whole tablet</option>
+        <option value="nearest_capsule">Nearest whole capsule</option>
+        <option value="nearest_drop">Nearest whole drop</option>
+        <option value="nearest_puff">Nearest whole puff</option>
+        <option value="nearest_1unit">Nearest whole unit (insulin/heparin)</option>
+        <option value="nearest_mEq">Nearest mEq</option>
+        <option value="nearest_vial">Nearest whole vial</option>
+        <option value="nearest_sachet">Nearest sachet</option>
+        <option value="nearest_syringe_size">Nearest syringe size</option>
         <option value="exact">Exact (oncology/specialist)</option>
+        <option value="protocol_specific">Protocol-specific</option>
       </select>
     </div>
   </div>
