@@ -28,6 +28,7 @@ create table formulary (
 
   -- Identity
   generic_name                text not null unique,
+  snomed_code                 text,
   drug_class                  text,
   category                    text,
   brand_names                 text[],
@@ -35,16 +36,31 @@ create table formulary (
   licensed_in_children        boolean default true,
   unlicensed_note             text,
 
-  -- Formulations
+  -- Data provenance
+  -- snomed_branded = SNOMED code + branded children with full formulation data
+  -- snomed_generic = SNOMED code but no branded children in India extension
+  -- orphan         = no SNOMED code (rare biologics, OTC supplements)
+  -- manual         = manually added entry
+  data_source                 text default 'manual'
+    check (data_source in ('snomed_branded', 'snomed_generic', 'orphan', 'manual')),
+
+  -- Formulations (ABDM FHIR R4 aligned)
   -- Each entry: {
-  --   form: syrup|drops|tablet|capsule|injection|inhaler|
-  --         nebulisation|sachet|cream|suppository|nasal|eye
-  --   conc_qty: number (e.g. 120)
-  --   conc_unit: mg|mcg|g|units|mmol|mEq
-  --   per_qty: number (e.g. 5)
-  --   per_unit: ml|tablet|capsule|dose|actuation
-  --   route: oral|iv|im|sc|inhaled|topical|rectal|nasal|ophthalmic
-  --   indian_brand: string (e.g. "Novamox 125mg/5ml")
+  --   form: "Oral suspension"|"Tablet"|"Solution for injection"|...
+  --   form_snomed_code: "385024007" (SNOMED dose form concept)
+  --   route: "PO"|"IV/IM"|"Topical"|"Inhaled"|"Rectal"|...
+  --   ingredients: [{
+  --     name: "Amoxicillin", snomed_code: "372687004",
+  --     is_active: true, is_primary: true,
+  --     strength_numerator: 250, strength_numerator_unit: "mg",
+  --     strength_denominator: 5, strength_denominator_unit: "mL"
+  --   }],
+  --   indian_brands: [{
+  --     name: "Novamox", manufacturer: "Cipla",
+  --     snomed_code: "1234567890", verified_on: "SNOMED CT India March 2026"
+  --   }],
+  --   indian_conc_note: "Amoxicillin 250 mg / 5 mL",
+  --   display_name: "Amoxicillin 250mg/5ml oral suspension"
   -- }
   formulations                jsonb check (formulations is null or jsonb_typeof(formulations) = 'array'),
 
@@ -124,6 +140,8 @@ create index idx_formulary_brands  on formulary using gin(brand_names);
 create index idx_formulary_use     on formulary using gin(therapeutic_use);
 create index if not exists idx_formulary_interactions on formulary using gin(interactions);
 create index if not exists idx_formulary_dosing on formulary using gin(dosing_bands);
+create index idx_formulary_snomed  on formulary(snomed_code) where snomed_code is not null;
+create index idx_formulary_datasource on formulary(data_source);
 
 -- ============================================================
 -- 2. DOCTORS
