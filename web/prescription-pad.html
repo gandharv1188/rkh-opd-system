@@ -1495,24 +1495,6 @@
         display: none;
       "
     ></span>
-    <select
-      id="rx-lang"
-      style="
-        font-size: 11px;
-        padding: 2px 6px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
-        background: transparent;
-        color: #fff;
-        margin-left: auto;
-        cursor: pointer;
-      "
-      title="Counselling language"
-    >
-      <option value="bilingual" style="color: #000">Bilingual</option>
-      <option value="hindi" style="color: #000">Hindi</option>
-      <option value="english" style="color: #000">English</option>
-    </select>
     <button
       id="conn-btn"
       onclick="connectSB()"
@@ -1700,6 +1682,32 @@
         </div>
         <div class="mod-chip" id="chip-neo" onclick="toggleMod('neo')">
           <span class="chip-dot"></span>Neonatal
+        </div>
+        <div style="margin-left: auto; display: flex; align-items: center">
+          <select
+            id="rx-lang"
+            style="
+              font-size: 12px;
+              padding: 4px 8px 4px 8px;
+              border-radius: 99px;
+              border: 0.5px solid var(--bdr2);
+              background: var(--bg2);
+              color: var(--ink2);
+              cursor: pointer;
+              font-family: inherit;
+              appearance: none;
+              -webkit-appearance: none;
+              background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22><path d=%225 6L0 0h10z%22 fill=%22%237a7a60%22/></svg>&quot;);
+              background-repeat: no-repeat;
+              background-position: right 8px center;
+              padding-right: 22px;
+            "
+            title="Counselling & warning signs language"
+          >
+            <option value="bilingual">Bilingual</option>
+            <option value="hindi">हिंदी</option>
+            <option value="english">English</option>
+          </select>
         </div>
       </div>
     </div>
