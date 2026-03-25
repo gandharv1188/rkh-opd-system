@@ -2606,6 +2606,35 @@
     } else {
       warnEl.style.display = "none";
     }
+
+    // Also update slider value display (same as dpSliderChanged)
+    const valEl = document.getElementById(pid + "-sliderval");
+    if (valEl) {
+      const ref2 = getDoseRef(m.row1_en, rxData.patient?.age);
+      const allBands2 = ref2
+        ? ref2.allBands.filter((b) => b.dose_min_qty != null)
+        : [];
+      const matchedBand2 = allBands2.find(
+        (b) =>
+          mgkg >= b.dose_min_qty && mgkg <= (b.dose_max_qty || b.dose_min_qty),
+      );
+      const inAny2 = !!matchedBand2;
+      const doseUnit2 = ref2?.bands?.[0]?.dose_unit || "mg/kg/day";
+      let sliderHtml = "<strong>" + esc(displayEn) + "</strong> per dose";
+      sliderHtml +=
+        '<br><span style="font-size:12px;opacity:0.7">' +
+        mgkg +
+        " " +
+        esc(doseUnit2);
+      if (matchedBand2?.indication)
+        sliderHtml += " — " + esc(matchedBand2.indication.substring(0, 40));
+      sliderHtml += "</span>";
+      if (!inAny2 && allBands2.length)
+        sliderHtml +=
+          '<br><span style="font-size:11px;color:var(--red)">⚠ Outside recommended range</span>';
+      valEl.innerHTML = sliderHtml;
+      valEl.className = "dp-slider-val " + (inAny2 ? "dp-safe" : "dp-warn");
+    }
   }
 
   // Format temperature: strip duplicate units, preserve °C if Celsius
