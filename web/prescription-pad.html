@@ -2965,7 +2965,8 @@
   }
 
   async function connectSB() {
-    if (sbConnected) return; // already connected
+    if (sbConnected || connectSB._pending) return; // already connected or in progress
+    connectSB._pending = true;
     if (!SB)
       SB =
         document.getElementById("sb-url")?.value?.trim()?.replace(/\/$/, "") ||
@@ -3001,6 +3002,7 @@
       }
     } catch (e) {
       sbConnected = false;
+      connectSB._pending = false;
       document.getElementById("conn-dot").style.background = "#8b1a1a";
       document.getElementById("conn-label").textContent = "Retry";
       document.getElementById("conn-btn").style.borderColor = "#8b1a1a";
@@ -3025,6 +3027,17 @@
       if (fr.ok) {
         const drugs = await fr.json();
         drugs.forEach((d) => {
+          // Keep brand_names for search but strip heavy indian_brands from formulations
+          // (saves ~7 MB memory — brands only needed for formulary viewer, not prescription pad)
+          if (d.formulations) {
+            d._brandIndex = []; // compact brand search index
+            d.formulations.forEach((f) => {
+              (f.indian_brands || []).forEach((ib) => {
+                if (ib.name) d._brandIndex.push(ib.name.toUpperCase());
+              });
+              delete f.indian_brands; // free memory
+            });
+          }
           formularyCache[d.generic_name.toUpperCase()] = d;
         });
         console.log(
