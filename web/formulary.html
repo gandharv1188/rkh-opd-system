@@ -778,6 +778,53 @@
     border-bottom: 0.5px solid var(--bdr);
     color: var(--ink2);
   }
+  /* Ingredient doses sub-form in dosing band edit */
+  .id-section {
+    border: 0.5px solid var(--bdr2);
+    border-radius: var(--r);
+    padding: 8px;
+    margin: 8px 0;
+    background: var(--bg2);
+  }
+  .id-section-hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    cursor: pointer;
+  }
+  .id-section-hdr span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue-mid);
+  }
+  .id-row {
+    background: var(--bg);
+    border: 0.5px solid var(--bdr);
+    border-radius: var(--r);
+    padding: 8px;
+    margin-bottom: 6px;
+    position: relative;
+  }
+  .id-row .rm-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+  .id-row .fg {
+    gap: 6px;
+  }
+  .id-row .ff label {
+    font-size: 9px;
+  }
+  .id-row .ff input,
+  .id-row .ff select {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+  .id-body.collapsed {
+    display: none;
+  }
   .brands-toggle {
     background: none;
     border: none;
@@ -2334,71 +2381,22 @@
     </div>
   </div>
   <div id="${id}-mhelp" class="method-highlight" style="margin-bottom:8px">${METHOD_EXPLAIN.weight}</div>
-  <div class="fg g4" style="margin-bottom:8px">
-    <div class="ff"><label>Dose min qty *</label><input type="number" id="${id}-dmin" placeholder="e.g. 40" step="any"></div>
-    <div class="ff"><label>Dose max qty</label><input type="number" id="${id}-dmax" placeholder="e.g. 90" step="any"></div>
-    <div class="ff"><label>Dose unit *</label>
-      <select id="${id}-du">
-        <optgroup label="Weight-based">
-          <option value="mg/kg">mg/kg</option><option value="mg/kg/dose">mg/kg/dose</option><option value="mg/kg/day">mg/kg/day</option>
-          <option value="mcg/kg">mcg/kg</option><option value="mcg/kg/dose">mcg/kg/dose</option><option value="mcg/kg/day">mcg/kg/day</option>
-          <option value="g/kg">g/kg</option><option value="mL/kg">mL/kg</option><option value="mL/kg/day">mL/kg/day</option>
-          <option value="mEq/kg">mEq/kg</option><option value="mmol/kg">mmol/kg</option>
-          <option value="IU/kg">IU/kg</option><option value="U/kg">U/kg</option><option value="units/kg">units/kg</option>
-          <option value="mg base/kg">mg base/kg</option><option value="mg TMP/kg">mg TMP/kg</option><option value="mg PE">mg PE</option>
-        </optgroup>
-        <optgroup label="Infusion rates">
-          <option value="mcg/kg/min">mcg/kg/min</option><option value="mcg/kg/hr">mcg/kg/hr</option>
-          <option value="mg/kg/hr">mg/kg/hr</option><option value="mg/kg/h">mg/kg/h</option>
-          <option value="ng/kg/min">ng/kg/min</option>
-          <option value="U/kg/hr">U/kg/hr</option><option value="IU/kg/hr">IU/kg/hr</option>
-          <option value="units/kg/hr">units/kg/hr</option><option value="units/kg/min">units/kg/min</option>
-        </optgroup>
-        <optgroup label="BSA-based">
-          <option value="mg/m2">mg/m²</option><option value="mL/m2/day">mL/m²/day</option>
-        </optgroup>
-        <optgroup label="Fixed/absolute">
-          <option value="mg">mg</option><option value="mcg">mcg (μg)</option><option value="g">g</option>
-          <option value="IU">IU</option><option value="IU/day">IU/day</option>
-          <option value="units">units</option>
-          <option value="mEq">mEq</option><option value="mmol">mmol</option>
-          <option value="mL">mL</option>
-          <option value="billion CFU">billion CFU</option><option value="lipase units">lipase units</option>
-        </optgroup>
-        <optgroup label="Discrete units">
-          <option value="drops">drops</option><option value="drop">drop</option>
-          <option value="puffs">puffs</option><option value="sprays">sprays</option>
-          <option value="tablet">tablet</option><option value="capsule">capsule</option>
-          <option value="suppository">suppository</option><option value="application">application</option>
-          <option value="thin layer">thin layer</option><option value="vial">vial</option>
-        </optgroup>
-      </select>
-    </div>
+  <div class="fg g3" style="margin-bottom:8px">
     <div class="ff"><label>Per day or per dose?</label>
       <select id="${id}-pd"><option value="day">Per day (then ÷ freq)</option><option value="dose">Per dose (direct)</option></select>
     </div>
-  </div>
-  <div class="fg g4" style="margin-bottom:8px">
     <div class="ff"><label>Frequency (×/day)</label><input type="number" id="${id}-freq" placeholder="e.g. 3"></div>
     <div class="ff"><label>OR interval (hrs)</label><input type="number" id="${id}-intv" placeholder="e.g. 8"></div>
-    <div class="ff"><label>Duration (days)</label><input type="number" id="${id}-dur" placeholder="e.g. 7"></div>
-    <div class="ff"><label>Duration note</label><input id="${id}-durnote" placeholder="e.g. Complete full course"></div>
   </div>
   <div class="fg g4" style="margin-bottom:8px">
-    <div class="ff"><label>Max single qty</label><input type="number" id="${id}-ms" placeholder="e.g. 500" step="any"></div>
-    <div class="ff"><label>Max single unit</label>
-      <select id="${id}-msu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option><option value="IU">IU</option><option value="mEq">mEq</option><option value="mmol">mmol</option><option value="mL">mL</option><option value="mL/kg">mL/kg</option><option value="mg/kg">mg/kg</option><option value="mg/kg/day">mg/kg/day</option><option value="drops">drops</option><option value="puffs">puffs</option><option value="sprays">sprays</option><option value="tablets">tablets</option><option value="capsule">capsule</option><option value="vial">vial</option></select>
-    </div>
-    <div class="ff"><label>Max daily qty</label><input type="number" id="${id}-md" placeholder="e.g. 3000" step="any"></div>
-    <div class="ff"><label>Max daily unit</label>
-      <select id="${id}-mdu"><option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option><option value="units">units</option><option value="IU">IU</option><option value="mEq">mEq</option><option value="mmol">mmol</option><option value="mL">mL</option><option value="mL/kg">mL/kg</option><option value="mg/kg">mg/kg</option><option value="mg/kg/day">mg/kg/day</option><option value="drops">drops</option><option value="puffs">puffs</option><option value="sprays">sprays</option><option value="tablets">tablets</option><option value="capsule">capsule</option><option value="vial">vial</option></select>
-    </div>
-  </div>
-  <div class="fg g3" style="margin-bottom:8px">
+    <div class="ff"><label>Duration (days)</label><input type="number" id="${id}-dur" placeholder="e.g. 7"></div>
+    <div class="ff"><label>Duration note</label><input id="${id}-durnote" placeholder="e.g. Complete full course"></div>
     <div class="ff"><label>Loading dose qty</label><input type="number" id="${id}-ld" placeholder="e.g. 20" step="any"></div>
     <div class="ff"><label>Loading dose unit</label>
       <select id="${id}-ldu"><option value="mg">mg</option><option value="mg/kg">mg/kg</option><option value="mcg">mcg</option><option value="mcg/kg">mcg/kg</option><option value="g">g</option><option value="g/kg/day">g/kg/day</option><option value="IU">IU</option><option value="IU/kg">IU/kg</option><option value="units">units</option><option value="units/kg">units/kg</option><option value="mL">mL</option><option value="mL/kg">mL/kg</option><option value="mg PE/kg">mg PE/kg</option><option value="mEq">mEq</option><option value="mEq/kg">mEq/kg</option></select>
     </div>
+  </div>
+  <div class="fg g2" style="margin-bottom:8px">
     <div class="ff"><label>Rounding rule</label>
       <select id="${id}-rnd">
         <option value="0.5ml">Nearest 0.5 mL (syrup)</option>
@@ -2418,8 +2416,15 @@
         <option value="protocol_specific">Protocol-specific</option>
       </select>
     </div>
+    <div class="ff"><label>Band-specific notes</label><input id="${id}-note" placeholder="e.g. High-dose protocol for severe AOM"></div>
   </div>
-  <div class="ff"><label>Band-specific notes</label><input id="${id}-note" placeholder="e.g. High-dose protocol for severe AOM; standard dose for URTI. Avoid in renal impairment without dose adjustment."></div>`;
+  <div class="id-section">
+    <div class="id-section-hdr" onclick="this.parentElement.querySelector('.id-body').classList.toggle('collapsed')">
+      <span>Ingredient Doses</span>
+      <button type="button" class="add-row-btn" style="font-size:11px;padding:2px 8px" onclick="event.stopPropagation();addIngredientDose('${id}')">+ Ingredient</button>
+    </div>
+    <div class="id-body" id="${id}-idlist"></div>
+  </div>`;
     document.getElementById("bands-list").appendChild(el);
     if (d) {
       // Map JSONB field names → DOM suffixes
@@ -2427,7 +2432,6 @@
         ind: d.indication,
         ab: d.age_band,
         meth: d.method,
-        du: d.dose_unit || d.dose_min_unit,
         pd:
           d.is_per_day === true
             ? "day"
@@ -2438,8 +2442,6 @@
         intv: d.interval_hours,
         dur: d.duration_days || d.duration_days_default,
         durnote: d.duration_note,
-        msu: d.max_single_unit,
-        mdu: d.max_daily_unit,
         ldu: d.loading_dose_unit,
         rnd: d.rounding_rule,
         note: d.notes,
@@ -2450,10 +2452,6 @@
       });
       // Numeric fields
       const numMap = {
-        dmin: d.dose_min_qty,
-        dmax: d.dose_max_qty,
-        ms: d.max_single_qty,
-        md: d.max_daily_qty,
         ld: d.loading_dose_qty,
       };
       Object.entries(numMap).forEach(([suffix, val]) => {
@@ -2461,6 +2459,123 @@
         if (el) el.value = val != null ? val : "";
       });
       updateMethodHelp(id);
+      // Populate ingredient_doses sub-form
+      const idoses = d.ingredient_doses || [];
+      if (idoses.length) {
+        idoses.forEach((ig) => addIngredientDose(id, ig));
+      } else {
+        // Legacy data: create single ingredient entry from old band-level fields
+        if (d.dose_min_qty != null || d.dose_max_qty != null) {
+          addIngredientDose(id, {
+            ingredient: d.dose_reference_ingredient || "",
+            snomed_code: null,
+            dose_min_qty: d.dose_min_qty,
+            dose_max_qty: d.dose_max_qty,
+            dose_unit: d.dose_unit || d.dose_min_unit || "",
+            max_single_mg: d.max_single_qty,
+            max_daily_mg: d.max_daily_qty,
+            is_limiting: true,
+            source: null,
+          });
+        }
+      }
+    }
+  }
+
+  /* Helper: dose unit <select> options HTML (shared across ingredient dose rows) */
+  const DOSE_UNIT_OPTIONS = `<optgroup label="Weight-based">
+      <option value="mg/kg">mg/kg</option><option value="mg/kg/dose">mg/kg/dose</option><option value="mg/kg/day">mg/kg/day</option>
+      <option value="mcg/kg">mcg/kg</option><option value="mcg/kg/dose">mcg/kg/dose</option><option value="mcg/kg/day">mcg/kg/day</option>
+      <option value="g/kg">g/kg</option><option value="mL/kg">mL/kg</option><option value="mL/kg/day">mL/kg/day</option>
+      <option value="mEq/kg">mEq/kg</option><option value="mmol/kg">mmol/kg</option>
+      <option value="IU/kg">IU/kg</option><option value="U/kg">U/kg</option><option value="units/kg">units/kg</option>
+      <option value="mg base/kg">mg base/kg</option><option value="mg TMP/kg">mg TMP/kg</option><option value="mg PE">mg PE</option>
+    </optgroup>
+    <optgroup label="Infusion rates">
+      <option value="mcg/kg/min">mcg/kg/min</option><option value="mcg/kg/hr">mcg/kg/hr</option>
+      <option value="mg/kg/hr">mg/kg/hr</option><option value="mg/kg/h">mg/kg/h</option>
+      <option value="ng/kg/min">ng/kg/min</option>
+      <option value="U/kg/hr">U/kg/hr</option><option value="IU/kg/hr">IU/kg/hr</option>
+      <option value="units/kg/hr">units/kg/hr</option><option value="units/kg/min">units/kg/min</option>
+    </optgroup>
+    <optgroup label="BSA-based">
+      <option value="mg/m2">mg/m2</option><option value="mL/m2/day">mL/m2/day</option>
+    </optgroup>
+    <optgroup label="Fixed/absolute">
+      <option value="mg">mg</option><option value="mcg">mcg</option><option value="g">g</option>
+      <option value="IU">IU</option><option value="IU/day">IU/day</option>
+      <option value="units">units</option>
+      <option value="mEq">mEq</option><option value="mmol">mmol</option>
+      <option value="mL">mL</option>
+      <option value="billion CFU">billion CFU</option><option value="lipase units">lipase units</option>
+    </optgroup>
+    <optgroup label="Discrete units">
+      <option value="drops">drops</option><option value="drop">drop</option>
+      <option value="puffs">puffs</option><option value="sprays">sprays</option>
+      <option value="tablet">tablet</option><option value="capsule">capsule</option>
+      <option value="suppository">suppository</option><option value="application">application</option>
+      <option value="thin layer">thin layer</option><option value="vial">vial</option>
+    </optgroup>`;
+
+  let idCnt = 0;
+  function addIngredientDose(bandId, ig) {
+    const rid = bandId + "-id" + idCnt++;
+    const list = document.getElementById(bandId + "-idlist");
+    if (!list) return;
+    const row = document.createElement("div");
+    row.className = "id-row";
+    row.id = rid;
+    // Auto-populate ingredient names from formulations if available
+    const formIngredients = _editFormulations
+      .flatMap((f) => (f.ingredients || []).map((i) => i.name))
+      .filter(Boolean);
+    const uniqueIngr = [...new Set(formIngredients)];
+    const datalistId = rid + "-dl";
+    const dlHtml = uniqueIngr.length
+      ? '<datalist id="' +
+        datalistId +
+        '">' +
+        uniqueIngr.map((n) => '<option value="' + esc(n) + '">').join("") +
+        "</datalist>"
+      : "";
+    row.innerHTML = `<button class="rm-btn" onclick="document.getElementById('${rid}').remove();">&times;</button>
+      ${dlHtml}
+      <div class="fg g3" style="margin-bottom:4px">
+        <div class="ff"><label>Ingredient *</label><input id="${rid}-name" placeholder="e.g. Amoxicillin"${uniqueIngr.length ? ' list="' + datalistId + '"' : ""}></div>
+        <div class="ff"><label>SNOMED code</label><input id="${rid}-snomed" placeholder="e.g. 372687004" style="font-size:10px"></div>
+        <div class="ff" style="align-items:center;padding-top:14px"><label style="display:inline;margin:0"><input type="checkbox" id="${rid}-lim" style="width:auto;margin-right:4px">Limiting ingredient</label></div>
+      </div>
+      <div class="fg g4" style="margin-bottom:4px">
+        <div class="ff"><label>Dose min *</label><input type="number" id="${rid}-dmin" step="any" placeholder="e.g. 25"></div>
+        <div class="ff"><label>Dose max</label><input type="number" id="${rid}-dmax" step="any" placeholder="e.g. 45"></div>
+        <div class="ff"><label>Dose unit *</label><select id="${rid}-du">${DOSE_UNIT_OPTIONS}</select></div>
+        <div class="ff"><label>Source</label><input id="${rid}-src" placeholder="e.g. Harriet Lane 23e" style="font-size:10px"></div>
+      </div>
+      <div class="fg g2">
+        <div class="ff"><label>Max single (mg)</label><input type="number" id="${rid}-msm" step="any" placeholder="e.g. 500"></div>
+        <div class="ff"><label>Max daily (mg)</label><input type="number" id="${rid}-mdm" step="any" placeholder="e.g. 4000"></div>
+      </div>`;
+    list.appendChild(row);
+    // Populate values if data provided
+    if (ig) {
+      const nameEl = document.getElementById(rid + "-name");
+      if (nameEl) nameEl.value = ig.ingredient || "";
+      const snomedEl = document.getElementById(rid + "-snomed");
+      if (snomedEl) snomedEl.value = ig.snomed_code || "";
+      const limEl = document.getElementById(rid + "-lim");
+      if (limEl) limEl.checked = !!ig.is_limiting;
+      const dminEl = document.getElementById(rid + "-dmin");
+      if (dminEl) dminEl.value = ig.dose_min_qty != null ? ig.dose_min_qty : "";
+      const dmaxEl = document.getElementById(rid + "-dmax");
+      if (dmaxEl) dmaxEl.value = ig.dose_max_qty != null ? ig.dose_max_qty : "";
+      const duEl = document.getElementById(rid + "-du");
+      if (duEl && ig.dose_unit) sv(rid + "-du", ig.dose_unit);
+      const msmEl = document.getElementById(rid + "-msm");
+      if (msmEl) msmEl.value = ig.max_single_mg != null ? ig.max_single_mg : "";
+      const mdmEl = document.getElementById(rid + "-mdm");
+      if (mdmEl) mdmEl.value = ig.max_daily_mg != null ? ig.max_daily_mg : "";
+      const srcEl = document.getElementById(rid + "-src");
+      if (srcEl) srcEl.value = ig.source || "";
     }
   }
   function updateMethodHelp(id) {
@@ -2472,44 +2587,52 @@
     return Array.from(document.getElementById("bands-list").children)
       .map((r) => {
         const id = r.id;
-        const du = v(id + "-du");
         const method = v(id + "-meth");
-        const basisMap = {
-          weight: "per_kg",
-          bsa: "per_m2",
-          fixed: "per_dose",
-          gfr: "per_kg",
-          infusion: "per_kg",
-          age: "per_dose",
-        };
+        // Collect ingredient_doses from sub-form rows
+        const idList = document.getElementById(id + "-idlist");
+        const ingredientDoses = idList
+          ? Array.from(idList.children)
+              .map((row) => {
+                const rid = row.id;
+                return {
+                  ingredient: v(rid + "-name"),
+                  snomed_code: v(rid + "-snomed") || null,
+                  dose_min_qty: n(rid + "-dmin"),
+                  dose_max_qty: n(rid + "-dmax"),
+                  dose_unit: v(rid + "-du"),
+                  max_single_mg: n(rid + "-msm"),
+                  max_daily_mg: n(rid + "-mdm"),
+                  is_limiting:
+                    document.getElementById(rid + "-lim")?.checked || false,
+                  source: v(rid + "-src") || null,
+                };
+              })
+              .filter(
+                (ig) =>
+                  ig.ingredient ||
+                  ig.dose_min_qty != null ||
+                  ig.dose_max_qty != null,
+              )
+          : [];
         return {
           indication: v(id + "-ind"),
           age_band: v(id + "-ab"),
           method: method,
-          dose_min_qty: n(id + "-dmin"),
-          dose_min_unit: du,
-          dose_basis: basisMap[method] || "per_kg",
-          dose_max_qty: n(id + "-dmax"),
-          dose_max_unit: du,
-          dose_unit: du,
           is_per_day: v(id + "-pd") === "day",
           frequency_per_day: n(id + "-freq"),
           interval_hours: n(id + "-intv"),
           duration_days_default: n(id + "-dur"),
           duration_note: v(id + "-durnote"),
-          max_single_qty: n(id + "-ms"),
-          max_single_unit: v(id + "-msu"),
-          max_daily_qty: n(id + "-md"),
-          max_daily_unit: v(id + "-mdu"),
           loading_dose_qty: n(id + "-ld"),
           loading_dose_unit: v(id + "-ldu"),
           rounding_rule: v(id + "-rnd"),
           notes: v(id + "-note"),
+          ingredient_doses: ingredientDoses,
           // Merge preserved extra fields that have no UI inputs
           ...(r.dataset.extra ? JSON.parse(r.dataset.extra) : {}),
         };
       })
-      .filter((b) => b.dose_min_qty || b.dose_max_qty);
+      .filter((b) => b.ingredient_doses.length > 0 || b.indication);
   }
 
   /* ===== Interactions ===== */
@@ -2686,7 +2809,7 @@
       "renal-bands-list",
       "admin-list",
     ].forEach((id) => (document.getElementById(id).innerHTML = ""));
-    formCnt = bandCnt = intCnt = renalCnt = adminCnt = 0;
+    formCnt = bandCnt = intCnt = renalCnt = adminCnt = idCnt = 0;
     _editFormulations = [];
   }
 
