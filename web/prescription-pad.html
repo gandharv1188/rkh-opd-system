@@ -4129,7 +4129,7 @@
         <div class="collapse-hdr" onclick="const b=this.nextElementSibling;b.style.display=b.style.display==='none'?'':'none';this.querySelector('.arrow').textContent=b.style.display==='none'?'\u25B6':'\u25BC'">
           <span class="arrow">\u25BC</span> Current Visit${visit?.chief_complaints ? ' \u2014 <span style="font-weight:400;font-style:italic;color:var(--ink2)">' + esc(visit.chief_complaints.slice(0, 80)) + "</span>" : ""}
         </div>
-        <div class="collapse-body"><div class="visit-info">${vi}</div></div>
+        <div class="visit-info">${vi}</div>
       </div>`;
     } else {
       panel.innerHTML = `<div class="collapse-panel"><div class="collapse-hdr" style="cursor:default"><span class="arrow">\u25BC</span> Current Visit \u2014 <span style="font-weight:400;color:var(--ink3)">No visit data captured yet</span></div></div>`;
