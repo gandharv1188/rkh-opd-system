@@ -911,7 +911,8 @@
     text-decoration: line-through;
     pointer-events: none;
   }
-  .item-struck .item-remove {
+  .item-struck .item-remove,
+  .item-struck .adj-btn {
     pointer-events: auto;
     opacity: 1;
     text-decoration: none;
@@ -3508,7 +3509,14 @@
       h += `<div class="rv-sec"><div class="rv-hdr">Referral</div><div>${esc(r.referral)}</div></div>`;
     // Counselling
     if (r.counselling?.length)
-      h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div><ul style="margin:4px 0;padding-left:18px;font-size:12px;line-height:1.8;list-style:none">${r.counselling.map((c) => `<li style="margin-bottom:4px">✓ ${esc(c)}</li>`).join("")}</ul></div>`;
+      h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div><ul style="margin:4px 0;padding-left:18px;font-size:12px;line-height:1.8;list-style:none">${r.counselling
+        .map((c) => {
+          const parts = String(c).split(/ — | – /);
+          if (parts.length > 1)
+            return `<li style="margin-bottom:4px">✓ ${esc(parts[0])}<br><span style="font-family:'Noto Sans Devanagari',sans-serif;color:var(--ink3);font-size:11px">${esc(parts.slice(1).join(" "))}</span></li>`;
+          return `<li style="margin-bottom:4px">✓ ${esc(c)}</li>`;
+        })
+        .join("")}</ul></div>`;
     // Follow-up
     h += `<div class="rv-sec"><div class="rv-hdr">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
     // Safety
@@ -5635,7 +5643,7 @@
 
     if (has(r.non_pharmacological)) {
       h += `<div class="rv-sec"><div class="rv-hdr blue">Non-Pharmacological</div>
-    ${r.non_pharmacological.map((np, i) => `<div class="info-block" contenteditable="true" spellcheck="false" style="margin-bottom:4px"><strong>${esc(np.instruction)}</strong>${np.instruction_hi ? "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;color:var(--ink2)\">" + esc(np.instruction_hi) + "</span>" : ""}${np.category ? ' <span style="font-size:10px;color:var(--ink3);background:var(--blue-lt);padding:1px 6px;border-radius:3px;margin-left:6px">' + esc(np.category) + "</span>" : ""}</div>`).join("")}
+    ${r.non_pharmacological.map((np, i) => `<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px" id="np${i}"><div class="info-block" contenteditable="true" spellcheck="false" style="flex:1"><strong>${esc(np.instruction)}</strong>${np.instruction_hi ? "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;color:var(--ink2)\">" + esc(np.instruction_hi) + "</span>" : ""}${np.category ? ' <span style="font-size:10px;color:var(--ink3);background:var(--blue-lt);padding:1px 6px;border-radius:3px;margin-left:6px">' + esc(np.category) + "</span>" : ""}</div><button class="item-remove" onclick="removeNP(${i})" title="Remove this advice" style="flex-shrink:0">\u2212</button></div>`).join("")}
     </div>`;
     }
 
@@ -5697,7 +5705,14 @@
     }
     if (has(r.counselling)) {
       h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div>
-    <ul style="margin:4px 0;padding-left:18px;font-size:12px;line-height:1.8;list-style:none;color:var(--ink2)">${r.counselling.map((c) => `<li style="margin-bottom:4px">✓ ${esc(c)}</li>`).join("")}</ul></div>`;
+    <ul style="margin:4px 0;padding-left:18px;font-size:12px;line-height:1.8;list-style:none;color:var(--ink2)">${r.counselling
+      .map((c) => {
+        const parts = String(c).split(/ — | – /);
+        if (parts.length > 1)
+          return `<li style="margin-bottom:4px">✓ ${esc(parts[0])}<br><span style="font-family:'Noto Sans Devanagari',sans-serif;color:var(--ink3);font-size:11px">${esc(parts.slice(1).join(" "))}</span></li>`;
+        return `<li style="margin-bottom:4px">✓ ${esc(c)}</li>`;
+      })
+      .join("")}</ul></div>`;
     }
     // Use AI-generated warning signs if available, fallback to hardcoded
     const patientAgeMonths = rxData?.patient?.age
@@ -6521,25 +6536,29 @@
               fhir_bundle: fhirData.bundle,
             },
           );
-          // Create care context for ABDM linking
-          await q("abdm_care_contexts", "", "POST", {
-            patient_id: patientId,
-            visit_id: visitId,
-            prescription_id: rxId,
-            care_context_ref: "RKH-CC-" + rxId,
-            display_text:
-              "OPD Visit - " +
-              new Date().toLocaleDateString("en-IN", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              }),
-            record_types: ["OPConsultation", "Prescription"],
-            linked: !!selectedPatient?.abha_verified,
-            linked_at: selectedPatient?.abha_verified
-              ? new Date().toISOString()
-              : null,
-          });
+          // Create care context for ABDM linking (may fail if RLS restricts — non-critical)
+          try {
+            await q("abdm_care_contexts", "", "POST", {
+              patient_id: patientId,
+              visit_id: visitId,
+              prescription_id: rxId,
+              care_context_ref: "RKH-CC-" + rxId,
+              display_text:
+                "OPD Visit - " +
+                new Date().toLocaleDateString("en-IN", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                }),
+              record_types: ["OPConsultation", "Prescription"],
+              linked: !!selectedPatient?.abha_verified,
+              linked_at: selectedPatient?.abha_verified
+                ? new Date().toISOString()
+                : null,
+            });
+          } catch (e) {
+            console.warn("ABDM care context skipped:", e.message);
+          }
           console.log(
             "FHIR bundle generated and care context created for",
             rxId,
@@ -6589,22 +6608,35 @@
       );
 
       const filepath = `${patientId}/${rxId}.txt`;
-      const uploadRes = await fetch(
-        `${SB}/storage/v1/object/prescriptions/${filepath}`,
-        {
-          method: "POST",
-          headers: {
-            apikey: KEY,
-            Authorization: "Bearer " + KEY,
-            "Content-Type": "text/plain",
-            "x-upsert": "true",
-          },
+      const storageUrl = `${SB}/storage/v1/object/prescriptions/${filepath}`;
+      const storageHeaders = {
+        apikey: KEY,
+        Authorization: "Bearer " + KEY,
+        "Content-Type": "text/plain",
+        "x-upsert": "true",
+      };
+      // Try POST first, then PUT if file already exists (400)
+      let uploadRes = await fetch(storageUrl, {
+        method: "POST",
+        headers: storageHeaders,
+        body: blob,
+      });
+      if (!uploadRes.ok && uploadRes.status === 400) {
+        // File likely exists — try PUT (update)
+        uploadRes = await fetch(storageUrl, {
+          method: "PUT",
+          headers: storageHeaders,
           body: blob,
-        },
-      );
+        });
+      }
       if (uploadRes.ok) {
         return `${SB}/storage/v1/object/public/prescriptions/${filepath}`;
       }
+      console.warn(
+        "Rx text upload failed:",
+        uploadRes.status,
+        await uploadRes.text().catch(() => ""),
+      );
       return null;
     } catch (e) {
       console.warn("Rx text upload skipped:", e.message);
@@ -6795,7 +6827,20 @@
     }
     // Counselling
     if (r.counselling?.length) {
-      h += `<div class="sec"><div class="sec-title">Counselling</div><ul style="margin:2px 0;padding-left:16px;list-style:none;font-size:11px;line-height:1.7">${r.counselling.map((c) => `<li>✓ ${esc(c)}</li>`).join("")}</ul></div>`;
+      h += `<div class="sec"><div class="sec-title">Counselling</div><ul style="margin:2px 0;padding-left:16px;list-style:none;font-size:11px;line-height:1.7">${r.counselling
+        .map((c) => {
+          const parts = String(c).split(/ — | – /);
+          if (parts.length > 1)
+            return (
+              '<li style="margin-bottom:3px">✓ ' +
+              esc(parts[0]) +
+              "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;color:#555;font-size:10px\">" +
+              esc(parts.slice(1).join(" ")) +
+              "</span></li>"
+            );
+          return "<li>✓ " + esc(c) + "</li>";
+        })
+        .join("")}</ul></div>`;
     }
     // Emergency signs
     const printAgeMonths = r.patient?.age
@@ -6906,9 +6951,29 @@
       .dose-meta svg { width:12px; height:12px; stroke:#666; fill:none; stroke-width:1.5; }
     </style></head><body>${h}</body></html>`);
     w.document.close();
-    w.document.fonts?.ready
-      ?.then(() => w.print())
-      .catch(() => setTimeout(() => w.print(), 800));
+    // Wait for DOM parse + fonts + images (especially QR from external API) before printing
+    w.onload = () => {
+      const imgs = w.document.querySelectorAll("img");
+      const imgPromises = Array.from(imgs).map((img) => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+          setTimeout(resolve, 5000); // 5s max wait per image
+        });
+      });
+      const fontPromise = w.document.fonts?.ready || Promise.resolve();
+      Promise.all([fontPromise, ...imgPromises])
+        .then(() => setTimeout(() => w.print(), 300))
+        .catch(() => setTimeout(() => w.print(), 1500));
+    };
+  }
+
+  // Remove non-pharmacological item
+  function removeNP(idx) {
+    if (!rxData?.non_pharmacological) return;
+    rxData.non_pharmacological.splice(idx, 1);
+    renderReview();
   }
 
   // ===== REVIEW EDIT: Toggle strike-through on items =====

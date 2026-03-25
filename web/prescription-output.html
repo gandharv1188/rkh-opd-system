@@ -833,7 +833,20 @@
     }
     // Counselling
     if (r.counselling?.length) {
-      h += `<div class="sec"><div class="sec-title">Counselling</div><div>${r.counselling.map((c) => `\u2713 ${esc(c)}`).join(" &nbsp; ")}</div></div>`;
+      h += `<div class="sec"><div class="sec-title">Counselling</div><ul style="margin:2px 0;padding-left:16px;list-style:none;font-size:11px;line-height:1.7">${r.counselling
+        .map((c) => {
+          const parts = String(c).split(/ — | – /);
+          if (parts.length > 1)
+            return (
+              '<li style="margin-bottom:3px">\u2713 ' +
+              esc(parts[0]) +
+              "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;color:#555;font-size:10px\">" +
+              esc(parts.slice(1).join(" ")) +
+              "</span></li>"
+            );
+          return "<li>\u2713 " + esc(c) + "</li>";
+        })
+        .join("")}</ul></div>`;
     }
     // Emergency signs — use AI-generated if available, fallback to hardcoded
     const ageMonths = r.patient?.age ? parseAgeMonths(r.patient.age) : null;
