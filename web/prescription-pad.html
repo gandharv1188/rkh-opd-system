@@ -2591,7 +2591,7 @@
     }
   }
 
-  // Master recalculate: reads all panel state, calls calcDose, shows result
+  // Master recalculate: reads all panel state, calls DoseEngine, shows result
   function dpRecalc(pid, idx) {
     const m = rxData.medicines[idx];
     const ref = getDoseRef(m.row1_en, rxData.patient?.age);
@@ -2687,17 +2687,18 @@
       const allBands = ref
         ? ref.allBands.filter((b) => {
             const l = DoseEngine.getLimiting(b);
-            return l ? l.dose_min_qty != null : b.dose_min_qty != null;
+            return l ? l.dose_min_qty != null : false;
           })
         : [];
       const matchedBand = allBands.find((b) => {
         const l = DoseEngine.getLimiting(b);
-        const bMin = l ? l.dose_min_qty : b.dose_min_qty;
-        const bMax = l ? (l.dose_max_qty || l.dose_min_qty) : (b.dose_max_qty || b.dose_min_qty);
+        if (!l) return false;
+        const bMin = l.dose_min_qty;
+        const bMax = l.dose_max_qty || l.dose_min_qty;
         return sliderVal >= bMin && sliderVal <= bMax;
       });
       const inAny = !!matchedBand;
-      const doseUnit = band?.dose_unit || "mg/kg/day";
+      const doseUnit = DoseEngine.getLimiting(band)?.dose_unit || "mg/kg/day";
 
       let sliderHtml = "<strong>" + esc(r.vol) + "</strong> per dose";
       // Show per-ingredient breakdown for combo drugs
@@ -2873,9 +2874,14 @@
         const id = ids[0];
         let line = "";
         if (id.dose_min_qty != null) {
-          line += id.dose_min_qty === (id.dose_max_qty || id.dose_min_qty)
-            ? id.dose_min_qty + " " + (id.dose_unit || "mg/kg")
-            : id.dose_min_qty + "-" + id.dose_max_qty + " " + (id.dose_unit || "mg/kg");
+          line +=
+            id.dose_min_qty === (id.dose_max_qty || id.dose_min_qty)
+              ? id.dose_min_qty + " " + (id.dose_unit || "mg/kg")
+              : id.dose_min_qty +
+                "-" +
+                id.dose_max_qty +
+                " " +
+                (id.dose_unit || "mg/kg");
         }
         if (b.is_per_day) line += "/day";
         line += freqStr;
@@ -2883,31 +2889,27 @@
         return line;
       }
       // Combo drug — show per-ingredient
-      const parts = ids.filter(id => id.dose_min_qty != null).map(id => {
-        const name = (id.ingredient || "").split(" ")[0];
-        const range = id.dose_min_qty === (id.dose_max_qty || id.dose_min_qty)
-          ? id.dose_min_qty
-          : id.dose_min_qty + "-" + id.dose_max_qty;
-        const maxStr = id.max_single_mg ? " (max " + id.max_single_mg + "mg)" : "";
-        return name + ": " + range + " " + (id.dose_unit || "mg/kg") + maxStr;
-      });
+      const parts = ids
+        .filter((id) => id.dose_min_qty != null)
+        .map((id) => {
+          const name = (id.ingredient || "").split(" ")[0];
+          const range =
+            id.dose_min_qty === (id.dose_max_qty || id.dose_min_qty)
+              ? id.dose_min_qty
+              : id.dose_min_qty + "-" + id.dose_max_qty;
+          const maxStr = id.max_single_mg
+            ? " (max " + id.max_single_mg + "mg)"
+            : "";
+          return name + ": " + range + " " + (id.dose_unit || "mg/kg") + maxStr;
+        });
       let line = parts.join(" | ");
       if (b.is_per_day) line += " /day";
       line += freqStr;
       return line;
     }
 
-    // Legacy fallback (no ingredient_doses)
-    let line = "";
-    if (b.dose_min_qty != null) {
-      line += b.dose_min_qty === (b.dose_max_qty || b.dose_min_qty)
-        ? b.dose_min_qty + " " + (b.dose_min_unit || "mg/kg")
-        : b.dose_min_qty + "-" + b.dose_max_qty + " " + (b.dose_min_unit || "mg/kg");
-    }
-    if (b.is_per_day) line += "/day";
-    line += freqStr;
-    if (b.max_single_qty) line += ", max " + b.max_single_qty + (b.max_single_unit || "mg") + "/dose";
-    return line;
+    // No ingredient_doses found
+    return "No dosing data";
   }
 
   function getEmergencySigns(ageMonths) {
@@ -4842,56 +4844,6 @@
     });
   }
 
-  /* ===== SEND TO CHAT (Option A) ===== */
-  function buildFormularyContext(fullNote) {
-    let formularyContext = "";
-    const drugNames = Object.keys(formularyCache);
-    const mentionedDrugs = drugNames.filter((d) =>
-      fullNote.toUpperCase().includes(d),
-    );
-    if (mentionedDrugs.length) {
-      formularyContext =
-        "\n\nFORMULARY DATA (use these exact concentrations and dose ranges):\n";
-      mentionedDrugs.forEach((d) => {
-        const f = formularyCache[d];
-        const forms = (f.formulations || [])
-          .map((fm) => `${fm.form} ${fmtConc(fm)}`)
-          .join(", ");
-        const bands = (f.dosing_bands || [])
-          .map(
-            (b) =>
-              `${b.dose_min_qty || "?"}${b.dose_max_qty ? "–" + b.dose_max_qty : ""}${b.dose_min_unit || b.dose_max_unit || "mg"}/${b.dose_basis || (b.is_per_day ? "day" : "dose")} ÷${b.frequency_per_day || "?"}× (${b.age_band || "all"})`,
-          )
-          .join("; ");
-        formularyContext += `${d}: ${forms}. Dose: ${bands}. ${f.notes || ""}\n`;
-      });
-    }
-    return formularyContext;
-  }
-
-  function buildStdRxContext(fullNote) {
-    let stdRxContext = "";
-    const stdEntries = Object.values(stdRxCache);
-    const matchedStd = stdEntries.filter(
-      (s) =>
-        fullNote
-          .toLowerCase()
-          .includes(s.diagnosis_name.toLowerCase().split(" ")[0]) ||
-        fullNote.toUpperCase().includes(s.icd10),
-    );
-    if (matchedStd.length) {
-      stdRxContext =
-        "\n\nSTANDARD PRESCRIPTION PROTOCOLS (pre-approved for this hospital):\n";
-      matchedStd.slice(0, 3).forEach((s) => {
-        const drugs = (s.first_line_drugs || [])
-          .map((d) => `${d.drug}${d.notes ? " (" + d.notes + ")" : ""}`)
-          .join(", ");
-        stdRxContext += `${s.diagnosis_name} (${s.icd10}): First-line: ${drugs}. ${s.notes || ""}\n`;
-      });
-    }
-    return stdRxContext;
-  }
-
   /* ===== GENERATE PRESCRIPTION (via Supabase Edge Function → Claude API) ===== */
   async function generatePrescription() {
     const note = document.getElementById("pad-ta").value.trim();
@@ -5072,107 +5024,7 @@
     return true;
   }
 
-  function calcDose(wt, mgkg, freq, cmg, cml, maxS, form) {
-    const totalDay = wt * mgkg;
-    const perDose = totalDay / freq;
-    const capped = maxS && perDose > maxS;
-    const fd = capped ? maxS : perDose;
-    let vol, enD, hiD;
-    if (
-      form === "drops" ||
-      form === "eye drops" ||
-      form === "nasal drops" ||
-      form === "ear drops"
-    ) {
-      // Drops: 1 ml = 20 drops (standard medical dropper). All formulary concentrations MUST be per-ml.
-      const mlPerDose = (fd / cmg) * cml;
-      const drops = Math.round(mlPerDose * 20); // 20 drops per ml (standard)
-      vol = drops + " drops";
-      enD = drops + " drops";
-      const DN = {
-        1: "एक",
-        2: "दो",
-        3: "तीन",
-        4: "चार",
-        5: "पाँच",
-        6: "छह",
-        7: "सात",
-        8: "आठ",
-        9: "नौ",
-        10: "दस",
-        12: "बारह",
-        15: "पंद्रह",
-        20: "बीस",
-      };
-      hiD = (DN[drops] || drops) + " बूंदें";
-    } else if (form === "syrup") {
-      const v = (fd / cmg) * cml;
-      const r = Math.round(v * 2) / 2; // round to nearest 0.5 ml
-      const tsp = r / 5;
-      vol = r + "ml";
-      enD = r + "ml";
-      const HN = {
-        0.5: "आधा",
-        1: "एक",
-        1.5: "डेढ़",
-        2: "दो",
-        2.5: "ढाई",
-        3: "तीन",
-        3.5: "साढ़े तीन",
-        4: "चार",
-        4.5: "साढ़े चार",
-        5: "पाँच",
-        5.5: "साढ़े पाँच",
-        6: "छह",
-        7: "सात",
-        8: "आठ",
-        10: "दस",
-      };
-      hiD =
-        (HN[r] || r) +
-        " ml" +
-        (Number.isInteger(tsp) ? " (" + tsp + " चम्मच)" : "");
-    } else if (form === "tablet" || form === "capsule") {
-      const tabs = fd / cmg;
-      const r = Math.round(tabs * 4) / 4;
-      const TN = {
-        0.25: "चौथाई",
-        0.5: "आधी",
-        0.75: "तीन-चौथाई",
-        1: "एक",
-        1.5: "डेढ़",
-        2: "दो",
-      };
-      vol = r + " tablet";
-      enD = vol;
-      hiD = (TN[r] || r) + " गोली";
-      if (form === "capsule") {
-        vol = r + " capsule";
-        hiD = (TN[r] || r) + " कैप्सूल";
-      }
-    } else if (form === "inhaler" || form === "puffs") {
-      const puffs = Math.round(fd / cmg);
-      vol = puffs + " puff" + (puffs > 1 ? "s" : "");
-      enD = vol;
-      hiD = puffs + " पफ";
-    } else if (form === "suppository") {
-      vol = fd.toFixed(0) + " mg";
-      enD = vol + " suppository";
-      hiD = fd.toFixed(0) + " mg सपोसिटरी";
-    } else if (form === "injection") {
-      const v = (fd / cmg) * cml;
-      const r = Math.round(v * 10) / 10;
-      vol = r + " mL";
-      enD = r + " mL";
-      hiD = r + " mL";
-    } else {
-      vol = ((fd / cmg) * cml).toFixed(1) + "ml";
-      enD = vol;
-      hiD = vol;
-    }
-    const calc = `${mgkg}mg/kg × ${wt}kg = ${totalDay.toFixed(0)}mg/day ÷ ${freq} = ${perDose.toFixed(0)}mg/dose${capped ? " → max " + maxS + "mg" : ""} → ${vol}`;
-    return { vol, enD, hiD, calc, capped, fd: fd.toFixed(0) };
-  }
+  // calcDose removed — dosing now handled by DoseEngine
   const FW = { 1: "once", 2: "twice", 3: "three times", 4: "four times" };
   const FH = { 1: "एक बार", 2: "दो बार", 3: "तीन बार", 4: "चार बार" };
 
@@ -5538,7 +5390,7 @@
             const allBands = ref
               ? ref.allBands.filter((b) => {
                   const lim = DoseEngine.getLimiting(b);
-                  return lim ? lim.dose_min_qty != null : b.dose_min_qty != null;
+                  return lim ? lim.dose_min_qty != null : false;
                 })
               : [];
             const bandColors = [
@@ -5549,13 +5401,13 @@
               "#ec4899",
               "#06b6d4",
             ];
-            const doseUnit = band?.dose_unit || "mg/kg/day";
-            let curDose = m.dose_mg_per_kg || band?.dose_min_qty || 0;
+            const doseUnit = DoseEngine.getLimiting(band)?.dose_unit || "mg/kg/day";
+            let curDose = m.dose_mg_per_kg || DoseEngine.getLimiting(band)?.dose_min_qty || 0;
             if (bandMethod === "fixed" || bandMethod === "age") {
               curDose =
                 parseFloat(m.dose_mg_per_kg) ||
                 parseFloat((m.row2_en || "").match(/(\d+\.?\d*)/)?.[1]) ||
-                band?.dose_min_qty ||
+                DoseEngine.getLimiting(band)?.dose_min_qty ||
                 1;
             }
 
@@ -5593,11 +5445,11 @@
               gradient += "#fca5a5 0%, #fca5a5 100%)";
             }
 
-            const inAnyBand = allBands.some(
-              (b) =>
-                curDose >= b.dose_min_qty &&
-                curDose <= (b.dose_max_qty || b.dose_min_qty),
-            );
+            const inAnyBand = allBands.some((b) => {
+              const lb = DoseEngine.getLimiting(b);
+              return lb && curDose >= lb.dose_min_qty &&
+                curDose <= (lb.dose_max_qty || lb.dose_min_qty);
+            });
 
             html += '<div class="dp-slider-wrap">';
             html +=
@@ -5638,7 +5490,7 @@
               html +=
                 '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">';
               allBands
-                .sort((a, b) => a.dose_min_qty - b.dose_min_qty)
+                .sort((a, b) => (DoseEngine.getLimiting(a)?.dose_min_qty || 0) - (DoseEngine.getLimiting(b)?.dose_min_qty || 0))
                 .forEach((b, bi) => {
                   const color = bandColors[bi % bandColors.length];
                   const label = (
@@ -5648,7 +5500,7 @@
                     '<span style="font-size:10px;display:flex;align-items:center;gap:3px;cursor:pointer" onclick="document.getElementById(\'' +
                     pid +
                     "-slider').value=" +
-                    (b.dose_min_qty + (b.dose_max_qty || b.dose_min_qty)) / 2 +
+                    ((DoseEngine.getLimiting(b)?.dose_min_qty || 0) + (DoseEngine.getLimiting(b)?.dose_max_qty || DoseEngine.getLimiting(b)?.dose_min_qty || 0)) / 2 +
                     ";dpSliderChanged('" +
                     pid +
                     "'," +
@@ -5658,12 +5510,13 @@
                     '<span style="width:8px;height:8px;border-radius:50%;background:' +
                     color +
                     ';display:inline-block"></span>';
+                  const lb = DoseEngine.getLimiting(b);
                   html +=
                     esc(label) +
                     " (" +
-                    b.dose_min_qty +
+                    (lb?.dose_min_qty || 0) +
                     "-" +
-                    (b.dose_max_qty || b.dose_min_qty) +
+                    (lb?.dose_max_qty || lb?.dose_min_qty || 0) +
                     ")";
                   html += "</span>";
                 });
@@ -5713,7 +5566,7 @@
               ',1)">+</button>';
             html += "</div>";
 
-            // HIDDEN FIELDS (needed by calcDose/applyDose)
+            // HIDDEN FIELDS (needed by DoseEngine/applyDose)
             html +=
               '<input type="hidden" id="' +
               pid +
@@ -5917,7 +5770,7 @@
     );
     if (formRadio) {
       const sf = formRadio.value.toLowerCase();
-      // Map simplified form to calcDose form names
+      // Map simplified form to DoseEngine form names
       const formMap = {
         syrup: "syrup",
         "dry syrup": "syrup",
@@ -6133,7 +5986,7 @@
     const concUnit = parts[2] || "mg";
     let perQty = parseFloat(parts[3]) || 5;
     const perUnit = parts[4] || "ml";
-    // If concentration is per-drop, convert to per-ml for calcDose (1 ml = 20 drops)
+    // If concentration is per-drop, convert to per-ml for DoseEngine (1 ml = 20 drops)
     if (perUnit === "drop") perQty = perQty / 20;
     // Update the concentration fields in the adjustment panel
     const cmgEl = document.getElementById(pid + "-cmg");
@@ -7226,9 +7079,9 @@
     const band = f.dosing_bands?.[0] || {};
     const lim = DoseEngine.getLimiting(band) || {};
     const wt = rxData?.patient?.weight_kg || 0;
-    const limDoseMin = lim.dose_min_qty || band.dose_min_qty || 0;
-    const limDoseUnit = lim.dose_unit || band.dose_unit || "mg/kg";
-    const limMaxSingle = lim.max_single_mg || band.max_single_qty || 0;
+    const limDoseMin = lim.dose_min_qty || 0;
+    const limDoseUnit = lim.dose_unit || "mg/kg";
+    const limMaxSingle = lim.max_single_mg || 0;
     const newMed = {
       number: (rxData.medicines?.length || 0) + 1,
       row1_en: `${drugName} (${fc.concQty || ""}${fc.concUnit || ""}/${fc.perQty || ""}${fc.perUnit || ""} ${form.form || ""})`,

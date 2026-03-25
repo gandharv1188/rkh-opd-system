@@ -1766,11 +1766,11 @@
           .slice(0, 3)
           .map((b) => {
             const m = b.method || "weight";
-            const qty =
-              b.dose_min_qty && b.dose_max_qty
-                ? `${b.dose_min_qty}–${b.dose_max_qty}`
-                : b.dose_min_qty || b.dose_max_qty || "?";
-            const unit = esc(b.dose_unit || "mg");
+            const lim = (b.ingredient_doses || []).find(id => id.is_limiting) || (b.ingredient_doses || [])[0];
+            const qty = lim
+              ? (lim.dose_min_qty || "?") + (lim.dose_max_qty && lim.dose_max_qty !== lim.dose_min_qty ? "–" + lim.dose_max_qty : "")
+              : (b.dose_min_qty && b.dose_max_qty ? b.dose_min_qty + "–" + b.dose_max_qty : b.dose_min_qty || b.dose_max_qty || "?");
+            const unit = esc(lim ? (lim.dose_unit || "mg") : (b.dose_unit || "mg"));
             const basis =
               {
                 weight: "kg",
@@ -1780,7 +1780,8 @@
                 infusion: "kg/min",
                 age: "age",
               }[m] || esc(m);
-            return `<span class="bk bk-blue" style="font-size:9.5px">${esc(qty)} ${unit}/${basis}${b.age_band && b.age_band !== "all" ? " (" + esc(b.age_band) + ")" : ""}</span>`;
+            const srcNote = lim && lim.source ? '<div style="font-size:8px;color:var(--ink3)">' + esc(lim.source) + '</div>' : '';
+            return `<span class="bk bk-blue" style="font-size:9.5px">${esc(String(qty))} ${unit}/${basis}${b.age_band && b.age_band !== "all" ? " (" + esc(b.age_band) + ")" : ""}</span>${srcNote}`;
           })
           .join(" ");
         const formHtml = forms
@@ -1806,9 +1807,14 @@
             orphan: "Orphan",
             manual: "Manual",
           }[dsrc] || dsrc;
+        // Count unique active ingredients across all formulations
+        const _uIngr = new Set();
+        forms.forEach(f => (f.ingredients || []).forEach(ig => { if (ig.name && ig.is_active !== false) _uIngr.add(ig.name.toLowerCase()); }));
+        const ingrCount = _uIngr.size;
+        const ingrBadge = ingrCount > 1 ? '<span class="bk bk-purple" style="font-size:8.5px;margin-left:4px">' + esc(ingrCount + ' ingredients') + '</span>' : '';
         return `<tr>
       <td>
-        <div class="dn">${esc(d.generic_name)}<span class="ds-badge ${esc(dsrc)}">${esc(dsLabel)}</span></div>
+        <div class="dn">${esc(d.generic_name)}<span class="ds-badge ${esc(dsrc)}">${esc(dsLabel)}</span>${ingrBadge}</div>
         <div class="dm">${esc(d.drug_class || "")} · ${esc(d.category || "")}</div>
         ${
           (d.brand_names || []).length
@@ -2646,6 +2652,45 @@
   let _viewMode = false;
   let _editBodyHtml = ""; // saved on first use
 
+  function _renderViewConstituents(forms) {
+    if (!forms || !forms.length) return '';
+    // Collect unique ingredients across all formulations
+    const ingredientMap = {}; // key = ingredient name lowercase, value = { name, snomed_code, concentrations: [] }
+    forms.forEach(f => {
+      (f.ingredients || []).forEach(ig => {
+        if (!ig.name) return;
+        const key = ig.name.toLowerCase();
+        if (!ingredientMap[key]) {
+          ingredientMap[key] = { name: ig.name, snomed_code: ig.snomed_code || '', concentrations: [] };
+        }
+        // Build concentration string for this formulation
+        if (ig.strength_numerator != null) {
+          const concStr = ig.strength_numerator + (ig.strength_numerator_unit || 'mg')
+            + '/' + (ig.strength_denominator || 1) + (ig.strength_denominator_unit || 'unit')
+            + ' in ' + (f.form || 'Unknown');
+          ingredientMap[key].concentrations.push(concStr);
+        }
+        // Update snomed if missing
+        if (!ingredientMap[key].snomed_code && ig.snomed_code) {
+          ingredientMap[key].snomed_code = ig.snomed_code;
+        }
+      });
+    });
+    const ingredients = Object.values(ingredientMap);
+    if (!ingredients.length) return '';
+    const rows = ingredients.map(ig => {
+      const concHtml = ig.concentrations.length
+        ? ig.concentrations.map(c => '<div style="font-size:10px;color:var(--ink3)">' + esc(c) + '</div>').join('')
+        : '<div style="font-size:10px;color:var(--ink3)">-</div>';
+      return '<tr><td><strong>' + esc(ig.name) + '</strong></td>'
+        + '<td>' + (ig.snomed_code ? '<span class="bk bk-gray" style="font-size:9px">' + esc(ig.snomed_code) + '</span>' : '-') + '</td>'
+        + '<td>' + concHtml + '</td></tr>';
+    }).join('');
+    return '<div class="mono-section"><div class="mono-title">Active constituents</div>'
+      + '<table class="ingr-tbl"><thead><tr><th>Ingredient</th><th>SNOMED</th><th>Concentrations</th></tr></thead><tbody>'
+      + rows + '</tbody></table></div>';
+  }
+
   function _renderViewFormulations(forms) {
     if (!forms || !forms.length)
       return '<div style="color:var(--ink3);font-size:12px;font-style:italic">No formulations defined</div>';
@@ -2715,44 +2760,73 @@
             // Build dose column — per-ingredient if available
             let doseCol;
             if (ids.length > 1) {
-              doseCol = ids.map(id => {
-                const name = (id.ingredient || "").split(" ")[0];
-                const qty = id.dose_min_qty != null
-                  ? (id.dose_min_qty !== (id.dose_max_qty || id.dose_min_qty)
-                      ? esc(id.dose_min_qty) + "–" + esc(id.dose_max_qty)
-                      : esc(id.dose_min_qty))
-                  : "—";
-                const flag = id.is_limiting ? ' <span style="font-size:8px;color:var(--blue);opacity:0.7">★</span>' : "";
-                return `<div style="font-size:10px"><strong>${esc(name)}</strong>: ${qty} ${esc(id.dose_unit || "")}${flag}</div>`;
-              }).join("");
+              doseCol = ids
+                .map((id) => {
+                  const name = (id.ingredient || "").split(" ")[0];
+                  const qty =
+                    id.dose_min_qty != null
+                      ? id.dose_min_qty !== (id.dose_max_qty || id.dose_min_qty)
+                        ? esc(id.dose_min_qty) + "–" + esc(id.dose_max_qty)
+                        : esc(id.dose_min_qty)
+                      : "—";
+                  const flag = id.is_limiting
+                    ? ' <span style="font-size:8px;color:var(--blue);opacity:0.7">★</span>'
+                    : "";
+                  return `<div style="font-size:10px"><strong>${esc(name)}</strong>: ${qty} ${esc(id.dose_unit || "")}${flag}</div>`;
+                })
+                .join("");
             } else if (ids.length === 1) {
               const id = ids[0];
-              const qty = id.dose_min_qty != null && id.dose_max_qty != null && id.dose_min_qty !== id.dose_max_qty
-                ? esc(id.dose_min_qty) + "–" + esc(id.dose_max_qty)
-                : esc(id.dose_min_qty || id.dose_max_qty || "-");
+              const qty =
+                id.dose_min_qty != null &&
+                id.dose_max_qty != null &&
+                id.dose_min_qty !== id.dose_max_qty
+                  ? esc(id.dose_min_qty) + "–" + esc(id.dose_max_qty)
+                  : esc(id.dose_min_qty || id.dose_max_qty || "-");
               doseCol = `<strong>${qty}</strong> ${esc(id.dose_unit || "")}`;
             } else {
-              const qty = b.dose_min_qty != null && b.dose_max_qty != null && b.dose_min_qty !== b.dose_max_qty
-                ? esc(b.dose_min_qty) + "–" + esc(b.dose_max_qty)
-                : esc(b.dose_min_qty || b.dose_max_qty || "-");
+              const qty =
+                b.dose_min_qty != null &&
+                b.dose_max_qty != null &&
+                b.dose_min_qty !== b.dose_max_qty
+                  ? esc(b.dose_min_qty) + "–" + esc(b.dose_max_qty)
+                  : esc(b.dose_min_qty || b.dose_max_qty || "-");
               doseCol = `<strong>${qty}</strong> ${esc(b.dose_unit || "")}`;
             }
 
             // Build max columns — per-ingredient if available
             let maxSingleCol, maxDailyCol;
             if (ids.length > 1) {
-              maxSingleCol = ids.filter(id => id.max_single_mg).map(id =>
-                `<div style="font-size:10px">${(id.ingredient||"").split(" ")[0]}: ${esc(id.max_single_mg)}mg</div>`
-              ).join("") || "-";
-              maxDailyCol = ids.filter(id => id.max_daily_mg).map(id =>
-                `<div style="font-size:10px">${(id.ingredient||"").split(" ")[0]}: ${esc(id.max_daily_mg)}mg</div>`
-              ).join("") || "-";
+              maxSingleCol =
+                ids
+                  .filter((id) => id.max_single_mg)
+                  .map(
+                    (id) =>
+                      `<div style="font-size:10px">${(id.ingredient || "").split(" ")[0]}: ${esc(id.max_single_mg)}mg</div>`,
+                  )
+                  .join("") || "-";
+              maxDailyCol =
+                ids
+                  .filter((id) => id.max_daily_mg)
+                  .map(
+                    (id) =>
+                      `<div style="font-size:10px">${(id.ingredient || "").split(" ")[0]}: ${esc(id.max_daily_mg)}mg</div>`,
+                  )
+                  .join("") || "-";
             } else if (ids.length === 1) {
-              maxSingleCol = ids[0].max_single_mg ? esc(ids[0].max_single_mg) + "mg" : "-";
-              maxDailyCol = ids[0].max_daily_mg ? esc(ids[0].max_daily_mg) + "mg" : "-";
+              maxSingleCol = ids[0].max_single_mg
+                ? esc(ids[0].max_single_mg) + "mg"
+                : "-";
+              maxDailyCol = ids[0].max_daily_mg
+                ? esc(ids[0].max_daily_mg) + "mg"
+                : "-";
             } else {
-              maxSingleCol = b.max_single_qty ? esc(b.max_single_qty) + " " + esc(b.max_single_unit || "") : "-";
-              maxDailyCol = b.max_daily_qty ? esc(b.max_daily_qty) + " " + esc(b.max_daily_unit || "") : "-";
+              maxSingleCol = b.max_single_qty
+                ? esc(b.max_single_qty) + " " + esc(b.max_single_unit || "")
+                : "-";
+              maxDailyCol = b.max_daily_qty
+                ? esc(b.max_daily_qty) + " " + esc(b.max_daily_unit || "")
+                : "-";
             }
 
             return `<tr>
@@ -3005,6 +3079,7 @@
         ${d.unlicensed_note ? '<div class="mono-lbl">Unlicensed note</div><div class="mono-val" style="font-size:11px">' + esc(d.unlicensed_note) + "</div>" : ""}
       </div>
     </div>
+    ${_renderViewConstituents(d.formulations)}
     ${(d.brand_names || []).length ? '<div class="mono-section"><div class="mono-title">Brand names</div><div class="chip-list">' + d.brand_names.map((b) => '<span class="bk bk-blue">' + esc(b) + "</span>").join("") + "</div></div>" : ""}
     ${(d.therapeutic_use || []).length ? '<div class="mono-section"><div class="mono-title">Therapeutic uses</div><div class="chip-list">' + d.therapeutic_use.map((t) => '<span class="bk bk-green">' + esc(t) + "</span>").join("") + "</div></div>" : ""}
     ${(d.reference_source || []).length ? '<div class="mono-section"><div class="mono-title">References</div><div style="font-size:11px;color:var(--ink3)">' + (Array.isArray(d.reference_source) ? d.reference_source.map((r) => esc(r)).join(" · ") : esc(d.reference_source || "")) + "</div></div>" : ""}

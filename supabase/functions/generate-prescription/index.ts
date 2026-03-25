@@ -72,7 +72,7 @@ const tools = [
   {
     name: "get_formulary",
     description:
-      "Look up drugs in the hospital formulary. Returns ABDM FHIR-compliant formulations with ingredients[] (each having strength_numerator/strength_denominator), indian_brands[], indian_conc_note, dosing_bands (dose ranges by age/weight/indication), interactions, contraindications, cross_reactions, renal_bands, and administration instructions. ALWAYS call this for every drug you plan to prescribe.",
+      "Look up drugs in the hospital formulary. Returns ABDM FHIR-compliant formulations with ingredients[] (each having strength_numerator/strength_denominator and concentration), dosing_bands with per-ingredient dose ranges via ingredient_doses[] (each having dose_min/max, unit, max_single/daily, and is_limiting flag for combo drugs), interactions, contraindications, cross_reactions, renal_bands, and administration instructions. ALWAYS call this for every drug you plan to prescribe. For combo drugs, use the LIMITING ingredient's dose range and check all ingredients' max doses.",
     input_schema: {
       type: "object",
       properties: {
@@ -170,20 +170,19 @@ async function executeGetReference(name: string): Promise<string> {
   }
 }
 
-// Condense drug data for AI — strips indian_brands (77% of tokens) and SNOMED metadata
-// Keeps: identity, condensed formulations, all dosing bands, all safety data, administration
+// Condense drug data for AI — strips indian_brands (77% of tokens), SNOMED metadata,
+// and null fields. Keeps: identity, category, therapeutic_use, condensed formulations,
+// dosing bands with ingredient_doses (source kept, snomed stripped), all safety data.
 function condenseDrugForAI(drug: any): any {
-  return {
+  const result: any = {
     generic_name: drug.generic_name,
-    snomed_code: drug.snomed_code,
-    snomed_display: drug.snomed_display,
     drug_class: drug.drug_class,
+    category: drug.category,
+    therapeutic_use: drug.therapeutic_use,
     licensed_in_children: drug.licensed_in_children,
-    unlicensed_note: drug.unlicensed_note,
     formulations: (drug.formulations || []).map((f: any) => ({
       form: f.form,
       route: f.route,
-      unit_of_presentation: f.unit_of_presentation,
       indian_conc_note: f.indian_conc_note,
       ingredients: (f.ingredients || []).map((i: any) => ({
         name: i.name,
@@ -194,21 +193,45 @@ function condenseDrugForAI(drug: any): any {
         strength_denominator_unit: i.strength_denominator_unit,
       })),
     })),
-    dosing_bands: drug.dosing_bands,
-    interactions: drug.interactions,
-    contraindications: drug.contraindications,
-    cross_reactions: drug.cross_reactions,
-    black_box_warnings: drug.black_box_warnings,
-    pediatric_specific_warnings: drug.pediatric_specific_warnings,
-    monitoring_parameters: drug.monitoring_parameters,
-    renal_adjustment_required: drug.renal_adjustment_required,
-    renal_bands: drug.renal_bands,
-    hepatic_adjustment_required: drug.hepatic_adjustment_required,
-    hepatic_note: drug.hepatic_note,
-    administration: drug.administration,
-    food_instructions: drug.food_instructions,
-    notes: drug.notes,
+    // Dosing bands: pass through but strip ingredient snomed_codes (keep source)
+    dosing_bands: (drug.dosing_bands || []).map((b: any) => {
+      const band = { ...b };
+      if (band.ingredient_doses) {
+        band.ingredient_doses = band.ingredient_doses.map((id: any) => {
+          const { snomed_code, ...rest } = id;
+          return rest;
+        });
+      }
+      // Strip null fields from band
+      Object.keys(band).forEach((k) => {
+        if (band[k] === null || band[k] === undefined) delete band[k];
+      });
+      return band;
+    }),
   };
+
+  // Conditionally include non-null fields
+  if (drug.unlicensed_note) result.unlicensed_note = drug.unlicensed_note;
+  if (drug.snomed_code) result.snomed_code = drug.snomed_code;
+  if ((drug.interactions || []).length) result.interactions = drug.interactions;
+  if ((drug.contraindications || []).length) result.contraindications = drug.contraindications;
+  if ((drug.cross_reactions || []).length) result.cross_reactions = drug.cross_reactions;
+  if ((drug.black_box_warnings || []).length) result.black_box_warnings = drug.black_box_warnings;
+  if ((drug.pediatric_specific_warnings || []).length) result.pediatric_specific_warnings = drug.pediatric_specific_warnings;
+  if ((drug.monitoring_parameters || []).length) result.monitoring_parameters = drug.monitoring_parameters;
+  if (drug.renal_adjustment_required) {
+    result.renal_adjustment_required = true;
+    result.renal_bands = drug.renal_bands;
+  }
+  if (drug.hepatic_adjustment_required) {
+    result.hepatic_adjustment_required = true;
+    if (drug.hepatic_note) result.hepatic_note = drug.hepatic_note;
+  }
+  if ((drug.administration || []).length) result.administration = drug.administration;
+  if (drug.food_instructions) result.food_instructions = drug.food_instructions;
+  if (drug.notes) result.notes = drug.notes;
+
+  return result;
 }
 
 async function executeGetFormulary(drugNames: string[]): Promise<string> {

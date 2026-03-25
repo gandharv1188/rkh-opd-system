@@ -267,9 +267,15 @@
 
   function _findIngBand(ingredientBands, ing) {
     if (!ingredientBands || !ingredientBands.length) return null;
-    // Match by snomed_code first, then by name substring
-    return ingredientBands.find(function (ib) {
-      if (ib.snomed_code && ing.snomed_code) return ib.snomed_code === ing.snomed_code;
+    // Try SNOMED match first
+    if (ing.snomed_code) {
+      var snomedMatch = ingredientBands.find(function(ib) {
+        return ib.snomed_code && ib.snomed_code === ing.snomed_code;
+      });
+      if (snomedMatch) return snomedMatch;
+    }
+    // Fall back to name matching
+    return ingredientBands.find(function(ib) {
       if (!ib.ingredient || !ing.name) return false;
       return ing.name.toLowerCase().indexOf(ib.ingredient.toLowerCase()) >= 0 ||
         ib.ingredient.toLowerCase().indexOf(ing.name.toLowerCase()) >= 0;
@@ -280,7 +286,11 @@
   function _getLimiting(band) {
     var ids = band && band.ingredient_doses;
     if (!ids || !ids.length) return null;
-    return ids.find(function (id) { return id.is_limiting; }) || ids[0];
+    return (
+      ids.find(function (id) {
+        return id.is_limiting;
+      }) || ids[0]
+    );
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -301,8 +311,8 @@
     var outputUnit = params.outputUnit || "mL";
     var dpm = params.dropsPerMl || DROPS_PER_ML;
     var ingredientBands = params.ingredientBands || []; // ingredient_doses[] from dosing band
-    var maxSingleMg = params.maxSingleDoseMg; // legacy scalar fallback
-    var maxDailyMg = params.maxDailyDoseMg;   // legacy scalar fallback
+    var maxSingleMg = params.maxSingleDoseMg; // DEPRECATED: legacy scalar fallback — use ingredientBands instead
+    var maxDailyMg = params.maxDailyDoseMg; // DEPRECATED: legacy scalar fallback — use ingredientBands instead
 
     if (!ingredients.length) {
       return _emptyResult();
@@ -348,12 +358,15 @@
     // ── Step 2: Apply max single dose cap (primary) ──
     // Prefer per-ingredient max from ingredientBands, fall back to scalar
     var primaryBand = _findIngBand(ingredientBands, primary);
-    var effMaxSingle = (primaryBand && primaryBand.max_single_mg) || maxSingleMg;
+    var effMaxSingle =
+      (primaryBand && primaryBand.max_single_mg) || maxSingleMg;
 
     if (effMaxSingle && primaryMgPerDose > effMaxSingle) {
       primaryMgPerDose = effMaxSingle;
       capped = true;
-      warnings.push("Max single dose " + effMaxSingle + "mg applied (" + primary.name + ")");
+      warnings.push(
+        "Max single dose " + effMaxSingle + "mg applied (" + primary.name + ")",
+      );
     }
 
     // ── Step 3: Compute volume from primary ingredient ──
@@ -429,8 +442,10 @@
       }
 
       // Within therapeutic range check from ingredientBands
-      var ibMin = ib ? ib.dose_min_qty : (ing.doseMinPerKg || null);
-      var ibMax = ib ? (ib.dose_max_qty || ib.dose_min_qty) : (ing.doseMaxPerKg || null);
+      var ibMin = ib ? ib.dose_min_qty : ing.doseMinPerKg || null;
+      var ibMax = ib
+        ? ib.dose_max_qty || ib.dose_min_qty
+        : ing.doseMaxPerKg || null;
       var withinRange = null;
       if (ibMin != null && mgPerKg != null) {
         withinRange = mgPerKg >= ibMin && mgPerKg <= (ibMax || ibMin);
@@ -685,8 +700,9 @@
         globalMax = 0;
       allBands.forEach(function (b) {
         var lim = _getLimiting(b);
-        var dMin = lim ? lim.dose_min_qty : b.dose_min_qty;
-        var dMax = lim ? (lim.dose_max_qty || lim.dose_min_qty) : (b.dose_max_qty || b.dose_min_qty);
+        if (!lim || lim.dose_min_qty == null) return; // skip bands without ingredient data
+        var dMin = lim.dose_min_qty;
+        var dMax = lim.dose_max_qty || lim.dose_min_qty;
         if (dMin != null) {
           globalMin = Math.min(globalMin, dMin);
           globalMax = Math.max(globalMax, dMax || dMin);
@@ -709,8 +725,9 @@
       var range = sliderMax - sliderMin || 1;
       allBands.forEach(function (b, i) {
         var lim = _getLimiting(b);
-        var bMin = lim ? lim.dose_min_qty : b.dose_min_qty;
-        var bMax = lim ? (lim.dose_max_qty || lim.dose_min_qty) : (b.dose_max_qty || b.dose_min_qty);
+        if (!lim || lim.dose_min_qty == null) return; // skip bands without ingredient data
+        var bMin = lim.dose_min_qty;
+        var bMax = lim.dose_max_qty || lim.dose_min_qty;
         if (bMin == null) return;
         zones.push({
           startPct: ((bMin - sliderMin) / range) * 100,
@@ -737,8 +754,9 @@
       gMax = 0;
     allBands.forEach(function (b) {
       var lim = _getLimiting(b);
-      var dMin = lim ? lim.dose_min_qty : b.dose_min_qty;
-      var dMax = lim ? (lim.dose_max_qty || lim.dose_min_qty) : (b.dose_max_qty || b.dose_min_qty);
+      if (!lim || lim.dose_min_qty == null) return; // skip bands without ingredient data
+      var dMin = lim.dose_min_qty;
+      var dMax = lim.dose_max_qty || lim.dose_min_qty;
       if (dMin != null) {
         gMin = Math.min(gMin, dMin);
         gMax = Math.max(gMax, dMax || dMin);
@@ -762,8 +780,9 @@
 
     allBands.forEach(function (b, i) {
       var lim2 = _getLimiting(b);
-      var bMin2 = lim2 ? lim2.dose_min_qty : b.dose_min_qty;
-      var bMax2 = lim2 ? (lim2.dose_max_qty || lim2.dose_min_qty) : (b.dose_max_qty || b.dose_min_qty);
+      if (!lim2 || lim2.dose_min_qty == null) return; // skip bands without ingredient data
+      var bMin2 = lim2.dose_min_qty;
+      var bMax2 = lim2.dose_max_qty || lim2.dose_min_qty;
       if (bMin2 == null) return;
       zones.push({
         startPct: ((bMin2 - sMin) / sRange) * 100,
