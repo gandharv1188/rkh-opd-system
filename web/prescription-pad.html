@@ -2540,7 +2540,7 @@
     const fdNum = parseFloat(r.fd) || 0;
     const mlPerDose = (fdNum / cmg) * cml;
 
-    if (unit === "drops" && !form.includes("drop")) {
+    if (unit === "drops") {
       const drops = Math.round(mlPerDose * 20);
       const DN = {
         1: "एक",
@@ -5314,18 +5314,23 @@
                   ...allBands.map((b) => b.dose_max_qty || b.dose_min_qty),
                 )
               : m.dose_mg_per_kg * 1.5 || 50;
-            const sliderMin = Math.max(0, Math.floor(globalMin * 0.5));
-            const sliderMax = Math.ceil(globalMax * 1.5) || 100;
+            const sliderMin = Math.max(
+              0,
+              parseFloat((globalMin * 0.5).toFixed(2)),
+            );
+            const sliderMax = parseFloat((globalMax * 2).toFixed(2)) || 100;
             const curDose = m.dose_mg_per_kg || (globalMin + globalMax) / 2;
             const doseUnit = band?.dose_unit || "mg/kg/day";
             const rndRule = band?.rounding_rule || "0.5ml";
-            // Slider step based on rounding rule
-            const sliderStep =
-              rndRule === "exact"
-                ? 0.1
-                : rndRule === "quarter_tab"
-                  ? 0.25
-                  : 0.5;
+            // Slider step: adaptive based on range size
+            const range = sliderMax - sliderMin;
+            let sliderStep;
+            if (rndRule === "exact") sliderStep = range / 200;
+            else if (rndRule === "quarter_tab") sliderStep = 0.25;
+            else if (range < 2) sliderStep = 0.01;
+            else if (range < 10) sliderStep = 0.1;
+            else if (range < 50) sliderStep = 0.5;
+            else sliderStep = 1;
             // Check if current dose is in any band
             const inAnyBand = allBands.some(
               (b) =>
