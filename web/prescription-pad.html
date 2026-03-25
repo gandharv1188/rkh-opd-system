@@ -5437,9 +5437,14 @@
             ];
             const doseUnit = band?.dose_unit || "mg/kg/day";
             const rndRule = band?.rounding_rule || "0.5ml";
+            let curDose = m.dose_mg_per_kg || band?.dose_min_qty || 0;
             if (bandMethod === "fixed" || bandMethod === "age") {
               // ===== FIXED DOSE: simple stepper (drops, puffs, tablets, mg, application) =====
               const fixedMin = band?.dose_min_qty || 1;
+              curDose =
+                parseFloat(m.dose_mg_per_kg) ||
+                parseFloat((m.row2_en || "").match(/(\d+\.?\d*)/)?.[1]) ||
+                fixedMin;
               const fixedMax = band?.dose_max_qty || fixedMin;
               const fixedUnit = band?.dose_unit || "drops";
               // Parse current dose from AI output (e.g., "3 drops" → 3)
@@ -5514,7 +5519,7 @@
                 parseFloat((globalMin * 0.5).toFixed(2)),
               );
               const sliderMax = parseFloat((globalMax * 2).toFixed(2)) || 100;
-              const curDose = m.dose_mg_per_kg || (globalMin + globalMax) / 2;
+              curDose = m.dose_mg_per_kg || (globalMin + globalMax) / 2;
               const sliderRange = sliderMax - sliderMin;
               let sliderStep;
               if (rndRule === "exact") sliderStep = sliderRange / 200;
