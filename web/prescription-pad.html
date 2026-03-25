@@ -2610,6 +2610,81 @@
 
   // Master recalculate: reads all panel state, calls calcDose, shows result
   function dpRecalc(pid, idx) {
+    const m = rxData.medicines[idx];
+
+    // For fixed-dose drugs, skip weight-based calculation entirely
+    const ref = getDoseRef(m.row1_en, rxData.patient?.age);
+    const bandForMethod = ref?.bands?.[0];
+    if (
+      bandForMethod &&
+      (bandForMethod.method === "fixed" || bandForMethod.method === "age")
+    ) {
+      // Fixed dose: just display what dpFixedChange set, or the initial value
+      const fixedDose = document.getElementById(pid + "-fixeddose");
+      if (fixedDose) {
+        const cur =
+          parseFloat(fixedDose.value) || bandForMethod.dose_min_qty || 1;
+        const fixedUnit =
+          document.getElementById(pid + "-fixedunit")?.value ||
+          bandForMethod.dose_unit ||
+          "drops";
+        const freq =
+          parseFloat(document.getElementById(pid + "-freq")?.value) ||
+          bandForMethod.frequency_per_day ||
+          3;
+        const freqEn = FW[freq] || freq + " times";
+        const freqHi = FH[freq] || freq + " बार";
+        const HN = {
+          1: "एक",
+          2: "दो",
+          3: "तीन",
+          4: "चार",
+          5: "पाँच",
+          6: "छह",
+          7: "सात",
+          8: "आठ",
+          9: "नौ",
+          10: "दस",
+          12: "बारह",
+          15: "पंद्रह",
+          20: "बीस",
+        };
+        const unitHi = {
+          drops: "बूंदें",
+          puffs: "पफ",
+          tablet: "गोली",
+          capsule: "कैप्सूल",
+          application: "लगाएं",
+          mg: "mg",
+          mL: "ml",
+          sprays: "स्प्रे",
+        };
+        const resEl = document.getElementById(pid + "-res");
+        if (resEl) {
+          resEl.innerHTML =
+            "➜ <strong>" +
+            esc(cur + " " + fixedUnit) +
+            "</strong> " +
+            esc(freqEn) +
+            " daily" +
+            '<div class="ep-hindi">➜ ' +
+            esc((HN[cur] || cur) + " " + (unitHi[fixedUnit] || fixedUnit)) +
+            " दिन में " +
+            esc(freqHi) +
+            "</div>";
+        }
+        const valEl = document.getElementById(pid + "-sliderval");
+        if (valEl)
+          valEl.innerHTML =
+            "<strong>" + cur + " " + esc(fixedUnit) + "</strong> per dose";
+        // Set hidden fields for applyDose
+        document.getElementById(pid + "-mgkg").value = cur;
+        document.getElementById(pid + "-cmg").value = 1;
+        document.getElementById(pid + "-cml").value = 1;
+      }
+      return;
+    }
+
     const wt = parseFloat(document.getElementById(pid + "-wt").value);
     let mgkg = parseFloat(document.getElementById(pid + "-mgkg").value);
     const freq = parseFloat(document.getElementById(pid + "-freq").value);
@@ -2617,7 +2692,6 @@
     const cml = parseFloat(document.getElementById(pid + "-cml").value) || 5;
     const maxS =
       parseFloat(document.getElementById(pid + "-max").value) || null;
-    const m = rxData.medicines[idx];
     const form = m.formulation || "syrup";
 
     if (isNaN(wt) || isNaN(mgkg) || isNaN(freq) || isNaN(cmg)) {
@@ -7209,15 +7283,19 @@
       number: (rxData.medicines?.length || 0) + 1,
       row1_en: `${drugName} (${fc.concQty || ""}${fc.concUnit || ""}/${fc.perQty || ""}${fc.perUnit || ""} ${form.form || ""})`,
       row2_en:
-        wt && band.dose_min_qty
-          ? `${((wt * band.dose_min_qty) / (band.frequency_per_day || 1)).toFixed(1)} ${fc.perUnit || "ml"} ${form.form === "tablet" ? "orally" : "orally"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days_default || "?"} days`
-          : "Enter dosing instructions",
+        band.method === "fixed" || band.method === "age"
+          ? `${band.dose_min_qty || 1} ${band.dose_unit || "drops"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days || "?"} days`
+          : wt && band.dose_min_qty
+            ? `${((wt * band.dose_min_qty) / (band.frequency_per_day || 1)).toFixed(1)} ${fc.perUnit || "ml"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days || "?"} days`
+            : "Enter dosing instructions",
       row3_hi:
         "\u0939\u093f\u0902\u0926\u0940 \u0928\u093f\u0930\u094d\u0926\u0947\u0936 \u092f\u0939\u093e\u0901 \u0932\u093f\u0916\u0947\u0902",
       calc:
-        wt && band.dose_min_qty
-          ? `${band.dose_min_qty}mg/kg \u00d7 ${wt}kg = ${(band.dose_min_qty * wt).toFixed(1)}mg`
-          : "Calculate dose",
+        band.method === "fixed" || band.method === "age"
+          ? `${band.dose_min_qty || 1} ${band.dose_unit || "drops"} per dose`
+          : wt && band.dose_min_qty
+            ? `${band.dose_min_qty}mg/kg \u00d7 ${wt}kg = ${(band.dose_min_qty * wt).toFixed(1)}mg`
+            : "Calculate dose",
       flag: "",
       dose_mg_per_kg: band.dose_min_qty || 0,
       dose_per_day_divided: band.frequency_per_day || 1,
@@ -7227,7 +7305,7 @@
       formulation: form.form || "syrup",
       snomed_code: f.snomed_code || null,
       snomed_display: f.snomed_display || null,
-      method: "weight",
+      method: band.method || "weight",
       pictogram: {
         form: form.form || "syrup",
         dose_display: "",
