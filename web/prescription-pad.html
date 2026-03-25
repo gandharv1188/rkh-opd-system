@@ -3387,7 +3387,7 @@
       h += `<div class="rv-sec"><div class="rv-hdr">Referral</div><div>${esc(r.referral)}</div></div>`;
     // Counselling
     if (r.counselling?.length)
-      h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div><div>${r.counselling.map((c) => "✓ " + esc(c)).join(" &nbsp; ")}</div></div>`;
+      h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div><ul style="margin:4px 0;padding-left:18px;font-size:12px;line-height:1.8;list-style:none">${r.counselling.map((c) => `<li style="margin-bottom:4px">✓ ${esc(c)}</li>`).join("")}</ul></div>`;
     // Follow-up
     h += `<div class="rv-sec"><div class="rv-hdr">Follow-up</div><div>Return after <strong>${r.followup_days || 3} days</strong>${r.doctor_notes ? " — " + esc(r.doctor_notes) : ""}</div></div>`;
     // Safety
@@ -5611,7 +5611,7 @@
     }
     if (has(r.counselling)) {
       h += `<div class="rv-sec"><div class="rv-hdr">Counselling given</div>
-    <div style="font-size:13px;color:var(--ink2);font-family:system-ui,sans-serif;line-height:2">${r.counselling.map((c) => `<span style="margin-right:14px">✓ ${esc(c)}</span>`).join("")}</div></div>`;
+    <ul style="margin:4px 0;padding-left:18px;font-size:12px;line-height:1.8;list-style:none;color:var(--ink2)">${r.counselling.map((c) => `<li style="margin-bottom:4px">✓ ${esc(c)}</li>`).join("")}</ul></div>`;
     }
     // Use AI-generated warning signs if available, fallback to hardcoded
     const patientAgeMonths = rxData?.patient?.age
@@ -6731,7 +6731,7 @@
     }
     // Counselling
     if (r.counselling?.length) {
-      h += `<div class="sec"><div class="sec-title">Counselling</div><div>${r.counselling.map((c) => `✓ ${esc(c)}`).join(" &nbsp; ")}</div></div>`;
+      h += `<div class="sec"><div class="sec-title">Counselling</div><ul style="margin:2px 0;padding-left:16px;list-style:none;font-size:11px;line-height:1.7">${r.counselling.map((c) => `<li>✓ ${esc(c)}</li>`).join("")}</ul></div>`;
     }
     // Emergency signs
     const printAgeMonths = r.patient?.age
