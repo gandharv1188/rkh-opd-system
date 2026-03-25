@@ -2530,6 +2530,84 @@
     dpRecalc(pid, idx);
   }
 
+  // Fixed-dose stepper: +/- for drops, puffs, tablets, applications
+  function dpFixedChange(pid, idx, delta) {
+    const valEl = document.getElementById(pid + "-fixedval");
+    const hiddenDose = document.getElementById(pid + "-fixeddose");
+    const fixedUnit =
+      document.getElementById(pid + "-fixedunit")?.value || "drops";
+    let cur = parseFloat(hiddenDose?.value) || 1;
+
+    // Step size depends on unit
+    let step = 1; // drops, puffs, capsule, application
+    if (fixedUnit === "mg") step = cur < 10 ? 1 : cur < 100 ? 5 : 10;
+    if (fixedUnit === "mL") step = 0.5;
+    if (fixedUnit === "tablet") step = 0.25;
+
+    cur = Math.max(step, cur + delta * step);
+    cur = parseFloat(cur.toFixed(2));
+    if (hiddenDose) hiddenDose.value = cur;
+    if (valEl) valEl.textContent = cur;
+
+    // Update slider display
+    const sliderVal = document.getElementById(pid + "-sliderval");
+    if (sliderVal)
+      sliderVal.innerHTML =
+        "<strong>" + cur + " " + esc(fixedUnit) + "</strong> per dose";
+
+    // Update result
+    const freq = parseFloat(document.getElementById(pid + "-freq")?.value) || 3;
+    const resEl = document.getElementById(pid + "-res");
+    const freqEn = FW[freq] || freq + " times";
+    const freqHi = FH[freq] || freq + " बार";
+    // Build Hindi number
+    const HN = {
+      1: "एक",
+      2: "दो",
+      3: "तीन",
+      4: "चार",
+      5: "पाँच",
+      6: "छह",
+      7: "सात",
+      8: "आठ",
+      9: "नौ",
+      10: "दस",
+      12: "बारह",
+      15: "पंद्रह",
+      20: "बीस",
+    };
+    const hiQty = HN[cur] || cur;
+    const unitHi = {
+      drops: "बूंदें",
+      puffs: "पफ",
+      tablet: "गोली",
+      capsule: "कैप्सूल",
+      application: "लगाएं",
+      mg: "mg",
+      mL: "ml",
+      sprays: "स्प्रे",
+    };
+    if (resEl) {
+      resEl.innerHTML =
+        "➜ <strong>" +
+        esc(cur + " " + fixedUnit) +
+        "</strong> " +
+        esc(freqEn) +
+        " daily" +
+        '<div class="ep-hindi">➜ ' +
+        esc(hiQty + " " + (unitHi[fixedUnit] || fixedUnit)) +
+        " दिन में " +
+        esc(freqHi) +
+        "</div>";
+    }
+
+    // Update hidden mgkg (store the fixed dose qty for applyDose)
+    document.getElementById(pid + "-mgkg").value = cur;
+    // Set cmg/cml to 1/1 so calcDose treats it as direct quantity
+    document.getElementById(pid + "-cmg").value = 1;
+    document.getElementById(pid + "-cml").value = 1;
+  }
+
   // Master recalculate: reads all panel state, calls calcDose, shows result
   function dpRecalc(pid, idx) {
     const wt = parseFloat(document.getElementById(pid + "-wt").value);
@@ -5331,7 +5409,8 @@
               html += "</div>";
             }
 
-            // DOSE SLIDER — multi-zone for multiple indications
+            // DOSE INPUT — method-aware
+            const bandMethod = band?.method || m.method || "weight";
             const allBands = ref
               ? ref.allBands.filter((b) => b.dose_min_qty != null)
               : [];
@@ -5343,144 +5422,205 @@
               "#ec4899",
               "#06b6d4",
             ];
-            const globalMin = allBands.length
-              ? Math.min(...allBands.map((b) => b.dose_min_qty))
-              : m.dose_mg_per_kg * 0.5 || 5;
-            const globalMax = allBands.length
-              ? Math.max(
-                  ...allBands.map((b) => b.dose_max_qty || b.dose_min_qty),
-                )
-              : m.dose_mg_per_kg * 1.5 || 50;
-            const sliderMin = Math.max(
-              0,
-              parseFloat((globalMin * 0.5).toFixed(2)),
-            );
-            const sliderMax = parseFloat((globalMax * 2).toFixed(2)) || 100;
-            const curDose = m.dose_mg_per_kg || (globalMin + globalMax) / 2;
             const doseUnit = band?.dose_unit || "mg/kg/day";
             const rndRule = band?.rounding_rule || "0.5ml";
-            // Slider step: adaptive based on range size
-            const sliderRange = sliderMax - sliderMin;
-            let sliderStep;
-            if (rndRule === "exact") sliderStep = sliderRange / 200;
-            else if (rndRule === "quarter_tab") sliderStep = 0.25;
-            else if (sliderRange < 2) sliderStep = 0.01;
-            else if (sliderRange < 10) sliderStep = 0.1;
-            else if (sliderRange < 50) sliderStep = 0.5;
-            else sliderStep = 1;
-            // Check if current dose is in any band
-            const inAnyBand = allBands.some(
-              (b) =>
-                curDose >= b.dose_min_qty &&
-                curDose <= (b.dose_max_qty || b.dose_min_qty),
-            );
-
-            // Build multi-zone gradient
-            let gradient = "linear-gradient(to right, ";
-            const range = sliderMax - sliderMin;
-            if (allBands.length) {
-              // Sort bands by min dose
-              const sorted = [...allBands].sort(
-                (a, b) => a.dose_min_qty - b.dose_min_qty,
-              );
-              let stops = [];
-              let lastEnd = 0;
-              sorted.forEach((b, bi) => {
-                const left = ((b.dose_min_qty - sliderMin) / range) * 100;
-                const right =
-                  (((b.dose_max_qty || b.dose_min_qty) - sliderMin) / range) *
-                  100;
-                const color = bandColors[bi % bandColors.length];
-                // Red gap before this zone
-                if (left > lastEnd + 0.5) {
-                  stops.push("#fca5a5 " + lastEnd + "%");
-                  stops.push("#fca5a5 " + left + "%");
-                }
-                stops.push(color + " " + left + "%");
-                stops.push(color + " " + right + "%");
-                lastEnd = right;
-              });
-              if (lastEnd < 100) {
-                stops.push("#fca5a5 " + lastEnd + "%");
-                stops.push("#fca5a5 100%");
-              }
-              gradient += stops.join(", ") + ")";
-            } else {
-              gradient += "#fca5a5 0%, #fca5a5 100%)";
-            }
-
-            html += '<div class="dp-slider-wrap">';
-            html +=
-              '<div class="dp-slider-val' +
-              (inAnyBand ? " dp-safe" : " dp-warn") +
-              '" id="' +
-              pid +
-              '-sliderval">' +
-              curDose +
-              " " +
-              esc(doseUnit) +
-              "</div>";
-            html +=
-              '<input type="range" class="dp-slider" id="' +
-              pid +
-              '-slider" min="' +
-              sliderMin +
-              '" max="' +
-              sliderMax +
-              '" step="' +
-              sliderStep +
-              '" value="' +
-              curDose +
-              '" oninput="dpSliderChanged(\'' +
-              pid +
-              "'," +
-              idx +
-              ')" style="background:' +
-              gradient +
-              '">';
-            html +=
-              '<div class="dp-slider-labels"><span>' +
-              sliderMin +
-              "</span><span>" +
-              sliderMax +
-              "</span></div>";
-            // Legend: colored dots for each indication
-            if (allBands.length > 0) {
+            if (bandMethod === "fixed" || bandMethod === "age") {
+              // ===== FIXED DOSE: simple stepper (drops, puffs, tablets, mg, application) =====
+              const fixedMin = band?.dose_min_qty || 1;
+              const fixedMax = band?.dose_max_qty || fixedMin;
+              const fixedUnit = band?.dose_unit || "drops";
+              // Parse current dose from AI output (e.g., "3 drops" → 3)
+              const curFixed =
+                parseFloat(m.dose_mg_per_kg) ||
+                parseFloat((m.row2_en || "").match(/(\d+\.?\d*)/)?.[1]) ||
+                fixedMin;
+              html += '<div class="dp-slider-wrap">';
               html +=
-                '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">';
-              allBands
-                .sort((a, b) => a.dose_min_qty - b.dose_min_qty)
-                .forEach((b, bi) => {
+                '<div class="dp-slider-val dp-safe" id="' +
+                pid +
+                '-sliderval"><strong>' +
+                curFixed +
+                " " +
+                esc(fixedUnit) +
+                "</strong> per dose</div>";
+              html +=
+                '<div class="dp-freq-row" style="justify-content:center">';
+              html +=
+                '<button class="dp-freq-btn" onclick="dpFixedChange(\'' +
+                pid +
+                "'," +
+                idx +
+                ',-1)" style="width:36px;height:36px;font-size:20px">\u2212</button>';
+              html +=
+                '<span id="' +
+                pid +
+                '-fixedval" style="font-size:24px;font-weight:700;min-width:60px;text-align:center;color:var(--blue)">' +
+                curFixed +
+                "</span>";
+              html +=
+                '<button class="dp-freq-btn" onclick="dpFixedChange(\'' +
+                pid +
+                "'," +
+                idx +
+                ',1)" style="width:36px;height:36px;font-size:20px">+</button>';
+              html += "</div>";
+              html +=
+                '<div style="text-align:center;font-size:11px;color:var(--ink3);margin-top:4px">' +
+                esc(fixedUnit) +
+                " per dose (recommended: " +
+                fixedMin +
+                "-" +
+                fixedMax +
+                ")</div>";
+              html += "</div>";
+              // Store fixed dose in hidden fields — dpFixedChange will update these
+              html +=
+                '<input type="hidden" id="' +
+                pid +
+                '-fixeddose" value="' +
+                curFixed +
+                '">';
+              html +=
+                '<input type="hidden" id="' +
+                pid +
+                '-fixedunit" value="' +
+                esc(fixedUnit) +
+                '">';
+            } else {
+              // ===== WEIGHT-BASED / BSA / INFUSION: mg/kg slider =====
+              const globalMin = allBands.length
+                ? Math.min(...allBands.map((b) => b.dose_min_qty))
+                : m.dose_mg_per_kg * 0.5 || 5;
+              const globalMax = allBands.length
+                ? Math.max(
+                    ...allBands.map((b) => b.dose_max_qty || b.dose_min_qty),
+                  )
+                : m.dose_mg_per_kg * 1.5 || 50;
+              const sliderMin = Math.max(
+                0,
+                parseFloat((globalMin * 0.5).toFixed(2)),
+              );
+              const sliderMax = parseFloat((globalMax * 2).toFixed(2)) || 100;
+              const curDose = m.dose_mg_per_kg || (globalMin + globalMax) / 2;
+              const sliderRange = sliderMax - sliderMin;
+              let sliderStep;
+              if (rndRule === "exact") sliderStep = sliderRange / 200;
+              else if (rndRule === "quarter_tab") sliderStep = 0.25;
+              else if (sliderRange < 2) sliderStep = 0.01;
+              else if (sliderRange < 10) sliderStep = 0.1;
+              else if (sliderRange < 50) sliderStep = 0.5;
+              else sliderStep = 1;
+              const inAnyBand = allBands.some(
+                (b) =>
+                  curDose >= b.dose_min_qty &&
+                  curDose <= (b.dose_max_qty || b.dose_min_qty),
+              );
+
+              // Build multi-zone gradient
+              let gradient = "linear-gradient(to right, ";
+              const range = sliderMax - sliderMin;
+              if (allBands.length) {
+                const sorted = [...allBands].sort(
+                  (a, b) => a.dose_min_qty - b.dose_min_qty,
+                );
+                let stops = [],
+                  lastEnd = 0;
+                sorted.forEach((b, bi) => {
+                  const left = ((b.dose_min_qty - sliderMin) / range) * 100;
+                  const right =
+                    (((b.dose_max_qty || b.dose_min_qty) - sliderMin) / range) *
+                    100;
                   const color = bandColors[bi % bandColors.length];
-                  const label = (
-                    b.indication || "Indication " + (bi + 1)
-                  ).substring(0, 35);
-                  html +=
-                    '<span style="font-size:10px;display:flex;align-items:center;gap:3px;cursor:pointer" onclick="document.getElementById(\'' +
-                    pid +
-                    "-slider').value=" +
-                    (b.dose_min_qty + (b.dose_max_qty || b.dose_min_qty)) / 2 +
-                    ";dpSliderChanged('" +
-                    pid +
-                    "'," +
-                    idx +
-                    ')">';
-                  html +=
-                    '<span style="width:8px;height:8px;border-radius:50%;background:' +
-                    color +
-                    ';display:inline-block"></span>';
-                  html +=
-                    esc(label) +
-                    " (" +
-                    b.dose_min_qty +
-                    "-" +
-                    (b.dose_max_qty || b.dose_min_qty) +
-                    ")";
-                  html += "</span>";
+                  if (left > lastEnd + 0.5) {
+                    stops.push("#fca5a5 " + lastEnd + "%");
+                    stops.push("#fca5a5 " + left + "%");
+                  }
+                  stops.push(color + " " + left + "%");
+                  stops.push(color + " " + right + "%");
+                  lastEnd = right;
                 });
+                if (lastEnd < 100) {
+                  stops.push("#fca5a5 " + lastEnd + "%");
+                  stops.push("#fca5a5 100%");
+                }
+                gradient += stops.join(", ") + ")";
+              } else {
+                gradient += "#fca5a5 0%, #fca5a5 100%)";
+              }
+
+              html += '<div class="dp-slider-wrap">';
+              html +=
+                '<div class="dp-slider-val' +
+                (inAnyBand ? " dp-safe" : " dp-warn") +
+                '" id="' +
+                pid +
+                '-sliderval">' +
+                curDose +
+                " " +
+                esc(doseUnit) +
+                "</div>";
+              html +=
+                '<input type="range" class="dp-slider" id="' +
+                pid +
+                '-slider" min="' +
+                sliderMin +
+                '" max="' +
+                sliderMax +
+                '" step="' +
+                sliderStep +
+                '" value="' +
+                curDose +
+                '" oninput="dpSliderChanged(\'' +
+                pid +
+                "'," +
+                idx +
+                ')" style="background:' +
+                gradient +
+                '">';
+              html +=
+                '<div class="dp-slider-labels"><span>' +
+                sliderMin +
+                "</span><span>" +
+                sliderMax +
+                "</span></div>";
+              if (allBands.length > 0) {
+                html +=
+                  '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">';
+                allBands
+                  .sort((a, b) => a.dose_min_qty - b.dose_min_qty)
+                  .forEach((b, bi) => {
+                    const color = bandColors[bi % bandColors.length];
+                    const label = (
+                      b.indication || "Indication " + (bi + 1)
+                    ).substring(0, 35);
+                    html +=
+                      '<span style="font-size:10px;display:flex;align-items:center;gap:3px;cursor:pointer" onclick="document.getElementById(\'' +
+                      pid +
+                      "-slider').value=" +
+                      (b.dose_min_qty + (b.dose_max_qty || b.dose_min_qty)) /
+                        2 +
+                      ";dpSliderChanged('" +
+                      pid +
+                      "'," +
+                      idx +
+                      ')">';
+                    html +=
+                      '<span style="width:8px;height:8px;border-radius:50%;background:' +
+                      color +
+                      ';display:inline-block"></span>';
+                    html +=
+                      esc(label) +
+                      " (" +
+                      b.dose_min_qty +
+                      "-" +
+                      (b.dose_max_qty || b.dose_min_qty) +
+                      ")";
+                    html += "</span>";
+                  });
+                html += "</div>";
+              }
               html += "</div>";
             }
-            html += "</div>";
 
             // FREQUENCY
             const curFreq = (() => {
@@ -7652,6 +7792,7 @@
     dpUnitChanged,
     dpSliderChanged,
     dpFreqChange,
+    dpFixedChange,
     dpRecalc,
     simplifyForm,
     getUnitOptions,
