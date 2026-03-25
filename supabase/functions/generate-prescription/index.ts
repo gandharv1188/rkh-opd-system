@@ -214,11 +214,16 @@ function condenseDrugForAI(drug: any): any {
   if (drug.unlicensed_note) result.unlicensed_note = drug.unlicensed_note;
   if (drug.snomed_code) result.snomed_code = drug.snomed_code;
   if ((drug.interactions || []).length) result.interactions = drug.interactions;
-  if ((drug.contraindications || []).length) result.contraindications = drug.contraindications;
-  if ((drug.cross_reactions || []).length) result.cross_reactions = drug.cross_reactions;
-  if ((drug.black_box_warnings || []).length) result.black_box_warnings = drug.black_box_warnings;
-  if ((drug.pediatric_specific_warnings || []).length) result.pediatric_specific_warnings = drug.pediatric_specific_warnings;
-  if ((drug.monitoring_parameters || []).length) result.monitoring_parameters = drug.monitoring_parameters;
+  if ((drug.contraindications || []).length)
+    result.contraindications = drug.contraindications;
+  if ((drug.cross_reactions || []).length)
+    result.cross_reactions = drug.cross_reactions;
+  if ((drug.black_box_warnings || []).length)
+    result.black_box_warnings = drug.black_box_warnings;
+  if ((drug.pediatric_specific_warnings || []).length)
+    result.pediatric_specific_warnings = drug.pediatric_specific_warnings;
+  if ((drug.monitoring_parameters || []).length)
+    result.monitoring_parameters = drug.monitoring_parameters;
   if (drug.renal_adjustment_required) {
     result.renal_adjustment_required = true;
     result.renal_bands = drug.renal_bands;
@@ -227,7 +232,8 @@ function condenseDrugForAI(drug: any): any {
     result.hepatic_adjustment_required = true;
     if (drug.hepatic_note) result.hepatic_note = drug.hepatic_note;
   }
-  if ((drug.administration || []).length) result.administration = drug.administration;
+  if ((drug.administration || []).length)
+    result.administration = drug.administration;
   if (drug.food_instructions) result.food_instructions = drug.food_instructions;
   if (drug.notes) result.notes = drug.notes;
 

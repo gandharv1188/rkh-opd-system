@@ -7,43 +7,43 @@
 
 ## SENT TO CLAUDE (via `condenseDrugForAI()` in Edge Function)
 
-| Section | Fields | Notes |
-|---------|--------|-------|
-| **Identity** | generic_name, drug_class, **category**, **therapeutic_use[]**, licensed_in_children | Category + therapeutic_use added for clinical context |
-| **Formulations** | form, route, indian_conc_note | unit_of_presentation removed (redundant) |
-| **Ingredients** (per formulation) | name, is_primary, strength_numerator/unit, strength_denominator/unit | Ingredient SNOMED codes stripped |
-| **Dosing bands** | indication, age_band, method, is_per_day, frequency_per_day, interval_hours, duration_days, duration_note, rounding_rule, notes | Null fields auto-stripped (ga_weeks, loading_dose when null) |
-| **ingredient_doses[]** (per band) | ingredient, dose_min_qty, dose_max_qty, dose_unit, max_single_mg, max_daily_mg, is_limiting, **source** | SNOMED code stripped; source kept for Claude's reference |
-| **Safety** (conditional) | contraindications, interactions, cross_reactions, black_box_warnings, pediatric_specific_warnings, monitoring_parameters | Only included when non-empty |
-| **Renal** (conditional) | renal_adjustment_required, renal_bands | Only when renal_adjustment_required=true |
-| **Hepatic** (conditional) | hepatic_adjustment_required, hepatic_note | Only when hepatic_adjustment_required=true |
-| **Admin** (conditional) | administration, food_instructions | Only when non-empty/non-null |
-| **Other** (conditional) | unlicensed_note, snomed_code, notes | Only when non-null |
+| Section                           | Fields                                                                                                                          | Notes                                                        |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Identity**                      | generic_name, drug_class, **category**, **therapeutic_use[]**, licensed_in_children                                             | Category + therapeutic_use added for clinical context        |
+| **Formulations**                  | form, route, indian_conc_note                                                                                                   | unit_of_presentation removed (redundant)                     |
+| **Ingredients** (per formulation) | name, is_primary, strength_numerator/unit, strength_denominator/unit                                                            | Ingredient SNOMED codes stripped                             |
+| **Dosing bands**                  | indication, age_band, method, is_per_day, frequency_per_day, interval_hours, duration_days, duration_note, rounding_rule, notes | Null fields auto-stripped (ga_weeks, loading_dose when null) |
+| **ingredient_doses[]** (per band) | ingredient, dose_min_qty, dose_max_qty, dose_unit, max_single_mg, max_daily_mg, is_limiting, **source**                         | SNOMED code stripped; source kept for Claude's reference     |
+| **Safety** (conditional)          | contraindications, interactions, cross_reactions, black_box_warnings, pediatric_specific_warnings, monitoring_parameters        | Only included when non-empty                                 |
+| **Renal** (conditional)           | renal_adjustment_required, renal_bands                                                                                          | Only when renal_adjustment_required=true                     |
+| **Hepatic** (conditional)         | hepatic_adjustment_required, hepatic_note                                                                                       | Only when hepatic_adjustment_required=true                   |
+| **Admin** (conditional)           | administration, food_instructions                                                                                               | Only when non-empty/non-null                                 |
+| **Other** (conditional)           | unlicensed_note, snomed_code, notes                                                                                             | Only when non-null                                           |
 
 ---
 
 ## NOT SENT TO CLAUDE
 
-| Field | Reason |
-|-------|--------|
-| `brand_names[]` | Pharmacist's domain, not needed for prescribing |
-| `formulations[].indian_brands[]` | 77% of raw tokens — manufacturer data, trade names, SNOMED product codes |
-| `formulations[].form_snomed_code` | SNOMED metadata |
-| `formulations[].display_name` | Redundant with form + ingredients |
-| `formulations[].generic_clinical_drug_code/name` | SNOMED reference |
-| `ingredients[].snomed_code` | Not needed for dose calculation |
-| `ingredients[].basis_of_strength/code` | Salt vs base metadata |
-| `ingredients[].is_active` | Always true |
-| `ingredient_doses[].snomed_code` | Not needed for dose calculation |
-| `snomed_display` | Redundant with generic_name |
-| `storage_instructions` | Pharmacist's domain |
-| `pregnancy_category` | Pediatric system |
-| `lactation_safe/note` | Pediatric system |
-| `data_source` | Internal metadata |
-| `reference_source[]` | Audit trail |
-| `last_reviewed_date` | Internal |
-| `id`, `created_at`, `updated_at`, `active` | Database internals |
-| **Empty arrays/null values** | Auto-stripped to save tokens |
+| Field                                            | Reason                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| `brand_names[]`                                  | Pharmacist's domain, not needed for prescribing                          |
+| `formulations[].indian_brands[]`                 | 77% of raw tokens — manufacturer data, trade names, SNOMED product codes |
+| `formulations[].form_snomed_code`                | SNOMED metadata                                                          |
+| `formulations[].display_name`                    | Redundant with form + ingredients                                        |
+| `formulations[].generic_clinical_drug_code/name` | SNOMED reference                                                         |
+| `ingredients[].snomed_code`                      | Not needed for dose calculation                                          |
+| `ingredients[].basis_of_strength/code`           | Salt vs base metadata                                                    |
+| `ingredients[].is_active`                        | Always true                                                              |
+| `ingredient_doses[].snomed_code`                 | Not needed for dose calculation                                          |
+| `snomed_display`                                 | Redundant with generic_name                                              |
+| `storage_instructions`                           | Pharmacist's domain                                                      |
+| `pregnancy_category`                             | Pediatric system                                                         |
+| `lactation_safe/note`                            | Pediatric system                                                         |
+| `data_source`                                    | Internal metadata                                                        |
+| `reference_source[]`                             | Audit trail                                                              |
+| `last_reviewed_date`                             | Internal                                                                 |
+| `id`, `created_at`, `updated_at`, `active`       | Database internals                                                       |
+| **Empty arrays/null values**                     | Auto-stripped to save tokens                                             |
 
 ---
 
@@ -100,8 +100,22 @@ Doctor types clinical note
       "route": "PO",
       "indian_conc_note": "Phenylephrine hydrochloride 2.5 mg / 1 mL + Chlorpheniramine maleate 1 mg / 1 mL",
       "ingredients": [
-        { "name": "Phenylephrine hydrochloride", "is_primary": true, "strength_numerator": 2.5, "strength_numerator_unit": "mg", "strength_denominator": 1, "strength_denominator_unit": "mL" },
-        { "name": "Chlorpheniramine maleate", "is_primary": false, "strength_numerator": 1, "strength_numerator_unit": "mg", "strength_denominator": 1, "strength_denominator_unit": "mL" }
+        {
+          "name": "Phenylephrine hydrochloride",
+          "is_primary": true,
+          "strength_numerator": 2.5,
+          "strength_numerator_unit": "mg",
+          "strength_denominator": 1,
+          "strength_denominator_unit": "mL"
+        },
+        {
+          "name": "Chlorpheniramine maleate",
+          "is_primary": false,
+          "strength_numerator": 1,
+          "strength_numerator_unit": "mg",
+          "strength_denominator": 1,
+          "strength_denominator_unit": "mL"
+        }
       ]
     }
   ],
@@ -117,14 +131,41 @@ Doctor types clinical note
       "rounding_rule": "whole_unit",
       "notes": "DCGI: Not for children <4 years...",
       "ingredient_doses": [
-        { "ingredient": "Phenylephrine hydrochloride", "dose_min_qty": 0.125, "dose_max_qty": 0.25, "dose_unit": "mg/kg/dose", "max_single_mg": 2.5, "max_daily_mg": 15, "is_limiting": false, "source": "FDA OTC monograph" },
-        { "ingredient": "Chlorpheniramine maleate", "dose_min_qty": 0.05, "dose_max_qty": 0.1, "dose_unit": "mg/kg/dose", "max_single_mg": 1, "max_daily_mg": 3, "is_limiting": true, "source": "Harriet Lane" }
+        {
+          "ingredient": "Phenylephrine hydrochloride",
+          "dose_min_qty": 0.125,
+          "dose_max_qty": 0.25,
+          "dose_unit": "mg/kg/dose",
+          "max_single_mg": 2.5,
+          "max_daily_mg": 15,
+          "is_limiting": false,
+          "source": "FDA OTC monograph"
+        },
+        {
+          "ingredient": "Chlorpheniramine maleate",
+          "dose_min_qty": 0.05,
+          "dose_max_qty": 0.1,
+          "dose_unit": "mg/kg/dose",
+          "max_single_mg": 1,
+          "max_daily_mg": 3,
+          "is_limiting": true,
+          "source": "Harriet Lane"
+        }
       ]
     }
   ],
   "snomed_code": "372914003",
-  "contraindications": ["Age <4 years (DCGI)", "Neonates", "Severe hypertension", "MAO inhibitor use within 14 days"],
-  "pediatric_specific_warnings": ["DCGI restriction: Not for children <4 years", "CPM causes sedation", "..."],
+  "contraindications": [
+    "Age <4 years (DCGI)",
+    "Neonates",
+    "Severe hypertension",
+    "MAO inhibitor use within 14 days"
+  ],
+  "pediatric_specific_warnings": [
+    "DCGI restriction: Not for children <4 years",
+    "CPM causes sedation",
+    "..."
+  ],
   "monitoring_parameters": ["Sedation level", "Heart rate"],
   "notes": "Two market variants exist..."
 }
