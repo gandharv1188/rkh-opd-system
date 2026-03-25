@@ -2710,20 +2710,59 @@
         const rows = blist
           .map((b) => {
             const abClass = "ab-" + (b.age_band || "all").replace(/\s/g, "-");
-            const qty =
-              b.dose_min_qty != null &&
-              b.dose_max_qty != null &&
-              b.dose_min_qty !== b.dose_max_qty
+            const ids = b.ingredient_doses || [];
+
+            // Build dose column — per-ingredient if available
+            let doseCol;
+            if (ids.length > 1) {
+              doseCol = ids.map(id => {
+                const name = (id.ingredient || "").split(" ")[0];
+                const qty = id.dose_min_qty != null
+                  ? (id.dose_min_qty !== (id.dose_max_qty || id.dose_min_qty)
+                      ? esc(id.dose_min_qty) + "–" + esc(id.dose_max_qty)
+                      : esc(id.dose_min_qty))
+                  : "—";
+                const flag = id.is_limiting ? ' <span style="font-size:8px;color:var(--blue);opacity:0.7">★</span>' : "";
+                return `<div style="font-size:10px"><strong>${esc(name)}</strong>: ${qty} ${esc(id.dose_unit || "")}${flag}</div>`;
+              }).join("");
+            } else if (ids.length === 1) {
+              const id = ids[0];
+              const qty = id.dose_min_qty != null && id.dose_max_qty != null && id.dose_min_qty !== id.dose_max_qty
+                ? esc(id.dose_min_qty) + "–" + esc(id.dose_max_qty)
+                : esc(id.dose_min_qty || id.dose_max_qty || "-");
+              doseCol = `<strong>${qty}</strong> ${esc(id.dose_unit || "")}`;
+            } else {
+              const qty = b.dose_min_qty != null && b.dose_max_qty != null && b.dose_min_qty !== b.dose_max_qty
                 ? esc(b.dose_min_qty) + "–" + esc(b.dose_max_qty)
                 : esc(b.dose_min_qty || b.dose_max_qty || "-");
+              doseCol = `<strong>${qty}</strong> ${esc(b.dose_unit || "")}`;
+            }
+
+            // Build max columns — per-ingredient if available
+            let maxSingleCol, maxDailyCol;
+            if (ids.length > 1) {
+              maxSingleCol = ids.filter(id => id.max_single_mg).map(id =>
+                `<div style="font-size:10px">${(id.ingredient||"").split(" ")[0]}: ${esc(id.max_single_mg)}mg</div>`
+              ).join("") || "-";
+              maxDailyCol = ids.filter(id => id.max_daily_mg).map(id =>
+                `<div style="font-size:10px">${(id.ingredient||"").split(" ")[0]}: ${esc(id.max_daily_mg)}mg</div>`
+              ).join("") || "-";
+            } else if (ids.length === 1) {
+              maxSingleCol = ids[0].max_single_mg ? esc(ids[0].max_single_mg) + "mg" : "-";
+              maxDailyCol = ids[0].max_daily_mg ? esc(ids[0].max_daily_mg) + "mg" : "-";
+            } else {
+              maxSingleCol = b.max_single_qty ? esc(b.max_single_qty) + " " + esc(b.max_single_unit || "") : "-";
+              maxDailyCol = b.max_daily_qty ? esc(b.max_daily_qty) + " " + esc(b.max_daily_unit || "") : "-";
+            }
+
             return `<tr>
           <td><span class="bk ${abClass}" style="font-size:10px">${esc(b.age_band || "all")}</span></td>
           <td><span class="bk db-method ${esc(b.method || "weight")}" style="font-size:10px">${esc(b.method || "weight")}</span></td>
-          <td><strong>${qty}</strong> ${esc(b.dose_unit || "")}</td>
+          <td>${doseCol}</td>
           <td>${b.frequency_per_day ? esc(b.frequency_per_day) + "×/day" : ""}${b.interval_hours ? " (q" + esc(b.interval_hours) + "h)" : ""}</td>
           <td>${b.duration_days ? esc(b.duration_days) + "d" : b.duration_note ? esc(b.duration_note) : "-"}</td>
-          <td>${b.max_single_qty ? esc(b.max_single_qty) + " " + esc(b.max_single_unit || "") : "-"}</td>
-          <td>${b.max_daily_qty ? esc(b.max_daily_qty) + " " + esc(b.max_daily_unit || "") : "-"}</td>
+          <td>${maxSingleCol}</td>
+          <td>${maxDailyCol}</td>
           <td>${b.loading_dose_qty ? esc(b.loading_dose_qty) + " " + esc(b.loading_dose_unit || "") : "-"}</td>
           <td>${esc(b.rounding_rule || "-")}</td>
           <td style="font-size:10px;max-width:140px">${esc(b.notes || "")}</td>
