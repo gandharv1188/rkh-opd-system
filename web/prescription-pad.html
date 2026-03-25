@@ -2422,8 +2422,7 @@
   function dpSliderChanged(pid, idx) {
     const slider = document.getElementById(pid + "-slider");
     if (!slider) return;
-    const mgkg = parseFloat(slider.value);
-    document.getElementById(pid + "-mgkg").value = mgkg;
+    let mgkg = parseFloat(slider.value);
 
     const m = rxData.medicines[idx];
     const ref = getDoseRef(m.row1_en, rxData.patient?.age);
@@ -2431,13 +2430,6 @@
       ? ref.allBands.filter((b) => b.dose_min_qty != null)
       : [];
     const doseUnit = ref?.bands?.[0]?.dose_unit || "mg/kg/day";
-
-    // Find which indication zone the slider is in
-    const matchedBand = allBands.find(
-      (b) =>
-        mgkg >= b.dose_min_qty && mgkg <= (b.dose_max_qty || b.dose_min_qty),
-    );
-    const inAny = !!matchedBand;
 
     // Calculate output in selected unit for prominent display
     const wt = parseFloat(document.getElementById(pid + "-wt").value) || 10;
@@ -2448,11 +2440,48 @@
       'input[name="' + pid + '-unit-r"]:checked',
     );
     const unit = unitSel ? unitSel.value : "mL";
-    // If dosing band is per-dose (is_per_day=false), mgkg IS the per-dose value — don't divide by freq
     const band0 = ref?.bands?.[0];
     const isPerDay = band0 ? band0.is_per_day !== false : true;
+
+    // Snap slider to discrete output units (whole drops, 0.5mL, quarter tab, whole capsule)
+    {
+      const perDoseRaw = isPerDay ? (wt * mgkg) / freq : wt * mgkg;
+      const mlRaw = (perDoseRaw / cmg) * cml;
+      let snappedPerDose = perDoseRaw;
+      if (unit === "drops") {
+        const drops = Math.max(1, Math.round(mlRaw * 20));
+        snappedPerDose = (drops / 20 / cml) * cmg;
+      } else if (unit === "mL") {
+        const ml = Math.max(0.5, Math.round(mlRaw * 2) / 2);
+        snappedPerDose = (ml / cml) * cmg;
+      } else if (unit === "tsp") {
+        const tsp = Math.max(0.5, Math.round((mlRaw / 5) * 2) / 2);
+        snappedPerDose = ((tsp * 5) / cml) * cmg;
+      } else if (unit === "tablet") {
+        const tabs = Math.max(0.25, Math.round((perDoseRaw / cmg) * 4) / 4);
+        snappedPerDose = tabs * cmg;
+      } else if (unit === "capsule") {
+        const caps = Math.max(1, Math.round(perDoseRaw / cmg));
+        snappedPerDose = caps * cmg;
+      } else if (unit === "puffs") {
+        const puffs = Math.max(1, Math.round(perDoseRaw / cmg));
+        snappedPerDose = puffs * cmg;
+      }
+      mgkg = isPerDay ? (snappedPerDose * freq) / wt : snappedPerDose / wt;
+      mgkg = parseFloat(mgkg.toFixed(4));
+    }
+
+    document.getElementById(pid + "-mgkg").value = mgkg;
+
     const perDose = isPerDay ? (wt * mgkg) / freq : wt * mgkg;
     const mlPerDose = (perDose / cmg) * cml;
+
+    // Find which indication zone the slider is in
+    const matchedBand = allBands.find(
+      (b) =>
+        mgkg >= b.dose_min_qty && mgkg <= (b.dose_max_qty || b.dose_min_qty),
+    );
+    const inAny = !!matchedBand;
 
     let outLabel = "";
     if (unit === "drops") {
