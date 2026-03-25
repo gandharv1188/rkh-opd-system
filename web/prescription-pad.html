@@ -345,8 +345,44 @@
     flex: 1;
   }
   /* Visit Summary Panel */
+  /* Collapsible panels (shared style for vitals + visit summary) */
+  .collapse-panel {
+    margin: 6px 14px 0;
+    background: var(--blue-lt);
+    border: 1px solid var(--bdr);
+    border-radius: var(--r);
+    font-size: 12px;
+    color: var(--ink2);
+    overflow: hidden;
+  }
+  .collapse-hdr {
+    display: flex;
+    align-items: center;
+    padding: 7px 12px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    color: var(--blue);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+  }
+  .collapse-hdr:hover {
+    background: rgba(30, 58, 107, 0.06);
+  }
+  .collapse-hdr .arrow {
+    margin-right: 6px;
+    font-size: 9px;
+    transition: transform 0.15s;
+  }
+  .collapse-body {
+    padding: 0 12px 8px;
+    line-height: 1.6;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  /* Legacy aliases */
   .visit-summary-panel {
-    margin: 8px 14px 0;
+    margin: 6px 14px 0;
     background: var(--blue-lt);
     border: 1px solid var(--bdr);
     border-radius: var(--r);
@@ -357,13 +393,13 @@
   .visit-summary-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 6px 12px;
+    padding: 7px 12px;
     cursor: pointer;
     user-select: none;
     font-weight: 600;
     color: var(--blue);
-    font-size: 12px;
+    font-size: 11px;
+    letter-spacing: 0.03em;
   }
   .visit-summary-header:hover {
     background: rgba(30, 58, 107, 0.06);
@@ -372,7 +408,7 @@
     padding: 0 12px 8px;
     white-space: pre-wrap;
     line-height: 1.6;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     font-family: system-ui, sans-serif;
   }
@@ -1843,24 +1879,18 @@
       <!-- Visit Summary (read-only, collapsible) -->
       <div
         id="visit-summary-panel"
-        class="visit-summary-panel"
+        class="collapse-panel"
         style="display: none"
       >
-        <div class="visit-summary-header" onclick="toggleVisitSummary()">
-          <span id="visit-summary-arrow">&#9660;</span>&nbsp; Previous Visit
-          Summary
-          <button
-            class="visit-summary-toggle"
-            onclick="
-              event.stopPropagation();
-              toggleVisitSummary();
-            "
-            title="Toggle summary"
-          >
-            &times;
-          </button>
+        <div class="collapse-hdr" onclick="toggleVisitSummary()">
+          <span class="arrow" id="visit-summary-arrow">&#9660;</span> Previous
+          Visit Summary
         </div>
-        <div id="visit-summary-body" class="visit-summary-body"></div>
+        <div
+          id="visit-summary-body"
+          class="collapse-body"
+          style="white-space: pre-wrap; font-family: system-ui, sans-serif"
+        ></div>
       </div>
 
       <div class="pad-hint">
@@ -4095,14 +4125,14 @@
     vi += growthHtml + labsHtml + vaxHtml;
 
     if (vi) {
-      panel.innerHTML = `<div class="visit-info">
-        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:2px 0" onclick="const b=this.nextElementSibling;b.style.display=b.style.display==='none'?'':'none';this.querySelector('.vi-arrow').textContent=b.style.display==='none'?'\u25B6':'\u25BC'">
-          <span style="font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:0.05em"><span class="vi-arrow">\u25BC</span> Vitals &amp; Visit Data</span>
+      panel.innerHTML = `<div class="collapse-panel">
+        <div class="collapse-hdr" onclick="const b=this.nextElementSibling;b.style.display=b.style.display==='none'?'':'none';this.querySelector('.arrow').textContent=b.style.display==='none'?'\u25B6':'\u25BC'">
+          <span class="arrow">\u25BC</span> Current Visit${visit?.chief_complaints ? ' \u2014 <span style="font-weight:400;font-style:italic;color:var(--ink2)">' + esc(visit.chief_complaints.slice(0, 80)) + "</span>" : ""}
         </div>
-        <div>${vi}</div>
+        <div class="collapse-body"><div class="visit-info">${vi}</div></div>
       </div>`;
     } else {
-      panel.innerHTML = `<div class="visit-info"><div class="vi-row" style="color:var(--ink3)">No visit data captured yet for today</div></div>`;
+      panel.innerHTML = `<div class="collapse-panel"><div class="collapse-hdr" style="cursor:default"><span class="arrow">\u25BC</span> Current Visit \u2014 <span style="font-weight:400;color:var(--ink3)">No visit data captured yet</span></div></div>`;
     }
 
     // Check if doctor has a saved note from earlier (raw_dictation)
