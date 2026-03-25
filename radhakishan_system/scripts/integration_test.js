@@ -448,14 +448,55 @@ async function test7_formularyBranded() {
       "dosing_band[0].method is non-empty string",
       `Got: ${band.method}`,
     );
+
+    // NEW: ingredient_doses[] structure
     assert(
-      typeof band.dose_unit === "string" && band.dose_unit.length > 0,
-      "dosing_band[0].dose_unit is non-empty string",
-      `Got: ${band.dose_unit}`,
+      Array.isArray(band.ingredient_doses) && band.ingredient_doses.length >= 1,
+      "dosing_band[0].ingredient_doses is array with >= 1 entry",
+      `Got: ${Array.isArray(band.ingredient_doses) ? band.ingredient_doses.length + " entries" : typeof band.ingredient_doses}`,
+    );
+
+    if (
+      Array.isArray(band.ingredient_doses) &&
+      band.ingredient_doses.length > 0
+    ) {
+      const id = band.ingredient_doses[0];
+      assert(
+        typeof id.ingredient === "string" && id.ingredient.length > 0,
+        "ingredient_doses[0].ingredient is non-empty string",
+        `Got: ${id.ingredient}`,
+      );
+      assert(
+        id.dose_min_qty != null ||
+          id.dose_unit === "excipient" ||
+          id.dose_unit === "vehicle",
+        "ingredient_doses[0].dose_min_qty exists or is excipient/vehicle",
+        `Got: dose_min=${id.dose_min_qty}, unit=${id.dose_unit}`,
+      );
+      assert(
+        typeof id.is_limiting === "boolean",
+        "ingredient_doses[0].is_limiting is boolean",
+        `Got: ${id.is_limiting}`,
+      );
+
+      // At least one ingredient should be limiting
+      const hasLimiting = band.ingredient_doses.some((d) => d.is_limiting);
+      assert(
+        hasLimiting,
+        "At least one ingredient_dose is_limiting=true",
+        `Got: ${band.ingredient_doses.map((d) => d.ingredient + ":" + d.is_limiting).join(", ")}`,
+      );
+    }
+
+    // Verify OLD band-level fields are REMOVED
+    assert(
+      band.dose_min_qty === undefined,
+      "OLD band.dose_min_qty is REMOVED (migrated to ingredient_doses)",
+      `Got: ${band.dose_min_qty}`,
     );
     assert(
-      band.max_single_qty != null,
-      "dosing_band[0].max_single_qty exists",
+      band.max_single_qty === undefined,
+      "OLD band.max_single_qty is REMOVED (migrated to ingredient_doses)",
       `Got: ${band.max_single_qty}`,
     );
   }
