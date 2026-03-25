@@ -6867,7 +6867,7 @@
         <strong style="font-size:14px;color:var(--blue)">Add Medicine from Formulary</strong>
         <button onclick="document.getElementById('add-med-overlay').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink3)">\u00d7</button>
       </div>
-      <input class="add-med-search" id="add-med-search" placeholder="Search drug name..." oninput="filterAddMed()" autofocus>
+      <input class="add-med-search" id="add-med-search" placeholder="Search generic or brand name (e.g. Crocin, Augmentin, Karvol)..." oninput="filterAddMed()" autofocus>
       <div class="add-med-list" id="add-med-list">
         ${drugNames
           .slice(0, 50)
@@ -6927,8 +6927,14 @@
       .toUpperCase()
       .trim();
     const list = document.getElementById("add-med-list");
-    const renderItem = (d) =>
-      `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong><div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + fmtConc(f)).join(", ")}</div></div>`;
+    const renderItem = (d, matchedBrand) => {
+      const brandHint = matchedBrand
+        ? '<span style="font-size:10px;color:var(--blue);margin-left:6px">(' +
+          esc(matchedBrand) +
+          ")</span>"
+        : "";
+      return `<div class="add-med-item" onclick="selectAddMed('${esc(d)}')"><strong>${esc(d)}</strong>${brandHint}<div style="font-size:10px;color:var(--ink3)">${(formularyCache[d]?.formulations || []).map((f) => f.form + " " + fmtConc(f)).join(", ")}</div></div>`;
+    };
     if (!q) {
       list.innerHTML = Object.keys(formularyCache)
         .sort()
@@ -6938,13 +6944,44 @@
       return;
     }
     const results = Object.keys(formularyCache)
-      .map((d) => ({ d, s: fuzzyScore(d, q) }))
+      .map((d) => {
+        let s = fuzzyScore(d, q);
+        let matchedBrand = null;
+        // Also search brand_names and indian_brands
+        if (s === 0) {
+          const drug = formularyCache[d];
+          const ql = q.toLowerCase();
+          const bn = (drug.brand_names || []).find(
+            (b) => b.toUpperCase().includes(q) || b.toLowerCase().includes(ql),
+          );
+          if (bn) {
+            s = 2.5;
+            matchedBrand = bn;
+          }
+          if (s === 0) {
+            for (const f of drug.formulations || []) {
+              const ib = (f.indian_brands || []).find(
+                (b) =>
+                  (b.name || "").toUpperCase().includes(q) ||
+                  (b.trade_name || "").toUpperCase().includes(q),
+              );
+              if (ib) {
+                s = 2;
+                matchedBrand =
+                  ib.name + (ib.manufacturer ? " — " + ib.manufacturer : "");
+                break;
+              }
+            }
+          }
+        }
+        return { d, s, matchedBrand };
+      })
       .filter((x) => x.s > 0)
       .sort((a, b) => b.s - a.s || a.d.localeCompare(b.d));
     list.innerHTML =
       results
         .slice(0, 50)
-        .map((x) => renderItem(x.d))
+        .map((x) => renderItem(x.d, x.matchedBrand))
         .join("") ||
       '<div style="padding:10px;color:var(--ink3);font-size:12px">No matches found</div>';
   }
