@@ -160,13 +160,13 @@
     color: var(--ink3);
   }
 
-  /* Tabs */
+  /* Tabs — sticks below the header; JS updates top dynamically */
   .tabs {
     display: flex;
     background: var(--bg3);
     border-bottom: 1px solid var(--bdr2);
     position: sticky;
-    top: 74px;
+    top: var(--hdr-h, 90px);
     z-index: 99;
   }
   .tab {
@@ -1882,7 +1882,7 @@
       <div class="mod-lbl">Include in prescription</div>
       <div class="mod-chips">
         <div
-          class="mod-chip"
+          class="mod-chip on"
           id="chip-stdrx"
           onclick="toggleMod('stdrx')"
           style="border-color: rgba(30, 88, 107, 0.4); font-weight: 600"
@@ -1921,9 +1921,7 @@
         <div class="mod-chip" id="chip-iv" onclick="toggleMod('iv')">
           <span class="chip-dot"></span>IV fluids
         </div>
-        <div class="mod-chip" id="chip-ref" onclick="toggleMod('ref')">
-          <span class="chip-dot"></span>Referral
-        </div>
+        <!-- Referral button removed per doctor request -->
         <div
           class="mod-chip"
           id="chip-admit"
@@ -2130,7 +2128,7 @@
     rxData = null,
     visitId = null,
     rxId = null;
-  let activeMods = new Set(),
+  let activeMods = new Set(["inv", "stdrx", "growth"]),
     recog = null,
     isRec = false;
   let formularyCache = {},
@@ -3192,11 +3190,22 @@
       // Check which patients have approved prescriptions today
       const rxr = await q(
         "prescriptions",
-        `?patient_id=in.(${ids.join(",")})&is_approved=eq.true&created_at=gte.${today}&select=patient_id`,
+        `?patient_id=in.(${ids.join(",")})&is_approved=eq.true&created_at=gte.${today}&select=patient_id,generated_json`,
       );
       const doneIds = new Set();
+      const doneDiagnosis = {};
       if (rxr.ok) {
-        (await rxr.json()).forEach((rx) => doneIds.add(rx.patient_id));
+        (await rxr.json()).forEach((rx) => {
+          doneIds.add(rx.patient_id);
+          // Extract diagnosis names for display in patient list
+          const diag = rx.generated_json?.diagnosis;
+          if (Array.isArray(diag) && diag.length) {
+            doneDiagnosis[rx.patient_id] = diag
+              .map((d) => d.name || d.diagnosis_name || "")
+              .filter(Boolean)
+              .join(", ");
+          }
+        });
       }
       todayPatients = [];
       const seen = new Set();
@@ -3206,7 +3215,12 @@
         seen.add(v.patient_id);
         const p = pMap[v.patient_id];
         if (p)
-          todayPatients.unshift({ ...p, visit: v, done: doneIds.has(p.id) });
+          todayPatients.unshift({
+            ...p,
+            visit: v,
+            done: doneIds.has(p.id),
+            rx_diagnosis: doneDiagnosis[p.id] || "",
+          });
       }
       renderPatientList();
       // Update placeholder with count
@@ -3243,7 +3257,7 @@
     const age = calcAge(p.dob);
     if (p.done) {
       return `<div onclick="selectFromList(${i})" style="padding:5px 12px;cursor:pointer;border-bottom:1px solid #f0f0ea;font-size:11px;color:var(--ink3);background:${isMatch ? "#f0f5ff" : "#f9f9f5"};" onmouseover="this.style.background='#f0f0ea'" onmouseout="this.style.background='${isMatch ? "#f0f5ff" : "#f9f9f5"}'">
-        <strong>${i + 1}.</strong> ${esc(p.name)} <span style="color:#aaa">— ${esc(p.id)}</span> · ${esc(age)} · ✓
+        <strong>${i + 1}.</strong> ${esc(p.name)} <span style="color:#aaa">— ${esc(p.id)}</span> · ${esc(age)} · ✓${p.rx_diagnosis ? ' <span style="color:var(--green);font-size:10px">(' + esc(p.rx_diagnosis) + ")</span>" : ""}
       </div>`;
     }
     const allergy = p.known_allergies?.length
@@ -4081,7 +4095,12 @@
     vi += growthHtml + labsHtml + vaxHtml;
 
     if (vi) {
-      panel.innerHTML = `<div class="visit-info">${vi}</div>`;
+      panel.innerHTML = `<div class="visit-info">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:2px 0" onclick="const b=this.nextElementSibling;b.style.display=b.style.display==='none'?'':'none';this.querySelector('.vi-arrow').textContent=b.style.display==='none'?'\u25B6':'\u25BC'">
+          <span style="font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:0.05em"><span class="vi-arrow">\u25BC</span> Vitals &amp; Visit Data</span>
+        </div>
+        <div>${vi}</div>
+      </div>`;
     } else {
       panel.innerHTML = `<div class="visit-info"><div class="vi-row" style="color:var(--ink3)">No visit data captured yet for today</div></div>`;
     }
@@ -4172,7 +4191,10 @@
     const summaryPanel = document.getElementById("visit-summary-panel");
     const summaryBody = document.getElementById("visit-summary-body");
     if (visit?.visit_summary && summaryPanel && summaryBody) {
-      summaryBody.textContent = visit.visit_summary;
+      // Convert basic markdown bold (**text**) to HTML, preserving XSS safety
+      summaryBody.innerHTML = esc(visit.visit_summary)
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\n/g, "<br>");
       summaryPanel.style.display = "";
       summaryBody.style.display = "";
       const arrow = document.getElementById("visit-summary-arrow");
@@ -4870,7 +4892,14 @@
       rxLang !== "bilingual"
         ? "\nLANGUAGE: " + (rxLang === "hindi" ? "Hindi" : "English")
         : "";
-    const fullNote = note + sectionsNote + langNote;
+    // Include previous visit summary for returning patients (clearly separated)
+    const curVisit = selectedPatient?._visit;
+    const visitSummary = curVisit?.visit_summary;
+    const summaryNote = visitSummary
+      ? "\n\nPREVIOUS VISIT SUMMARY (AI-generated from prior visits — for context only, DO NOT confuse with current clinical note above):\n" +
+        visitSummary
+      : "";
+    const fullNote = note + sectionsNote + langNote + summaryNote;
 
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];
@@ -7777,8 +7806,22 @@
     loadDocuments,
   });
 
+  // Set sticky tabs offset based on actual header height
+  function updateHdrH() {
+    const hdr = document.querySelector(".hdr");
+    if (hdr)
+      document.documentElement.style.setProperty(
+        "--hdr-h",
+        hdr.offsetHeight + "px",
+      );
+  }
+  window.addEventListener("resize", updateHdrH);
+
   // Auto-connect on page load
-  window.addEventListener("load", () => connectSB());
+  window.addEventListener("load", () => {
+    updateHdrH();
+    connectSB();
+  });
   setTimeout(() => {
     if (!sbConnected) connectSB();
   }, 1000);
