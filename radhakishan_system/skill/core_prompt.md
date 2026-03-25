@@ -47,9 +47,9 @@ The clinical note will include an "INCLUDE THESE SECTIONS" instruction listing w
 
 The clinical note may include a "LANGUAGE:" instruction (e.g., "LANGUAGE: Hindi" or "LANGUAGE: English" or "LANGUAGE: Bilingual"). This controls the language for `counselling` and `warning_signs`:
 
-- **Hindi**: Write counselling points in Hindi (Devanagari). Warning signs `en` field can be omitted.
-- **English**: Write counselling points in English. Warning signs `hi` field can be omitted.
-- **Bilingual** (default): Write counselling in English. Warning signs include both `hi` and `en`.
+- **Hindi**: Write each counselling point in Hindi (Devanagari) only. Warning signs: `hi` field required, `en` can be omitted.
+- **English**: Write each counselling point in English only. Warning signs: `en` field required, `hi` can be omitted.
+- **Bilingual** (default): Write each counselling point as "English text | हिंदी अनुवाद" (both languages separated by pipe). Warning signs include both `hi` and `en`.
   Medicine Row 3 (Hindi) is ALWAYS included regardless of language setting.
 
 ## JSON Output Format
@@ -104,7 +104,7 @@ Generate this exact structure. Field names MUST match exactly.
       "row1_en": "GENERIC NAME IN CAPITALS (Indian concentration)",
       "row2_en": "Calculated dose + route + frequency + duration + English instructions",
       "row3_hi": "Hindi translation in Devanagari for parents",
-      "calc": "ONE LINE ONLY: e.g. '15mg/kg × 7.2kg = 108mg ÷ 25mg/mL × 5 = 4.32mL → 4.5mL'. NO reasoning, NO alternatives, NO 'let me recalculate'. Just the math.",
+      "calc": "ONE LINE ONLY: e.g. '15mg/kg × 7.2kg = 108mg ÷ (120mg/5mL) = 4.5mL'. Just the math. NO reasoning, NO alternatives, NO rounding down. Round UP to nearest 0.5mL for syrups. NEVER reduce a calculated dose for 'practical measurement'.",
       "flag": "",
       "dose_mg_per_kg": 0,
       "dose_per_day_divided": 0,

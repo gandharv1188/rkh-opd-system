@@ -611,6 +611,37 @@
         ],
         "indian_conc_note": "CPX-351 (liposomal Ara-C/dauno) ?  / 1 vial",
         "display_name": null
+      },
+      {
+        "form": "Injection",
+        "form_snomed_code": null,
+        "route": "IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "CPX-351 (liposomal Ara-C/dauno)",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": null,
+            "strength_numerator_unit": "mg",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "vial"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Vyxeos (Jazz Pharma; limited availability in India)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "CPX-351 (liposomal Ara-C/dauno) ? mg / 1 vial",
+        "display_name": null
       }
     ],
     "dosing_bands": [
@@ -896,6 +927,37 @@
           }
         ],
         "indian_conc_note": "Casgevy (exagamglogene autotemcel) ?  / 1 infusion bag",
+        "display_name": null
+      },
+      {
+        "form": "Cell suspension for infusion",
+        "form_snomed_code": null,
+        "route": "IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "Casgevy (exagamglogene autotemcel)",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": null,
+            "strength_numerator_unit": "mg",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "infusion bag"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Casgevy (imported/not registered in India)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "Casgevy (exagamglogene autotemcel) ? mg / 1 infusion bag",
         "display_name": null
       }
     ],
@@ -7285,6 +7347,37 @@
         ],
         "indian_conc_note": "Lyfgenia (lovotibeglogene autotemcel) ?  / 1 infusion bag",
         "display_name": null
+      },
+      {
+        "form": "Cell suspension for IV infusion",
+        "form_snomed_code": null,
+        "route": "IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "Lyfgenia (lovotibeglogene autotemcel)",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": null,
+            "strength_numerator_unit": "mg",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "infusion bag"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Not available in India",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "Lyfgenia (lovotibeglogene autotemcel) ? mg / 1 infusion bag",
+        "display_name": null
       }
     ],
     "dosing_bands": [
@@ -8810,6 +8903,37 @@
           }
         ],
         "indian_conc_note": "ISOLYTE-P 500 bottle / 1 mL",
+        "display_name": null
+      },
+      {
+        "form": "IV fluid",
+        "form_snomed_code": null,
+        "route": "IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "ISOLYTE-P",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 500,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "bottle"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Isolyte-P 500 mL (Claris/Baxter)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "ISOLYTE-P 500 mL / 1 bottle",
         "display_name": null
       }
     ],
@@ -10616,6 +10740,37 @@
         ],
         "indian_conc_note": "JAPANESE ENCEPHALITIS VACCINE 0.5 dose / 1 mL",
         "display_name": null
+      },
+      {
+        "form": "Injection",
+        "form_snomed_code": null,
+        "route": "IM/SC",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "JAPANESE ENCEPHALITIS VACCINE",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 0.5,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "dose"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "JENVAC 0.5 mL (Bharat Biotech)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "JAPANESE ENCEPHALITIS VACCINE 0.5 mL / 1 dose",
+        "display_name": null
       }
     ],
     "dosing_bands": [
@@ -10886,6 +11041,68 @@
           }
         ],
         "indian_conc_note": "LIQUID PARAFFIN 100 bottle / 1 mL",
+        "display_name": null
+      },
+      {
+        "form": "Liquid (oral)",
+        "form_snomed_code": null,
+        "route": "PO",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "LIQUID PARAFFIN",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 100,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "bottle"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Liquid Paraffin IP (generic)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "LIQUID PARAFFIN 100 mL / 1 bottle",
+        "display_name": null
+      },
+      {
+        "form": "Liquid (topical)",
+        "form_snomed_code": null,
+        "route": "Topical",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "LIQUID PARAFFIN",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 100,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "bottle"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Light Liquid Paraffin IP (generic)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "LIQUID PARAFFIN 100 mL / 1 bottle",
         "display_name": null
       }
     ],
@@ -11488,6 +11705,37 @@
           }
         ],
         "indian_conc_note": "PNEUMOCOCCAL CONJUGATE VACCINE 0.5 dose / 1 mL",
+        "display_name": null
+      },
+      {
+        "form": "Injection (PCV13 — 13-valent)",
+        "form_snomed_code": null,
+        "route": "IM",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "PNEUMOCOCCAL CONJUGATE VACCINE",
+            "snomed_code": null,
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 0.5,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "dose"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Prevenar 13 (Pfizer)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "PNEUMOCOCCAL CONJUGATE VACCINE 0.5 mL / 1 dose",
         "display_name": null
       }
     ],

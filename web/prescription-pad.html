@@ -2926,21 +2926,22 @@
           "drugs",
         );
       }
+      let stdCount = 0;
       if (sr.ok) {
         const stds = await sr.json();
+        stdCount = stds.length;
         stds.forEach((s) => {
           if (s.icd10) stdRxCache[s.icd10.toUpperCase()] = s;
           if (s.diagnosis_name) stdRxCache[s.diagnosis_name.toUpperCase()] = s;
         });
         console.log(
           "Standard Rx loaded:",
-          Object.keys(stdRxCache).length,
-          "protocols",
+          stdCount,
+          "protocols (" + Object.keys(stdRxCache).length + " cache keys)",
         );
       }
-      // Log to console only, don't show to doctor
       console.log(
-        `✓ ${Object.keys(formularyCache).length} drugs and ${Object.keys(stdRxCache).length} standard protocols loaded`,
+        `✓ ${Object.keys(formularyCache).length} drugs and ${stdCount} standard protocols loaded`,
       );
     } catch (e) {
       console.warn("Preload partial:", e.message);
@@ -3526,12 +3527,19 @@
 
   async function fetchStorageDocs(patientId, docsTab, docsContent) {
     try {
-      const r = await fetch(
-        SB +
-          "/storage/v1/object/list/documents/" +
-          encodeURIComponent(patientId),
-        { headers: { apikey: KEY, Authorization: "Bearer " + KEY } },
-      );
+      const r = await fetch(SB + "/storage/v1/object/list/documents", {
+        method: "POST",
+        headers: {
+          apikey: KEY,
+          Authorization: "Bearer " + KEY,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prefix: patientId + "/",
+          limit: 100,
+          offset: 0,
+        }),
+      });
       if (!r.ok) return;
       const files = await r.json();
       if (!files || !files.length) return;

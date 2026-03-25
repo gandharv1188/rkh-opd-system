@@ -4268,6 +4268,37 @@
         ],
         "indian_conc_note": "Crotalidae polyvalent immune fab 10 vial / 1 mL",
         "display_name": null
+      },
+      {
+        "form": "Lyophilised powder",
+        "form_snomed_code": null,
+        "route": "IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "Crotalidae Polyvalent Immune Fab (CroFab)",
+            "snomed_code": "425504006",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 10,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "vial"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "ASV Polyvalent (VINS Bio)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "Crotalidae Polyvalent Immune Fab (CroFab) 10 mL / 1 vial",
+        "display_name": null
       }
     ],
     "dosing_bands": [
@@ -10366,6 +10397,37 @@
           }
         ],
         "indian_conc_note": "Lactated Ringer solution 500 bottle / 1 mL",
+        "display_name": null
+      },
+      {
+        "form": "IV solution",
+        "form_snomed_code": null,
+        "route": "IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "Lactated Ringer",
+            "snomed_code": "46097003",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 500,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "bottle"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "RL (Fresenius Kabi), RL (Claris)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "Lactated Ringer 500 mL / 1 bottle",
         "display_name": null
       }
     ],
@@ -21758,6 +21820,37 @@
         ],
         "indian_conc_note": "Vitamin B>5< 2 ampoule / 1 mL",
         "display_name": null
+      },
+      {
+        "form": "Injection",
+        "form_snomed_code": null,
+        "route": "IM/IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "B-COMPLEX",
+            "snomed_code": "86431009",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 2,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "ampoule"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Polybion Injection (Merck)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "B-COMPLEX 2 mL / 1 ampoule",
+        "display_name": null
       }
     ],
     "dosing_bands": [
@@ -23195,6 +23288,68 @@
         ],
         "indian_conc_note": "Isoflurane 250 bottle / 1 mL",
         "display_name": null
+      },
+      {
+        "form": "Inhalation liquid",
+        "form_snomed_code": null,
+        "route": "INH",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "ISOFLURANE",
+            "snomed_code": "387368002",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 100,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "bottle"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Forane 100 mL (AbbVie)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "ISOFLURANE 100 mL / 1 bottle",
+        "display_name": null
+      },
+      {
+        "form": "Inhalation liquid",
+        "form_snomed_code": null,
+        "route": "INH",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "ISOFLURANE",
+            "snomed_code": "387368002",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 250,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "bottle"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Isorane 250 mL (Neon Labs)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "ISOFLURANE 250 mL / 1 bottle",
+        "display_name": null
       }
     ],
     "dosing_bands": [
@@ -23307,6 +23462,37 @@
           }
         ],
         "indian_conc_note": "Measles live virus vaccine 0.5 dose / 1 mL",
+        "display_name": null
+      },
+      {
+        "form": "Injection (lyophilized + diluent)",
+        "form_snomed_code": null,
+        "route": "SC",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "MEASLES VACCINE",
+            "snomed_code": "396427003",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 0.5,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "dose"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "M-Vac (Serum Institute)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "MEASLES VACCINE 0.5 mL / 1 dose",
         "display_name": null
       }
     ],
@@ -23423,6 +23609,37 @@
           }
         ],
         "indian_conc_note": "Meningococcal antibody 0.5 dose / 1 mL",
+        "display_name": null
+      },
+      {
+        "form": "Injection",
+        "form_snomed_code": null,
+        "route": "IM",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "MENINGOCOCCAL CONJUGATE VACCINE",
+            "snomed_code": "259838001",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 0.5,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "dose"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Menactra 0.5 mL (Sanofi)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "MENINGOCOCCAL CONJUGATE VACCINE 0.5 mL / 1 dose",
         "display_name": null
       }
     ],
@@ -25731,6 +25948,68 @@
         ],
         "indian_conc_note": "Rotavirus vaccine 2.5 dose / 1 mL",
         "display_name": null
+      },
+      {
+        "form": "Oral solution (Rotavac — bovine-human reassortant, 116E)",
+        "form_snomed_code": null,
+        "route": "PO",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "ROTAVIRUS VACCINE",
+            "snomed_code": "398866008",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 0.5,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "dose"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Rotavac (Bharat Biotech)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "ROTAVIRUS VACCINE 0.5 mL / 1 dose",
+        "display_name": null
+      },
+      {
+        "form": "Oral solution (Rotasiil — bovine-human reassortant, pentavalent)",
+        "form_snomed_code": null,
+        "route": "PO",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "ROTAVIRUS VACCINE",
+            "snomed_code": "398866008",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 2.5,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "dose"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "Rotasiil (SII)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "ROTAVIRUS VACCINE 2.5 mL / 1 dose",
+        "display_name": null
       }
     ],
     "dosing_bands": [
@@ -26483,6 +26762,99 @@
           }
         ],
         "indian_conc_note": "H2O - water 500 bottle / 1 mL",
+        "display_name": null
+      },
+      {
+        "form": "Injection (ampoule)",
+        "form_snomed_code": null,
+        "route": "IV/IM",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "WATER FOR INJECTION",
+            "snomed_code": "11713004",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 5,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "ampoule"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "WFI 5 mL (Neon/Claris)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "WATER FOR INJECTION 5 mL / 1 ampoule",
+        "display_name": null
+      },
+      {
+        "form": "Injection (ampoule)",
+        "form_snomed_code": null,
+        "route": "IV/IM",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "WATER FOR INJECTION",
+            "snomed_code": "11713004",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 10,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "ampoule"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "WFI 10 mL (Neon/Claris)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "WATER FOR INJECTION 10 mL / 1 ampoule",
+        "display_name": null
+      },
+      {
+        "form": "Injection (bottle)",
+        "form_snomed_code": null,
+        "route": "IV",
+        "unit_of_presentation": null,
+        "unit_of_presentation_code": null,
+        "generic_clinical_drug_code": null,
+        "generic_clinical_drug_name": null,
+        "ingredients": [
+          {
+            "name": "WATER FOR INJECTION",
+            "snomed_code": "11713004",
+            "is_active": true,
+            "is_primary": true,
+            "strength_numerator": 500,
+            "strength_numerator_unit": "mL",
+            "strength_denominator": 1,
+            "strength_denominator_unit": "bottle"
+          }
+        ],
+        "indian_brands": [
+          {
+            "name": "WFI 500 mL (Baxter/Claris)",
+            "manufacturer": null,
+            "snomed_code": null,
+            "verified_on": "Original formulary data"
+          }
+        ],
+        "indian_conc_note": "WATER FOR INJECTION 500 mL / 1 bottle",
         "display_name": null
       }
     ],
