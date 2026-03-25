@@ -2189,49 +2189,72 @@
       .toUpperCase()
       .replace(
         /\s+(SYRUP|TABLET|CAPSULE|DROPS|INJECTION|CREAM|OINTMENT|INHALER|SUSPENSION|ORAL DROPS|SUPPOSITORY|DISPERSIBLE TABLET|CHEWABLE TABLET|DRY SYRUP|NASAL DROPS|NASAL SPRAY|EYE DROPS|EYE OINTMENT|EAR DROPS|GEL|LOTION|PASTE|SPRAY|PATCH|SACHETS|POWDER|GRANULES|ENEMA|PESSARY|RESPULES|NEBULISATION|IV INFUSION|IM INJECTION|SC INJECTION)\s*$/i,
-        ""
+        "",
       );
     const drug = formularyCache[genericName];
     if (drug && drug.formulations) {
       // Find formulation matching current form + strength
       const curForm = simplifyForm(med.formulation || "syrup");
       const curCmg = med.concentration_mg || 0;
-      const fm = drug.formulations.find(function (f) {
-        const sf = simplifyForm(f.form || "");
-        if (sf !== curForm) return false;
-        const c = getConc(f);
-        return c.concQty == curCmg || !curCmg;
-      }) || drug.formulations.find(function (f) {
-        return simplifyForm(f.form || "") === curForm;
-      }) || drug.formulations[0];
+      const fm =
+        drug.formulations.find(function (f) {
+          const sf = simplifyForm(f.form || "");
+          if (sf !== curForm) return false;
+          const c = getConc(f);
+          return c.concQty == curCmg || !curCmg;
+        }) ||
+        drug.formulations.find(function (f) {
+          return simplifyForm(f.form || "") === curForm;
+        }) ||
+        drug.formulations[0];
       if (fm) {
         // Check for custom concentration override
         const customEl = pid && document.getElementById(pid + "-custom-ings");
         if (customEl && customEl.value) {
-          try { return JSON.parse(customEl.value); } catch (e) { /* fall through */ }
+          try {
+            return JSON.parse(customEl.value);
+          } catch (e) {
+            /* fall through */
+          }
         }
         return DoseEngine.parseIngredients(fm);
       }
     }
     // Fallback: single ingredient from scalar cmg/cml
-    const cmg = med.concentration_mg || parseFloat(pid && document.getElementById(pid + "-cmg")?.value) || 0;
-    const cml = med.concentration_per_ml || parseFloat(pid && document.getElementById(pid + "-cml")?.value) || 5;
+    const cmg =
+      med.concentration_mg ||
+      parseFloat(pid && document.getElementById(pid + "-cmg")?.value) ||
+      0;
+    const cml =
+      med.concentration_per_ml ||
+      parseFloat(pid && document.getElementById(pid + "-cml")?.value) ||
+      5;
     return [DoseEngine.makeIngredient(genericName, true, cmg, "mg", cml, "mL")];
   }
 
   // Get the route from the selected formulation
   function getSelectedRoute(pid, med) {
     if (pid) {
-      const routeRadio = document.querySelector('input[name="' + pid + '-route-r"]:checked');
+      const routeRadio = document.querySelector(
+        'input[name="' + pid + '-route-r"]:checked',
+      );
       if (routeRadio) return routeRadio.value;
     }
     // Infer from formulation
-    const genericName = (med.row1_en || "").split("(")[0].trim().toUpperCase()
-      .replace(/\s+(SYRUP|TABLET|CAPSULE|DROPS|INJECTION|CREAM|OINTMENT|INHALER|SUSPENSION|ORAL DROPS|SUPPOSITORY|DISPERSIBLE TABLET|CHEWABLE TABLET|DRY SYRUP|NASAL DROPS|NASAL SPRAY|EYE DROPS|EYE OINTMENT|EAR DROPS|GEL|LOTION|PASTE|SPRAY|PATCH|SACHETS|POWDER|GRANULES|ENEMA|PESSARY|RESPULES|NEBULISATION|IV INFUSION|IM INJECTION|SC INJECTION)\s*$/i, "");
+    const genericName = (med.row1_en || "")
+      .split("(")[0]
+      .trim()
+      .toUpperCase()
+      .replace(
+        /\s+(SYRUP|TABLET|CAPSULE|DROPS|INJECTION|CREAM|OINTMENT|INHALER|SUSPENSION|ORAL DROPS|SUPPOSITORY|DISPERSIBLE TABLET|CHEWABLE TABLET|DRY SYRUP|NASAL DROPS|NASAL SPRAY|EYE DROPS|EYE OINTMENT|EAR DROPS|GEL|LOTION|PASTE|SPRAY|PATCH|SACHETS|POWDER|GRANULES|ENEMA|PESSARY|RESPULES|NEBULISATION|IV INFUSION|IM INJECTION|SC INJECTION)\s*$/i,
+        "",
+      );
     const drug = formularyCache[genericName];
     if (drug && drug.formulations) {
       const curForm = simplifyForm(med.formulation || "syrup");
-      const fm = drug.formulations.find(f => simplifyForm(f.form || "") === curForm);
+      const fm = drug.formulations.find(
+        (f) => simplifyForm(f.form || "") === curForm,
+      );
       if (fm) return (fm.route || "PO").toUpperCase();
     }
     return "PO";
@@ -2498,7 +2521,8 @@
       const input = editDiv.querySelector('input[data-ing-idx="' + i + '"]');
       const customNum = input ? parseFloat(input.value) : ing.strengthNum;
       return Object.assign({}, ing, {
-        concMgPerUnit: ing.strengthDen !== 0 ? customNum / ing.strengthDen : customNum,
+        concMgPerUnit:
+          ing.strengthDen !== 0 ? customNum / ing.strengthDen : customNum,
         strengthNum: customNum,
       });
     });
@@ -2519,7 +2543,9 @@
     const isPerDay = band ? band.is_per_day !== false : true;
     const wt = parseFloat(document.getElementById(pid + "-wt")?.value) || 10;
     const freq = parseFloat(document.getElementById(pid + "-freq")?.value) || 3;
-    const unitSel = document.querySelector('input[name="' + pid + '-unit-r"]:checked');
+    const unitSel = document.querySelector(
+      'input[name="' + pid + '-unit-r"]:checked',
+    );
     const outputUnit = unitSel ? unitSel.value : "mL";
     const form = (m.formulation || "syrup").toLowerCase();
     const ingredients = getSelectedIngredients(pid, m);
@@ -2527,8 +2553,13 @@
     // Snap slider value to produce clean dispensing units
     const rawVal = parseFloat(slider.value);
     const snapped = DoseEngine.snapToUnit(rawVal, {
-      method, weight: wt, frequency: freq, ingredients,
-      form, outputUnit, isPerDay,
+      method,
+      weight: wt,
+      frequency: freq,
+      ingredients,
+      form,
+      outputUnit,
+      isPerDay,
     });
 
     // Update slider position to snapped value (prevents jitter)
@@ -2569,13 +2600,17 @@
     const isPerDay = band ? band.is_per_day !== false : true;
 
     const wt = parseFloat(document.getElementById(pid + "-wt")?.value) || 0;
-    const sliderVal = parseFloat(document.getElementById(pid + "-slider")?.value) || 0;
+    const sliderVal =
+      parseFloat(document.getElementById(pid + "-slider")?.value) || 0;
     const freq = parseFloat(document.getElementById(pid + "-freq")?.value) || 3;
-    const unitSel = document.querySelector('input[name="' + pid + '-unit-r"]:checked');
+    const unitSel = document.querySelector(
+      'input[name="' + pid + '-unit-r"]:checked',
+    );
     const outputUnit = unitSel ? unitSel.value : "mL";
     const form = (m.formulation || "syrup").toLowerCase();
     const ingredients = getSelectedIngredients(pid, m);
-    const maxS = parseFloat(document.getElementById(pid + "-max")?.value) || null;
+    const maxS =
+      parseFloat(document.getElementById(pid + "-max")?.value) || null;
     const maxDaily = band?.max_daily_qty || null;
 
     if (!sliderVal && method !== "fixed" && method !== "age") {
@@ -2585,16 +2620,22 @@
     }
 
     const r = DoseEngine.computeDose({
-      method, weight: wt,
+      method,
+      weight: wt,
       bsa: rxData.patient?.bsa || null,
       heightCm: rxData.patient?.height_cm || null,
-      sliderValue: sliderVal, isPerDay, frequency: freq,
-      ingredients, form, outputUnit,
-      maxSingleDoseMg: maxS, maxDailyDoseMg: maxDaily,
+      sliderValue: sliderVal,
+      isPerDay,
+      frequency: freq,
+      ingredients,
+      form,
+      outputUnit,
+      maxSingleDoseMg: maxS,
+      maxDailyDoseMg: maxDaily,
     });
 
     // Update hidden fields for applyDose backward compat
-    const primary = ingredients.find(i => i.isPrimary) || ingredients[0];
+    const primary = ingredients.find((i) => i.isPrimary) || ingredients[0];
     if (primary) {
       const cmgEl = document.getElementById(pid + "-cmg");
       const cmlEl = document.getElementById(pid + "-cml");
@@ -2605,16 +2646,27 @@
     if (mgkgEl) mgkgEl.value = sliderVal;
 
     // Result display
-    const FW = DoseEngine.FREQ_EN, FH = DoseEngine.FREQ_HI;
+    const FW = DoseEngine.FREQ_EN,
+      FH = DoseEngine.FREQ_HI;
     const freqEn = FW[freq] || freq + " times";
     const freqHi = FH[freq] || freq + " बार";
     const resEl = document.getElementById(pid + "-res");
     if (resEl) {
       let calcHtml = esc(r.calc).replace(/\n/g, "<br>");
       resEl.innerHTML =
-        "\u27A1 <strong>" + esc(r.enD) + "</strong> " + esc(freqEn) + " daily" +
-        '<div class="ep-hindi">\u27A1 ' + esc(r.hiD) + " दिन में " + esc(freqHi) + "</div>" +
-        '<div class="ep-calc-detail">' + calcHtml + "</div>";
+        "\u27A1 <strong>" +
+        esc(r.enD) +
+        "</strong> " +
+        esc(freqEn) +
+        " daily" +
+        '<div class="ep-hindi">\u27A1 ' +
+        esc(r.hiD) +
+        " दिन में " +
+        esc(freqHi) +
+        "</div>" +
+        '<div class="ep-calc-detail">' +
+        calcHtml +
+        "</div>";
     }
 
     // Warnings
@@ -2622,7 +2674,10 @@
     if (warnEl) {
       if (r.capped || r.warnings.length) {
         warnEl.style.display = "block";
-        warnEl.textContent = "\u26A0 " + (r.warnings.join("; ") || "Max dose limit applied. Verify clinically.");
+        warnEl.textContent =
+          "\u26A0 " +
+          (r.warnings.join("; ") ||
+            "Max dose limit applied. Verify clinically.");
       } else {
         warnEl.style.display = "none";
       }
@@ -2631,9 +2686,13 @@
     // Slider value label
     const valEl = document.getElementById(pid + "-sliderval");
     if (valEl) {
-      const allBands = ref ? ref.allBands.filter(b => b.dose_min_qty != null) : [];
-      const matchedBand = allBands.find(b =>
-        sliderVal >= b.dose_min_qty && sliderVal <= (b.dose_max_qty || b.dose_min_qty)
+      const allBands = ref
+        ? ref.allBands.filter((b) => b.dose_min_qty != null)
+        : [];
+      const matchedBand = allBands.find(
+        (b) =>
+          sliderVal >= b.dose_min_qty &&
+          sliderVal <= (b.dose_max_qty || b.dose_min_qty),
       );
       const inAny = !!matchedBand;
       const doseUnit = band?.dose_unit || "mg/kg/day";
@@ -2642,19 +2701,31 @@
       // Show per-ingredient breakdown for combo drugs
       if (r.ingredientDoses.length > 1) {
         sliderHtml += '<br><span style="font-size:11px;opacity:0.7">';
-        sliderHtml += r.ingredientDoses.map(id =>
-          esc(id.name.split(" ")[0]) + " " + id.mgPerDose.toFixed(1) + "mg" +
-          (id.maxExceeded ? " \u26A0" : "")
-        ).join(" + ");
+        sliderHtml += r.ingredientDoses
+          .map(
+            (id) =>
+              esc(id.name.split(" ")[0]) +
+              " " +
+              id.mgPerDose.toFixed(1) +
+              "mg" +
+              (id.maxExceeded ? " \u26A0" : ""),
+          )
+          .join(" + ");
         sliderHtml += "</span>";
       } else if (method !== "fixed" && method !== "age") {
-        sliderHtml += '<br><span style="font-size:12px;opacity:0.7">' +
-          sliderVal + " " + esc(doseUnit);
-        if (matchedBand?.indication) sliderHtml += " \u2014 " + esc(matchedBand.indication.substring(0, 40));
+        sliderHtml +=
+          '<br><span style="font-size:12px;opacity:0.7">' +
+          sliderVal +
+          " " +
+          esc(doseUnit);
+        if (matchedBand?.indication)
+          sliderHtml +=
+            " \u2014 " + esc(matchedBand.indication.substring(0, 40));
         sliderHtml += "</span>";
       }
       if (!inAny && allBands.length)
-        sliderHtml += '<br><span style="font-size:11px;color:var(--red)">\u26A0 Outside recommended range</span>';
+        sliderHtml +=
+          '<br><span style="font-size:11px;color:var(--red)">\u26A0 Outside recommended range</span>';
       valEl.innerHTML = sliderHtml;
       valEl.className = "dp-slider-val " + (inAny ? "dp-safe" : "dp-warn");
     }
@@ -5230,78 +5301,158 @@
             html += "</div></div>";
 
             // ROUTE RADIOS
-            const drugFormsAll = formularyCache[genericName]?.formulations || [];
+            const drugFormsAll =
+              formularyCache[genericName]?.formulations || [];
             const routes = DoseEngine.getAvailableRoutes(drugFormsAll);
             const curRoute = (() => {
-              const fm = drugFormsAll.find(f => simplifyForm(f.form || "") === curForm);
+              const fm = drugFormsAll.find(
+                (f) => simplifyForm(f.form || "") === curForm,
+              );
               return (fm?.route || "PO").toUpperCase();
             })();
             if (routes.length > 1) {
-              html += '<div class="dp-row"><div class="dp-row-label">Route</div><div class="dp-radios" id="' +
-                pid + '-dp-routes">';
-              routes.forEach(rt => {
+              html +=
+                '<div class="dp-row"><div class="dp-row-label">Route</div><div class="dp-radios" id="' +
+                pid +
+                '-dp-routes">';
+              routes.forEach((rt) => {
                 const checked = rt === curRoute ? " checked" : "";
-                html += '<label><input type="radio" name="' + pid + '-route-r" value="' +
-                  esc(rt) + '"' + checked + " onchange=\"dpRouteChanged('" + pid + "'," + idx +
-                  ')"><span>' + esc(DoseEngine.routeLabel(rt)) + "</span></label>";
+                html +=
+                  '<label><input type="radio" name="' +
+                  pid +
+                  '-route-r" value="' +
+                  esc(rt) +
+                  '"' +
+                  checked +
+                  " onchange=\"dpRouteChanged('" +
+                  pid +
+                  "'," +
+                  idx +
+                  ')"><span>' +
+                  esc(DoseEngine.routeLabel(rt)) +
+                  "</span></label>";
               });
               html += "</div></div>";
             } else {
               // Single route — render as hidden value for getSelectedRoute()
-              html += '<input type="hidden" name="' + pid + '-route-r" value="' + esc(curRoute) + '">';
+              html +=
+                '<input type="hidden" name="' +
+                pid +
+                '-route-r" value="' +
+                esc(curRoute) +
+                '">';
             }
 
             // STRENGTH RADIOS + edit icon
             html +=
               '<div class="dp-row"><div class="dp-row-label">Strength</div><div class="dp-radios" id="' +
-              pid + '-dp-strengths" style="flex:1">';
+              pid +
+              '-dp-strengths" style="flex:1">';
             const curStrengths =
               formGroups[curForm] || formGroups[formKeys[0]] || [];
             curStrengths.forEach((s, si) => {
               const checked =
                 s.c.concQty == curCmg ? " checked" : si === 0 ? " checked" : "";
               // For multi-ingredient, show all ingredients in label
-              const matchedFm = drugFormsAll.find(f => {
+              const matchedFm = drugFormsAll.find((f) => {
                 const sc = getConc(f);
-                return simplifyForm(f.form || "") === curForm && sc.concQty == s.c.concQty;
+                return (
+                  simplifyForm(f.form || "") === curForm &&
+                  sc.concQty == s.c.concQty
+                );
               });
-              let label = s.c.concQty + s.c.concUnit + "/" + s.c.perQty + s.c.perUnit;
-              if (matchedFm && matchedFm.ingredients && matchedFm.ingredients.length > 1) {
-                label = matchedFm.ingredients.map(i =>
-                  i.strength_numerator + (i.strength_numerator_unit || "mg")
-                ).join("+") + "/" + s.c.perQty + s.c.perUnit;
+              let label =
+                s.c.concQty + s.c.concUnit + "/" + s.c.perQty + s.c.perUnit;
+              if (
+                matchedFm &&
+                matchedFm.ingredients &&
+                matchedFm.ingredients.length > 1
+              ) {
+                label =
+                  matchedFm.ingredients
+                    .map(
+                      (i) =>
+                        i.strength_numerator +
+                        (i.strength_numerator_unit || "mg"),
+                    )
+                    .join("+") +
+                  "/" +
+                  s.c.perQty +
+                  s.c.perUnit;
               }
               html +=
-                '<label><input type="radio" name="' + pid +
-                '-str-r" value="' + esc(s.key) + '"' + checked +
-                " onchange=\"dpStrengthChanged('" + pid + "'," + idx +
-                ')"><span>' + esc(label) + "</span></label>";
+                '<label><input type="radio" name="' +
+                pid +
+                '-str-r" value="' +
+                esc(s.key) +
+                '"' +
+                checked +
+                " onchange=\"dpStrengthChanged('" +
+                pid +
+                "'," +
+                idx +
+                ')"><span>' +
+                esc(label) +
+                "</span></label>";
             });
             if (!curStrengths.length)
               html +=
-                '<label><input type="radio" name="' + pid +
-                '-str-r" value="' + curCmg + "|mg|" + curCml +
-                '|mL" checked><span>' + curCmg + "mg/" + curCml + "mL</span></label>";
-            html += '</div>';
+                '<label><input type="radio" name="' +
+                pid +
+                '-str-r" value="' +
+                curCmg +
+                "|mg|" +
+                curCml +
+                '|mL" checked><span>' +
+                curCmg +
+                "mg/" +
+                curCml +
+                "mL</span></label>";
+            html += "</div>";
             // Edit icon for custom concentration
-            html += '<button type="button" title="Edit concentration" style="background:none;border:1px solid var(--bdr2);border-radius:4px;padding:2px 6px;cursor:pointer;font-size:12px;color:var(--ink3);margin-left:4px;white-space:nowrap" onclick="toggleConcEdit(\'' + pid + '\',' + idx + ')">&#9998; Edit</button>';
-            html += '</div>';
+            html +=
+              '<button type="button" title="Edit concentration" style="background:none;border:1px solid var(--bdr2);border-radius:4px;padding:2px 6px;cursor:pointer;font-size:12px;color:var(--ink3);margin-left:4px;white-space:nowrap" onclick="toggleConcEdit(\'' +
+              pid +
+              "'," +
+              idx +
+              ')">&#9998; Edit</button>';
+            html += "</div>";
             // Custom concentration editor (hidden by default)
-            html += '<div class="dp-row" id="' + pid + '-conc-edit" style="display:none">';
-            html += '<div class="dp-row-label">Custom</div><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">';
+            html +=
+              '<div class="dp-row" id="' +
+              pid +
+              '-conc-edit" style="display:none">';
+            html +=
+              '<div class="dp-row-label">Custom</div><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">';
             const ingsForEdit = DoseEngine.parseIngredients(
-              drugFormsAll.find(f => simplifyForm(f.form || "") === curForm) || drugFormsAll[0]
+              drugFormsAll.find(
+                (f) => simplifyForm(f.form || "") === curForm,
+              ) || drugFormsAll[0],
             );
             ingsForEdit.forEach((ing, ii) => {
-              html += '<label style="font-size:11px;display:flex;align-items:center;gap:3px">' +
-                esc(ing.name.split(" ")[0]) + ': <input type="number" step="0.1" min="0" value="' +
-                ing.strengthNum + '" style="width:50px;font-size:11px;padding:2px 4px;border:1px solid var(--bdr2);border-radius:3px" ' +
-                'data-ing-idx="' + ii + '" onchange="updateCustomConc(\'' + pid + '\',' + idx + ')"> ' +
-                esc(ing.strengthNumUnit) + '/' + ing.strengthDen + esc(ing.strengthDenUnit) + '</label>';
+              html +=
+                '<label style="font-size:11px;display:flex;align-items:center;gap:3px">' +
+                esc(ing.name.split(" ")[0]) +
+                ': <input type="number" step="0.1" min="0" value="' +
+                ing.strengthNum +
+                '" style="width:50px;font-size:11px;padding:2px 4px;border:1px solid var(--bdr2);border-radius:3px" ' +
+                'data-ing-idx="' +
+                ii +
+                '" onchange="updateCustomConc(\'' +
+                pid +
+                "'," +
+                idx +
+                ')"> ' +
+                esc(ing.strengthNumUnit) +
+                "/" +
+                ing.strengthDen +
+                esc(ing.strengthDenUnit) +
+                "</label>";
             });
-            html += '</div></div>';
+            html += "</div></div>";
             // Hidden field for custom ingredients JSON
-            html += '<input type="hidden" id="' + pid + '-custom-ings" value="">';
+            html +=
+              '<input type="hidden" id="' + pid + '-custom-ings" value="">';
 
             // UNIT RADIOS
             const unitOpts = getUnitOptions(curForm);
@@ -5378,20 +5529,25 @@
               curDose =
                 parseFloat(m.dose_mg_per_kg) ||
                 parseFloat((m.row2_en || "").match(/(\d+\.?\d*)/)?.[1]) ||
-                band?.dose_min_qty || 1;
+                band?.dose_min_qty ||
+                1;
             }
 
             // Use DoseEngine for slider range
             const sliderRange = DoseEngine.computeSliderRange({
-              method: bandMethod, allBands, weight: r.patient?.weight_kg || 10,
-              form: curForm, outputUnit: unitOpts[0] || "mL",
+              method: bandMethod,
+              allBands,
+              weight: r.patient?.weight_kg || 10,
+              form: curForm,
+              outputUnit: unitOpts[0] || "mL",
               currentDose: curDose,
             });
 
             // Build multi-zone gradient from zones
             let gradient = "linear-gradient(to right, ";
             if (sliderRange.zones.length) {
-              let stops = [], lastEnd = 0;
+              let stops = [],
+                lastEnd = 0;
               sliderRange.zones.forEach((z, zi) => {
                 const color = bandColors[zi % bandColors.length];
                 if (z.startPct > lastEnd + 0.5) {
@@ -5411,40 +5567,80 @@
               gradient += "#fca5a5 0%, #fca5a5 100%)";
             }
 
-            const inAnyBand = allBands.some(b =>
-              curDose >= b.dose_min_qty && curDose <= (b.dose_max_qty || b.dose_min_qty)
+            const inAnyBand = allBands.some(
+              (b) =>
+                curDose >= b.dose_min_qty &&
+                curDose <= (b.dose_max_qty || b.dose_min_qty),
             );
 
             html += '<div class="dp-slider-wrap">';
             html +=
-              '<div class="dp-slider-val' + (inAnyBand ? " dp-safe" : " dp-warn") +
-              '" id="' + pid + '-sliderval">' + curDose + " " + esc(sliderRange.unit) + "</div>";
+              '<div class="dp-slider-val' +
+              (inAnyBand ? " dp-safe" : " dp-warn") +
+              '" id="' +
+              pid +
+              '-sliderval">' +
+              curDose +
+              " " +
+              esc(sliderRange.unit) +
+              "</div>";
             html +=
-              '<input type="range" class="dp-slider" id="' + pid +
-              '-slider" min="' + sliderRange.min +
-              '" max="' + sliderRange.max +
-              '" step="' + sliderRange.step +
-              '" value="' + (sliderRange.value || curDose) +
-              '" oninput="dpSliderChanged(\'' + pid + "'," + idx +
-              ')" style="background:' + gradient + '">';
-            html += '<div class="dp-slider-labels"><span>' +
-              sliderRange.min + "</span><span>" + sliderRange.max + "</span></div>";
+              '<input type="range" class="dp-slider" id="' +
+              pid +
+              '-slider" min="' +
+              sliderRange.min +
+              '" max="' +
+              sliderRange.max +
+              '" step="' +
+              sliderRange.step +
+              '" value="' +
+              (sliderRange.value || curDose) +
+              '" oninput="dpSliderChanged(\'' +
+              pid +
+              "'," +
+              idx +
+              ')" style="background:' +
+              gradient +
+              '">';
+            html +=
+              '<div class="dp-slider-labels"><span>' +
+              sliderRange.min +
+              "</span><span>" +
+              sliderRange.max +
+              "</span></div>";
             if (allBands.length > 0) {
-              html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">';
-              allBands.sort((a, b) => a.dose_min_qty - b.dose_min_qty).forEach((b, bi) => {
-                const color = bandColors[bi % bandColors.length];
-                const label = (b.indication || "Indication " + (bi + 1)).substring(0, 35);
-                html +=
-                  '<span style="font-size:10px;display:flex;align-items:center;gap:3px;cursor:pointer" onclick="document.getElementById(\'' +
-                  pid + "-slider').value=" +
-                  (b.dose_min_qty + (b.dose_max_qty || b.dose_min_qty)) / 2 +
-                  ";dpSliderChanged('" + pid + "'," + idx + ')">';
-                html += '<span style="width:8px;height:8px;border-radius:50%;background:' +
-                  color + ';display:inline-block"></span>';
-                html += esc(label) + " (" + b.dose_min_qty + "-" +
-                  (b.dose_max_qty || b.dose_min_qty) + ")";
-                html += "</span>";
-              });
+              html +=
+                '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">';
+              allBands
+                .sort((a, b) => a.dose_min_qty - b.dose_min_qty)
+                .forEach((b, bi) => {
+                  const color = bandColors[bi % bandColors.length];
+                  const label = (
+                    b.indication || "Indication " + (bi + 1)
+                  ).substring(0, 35);
+                  html +=
+                    '<span style="font-size:10px;display:flex;align-items:center;gap:3px;cursor:pointer" onclick="document.getElementById(\'' +
+                    pid +
+                    "-slider').value=" +
+                    (b.dose_min_qty + (b.dose_max_qty || b.dose_min_qty)) / 2 +
+                    ";dpSliderChanged('" +
+                    pid +
+                    "'," +
+                    idx +
+                    ')">';
+                  html +=
+                    '<span style="width:8px;height:8px;border-radius:50%;background:' +
+                    color +
+                    ';display:inline-block"></span>';
+                  html +=
+                    esc(label) +
+                    " (" +
+                    b.dose_min_qty +
+                    "-" +
+                    (b.dose_max_qty || b.dose_min_qty) +
+                    ")";
+                  html += "</span>";
+                });
               html += "</div>";
             }
             html += "</div>";
@@ -5736,11 +5932,15 @@
     const form = m.formulation || "syrup";
 
     const r = DoseEngine.computeDose({
-      method, weight: wt,
+      method,
+      weight: wt,
       bsa: rxData.patient?.bsa || null,
       heightCm: rxData.patient?.height_cm || null,
-      sliderValue: mgkg, isPerDay, frequency: freq,
-      ingredients, form: form,
+      sliderValue: mgkg,
+      isPerDay,
+      frequency: freq,
+      ingredients,
+      form: form,
       outputUnit: preferredUnit || "mL",
       maxSingleDoseMg: maxS,
       maxDailyDoseMg: band?.max_daily_qty || null,
@@ -5748,7 +5948,6 @@
     rxData.patient.weight_kg = wt;
     m.dose_mg_per_kg = mgkg;
     m.dose_per_day_divided = freq;
-    const form = m.formulation || "syrup";
     // Update Row 1 — always rebuild to keep concentration in sync
     const rawName = (m.row1_en || "").split("(")[0].trim();
     // Strip form word from drug name if already present (e.g., "LEVOSALBUTAMOL SYRUP" → "LEVOSALBUTAMOL")
@@ -5776,8 +5975,11 @@
     // Multi-ingredient: show all concentrations
     let concDisplay;
     if (ingredients.length > 1) {
-      concDisplay = ingredients.map(i => i.strengthNum + i.strengthNumUnit).join("+") +
-        "/" + (ingredients[0]?.strengthDen || cml) + perUnit;
+      concDisplay =
+        ingredients.map((i) => i.strengthNum + i.strengthNumUnit).join("+") +
+        "/" +
+        (ingredients[0]?.strengthDen || cml) +
+        perUnit;
     } else {
       concDisplay = cmg + "mg/" + cml + perUnit;
     }
@@ -5854,7 +6056,8 @@
     document.getElementById(pid + "-r2").textContent = newR2;
     document.getElementById(pid + "-r3").textContent = newR3;
     const calcEl = document.getElementById(pid + "-calc");
-    if (calcEl) calcEl.innerHTML = "Calculation: " + esc(r.calc).replace(/\n/g, "<br>");
+    if (calcEl)
+      calcEl.innerHTML = "Calculation: " + esc(r.calc).replace(/\n/g, "<br>");
     m.row2_en = newR2;
     m.row3_hi = newR3;
     m.calc = r.calc;
@@ -5877,7 +6080,9 @@
     if (flagEl) {
       if (r.capped || r.warnings.length) {
         flagEl.style.display = "block";
-        flagEl.textContent = "\u26A0 " + (r.warnings.join("; ") || "Max dose applied \u2014 " + maxS + "mg");
+        flagEl.textContent =
+          "\u26A0 " +
+          (r.warnings.join("; ") || "Max dose applied \u2014 " + maxS + "mg");
       } else {
         flagEl.style.display = "none";
       }
