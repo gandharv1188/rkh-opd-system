@@ -56,7 +56,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "200 mg / 1 tablet",
+        "indian_conc_note": "Acyclovir 200 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -83,7 +83,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "400 mg / 1 tablet",
+        "indian_conc_note": "Acyclovir 400 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -110,7 +110,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "800 mg / 1 tablet",
+        "indian_conc_note": "Acyclovir 800 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -137,7 +137,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "200 mg / 1 tablet",
+        "indian_conc_note": "Acyclovir 200 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -164,7 +164,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "200 mg / 5 mL",
+        "indian_conc_note": "Acyclovir 200 mg / 5 mL",
         "display_name": null
       },
       {
@@ -191,7 +191,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "250 mg / 1 vial",
+        "indian_conc_note": "Acyclovir 250 mg / 1 vial",
         "display_name": null
       },
       {
@@ -218,7 +218,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 1 vial",
+        "indian_conc_note": "Acyclovir 500 mg / 1 vial",
         "display_name": null
       },
       {
@@ -245,7 +245,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 % w/w / 5 g",
+        "indian_conc_note": "Acyclovir 5 % w/w / 5 g",
         "display_name": null
       },
       {
@@ -272,7 +272,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "3 % w/w / 5 g",
+        "indian_conc_note": "Acyclovir 3 % w/w / 5 g",
         "display_name": null
       }
     ],
@@ -396,7 +396,9 @@
     "contraindications": [
       "Known hypersensitivity to acyclovir or valacyclovir"
     ],
-    "cross_reactions": ["Valacyclovir (prodrug of acyclovir)"],
+    "cross_reactions": [
+      "Valacyclovir (prodrug of acyclovir)"
+    ],
     "interactions": [
       {
         "drug_or_class": "Nephrotoxic drugs (aminoglycosides, amphotericin B, NSAIDs)",
@@ -476,8 +478,12 @@
     "snomed_display": null,
     "drug_class": "Heat shock protein amplifier",
     "category": "Endocrine",
-    "therapeutic_use": ["Sphingolipidosis and other lipid storage disorders"],
-    "brand_names": ["Miplyffa (Zevra Therapeutics — imported)"],
+    "therapeutic_use": [
+      "Sphingolipidosis and other lipid storage disorders"
+    ],
+    "brand_names": [
+      "Miplyffa (Zevra Therapeutics — imported)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved 2024 for NPC in patients >=2 years; not available as Indian generic",
     "formulations": [
@@ -505,7 +511,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 capsule",
+        "indian_conc_note": "Arimoclomol (NPC) 100 mg / 1 capsule",
         "display_name": null
       }
     ],
@@ -536,7 +542,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": true,
     "hepatic_note": "Avoid in severe hepatic impairment; monitor LFTs",
-    "contraindications": ["Known hypersensitivity"],
+    "contraindications": [
+      "Known hypersensitivity"
+    ],
     "cross_reactions": [],
     "interactions": [
       {
@@ -570,7 +578,10 @@
     "pregnancy_category": "Not classified",
     "lactation_safe": null,
     "lactation_note": "Insufficient data",
-    "reference_source": ["FDA Label (Miplyffa)", "NPC Clinical Trials"],
+    "reference_source": [
+      "FDA Label (Miplyffa)",
+      "NPC Clinical Trials"
+    ],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -580,8 +591,14 @@
     "snomed_display": null,
     "drug_class": "Liposomal cytarabine-daunorubicin fixed combination",
     "category": "Haematology",
-    "therapeutic_use": ["High-risk AML", "Therapy-related AML", "AML-MRC"],
-    "brand_names": ["Vyxeos"],
+    "therapeutic_use": [
+      "High-risk AML",
+      "Therapy-related AML",
+      "AML-MRC"
+    ],
+    "brand_names": [
+      "Vyxeos"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "FDA approved >=1yr for t-AML/AML-MRC (2021 label expansion)",
     "formulations": [
@@ -609,7 +626,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": null,
+        "indian_conc_note": "CPX-351 (liposomal Ara-C/dauno) ?  / 1 vial",
         "display_name": null
       }
     ],
@@ -643,7 +660,10 @@
     "contraindications": [
       "Hypersensitivity to cytarabine, daunorubicin, or liposomal components"
     ],
-    "cross_reactions": ["Conventional cytarabine", "Conventional daunorubicin"],
+    "cross_reactions": [
+      "Conventional cytarabine",
+      "Conventional daunorubicin"
+    ],
     "interactions": [
       {
         "drug_or_class": "Cardiotoxic agents",
@@ -686,7 +706,11 @@
     "pregnancy_category": "D",
     "lactation_safe": null,
     "lactation_note": "Contraindicated during treatment",
-    "reference_source": ["Vyxeos PI", "COG AAML1421", "Blood Advances 2022"],
+    "reference_source": [
+      "Vyxeos PI",
+      "COG AAML1421",
+      "Blood Advances 2022"
+    ],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -696,8 +720,14 @@
     "snomed_display": null,
     "drug_class": "Vitamin D3 analogue (topical)",
     "category": "Skin",
-    "therapeutic_use": ["Psoriasis"],
-    "brand_names": ["Dovonex", "Calcitrene", "Daivonex"],
+    "therapeutic_use": [
+      "Psoriasis"
+    ],
+    "brand_names": [
+      "Dovonex",
+      "Calcitrene",
+      "Daivonex"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Foam (Sorilux) approved >=4yr; cream safety not established <12yr per FDA labeling",
     "formulations": [
@@ -725,7 +755,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.005 % / 30 g",
+        "indian_conc_note": "Calcipotriene 0.005% cream 0.005 % / 30 g",
         "display_name": null
       },
       {
@@ -752,7 +782,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.005 % / 30 g",
+        "indian_conc_note": "Calcipotriene 0.005% cream 0.005 % / 30 g",
         "display_name": null
       },
       {
@@ -779,7 +809,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.005 % / 60 mL",
+        "indian_conc_note": "Calcipotriene 0.005% cream 0.005 % / 60 mL",
         "display_name": null
       }
     ],
@@ -856,7 +886,10 @@
     "pregnancy_category": "C",
     "lactation_safe": true,
     "lactation_note": "Topical; minimal absorption; likely safe",
-    "reference_source": ["BNF for Children", "AAD Psoriasis Guidelines"],
+    "reference_source": [
+      "BNF for Children",
+      "AAD Psoriasis Guidelines"
+    ],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -866,8 +899,13 @@
     "snomed_display": null,
     "drug_class": "CRISPR/Cas9 gene-edited cell therapy",
     "category": "Haematology",
-    "therapeutic_use": ["Sickle-cell disorders", "Thalassemia"],
-    "brand_names": ["Casgevy (Vertex/CRISPR Therapeutics)"],
+    "therapeutic_use": [
+      "Sickle-cell disorders",
+      "Thalassemia"
+    ],
+    "brand_names": [
+      "Casgevy (Vertex/CRISPR Therapeutics)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "FDA/EMA approved for >=12 years; not yet registered in India as of 2026",
     "formulations": [
@@ -895,7 +933,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": null,
+        "indian_conc_note": "Casgevy (exagamglogene autotemcel) ?  / 1 infusion bag",
         "display_name": null
       }
     ],
@@ -1029,7 +1067,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "125 mg / 5 mL",
+        "indian_conc_note": "Cephalexin 125 mg / 5 mL",
         "display_name": null
       },
       {
@@ -1056,7 +1094,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "250 mg / 5 mL",
+        "indian_conc_note": "Cephalexin 250 mg / 5 mL",
         "display_name": null
       },
       {
@@ -1083,7 +1121,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "250 mg / 1 capsule",
+        "indian_conc_note": "Cephalexin 250 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1110,7 +1148,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 1 capsule",
+        "indian_conc_note": "Cephalexin 500 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1137,7 +1175,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "250 mg / 1 tablet",
+        "indian_conc_note": "Cephalexin 250 mg / 1 tablet",
         "display_name": null
       }
     ],
@@ -1183,7 +1221,9 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment",
-    "contraindications": ["Cephalosporin allergy"],
+    "contraindications": [
+      "Cephalosporin allergy"
+    ],
     "cross_reactions": [
       "Penicillins (1-2% cross-reactivity)",
       "Other cephalosporins"
@@ -1243,7 +1283,10 @@
       "Acute hepatitis A",
       "Intestinal malabsorption, unspecified"
     ],
-    "brand_names": ["Choltran (Ajanta Pharma)", "Questran (imported)"],
+    "brand_names": [
+      "Choltran (Ajanta Pharma)",
+      "Questran (imported)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for children >=6 years for pruritus; off-label for younger children",
     "formulations": [
@@ -1271,7 +1314,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "4 g / 1 sachet",
+        "indian_conc_note": "Cholestyramine 4 g / 1 sachet",
         "display_name": null
       }
     ],
@@ -1375,7 +1418,9 @@
     "therapeutic_use": [
       "Congenital adrenogenital disorders associated with enzyme deficiency"
     ],
-    "brand_names": ["Crenessity (Neurocrine Biosciences)"],
+    "brand_names": [
+      "Crenessity (Neurocrine Biosciences)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved 2024 for >=4yr with classic CAH; not yet marketed in India",
     "formulations": [
@@ -1403,7 +1448,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "25 mg / 1 capsule",
+        "indian_conc_note": "Crinecerfont 25 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1430,7 +1475,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "50 mg / 1 capsule",
+        "indian_conc_note": "Crinecerfont 50 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1457,7 +1502,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 capsule",
+        "indian_conc_note": "Crinecerfont 100 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1484,7 +1529,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "25 mg / 1 mL",
+        "indian_conc_note": "Crinecerfont 25 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -1561,7 +1606,10 @@
     "pregnancy_category": "Not established",
     "lactation_safe": null,
     "lactation_note": "No data; avoid",
-    "reference_source": ["FDA PI - Crenessity", "Neurocrine Biosciences"],
+    "reference_source": [
+      "FDA PI - Crenessity",
+      "Neurocrine Biosciences"
+    ],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -1610,7 +1658,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "25 mg / 1 capsule",
+        "indian_conc_note": "Cyclosporine 25 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1637,7 +1685,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "50 mg / 1 capsule",
+        "indian_conc_note": "Cyclosporine 50 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1664,7 +1712,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 capsule",
+        "indian_conc_note": "Cyclosporine 100 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -1691,7 +1739,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 mL",
+        "indian_conc_note": "Cyclosporine 100 mg / 1 mL",
         "display_name": null
       },
       {
@@ -1718,7 +1766,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "50 mg / 1 mL",
+        "indian_conc_note": "Cyclosporine 50 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -1783,7 +1831,9 @@
       "Uncontrolled infections",
       "Concurrent PUVA/UVB"
     ],
-    "cross_reactions": ["Tacrolimus — do not combine"],
+    "cross_reactions": [
+      "Tacrolimus — do not combine"
+    ],
     "interactions": [
       {
         "drug_or_class": "Aminoglycosides",
@@ -1871,7 +1921,9 @@
     "snomed_display": null,
     "drug_class": "Artemisinin-based combination therapy (ACT)",
     "category": "Infectious",
-    "therapeutic_use": ["Plasmodium falciparum malaria"],
+    "therapeutic_use": [
+      "Plasmodium falciparum malaria"
+    ],
     "brand_names": [
       "Eurartesim (Sigma-Tau)",
       "Duocotecxin (Holley Pharm)",
@@ -1905,7 +1957,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "20 mg DHA / 1 tablet",
+        "indian_conc_note": "DHA-piperaquine 20 mg DHA / 1 tablet",
         "display_name": null
       },
       {
@@ -1932,7 +1984,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "40 mg DHA / 1 tablet",
+        "indian_conc_note": "DHA-piperaquine 40 mg DHA / 1 tablet",
         "display_name": null
       }
     ],
@@ -1971,7 +2023,9 @@
       "Concomitant QT-prolonging drugs",
       "Severe hepatic impairment"
     ],
-    "cross_reactions": ["Other artemisinin derivatives"],
+    "cross_reactions": [
+      "Other artemisinin derivatives"
+    ],
     "interactions": [
       {
         "drug_or_class": "QT-prolonging drugs",
@@ -1984,7 +2038,9 @@
         "effect": "May increase piperaquine levels"
       }
     ],
-    "black_box_warnings": ["QTc prolongation risk — obtain baseline ECG"],
+    "black_box_warnings": [
+      "QTc prolongation risk — obtain baseline ECG"
+    ],
     "pediatric_specific_warnings": [
       "Weight-band dosing essential; do not underdose",
       "Give on empty stomach; food increases absorption variably",
@@ -2027,7 +2083,9 @@
     "snomed_display": null,
     "drug_class": "Silicone-based pediculicide",
     "category": "Infectious",
-    "therapeutic_use": ["Head lice (pediculosis capitis) treatment"],
+    "therapeutic_use": [
+      "Head lice (pediculosis capitis) treatment"
+    ],
     "brand_names": [
       "Hedrin (Thornton & Ross — imported)",
       "Lice-Nil (Indian generic)",
@@ -2060,7 +2118,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "4 % / 100 mL",
+        "indian_conc_note": "Dimethicone 4% lotion 4 % / 100 mL",
         "display_name": null
       }
     ],
@@ -2177,7 +2235,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "300 mcg / 0.5 mL",
+        "indian_conc_note": "G-CSF (Filgrastim) 300 mcg / 0.5 mL",
         "display_name": null
       },
       {
@@ -2204,7 +2262,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "300 mcg / 1 mL",
+        "indian_conc_note": "G-CSF (Filgrastim) 300 mcg / 1 mL",
         "display_name": null
       },
       {
@@ -2231,7 +2289,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "480 mcg / 0.8 mL",
+        "indian_conc_note": "G-CSF (Filgrastim) 480 mcg / 0.8 mL",
         "display_name": null
       }
     ],
@@ -2361,7 +2419,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1.5 mL",
+        "indian_conc_note": "GH therapy (PWS) 10 mg / 1.5 mL",
         "display_name": null
       },
       {
@@ -2388,7 +2446,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "4 IU / 1 vial",
+        "indian_conc_note": "GH therapy (PWS) 4 IU / 1 vial",
         "display_name": null
       },
       {
@@ -2415,7 +2473,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "6 mg / 1 cartridge",
+        "indian_conc_note": "GH therapy (PWS) 6 mg / 1 cartridge",
         "display_name": null
       },
       {
@@ -2442,7 +2500,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "16 IU / 1 vial",
+        "indian_conc_note": "GH therapy (PWS) 16 IU / 1 vial",
         "display_name": null
       }
     ],
@@ -2574,7 +2632,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.2 mg / 1 mL",
+        "indian_conc_note": "Glycopyrrolate 0.2 mg / 1 mL",
         "display_name": null
       },
       {
@@ -2601,7 +2659,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 mg / 1 tablet",
+        "indian_conc_note": "Glycopyrrolate 1 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -2628,7 +2686,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "2 mg / 1 tablet",
+        "indian_conc_note": "Glycopyrrolate 2 mg / 1 tablet",
         "display_name": null
       }
     ],
@@ -2673,7 +2731,10 @@
       "Paralytic ileus",
       "Severe ulcerative colitis"
     ],
-    "cross_reactions": ["Atropine", "Other anticholinergics"],
+    "cross_reactions": [
+      "Atropine",
+      "Other anticholinergics"
+    ],
     "interactions": [
       {
         "drug_or_class": "Potassium chloride (solid oral forms)",
@@ -2726,7 +2787,9 @@
     "snomed_display": null,
     "drug_class": "GnRH agonist",
     "category": "Renal",
-    "therapeutic_use": ["Undescended testicle"],
+    "therapeutic_use": [
+      "Undescended testicle"
+    ],
     "brand_names": [
       "Suprefact (Sanofi — imported)",
       "Buserelin (Hemmo Pharma — API)"
@@ -2758,7 +2821,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mcg / 1 actuation",
+        "indian_conc_note": "GnRH (Buserelin) 100 mcg / 1 actuation",
         "display_name": null
       }
     ],
@@ -2792,7 +2855,9 @@
     "contraindications": [
       "Known hypersensitivity to buserelin or GnRH analogues"
     ],
-    "cross_reactions": ["Other GnRH agonists (leuprolide, goserelin)"],
+    "cross_reactions": [
+      "Other GnRH agonists (leuprolide, goserelin)"
+    ],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -2818,7 +2883,10 @@
     "pregnancy_category": "X",
     "lactation_safe": null,
     "lactation_note": "Contraindicated; not applicable in paediatric context",
-    "reference_source": ["Nelson Textbook of Pediatrics", "BNF for Children"],
+    "reference_source": [
+      "Nelson Textbook of Pediatrics",
+      "BNF for Children"
+    ],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -2828,7 +2896,9 @@
     "snomed_display": null,
     "drug_class": "Human rabies immunoglobulin (passive immunisation)",
     "category": "Infectious",
-    "therapeutic_use": ["Rabies (post-exposure prophylaxis)"],
+    "therapeutic_use": [
+      "Rabies (post-exposure prophylaxis)"
+    ],
     "brand_names": [
       "Berirab-P (CSL Behring / Bharat Serums)",
       "Rabglob (Bharat Serums)",
@@ -2861,7 +2931,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "150 IU / 1 mL",
+        "indian_conc_note": "HRIG (Human Rabies Ig) 150 IU / 1 mL",
         "display_name": null
       },
       {
@@ -2888,7 +2958,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "300 IU / 2 mL",
+        "indian_conc_note": "HRIG (Human Rabies Ig) 300 IU / 2 mL",
         "display_name": null
       }
     ],
@@ -2925,7 +2995,9 @@
       "Do not give to previously vaccinated individuals (completed PEP or pre-exposure prophylaxis) — HRIG not needed",
       "Known anaphylaxis to human immunoglobulin products"
     ],
-    "cross_reactions": ["Other human immunoglobulin products"],
+    "cross_reactions": [
+      "Other human immunoglobulin products"
+    ],
     "interactions": [
       {
         "drug_or_class": "Live vaccines (MMR, varicella)",
@@ -2973,7 +3045,9 @@
     "snomed_display": null,
     "drug_class": "Antineoplastic / Antimetabolite",
     "category": "Haematology",
-    "therapeutic_use": ["Sickle-cell disorders"],
+    "therapeutic_use": [
+      "Sickle-cell disorders"
+    ],
     "brand_names": [
       "Cytodrox 500 (Cipla)",
       "Hydrea (BMS)",
@@ -3008,7 +3082,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 1 capsule",
+        "indian_conc_note": "Hydroxyurea 500 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -3035,7 +3109,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 1 tablet",
+        "indian_conc_note": "Hydroxyurea 500 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -3062,7 +3136,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 mL",
+        "indian_conc_note": "Hydroxyurea 100 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -3163,7 +3237,9 @@
     "snomed_display": null,
     "drug_class": "Intranasal corticosteroid",
     "category": "Allergy",
-    "therapeutic_use": ["Allergic rhinitis"],
+    "therapeutic_use": [
+      "Allergic rhinitis"
+    ],
     "brand_names": [
       "Flomist (Cipla)",
       "Fluticone (Sun Pharma)",
@@ -3197,7 +3273,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "50 mcg / 1 spray",
+        "indian_conc_note": "Intranasal Fluticasone 50 mcg / 1 spray",
         "display_name": null
       },
       {
@@ -3224,7 +3300,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "50 mcg / 1 spray",
+        "indian_conc_note": "Intranasal Fluticasone 50 mcg / 1 spray",
         "display_name": null
       }
     ],
@@ -3262,7 +3338,9 @@
       "Active nasal infection (untreated)",
       "Recent nasal surgery or trauma (until healed)"
     ],
-    "cross_reactions": ["Other intranasal corticosteroids"],
+    "cross_reactions": [
+      "Other intranasal corticosteroids"
+    ],
     "interactions": [
       {
         "drug_or_class": "Ritonavir/CYP3A4 inhibitors",
@@ -3317,7 +3395,9 @@
     "snomed_display": null,
     "drug_class": "Parenteral iron preparation (iron carbohydrate complex)",
     "category": "Haematology",
-    "therapeutic_use": ["Iron deficiency anemia"],
+    "therapeutic_use": [
+      "Iron deficiency anemia"
+    ],
     "brand_names": [
       "Orofer FCM (Emcure)",
       "Encicarb (Emcure)",
@@ -3351,7 +3431,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 10 mL",
+        "indian_conc_note": "IV iron (ferric carboxymaltose) 500 mg / 10 mL",
         "display_name": null
       },
       {
@@ -3378,7 +3458,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1000 mg / 20 mL",
+        "indian_conc_note": "IV iron (ferric carboxymaltose) 1000 mg / 20 mL",
         "display_name": null
       }
     ],
@@ -3511,7 +3591,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "125 mg / 1 vial",
+        "indian_conc_note": "IV methylprednisolone 125 mg / 1 vial",
         "display_name": null
       },
       {
@@ -3538,7 +3618,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 1 vial",
+        "indian_conc_note": "IV methylprednisolone 500 mg / 1 vial",
         "display_name": null
       },
       {
@@ -3565,7 +3645,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1000 mg / 1 vial",
+        "indian_conc_note": "IV methylprednisolone 1000 mg / 1 vial",
         "display_name": null
       }
     ],
@@ -3622,7 +3702,9 @@
       "Known hypersensitivity to methylprednisolone",
       "Live vaccine administration"
     ],
-    "cross_reactions": ["Other corticosteroids"],
+    "cross_reactions": [
+      "Other corticosteroids"
+    ],
     "interactions": [
       {
         "drug_or_class": "NSAIDs",
@@ -3691,7 +3773,9 @@
     "snomed_display": null,
     "drug_class": "Corticosteroid (glucocorticoid + mineralocorticoid activity)",
     "category": "Endocrine",
-    "therapeutic_use": ["Adrenocortical insufficiency"],
+    "therapeutic_use": [
+      "Adrenocortical insufficiency"
+    ],
     "brand_names": [
       "Solu-Cortef (Pfizer)",
       "Hydrocortisone Sodium Succinate (generic)",
@@ -3724,7 +3808,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 vial",
+        "indian_conc_note": "IV Hydrocortisone 100 mg / 1 vial",
         "display_name": null
       },
       {
@@ -3751,7 +3835,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "250 mg / 1 vial",
+        "indian_conc_note": "IV Hydrocortisone 250 mg / 1 vial",
         "display_name": null
       },
       {
@@ -3778,7 +3862,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 mL",
+        "indian_conc_note": "IV Hydrocortisone 100 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -3834,7 +3918,9 @@
       "Known hypersensitivity to hydrocortisone sodium succinate",
       "Systemic fungal infection (relative in adrenal crisis)"
     ],
-    "cross_reactions": ["Other corticosteroids"],
+    "cross_reactions": [
+      "Other corticosteroids"
+    ],
     "interactions": [
       {
         "drug_or_class": "Phenytoin/Phenobarbital",
@@ -3896,7 +3982,9 @@
     "snomed_display": null,
     "drug_class": "Bisphosphonate (nitrogen-containing)",
     "category": "Surgical",
-    "therapeutic_use": ["Osteogenesis imperfecta"],
+    "therapeutic_use": [
+      "Osteogenesis imperfecta"
+    ],
     "brand_names": [
       "Pamidria (Cipla)",
       "Bonapam (Biochem)",
@@ -3930,7 +4018,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "30 mg / 10 mL",
+        "indian_conc_note": "IV pamidronate 30 mg / 10 mL",
         "display_name": null
       },
       {
@@ -3957,7 +4045,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "60 mg / 10 mL",
+        "indian_conc_note": "IV pamidronate 60 mg / 10 mL",
         "display_name": null
       },
       {
@@ -3984,7 +4072,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "90 mg / 10 mL",
+        "indian_conc_note": "IV pamidronate 90 mg / 10 mL",
         "display_name": null
       }
     ],
@@ -4034,7 +4122,9 @@
       "Severe renal impairment",
       "Hypocalcemia (must correct before infusion)"
     ],
-    "cross_reactions": ["Other bisphosphonates (zoledronic acid, alendronate)"],
+    "cross_reactions": [
+      "Other bisphosphonates (zoledronic acid, alendronate)"
+    ],
     "interactions": [
       {
         "drug_or_class": "Aminoglycosides",
@@ -4097,7 +4187,9 @@
     "snomed_display": null,
     "drug_class": "Bisphosphonate (nitrogen-containing, third-generation)",
     "category": "Surgical",
-    "therapeutic_use": ["Osteogenesis imperfecta"],
+    "therapeutic_use": [
+      "Osteogenesis imperfecta"
+    ],
     "brand_names": [
       "Zometa (Novartis)",
       "Zoldonat (Natco)",
@@ -4131,7 +4223,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "4 mg / 5 mL",
+        "indian_conc_note": "IV zoledronic acid 4 mg / 5 mL",
         "display_name": null
       },
       {
@@ -4158,7 +4250,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 100 mL",
+        "indian_conc_note": "IV zoledronic acid 5 mg / 100 mL",
         "display_name": null
       }
     ],
@@ -4208,7 +4300,9 @@
       "CrCl <35 mL/min",
       "Hypocalcemia (must correct before infusion)"
     ],
-    "cross_reactions": ["Other bisphosphonates"],
+    "cross_reactions": [
+      "Other bisphosphonates"
+    ],
     "interactions": [
       {
         "drug_or_class": "Aminoglycosides",
@@ -4323,7 +4417,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 g / 100 mL",
+        "indian_conc_note": "IVIG 5 g / 100 mL",
         "display_name": null
       },
       {
@@ -4350,7 +4444,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 g / 100 mL",
+        "indian_conc_note": "IVIG 10 g / 100 mL",
         "display_name": null
       },
       {
@@ -4377,7 +4471,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 g / 50 mL",
+        "indian_conc_note": "IVIG 5 g / 50 mL",
         "display_name": null
       },
       {
@@ -4404,7 +4498,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 g / 200 mL",
+        "indian_conc_note": "IVIG 10 g / 200 mL",
         "display_name": null
       }
     ],
@@ -4573,7 +4667,9 @@
     "snomed_display": null,
     "drug_class": "Fibrinolytic agent (plasminogen activator)",
     "category": "Respiratory",
-    "therapeutic_use": ["Pleural effusion, not elsewhere classified"],
+    "therapeutic_use": [
+      "Pleural effusion, not elsewhere classified"
+    ],
     "brand_names": [
       "Urokinase (generic)",
       "Dabunase (Biocon)",
@@ -4607,7 +4703,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100000 IU / 1 vial",
+        "indian_conc_note": "Intrapleural urokinase 100000 IU / 1 vial",
         "display_name": null
       },
       {
@@ -4634,7 +4730,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500000 IU / 1 vial",
+        "indian_conc_note": "Intrapleural urokinase 500000 IU / 1 vial",
         "display_name": null
       }
     ],
@@ -4674,7 +4770,9 @@
       "Bronchopleural fistula",
       "Severe coagulopathy"
     ],
-    "cross_reactions": ["Other fibrinolytics (alteplase, streptokinase)"],
+    "cross_reactions": [
+      "Other fibrinolytics (alteplase, streptokinase)"
+    ],
     "interactions": [
       {
         "drug_or_class": "Anticoagulants (heparin, warfarin)",
@@ -4769,7 +4867,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.05 mg / 1 mL",
+        "indian_conc_note": "Intrathecal baclofen 0.05 mg / 1 mL",
         "display_name": null
       },
       {
@@ -4796,7 +4894,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.5 mg / 1 mL",
+        "indian_conc_note": "Intrathecal baclofen 0.5 mg / 1 mL",
         "display_name": null
       },
       {
@@ -4823,7 +4921,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "2 mg / 1 mL",
+        "indian_conc_note": "Intrathecal baclofen 2 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -4977,7 +5075,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 5 mL",
+        "indian_conc_note": "Intrathecal cytarabine 100 mg / 5 mL",
         "display_name": null
       },
       {
@@ -5004,7 +5102,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 25 mL",
+        "indian_conc_note": "Intrathecal cytarabine 500 mg / 25 mL",
         "display_name": null
       }
     ],
@@ -5097,7 +5195,9 @@
     "snomed_display": null,
     "drug_class": "Halogenated hydroxyquinoline (luminal amebicide)",
     "category": "Infectious",
-    "therapeutic_use": ["Intestinal amoebiasis (luminal cyst eradication)"],
+    "therapeutic_use": [
+      "Intestinal amoebiasis (luminal cyst eradication)"
+    ],
     "brand_names": [
       "Diodoquin (generic)",
       "Yodoxin (Glenwood)",
@@ -5130,7 +5230,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "210 mg / 1 tablet",
+        "indian_conc_note": "Iodoquinol 210 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -5157,7 +5257,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "650 mg / 1 tablet",
+        "indian_conc_note": "Iodoquinol 650 mg / 1 tablet",
         "display_name": null
       }
     ],
@@ -5253,8 +5353,14 @@
     "snomed_display": null,
     "drug_class": "Amino acid derivative",
     "category": "Endocrine",
-    "therapeutic_use": ["Fatty acid oxidation defects", "Carnitine deficiency"],
-    "brand_names": ["Carnisure (Sun Pharma)", "Carnirich (Intas)"],
+    "therapeutic_use": [
+      "Fatty acid oxidation defects",
+      "Carnitine deficiency"
+    ],
+    "brand_names": [
+      "Carnisure (Sun Pharma)",
+      "Carnirich (Intas)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for primary carnitine deficiency",
     "formulations": [
@@ -5282,7 +5388,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 mL",
+        "indian_conc_note": "L-Carnitine 100 mg / 1 mL",
         "display_name": null
       },
       {
@@ -5309,7 +5415,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 1 tablet",
+        "indian_conc_note": "L-Carnitine 500 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -5336,7 +5442,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "200 mg / 1 mL",
+        "indian_conc_note": "L-Carnitine 200 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -5380,11 +5486,15 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment",
-    "contraindications": ["Hypersensitivity"],
+    "contraindications": [
+      "Hypersensitivity"
+    ],
     "cross_reactions": [],
     "interactions": [],
     "black_box_warnings": [],
-    "pediatric_specific_warnings": ["GI side effects dose-related"],
+    "pediatric_specific_warnings": [
+      "GI side effects dose-related"
+    ],
     "monitoring_parameters": [
       "Plasma carnitine levels",
       "Acylcarnitine profile"
@@ -5404,7 +5514,10 @@
     "pregnancy_category": "B",
     "lactation_safe": true,
     "lactation_note": "Safe",
-    "reference_source": ["Carnitor PI", "BNF for Children"],
+    "reference_source": [
+      "Carnitor PI",
+      "BNF for Children"
+    ],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -5414,8 +5527,13 @@
     "snomed_display": null,
     "drug_class": "GnRH agonist",
     "category": "Endocrine",
-    "therapeutic_use": ["Central precocious puberty"],
-    "brand_names": ["Lupride Depot (Sun Pharma)", "Leuprogen (Lupin)"],
+    "therapeutic_use": [
+      "Central precocious puberty"
+    ],
+    "brand_names": [
+      "Lupride Depot (Sun Pharma)",
+      "Leuprogen (Lupin)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for CPP",
     "formulations": [
@@ -5443,7 +5561,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "3.75 mg / 1 vial",
+        "indian_conc_note": "Leuprolide acetate 3.75 mg / 1 vial",
         "display_name": null
       },
       {
@@ -5470,7 +5588,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "7.5 mg / 1 vial",
+        "indian_conc_note": "Leuprolide acetate 7.5 mg / 1 vial",
         "display_name": null
       },
       {
@@ -5497,7 +5615,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "11.25 mg / 1 vial",
+        "indian_conc_note": "Leuprolide acetate 11.25 mg / 1 vial",
         "display_name": null
       }
     ],
@@ -5535,12 +5653,21 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment",
-    "contraindications": ["Pregnancy"],
-    "cross_reactions": ["Other GnRH agonists"],
+    "contraindications": [
+      "Pregnancy"
+    ],
+    "cross_reactions": [
+      "Other GnRH agonists"
+    ],
     "interactions": [],
     "black_box_warnings": [],
-    "pediatric_specific_warnings": ["Initial pubertal flare"],
-    "monitoring_parameters": ["LH/FSH", "Bone age q6mo"],
+    "pediatric_specific_warnings": [
+      "Initial pubertal flare"
+    ],
+    "monitoring_parameters": [
+      "LH/FSH",
+      "Bone age q6mo"
+    ],
     "administration": [
       {
         "route": "IM",
@@ -5556,7 +5683,10 @@
     "pregnancy_category": "X",
     "lactation_safe": null,
     "lactation_note": "Contraindicated",
-    "reference_source": ["Lupron PI", "IAP Endocrine"],
+    "reference_source": [
+      "Lupron PI",
+      "IAP Endocrine"
+    ],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -5566,7 +5696,9 @@
     "snomed_display": null,
     "drug_class": "Sympathomimetic amine (alpha+beta agonist)",
     "category": "Respiratory",
-    "therapeutic_use": ["Acute laryngitis and tracheitis"],
+    "therapeutic_use": [
+      "Acute laryngitis and tracheitis"
+    ],
     "brand_names": [
       "Adrenaline Injection (generic)",
       "Vasoprime (Primus)",
@@ -5600,7 +5732,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 mg / 1 mL",
+        "indian_conc_note": "Nebulized epinephrine 1 mg / 1 mL",
         "display_name": null
       },
       {
@@ -5627,7 +5759,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 mg / 1 mL",
+        "indian_conc_note": "Nebulized epinephrine 1 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -5660,7 +5792,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": null,
-    "contraindications": ["Known hypersensitivity to epinephrine (rare)"],
+    "contraindications": [
+      "Known hypersensitivity to epinephrine (rare)"
+    ],
     "cross_reactions": [],
     "interactions": [
       {
@@ -5752,7 +5886,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "3 % / 4 mL",
+        "indian_conc_note": "Nebulized hypertonic saline 3 % / 4 mL",
         "display_name": null
       },
       {
@@ -5779,7 +5913,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "3 % / 4 mL",
+        "indian_conc_note": "Nebulized hypertonic saline 3 % / 4 mL",
         "display_name": null
       }
     ],
@@ -5858,7 +5992,9 @@
     "snomed_display": null,
     "drug_class": "Osmotic laxative",
     "category": "GI",
-    "therapeutic_use": ["Functional constipation"],
+    "therapeutic_use": [
+      "Functional constipation"
+    ],
     "brand_names": [
       "Peglec (Fresenius Kabi)",
       "Pegred (Reddys)",
@@ -5892,7 +6028,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "17 g / 1 sachet",
+        "indian_conc_note": "PEG 3350 (Polyethylene Glycol) 17 g / 1 sachet",
         "display_name": null
       },
       {
@@ -5919,7 +6055,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "119 g / 1 bottle",
+        "indian_conc_note": "PEG 3350 (Polyethylene Glycol) 119 g / 1 bottle",
         "display_name": null
       }
     ],
@@ -6067,8 +6203,13 @@
     "snomed_display": null,
     "drug_class": "Fat-soluble vitamin / Coagulation factor",
     "category": "Neonatology",
-    "therapeutic_use": ["Hemorrhagic disease of newborn"],
-    "brand_names": ["Kenadion (Samarth Life Sciences)", "K-Ject (Neon Labs)"],
+    "therapeutic_use": [
+      "Hemorrhagic disease of newborn"
+    ],
+    "brand_names": [
+      "Kenadion (Samarth Life Sciences)",
+      "K-Ject (Neon Labs)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed from birth for VKDB prophylaxis and treatment",
     "formulations": [
@@ -6096,7 +6237,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 mg / 0.5 mL",
+        "indian_conc_note": "Phytonadione (Vitamin K1) 1 mg / 0.5 mL",
         "display_name": null
       },
       {
@@ -6123,7 +6264,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 mL",
+        "indian_conc_note": "Phytonadione (Vitamin K1) 10 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -6175,7 +6316,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "May be less effective in severe hepatic failure",
-    "contraindications": ["Hypersensitivity to phytonadione"],
+    "contraindications": [
+      "Hypersensitivity to phytonadione"
+    ],
     "cross_reactions": [],
     "interactions": [
       {
@@ -6227,7 +6370,9 @@
     "snomed_display": null,
     "drug_class": "Scabicidal agent (keratolytic / parasiticide)",
     "category": "Infectious",
-    "therapeutic_use": ["Scabies (especially in infants <2 months)"],
+    "therapeutic_use": [
+      "Scabies (especially in infants <2 months)"
+    ],
     "brand_names": [
       "Sulfur Ointment (generic India)",
       "Sulphur in Petrolatum (compounding)",
@@ -6260,7 +6405,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 % w/w / 1 tube",
+        "indian_conc_note": "Precipitated sulfur 5-10% 5 % w/w / 1 tube",
         "display_name": null
       },
       {
@@ -6287,7 +6432,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 % w/w / 1 tube",
+        "indian_conc_note": "Precipitated sulfur 5-10% 10 % w/w / 1 tube",
         "display_name": null
       }
     ],
@@ -6367,7 +6512,9 @@
     "snomed_display": null,
     "drug_class": "Corticosteroid (glucocorticoid)",
     "category": "Haematology",
-    "therapeutic_use": ["Acquired hemolytic anemia (warm AIHA)"],
+    "therapeutic_use": [
+      "Acquired hemolytic anemia (warm AIHA)"
+    ],
     "brand_names": [
       "Omnacortil (Macleods)",
       "Wysolone (Pfizer India)",
@@ -6401,7 +6548,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 1 tablet",
+        "indian_conc_note": "Prednis(ol)one 5 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -6428,7 +6575,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 tablet",
+        "indian_conc_note": "Prednis(ol)one 10 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -6455,7 +6602,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "20 mg / 1 tablet",
+        "indian_conc_note": "Prednis(ol)one 20 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -6482,7 +6629,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 tablet",
+        "indian_conc_note": "Prednis(ol)one 10 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -6509,7 +6656,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 5 mL",
+        "indian_conc_note": "Prednis(ol)one 5 mg / 5 mL",
         "display_name": null
       },
       {
@@ -6536,7 +6683,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "15 mg / 5 mL",
+        "indian_conc_note": "Prednis(ol)one 15 mg / 5 mL",
         "display_name": null
       }
     ],
@@ -6572,7 +6719,9 @@
       "Known hypersensitivity to prednisolone",
       "Live vaccine administration during high-dose immunosuppression"
     ],
-    "cross_reactions": ["Other corticosteroids"],
+    "cross_reactions": [
+      "Other corticosteroids"
+    ],
     "interactions": [
       {
         "drug_or_class": "NSAIDs",
@@ -6672,7 +6821,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 billion CFU / 1 sachet",
+        "indian_conc_note": "Probiotics (LGG) 10 billion CFU / 1 sachet",
         "display_name": null
       },
       {
@@ -6699,7 +6848,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "2.5 billion CFU / 1 capsule",
+        "indian_conc_note": "Probiotics (LGG) 2.5 billion CFU / 1 capsule",
         "display_name": null
       },
       {
@@ -6726,7 +6875,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 billion CFU / 1 sachet",
+        "indian_conc_note": "Probiotics (LGG) 1 billion CFU / 1 sachet",
         "display_name": null
       }
     ],
@@ -6851,7 +7000,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "250 mg / 1 sachet",
+        "indian_conc_note": "Probiotics (S. boulardii) 250 mg / 1 sachet",
         "display_name": null
       },
       {
@@ -6878,7 +7027,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "250 mg / 1 capsule",
+        "indian_conc_note": "Probiotics (S. boulardii) 250 mg / 1 capsule",
         "display_name": null
       },
       {
@@ -6905,7 +7054,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "765 mg / 1 sachet",
+        "indian_conc_note": "Probiotics (S. boulardii) 765 mg / 1 sachet",
         "display_name": null
       }
     ],
@@ -7032,7 +7181,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 billion CFU / 1 sachet",
+        "indian_conc_note": "Probiotics (prevention) 1 billion CFU / 1 sachet",
         "display_name": null
       },
       {
@@ -7059,7 +7208,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 billion CFU / 1 capsule",
+        "indian_conc_note": "Probiotics (prevention) 1 billion CFU / 1 capsule",
         "display_name": null
       }
     ],
@@ -7136,8 +7285,12 @@
     "snomed_display": null,
     "drug_class": "Anti-antithrombin siRNA (RNA interference therapy)",
     "category": "Haematology",
-    "therapeutic_use": ["Hemophilia B"],
-    "brand_names": ["Qfitlia (Sanofi — imported)"],
+    "therapeutic_use": [
+      "Hemophilia B"
+    ],
+    "brand_names": [
+      "Qfitlia (Sanofi — imported)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved for prophylaxis in patients >=12 years with hemophilia A or B with or without inhibitors; not manufactured in India — import only; limited pediatric data below 12 years",
     "formulations": [
@@ -7165,7 +7318,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "80 mg / 0.4 mL",
+        "indian_conc_note": "Fitusiran 80 mg / 0.4 mL",
         "display_name": null
       }
     ],
@@ -7196,7 +7349,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No formal hepatic adjustment; monitor LFTs as hepatotoxicity reported",
-    "contraindications": ["Known hypersensitivity to fitusiran"],
+    "contraindications": [
+      "Known hypersensitivity to fitusiran"
+    ],
     "cross_reactions": [],
     "interactions": [
       {
@@ -7254,8 +7409,12 @@
     "snomed_display": null,
     "drug_class": "Gene therapy (lentiviral vector-based)",
     "category": "Haematology",
-    "therapeutic_use": ["Sickle-cell disease"],
-    "brand_names": ["Lyfgenia"],
+    "therapeutic_use": [
+      "Sickle-cell disease"
+    ],
+    "brand_names": [
+      "Lyfgenia"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved for patients >=12 years with SCD and history of VOEs. Not available in India.",
     "formulations": [
@@ -7283,7 +7442,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": null,
+        "indian_conc_note": "Lyfgenia (lovotibeglogene autotemcel) ?  / 1 infusion bag",
         "display_name": null
       }
     ],
@@ -7369,8 +7528,13 @@
     "snomed_display": null,
     "drug_class": "Anti-tissue factor pathway inhibitor (anti-TFPI) monoclonal antibody",
     "category": "Haematology",
-    "therapeutic_use": ["Hemophilia A", "Hemophilia B"],
-    "brand_names": ["Hympavzi"],
+    "therapeutic_use": [
+      "Hemophilia A",
+      "Hemophilia B"
+    ],
+    "brand_names": [
+      "Hympavzi"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved for >=12 years without inhibitors. Expanded indication for >=6 years under review. Not available in India.",
     "formulations": [
@@ -7398,7 +7562,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "150 mg / 1 mL",
+        "indian_conc_note": "Marstacimab 150 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -7429,7 +7593,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": null,
-    "contraindications": ["Hypersensitivity to marstacimab"],
+    "contraindications": [
+      "Hypersensitivity to marstacimab"
+    ],
     "cross_reactions": [],
     "interactions": [
       {
@@ -7484,8 +7650,15 @@
     "snomed_display": null,
     "drug_class": "Thionamide antithyroid agent",
     "category": "Endocrine",
-    "therapeutic_use": ["Thyrotoxicosis", "Hyperthyroidism", "Graves disease"],
-    "brand_names": ["Methimez", "Thyrozol"],
+    "therapeutic_use": [
+      "Thyrotoxicosis",
+      "Hyperthyroidism",
+      "Graves disease"
+    ],
+    "brand_names": [
+      "Methimez",
+      "Thyrozol"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Preferred antithyroid drug in pediatrics (over propylthiouracil due to hepatotoxicity risk)",
     "formulations": [
@@ -7513,7 +7686,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 1 tablet",
+        "indian_conc_note": "Methimazole 5 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -7540,7 +7713,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 tablet",
+        "indian_conc_note": "Methimazole 10 mg / 1 tablet",
         "display_name": null
       }
     ],
@@ -7638,7 +7811,9 @@
     "snomed_display": null,
     "drug_class": "Vitamin B12 analogue (active coenzyme form)",
     "category": "Haematology",
-    "therapeutic_use": ["Vitamin B12 deficiency anemia"],
+    "therapeutic_use": [
+      "Vitamin B12 deficiency anemia"
+    ],
     "brand_names": [
       "Methycobal (Wockhardt)",
       "Meconerv (Micro Labs)",
@@ -7673,7 +7848,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mcg / 1 tablet",
+        "indian_conc_note": "Methylcobalamin 500 mcg / 1 tablet",
         "display_name": null
       },
       {
@@ -7700,7 +7875,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1500 mcg / 1 tablet",
+        "indian_conc_note": "Methylcobalamin 1500 mcg / 1 tablet",
         "display_name": null
       },
       {
@@ -7727,7 +7902,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mcg / 1 mL",
+        "indian_conc_note": "Methylcobalamin 500 mcg / 1 mL",
         "display_name": null
       },
       {
@@ -7754,7 +7929,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1500 mcg / 1 mL",
+        "indian_conc_note": "Methylcobalamin 1500 mcg / 1 mL",
         "display_name": null
       },
       {
@@ -7781,7 +7956,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mcg / 5 mL",
+        "indian_conc_note": "Methylcobalamin 500 mcg / 5 mL",
         "display_name": null
       }
     ],
@@ -7812,8 +7987,13 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment required",
-    "contraindications": ["Hypersensitivity to cobalamin or cobalt"],
-    "cross_reactions": ["Cyanocobalamin", "Hydroxocobalamin"],
+    "contraindications": [
+      "Hypersensitivity to cobalamin or cobalt"
+    ],
+    "cross_reactions": [
+      "Cyanocobalamin",
+      "Hydroxocobalamin"
+    ],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -7907,7 +8087,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "40 mg TMP/200mg SMX / 5 mL",
+        "indian_conc_note": "TMP-SMX (Cotrimoxazole) 40 mg TMP/200mg SMX / 5 mL",
         "display_name": null
       },
       {
@@ -7934,7 +8114,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "80 mg TMP/400mg SMX / 1 tablet",
+        "indian_conc_note": "TMP-SMX (Cotrimoxazole) 80 mg TMP/400mg SMX / 1 tablet",
         "display_name": null
       },
       {
@@ -7961,7 +8141,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "160 mg TMP/800mg SMX / 1 tablet",
+        "indian_conc_note": "TMP-SMX (Cotrimoxazole) 160 mg TMP/800mg SMX / 1 tablet",
         "display_name": null
       },
       {
@@ -7988,7 +8168,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "80 mg TMP/400mg SMX / 5 mL",
+        "indian_conc_note": "TMP-SMX (Cotrimoxazole) 80 mg TMP/400mg SMX / 5 mL",
         "display_name": null
       },
       {
@@ -8015,7 +8195,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "16 mg TMP/80mg SMX / 1 mL",
+        "indian_conc_note": "TMP-SMX (Cotrimoxazole) 16 mg TMP/80mg SMX / 1 mL",
         "display_name": null
       }
     ],
@@ -8115,7 +8295,10 @@
       "Hypersensitivity to sulfonamides or trimethoprim",
       "G6PD deficiency (relative)"
     ],
-    "cross_reactions": ["Sulfonamides", "Dapsone"],
+    "cross_reactions": [
+      "Sulfonamides",
+      "Dapsone"
+    ],
     "interactions": [
       {
         "drug_or_class": "Methotrexate",
@@ -8197,7 +8380,11 @@
       "Varicella [chickenpox]",
       "Erythema multiforme"
     ],
-    "brand_names": ["Valcivir (Cipla)", "Valvir (FDC)", "Valtrex (GSK)"],
+    "brand_names": [
+      "Valcivir (Cipla)",
+      "Valvir (FDC)",
+      "Valtrex (GSK)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed >=12 yr for herpes zoster and genital herpes; >=2 yr for chickenpox; extemporaneous suspension for younger children",
     "formulations": [
@@ -8225,7 +8412,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mg / 1 tablet",
+        "indian_conc_note": "Valacyclovir 500 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -8252,7 +8439,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1000 mg / 1 tablet",
+        "indian_conc_note": "Valacyclovir 1000 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -8279,7 +8466,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "25 mg / 1 mL",
+        "indian_conc_note": "Valacyclovir 25 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -8328,8 +8515,12 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment; converted to acyclovir in liver/intestine",
-    "contraindications": ["Hypersensitivity to valacyclovir or acyclovir"],
-    "cross_reactions": ["Cross-sensitivity with acyclovir"],
+    "contraindications": [
+      "Hypersensitivity to valacyclovir or acyclovir"
+    ],
+    "cross_reactions": [
+      "Cross-sensitivity with acyclovir"
+    ],
     "interactions": [
       {
         "drug_or_class": "Nephrotoxic drugs",
@@ -8419,7 +8610,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 mg / 0.5 mL",
+        "indian_conc_note": "Phytonadione 1 mg / 0.5 mL",
         "display_name": null
       },
       {
@@ -8446,7 +8637,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 mL",
+        "indian_conc_note": "Phytonadione 10 mg / 1 mL",
         "display_name": null
       }
     ],
@@ -8498,7 +8689,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "May have limited efficacy in severe hepatic failure; vitamin K-dependent factor synthesis impaired",
-    "contraindications": ["Hypersensitivity to phytonadione"],
+    "contraindications": [
+      "Hypersensitivity to phytonadione"
+    ],
     "cross_reactions": [],
     "interactions": [
       {
@@ -8603,7 +8796,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "20 mg / 2 mL",
+        "indian_conc_note": "CROMOLYN SODIUM 20 mg / 2 mL",
         "display_name": null
       },
       {
@@ -8630,7 +8823,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 1 puff",
+        "indian_conc_note": "CROMOLYN SODIUM 5 mg / 1 puff",
         "display_name": null
       },
       {
@@ -8657,7 +8850,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "2 % / 15 mL bottle",
+        "indian_conc_note": "CROMOLYN SODIUM 2 % / 15 mL bottle",
         "display_name": null
       },
       {
@@ -8684,7 +8877,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "2 % / 10 mL bottle",
+        "indian_conc_note": "CROMOLYN SODIUM 2 % / 10 mL bottle",
         "display_name": null
       }
     ],
@@ -8721,7 +8914,9 @@
       "Acute asthma attack (not a bronchodilator)",
       "Hypersensitivity to sodium cromoglicate"
     ],
-    "cross_reactions": ["Nedocromil sodium"],
+    "cross_reactions": [
+      "Nedocromil sodium"
+    ],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -8796,9 +8991,9 @@
             "is_active": true,
             "is_primary": true,
             "strength_numerator": 500,
-            "strength_numerator_unit": "mL",
+            "strength_numerator_unit": "bottle",
             "strength_denominator": 1,
-            "strength_denominator_unit": "bottle"
+            "strength_denominator_unit": "mL"
           }
         ],
         "indian_brands": [
@@ -8809,7 +9004,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "500 mL / 1 bottle",
+        "indian_conc_note": "ISOLYTE-P 500 bottle / 1 mL",
         "display_name": null
       }
     ],
@@ -8935,7 +9130,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.5 % / 10 mL",
+        "indian_conc_note": "CARBOXYMETHYLCELLULOSE (EYE DROPS) 0.5 % / 10 mL",
         "display_name": null
       },
       {
@@ -8962,7 +9157,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.5 % / 0.4 mL",
+        "indian_conc_note": "CARBOXYMETHYLCELLULOSE (EYE DROPS) 0.5 % / 0.4 mL",
         "display_name": null
       },
       {
@@ -8989,7 +9184,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "1 % / 10 mL",
+        "indian_conc_note": "CARBOXYMETHYLCELLULOSE (EYE DROPS) 1 % / 10 mL",
         "display_name": null
       }
     ],
@@ -9076,8 +9271,14 @@
     "snomed_code": null,
     "drug_class": "Antipyretic + Antihistamine + Decongestant",
     "category": "Respiratory",
-    "therapeutic_use": ["Common cold with fever", "Flu symptoms"],
-    "brand_names": ["Sinarest AF (Centaur)", "Wicoryl (Alkem)"],
+    "therapeutic_use": [
+      "Common cold with fever",
+      "Flu symptoms"
+    ],
+    "brand_names": [
+      "Sinarest AF (Centaur)",
+      "Wicoryl (Alkem)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "",
     "formulations": [
@@ -9125,7 +9326,7 @@
             "verified_on": "Manual - March 2026"
           }
         ],
-        "indian_conc_note": "Paracetamol 125 mg + CPM 1 mg + PE 5 mg per mL",
+        "indian_conc_note": "Paracetamol 125 mg / 1 mL + Chlorphenamine Maleate 1 mg / 1 mL + Phenylephrine Hydrochloride 5 mg / 1 mL",
         "display_name": "Paracetamol + Chlorphenamine + Phenylephrine drops"
       },
       {
@@ -9178,7 +9379,7 @@
             "verified_on": "Manual - March 2026"
           }
         ],
-        "indian_conc_note": "Paracetamol 125 mg + CPM 1 mg + PE 5 mg per 5 mL",
+        "indian_conc_note": "Paracetamol 125 mg / 5 mL + Chlorphenamine Maleate 1 mg / 5 mL + Phenylephrine Hydrochloride 5 mg / 5 mL",
         "display_name": "Paracetamol + Chlorphenamine + Phenylephrine syrup"
       }
     ],
@@ -9223,7 +9424,9 @@
     "pregnancy_category": null,
     "lactation_safe": null,
     "lactation_note": null,
-    "reference_source": ["Manual entry"],
+    "reference_source": [
+      "Manual entry"
+    ],
     "last_reviewed_date": null,
     "active": true
   },
@@ -9237,7 +9440,9 @@
       "Vitamin deficiency",
       "Mineral deficiency"
     ],
-    "brand_names": ["Neogadine Elixir (Raptakos Brett & Co.)"],
+    "brand_names": [
+      "Neogadine Elixir (Raptakos Brett & Co.)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "",
     "formulations": [
@@ -9335,7 +9540,7 @@
             "verified_on": "1mg.com / PharmEasy March 2026"
           }
         ],
-        "indian_conc_note": "Per 5 mL: Iodised Peptone 0.322 mg + MgCl2 6.67 mg + MnSO4 1.33 mg + Na Metavanadate 0.22 mg + ZnSO4 10.71 mg + Pyridoxine 0.25 mg + Cyanocobalamin 0.167 mcg + Nicotinamide 3.33 mg",
+        "indian_conc_note": "Iodised Peptone 0.322 mg / 5 mL + Magnesium Chloride 6.67 mg / 5 mL + Manganese Sulphate 1.33 mg / 5 mL + Sodium Metavanadate 0.22 mg / 5 mL + Zinc Sulphate 10.71 mg / 5 mL + Pyridoxine Hydrochloride 0.25 mg / 5 mL + Cyanocobalamin 0.167 mcg / 5 mL + Nicotinamide 3.33 mg / 5 mL",
         "display_name": "Neogadine Elixir (Multivitamin + Multimineral)"
       }
     ],
@@ -9392,7 +9597,10 @@
     "pregnancy_category": null,
     "lactation_safe": null,
     "lactation_note": null,
-    "reference_source": ["1mg.com", "PharmEasy"],
+    "reference_source": [
+      "1mg.com",
+      "PharmEasy"
+    ],
     "last_reviewed_date": null,
     "active": true
   },
@@ -9401,8 +9609,13 @@
     "snomed_code": null,
     "drug_class": "Iron supplement + Vitamin",
     "category": "Nutritional",
-    "therapeutic_use": ["Iron deficiency anaemia", "Folic acid deficiency"],
-    "brand_names": ["Orofer-XT (Emcure)"],
+    "therapeutic_use": [
+      "Iron deficiency anaemia",
+      "Folic acid deficiency"
+    ],
+    "brand_names": [
+      "Orofer-XT (Emcure)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "",
     "formulations": [
@@ -9440,7 +9653,7 @@
             "verified_on": "Manual - March 2026"
           }
         ],
-        "indian_conc_note": "Ferrous Ascorbate 30 mg + Folic Acid 0.2 mg per mL",
+        "indian_conc_note": "Ferrous Ascorbate 30 mg / 1 mL + Folic Acid 0.2 mg / 1 mL",
         "display_name": "Ferrous Ascorbate + Folic Acid drops"
       },
       {
@@ -9477,7 +9690,7 @@
             "verified_on": "Manual - March 2026"
           }
         ],
-        "indian_conc_note": "Ferrous Ascorbate 30 mg + Folic Acid 0.5 mg per 5 mL",
+        "indian_conc_note": "Ferrous Ascorbate 30 mg / 5 mL + Folic Acid 0.5 mg / 5 mL",
         "display_name": "Ferrous Ascorbate + Folic Acid syrup"
       }
     ],
@@ -9527,7 +9740,9 @@
     "pregnancy_category": null,
     "lactation_safe": null,
     "lactation_note": null,
-    "reference_source": ["Manual entry"],
+    "reference_source": [
+      "Manual entry"
+    ],
     "last_reviewed_date": null,
     "active": true
   },
@@ -9537,8 +9752,13 @@
     "snomed_display": null,
     "drug_class": "Plasma volume expander",
     "category": "Infectious",
-    "therapeutic_use": ["Dengue hemorrhagic fever"],
-    "brand_names": ["Microspan NS (Akshar)", "Lomodex (Fresenius Kabi)"],
+    "therapeutic_use": [
+      "Dengue hemorrhagic fever"
+    ],
+    "brand_names": [
+      "Microspan NS (Akshar)",
+      "Lomodex (Fresenius Kabi)"
+    ],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for plasma expansion; dengue use per WHO guidelines",
     "formulations": [
@@ -9566,7 +9786,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 g / 100 mL",
+        "indian_conc_note": "Colloid (Dextran 40) 10 g / 100 mL",
         "display_name": null
       },
       {
@@ -9593,7 +9813,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 g / 100 mL",
+        "indian_conc_note": "Colloid (Dextran 40) 10 g / 100 mL",
         "display_name": null
       }
     ],
@@ -9692,7 +9912,9 @@
     "snomed_display": null,
     "drug_class": "Digestive enzyme supplement",
     "category": "GI",
-    "therapeutic_use": ["Other diseases of pancreas"],
+    "therapeutic_use": [
+      "Other diseases of pancreas"
+    ],
     "brand_names": [
       "Creon (AbbVie/imported)",
       "Enzy (Torrent)",
@@ -9725,7 +9947,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10000 lipase units / 1 capsule",
+        "indian_conc_note": "Pancreatic enzyme replacement (Pancrelipase) 10000 lipase units / 1 capsule",
         "display_name": null
       },
       {
@@ -9752,7 +9974,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "25000 lipase units / 1 capsule",
+        "indian_conc_note": "Pancreatic enzyme replacement (Pancrelipase) 25000 lipase units / 1 capsule",
         "display_name": null
       },
       {
@@ -9779,7 +10001,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "40000 lipase units / 1 capsule",
+        "indian_conc_note": "Pancreatic enzyme replacement (Pancrelipase) 40000 lipase units / 1 capsule",
         "display_name": null
       }
     ],
@@ -9845,7 +10067,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "Acts locally",
-    "contraindications": ["Hypersensitivity to porcine proteins"],
+    "contraindications": [
+      "Hypersensitivity to porcine proteins"
+    ],
     "cross_reactions": [],
     "interactions": [
       {
@@ -9895,7 +10119,9 @@
     "snomed_display": null,
     "drug_class": "Digestive enzyme supplement",
     "category": "Endocrine",
-    "therapeutic_use": ["Cystic fibrosis"],
+    "therapeutic_use": [
+      "Cystic fibrosis"
+    ],
     "brand_names": [
       "Creon (AbbVie/imported)",
       "Enzy (Torrent)",
@@ -9928,7 +10154,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10000 lipase units / 1 capsule",
+        "indian_conc_note": "Pancreatic enzymes (Pancrelipase) for CF 10000 lipase units / 1 capsule",
         "display_name": null
       },
       {
@@ -9955,7 +10181,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "25000 lipase units / 1 capsule",
+        "indian_conc_note": "Pancreatic enzymes (Pancrelipase) for CF 25000 lipase units / 1 capsule",
         "display_name": null
       }
     ],
@@ -10007,7 +10233,9 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "Acts locally",
-    "contraindications": ["Hypersensitivity to porcine proteins"],
+    "contraindications": [
+      "Hypersensitivity to porcine proteins"
+    ],
     "cross_reactions": [],
     "interactions": [],
     "black_box_warnings": [],
@@ -10089,7 +10317,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mg / 1 tablet",
+        "indian_conc_note": "ACECLOFENAC 100 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -10116,7 +10344,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "200 mg / 1 tablet",
+        "indian_conc_note": "ACECLOFENAC 200 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -10143,7 +10371,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "50 mg / 5 mL",
+        "indian_conc_note": "ACECLOFENAC 50 mg / 5 mL",
         "display_name": null
       }
     ],
@@ -10189,7 +10417,10 @@
       "Aspirin-sensitive asthma",
       "Children < 6 years"
     ],
-    "cross_reactions": ["Other NSAIDs", "Aspirin"],
+    "cross_reactions": [
+      "Other NSAIDs",
+      "Aspirin"
+    ],
     "interactions": [
       {
         "drug_or_class": "Anticoagulants (warfarin)",
@@ -10294,7 +10525,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.05 % / 15 g tube",
+        "indian_conc_note": "CLOBETASONE 0.05 % / 15 g tube",
         "display_name": null
       },
       {
@@ -10321,7 +10552,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.05 % / 15 g tube",
+        "indian_conc_note": "CLOBETASONE 0.05 % / 15 g tube",
         "display_name": null
       }
     ],
@@ -10365,7 +10596,9 @@
       "Rosacea",
       "Perioral dermatitis"
     ],
-    "cross_reactions": ["Other topical corticosteroids"],
+    "cross_reactions": [
+      "Other topical corticosteroids"
+    ],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -10446,7 +10679,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 tablet",
+        "indian_conc_note": "HYOSCINE BUTYLBROMIDE 10 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -10473,7 +10706,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "20 mg / 1 mL",
+        "indian_conc_note": "HYOSCINE BUTYLBROMIDE 20 mg / 1 mL",
         "display_name": null
       },
       {
@@ -10500,7 +10733,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 5 mL",
+        "indian_conc_note": "HYOSCINE BUTYLBROMIDE 5 mg / 5 mL",
         "display_name": null
       }
     ],
@@ -10601,9 +10834,9 @@
             "is_active": true,
             "is_primary": true,
             "strength_numerator": 0.5,
-            "strength_numerator_unit": "mL",
+            "strength_numerator_unit": "dose",
             "strength_denominator": 1,
-            "strength_denominator_unit": "dose"
+            "strength_denominator_unit": "mL"
           }
         ],
         "indian_brands": [
@@ -10614,7 +10847,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.5 mL / 1 dose",
+        "indian_conc_note": "JAPANESE ENCEPHALITIS VACCINE 0.5 dose / 1 mL",
         "display_name": null
       }
     ],
@@ -10717,7 +10950,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "3.75 mL/mL / 15 mL",
+        "indian_conc_note": "LIQUID PARAFFIN+MILK OF MAGNESIA 3.75 mL/mL / 15 mL",
         "display_name": null
       },
       {
@@ -10744,7 +10977,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "3.75 mL/mL / 15 mL",
+        "indian_conc_note": "LIQUID PARAFFIN+MILK OF MAGNESIA 3.75 mL/mL / 15 mL",
         "display_name": null
       }
     ],
@@ -10845,9 +11078,9 @@
             "is_active": true,
             "is_primary": true,
             "strength_numerator": 100,
-            "strength_numerator_unit": "mL",
+            "strength_numerator_unit": "bottle",
             "strength_denominator": 1,
-            "strength_denominator_unit": "bottle"
+            "strength_denominator_unit": "mL"
           }
         ],
         "indian_brands": [
@@ -10858,7 +11091,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mL / 1 bottle",
+        "indian_conc_note": "LIQUID PARAFFIN 100 bottle / 1 mL",
         "display_name": null
       },
       {
@@ -10872,9 +11105,9 @@
             "is_active": true,
             "is_primary": true,
             "strength_numerator": 100,
-            "strength_numerator_unit": "mL",
+            "strength_numerator_unit": "bottle",
             "strength_denominator": 1,
-            "strength_denominator_unit": "bottle"
+            "strength_denominator_unit": "mL"
           }
         ],
         "indian_brands": [
@@ -10885,7 +11118,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "100 mL / 1 bottle",
+        "indian_conc_note": "LIQUID PARAFFIN 100 bottle / 1 mL",
         "display_name": null
       }
     ],
@@ -11003,7 +11236,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.5 % / 5 mL",
+        "indian_conc_note": "LOTEPREDNOL ETABONATE 0.5 % / 5 mL",
         "display_name": null
       },
       {
@@ -11030,7 +11263,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.2 % / 5 mL",
+        "indian_conc_note": "LOTEPREDNOL ETABONATE 0.2 % / 5 mL",
         "display_name": null
       }
     ],
@@ -11145,7 +11378,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 1 tablet",
+        "indian_conc_note": "NORETHISTERONE 5 mg / 1 tablet",
         "display_name": null
       }
     ],
@@ -11275,7 +11508,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "30 mg / 1 mL",
+        "indian_conc_note": "PENTAZOCINE 30 mg / 1 mL",
         "display_name": null
       },
       {
@@ -11302,7 +11535,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "25 mg / 1 tablet",
+        "indian_conc_note": "PENTAZOCINE 25 mg / 1 tablet",
         "display_name": null
       }
     ],
@@ -11447,9 +11680,9 @@
             "is_active": true,
             "is_primary": true,
             "strength_numerator": 0.5,
-            "strength_numerator_unit": "mL",
+            "strength_numerator_unit": "dose",
             "strength_denominator": 1,
-            "strength_denominator_unit": "dose"
+            "strength_denominator_unit": "mL"
           }
         ],
         "indian_brands": [
@@ -11460,7 +11693,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.5 mL / 1 dose",
+        "indian_conc_note": "PNEUMOCOCCAL CONJUGATE VACCINE 0.5 dose / 1 mL",
         "display_name": null
       },
       {
@@ -11474,9 +11707,9 @@
             "is_active": true,
             "is_primary": true,
             "strength_numerator": 0.5,
-            "strength_numerator_unit": "mL",
+            "strength_numerator_unit": "dose",
             "strength_denominator": 1,
-            "strength_denominator_unit": "dose"
+            "strength_denominator_unit": "mL"
           }
         ],
         "indian_brands": [
@@ -11487,7 +11720,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "0.5 mL / 1 dose",
+        "indian_conc_note": "PNEUMOCOCCAL CONJUGATE VACCINE 0.5 dose / 1 mL",
         "display_name": null
       }
     ],
@@ -11610,7 +11843,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "5 mg / 1 tablet",
+        "indian_conc_note": "ROSUVASTATIN 5 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -11637,7 +11870,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 tablet",
+        "indian_conc_note": "ROSUVASTATIN 10 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -11664,7 +11897,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "20 mg / 1 tablet",
+        "indian_conc_note": "ROSUVASTATIN 20 mg / 1 tablet",
         "display_name": null
       }
     ],
@@ -11709,7 +11942,9 @@
       "Myopathy",
       "Concomitant ciclosporin"
     ],
-    "cross_reactions": ["Other statins (atorvastatin, simvastatin)"],
+    "cross_reactions": [
+      "Other statins (atorvastatin, simvastatin)"
+    ],
     "interactions": [
       {
         "drug_or_class": "Ciclosporin",
@@ -11780,7 +12015,10 @@
       "Renal colic",
       "Cervical dilatation (obstetrics)"
     ],
-    "brand_names": ["Epidosin (TTK Healthcare)", "Valethamate (Abbott)"],
+    "brand_names": [
+      "Epidosin (TTK Healthcare)",
+      "Valethamate (Abbott)"
+    ],
     "licensed_in_children": false,
     "unlicensed_note": "Not specifically licensed for pediatric use; used off-label in children for colicky abdominal pain and smooth muscle spasm; limited pediatric data",
     "formulations": [
@@ -11808,7 +12046,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "10 mg / 1 tablet",
+        "indian_conc_note": "VALETHEMATE 10 mg / 1 tablet",
         "display_name": null
       },
       {
@@ -11835,7 +12073,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "8 mg / 1 mL",
+        "indian_conc_note": "VALETHEMATE 8 mg / 1 mL",
         "display_name": null
       },
       {
@@ -11862,7 +12100,7 @@
             "verified_on": "Original formulary data"
           }
         ],
-        "indian_conc_note": "2 mg / 5 mL",
+        "indian_conc_note": "VALETHEMATE 2 mg / 5 mL",
         "display_name": null
       }
     ],
@@ -11907,7 +12145,9 @@
       "Myasthenia gravis",
       "Urinary retention"
     ],
-    "cross_reactions": ["Other anticholinergic drugs"],
+    "cross_reactions": [
+      "Other anticholinergic drugs"
+    ],
     "interactions": [
       {
         "drug_or_class": "Other anticholinergics (antihistamines, TCAs)",
@@ -11955,7 +12195,10 @@
     "pregnancy_category": "C",
     "lactation_safe": null,
     "lactation_note": "May reduce milk production due to anticholinergic effect; avoid if possible",
-    "reference_source": ["Indian Drug Formulary", "IAP Textbook of Pediatrics"],
+    "reference_source": [
+      "Indian Drug Formulary",
+      "IAP Textbook of Pediatrics"
+    ],
     "last_reviewed_date": "2026-03-18",
     "active": true
   }
