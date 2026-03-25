@@ -228,4 +228,6 @@ function processFile(filename) {
 console.log("Dosing Bands Migration: band-level → ingredient_doses[]");
 console.log("=========================================================");
 SOURCE_FILES.forEach(processFile);
-console.log("\n✓ Migration complete. Review _v3 files before replacing originals.");
+console.log(
+  "\n✓ Migration complete. Review _v3 files before replacing originals.",
+);

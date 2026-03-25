@@ -5401,8 +5401,12 @@
               "#ec4899",
               "#06b6d4",
             ];
-            const doseUnit = DoseEngine.getLimiting(band)?.dose_unit || "mg/kg/day";
-            let curDose = m.dose_mg_per_kg || DoseEngine.getLimiting(band)?.dose_min_qty || 0;
+            const doseUnit =
+              DoseEngine.getLimiting(band)?.dose_unit || "mg/kg/day";
+            let curDose =
+              m.dose_mg_per_kg ||
+              DoseEngine.getLimiting(band)?.dose_min_qty ||
+              0;
             if (bandMethod === "fixed" || bandMethod === "age") {
               curDose =
                 parseFloat(m.dose_mg_per_kg) ||
@@ -5447,8 +5451,11 @@
 
             const inAnyBand = allBands.some((b) => {
               const lb = DoseEngine.getLimiting(b);
-              return lb && curDose >= lb.dose_min_qty &&
-                curDose <= (lb.dose_max_qty || lb.dose_min_qty);
+              return (
+                lb &&
+                curDose >= lb.dose_min_qty &&
+                curDose <= (lb.dose_max_qty || lb.dose_min_qty)
+              );
             });
 
             html += '<div class="dp-slider-wrap">';
@@ -5490,7 +5497,11 @@
               html +=
                 '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">';
               allBands
-                .sort((a, b) => (DoseEngine.getLimiting(a)?.dose_min_qty || 0) - (DoseEngine.getLimiting(b)?.dose_min_qty || 0))
+                .sort(
+                  (a, b) =>
+                    (DoseEngine.getLimiting(a)?.dose_min_qty || 0) -
+                    (DoseEngine.getLimiting(b)?.dose_min_qty || 0),
+                )
                 .forEach((b, bi) => {
                   const color = bandColors[bi % bandColors.length];
                   const label = (
@@ -5500,7 +5511,11 @@
                     '<span style="font-size:10px;display:flex;align-items:center;gap:3px;cursor:pointer" onclick="document.getElementById(\'' +
                     pid +
                     "-slider').value=" +
-                    ((DoseEngine.getLimiting(b)?.dose_min_qty || 0) + (DoseEngine.getLimiting(b)?.dose_max_qty || DoseEngine.getLimiting(b)?.dose_min_qty || 0)) / 2 +
+                    ((DoseEngine.getLimiting(b)?.dose_min_qty || 0) +
+                      (DoseEngine.getLimiting(b)?.dose_max_qty ||
+                        DoseEngine.getLimiting(b)?.dose_min_qty ||
+                        0)) /
+                      2 +
                     ";dpSliderChanged('" +
                     pid +
                     "'," +

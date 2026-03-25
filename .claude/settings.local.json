@@ -1,7 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(node migrate_dosing_bands.js)"
-    ]
+    "allow": ["Bash(node migrate_dosing_bands.js)"]
   }
 }

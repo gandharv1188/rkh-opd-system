@@ -269,17 +269,21 @@
     if (!ingredientBands || !ingredientBands.length) return null;
     // Try SNOMED match first
     if (ing.snomed_code) {
-      var snomedMatch = ingredientBands.find(function(ib) {
+      var snomedMatch = ingredientBands.find(function (ib) {
         return ib.snomed_code && ib.snomed_code === ing.snomed_code;
       });
       if (snomedMatch) return snomedMatch;
     }
     // Fall back to name matching
-    return ingredientBands.find(function(ib) {
-      if (!ib.ingredient || !ing.name) return false;
-      return ing.name.toLowerCase().indexOf(ib.ingredient.toLowerCase()) >= 0 ||
-        ib.ingredient.toLowerCase().indexOf(ing.name.toLowerCase()) >= 0;
-    }) || null;
+    return (
+      ingredientBands.find(function (ib) {
+        if (!ib.ingredient || !ing.name) return false;
+        return (
+          ing.name.toLowerCase().indexOf(ib.ingredient.toLowerCase()) >= 0 ||
+          ib.ingredient.toLowerCase().indexOf(ing.name.toLowerCase()) >= 0
+        );
+      }) || null
+    );
   }
 
   // Helper: get limiting ingredient_dose from a band

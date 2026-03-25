@@ -9,8 +9,20 @@
     {
       "form": "Conventional release oral drops",
       "ingredients": [
-        { "name": "Phenylephrine HCl", "is_primary": true, "strength_numerator": 2.5, "strength_denominator": 1, "strength_denominator_unit": "mL" },
-        { "name": "Chlorpheniramine maleate", "is_primary": false, "strength_numerator": 1, "strength_denominator": 1, "strength_denominator_unit": "mL" }
+        {
+          "name": "Phenylephrine HCl",
+          "is_primary": true,
+          "strength_numerator": 2.5,
+          "strength_denominator": 1,
+          "strength_denominator_unit": "mL"
+        },
+        {
+          "name": "Chlorpheniramine maleate",
+          "is_primary": false,
+          "strength_numerator": 1,
+          "strength_denominator": 1,
+          "strength_denominator_unit": "mL"
+        }
       ]
     }
   ],
@@ -41,7 +53,7 @@
 ```json
 {
   "generic_name": "CHLORPHENAMINE MALEATE + PHENYLEPHRINE HYDROCHLORIDE",
-  "formulations": [ "...same as current..." ],
+  "formulations": ["...same as current..."],
   "dosing_bands": [
     {
       "indication": "Common cold",
@@ -85,14 +97,14 @@
 
 ## What changes
 
-| Field | Current | Proposed |
-|-------|---------|----------|
-| `dose_min/max_qty` | At band level (one ingredient) | Moves inside `ingredient_doses[]` per ingredient |
-| `max_single_qty` | At band level (ambiguous which ingredient) | Per ingredient: `max_single_mg` |
-| `max_daily_qty` | At band level | Per ingredient: `max_daily_mg` |
-| `dose_reference_ingredient` | Free-text hint | Replaced by `is_limiting: true` flag |
-| `dose_unit` | At band level | Per ingredient (allows mixed units in future) |
-| `source` | Not present | Per ingredient — tracks authority for each dose range |
+| Field                       | Current                                    | Proposed                                              |
+| --------------------------- | ------------------------------------------ | ----------------------------------------------------- |
+| `dose_min/max_qty`          | At band level (one ingredient)             | Moves inside `ingredient_doses[]` per ingredient      |
+| `max_single_qty`            | At band level (ambiguous which ingredient) | Per ingredient: `max_single_mg`                       |
+| `max_daily_qty`             | At band level                              | Per ingredient: `max_daily_mg`                        |
+| `dose_reference_ingredient` | Free-text hint                             | Replaced by `is_limiting: true` flag                  |
+| `dose_unit`                 | At band level                              | Per ingredient (allows mixed units in future)         |
+| `source`                    | Not present                                | Per ingredient — tracks authority for each dose range |
 
 **What stays at band level:** `indication`, `age_band`, `method`, `is_per_day`, `frequency_per_day`, `interval_hours`, `duration_days`, `rounding_rule`, `notes`.
 

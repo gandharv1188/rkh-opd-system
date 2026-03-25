@@ -13,6 +13,7 @@ Dosing bands currently store dose ranges, max doses, and units at the **band lev
 ### Step 1: Migrate Wikoryl AF first (test case)
 
 Current:
+
 ```json
 {
   "dose_min_qty": 0.05,
@@ -26,6 +27,7 @@ Current:
 ```
 
 After:
+
 ```json
 {
   "dose_min_qty": 0.05,
@@ -63,17 +65,20 @@ After:
 ### Step 2: Bulk migrate all mono drugs via script
 
 For each drug with 1 ingredient per formulation:
+
 ```js
-band.ingredient_doses = [{
-  ingredient: primaryIngredient.name,  // from formulations[0].ingredients[0].name
-  dose_min_qty: band.dose_min_qty,
-  dose_max_qty: band.dose_max_qty,
-  dose_unit: band.dose_unit,
-  max_single_mg: band.max_single_qty || null,
-  max_daily_mg: band.max_daily_qty || null,
-  is_limiting: true,
-  source: null
-}];
+band.ingredient_doses = [
+  {
+    ingredient: primaryIngredient.name, // from formulations[0].ingredients[0].name
+    dose_min_qty: band.dose_min_qty,
+    dose_max_qty: band.dose_max_qty,
+    dose_unit: band.dose_unit,
+    max_single_mg: band.max_single_qty || null,
+    max_daily_mg: band.max_daily_qty || null,
+    is_limiting: true,
+    source: null,
+  },
+];
 ```
 
 Band-level `dose_min/max_qty` and `max_single/daily_qty` are **removed** after migration — `ingredient_doses[]` is the single source of truth. No backward compatibility branching.
@@ -91,7 +96,9 @@ Update each drug's `dosing_bands` JSONB column via REST API PATCH.
 **`computeSliderRange()`** — Read dose ranges from `band.ingredient_doses` (limiting ingredient). Remove fallback to band-level `dose_min/max_qty`.
 
 ```js
-const lim = band.ingredient_doses.find(id => id.is_limiting) || band.ingredient_doses[0];
+const lim =
+  band.ingredient_doses.find((id) => id.is_limiting) ||
+  band.ingredient_doses[0];
 const bMin = lim.dose_min_qty;
 const bMax = lim.dose_max_qty || bMin;
 ```
@@ -101,14 +108,19 @@ const bMax = lim.dose_max_qty || bMin;
 ### 2. `web/prescription-pad.html`
 
 **`fmtDoseBand(b)`** (~line 2860) — Always reads from `b.ingredient_doses`. For >1 entry, show per-ingredient ranges:
+
 ```
 CPM: 0.05-0.1 mg/kg/dose (max 1mg) | PE: 0.125-0.25 mg/kg/dose (max 2.5mg)
 ```
+
 For 1 entry: display same as current format.
 
 **`confirmAddMed()`** (~line 7200) — Read from limiting ingredient_dose:
+
 ```js
-const lim = band.ingredient_doses.find(id => id.is_limiting) || band.ingredient_doses[0];
+const lim =
+  band.ingredient_doses.find((id) => id.is_limiting) ||
+  band.ingredient_doses[0];
 ```
 
 **`dpRecalc()`** — Pass `band.ingredient_doses` to `DoseEngine.computeDose()`.
@@ -158,7 +170,7 @@ New file: `radhakishan_system/scripts/migrate_dosing_bands.js`
 - `radhakishan_system/scripts/migrate_dosing_bands.js` — NEW migration script
 - `web/dose-engine.js` — computeSliderRange(), computeDose()
 - `web/prescription-pad.html` — fmtDoseBand(), confirmAddMed(), dpRecalc(), renderReview()
-- `web/formulary.html` — _renderViewDosingBands()
+- `web/formulary.html` — \_renderViewDosingBands()
 
 ## Execution Order
 
@@ -167,6 +179,6 @@ New file: `radhakishan_system/scripts/migrate_dosing_bands.js`
 3. Manually enrich Wikoryl AF with PE's dose ranges (already researched)
 4. Update dose-engine.js (computeSliderRange + computeDose)
 5. Update prescription-pad.html (fmtDoseBand + confirmAddMed + dpRecalc)
-6. Update formulary.html (_renderViewDosingBands)
+6. Update formulary.html (\_renderViewDosingBands)
 7. Push JSON to Supabase
 8. Commit + push to GitHub
