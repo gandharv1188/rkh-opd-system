@@ -104,7 +104,7 @@ Generate this exact structure. Field names MUST match exactly.
       "row1_en": "GENERIC NAME IN CAPITALS (Indian concentration)",
       "row2_en": "Calculated dose + route + frequency + duration + English instructions",
       "row3_hi": "Hindi translation in Devanagari for parents",
-      "calc": "Dose calculation working",
+      "calc": "ONE LINE ONLY: e.g. '15mg/kg × 7.2kg = 108mg ÷ 25mg/mL × 5 = 4.32mL → 4.5mL'. NO reasoning, NO alternatives, NO 'let me recalculate'. Just the math.",
       "flag": "",
       "dose_mg_per_kg": 0,
       "dose_per_day_divided": 0,

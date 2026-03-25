@@ -396,9 +396,7 @@
     "contraindications": [
       "Known hypersensitivity to acyclovir or valacyclovir"
     ],
-    "cross_reactions": [
-      "Valacyclovir (prodrug of acyclovir)"
-    ],
+    "cross_reactions": ["Valacyclovir (prodrug of acyclovir)"],
     "interactions": [
       {
         "drug_or_class": "Nephrotoxic drugs (aminoglycosides, amphotericin B, NSAIDs)",
@@ -478,12 +476,8 @@
     "snomed_display": null,
     "drug_class": "Heat shock protein amplifier",
     "category": "Endocrine",
-    "therapeutic_use": [
-      "Sphingolipidosis and other lipid storage disorders"
-    ],
-    "brand_names": [
-      "Miplyffa (Zevra Therapeutics — imported)"
-    ],
+    "therapeutic_use": ["Sphingolipidosis and other lipid storage disorders"],
+    "brand_names": ["Miplyffa (Zevra Therapeutics — imported)"],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved 2024 for NPC in patients >=2 years; not available as Indian generic",
     "formulations": [
@@ -542,9 +536,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": true,
     "hepatic_note": "Avoid in severe hepatic impairment; monitor LFTs",
-    "contraindications": [
-      "Known hypersensitivity"
-    ],
+    "contraindications": ["Known hypersensitivity"],
     "cross_reactions": [],
     "interactions": [
       {
@@ -578,10 +570,7 @@
     "pregnancy_category": "Not classified",
     "lactation_safe": null,
     "lactation_note": "Insufficient data",
-    "reference_source": [
-      "FDA Label (Miplyffa)",
-      "NPC Clinical Trials"
-    ],
+    "reference_source": ["FDA Label (Miplyffa)", "NPC Clinical Trials"],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -591,14 +580,8 @@
     "snomed_display": null,
     "drug_class": "Liposomal cytarabine-daunorubicin fixed combination",
     "category": "Haematology",
-    "therapeutic_use": [
-      "High-risk AML",
-      "Therapy-related AML",
-      "AML-MRC"
-    ],
-    "brand_names": [
-      "Vyxeos"
-    ],
+    "therapeutic_use": ["High-risk AML", "Therapy-related AML", "AML-MRC"],
+    "brand_names": ["Vyxeos"],
     "licensed_in_children": true,
     "unlicensed_note": "FDA approved >=1yr for t-AML/AML-MRC (2021 label expansion)",
     "formulations": [
@@ -660,10 +643,7 @@
     "contraindications": [
       "Hypersensitivity to cytarabine, daunorubicin, or liposomal components"
     ],
-    "cross_reactions": [
-      "Conventional cytarabine",
-      "Conventional daunorubicin"
-    ],
+    "cross_reactions": ["Conventional cytarabine", "Conventional daunorubicin"],
     "interactions": [
       {
         "drug_or_class": "Cardiotoxic agents",
@@ -706,11 +686,7 @@
     "pregnancy_category": "D",
     "lactation_safe": null,
     "lactation_note": "Contraindicated during treatment",
-    "reference_source": [
-      "Vyxeos PI",
-      "COG AAML1421",
-      "Blood Advances 2022"
-    ],
+    "reference_source": ["Vyxeos PI", "COG AAML1421", "Blood Advances 2022"],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -720,14 +696,8 @@
     "snomed_display": null,
     "drug_class": "Vitamin D3 analogue (topical)",
     "category": "Skin",
-    "therapeutic_use": [
-      "Psoriasis"
-    ],
-    "brand_names": [
-      "Dovonex",
-      "Calcitrene",
-      "Daivonex"
-    ],
+    "therapeutic_use": ["Psoriasis"],
+    "brand_names": ["Dovonex", "Calcitrene", "Daivonex"],
     "licensed_in_children": true,
     "unlicensed_note": "Foam (Sorilux) approved >=4yr; cream safety not established <12yr per FDA labeling",
     "formulations": [
@@ -886,10 +856,7 @@
     "pregnancy_category": "C",
     "lactation_safe": true,
     "lactation_note": "Topical; minimal absorption; likely safe",
-    "reference_source": [
-      "BNF for Children",
-      "AAD Psoriasis Guidelines"
-    ],
+    "reference_source": ["BNF for Children", "AAD Psoriasis Guidelines"],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -899,13 +866,8 @@
     "snomed_display": null,
     "drug_class": "CRISPR/Cas9 gene-edited cell therapy",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Sickle-cell disorders",
-      "Thalassemia"
-    ],
-    "brand_names": [
-      "Casgevy (Vertex/CRISPR Therapeutics)"
-    ],
+    "therapeutic_use": ["Sickle-cell disorders", "Thalassemia"],
+    "brand_names": ["Casgevy (Vertex/CRISPR Therapeutics)"],
     "licensed_in_children": true,
     "unlicensed_note": "FDA/EMA approved for >=12 years; not yet registered in India as of 2026",
     "formulations": [
@@ -1221,9 +1183,7 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment",
-    "contraindications": [
-      "Cephalosporin allergy"
-    ],
+    "contraindications": ["Cephalosporin allergy"],
     "cross_reactions": [
       "Penicillins (1-2% cross-reactivity)",
       "Other cephalosporins"
@@ -1283,10 +1243,7 @@
       "Acute hepatitis A",
       "Intestinal malabsorption, unspecified"
     ],
-    "brand_names": [
-      "Choltran (Ajanta Pharma)",
-      "Questran (imported)"
-    ],
+    "brand_names": ["Choltran (Ajanta Pharma)", "Questran (imported)"],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for children >=6 years for pruritus; off-label for younger children",
     "formulations": [
@@ -1418,9 +1375,7 @@
     "therapeutic_use": [
       "Congenital adrenogenital disorders associated with enzyme deficiency"
     ],
-    "brand_names": [
-      "Crenessity (Neurocrine Biosciences)"
-    ],
+    "brand_names": ["Crenessity (Neurocrine Biosciences)"],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved 2024 for >=4yr with classic CAH; not yet marketed in India",
     "formulations": [
@@ -1606,10 +1561,7 @@
     "pregnancy_category": "Not established",
     "lactation_safe": null,
     "lactation_note": "No data; avoid",
-    "reference_source": [
-      "FDA PI - Crenessity",
-      "Neurocrine Biosciences"
-    ],
+    "reference_source": ["FDA PI - Crenessity", "Neurocrine Biosciences"],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -1831,9 +1783,7 @@
       "Uncontrolled infections",
       "Concurrent PUVA/UVB"
     ],
-    "cross_reactions": [
-      "Tacrolimus — do not combine"
-    ],
+    "cross_reactions": ["Tacrolimus — do not combine"],
     "interactions": [
       {
         "drug_or_class": "Aminoglycosides",
@@ -1921,9 +1871,7 @@
     "snomed_display": null,
     "drug_class": "Artemisinin-based combination therapy (ACT)",
     "category": "Infectious",
-    "therapeutic_use": [
-      "Plasmodium falciparum malaria"
-    ],
+    "therapeutic_use": ["Plasmodium falciparum malaria"],
     "brand_names": [
       "Eurartesim (Sigma-Tau)",
       "Duocotecxin (Holley Pharm)",
@@ -2023,9 +1971,7 @@
       "Concomitant QT-prolonging drugs",
       "Severe hepatic impairment"
     ],
-    "cross_reactions": [
-      "Other artemisinin derivatives"
-    ],
+    "cross_reactions": ["Other artemisinin derivatives"],
     "interactions": [
       {
         "drug_or_class": "QT-prolonging drugs",
@@ -2038,9 +1984,7 @@
         "effect": "May increase piperaquine levels"
       }
     ],
-    "black_box_warnings": [
-      "QTc prolongation risk — obtain baseline ECG"
-    ],
+    "black_box_warnings": ["QTc prolongation risk — obtain baseline ECG"],
     "pediatric_specific_warnings": [
       "Weight-band dosing essential; do not underdose",
       "Give on empty stomach; food increases absorption variably",
@@ -2083,9 +2027,7 @@
     "snomed_display": null,
     "drug_class": "Silicone-based pediculicide",
     "category": "Infectious",
-    "therapeutic_use": [
-      "Head lice (pediculosis capitis) treatment"
-    ],
+    "therapeutic_use": ["Head lice (pediculosis capitis) treatment"],
     "brand_names": [
       "Hedrin (Thornton & Ross — imported)",
       "Lice-Nil (Indian generic)",
@@ -2731,10 +2673,7 @@
       "Paralytic ileus",
       "Severe ulcerative colitis"
     ],
-    "cross_reactions": [
-      "Atropine",
-      "Other anticholinergics"
-    ],
+    "cross_reactions": ["Atropine", "Other anticholinergics"],
     "interactions": [
       {
         "drug_or_class": "Potassium chloride (solid oral forms)",
@@ -2787,9 +2726,7 @@
     "snomed_display": null,
     "drug_class": "GnRH agonist",
     "category": "Renal",
-    "therapeutic_use": [
-      "Undescended testicle"
-    ],
+    "therapeutic_use": ["Undescended testicle"],
     "brand_names": [
       "Suprefact (Sanofi — imported)",
       "Buserelin (Hemmo Pharma — API)"
@@ -2855,9 +2792,7 @@
     "contraindications": [
       "Known hypersensitivity to buserelin or GnRH analogues"
     ],
-    "cross_reactions": [
-      "Other GnRH agonists (leuprolide, goserelin)"
-    ],
+    "cross_reactions": ["Other GnRH agonists (leuprolide, goserelin)"],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -2883,10 +2818,7 @@
     "pregnancy_category": "X",
     "lactation_safe": null,
     "lactation_note": "Contraindicated; not applicable in paediatric context",
-    "reference_source": [
-      "Nelson Textbook of Pediatrics",
-      "BNF for Children"
-    ],
+    "reference_source": ["Nelson Textbook of Pediatrics", "BNF for Children"],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -2896,9 +2828,7 @@
     "snomed_display": null,
     "drug_class": "Human rabies immunoglobulin (passive immunisation)",
     "category": "Infectious",
-    "therapeutic_use": [
-      "Rabies (post-exposure prophylaxis)"
-    ],
+    "therapeutic_use": ["Rabies (post-exposure prophylaxis)"],
     "brand_names": [
       "Berirab-P (CSL Behring / Bharat Serums)",
       "Rabglob (Bharat Serums)",
@@ -2995,9 +2925,7 @@
       "Do not give to previously vaccinated individuals (completed PEP or pre-exposure prophylaxis) — HRIG not needed",
       "Known anaphylaxis to human immunoglobulin products"
     ],
-    "cross_reactions": [
-      "Other human immunoglobulin products"
-    ],
+    "cross_reactions": ["Other human immunoglobulin products"],
     "interactions": [
       {
         "drug_or_class": "Live vaccines (MMR, varicella)",
@@ -3045,9 +2973,7 @@
     "snomed_display": null,
     "drug_class": "Antineoplastic / Antimetabolite",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Sickle-cell disorders"
-    ],
+    "therapeutic_use": ["Sickle-cell disorders"],
     "brand_names": [
       "Cytodrox 500 (Cipla)",
       "Hydrea (BMS)",
@@ -3237,9 +3163,7 @@
     "snomed_display": null,
     "drug_class": "Intranasal corticosteroid",
     "category": "Allergy",
-    "therapeutic_use": [
-      "Allergic rhinitis"
-    ],
+    "therapeutic_use": ["Allergic rhinitis"],
     "brand_names": [
       "Flomist (Cipla)",
       "Fluticone (Sun Pharma)",
@@ -3338,9 +3262,7 @@
       "Active nasal infection (untreated)",
       "Recent nasal surgery or trauma (until healed)"
     ],
-    "cross_reactions": [
-      "Other intranasal corticosteroids"
-    ],
+    "cross_reactions": ["Other intranasal corticosteroids"],
     "interactions": [
       {
         "drug_or_class": "Ritonavir/CYP3A4 inhibitors",
@@ -3395,9 +3317,7 @@
     "snomed_display": null,
     "drug_class": "Parenteral iron preparation (iron carbohydrate complex)",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Iron deficiency anemia"
-    ],
+    "therapeutic_use": ["Iron deficiency anemia"],
     "brand_names": [
       "Orofer FCM (Emcure)",
       "Encicarb (Emcure)",
@@ -3702,9 +3622,7 @@
       "Known hypersensitivity to methylprednisolone",
       "Live vaccine administration"
     ],
-    "cross_reactions": [
-      "Other corticosteroids"
-    ],
+    "cross_reactions": ["Other corticosteroids"],
     "interactions": [
       {
         "drug_or_class": "NSAIDs",
@@ -3773,9 +3691,7 @@
     "snomed_display": null,
     "drug_class": "Corticosteroid (glucocorticoid + mineralocorticoid activity)",
     "category": "Endocrine",
-    "therapeutic_use": [
-      "Adrenocortical insufficiency"
-    ],
+    "therapeutic_use": ["Adrenocortical insufficiency"],
     "brand_names": [
       "Solu-Cortef (Pfizer)",
       "Hydrocortisone Sodium Succinate (generic)",
@@ -3918,9 +3834,7 @@
       "Known hypersensitivity to hydrocortisone sodium succinate",
       "Systemic fungal infection (relative in adrenal crisis)"
     ],
-    "cross_reactions": [
-      "Other corticosteroids"
-    ],
+    "cross_reactions": ["Other corticosteroids"],
     "interactions": [
       {
         "drug_or_class": "Phenytoin/Phenobarbital",
@@ -3982,9 +3896,7 @@
     "snomed_display": null,
     "drug_class": "Bisphosphonate (nitrogen-containing)",
     "category": "Surgical",
-    "therapeutic_use": [
-      "Osteogenesis imperfecta"
-    ],
+    "therapeutic_use": ["Osteogenesis imperfecta"],
     "brand_names": [
       "Pamidria (Cipla)",
       "Bonapam (Biochem)",
@@ -4122,9 +4034,7 @@
       "Severe renal impairment",
       "Hypocalcemia (must correct before infusion)"
     ],
-    "cross_reactions": [
-      "Other bisphosphonates (zoledronic acid, alendronate)"
-    ],
+    "cross_reactions": ["Other bisphosphonates (zoledronic acid, alendronate)"],
     "interactions": [
       {
         "drug_or_class": "Aminoglycosides",
@@ -4187,9 +4097,7 @@
     "snomed_display": null,
     "drug_class": "Bisphosphonate (nitrogen-containing, third-generation)",
     "category": "Surgical",
-    "therapeutic_use": [
-      "Osteogenesis imperfecta"
-    ],
+    "therapeutic_use": ["Osteogenesis imperfecta"],
     "brand_names": [
       "Zometa (Novartis)",
       "Zoldonat (Natco)",
@@ -4300,9 +4208,7 @@
       "CrCl <35 mL/min",
       "Hypocalcemia (must correct before infusion)"
     ],
-    "cross_reactions": [
-      "Other bisphosphonates"
-    ],
+    "cross_reactions": ["Other bisphosphonates"],
     "interactions": [
       {
         "drug_or_class": "Aminoglycosides",
@@ -4667,9 +4573,7 @@
     "snomed_display": null,
     "drug_class": "Fibrinolytic agent (plasminogen activator)",
     "category": "Respiratory",
-    "therapeutic_use": [
-      "Pleural effusion, not elsewhere classified"
-    ],
+    "therapeutic_use": ["Pleural effusion, not elsewhere classified"],
     "brand_names": [
       "Urokinase (generic)",
       "Dabunase (Biocon)",
@@ -4770,9 +4674,7 @@
       "Bronchopleural fistula",
       "Severe coagulopathy"
     ],
-    "cross_reactions": [
-      "Other fibrinolytics (alteplase, streptokinase)"
-    ],
+    "cross_reactions": ["Other fibrinolytics (alteplase, streptokinase)"],
     "interactions": [
       {
         "drug_or_class": "Anticoagulants (heparin, warfarin)",
@@ -5195,9 +5097,7 @@
     "snomed_display": null,
     "drug_class": "Halogenated hydroxyquinoline (luminal amebicide)",
     "category": "Infectious",
-    "therapeutic_use": [
-      "Intestinal amoebiasis (luminal cyst eradication)"
-    ],
+    "therapeutic_use": ["Intestinal amoebiasis (luminal cyst eradication)"],
     "brand_names": [
       "Diodoquin (generic)",
       "Yodoxin (Glenwood)",
@@ -5353,14 +5253,8 @@
     "snomed_display": null,
     "drug_class": "Amino acid derivative",
     "category": "Endocrine",
-    "therapeutic_use": [
-      "Fatty acid oxidation defects",
-      "Carnitine deficiency"
-    ],
-    "brand_names": [
-      "Carnisure (Sun Pharma)",
-      "Carnirich (Intas)"
-    ],
+    "therapeutic_use": ["Fatty acid oxidation defects", "Carnitine deficiency"],
+    "brand_names": ["Carnisure (Sun Pharma)", "Carnirich (Intas)"],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for primary carnitine deficiency",
     "formulations": [
@@ -5486,15 +5380,11 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment",
-    "contraindications": [
-      "Hypersensitivity"
-    ],
+    "contraindications": ["Hypersensitivity"],
     "cross_reactions": [],
     "interactions": [],
     "black_box_warnings": [],
-    "pediatric_specific_warnings": [
-      "GI side effects dose-related"
-    ],
+    "pediatric_specific_warnings": ["GI side effects dose-related"],
     "monitoring_parameters": [
       "Plasma carnitine levels",
       "Acylcarnitine profile"
@@ -5514,10 +5404,7 @@
     "pregnancy_category": "B",
     "lactation_safe": true,
     "lactation_note": "Safe",
-    "reference_source": [
-      "Carnitor PI",
-      "BNF for Children"
-    ],
+    "reference_source": ["Carnitor PI", "BNF for Children"],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -5527,13 +5414,8 @@
     "snomed_display": null,
     "drug_class": "GnRH agonist",
     "category": "Endocrine",
-    "therapeutic_use": [
-      "Central precocious puberty"
-    ],
-    "brand_names": [
-      "Lupride Depot (Sun Pharma)",
-      "Leuprogen (Lupin)"
-    ],
+    "therapeutic_use": ["Central precocious puberty"],
+    "brand_names": ["Lupride Depot (Sun Pharma)", "Leuprogen (Lupin)"],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for CPP",
     "formulations": [
@@ -5653,21 +5535,12 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment",
-    "contraindications": [
-      "Pregnancy"
-    ],
-    "cross_reactions": [
-      "Other GnRH agonists"
-    ],
+    "contraindications": ["Pregnancy"],
+    "cross_reactions": ["Other GnRH agonists"],
     "interactions": [],
     "black_box_warnings": [],
-    "pediatric_specific_warnings": [
-      "Initial pubertal flare"
-    ],
-    "monitoring_parameters": [
-      "LH/FSH",
-      "Bone age q6mo"
-    ],
+    "pediatric_specific_warnings": ["Initial pubertal flare"],
+    "monitoring_parameters": ["LH/FSH", "Bone age q6mo"],
     "administration": [
       {
         "route": "IM",
@@ -5683,10 +5556,7 @@
     "pregnancy_category": "X",
     "lactation_safe": null,
     "lactation_note": "Contraindicated",
-    "reference_source": [
-      "Lupron PI",
-      "IAP Endocrine"
-    ],
+    "reference_source": ["Lupron PI", "IAP Endocrine"],
     "last_reviewed_date": "2026-03-15",
     "active": true
   },
@@ -5696,9 +5566,7 @@
     "snomed_display": null,
     "drug_class": "Sympathomimetic amine (alpha+beta agonist)",
     "category": "Respiratory",
-    "therapeutic_use": [
-      "Acute laryngitis and tracheitis"
-    ],
+    "therapeutic_use": ["Acute laryngitis and tracheitis"],
     "brand_names": [
       "Adrenaline Injection (generic)",
       "Vasoprime (Primus)",
@@ -5792,9 +5660,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": null,
-    "contraindications": [
-      "Known hypersensitivity to epinephrine (rare)"
-    ],
+    "contraindications": ["Known hypersensitivity to epinephrine (rare)"],
     "cross_reactions": [],
     "interactions": [
       {
@@ -5992,9 +5858,7 @@
     "snomed_display": null,
     "drug_class": "Osmotic laxative",
     "category": "GI",
-    "therapeutic_use": [
-      "Functional constipation"
-    ],
+    "therapeutic_use": ["Functional constipation"],
     "brand_names": [
       "Peglec (Fresenius Kabi)",
       "Pegred (Reddys)",
@@ -6203,13 +6067,8 @@
     "snomed_display": null,
     "drug_class": "Fat-soluble vitamin / Coagulation factor",
     "category": "Neonatology",
-    "therapeutic_use": [
-      "Hemorrhagic disease of newborn"
-    ],
-    "brand_names": [
-      "Kenadion (Samarth Life Sciences)",
-      "K-Ject (Neon Labs)"
-    ],
+    "therapeutic_use": ["Hemorrhagic disease of newborn"],
+    "brand_names": ["Kenadion (Samarth Life Sciences)", "K-Ject (Neon Labs)"],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed from birth for VKDB prophylaxis and treatment",
     "formulations": [
@@ -6316,9 +6175,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "May be less effective in severe hepatic failure",
-    "contraindications": [
-      "Hypersensitivity to phytonadione"
-    ],
+    "contraindications": ["Hypersensitivity to phytonadione"],
     "cross_reactions": [],
     "interactions": [
       {
@@ -6370,9 +6227,7 @@
     "snomed_display": null,
     "drug_class": "Scabicidal agent (keratolytic / parasiticide)",
     "category": "Infectious",
-    "therapeutic_use": [
-      "Scabies (especially in infants <2 months)"
-    ],
+    "therapeutic_use": ["Scabies (especially in infants <2 months)"],
     "brand_names": [
       "Sulfur Ointment (generic India)",
       "Sulphur in Petrolatum (compounding)",
@@ -6512,9 +6367,7 @@
     "snomed_display": null,
     "drug_class": "Corticosteroid (glucocorticoid)",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Acquired hemolytic anemia (warm AIHA)"
-    ],
+    "therapeutic_use": ["Acquired hemolytic anemia (warm AIHA)"],
     "brand_names": [
       "Omnacortil (Macleods)",
       "Wysolone (Pfizer India)",
@@ -6719,9 +6572,7 @@
       "Known hypersensitivity to prednisolone",
       "Live vaccine administration during high-dose immunosuppression"
     ],
-    "cross_reactions": [
-      "Other corticosteroids"
-    ],
+    "cross_reactions": ["Other corticosteroids"],
     "interactions": [
       {
         "drug_or_class": "NSAIDs",
@@ -7285,12 +7136,8 @@
     "snomed_display": null,
     "drug_class": "Anti-antithrombin siRNA (RNA interference therapy)",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Hemophilia B"
-    ],
-    "brand_names": [
-      "Qfitlia (Sanofi — imported)"
-    ],
+    "therapeutic_use": ["Hemophilia B"],
+    "brand_names": ["Qfitlia (Sanofi — imported)"],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved for prophylaxis in patients >=12 years with hemophilia A or B with or without inhibitors; not manufactured in India — import only; limited pediatric data below 12 years",
     "formulations": [
@@ -7349,9 +7196,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No formal hepatic adjustment; monitor LFTs as hepatotoxicity reported",
-    "contraindications": [
-      "Known hypersensitivity to fitusiran"
-    ],
+    "contraindications": ["Known hypersensitivity to fitusiran"],
     "cross_reactions": [],
     "interactions": [
       {
@@ -7409,12 +7254,8 @@
     "snomed_display": null,
     "drug_class": "Gene therapy (lentiviral vector-based)",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Sickle-cell disease"
-    ],
-    "brand_names": [
-      "Lyfgenia"
-    ],
+    "therapeutic_use": ["Sickle-cell disease"],
+    "brand_names": ["Lyfgenia"],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved for patients >=12 years with SCD and history of VOEs. Not available in India.",
     "formulations": [
@@ -7528,13 +7369,8 @@
     "snomed_display": null,
     "drug_class": "Anti-tissue factor pathway inhibitor (anti-TFPI) monoclonal antibody",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Hemophilia A",
-      "Hemophilia B"
-    ],
-    "brand_names": [
-      "Hympavzi"
-    ],
+    "therapeutic_use": ["Hemophilia A", "Hemophilia B"],
+    "brand_names": ["Hympavzi"],
     "licensed_in_children": true,
     "unlicensed_note": "FDA-approved for >=12 years without inhibitors. Expanded indication for >=6 years under review. Not available in India.",
     "formulations": [
@@ -7593,9 +7429,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": null,
-    "contraindications": [
-      "Hypersensitivity to marstacimab"
-    ],
+    "contraindications": ["Hypersensitivity to marstacimab"],
     "cross_reactions": [],
     "interactions": [
       {
@@ -7650,15 +7484,8 @@
     "snomed_display": null,
     "drug_class": "Thionamide antithyroid agent",
     "category": "Endocrine",
-    "therapeutic_use": [
-      "Thyrotoxicosis",
-      "Hyperthyroidism",
-      "Graves disease"
-    ],
-    "brand_names": [
-      "Methimez",
-      "Thyrozol"
-    ],
+    "therapeutic_use": ["Thyrotoxicosis", "Hyperthyroidism", "Graves disease"],
+    "brand_names": ["Methimez", "Thyrozol"],
     "licensed_in_children": true,
     "unlicensed_note": "Preferred antithyroid drug in pediatrics (over propylthiouracil due to hepatotoxicity risk)",
     "formulations": [
@@ -7811,9 +7638,7 @@
     "snomed_display": null,
     "drug_class": "Vitamin B12 analogue (active coenzyme form)",
     "category": "Haematology",
-    "therapeutic_use": [
-      "Vitamin B12 deficiency anemia"
-    ],
+    "therapeutic_use": ["Vitamin B12 deficiency anemia"],
     "brand_names": [
       "Methycobal (Wockhardt)",
       "Meconerv (Micro Labs)",
@@ -7987,13 +7812,8 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment required",
-    "contraindications": [
-      "Hypersensitivity to cobalamin or cobalt"
-    ],
-    "cross_reactions": [
-      "Cyanocobalamin",
-      "Hydroxocobalamin"
-    ],
+    "contraindications": ["Hypersensitivity to cobalamin or cobalt"],
+    "cross_reactions": ["Cyanocobalamin", "Hydroxocobalamin"],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -8295,10 +8115,7 @@
       "Hypersensitivity to sulfonamides or trimethoprim",
       "G6PD deficiency (relative)"
     ],
-    "cross_reactions": [
-      "Sulfonamides",
-      "Dapsone"
-    ],
+    "cross_reactions": ["Sulfonamides", "Dapsone"],
     "interactions": [
       {
         "drug_or_class": "Methotrexate",
@@ -8380,11 +8197,7 @@
       "Varicella [chickenpox]",
       "Erythema multiforme"
     ],
-    "brand_names": [
-      "Valcivir (Cipla)",
-      "Valvir (FDC)",
-      "Valtrex (GSK)"
-    ],
+    "brand_names": ["Valcivir (Cipla)", "Valvir (FDC)", "Valtrex (GSK)"],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed >=12 yr for herpes zoster and genital herpes; >=2 yr for chickenpox; extemporaneous suspension for younger children",
     "formulations": [
@@ -8515,12 +8328,8 @@
     ],
     "hepatic_adjustment_required": false,
     "hepatic_note": "No adjustment; converted to acyclovir in liver/intestine",
-    "contraindications": [
-      "Hypersensitivity to valacyclovir or acyclovir"
-    ],
-    "cross_reactions": [
-      "Cross-sensitivity with acyclovir"
-    ],
+    "contraindications": ["Hypersensitivity to valacyclovir or acyclovir"],
+    "cross_reactions": ["Cross-sensitivity with acyclovir"],
     "interactions": [
       {
         "drug_or_class": "Nephrotoxic drugs",
@@ -8689,9 +8498,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "May have limited efficacy in severe hepatic failure; vitamin K-dependent factor synthesis impaired",
-    "contraindications": [
-      "Hypersensitivity to phytonadione"
-    ],
+    "contraindications": ["Hypersensitivity to phytonadione"],
     "cross_reactions": [],
     "interactions": [
       {
@@ -8914,9 +8721,7 @@
       "Acute asthma attack (not a bronchodilator)",
       "Hypersensitivity to sodium cromoglicate"
     ],
-    "cross_reactions": [
-      "Nedocromil sodium"
-    ],
+    "cross_reactions": ["Nedocromil sodium"],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -9271,14 +9076,8 @@
     "snomed_code": null,
     "drug_class": "Antipyretic + Antihistamine + Decongestant",
     "category": "Respiratory",
-    "therapeutic_use": [
-      "Common cold with fever",
-      "Flu symptoms"
-    ],
-    "brand_names": [
-      "Sinarest AF (Centaur)",
-      "Wicoryl (Alkem)"
-    ],
+    "therapeutic_use": ["Common cold with fever", "Flu symptoms"],
+    "brand_names": ["Sinarest AF (Centaur)", "Wicoryl (Alkem)"],
     "licensed_in_children": true,
     "unlicensed_note": "",
     "formulations": [
@@ -9424,9 +9223,7 @@
     "pregnancy_category": null,
     "lactation_safe": null,
     "lactation_note": null,
-    "reference_source": [
-      "Manual entry"
-    ],
+    "reference_source": ["Manual entry"],
     "last_reviewed_date": null,
     "active": true
   },
@@ -9440,9 +9237,7 @@
       "Vitamin deficiency",
       "Mineral deficiency"
     ],
-    "brand_names": [
-      "Neogadine Elixir (Raptakos Brett & Co.)"
-    ],
+    "brand_names": ["Neogadine Elixir (Raptakos Brett & Co.)"],
     "licensed_in_children": true,
     "unlicensed_note": "",
     "formulations": [
@@ -9597,10 +9392,7 @@
     "pregnancy_category": null,
     "lactation_safe": null,
     "lactation_note": null,
-    "reference_source": [
-      "1mg.com",
-      "PharmEasy"
-    ],
+    "reference_source": ["1mg.com", "PharmEasy"],
     "last_reviewed_date": null,
     "active": true
   },
@@ -9609,13 +9401,8 @@
     "snomed_code": null,
     "drug_class": "Iron supplement + Vitamin",
     "category": "Nutritional",
-    "therapeutic_use": [
-      "Iron deficiency anaemia",
-      "Folic acid deficiency"
-    ],
-    "brand_names": [
-      "Orofer-XT (Emcure)"
-    ],
+    "therapeutic_use": ["Iron deficiency anaemia", "Folic acid deficiency"],
+    "brand_names": ["Orofer-XT (Emcure)"],
     "licensed_in_children": true,
     "unlicensed_note": "",
     "formulations": [
@@ -9740,9 +9527,7 @@
     "pregnancy_category": null,
     "lactation_safe": null,
     "lactation_note": null,
-    "reference_source": [
-      "Manual entry"
-    ],
+    "reference_source": ["Manual entry"],
     "last_reviewed_date": null,
     "active": true
   },
@@ -9752,13 +9537,8 @@
     "snomed_display": null,
     "drug_class": "Plasma volume expander",
     "category": "Infectious",
-    "therapeutic_use": [
-      "Dengue hemorrhagic fever"
-    ],
-    "brand_names": [
-      "Microspan NS (Akshar)",
-      "Lomodex (Fresenius Kabi)"
-    ],
+    "therapeutic_use": ["Dengue hemorrhagic fever"],
+    "brand_names": ["Microspan NS (Akshar)", "Lomodex (Fresenius Kabi)"],
     "licensed_in_children": true,
     "unlicensed_note": "Licensed for plasma expansion; dengue use per WHO guidelines",
     "formulations": [
@@ -9912,9 +9692,7 @@
     "snomed_display": null,
     "drug_class": "Digestive enzyme supplement",
     "category": "GI",
-    "therapeutic_use": [
-      "Other diseases of pancreas"
-    ],
+    "therapeutic_use": ["Other diseases of pancreas"],
     "brand_names": [
       "Creon (AbbVie/imported)",
       "Enzy (Torrent)",
@@ -10067,9 +9845,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "Acts locally",
-    "contraindications": [
-      "Hypersensitivity to porcine proteins"
-    ],
+    "contraindications": ["Hypersensitivity to porcine proteins"],
     "cross_reactions": [],
     "interactions": [
       {
@@ -10119,9 +9895,7 @@
     "snomed_display": null,
     "drug_class": "Digestive enzyme supplement",
     "category": "Endocrine",
-    "therapeutic_use": [
-      "Cystic fibrosis"
-    ],
+    "therapeutic_use": ["Cystic fibrosis"],
     "brand_names": [
       "Creon (AbbVie/imported)",
       "Enzy (Torrent)",
@@ -10233,9 +10007,7 @@
     "renal_bands": [],
     "hepatic_adjustment_required": false,
     "hepatic_note": "Acts locally",
-    "contraindications": [
-      "Hypersensitivity to porcine proteins"
-    ],
+    "contraindications": ["Hypersensitivity to porcine proteins"],
     "cross_reactions": [],
     "interactions": [],
     "black_box_warnings": [],
@@ -10417,10 +10189,7 @@
       "Aspirin-sensitive asthma",
       "Children < 6 years"
     ],
-    "cross_reactions": [
-      "Other NSAIDs",
-      "Aspirin"
-    ],
+    "cross_reactions": ["Other NSAIDs", "Aspirin"],
     "interactions": [
       {
         "drug_or_class": "Anticoagulants (warfarin)",
@@ -10596,9 +10365,7 @@
       "Rosacea",
       "Perioral dermatitis"
     ],
-    "cross_reactions": [
-      "Other topical corticosteroids"
-    ],
+    "cross_reactions": ["Other topical corticosteroids"],
     "interactions": [],
     "black_box_warnings": [],
     "pediatric_specific_warnings": [
@@ -11942,9 +11709,7 @@
       "Myopathy",
       "Concomitant ciclosporin"
     ],
-    "cross_reactions": [
-      "Other statins (atorvastatin, simvastatin)"
-    ],
+    "cross_reactions": ["Other statins (atorvastatin, simvastatin)"],
     "interactions": [
       {
         "drug_or_class": "Ciclosporin",
@@ -12015,10 +11780,7 @@
       "Renal colic",
       "Cervical dilatation (obstetrics)"
     ],
-    "brand_names": [
-      "Epidosin (TTK Healthcare)",
-      "Valethamate (Abbott)"
-    ],
+    "brand_names": ["Epidosin (TTK Healthcare)", "Valethamate (Abbott)"],
     "licensed_in_children": false,
     "unlicensed_note": "Not specifically licensed for pediatric use; used off-label in children for colicky abdominal pain and smooth muscle spasm; limited pediatric data",
     "formulations": [
@@ -12145,9 +11907,7 @@
       "Myasthenia gravis",
       "Urinary retention"
     ],
-    "cross_reactions": [
-      "Other anticholinergic drugs"
-    ],
+    "cross_reactions": ["Other anticholinergic drugs"],
     "interactions": [
       {
         "drug_or_class": "Other anticholinergics (antihistamines, TCAs)",
@@ -12195,10 +11955,7 @@
     "pregnancy_category": "C",
     "lactation_safe": null,
     "lactation_note": "May reduce milk production due to anticholinergic effect; avoid if possible",
-    "reference_source": [
-      "Indian Drug Formulary",
-      "IAP Textbook of Pediatrics"
-    ],
+    "reference_source": ["Indian Drug Formulary", "IAP Textbook of Pediatrics"],
     "last_reviewed_date": "2026-03-18",
     "active": true
   }
