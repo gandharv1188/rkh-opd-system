@@ -5329,7 +5329,7 @@
             else if (rndRule === "quarter_tab") sliderStep = 0.25;
             else if (sliderRange < 2) sliderStep = 0.01;
             else if (sliderRange < 10) sliderStep = 0.1;
-            else if (range < 50) sliderStep = 0.5;
+            else if (sliderRange < 50) sliderStep = 0.5;
             else sliderStep = 1;
             // Check if current dose is in any band
             const inAnyBand = allBands.some(
