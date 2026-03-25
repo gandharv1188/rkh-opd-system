@@ -7,6 +7,7 @@ The current dose calculator in `web/prescription-pad.html` handles only **single
 **Goal:** Replace the calculation engine with a universal one that works from first principles — **concentration × volume = dose** — for all drug types, all dosing methods, and any number of ingredients. Keep the existing UI (slider, radios, bilingual display).
 
 **Phased approach:**
+
 - **Phase 1 (this build):** Engine works with current drug-level dosing bands. Mono drugs work perfectly. Combo drugs get volume-based per-ingredient dose display (derived from concentrations). Slider is universal for all methods.
 - **Phase 2 (data enrichment):** Add per-ingredient dosing bands (`ingredient_bands[]`). Engine already supports them — just needs data.
 
@@ -15,11 +16,13 @@ The current dose calculator in `web/prescription-pad.html` handles only **single
 ## Architecture
 
 ### New file: `web/dose-engine.js` (~350 lines)
+
 - Pure calculation logic, no DOM access
 - Loaded via `<script src="dose-engine.js"></script>` before inline script in prescription-pad.html
 - Exports via `window.DoseEngine = { ... }`
 
 ### Modified file: `web/prescription-pad.html`
+
 - Replace `calcDose()` calls with `DoseEngine.computeDose()`
 - Remove `dpFixedChange()` — slider is universal now
 - Simplify `dpRecalc()` — no more fixed-dose branch
@@ -98,6 +101,7 @@ IngredientDose = {
 **`DoseEngine.computeDose(params) → DoseResult`**
 
 Algorithm:
+
 1. Find primary ingredient (`isPrimary === true` or index 0)
 2. Compute primary mg/dose based on method:
    - **weight**: `mgPerDose = isPerDay ? (sliderValue × weight / frequency) : (sliderValue × weight)`
@@ -135,6 +139,7 @@ SliderRange = {
 ```
 
 Universal slider logic:
+
 - **weight/bsa/gfr**: axis = mg/kg or mg/m², range from `0.5×globalMin` to `2×globalMax`
 - **fixed/age**: axis = dispensing units, range from `min(1, band.dose_min_qty)` to `band.dose_max_qty × 1.5`
 - **infusion**: axis = rate units
@@ -154,6 +159,7 @@ Mosteller formula: `√(height × weight / 3600)`
 ### Hindi/English Constants (consolidated)
 
 All bilingual maps currently duplicated across 5+ places in prescription-pad.html are consolidated in dose-engine.js:
+
 - `HINDI_DROPS` (1-25), `HINDI_ML` (0.5-10), `HINDI_TABLETS` (0.25-2)
 - `HINDI_UNITS` (drops→बूंदें, tablet→गोली, etc.)
 - `FREQ_EN` (1→once, 2→twice, etc.), `FREQ_HI` (1→एक बार, etc.)
@@ -163,33 +169,38 @@ All bilingual maps currently duplicated across 5+ places in prescription-pad.htm
 ## Changes in prescription-pad.html
 
 ### REMOVE
-| Function | Lines | Reason |
-|---|---|---|
-| `calcDose()` | 5139-5239 | → `DoseEngine.computeDose()` |
-| `getConc()` | 2145-2169 | → `DoseEngine.parseIngredients()` |
-| `dpFixedChange()` | 2534-2609 | Slider is universal — no stepper |
-| Fixed stepper HTML | 5504-5556 | All methods use slider |
+
+| Function           | Lines     | Reason                            |
+| ------------------ | --------- | --------------------------------- |
+| `calcDose()`       | 5139-5239 | → `DoseEngine.computeDose()`      |
+| `getConc()`        | 2145-2169 | → `DoseEngine.parseIngredients()` |
+| `dpFixedChange()`  | 2534-2609 | Slider is universal — no stepper  |
+| Fixed stepper HTML | 5504-5556 | All methods use slider            |
 
 ### SIMPLIFY
-| Function | Lines | Change |
-|---|---|---|
-| `dpRecalc()` | 2612-2819 | Remove 70-line fixed branch (2615-2686). Single path: read state → `DoseEngine.computeDose()` → update display |
-| `dpSliderChanged()` | 2422-2520 | Replace 50 lines of snap logic with `DoseEngine.snapToUnit()` + `dpRecalc()` |
+
+| Function            | Lines     | Change                                                                                                         |
+| ------------------- | --------- | -------------------------------------------------------------------------------------------------------------- |
+| `dpRecalc()`        | 2612-2819 | Remove 70-line fixed branch (2615-2686). Single path: read state → `DoseEngine.computeDose()` → update display |
+| `dpSliderChanged()` | 2422-2520 | Replace 50 lines of snap logic with `DoseEngine.snapToUnit()` + `dpRecalc()`                                   |
 
 ### MODIFY
-| Function | Lines | Change |
-|---|---|---|
-| `applyDose()` | 5932-6179 | Use `DoseEngine.computeDose()`. Multi-ingredient calc string. Remove unit override block (engine handles it via `outputUnit`). |
-| `dpFormChanged()` | 2312-2397 | Use `DoseEngine.parseIngredients()`. Strength radios show multi-ingredient concentrations for combo drugs. |
-| `dpStrengthChanged()` | 2400-2414 | Store full ingredients array via `data-ingredients` attribute on panel. |
-| `confirmAddMed()` | 7274-7326 | Use `DoseEngine.parseIngredients()`. Store `ingredients[]` on medicine object. |
-| Dose panel HTML | 5329-5700 | Unify: always render slider via `DoseEngine.computeSliderRange()`. Remove stepper branch. |
-| `fmtConc()` | 2172-2181 | Show multi-ingredient: "2.5+1mg/mL" for combo drugs. |
+
+| Function              | Lines     | Change                                                                                                                         |
+| --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `applyDose()`         | 5932-6179 | Use `DoseEngine.computeDose()`. Multi-ingredient calc string. Remove unit override block (engine handles it via `outputUnit`). |
+| `dpFormChanged()`     | 2312-2397 | Use `DoseEngine.parseIngredients()`. Strength radios show multi-ingredient concentrations for combo drugs.                     |
+| `dpStrengthChanged()` | 2400-2414 | Store full ingredients array via `data-ingredients` attribute on panel.                                                        |
+| `confirmAddMed()`     | 7274-7326 | Use `DoseEngine.parseIngredients()`. Store `ingredients[]` on medicine object.                                                 |
+| Dose panel HTML       | 5329-5700 | Unify: always render slider via `DoseEngine.computeSliderRange()`. Remove stepper branch.                                      |
+| `fmtConc()`           | 2172-2181 | Show multi-ingredient: "2.5+1mg/mL" for combo drugs.                                                                           |
 
 ### KEEP UNCHANGED
+
 `getDoseRef()`, `parseAgeMonths()`, `fmtDoseBand()`, `simplifyForm()`, `getUnitOptions()`, `dpFreqChange()`, `dpUnitChanged()`, `toggleEP()`, `renderPictogram()`, `showAddMedicine()`, all route maps, form maps.
 
 ### ADD
+
 ```js
 function getSelectedIngredients(pid, med) {
   // Returns Ingredient[] from formularyCache for current form+strength selection
@@ -201,14 +212,14 @@ function getSelectedIngredients(pid, med) {
 
 ## Universal Slider — How It Works for Each Method
 
-| Method | Slider represents | Gradient zones | Slider label shows |
-|---|---|---|---|
-| `weight` | mg/kg/day (or /dose) | Band dose ranges | "2.5ml — 15mg/kg/day — Pneumonia" |
-| `bsa` | mg/m²/day (or /dose) | Band dose ranges | "1.2ml — 75mg/m²/day" |
-| `fixed` | dispensing units (drops/mL/tab) | Band min-max range | "5 drops (PE 0.625mg + CPM 0.25mg)" |
-| `age` | dispensing units | Band min-max range | "5ml (125mg)" |
-| `gfr` | mg/kg (adjusted) | Band dose ranges | Same as weight + GFR note |
-| `infusion` | rate (mL/hr or mg/kg/hr) | Band dose ranges | "12 mL/hr" |
+| Method     | Slider represents               | Gradient zones     | Slider label shows                  |
+| ---------- | ------------------------------- | ------------------ | ----------------------------------- |
+| `weight`   | mg/kg/day (or /dose)            | Band dose ranges   | "2.5ml — 15mg/kg/day — Pneumonia"   |
+| `bsa`      | mg/m²/day (or /dose)            | Band dose ranges   | "1.2ml — 75mg/m²/day"               |
+| `fixed`    | dispensing units (drops/mL/tab) | Band min-max range | "5 drops (PE 0.625mg + CPM 0.25mg)" |
+| `age`      | dispensing units                | Band min-max range | "5ml (125mg)"                       |
+| `gfr`      | mg/kg (adjusted)                | Band dose ranges   | Same as weight + GFR note           |
+| `infusion` | rate (mL/hr or mg/kg/hr)        | Band dose ranges   | "12 mL/hr"                          |
 
 For **fixed/age**, the engine back-calculates per-ingredient mg at the selected volume and displays them in the slider label. The doctor sees what they're actually giving.
 
@@ -217,11 +228,13 @@ For **fixed/age**, the engine back-calculates per-ingredient mg at the selected 
 ## Calc String Format
 
 **Single ingredient weight-based (Amoxicillin):**
+
 ```
 15mg/kg × 10kg = 150mg/day ÷ 3 = 50mg/dose → 2.5ml
 ```
 
 **Multi-ingredient (Wikoryl AF drops, 10kg child, 5 drops):**
+
 ```
 5 drops = 0.25mL
   Phenylephrine: 0.625mg (0.06mg/kg) ✓
@@ -229,6 +242,7 @@ For **fixed/age**, the engine back-calculates per-ingredient mg at the selected 
 ```
 
 **Multi-ingredient weight-based (Amox-Clav 250+62.5/5ml):**
+
 ```
 25mg/kg × 10kg = 250mg/day ÷ 3 = 83mg/dose → 1.7ml
   Amoxicillin: 83mg (8.3mg/kg) ✓
@@ -301,6 +315,7 @@ The engine checks: if `band.ingredient_bands` exists, it maps each ingredient's 
 ## Verification
 
 Test with real formulary data:
+
 1. **Amoxicillin syrup** (125mg/5mL, 10kg, 25mg/kg/day TDS) → 2.5ml ✓
 2. **Wikoryl AF drops** (PE 2.5+CPM 1 mg/mL, 10kg) → slider shows drops, calc shows both ingredients
 3. **Albendazole 400mg tablet** (fixed) → slider shows tablets (0.5-2), at 1 tab shows 400mg
@@ -310,5 +325,6 @@ Test with real formulary data:
 7. **BSA drug** (Lopinavir/Ritonavir, method=bsa) → slider in mg/m², uses Mosteller
 
 ## Critical Files
+
 - `web/dose-engine.js` — NEW (create)
 - `web/prescription-pad.html` — MODIFY (lines 2145-2169, 2312-2609, 2612-2819, 5139-5556, 5932-6179, 7274-7326)

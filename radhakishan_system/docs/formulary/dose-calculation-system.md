@@ -1,4 +1,5 @@
 # Universal Drug Dose Calculator System
+
 ## FHIR R4 + ABDM v6.5 Compliant Architecture
 
 ---
@@ -6,6 +7,7 @@
 ## 1. SYSTEM OVERVIEW
 
 This system has three layers:
+
 1. **Schema** — FHIR R4 resources with ABDM extensions
 2. **Calculation Engine** — Pure logic, independent of transport
 3. **API Contracts** — RESTful endpoints with FHIR request/response
@@ -112,13 +114,28 @@ Observation                  ← Lab values feeding into adjustments
         {
           "url": "https://nrces.in/ndhm/fhir/r4/Extension/ingredient-dose-basis",
           "extension": [
-            { "url": "dosingBasis",        "valueCode": "mg/kg/dose" },
-            { "url": "standardDose",       "valueQuantity": { "value": 0.1,  "unit": "mg/kg/dose" } },
-            { "url": "minDose",            "valueQuantity": { "value": 0.05, "unit": "mg/kg/dose" } },
-            { "url": "maxDose",            "valueQuantity": { "value": 0.2,  "unit": "mg/kg/dose" } },
-            { "url": "maxSingleDose",      "valueQuantity": { "value": 4,    "unit": "mg" } },
-            { "url": "maxDailyDose",       "valueQuantity": { "value": 16,   "unit": "mg/day" } },
-            { "url": "weightBasis",        "valueCode": "actual" }
+            { "url": "dosingBasis", "valueCode": "mg/kg/dose" },
+            {
+              "url": "standardDose",
+              "valueQuantity": { "value": 0.1, "unit": "mg/kg/dose" }
+            },
+            {
+              "url": "minDose",
+              "valueQuantity": { "value": 0.05, "unit": "mg/kg/dose" }
+            },
+            {
+              "url": "maxDose",
+              "valueQuantity": { "value": 0.2, "unit": "mg/kg/dose" }
+            },
+            {
+              "url": "maxSingleDose",
+              "valueQuantity": { "value": 4, "unit": "mg" }
+            },
+            {
+              "url": "maxDailyDose",
+              "valueQuantity": { "value": 16, "unit": "mg/day" }
+            },
+            { "url": "weightBasis", "valueCode": "actual" }
           ]
         }
       ]
@@ -142,13 +159,28 @@ Observation                  ← Lab values feeding into adjustments
         {
           "url": "https://nrces.in/ndhm/fhir/r4/Extension/ingredient-dose-basis",
           "extension": [
-            { "url": "dosingBasis",        "valueCode": "mg/kg/dose" },
-            { "url": "standardDose",       "valueQuantity": { "value": 0.05, "unit": "mg/kg/dose" } },
-            { "url": "minDose",            "valueQuantity": { "value": 0.025,"unit": "mg/kg/dose" } },
-            { "url": "maxDose",            "valueQuantity": { "value": 0.1,  "unit": "mg/kg/dose" } },
-            { "url": "maxSingleDose",      "valueQuantity": { "value": 10,   "unit": "mg" } },
-            { "url": "maxDailyDose",       "valueQuantity": { "value": 40,   "unit": "mg/day" } },
-            { "url": "weightBasis",        "valueCode": "actual" }
+            { "url": "dosingBasis", "valueCode": "mg/kg/dose" },
+            {
+              "url": "standardDose",
+              "valueQuantity": { "value": 0.05, "unit": "mg/kg/dose" }
+            },
+            {
+              "url": "minDose",
+              "valueQuantity": { "value": 0.025, "unit": "mg/kg/dose" }
+            },
+            {
+              "url": "maxDose",
+              "valueQuantity": { "value": 0.1, "unit": "mg/kg/dose" }
+            },
+            {
+              "url": "maxSingleDose",
+              "valueQuantity": { "value": 10, "unit": "mg" }
+            },
+            {
+              "url": "maxDailyDose",
+              "valueQuantity": { "value": 40, "unit": "mg/day" }
+            },
+            { "url": "weightBasis", "valueCode": "actual" }
           ]
         }
       ]
@@ -159,7 +191,12 @@ Observation                  ← Lab values feeding into adjustments
   "drugCharacteristic": [
     {
       "type": {
-        "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/medicationknowledge-characteristic", "code": "dropsPerMl" }]
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/medicationknowledge-characteristic",
+            "code": "dropsPerMl"
+          }
+        ]
       },
       "valueQuantity": { "value": 20, "unit": "drops/mL" }
     },
@@ -204,21 +241,27 @@ Observation                  ← Lab values feeding into adjustments
                 }
               },
               "route": {
-                "coding": [{ "system": "http://snomed.info/sct", "code": "26643006", "display": "Oral" }]
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "26643006",
+                    "display": "Oral"
+                  }
+                ]
               },
               "doseAndRate": [
                 {
                   "type": { "text": "calculated" },
                   "doseRange": {
-                    "low":  { "value": 0.04, "unit": "mL/kg" },
+                    "low": { "value": 0.04, "unit": "mL/kg" },
                     "high": { "value": 0.05, "unit": "mL/kg" }
                   }
                 }
               ],
               "maxDosePerAdministration": { "value": 1, "unit": "mL" },
               "maxDosePerPeriod": {
-                "numerator":   { "value": 4,   "unit": "mL" },
-                "denominator": { "value": 1,   "unit": "d" }
+                "numerator": { "value": 4, "unit": "mL" },
+                "denominator": { "value": 1, "unit": "d" }
               }
             }
           ]
@@ -245,7 +288,11 @@ Observation                  ← Lab values feeding into adjustments
     {
       "areaUnderCurve": [],
       "lethalDose50": [],
-      "halfLifePeriod": { "value": 21, "unit": "h", "system": "http://unitsofmeasure.org" }
+      "halfLifePeriod": {
+        "value": 21,
+        "unit": "h",
+        "system": "http://unitsofmeasure.org"
+      }
     }
   ],
 
@@ -258,7 +305,9 @@ Observation                  ← Lab values feeding into adjustments
       "substitution": [
         {
           "type": {
-            "coding": [{ "code": "therapeutic", "display": "Therapeutic Substitution" }]
+            "coding": [
+              { "code": "therapeutic", "display": "Therapeutic Substitution" }
+            ]
           },
           "allowed": true
         }
@@ -292,7 +341,11 @@ Observation                  ← Lab values feeding into adjustments
   },
   "identifier": [
     {
-      "type": { "coding": [{ "code": "ABHA", "display": "Ayushman Bharat Health Account" }] },
+      "type": {
+        "coding": [
+          { "code": "ABHA", "display": "Ayushman Bharat Health Account" }
+        ]
+      },
       "system": "https://abha.abdm.gov.in",
       "value": "91-1234-5678-9012"
     }
@@ -303,7 +356,12 @@ Observation                  ← Lab values feeding into adjustments
   "extension": [
     {
       "url": "https://nrces.in/ndhm/fhir/r4/Extension/patient-weight",
-      "valueQuantity": { "value": 10, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      "valueQuantity": {
+        "value": 10,
+        "unit": "kg",
+        "system": "http://unitsofmeasure.org",
+        "code": "kg"
+      }
     },
     {
       "url": "https://nrces.in/ndhm/fhir/r4/Extension/patient-height",
@@ -316,9 +374,15 @@ Observation                  ← Lab values feeding into adjustments
     {
       "url": "https://nrces.in/ndhm/fhir/r4/Extension/renal-function",
       "extension": [
-        { "url": "serumCreatinine", "valueQuantity": { "value": 0.4, "unit": "mg/dL" } },
-        { "url": "GFR",            "valueQuantity": { "value": 90,  "unit": "mL/min/1.73m2" } },
-        { "url": "renalImpairment","valueCode": "none" }
+        {
+          "url": "serumCreatinine",
+          "valueQuantity": { "value": 0.4, "unit": "mg/dL" }
+        },
+        {
+          "url": "GFR",
+          "valueQuantity": { "value": 90, "unit": "mL/min/1.73m2" }
+        },
+        { "url": "renalImpairment", "valueCode": "none" }
       ]
     },
     {
@@ -345,14 +409,17 @@ Observation                  ← Lab values feeding into adjustments
   "resourceType": "Parameters",
   "parameter": [
     { "name": "medicationKnowledgeId", "valueString": "wikoryl-af-drops" },
-    { "name": "patientId",             "valueString": "patient-001" },
-    { "name": "indication", "valueCoding": {
+    { "name": "patientId", "valueString": "patient-001" },
+    {
+      "name": "indication",
+      "valueCoding": {
         "system": "http://snomed.info/sct",
-        "code":   "82272006",
-        "display":"Common cold"
-    }},
-    { "name": "frequency",   "valueInteger": 3 },
-    { "name": "duration",    "valueQuantity": { "value": 5, "unit": "d" } },
+        "code": "82272006",
+        "display": "Common cold"
+      }
+    },
+    { "name": "frequency", "valueInteger": 3 },
+    { "name": "duration", "valueQuantity": { "value": 5, "unit": "d" } },
     { "name": "weightOverride", "valueQuantity": { "value": 10, "unit": "kg" } }
   ]
 }
@@ -367,11 +434,15 @@ Observation                  ← Lab values feeding into adjustments
   "resourceType": "MedicationRequest",
   "id": "rx-001",
   "meta": {
-    "profile": ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/MedicationRequest"]
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/MedicationRequest"
+    ]
   },
   "status": "active",
   "intent": "order",
-  "medicationReference": { "reference": "MedicationKnowledge/wikoryl-af-drops" },
+  "medicationReference": {
+    "reference": "MedicationKnowledge/wikoryl-af-drops"
+  },
   "subject": { "reference": "Patient/patient-001" },
 
   "dosageInstruction": [
@@ -386,7 +457,13 @@ Observation                  ← Lab values feeding into adjustments
         }
       },
       "route": {
-        "coding": [{ "system": "http://snomed.info/sct", "code": "26643006", "display": "Oral" }]
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "26643006",
+            "display": "Oral"
+          }
+        ]
       },
       "doseAndRate": [
         {
@@ -399,20 +476,29 @@ Observation                  ← Lab values feeding into adjustments
       ],
       "maxDosePerAdministration": { "value": 20, "unit": "drops" },
       "maxDosePerPeriod": {
-        "numerator":   { "value": 60, "unit": "drops" },
-        "denominator": { "value": 1,  "unit": "d" }
+        "numerator": { "value": 60, "unit": "drops" },
+        "denominator": { "value": 1, "unit": "d" }
       },
       "extension": [
         {
           "url": "https://nrces.in/ndhm/fhir/r4/Extension/dose-calculation-detail",
           "extension": [
-            { "url": "weightUsed",         "valueQuantity": { "value": 10, "unit": "kg" } },
-            { "url": "limitingIngredient", "valueString": "Chlorpheniramine Maleate" },
+            {
+              "url": "weightUsed",
+              "valueQuantity": { "value": 10, "unit": "kg" }
+            },
+            {
+              "url": "limitingIngredient",
+              "valueString": "Chlorpheniramine Maleate"
+            },
             { "url": "calculatedVolumeMl", "valueDecimal": 0.5 },
-            { "url": "calculatedDrops",    "valueDecimal": 10 },
-            { "url": "mgPerKgAchieved",    "valueString": "Chlorpheniramine: 0.125 mg/kg, Phenylephrine: 0.05 mg/kg" },
-            { "url": "dosingBasis",        "valueCode": "mg/kg/dose" },
-            { "url": "capApplied",         "valueBoolean": false }
+            { "url": "calculatedDrops", "valueDecimal": 10 },
+            {
+              "url": "mgPerKgAchieved",
+              "valueString": "Chlorpheniramine: 0.125 mg/kg, Phenylephrine: 0.05 mg/kg"
+            },
+            { "url": "dosingBasis", "valueCode": "mg/kg/dose" },
+            { "url": "capApplied", "valueBoolean": false }
           ]
         }
       ]
@@ -453,10 +539,10 @@ type ImpairmentLevel = "none" | "mild" | "moderate" | "severe";
 interface Ingredient {
   name: string;
   rxNormCode?: string;
-  concentrationMgPerMl: number;        // for liquids
-  strengthMgPerUnit?: number;          // for tablets/capsules
+  concentrationMgPerMl: number; // for liquids
+  strengthMgPerUnit?: number; // for tablets/capsules
   dosingBasis: DosingBasis;
-  standardDoseMgPerUnit: number;       // "unit" depends on dosingBasis
+  standardDoseMgPerUnit: number; // "unit" depends on dosingBasis
   minDoseMgPerUnit: number;
   maxDoseMgPerUnit: number;
   maxSingleDoseMg: number;
@@ -466,11 +552,11 @@ interface Ingredient {
 
 interface Formulation {
   type: DispensingUnit;
-  dropsPerMl?: number;               // default 20
+  dropsPerMl?: number; // default 20
   tabletStrengthMg?: number;
   capsuleStrengthMg?: number;
   canSplitTablet?: boolean;
-  roundingUnit?: number;             // e.g. 0.5 for half-tablets
+  roundingUnit?: number; // e.g. 0.5 for half-tablets
 }
 
 interface DrugFormularyEntry {
@@ -483,10 +569,10 @@ interface DrugFormularyEntry {
   minAgeMonths?: number;
   maxAgeMonths?: number;
   pkHalfLifeHours?: number;
-  bioavailabilityFraction?: number;    // F
+  bioavailabilityFraction?: number; // F
   volumeOfDistributionLPerKg?: number; // Vd
-  clearanceMlMinPer73m2?: number;      // CL
-  renalFractionExcreted?: number;      // fe
+  clearanceMlMinPer73m2?: number; // CL
+  renalFractionExcreted?: number; // fe
   hepaticExtractionRatio?: number;
   isNarrowTherapeuticIndex?: boolean;
 }
@@ -512,7 +598,7 @@ interface DosingRequest {
   frequencyPerDay: number;
   indication?: string;
   durationDays?: number;
-  targetCssMgL?: number;             // for target-concentration dosing
+  targetCssMgL?: number; // for target-concentration dosing
 }
 
 interface IngredientResult {
@@ -548,10 +634,9 @@ interface DoseCalculationResult {
   hepaticAdjustmentApplied: boolean;
   ageWarning?: string;
   safetyFlags: string[];
-  calculationTrace: string[];         // human-readable steps
-  fhirMedicationRequest: object;     // ready-to-use FHIR resource
+  calculationTrace: string[]; // human-readable steps
+  fhirMedicationRequest: object; // ready-to-use FHIR resource
 }
-
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: BSA (Mosteller formula)
@@ -561,7 +646,6 @@ function calculateBSA(weightKg: number, heightCm: number): number {
   // Mosteller: BSA (m²) = sqrt((height_cm × weight_kg) / 3600)
   return Math.sqrt((heightCm * weightKg) / 3600);
 }
-
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Ideal Body Weight (Devine formula)
@@ -573,19 +657,14 @@ function idealBodyWeightKg(heightCm: number, female: boolean): number {
   return base + 2.3 * (heightInches - 60);
 }
 
-
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Adjusted Body Weight (for obese patients)
 // ═══════════════════════════════════════════════════════════════════
 
-function adjustedBodyWeightKg(
-  actualKg: number,
-  ibwKg: number
-): number {
+function adjustedBodyWeightKg(actualKg: number, ibwKg: number): number {
   // ABW = IBW + 0.4 × (actual - IBW)
   return ibwKg + 0.4 * (actualKg - ibwKg);
 }
-
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Cockcroft-Gault GFR
@@ -595,12 +674,11 @@ function cockcroftGaultGFR(
   ageYears: number,
   weightKg: number,
   serumCrMgDl: number,
-  female: boolean
+  female: boolean,
 ): number {
   const gfr = ((140 - ageYears) * weightKg) / (72 * serumCrMgDl);
   return female ? gfr * 0.85 : gfr;
 }
-
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Renal Dose Adjustment Factor
@@ -608,14 +686,14 @@ function cockcroftGaultGFR(
 
 function renalAdjustmentFactor(
   gfr: number,
-  renalFractionExcreted: number,   // fe: 0-1
-  normalGFR: number = 100
+  renalFractionExcreted: number, // fe: 0-1
+  normalGFR: number = 100,
 ): number {
   // Dose fraction = 1 - fe + fe × (GFR/normalGFR)
-  const factor = 1 - renalFractionExcreted + renalFractionExcreted * (gfr / normalGFR);
-  return Math.min(1.0, Math.max(0.1, factor));  // clamp 10%-100%
+  const factor =
+    1 - renalFractionExcreted + renalFractionExcreted * (gfr / normalGFR);
+  return Math.min(1.0, Math.max(0.1, factor)); // clamp 10%-100%
 }
-
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Hepatic Dose Adjustment Factor (Child-Pugh)
@@ -623,28 +701,24 @@ function renalAdjustmentFactor(
 
 function hepaticAdjustmentFactor(
   childPughScore: number,
-  hepaticExtractionRatio: number    // 0-1
+  hepaticExtractionRatio: number, // 0-1
 ): number {
   if (!hepaticExtractionRatio || hepaticExtractionRatio < 0.3) return 1.0;
-  if (childPughScore <= 6)  return 1.0;   // Child-Pugh A: no adjustment
-  if (childPughScore <= 9)  return 0.75;  // Child-Pugh B: reduce 25%
-  return 0.5;                              // Child-Pugh C: reduce 50%
+  if (childPughScore <= 6) return 1.0; // Child-Pugh A: no adjustment
+  if (childPughScore <= 9) return 0.75; // Child-Pugh B: reduce 25%
+  return 0.5; // Child-Pugh C: reduce 50%
 }
-
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Select Weight to Use
 // ═══════════════════════════════════════════════════════════════════
 
-function selectWeight(
-  patient: PatientParameters,
-  basis: WeightBasis
-): number {
+function selectWeight(patient: PatientParameters, basis: WeightBasis): number {
   if (basis === "actual" || !patient.heightCm) return patient.weightKg;
 
   const ibw = idealBodyWeightKg(
     patient.heightCm,
-    patient.sexBiologicalFemale ?? false
+    patient.sexBiologicalFemale ?? false,
   );
 
   if (basis === "ideal") return ibw;
@@ -659,7 +733,6 @@ function selectWeight(
   return ibw;
 }
 
-
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Convert dose to mg based on basis
 // ═══════════════════════════════════════════════════════════════════
@@ -670,9 +743,8 @@ function computeTargetDoseMg(
   frequencyPerDay: number,
   targetCssMgL?: number,
   drugClearanceMlMinPer73m2?: number,
-  bioavailability?: number
+  bioavailability?: number,
 ): { targetMg: number; weightUsed: number; bsa?: number } {
-
   const w = selectWeight(patient, ingredient.weightBasis);
   const basis = ingredient.dosingBasis;
   const dose = ingredient.standardDoseMgPerUnit;
@@ -692,9 +764,8 @@ function computeTargetDoseMg(
   if (basis === "mg/m2/dose" || basis === "mg/m2/day") {
     if (!patient.heightCm) throw new Error("Height required for BSA dosing");
     const bsa = calculateBSA(w, patient.heightCm);
-    const perDose = basis === "mg/m2/day"
-      ? (dose * bsa) / frequencyPerDay
-      : dose * bsa;
+    const perDose =
+      basis === "mg/m2/day" ? (dose * bsa) / frequencyPerDay : dose * bsa;
     return { targetMg: perDose, weightUsed: w, bsa };
   }
 
@@ -703,7 +774,11 @@ function computeTargetDoseMg(
     return { targetMg: dose, weightUsed: w };
   }
 
-  if (basis === "target_concentration" && targetCssMgL && drugClearanceMlMinPer73m2) {
+  if (
+    basis === "target_concentration" &&
+    targetCssMgL &&
+    drugClearanceMlMinPer73m2
+  ) {
     // Maintenance dose = Css × CL / Bioavailability
     // CL in mL/min → convert to L/h: ÷ 1000 × 60
     const cl_L_h = (drugClearanceMlMinPer73m2 / 1000) * 60;
@@ -715,7 +790,6 @@ function computeTargetDoseMg(
   throw new Error(`Unsupported dosing basis: ${basis}`);
 }
 
-
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Convert mg → dispensing units
 // ═══════════════════════════════════════════════════════════════════
@@ -723,9 +797,8 @@ function computeTargetDoseMg(
 function mgToDispensingUnit(
   doseMg: number,
   ingredient: Ingredient,
-  formulation: Formulation
+  formulation: Formulation,
 ): { volumeMl: number; units: number } {
-
   const type = formulation.type;
 
   if (type === "drops" || type === "mL") {
@@ -738,9 +811,10 @@ function mgToDispensingUnit(
   }
 
   if (type === "tablet" || type === "capsule") {
-    const strength = ingredient.strengthMgPerUnit
-      ?? formulation.tabletStrengthMg
-      ?? formulation.capsuleStrengthMg;
+    const strength =
+      ingredient.strengthMgPerUnit ??
+      formulation.tabletStrengthMg ??
+      formulation.capsuleStrengthMg;
     if (!strength) throw new Error("Tablet/capsule strength required");
     const rawUnits = doseMg / strength;
     // Round to nearest 0.5 (if splittable) or 1.0
@@ -758,13 +832,11 @@ function mgToDispensingUnit(
   return { volumeMl: 0, units: doseMg };
 }
 
-
 // ═══════════════════════════════════════════════════════════════════
 // MAIN CALCULATION FUNCTION
 // ═══════════════════════════════════════════════════════════════════
 
 function calculateDose(req: DosingRequest): DoseCalculationResult {
-
   const { drug, patient, frequencyPerDay } = req;
   const trace: string[] = [];
   const safetyFlags: string[] = [];
@@ -775,107 +847,139 @@ function calculateDose(req: DosingRequest): DoseCalculationResult {
   if (drug.minAgeMonths && patient.ageMonths !== undefined) {
     if (patient.ageMonths < drug.minAgeMonths) {
       safetyFlags.push(
-        `⚠️ Patient age (${patient.ageMonths}m) below minimum age for this drug (${drug.minAgeMonths}m)`
+        `⚠️ Patient age (${patient.ageMonths}m) below minimum age for this drug (${drug.minAgeMonths}m)`,
       );
     }
   }
 
   // Step 2: Compute per-ingredient results
-  const ingredientResults: IngredientResult[] = drug.ingredients.map((ing, idx) => {
+  const ingredientResults: IngredientResult[] = drug.ingredients.map(
+    (ing, idx) => {
+      trace.push(`\n── Ingredient: ${ing.name} ──`);
 
-    trace.push(`\n── Ingredient: ${ing.name} ──`);
+      // 2a. Compute weight to use
+      const w = selectWeight(patient, ing.weightBasis);
+      trace.push(`Weight basis: ${ing.weightBasis} → ${w} kg`);
 
-    // 2a. Compute weight to use
-    const w = selectWeight(patient, ing.weightBasis);
-    trace.push(`Weight basis: ${ing.weightBasis} → ${w} kg`);
+      // 2b. Compute target dose in mg
+      const { targetMg, weightUsed, bsa } = computeTargetDoseMg(
+        ing,
+        patient,
+        frequencyPerDay,
+        req.targetCssMgL,
+        drug.clearanceMlMinPer73m2,
+        drug.bioavailabilityFraction,
+      );
+      trace.push(
+        `Target dose: ${ing.standardDoseMgPerUnit} ${ing.dosingBasis} × ${w} kg = ${targetMg.toFixed(3)} mg`,
+      );
 
-    // 2b. Compute target dose in mg
-    const { targetMg, weightUsed, bsa } = computeTargetDoseMg(
-      ing, patient, frequencyPerDay,
-      req.targetCssMgL,
-      drug.clearanceMlMinPer73m2,
-      drug.bioavailabilityFraction
-    );
-    trace.push(`Target dose: ${ing.standardDoseMgPerUnit} ${ing.dosingBasis} × ${w} kg = ${targetMg.toFixed(3)} mg`);
-
-    // 2c. Renal adjustment
-    let adjustedMg = targetMg;
-    if (
-      patient.gfrMlMinPer173m2 !== undefined &&
-      drug.renalFractionExcreted !== undefined &&
-      patient.gfrMlMinPer173m2 < 90
-    ) {
-      const factor = renalAdjustmentFactor(patient.gfrMlMinPer173m2, drug.renalFractionExcreted);
-      adjustedMg *= factor;
-      renalAdjApplied = true;
-      trace.push(`Renal adjustment: GFR=${patient.gfrMlMinPer173m2}, factor=${factor.toFixed(2)} → ${adjustedMg.toFixed(3)} mg`);
-    }
-
-    // 2d. Hepatic adjustment
-    if (
-      patient.childPughScore !== undefined &&
-      drug.hepaticExtractionRatio !== undefined
-    ) {
-      const factor = hepaticAdjustmentFactor(patient.childPughScore, drug.hepaticExtractionRatio);
-      if (factor < 1.0) {
+      // 2c. Renal adjustment
+      let adjustedMg = targetMg;
+      if (
+        patient.gfrMlMinPer173m2 !== undefined &&
+        drug.renalFractionExcreted !== undefined &&
+        patient.gfrMlMinPer173m2 < 90
+      ) {
+        const factor = renalAdjustmentFactor(
+          patient.gfrMlMinPer173m2,
+          drug.renalFractionExcreted,
+        );
         adjustedMg *= factor;
-        hepaticAdjApplied = true;
-        trace.push(`Hepatic adjustment: Child-Pugh=${patient.childPughScore}, factor=${factor} → ${adjustedMg.toFixed(3)} mg`);
+        renalAdjApplied = true;
+        trace.push(
+          `Renal adjustment: GFR=${patient.gfrMlMinPer173m2}, factor=${factor.toFixed(2)} → ${adjustedMg.toFixed(3)} mg`,
+        );
       }
-    }
 
-    // 2e. Apply safety caps
-    let capApplied = false;
-    let capType: IngredientResult["capType"];
+      // 2d. Hepatic adjustment
+      if (
+        patient.childPughScore !== undefined &&
+        drug.hepaticExtractionRatio !== undefined
+      ) {
+        const factor = hepaticAdjustmentFactor(
+          patient.childPughScore,
+          drug.hepaticExtractionRatio,
+        );
+        if (factor < 1.0) {
+          adjustedMg *= factor;
+          hepaticAdjApplied = true;
+          trace.push(
+            `Hepatic adjustment: Child-Pugh=${patient.childPughScore}, factor=${factor} → ${adjustedMg.toFixed(3)} mg`,
+          );
+        }
+      }
 
-    if (adjustedMg > ing.maxSingleDoseMg) {
-      trace.push(`Cap applied: ${adjustedMg.toFixed(3)} mg > maxSingleDose ${ing.maxSingleDoseMg} mg`);
-      adjustedMg = ing.maxSingleDoseMg;
-      capApplied = true;
-      capType = "maxSingleDose";
-      safetyFlags.push(`${ing.name}: capped at max single dose ${ing.maxSingleDoseMg} mg`);
-    }
+      // 2e. Apply safety caps
+      let capApplied = false;
+      let capType: IngredientResult["capType"];
 
-    const dailyMg = adjustedMg * frequencyPerDay;
-    if (dailyMg > ing.maxDailyDoseMg) {
-      const cappedPerDose = ing.maxDailyDoseMg / frequencyPerDay;
-      trace.push(`Daily cap: ${dailyMg.toFixed(2)} mg/day > maxDaily ${ing.maxDailyDoseMg} → per dose = ${cappedPerDose.toFixed(3)} mg`);
-      adjustedMg = cappedPerDose;
-      capApplied = true;
-      capType = "maxDailyDose";
-      safetyFlags.push(`${ing.name}: capped at max daily dose ${ing.maxDailyDoseMg} mg/day`);
-    }
+      if (adjustedMg > ing.maxSingleDoseMg) {
+        trace.push(
+          `Cap applied: ${adjustedMg.toFixed(3)} mg > maxSingleDose ${ing.maxSingleDoseMg} mg`,
+        );
+        adjustedMg = ing.maxSingleDoseMg;
+        capApplied = true;
+        capType = "maxSingleDose";
+        safetyFlags.push(
+          `${ing.name}: capped at max single dose ${ing.maxSingleDoseMg} mg`,
+        );
+      }
 
-    // 2f. Convert to volume/units
-    const { volumeMl, units } = mgToDispensingUnit(adjustedMg, ing, drug.formulation);
-    trace.push(`Volume: ${adjustedMg.toFixed(3)} mg ÷ ${ing.concentrationMgPerMl} mg/mL = ${volumeMl.toFixed(3)} mL = ${units.toFixed(1)} ${drug.formulation.type}`);
+      const dailyMg = adjustedMg * frequencyPerDay;
+      if (dailyMg > ing.maxDailyDoseMg) {
+        const cappedPerDose = ing.maxDailyDoseMg / frequencyPerDay;
+        trace.push(
+          `Daily cap: ${dailyMg.toFixed(2)} mg/day > maxDaily ${ing.maxDailyDoseMg} → per dose = ${cappedPerDose.toFixed(3)} mg`,
+        );
+        adjustedMg = cappedPerDose;
+        capApplied = true;
+        capType = "maxDailyDose";
+        safetyFlags.push(
+          `${ing.name}: capped at max daily dose ${ing.maxDailyDoseMg} mg/day`,
+        );
+      }
 
-    const mgPerKgAchieved = adjustedMg / w;
+      // 2f. Convert to volume/units
+      const { volumeMl, units } = mgToDispensingUnit(
+        adjustedMg,
+        ing,
+        drug.formulation,
+      );
+      trace.push(
+        `Volume: ${adjustedMg.toFixed(3)} mg ÷ ${ing.concentrationMgPerMl} mg/mL = ${volumeMl.toFixed(3)} mL = ${units.toFixed(1)} ${drug.formulation.type}`,
+      );
 
-    return {
-      ingredientName: ing.name,
-      dosingBasis: ing.dosingBasis,
-      weightUsedKg: weightUsed,
-      bsaM2: bsa,
-      targetDoseMg: adjustedMg,
-      calculatedVolumeMl: volumeMl,
-      calculatedUnits: units,
-      dispensingUnit: drug.formulation.type,
-      capApplied,
-      capType,
-      mgPerKgAchieved,
-      withinTherapeuticRange:
-        mgPerKgAchieved >= ing.minDoseMgPerUnit &&
-        mgPerKgAchieved <= ing.maxDoseMgPerUnit,
-      isLimitingIngredient: false
-    };
-  });
+      const mgPerKgAchieved = adjustedMg / w;
+
+      return {
+        ingredientName: ing.name,
+        dosingBasis: ing.dosingBasis,
+        weightUsedKg: weightUsed,
+        bsaM2: bsa,
+        targetDoseMg: adjustedMg,
+        calculatedVolumeMl: volumeMl,
+        calculatedUnits: units,
+        dispensingUnit: drug.formulation.type,
+        capApplied,
+        capType,
+        mgPerKgAchieved,
+        withinTherapeuticRange:
+          mgPerKgAchieved >= ing.minDoseMgPerUnit &&
+          mgPerKgAchieved <= ing.maxDoseMgPerUnit,
+        isLimitingIngredient: false,
+      };
+    },
+  );
 
   // Step 3: Multi-ingredient strategy
   let finalUnits: number;
   let limitingName: string;
 
-  if (drug.multiIngredientStrategy === "limiting" || drug.ingredients.length > 1) {
+  if (
+    drug.multiIngredientStrategy === "limiting" ||
+    drug.ingredients.length > 1
+  ) {
     // Take the ingredient that requires the SMALLEST volume/units
     let minUnits = Infinity;
     let limitingIdx = 0;
@@ -890,8 +994,9 @@ function calculateDose(req: DosingRequest): DoseCalculationResult {
     ingredientResults[limitingIdx].isLimitingIngredient = true;
     finalUnits = ingredientResults[limitingIdx].calculatedUnits;
     limitingName = ingredientResults[limitingIdx].ingredientName;
-    trace.push(`\nLimiting ingredient: ${limitingName} (${finalUnits.toFixed(1)} ${drug.formulation.type})`);
-
+    trace.push(
+      `\nLimiting ingredient: ${limitingName} (${finalUnits.toFixed(1)} ${drug.formulation.type})`,
+    );
   } else {
     const primaryIdx = drug.primaryIngredientIndex ?? 0;
     finalUnits = ingredientResults[primaryIdx].calculatedUnits;
@@ -904,7 +1009,9 @@ function calculateDose(req: DosingRequest): DoseCalculationResult {
   const finalVolumeMl = roundedUnits / (drug.formulation.dropsPerMl ?? 20);
   const totalDailyUnits = roundedUnits * frequencyPerDay;
 
-  trace.push(`\nFINAL: ${roundedUnits} ${drug.formulation.type} per dose × ${frequencyPerDay}/day = ${totalDailyUnits} ${drug.formulation.type}/day`);
+  trace.push(
+    `\nFINAL: ${roundedUnits} ${drug.formulation.type} per dose × ${frequencyPerDay}/day = ${totalDailyUnits} ${drug.formulation.type}/day`,
+  );
 
   // Step 4: Total supply
   const totalSupply = req.durationDays
@@ -913,10 +1020,16 @@ function calculateDose(req: DosingRequest): DoseCalculationResult {
 
   // Step 5: Build FHIR MedicationRequest
   const fhirRx = buildFHIRMedicationRequest({
-    drug, patient, roundedUnits, finalVolumeMl,
-    frequencyPerDay, durationDays: req.durationDays,
-    ingredientResults, limitingName,
-    renalAdjApplied, hepaticAdjApplied
+    drug,
+    patient,
+    roundedUnits,
+    finalVolumeMl,
+    frequencyPerDay,
+    durationDays: req.durationDays,
+    ingredientResults,
+    limitingName,
+    renalAdjApplied,
+    hepaticAdjApplied,
   });
 
   return {
@@ -924,7 +1037,8 @@ function calculateDose(req: DosingRequest): DoseCalculationResult {
     patientWeightKg: patient.weightKg,
     recommendedDosePerAdmin: roundedUnits,
     dispensingUnit: drug.formulation.type,
-    recommendedVolumeMl: drug.formulation.type === "drops" ? finalVolumeMl : undefined,
+    recommendedVolumeMl:
+      drug.formulation.type === "drops" ? finalVolumeMl : undefined,
     frequencyPerDay,
     totalDailyDose: totalDailyUnits,
     totalDailyDoseUnit: drug.formulation.type,
@@ -936,10 +1050,9 @@ function calculateDose(req: DosingRequest): DoseCalculationResult {
     hepaticAdjustmentApplied: hepaticAdjApplied,
     safetyFlags,
     calculationTrace: trace,
-    fhirMedicationRequest: fhirRx
+    fhirMedicationRequest: fhirRx,
   };
 }
-
 
 // ═══════════════════════════════════════════════════════════════════
 // FHIR OUTPUT BUILDER
@@ -947,15 +1060,22 @@ function calculateDose(req: DosingRequest): DoseCalculationResult {
 
 function buildFHIRMedicationRequest(params: any): object {
   const {
-    drug, patient, roundedUnits, finalVolumeMl,
-    frequencyPerDay, durationDays,
-    ingredientResults, limitingName
+    drug,
+    patient,
+    roundedUnits,
+    finalVolumeMl,
+    frequencyPerDay,
+    durationDays,
+    ingredientResults,
+    limitingName,
   } = params;
 
   return {
     resourceType: "MedicationRequest",
     meta: {
-      profile: ["https://nrces.in/ndhm/fhir/r4/StructureDefinition/MedicationRequest"]
+      profile: [
+        "https://nrces.in/ndhm/fhir/r4/StructureDefinition/MedicationRequest",
+      ],
     },
     status: "active",
     intent: "order",
@@ -970,41 +1090,48 @@ function buildFHIRMedicationRequest(params: any): object {
             period: 1,
             periodUnit: "d",
             ...(durationDays && {
-              boundsDuration: { value: durationDays, unit: "d" }
-            })
-          }
+              boundsDuration: { value: durationDays, unit: "d" },
+            }),
+          },
         },
         route: {
-          coding: [{ system: "http://snomed.info/sct", code: "26643006", display: "Oral" }]
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "26643006",
+              display: "Oral",
+            },
+          ],
         },
         doseAndRate: [
           {
             doseQuantity: {
               value: roundedUnits,
-              unit: drug.formulation.type
-            }
-          }
+              unit: drug.formulation.type,
+            },
+          },
         ],
         extension: [
           {
             url: "https://nrces.in/ndhm/fhir/r4/Extension/dose-calculation-detail",
             extension: [
-              { url: "weightUsedKg",        valueDecimal: patient.weightKg },
-              { url: "limitingIngredient",   valueString:  limitingName },
-              { url: "calculatedVolumeMl",   valueDecimal: finalVolumeMl },
+              { url: "weightUsedKg", valueDecimal: patient.weightKg },
+              { url: "limitingIngredient", valueString: limitingName },
+              { url: "calculatedVolumeMl", valueDecimal: finalVolumeMl },
               {
                 url: "ingredientBreakdown",
                 valueString: ingredientResults
-                  .map((r: IngredientResult) =>
-                    `${r.ingredientName}: ${r.targetDoseMg.toFixed(2)}mg (${r.mgPerKgAchieved.toFixed(3)} mg/kg)${r.isLimitingIngredient ? " ← LIMITING" : ""}`
+                  .map(
+                    (r: IngredientResult) =>
+                      `${r.ingredientName}: ${r.targetDoseMg.toFixed(2)}mg (${r.mgPerKgAchieved.toFixed(3)} mg/kg)${r.isLimitingIngredient ? " ← LIMITING" : ""}`,
                   )
-                  .join(" | ")
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                  .join(" | "),
+              },
+            ],
+          },
+        ],
+      },
+    ],
   };
 }
 ```
@@ -1014,6 +1141,7 @@ function buildFHIRMedicationRequest(params: any): object {
 ## 5. API CONTRACTS
 
 ### BASE URL
+
 ```
 https://api.yoursystem.in/fhir/r4
 ```
@@ -1025,6 +1153,7 @@ All endpoints are FHIR R4 compliant. ABDM headers required on production.
 ### 5.1 Formulary CRUD
 
 #### Create / Update Drug Entry
+
 ```
 POST   /MedicationKnowledge
 PUT    /MedicationKnowledge/{id}
@@ -1044,6 +1173,7 @@ Response 201:
 ```
 
 #### Get Drug Entry
+
 ```
 GET /MedicationKnowledge/{id}
 GET /MedicationKnowledge?code=IN-WIKORYL-AF-DROPS
@@ -1082,22 +1212,23 @@ Body: Parameters resource (see Schema §3.3)
 
 **Request Parameters:**
 
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| medicationKnowledgeId | string | YES | Drug formulary ID |
-| patientId | string | NO | Lookup patient from store |
-| weightKg | decimal | YES* | Direct weight if no patientId |
-| ageMonths | integer | NO | For age-based checks |
-| heightCm | decimal | NO | Required for BSA dosing |
-| gfr | decimal | NO | For renal adjustment |
-| childPughScore | integer | NO | For hepatic adjustment |
-| indication | Coding | NO | Indication-specific dosing |
-| frequency | integer | YES | Doses per day |
-| durationDays | integer | NO | For total supply calc |
-| weightBasis | code | NO | actual/ideal/adjusted |
-| targetCssMgL | decimal | NO | For TDM-based dosing |
+| Parameter             | Type    | Required | Description                   |
+| --------------------- | ------- | -------- | ----------------------------- |
+| medicationKnowledgeId | string  | YES      | Drug formulary ID             |
+| patientId             | string  | NO       | Lookup patient from store     |
+| weightKg              | decimal | YES\*    | Direct weight if no patientId |
+| ageMonths             | integer | NO       | For age-based checks          |
+| heightCm              | decimal | NO       | Required for BSA dosing       |
+| gfr                   | decimal | NO       | For renal adjustment          |
+| childPughScore        | integer | NO       | For hepatic adjustment        |
+| indication            | Coding  | NO       | Indication-specific dosing    |
+| frequency             | integer | YES      | Doses per day                 |
+| durationDays          | integer | NO       | For total supply calc         |
+| weightBasis           | code    | NO       | actual/ideal/adjusted         |
+| targetCssMgL          | decimal | NO       | For TDM-based dosing          |
 
 **Response 200:**
+
 ```json
 {
   "resourceType": "Parameters",
@@ -1143,6 +1274,7 @@ Body: Parameters resource (see Schema §3.3)
 ```
 
 **Error responses:**
+
 ```json
 // 400 — Validation failure
 {
@@ -1230,6 +1362,7 @@ Body: ABDM PrescriptionRecord bundle
 ## 6. COMPLIANCE CHECKLIST
 
 ### FHIR R4 Compliance
+
 - [x] All resources use FHIR R4 resource types
 - [x] Coding systems: SNOMED CT, RxNorm, UCUM, LOINC
 - [x] Extensions use proper FHIR extension URLs
@@ -1239,6 +1372,7 @@ Body: ABDM PrescriptionRecord bundle
 - [x] Parameters resource for operation input/output
 
 ### ABDM v6.5 Compliance
+
 - [x] Profile URLs: nrces.in/ndhm/fhir/r4
 - [x] Patient identifier: ABHA number
 - [x] PrescriptionRecord Composition profile

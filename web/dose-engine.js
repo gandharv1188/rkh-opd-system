@@ -191,7 +191,11 @@
       if (outputUnit === "drops" || !outputUnit || outputUnit === "mL") {
         // rawValue is mL, convert to drops and round
         var drops = Math.round(rawValue * dpm);
-        return { value: Math.max(1, drops), unit: "drops", volumeMl: drops / dpm };
+        return {
+          value: Math.max(1, drops),
+          unit: "drops",
+          volumeMl: drops / dpm,
+        };
       }
     }
     if (outputUnit === "tsp") {
@@ -231,10 +235,18 @@
       };
     }
     if (outputUnit === "sprays" || form === "nasal spray") {
-      return { value: Math.max(1, Math.round(rawValue)), unit: "sprays", volumeMl: 0 };
+      return {
+        value: Math.max(1, Math.round(rawValue)),
+        unit: "sprays",
+        volumeMl: 0,
+      };
     }
     if (outputUnit === "sachet" || form === "sachet") {
-      return { value: Math.max(1, Math.ceil(rawValue)), unit: "sachet", volumeMl: 0 };
+      return {
+        value: Math.max(1, Math.ceil(rawValue)),
+        unit: "sachet",
+        volumeMl: 0,
+      };
     }
     // Default: mL rounded to 0.5
     var v = Math.round(rawValue * 2) / 2;
@@ -256,7 +268,9 @@
   function computeDose(params) {
     var method = params.method || "weight";
     var weight = params.weight || 0;
-    var bsa = params.bsa || (params.heightCm ? calculateBSA(weight, params.heightCm) : null);
+    var bsa =
+      params.bsa ||
+      (params.heightCm ? calculateBSA(weight, params.heightCm) : null);
     var sv = params.sliderValue || 0;
     var isPerDay = params.isPerDay !== false;
     var freq = params.frequency || 1;
@@ -272,7 +286,10 @@
     }
 
     // Find primary ingredient
-    var primary = ingredients.find(function (i) { return i.isPrimary; }) || ingredients[0];
+    var primary =
+      ingredients.find(function (i) {
+        return i.isPrimary;
+      }) || ingredients[0];
     var capped = false;
     var warnings = [];
     var primaryMgPerDose;
@@ -293,20 +310,16 @@
       }
     } else if (method === "bsa") {
       if (!bsa) {
-        warnings.push("Height required for BSA dosing — using weight-based fallback");
-        primaryMgPerDose = isPerDay
-          ? (sv * weight) / freq
-          : sv * weight;
+        warnings.push(
+          "Height required for BSA dosing — using weight-based fallback",
+        );
+        primaryMgPerDose = isPerDay ? (sv * weight) / freq : sv * weight;
       } else {
-        primaryMgPerDose = isPerDay
-          ? (sv * bsa) / freq
-          : sv * bsa;
+        primaryMgPerDose = isPerDay ? (sv * bsa) / freq : sv * bsa;
       }
     } else {
       // weight, gfr, infusion — slider is mg/kg (or mg/kg/day)
-      primaryMgPerDose = isPerDay
-        ? (sv * weight) / freq
-        : sv * weight;
+      primaryMgPerDose = isPerDay ? (sv * weight) / freq : sv * weight;
     }
 
     // ── Step 2: Apply max single dose cap (primary) ──
@@ -324,7 +337,8 @@
       volumeRaw = 0;
     } else if (isSolidForm(form)) {
       // Solid: count = mg / (strengthNum per unit × strengthDen)
-      volumeRaw = primaryMgPerDose / (primary.concMgPerUnit * primary.strengthDen);
+      volumeRaw =
+        primaryMgPerDose / (primary.concMgPerUnit * primary.strengthDen);
     } else {
       // Liquid: mL = mg / concMgPerUnit
       volumeRaw = primaryMgPerDose / primary.concMgPerUnit;
@@ -341,7 +355,8 @@
 
     var actualPrimaryMg;
     if (isSolidForm(form)) {
-      actualPrimaryMg = roundedValue * primary.concMgPerUnit * primary.strengthDen;
+      actualPrimaryMg =
+        roundedValue * primary.concMgPerUnit * primary.strengthDen;
     } else if (dispUnit === "drops") {
       actualPrimaryMg = (roundedValue / dpm) * primary.concMgPerUnit;
     } else if (dispUnit === "tsp") {
@@ -390,8 +405,16 @@
         }
         if (maxDailyMg && mgPerDay > maxDailyMg) {
           maxExceeded = true;
-          maxNote = (maxNote ? maxNote + "; " : "") + "exceeds max " + maxDailyMg + "mg/day";
-          if (warnings.indexOf(ing.name + ": exceeds max " + maxDailyMg + "mg/day") < 0) {
+          maxNote =
+            (maxNote ? maxNote + "; " : "") +
+            "exceeds max " +
+            maxDailyMg +
+            "mg/day";
+          if (
+            warnings.indexOf(
+              ing.name + ": exceeds max " + maxDailyMg + "mg/day",
+            ) < 0
+          ) {
             warnings.push(ing.name + ": exceeds max " + maxDailyMg + "mg/day");
           }
         }
@@ -407,7 +430,8 @@
         maxNote: maxNote,
         withinRange:
           ing.doseMinPerKg != null && mgPerKg != null
-            ? mgPerKg >= ing.doseMinPerKg && mgPerKg <= (ing.doseMaxPerKg || ing.doseMinPerKg)
+            ? mgPerKg >= ing.doseMinPerKg &&
+              mgPerKg <= (ing.doseMaxPerKg || ing.doseMinPerKg)
             : null,
       };
     });
@@ -416,9 +440,18 @@
 
     var display = formatDoseDisplay(roundedValue, dispUnit, form, outputUnit);
     var calcStr = buildCalcString(
-      method, sv, isPerDay, weight, bsa, freq,
-      primaryMgPerDose, roundedValue, dispUnit,
-      ingredientDoses, capped, maxSingleMg
+      method,
+      sv,
+      isPerDay,
+      weight,
+      bsa,
+      freq,
+      primaryMgPerDose,
+      roundedValue,
+      dispUnit,
+      ingredientDoses,
+      capped,
+      maxSingleMg,
     );
 
     return {
@@ -445,7 +478,9 @@
     if (unit === "drops") {
       vol = value + " drops";
       enD = value + " drop" + (value !== 1 ? "s" : "");
-      hiD = (HINDI_DROPS[value] || String(value)) + " \u092C\u0942\u0901\u0926\u0947\u0902";
+      hiD =
+        (HINDI_DROPS[value] || String(value)) +
+        " \u092C\u0942\u0901\u0926\u0947\u0902";
     } else if (unit === "mL") {
       vol = value + "ml";
       enD = value + "ml";
@@ -459,19 +494,23 @@
     } else if (unit === "tablet") {
       vol = value + " tablet";
       enD = value + " tablet" + (value !== 1 ? "s" : "");
-      hiD = (HINDI_TABLETS[value] || String(value)) + " \u0917\u094B\u0932\u0940";
+      hiD =
+        (HINDI_TABLETS[value] || String(value)) + " \u0917\u094B\u0932\u0940";
     } else if (unit === "capsule") {
       vol = value + " capsule";
       enD = value + " capsule" + (value !== 1 ? "s" : "");
-      hiD = (HINDI_TABLETS[value] || String(value)) + " \u0915\u0948\u092A\u094D\u0938\u0942\u0932";
+      hiD =
+        (HINDI_TABLETS[value] || String(value)) +
+        " \u0915\u0948\u092A\u094D\u0938\u0942\u0932";
     } else if (unit === "puffs") {
       vol = value + " puff" + (value !== 1 ? "s" : "");
       enD = vol;
       hiD = String(value) + " \u092A\u092B";
     } else if (unit === "tsp") {
       vol = value + " tsp";
-      enD = value + " tsp (" + (value * 5) + " mL)";
-      hiD = (HINDI_ML[value] || String(value)) + " \u091A\u092E\u094D\u092E\u091A";
+      enD = value + " tsp (" + value * 5 + " mL)";
+      hiD =
+        (HINDI_ML[value] || String(value)) + " \u091A\u092E\u094D\u092E\u091A";
     } else if (unit === "application") {
       vol = value + " application";
       enD = vol;
@@ -502,9 +541,18 @@
   // ═══════════════════════════════════════════════════════════════
 
   function buildCalcString(
-    method, sv, isPerDay, weight, bsa, freq,
-    primaryMgPerDose, roundedValue, dispUnit,
-    ingredientDoses, capped, maxSingleMg
+    method,
+    sv,
+    isPerDay,
+    weight,
+    bsa,
+    freq,
+    primaryMgPerDose,
+    roundedValue,
+    dispUnit,
+    ingredientDoses,
+    capped,
+    maxSingleMg,
   ) {
     var lines = [];
     var multi = ingredientDoses.length > 1;
@@ -514,7 +562,8 @@
       lines.push(roundedValue + " " + dispUnit);
       ingredientDoses.forEach(function (id) {
         var mgStr = id.mgPerDose.toFixed(2) + "mg";
-        var kgStr = id.mgPerKg !== null ? " (" + id.mgPerKg.toFixed(3) + "mg/kg)" : "";
+        var kgStr =
+          id.mgPerKg !== null ? " (" + id.mgPerKg.toFixed(3) + "mg/kg)" : "";
         var flag = id.maxExceeded ? " \u26A0" : "";
         lines.push("  " + id.name + ": " + mgStr + kgStr + flag);
       });
@@ -522,16 +571,28 @@
       var bsaLabel = isPerDay ? "mg/m\u00B2/day" : "mg/m\u00B2/dose";
       var totalDay = isPerDay ? sv * bsa : sv * bsa * freq;
       lines.push(
-        sv + bsaLabel + " \u00D7 " + bsa.toFixed(2) + "m\u00B2 = " +
-        totalDay.toFixed(1) + "mg/day \u00F7 " + freq + " = " +
-        primaryMgPerDose.toFixed(1) + "mg/dose" +
-        (capped ? " \u2192 max " + maxSingleMg + "mg" : "") +
-        " \u2192 " + roundedValue + dispUnit
+        sv +
+          bsaLabel +
+          " \u00D7 " +
+          bsa.toFixed(2) +
+          "m\u00B2 = " +
+          totalDay.toFixed(1) +
+          "mg/day \u00F7 " +
+          freq +
+          " = " +
+          primaryMgPerDose.toFixed(1) +
+          "mg/dose" +
+          (capped ? " \u2192 max " + maxSingleMg + "mg" : "") +
+          " \u2192 " +
+          roundedValue +
+          dispUnit,
       );
       if (multi) {
         ingredientDoses.forEach(function (id) {
           if (!id.isPrimary) {
-            lines.push("  " + id.name + ": " + id.mgPerDose.toFixed(2) + "mg/dose");
+            lines.push(
+              "  " + id.name + ": " + id.mgPerDose.toFixed(2) + "mg/dose",
+            );
           }
         });
       }
@@ -539,19 +600,42 @@
       // Weight-based (default)
       var unitLabel = isPerDay ? "mg/kg/day" : "mg/kg/dose";
       var totalDay2 = isPerDay ? sv * weight : sv * weight * freq;
-      var primary = ingredientDoses.find(function (d) { return d.isPrimary; }) || ingredientDoses[0];
+      var primary =
+        ingredientDoses.find(function (d) {
+          return d.isPrimary;
+        }) || ingredientDoses[0];
       lines.push(
-        sv + unitLabel + " \u00D7 " + weight + "kg = " +
-        totalDay2.toFixed(1) + "mg/day \u00F7 " + freq + " = " +
-        primary.mgPerDose.toFixed(1) + "mg/dose" +
-        (capped ? " \u2192 max " + maxSingleMg + "mg" : "") +
-        " \u2192 " + roundedValue + dispUnit
+        sv +
+          unitLabel +
+          " \u00D7 " +
+          weight +
+          "kg = " +
+          totalDay2.toFixed(1) +
+          "mg/day \u00F7 " +
+          freq +
+          " = " +
+          primary.mgPerDose.toFixed(1) +
+          "mg/dose" +
+          (capped ? " \u2192 max " + maxSingleMg + "mg" : "") +
+          " \u2192 " +
+          roundedValue +
+          dispUnit,
       );
       if (multi) {
         ingredientDoses.forEach(function (id) {
           if (!id.isPrimary) {
-            var kgStr = id.mgPerKg !== null ? " (" + id.mgPerKg.toFixed(2) + "mg/kg)" : "";
-            lines.push("  " + id.name + ": " + id.mgPerDose.toFixed(2) + "mg/dose" + kgStr);
+            var kgStr =
+              id.mgPerKg !== null
+                ? " (" + id.mgPerKg.toFixed(2) + "mg/kg)"
+                : "";
+            lines.push(
+              "  " +
+                id.name +
+                ": " +
+                id.mgPerDose.toFixed(2) +
+                "mg/dose" +
+                kgStr,
+            );
           }
         });
       }
@@ -573,19 +657,30 @@
     var currentDose = params.currentDose;
     var dpm = params.dropsPerMl || DROPS_PER_ML;
 
-    var bandColors = ["#3b82f6", "#22c55e", "#f59e0b", "#a855f7", "#ec4899", "#06b6d4"];
+    var bandColors = [
+      "#3b82f6",
+      "#22c55e",
+      "#f59e0b",
+      "#a855f7",
+      "#ec4899",
+      "#06b6d4",
+    ];
     var zones = [];
 
     if (method === "fixed" || method === "age") {
       // Slider axis = dispensing units
-      var globalMin = Infinity, globalMax = 0;
+      var globalMin = Infinity,
+        globalMax = 0;
       allBands.forEach(function (b) {
         if (b.dose_min_qty != null) {
           globalMin = Math.min(globalMin, b.dose_min_qty);
           globalMax = Math.max(globalMax, b.dose_max_qty || b.dose_min_qty);
         }
       });
-      if (globalMin === Infinity) { globalMin = 1; globalMax = 20; }
+      if (globalMin === Infinity) {
+        globalMin = 1;
+        globalMax = 20;
+      }
 
       var sliderMin = Math.max(0, Math.floor(globalMin * 0.5));
       var sliderMax = Math.ceil(globalMax * 1.5);
@@ -593,7 +688,8 @@
       // Step based on unit type
       var step = 1;
       if (outputUnit === "mL" || form === "syrup") step = 0.5;
-      else if (outputUnit === "tablet" || form === "tablet" || form === "dt") step = 0.25;
+      else if (outputUnit === "tablet" || form === "tablet" || form === "dt")
+        step = 0.25;
 
       var range = sliderMax - sliderMin || 1;
       allBands.forEach(function (b, i) {
@@ -621,14 +717,18 @@
     }
 
     // Weight/BSA/GFR: slider axis = mg/kg or mg/m²
-    var gMin = Infinity, gMax = 0;
+    var gMin = Infinity,
+      gMax = 0;
     allBands.forEach(function (b) {
       if (b.dose_min_qty != null) {
         gMin = Math.min(gMin, b.dose_min_qty);
         gMax = Math.max(gMax, b.dose_max_qty || b.dose_min_qty);
       }
     });
-    if (gMin === Infinity) { gMin = 1; gMax = 100; }
+    if (gMin === Infinity) {
+      gMin = 1;
+      gMax = 100;
+    }
 
     var sMin = Math.max(0, gMin * 0.5);
     var sMax = gMax * 2;
@@ -701,7 +801,10 @@
     }
 
     // Weight/BSA: slider is mg/kg — snap so output is a clean dispensing unit
-    var primary = ingredients.find(function (i) { return i.isPrimary; }) || ingredients[0];
+    var primary =
+      ingredients.find(function (i) {
+        return i.isPrimary;
+      }) || ingredients[0];
     if (!primary || primary.concMgPerUnit <= 0) return rawValue;
 
     // Forward: mg/kg → mg/dose → volume
@@ -747,10 +850,18 @@
     if (!ingredients || !ingredients.length) return "";
     if (ingredients.length === 1) {
       var i = ingredients[0];
-      return i.strengthNum + i.strengthNumUnit + "/" + i.strengthDen + i.strengthDenUnit;
+      return (
+        i.strengthNum +
+        i.strengthNumUnit +
+        "/" +
+        i.strengthDen +
+        i.strengthDenUnit
+      );
     }
     // Multi: "2.5+1mg/mL" or "250+62.5mg/5mL"
-    var nums = ingredients.map(function (i) { return i.strengthNum; });
+    var nums = ingredients.map(function (i) {
+      return i.strengthNum;
+    });
     var unit = ingredients[0].strengthNumUnit;
     var den = ingredients[0].strengthDen;
     var denUnit = ingredients[0].strengthDenUnit;
@@ -797,8 +908,16 @@
 
   function _emptyResult() {
     return {
-      vol: "0", enD: "0", hiD: "0", calc: "", capped: false, fd: "0",
-      volumeMl: 0, volumeUnits: 0, ingredientDoses: [], warnings: [],
+      vol: "0",
+      enD: "0",
+      hiD: "0",
+      calc: "",
+      capped: false,
+      fd: "0",
+      volumeMl: 0,
+      volumeUnits: 0,
+      ingredientDoses: [],
+      warnings: [],
     };
   }
 
