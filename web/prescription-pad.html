@@ -5314,9 +5314,8 @@
                   stops.push("#fca5a5 " + lastEnd + "%");
                   stops.push("#fca5a5 " + left + "%");
                 }
-                stops.push(color + "33 " + left + "%"); // 20% opacity start
-                stops.push(color + "66 " + (left + right) / 2 + "%"); // 40% opacity center
-                stops.push(color + "33 " + right + "%"); // 20% opacity end
+                stops.push(color + " " + left + "%");
+                stops.push(color + " " + right + "%");
                 lastEnd = right;
               });
               if (lastEnd < 100) {
