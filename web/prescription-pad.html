@@ -3058,7 +3058,7 @@
         ),
         q(
           "standard_prescriptions",
-          "?select=icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,warning_signs,referral_criteria,hospitalisation_criteria,notes,duration_days_default&active=eq.true",
+          "?select=icd10,diagnosis_name,snomed_code,first_line_drugs,second_line_drugs,investigations,counselling,warning_signs,referral_criteria,hospitalisation_criteria,notes,duration_days_default,expected_course,key_clinical_points,severity_assessment,monitoring_parameters,guideline_changes&active=eq.true",
         ),
       ]);
       if (fr.ok) {

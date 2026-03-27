@@ -15857,7 +15857,11 @@
     "referral_criteria": "Refer to pediatrician or higher center if no improvement after 3 days, recurrent episodes, or development of warning signs",
     "hospitalisation_criteria": "Admit if SpO2 <92%, severe respiratory distress, poor feeding, dehydration, lethargy, or age <2 months with symptoms",
     "notes": "Viral upper respiratory infection; self-limiting illness lasting 5–7 days; antibiotics are not indicated routinely",
-    "source": ["IAP 2024", "WHO 2023", "AAP Guidelines"],
+    "source": [
+      "IAP 2024",
+      "WHO 2023",
+      "AAP Guidelines"
+    ],
     "duration_days_default": 5,
     "guideline_changes": "IAP 2024: Continued emphasis on no routine antibiotics or OTC cough/cold medicines in children; ACCP: Recommends against OTC cough suppressants in pediatric URI; No major guideline changes in 2024-2025 for common cold management",
     "snomed_code": "82272006",
@@ -28243,20 +28247,48 @@
         "is_new_2024_2025": false
       }
     ],
-    "investigations": {
-      "localized_no_systemic_signs": [
-        "Swab for culture (if discharge purulent)",
-        "CBC and CRP if not improving"
-      ],
-      "systemic_signs_present": [
-        "CBC",
-        "CRP",
-        "Blood culture",
-        "Urine culture",
-        "Lumbar puncture if indicated",
-        "Admit for full sepsis work-up"
-      ]
-    },
+    "investigations": [
+      {
+        "name": "Swab for culture (if discharge purulent)",
+        "indication": "localized no systemic signs",
+        "urgency": "routine"
+      },
+      {
+        "name": "CBC and CRP if not improving",
+        "indication": "localized no systemic signs",
+        "urgency": "routine"
+      },
+      {
+        "name": "CBC",
+        "indication": "systemic signs present",
+        "urgency": "routine"
+      },
+      {
+        "name": "CRP",
+        "indication": "systemic signs present",
+        "urgency": "routine"
+      },
+      {
+        "name": "Blood culture",
+        "indication": "systemic signs present",
+        "urgency": "routine"
+      },
+      {
+        "name": "Urine culture",
+        "indication": "systemic signs present",
+        "urgency": "routine"
+      },
+      {
+        "name": "Lumbar puncture if indicated",
+        "indication": "systemic signs present",
+        "urgency": "routine"
+      },
+      {
+        "name": "Admit for full sepsis work-up",
+        "indication": "systemic signs present",
+        "urgency": "routine"
+      }
+    ],
     "counselling": [
       "Keep umbilical cord clean and dry. — नाल को साफ़ और सूखा रखें।",
       "Avoid tight clothing over cord. — नाल पर कसे कपड़े न पहनाएं।",
@@ -29746,23 +29778,37 @@
     "investigations": [
       {
         "situation": "Ambiguous genitalia",
-        "tests": ["Karyotype", "17-OHP", "Serum electrolytes"]
+        "tests": [
+          "Karyotype",
+          "17-OHP",
+          "Serum electrolytes"
+        ]
       },
       {
         "situation": "Persistent vaginal bleeding",
-        "tests": ["Coagulation profile", "CBC"]
+        "tests": [
+          "Coagulation profile",
+          "CBC"
+        ]
       },
       {
         "situation": "Suspected imperforate hymen",
-        "tests": ["Genital ultrasound"]
+        "tests": [
+          "Genital ultrasound"
+        ]
       },
       {
         "situation": "Inguinal mass",
-        "tests": ["Ultrasound"]
+        "tests": [
+          "Ultrasound"
+        ]
       },
       {
         "situation": "Breast infection / abscess",
-        "tests": ["CBC", "Culture of discharge if present"]
+        "tests": [
+          "CBC",
+          "Culture of discharge if present"
+        ]
       }
     ],
     "counselling": [
@@ -32469,15 +32515,23 @@
     "investigations": [
       {
         "indication": "Bilateral non-palpable testes",
-        "tests": ["Karyotype", "Hormonal profile (Testosterone, AMH, 17-OHP)"]
+        "tests": [
+          "Karyotype",
+          "Hormonal profile (Testosterone, AMH, 17-OHP)"
+        ]
       },
       {
         "indication": "Suspected anorchia",
-        "tests": ["hCG stimulation test", "AMH levels"]
+        "tests": [
+          "hCG stimulation test",
+          "AMH levels"
+        ]
       },
       {
         "indication": "Imaging",
-        "tests": ["Ultrasound or MRI (only selected cases)"]
+        "tests": [
+          "Ultrasound or MRI (only selected cases)"
+        ]
       }
     ],
     "counselling": [
@@ -33267,13 +33321,23 @@
     "severity": "any",
     "first_line_drugs": [],
     "second_line_drugs": [],
-    "investigations": {
-      "routine": "Not required in typical cases",
-      "if_doubt": [
-        "Cranial ultrasound (if fontanelle open)",
-        "3D CT scan (only if craniosynostosis suspected)"
-      ]
-    },
+    "investigations": [
+      {
+        "name": "Not required in typical cases",
+        "indication": "routine",
+        "urgency": "routine"
+      },
+      {
+        "name": "Cranial ultrasound (if fontanelle open)",
+        "indication": "if doubt",
+        "urgency": "routine"
+      },
+      {
+        "name": "3D CT scan (only if craniosynostosis suspected)",
+        "indication": "if doubt",
+        "urgency": "routine"
+      }
+    ],
     "counselling": [
       "Condition is common and usually benign — यह आम है और आमतौर पर गंभीर नहीं है।",
       "Does not affect brain development or intelligence — इससे दिमाग के विकास या बुद्धि पर कोई असर नहीं पड़ता।",
@@ -39867,18 +39931,38 @@
     "severity": "any",
     "first_line_drugs": [],
     "second_line_drugs": [],
-    "investigations": {
-      "indications": [
-        "High-risk sacral dimple",
-        "Deep or atypical dimple",
-        "Associated skin or neurological findings"
-      ],
-      "recommended_tests": [
-        "Spinal Ultrasound (<3 months)",
-        "MRI Spine (>3 months or if US unavailable)",
-        "Pediatric Neurology / Neurosurgery referral if abnormal"
-      ]
-    },
+    "investigations": [
+      {
+        "name": "High-risk sacral dimple",
+        "indication": "indications",
+        "urgency": "routine"
+      },
+      {
+        "name": "Deep or atypical dimple",
+        "indication": "indications",
+        "urgency": "routine"
+      },
+      {
+        "name": "Associated skin or neurological findings",
+        "indication": "indications",
+        "urgency": "routine"
+      },
+      {
+        "name": "Spinal Ultrasound (<3 months)",
+        "indication": "recommended tests",
+        "urgency": "routine"
+      },
+      {
+        "name": "MRI Spine (>3 months or if US unavailable)",
+        "indication": "recommended tests",
+        "urgency": "routine"
+      },
+      {
+        "name": "Pediatric Neurology / Neurosurgery referral if abnormal",
+        "indication": "recommended tests",
+        "urgency": "routine"
+      }
+    ],
     "counselling": [
       "Most sacral dimples are benign and harmless — अधिकतर सैक्रल डिम्पल सामान्य और हानिरहित होते हैं",
       "Small, midline dimples with visible base usually do not need tests — छोटे, बीच में स्थित गड्ढे जिनका तल दिखता है, आमतौर पर जांच की ज़रूरत नहीं",
