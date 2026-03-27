@@ -15857,11 +15857,7 @@
     "referral_criteria": "Refer to pediatrician or higher center if no improvement after 3 days, recurrent episodes, or development of warning signs",
     "hospitalisation_criteria": "Admit if SpO2 <92%, severe respiratory distress, poor feeding, dehydration, lethargy, or age <2 months with symptoms",
     "notes": "Viral upper respiratory infection; self-limiting illness lasting 5–7 days; antibiotics are not indicated routinely",
-    "source": [
-      "IAP 2024",
-      "WHO 2023",
-      "AAP Guidelines"
-    ],
+    "source": ["IAP 2024", "WHO 2023", "AAP Guidelines"],
     "duration_days_default": 5,
     "guideline_changes": "IAP 2024: Continued emphasis on no routine antibiotics or OTC cough/cold medicines in children; ACCP: Recommends against OTC cough suppressants in pediatric URI; No major guideline changes in 2024-2025 for common cold management",
     "snomed_code": "82272006",
@@ -29778,37 +29774,23 @@
     "investigations": [
       {
         "situation": "Ambiguous genitalia",
-        "tests": [
-          "Karyotype",
-          "17-OHP",
-          "Serum electrolytes"
-        ]
+        "tests": ["Karyotype", "17-OHP", "Serum electrolytes"]
       },
       {
         "situation": "Persistent vaginal bleeding",
-        "tests": [
-          "Coagulation profile",
-          "CBC"
-        ]
+        "tests": ["Coagulation profile", "CBC"]
       },
       {
         "situation": "Suspected imperforate hymen",
-        "tests": [
-          "Genital ultrasound"
-        ]
+        "tests": ["Genital ultrasound"]
       },
       {
         "situation": "Inguinal mass",
-        "tests": [
-          "Ultrasound"
-        ]
+        "tests": ["Ultrasound"]
       },
       {
         "situation": "Breast infection / abscess",
-        "tests": [
-          "CBC",
-          "Culture of discharge if present"
-        ]
+        "tests": ["CBC", "Culture of discharge if present"]
       }
     ],
     "counselling": [
@@ -32515,23 +32497,15 @@
     "investigations": [
       {
         "indication": "Bilateral non-palpable testes",
-        "tests": [
-          "Karyotype",
-          "Hormonal profile (Testosterone, AMH, 17-OHP)"
-        ]
+        "tests": ["Karyotype", "Hormonal profile (Testosterone, AMH, 17-OHP)"]
       },
       {
         "indication": "Suspected anorchia",
-        "tests": [
-          "hCG stimulation test",
-          "AMH levels"
-        ]
+        "tests": ["hCG stimulation test", "AMH levels"]
       },
       {
         "indication": "Imaging",
-        "tests": [
-          "Ultrasound or MRI (only selected cases)"
-        ]
+        "tests": ["Ultrasound or MRI (only selected cases)"]
       }
     ],
     "counselling": [
