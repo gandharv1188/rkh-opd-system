@@ -7225,7 +7225,7 @@
         band.method === "fixed" || band.method === "age"
           ? `${limDoseMin || 1} ${limDoseUnit || "drops"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days || "?"} days`
           : wt && limDoseMin
-            ? `${((wt * limDoseMin) / (band.frequency_per_day || 1)).toFixed(1)} ${fc.perUnit || "ml"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days || "?"} days`
+            ? `${(((wt * limDoseMin) / (band.frequency_per_day || 1) / (fc.concQty || 1)) * (fc.perQty || 1)).toFixed(1)} ${fc.perUnit || "ml"} ${band.frequency_per_day ? band.frequency_per_day + " times/day" : ""} for ${band.duration_days || "?"} days`
             : "Enter dosing instructions",
       row3_hi:
         "\u0939\u093f\u0902\u0926\u0940 \u0928\u093f\u0930\u094d\u0926\u0947\u0936 \u092f\u0939\u093e\u0901 \u0932\u093f\u0916\u0947\u0902",
@@ -7233,7 +7233,7 @@
         band.method === "fixed" || band.method === "age"
           ? `${limDoseMin || 1} ${limDoseUnit || "drops"} per dose`
           : wt && limDoseMin
-            ? `${limDoseMin}mg/kg \u00d7 ${wt}kg = ${(limDoseMin * wt).toFixed(1)}mg`
+            ? `${limDoseMin}mg/kg \u00d7 ${wt}kg = ${(limDoseMin * wt).toFixed(1)}mg/day \u00f7 ${band.frequency_per_day || 1} = ${((limDoseMin * wt) / (band.frequency_per_day || 1)).toFixed(1)}mg/dose \u2192 ${(((wt * limDoseMin) / (band.frequency_per_day || 1) / (fc.concQty || 1)) * (fc.perQty || 1)).toFixed(1)}${fc.perUnit || "ml"}`
             : "Calculate dose",
       flag: "",
       dose_mg_per_kg: limDoseMin || 0,
