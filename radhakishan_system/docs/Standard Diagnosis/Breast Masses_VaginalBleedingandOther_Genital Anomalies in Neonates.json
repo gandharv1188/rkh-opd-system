@@ -1,0 +1,346 @@
+{
+  "template_name": "Standard Prescription Format – Breast Masses, Vaginal Bleeding, and Other Genital Anomalies in Neonates",
+  "template_code": "NEO_GENITAL_BREAST_CONCERNS_V1",
+  "category": "Neonatology",
+  "condition": "Breast Masses, Vaginal Bleeding, and Other Genital Anomalies",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "date_of_birth": "",
+    "sex": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "gestational_age_weeks": "",
+    "day_of_life": ""
+  },
+  "presenting_complaint": {
+    "primary_complaint": "",
+    "onset": "",
+    "duration": "",
+    "progression": "",
+    "associated_discharge": "",
+    "associated_bleeding": "",
+    "associated_swelling": "",
+    "associated_redness": "",
+    "associated_fever": ""
+  },
+  "common_benign_presentations": [
+    {
+      "finding": "Breast enlargement",
+      "likely_cause": "Maternal estrogen effect",
+      "action": "Reassure, no squeezing"
+    },
+    {
+      "finding": "Milky nipple discharge (witch’s milk)",
+      "likely_cause": "Hormonal, transient",
+      "action": "Reassure, resolves in weeks"
+    },
+    {
+      "finding": "Vaginal bleeding in first week",
+      "likely_cause": "Estrogen withdrawal",
+      "action": "Reassure, self-limiting"
+    },
+    {
+      "finding": "Mucoid vaginal discharge",
+      "likely_cause": "Estrogen effect",
+      "action": "Reassure, hygiene only"
+    },
+    {
+      "finding": "Labial enlargement",
+      "likely_cause": "Estrogen-related",
+      "action": "No treatment needed"
+    },
+    {
+      "finding": "Prominent clitoris",
+      "likely_cause": "Normal variant or CAH consideration",
+      "action": "Examine carefully"
+    }
+  ],
+  "red_flag_genital_findings": [
+    {
+      "presentation": "Persistent vaginal bleeding",
+      "possible_cause": "Trauma, coagulopathy",
+      "clues": "Bruising, abnormal labs"
+    },
+    {
+      "presentation": "Ambiguous genitalia",
+      "possible_cause": "DSD / CAH / mixed gonadal dysgenesis",
+      "clues": "Salt loss, pigmentation, atypical genital anatomy"
+    },
+    {
+      "presentation": "Imperforate hymen",
+      "possible_cause": "Obstructive anomaly",
+      "clues": "Bulging at introitus"
+    },
+    {
+      "presentation": "Urogenital sinus / cloacal anomaly",
+      "possible_cause": "Congenital anomaly",
+      "clues": "Single opening for urine/feces"
+    },
+    {
+      "presentation": "Inguinal / labial mass",
+      "possible_cause": "Hernia, hydrocele",
+      "clues": "Increases on crying, reducibility"
+    },
+    {
+      "presentation": "Breast abscess",
+      "possible_cause": "Infection",
+      "clues": "Warmth, redness, tenderness, discharge"
+    }
+  ],
+  "history_points": [
+    "Timing of bleeding or discharge",
+    "Family history of genital anomalies",
+    "Consanguinity or previous sibling with CAH / DSD",
+    "Feeding, weight gain, salt-loss symptoms",
+    "Fever or irritability",
+    "Duration and amount of vaginal bleeding",
+    "Any breast manipulation or squeezing by caregivers"
+  ],
+  "clinical_evaluation": {
+    "general_condition": "well / irritable / sick",
+    "vitals": {
+      "temperature": "",
+      "heart_rate": "",
+      "respiratory_rate": "",
+      "perfusion": ""
+    },
+    "breast_exam": {
+      "size": "",
+      "symmetry": "",
+      "tenderness": "",
+      "redness": "",
+      "discharge": "",
+      "warmth": ""
+    },
+    "genital_exam": {
+      "clitoris": "",
+      "labia": "",
+      "vaginal_opening": "",
+      "urethral_opening": "",
+      "number_of_openings": "",
+      "discharge": "",
+      "bleeding": ""
+    },
+    "additional_exam": {
+      "virilization_signs": "",
+      "ambiguity_of_genitalia": "",
+      "inguinal_or_labial_mass": "",
+      "hernia": "",
+      "hydrocele": "",
+      "pigmentation": "",
+      "signs_of_salt_loss": ""
+    }
+  },
+  "investigations_if_indicated": [
+    {
+      "situation": "Ambiguous genitalia",
+      "tests": ["Karyotype", "17-OHP", "Serum electrolytes"]
+    },
+    {
+      "situation": "Persistent vaginal bleeding",
+      "tests": ["Coagulation profile", "CBC"]
+    },
+    {
+      "situation": "Suspected imperforate hymen",
+      "tests": ["Genital ultrasound"]
+    },
+    {
+      "situation": "Inguinal mass",
+      "tests": ["Ultrasound"]
+    },
+    {
+      "situation": "Breast infection / abscess",
+      "tests": ["CBC", "Culture of discharge if present"]
+    }
+  ],
+  "diagnosis": {
+    "provisional_diagnosis": "",
+    "differential_diagnosis": [
+      "Physiological neonatal breast enlargement",
+      "Witch’s milk",
+      "Estrogen withdrawal vaginal bleeding",
+      "Physiological mucoid vaginal discharge",
+      "Breast abscess / mastitis",
+      "Ambiguous genitalia / DSD",
+      "CAH",
+      "Inguinal hernia / hydrocele",
+      "Imperforate hymen",
+      "Urogenital sinus / cloacal anomaly",
+      "Coagulopathy / trauma"
+    ],
+    "severity": "benign / needs evaluation / urgent referral"
+  },
+  "prescription": {
+    "medicines": [
+      {
+        "name": "No medicine required",
+        "dose": "",
+        "route": "",
+        "frequency": "",
+        "duration": "",
+        "indication": "Physiological breast swelling, mucoid discharge, first-week vaginal bleeding"
+      },
+      {
+        "name": "ORAL / IV ANTIBIOTICS",
+        "dose": "",
+        "route": "",
+        "frequency": "",
+        "duration": "",
+        "indication": "Breast abscess / breast infection"
+      }
+    ],
+    "supportive_care": [
+      "Do not squeeze or manipulate breasts",
+      "Maintain local hygiene only",
+      "No internal vaginal cleaning",
+      "Monitor duration of bleeding or discharge",
+      "Observe for fever, redness, tenderness, swelling"
+    ]
+  },
+  "management_plan": {
+    "hormonal_breast_or_genital_signs": [
+      "Reassure parents",
+      "Monitor clinically",
+      "No active treatment"
+    ],
+    "ambiguous_genitalia": [
+      "Urgent evaluation",
+      "Refer to pediatric endocrinology / higher center",
+      "Investigate for CAH / DSD"
+    ],
+    "breast_abscess": [
+      "Start antibiotics",
+      "Drainage if needed",
+      "Follow closely"
+    ],
+    "hernia_or_hydrocele": ["Surgical referral"],
+    "persistent_or_late_onset_vaginal_bleeding": [
+      "Evaluate for trauma / coagulopathy",
+      "Perform indicated investigations",
+      "Refer if abnormal"
+    ]
+  },
+  "parent_counseling": [
+    "These findings are common and usually hormonal / physiological",
+    "Breast swelling or milky discharge often resolves spontaneously",
+    "Do not squeeze or massage the breasts",
+    "First-week vaginal bleeding is usually self-limiting",
+    "Maintain gentle hygiene only; no internal cleaning",
+    "Seek review if bleeding persists, discharge is foul-smelling, breast becomes red/tender, or genitalia appear unclear"
+  ],
+  "summary_table": [
+    {
+      "feature": "Vaginal bleeding (few days)",
+      "benign": "Estrogen withdrawal",
+      "needs_evaluation": "Persistent or late-onset bleeding"
+    },
+    {
+      "feature": "Breast swelling",
+      "benign": "Hormonal, symmetric",
+      "needs_evaluation": "Red, tender, possible abscess"
+    },
+    {
+      "feature": "Clitoris",
+      "benign": "Mildly prominent",
+      "needs_evaluation": "Marked enlargement / ambiguity"
+    },
+    {
+      "feature": "Inguinal / labial swelling",
+      "benign": "Soft, reducible / none",
+      "needs_evaluation": "Hard, non-reducible mass"
+    },
+    {
+      "feature": "Labia",
+      "benign": "Puffy, estrogen-related",
+      "needs_evaluation": "Atrophic or fused / abnormal"
+    }
+  ],
+  "opd_checklist": [
+    "Breast enlargement warm? red? discharge? asymmetric?",
+    "Vaginal bleeding timing, duration, amount?",
+    "Genitalia ambiguous? single opening? hernia?",
+    "Discharge mucoid? blood-streaked? foul-smelling?",
+    "Signs of virilization or salt loss?",
+    "Parents counseled regarding no manipulation?"
+  ],
+  "follow_up": {
+    "routine_follow_up": "3–7 days or earlier if symptoms persist",
+    "urgent_follow_up": "Immediately if fever, breast redness, persistent bleeding, ambiguous genitalia, or hard inguinal swelling develops"
+  },
+  "referral_indications": [
+    "Ambiguous genitalia",
+    "Persistent vaginal bleeding",
+    "Breast abscess / mastitis",
+    "Hard or non-reducible inguinal / labial mass",
+    "Suspected imperforate hymen / cloacal anomaly",
+    "Salt-loss symptoms or suspicion of CAH"
+  ],
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "P83.4",
+  "diagnosis_name": "Breast Masses, Vaginal Bleeding and Other Genital Anomalies in Neonates",
+  "snomed_code": "281610003",
+  "snomed_display": "Neonatal breast engorgement (disorder)",
+  "counselling": [
+    "These findings are common and usually hormonal / physiological — ये लक्षण आम हैं और आमतौर पर हार्मोन के कारण होते हैं",
+    "Breast swelling or milky discharge often resolves spontaneously — स्तन की सूजन या दूध जैसा रिसाव अपने आप ठीक हो जाता है",
+    "Do not squeeze or massage the breasts — स्तनों को दबाएं या मालिश न करें",
+    "First-week vaginal bleeding is usually self-limiting — पहले हफ्ते में योनि से खून आना आमतौर पर अपने आप रुक जाता है",
+    "Maintain gentle hygiene only; no internal cleaning — सिर्फ़ हल्की सफ़ाई रखें; अंदर की सफ़ाई न करें",
+    "Seek review if bleeding persists, discharge is foul-smelling, breast becomes red/tender, or genitalia appear unclear — अगर खून बंद न हो, बदबूदार रिसाव हो, स्तन लाल/दर्दनाक हो, या जननांग स्पष्ट न दिखें तो डॉक्टर को दिखाएं"
+  ],
+  "warning_signs": [
+    "Persistent vaginal bleeding beyond first week — पहले हफ्ते के बाद भी योनि से खून आना",
+    "Breast redness, warmth or pus — स्तन पर लालिमा, गर्मी या मवाद",
+    "Ambiguous genitalia — अस्पष्ट जननांग",
+    "Fever or poor feeding — बुखार या कम दूध पीना",
+    "Inguinal swelling that does not reduce — जांघ की सूजन जो कम न हो",
+    "Signs of salt loss: vomiting, poor weight gain, dehydration — नमक की कमी के संकेत: उल्टी, वज़न न बढ़ना, पानी की कमी"
+  ],
+  "expected_course": "Neonatal breast enlargement resolves within 2-4 weeks as maternal hormones clear. Witch milk (galactorrhea) may persist for up to 2 months. First-week vaginal bleeding (estrogen withdrawal) resolves within 3-5 days. Mucoid vaginal discharge may persist for 2-4 weeks. All are self-limiting and benign.",
+  "key_clinical_points": [
+    "Neonatal breast enlargement is due to transplacental maternal estrogen — never squeeze",
+    "Squeezing breasts can cause mastitis/abscess — educate caregivers strongly",
+    "Vaginal bleeding in first week is estrogen withdrawal — benign if small amount",
+    "Always examine for ambiguous genitalia — rule out CAH (check 17-OHP, electrolytes)",
+    "Imperforate hymen presents as bulging introitus — needs surgical referral",
+    "Breast abscess requires antibiotics and possibly drainage",
+    "Salt-losing CAH is a neonatal emergency — vomiting, dehydration, hyperkalemia"
+  ],
+  "severity_assessment": {
+    "mild": "Bilateral breast swelling, clear/milky nipple discharge, small amount vaginal bleeding in first week — reassurance only",
+    "moderate": "Unilateral tender breast, persistent bleeding, prominent clitoris — investigation (CBC, 17-OHP, electrolytes), close follow-up",
+    "severe": "Breast abscess, ambiguous genitalia, salt loss symptoms, hard inguinal mass — urgent evaluation, specialist referral, possible NICU admission"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Breast size and tenderness",
+      "frequency": "At each visit until resolved"
+    },
+    {
+      "parameter": "Vaginal discharge/bleeding",
+      "frequency": "Daily by parents until resolved"
+    },
+    {
+      "parameter": "Weight gain",
+      "frequency": "At each follow-up visit"
+    },
+    {
+      "parameter": "Electrolytes (if CAH suspected)",
+      "frequency": "At presentation and as indicated"
+    },
+    {
+      "parameter": "Feeding adequacy",
+      "frequency": "At each feed"
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "template_name": "Standard Prescription Format - Seizure Mimics in a Neonate",
+  "diagnosis_name": "Seizure Mimics in a Neonate",
+  "icd10": "R25.8",
+  "snomed_code": "60238002",
+  "category": "Neonatology",
+  "condition": {
+    "name": "Seizure Mimics in a Neonate",
+    "icd10_suggestions": ["P90", "R25.8", "G25.3", "R56.9"],
+    "overview": [
+      "Not all abnormal movements in neonates are seizures.",
+      "Many benign or non-epileptic events resemble seizures but have distinct features that help differentiate them.",
+      "Recognizing seizure mimics avoids over-diagnosis, unnecessary medications, hospitalization, and parental distress."
+    ]
+  },
+  "common_mimics": [
+    {
+      "condition": "Jitteriness",
+      "key_features": [
+        "Fast, low-amplitude tremor-like movements",
+        "Stimulus-sensitive",
+        "Stops with passive flexion or holding",
+        "No ocular involvement"
+      ]
+    },
+    {
+      "condition": "Benign Neonatal Sleep Myoclonus",
+      "key_features": [
+        "Myoclonic jerks only during sleep",
+        "Ceases immediately on arousal",
+        "Normal neurological examination",
+        "Normal EEG",
+        "Self-limiting by 3-6 months"
+      ]
+    },
+    {
+      "condition": "Hyperekplexia (Startle disease)",
+      "key_features": [
+        "Exaggerated startle response",
+        "Triggered by tactile or auditory stimuli",
+        "Brief stiffness may occur",
+        "Apnea possible"
+      ]
+    },
+    {
+      "condition": "Normal sleep-related / neonatal behaviors",
+      "key_features": [
+        "Sucking, chewing, yawning",
+        "Facial twitches or smiles during REM sleep",
+        "Moro reflex or startle during handling",
+        "No progression and no abnormal EEG"
+      ]
+    },
+    {
+      "condition": "Feeding or rooting reflexes",
+      "key_features": [
+        "Rhythmic lip or tongue movements",
+        "Disappear when not feeding"
+      ]
+    },
+    {
+      "condition": "Startle reflex (Moro)",
+      "key_features": [
+        "Symmetric extension then flexion of limbs",
+        "Occurs in response to sudden stimulus"
+      ]
+    },
+    {
+      "condition": "Apnea with color change / BRUE-like events",
+      "key_features": ["May resemble tonic events", "Often no EEG correlate"]
+    }
+  ],
+  "clues_favoring_mimic": [
+    "Stimulus-sensitive",
+    "Non-rhythmic or variable",
+    "Suppressible with touch, holding, or repositioning",
+    "Occurs only during sleep",
+    "No altered consciousness",
+    "No autonomic signs in most cases",
+    "Normal feeding, tone, growth, and neurological examination"
+  ],
+  "clues_favoring_true_seizure": [
+    "Not stimulus-sensitive",
+    "Stereotyped and rhythmic",
+    "Does not stop with holding or repositioning",
+    "Altered consciousness or reduced responsiveness",
+    "Associated autonomic signs",
+    "Eye deviation or lip smacking",
+    "Persistent tonic or clonic activity",
+    "Abnormal neurological examination",
+    "Confirmed abnormal EEG"
+  ],
+  "history_template": [
+    "Onset and frequency of movements",
+    "Triggering events such as sound, touch, feeding, or sleep",
+    "Duration and symmetry",
+    "Associated cyanosis or apnea",
+    "Response to comforting, repositioning, or stimulation",
+    "Whether movements occur during sleep or wakefulness",
+    "Family history of neonatal seizures or hyperekplexia",
+    "Feeding pattern and overall behavior"
+  ],
+  "examination_template": [
+    "Observe movement characteristics directly or via video",
+    "Check whether movement is provoked or spontaneous",
+    "Assess whether movement stops with passive flexion or holding",
+    "Look for facial twitching, ocular movements, limb jerks",
+    "Assess during sleep and awake states",
+    "Observe feeding behavior",
+    "Examine tone and primitive reflexes",
+    "Perform full neurological examination"
+  ],
+  "key_mimics_in_detail": {
+    "jitteriness": {
+      "features": [
+        "Rapid rhythmic tremor-like movements",
+        "Stimulus-sensitive",
+        "Stops with passive flexion",
+        "No ocular involvement"
+      ],
+      "possible_causes": [
+        "Hypoglycemia",
+        "Hypocalcemia",
+        "Sepsis",
+        "Drug withdrawal",
+        "Idiopathic"
+      ]
+    },
+    "benign_neonatal_sleep_myoclonus": {
+      "features": [
+        "Sudden myoclonic jerks during sleep",
+        "Stops on arousal",
+        "Normal neuroexam and EEG",
+        "Self-limited"
+      ]
+    },
+    "hyperekplexia": {
+      "features": [
+        "Autosomal dominant or sporadic",
+        "Triggered by tactile or auditory stimuli",
+        "Exaggerated startle with brief stiffness",
+        "May have apnea or fall-like posture"
+      ],
+      "treatment_note": "May respond to CLONAZEPAM if symptomatic"
+    },
+    "normal_neonatal_behaviors": {
+      "features": [
+        "Sucking, chewing, yawning",
+        "Facial twitches or smiles in REM sleep",
+        "Moro reflex during handling",
+        "No abnormal EEG"
+      ]
+    }
+  },
+  "red_flags": [
+    "Apnea with bradycardia or cyanosis",
+    "Eye deviation",
+    "Lip smacking",
+    "Persistent tonic or clonic activity",
+    "Non-suppressible movements",
+    "Non-stimulus-sensitive events",
+    "Abnormal neurological examination",
+    "Confirmed abnormal EEG"
+  ],
+  "investigations_if_red_flags_present": [
+    {
+      "name": "VIDEO-EEG MONITORING",
+      "purpose": "Gold standard for seizure confirmation"
+    },
+    {
+      "name": "BLOOD GLUCOSE, CALCIUM, ELECTROLYTES",
+      "purpose": "Rule out metabolic causes"
+    },
+    {
+      "name": "NEUROIMAGING (CRANIAL USG / MRI)",
+      "purpose": "If neurological signs are present"
+    },
+    {
+      "name": "GENETIC TESTING",
+      "purpose": "If hyperekplexia or recurrent unexplained events suspected"
+    },
+    {
+      "name": "SEPSIS / METABOLIC WORK-UP",
+      "purpose": "In sick neonates"
+    }
+  ],
+  "management_protocol": {
+    "jitteriness_resolves": [
+      "Reassure parents",
+      "Correct metabolic cause if present"
+    ],
+    "sleep_myoclonus": ["No treatment needed", "Educate parents", "Observe"],
+    "hyperekplexia": ["Genetic counseling", "Consider CLONAZEPAM if severe"],
+    "uncertain_diagnosis": ["VIDEO-EEG", "Neurology consultation"],
+    "suspected_true_seizure": [
+      "Admit",
+      "Evaluate fully",
+      "Treat as per neonatal seizure protocol"
+    ]
+  },
+  "parent_counseling": [
+    "Many newborn movements are normal or benign. — नवजात शिशु की कई हलचलें सामान्य होती हैं।",
+    "Seizure mimics do not usually cause brain damage. — ये दौरे जैसी हलचलें आमतौर पर दिमाग को नुकसान नहीं पहुँचाती।",
+    "Avoid unnecessary panic or medication without confirmation. — बिना पुष्टि के घबराएं नहीं और दवा शुरू न करें।",
+    "Observe for red flags such as apnea, cyanosis, feeding difficulty, eye deviation, or persistent rhythmic movements. — सांस रुकना, नीलापन, दूध न पीना, आंखों का टेढ़ा होना जैसे लक्षणों पर ध्यान दें।",
+    "Most mimics resolve with time. — ये अधिकतर अपने आप ठीक हो जाती हैं।"
+  ],
+  "summary_table": [
+    {
+      "condition": "Jitteriness",
+      "clue_features": "Tremor-like, stimulus-sensitive",
+      "action": "Reassure, check electrolytes / metabolic causes"
+    },
+    {
+      "condition": "Sleep myoclonus",
+      "clue_features": "Only during sleep, stops on arousal",
+      "action": "No treatment"
+    },
+    {
+      "condition": "Hyperekplexia",
+      "clue_features": "Startle plus stiffness / apnea",
+      "action": "Refer, consider CLONAZEPAM if needed"
+    },
+    {
+      "condition": "Normal neonatal behavior",
+      "clue_features": "During feeding or sleep, non-progressive",
+      "action": "Reassure"
+    }
+  ],
+  "flow_logic": [
+    "Observe neonatal abnormal movement",
+    "Assess characteristics carefully",
+    "If rhythmic, not stimulus-sensitive, and associated with altered tone or consciousness, suspect seizure",
+    "Arrange EEG and full work-up",
+    "If stimulus-sensitive, suppressible, or occurs during sleep only, likely seizure mimic",
+    "Reassure or monitor",
+    "If diagnosis remains uncertain, arrange VIDEO-EEG or specialist referral"
+  ],
+  "quick_checklist_for_opd": [
+    "Is the movement rhythmic or jerky?",
+    "Is it stimulus-sensitive or suppressible?",
+    "Does it occur during sleep or wakefulness?",
+    "Is the baby feeding well and neurologically normal?",
+    "Any family history or red flags?",
+    "Is video documentation available?"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Neonatology OPD",
+    "title": "Standard Prescription - Seizure Mimics in a Neonate",
+    "patient_identification": {
+      "patient_name": "",
+      "uhid": "",
+      "ipid": "",
+      "age": "Neonate",
+      "sex": "",
+      "dob": "",
+      "day_of_life": "",
+      "weight_kg": "",
+      "date": "",
+      "time": "",
+      "parent_name": "",
+      "contact_number": ""
+    },
+    "chief_complaints": [
+      "Abnormal movements",
+      "Jitteriness / jerks",
+      "Startle episodes",
+      "Eye or lip movements",
+      "Apnea or color change"
+    ],
+    "clinical_assessment": {
+      "event_description": "",
+      "stimulus_sensitive": "",
+      "suppressible": "",
+      "during_sleep_or_wakefulness": "",
+      "rhythmic_or_variable": "",
+      "eye_deviation": "",
+      "lip_smacking": "",
+      "apnea_or_cyanosis": "",
+      "feeding_status": "",
+      "neurological_exam": "",
+      "family_history": "",
+      "video_available": ""
+    },
+    "provisional_diagnosis_options": [
+      "Seizure mimic - likely jitteriness",
+      "Seizure mimic - benign neonatal sleep myoclonus",
+      "Seizure mimic - hyperekplexia",
+      "Abnormal movement - rule out neonatal seizure"
+    ],
+    "investigation_orders": [
+      "No routine investigations if classic benign mimic and normal exam",
+      "VIDEO-EEG if red flags present",
+      "BLOOD GLUCOSE",
+      "SERUM CALCIUM",
+      "SERUM ELECTROLYTES",
+      "NEUROIMAGING if indicated",
+      "SEPSIS / METABOLIC WORK-UP if clinically indicated"
+    ],
+    "medication_template": [
+      {
+        "drug_name": "No routine anticonvulsant required for benign mimic",
+        "dose": "",
+        "route": "",
+        "frequency": "",
+        "duration": "",
+        "instructions_en": "Do not start seizure medicines unless true seizure is suspected or confirmed",
+        "instructions_hi": "सही दौरे का संदेह या पुष्टि बिना एंटी-सीज़र दवा शुरू न करें"
+      },
+      {
+        "drug_name": "CLONAZEPAM",
+        "dose": "",
+        "route": "Oral",
+        "frequency": "",
+        "duration": "",
+        "instructions_en": "Only if hyperekplexia is diagnosed and symptomatic, under specialist advice",
+        "instructions_hi": "केवल हाइपेरेक्प्लेक्सिया की पुष्टि और लक्षण होने पर विशेषज्ञ की सलाह से"
+      }
+    ],
+    "treatment_plan": {
+      "general_advice": [
+        "Observe and document events carefully",
+        "Ask parents to record video if possible",
+        "Reassure if features are consistent with benign mimic"
+      ],
+      "if_mimic_likely": [
+        "Parental reassurance",
+        "No unnecessary antiepileptic drugs",
+        "Correct metabolic abnormality if present"
+      ],
+      "if_red_flags_present": [
+        "Urgent evaluation",
+        "Consider admission",
+        "EEG and full work-up"
+      ]
+    },
+    "follow_up": {
+      "review_in": "",
+      "emergency_if": [
+        "Apnea",
+        "Cyanosis",
+        "Persistent rhythmic movements",
+        "Eye deviation",
+        "Poor feeding",
+        "Lethargy",
+        "Abnormal neurobehavior"
+      ]
+    },
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "warning_signs": [
+    "Apnea with bradycardia or cyanosis — सांस रुकना, धड़कन धीमी होना या नीलापन",
+    "Eye deviation or lip smacking — आंखों का टेढ़ा होना या होंठ चटकाना",
+    "Persistent tonic or clonic movements — लगातार अकड़न या झटके",
+    "Non-suppressible movements — पकड़ने पर भी न रुकने वाली हलचल",
+    "Poor feeding or lethargy — दूध न पीना या सुस्ती",
+    "Abnormal neurological examination — असामान्य तंत्रिका जांच"
+  ],
+  "expected_course": "Benign neonatal sleep myoclonus resolves spontaneously by 3-6 months. Jitteriness usually resolves once metabolic cause (hypoglycemia, hypocalcemia) is corrected. Hyperekplexia may require long-term medication. Video-EEG helps differentiate true seizures from mimics. Most mimics have an excellent prognosis.",
+  "key_clinical_points": [
+    "Ask parents to record a video of the episode for review",
+    "Stimulus-sensitive and suppressible movements favor mimic over seizure",
+    "Normal interictal EEG and neurological exam are reassuring",
+    "Do NOT start anticonvulsants without confirmed seizure diagnosis",
+    "Benign sleep myoclonus occurs ONLY during sleep and stops on arousal",
+    "Jitteriness may indicate underlying metabolic derangement requiring correction"
+  ],
+  "severity_assessment": {
+    "mild": "Isolated jitteriness or brief myoclonic jerks during sleep with normal exam — observation and parental reassurance",
+    "moderate": "Recurrent episodes with parental anxiety, uncertain diagnosis — video documentation, metabolic screen, neurology follow-up",
+    "severe": "Non-suppressible rhythmic movements, eye deviation, apnea, altered tone — urgent EEG and full neonatal seizure workup, consider admission"
+  }
+}

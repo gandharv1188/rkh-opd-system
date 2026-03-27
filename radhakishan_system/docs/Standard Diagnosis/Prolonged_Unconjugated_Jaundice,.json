@@ -1,0 +1,377 @@
+{
+  "template_name": "Standard Prescription Format - Prolonged Unconjugated Jaundice",
+  "condition": {
+    "name": "Prolonged Unconjugated Jaundice",
+    "icd10_suggestions": ["P59.3", "P59.8", "P59.9"],
+    "overview": [
+      "Jaundice beyond 14 days in a term neonate or beyond 21 days in a preterm infant warrants evaluation.",
+      "If the conjugated fraction is normal, the jaundice is unconjugated and is often benign, but it may indicate underlying pathology.",
+      "The first step is to distinguish unconjugated from conjugated hyperbilirubinemia by fractionated bilirubin."
+    ]
+  },
+  "definition": {
+    "prolonged_jaundice_cutoff": {
+      "term_baby": ">14 days",
+      "preterm_baby": ">21 days"
+    },
+    "practical_pearl": "Do not label prolonged jaundice as benign until direct bilirubin is checked and conjugated jaundice is excluded."
+  },
+  "common_causes": {
+    "frequent_benign_or_common": [
+      "Breast milk jaundice",
+      "Physiological delayed resolution",
+      "Hemolysis (ABO incompatibility, Rh incompatibility, G6PD deficiency)",
+      "Polycythemia",
+      "Dehydration or poor feeding",
+      "Cephalhematoma"
+    ],
+    "less_common_or_pathological": [
+      "Congenital hypothyroidism",
+      "Crigler-Najjar syndrome",
+      "Gilbert syndrome",
+      "Inborn errors of metabolism",
+      "Pyloric stenosis with starvation jaundice",
+      "Occult infection such as urinary tract infection"
+    ]
+  },
+  "history_template": [
+    "Age at onset and duration of jaundice",
+    "Term or preterm status",
+    "Feeding adequacy and breastfeeding history",
+    "Weight gain and thriving status",
+    "Color of urine",
+    "Color of stools",
+    "History of poor feeding or dehydration",
+    "Family history of jaundice or hemolytic disorders",
+    "Any sibling with kernicterus or neonatal death",
+    "Drug exposure or hemolysis triggers if relevant"
+  ],
+  "examination_template": [
+    "General appearance, activity, tone and growth",
+    "Hydration status",
+    "Presence of pallor",
+    "Hepatosplenomegaly",
+    "Signs of birth injury such as cephalhematoma",
+    "Signs of congenital hypothyroidism including macroglossia and large fontanel",
+    "Neurological status including alertness and reflexes",
+    "Overall thriving versus sick baby appearance"
+  ],
+  "first_line_investigations": [
+    {
+      "name": "Total bilirubin and Direct bilirubin",
+      "purpose": "Confirm that jaundice is unconjugated and exclude cholestasis"
+    },
+    {
+      "name": "TSH and Free T4",
+      "purpose": "Rule out congenital hypothyroidism"
+    },
+    {
+      "name": "Reticulocyte count",
+      "purpose": "Assess hemolysis"
+    },
+    {
+      "name": "Blood group and Coombs test",
+      "purpose": "Evaluate immune hemolysis"
+    },
+    {
+      "name": "G6PD level",
+      "purpose": "Detect G6PD deficiency"
+    },
+    {
+      "name": "CBC and peripheral smear",
+      "purpose": "Assess anemia or hemolysis"
+    },
+    {
+      "name": "Urine examination",
+      "purpose": "Rule out urinary tract infection"
+    }
+  ],
+  "optional_investigations": [
+    {
+      "name": "Serum albumin and LFTs",
+      "indication": "If baby is unwell or liver disease suspected"
+    },
+    {
+      "name": "Urine reducing substances",
+      "indication": "If galactosemia or metabolic disease is suspected"
+    }
+  ],
+  "diagnosis_by_pattern": [
+    {
+      "clue": "Jaundice in a thriving baby",
+      "probable_diagnosis": "Breast milk jaundice"
+    },
+    {
+      "clue": "Jaundice with poor feeding",
+      "probable_diagnosis": "Hypothyroidism or sepsis"
+    },
+    {
+      "clue": "Pallor with high reticulocyte count",
+      "probable_diagnosis": "Hemolysis"
+    },
+    {
+      "clue": "Jaundice with large fontanel",
+      "probable_diagnosis": "Congenital hypothyroidism"
+    },
+    {
+      "clue": "Positive family history",
+      "probable_diagnosis": "G6PD deficiency, Gilbert syndrome, or Crigler-Najjar syndrome"
+    }
+  ],
+  "red_flags": [
+    "Direct bilirubin elevated",
+    "Dark urine",
+    "Pale or acholic stools",
+    "Poor feeding",
+    "Poor weight gain",
+    "Sick or lethargic baby",
+    "Hepatosplenomegaly",
+    "Marked pallor",
+    "Neurological abnormalities",
+    "Signs of congenital hypothyroidism",
+    "Evidence of sepsis or dehydration"
+  ],
+  "management_protocol": {
+    "general_principles": [
+      "Always fractionate bilirubin first",
+      "Continue breastfeeding unless a specific contraindication exists",
+      "Treat the underlying cause when identified",
+      "Follow-up with clinical and bilirubin monitoring"
+    ],
+    "cause_specific_management": [
+      {
+        "condition": "Breast milk jaundice",
+        "management": [
+          "Continue breastfeeding",
+          "No need to stop feeds",
+          "Monitor bilirubin and clinical status"
+        ]
+      },
+      {
+        "condition": "Hemolysis",
+        "management": [
+          "Identify and treat the cause",
+          "Avoid hemolysis triggers in G6PD deficiency",
+          "Consider phototherapy if indicated"
+        ]
+      },
+      {
+        "condition": "Congenital hypothyroidism",
+        "management": [
+          "Start LEVOTHYROXINE after confirmation",
+          "Arrange endocrine follow-up"
+        ]
+      },
+      {
+        "condition": "Unwell baby or suspicion of cholestasis",
+        "management": [
+          "Refer for further work-up",
+          "Do not manage as simple breast milk jaundice"
+        ]
+      }
+    ]
+  },
+  "parent_counseling": [
+    "Some jaundice after 2 weeks can be common, especially in breastfed babies. — 2 हफ्ते बाद भी पीलिया हो सकता है, खासकर माँ का दूध पीने वाले बच्चों में।",
+    "Breastfeeding is usually safe and should generally be continued. — माँ का दूध सुरक्षित है और आमतौर पर जारी रखना चाहिए।",
+    "Further tests are needed mainly to rule out uncommon but important causes. — जांच कुछ दुर्लभ लेकिन गंभीर कारणों को दूर करने के लिए ज़रूरी है।",
+    "Parents should monitor feeding, urine color, stool color, activity and weight gain. — दूध पीना, पेशाब का रंग, पोटी का रंग, हिलना-डुलना और वज़न बढ़ना ध्यान से देखें।",
+    "Follow-up is important until jaundice resolves. — पीलिया ठीक होने तक नियमित जांच कराएं।"
+  ],
+  "summary_scenarios": [
+    {
+      "scenario": "Baby thriving with unconjugated jaundice",
+      "suggested_action": "Likely breast milk jaundice; monitor"
+    },
+    {
+      "scenario": "Pallor or anemia present",
+      "suggested_action": "Do hemolysis work-up"
+    },
+    {
+      "scenario": "High TSH or low T4",
+      "suggested_action": "Start treatment for hypothyroidism"
+    },
+    {
+      "scenario": "Direct bilirubin high",
+      "suggested_action": "Refer for cholestasis work-up"
+    }
+  ],
+  "flow_logic": [
+    "If jaundice persists beyond 14 days in a term baby or 21 days in a preterm baby, measure total and direct bilirubin",
+    "If direct bilirubin is elevated, evaluate for cholestasis",
+    "If conjugated fraction is normal, assess feeding, growth, urine and stool color",
+    "If baby is well, stools are normal and breastfeeding is exclusive, breast milk jaundice is likely",
+    "Still run TSH, CBC, reticulocyte count, blood group, Coombs and G6PD to rule out treatable causes",
+    "Continue follow-up with clinical and bilirubin monitoring"
+  ],
+  "quick_checklist_for_opd": [
+    "Duration more than 14 days in term or more than 21 days in preterm?",
+    "Has bilirubin been fractionated?",
+    "Are feeding and growth adequate?",
+    "Have hemolysis and hypothyroidism been evaluated?",
+    "Are stool and urine colors normal?",
+    "Have parents been counseled and follow-up planned?"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Neonatology OPD",
+    "title": "Standard Prescription - Prolonged Unconjugated Jaundice",
+    "patient_identification": {
+      "patient_name": "",
+      "uhid": "",
+      "ipid": "",
+      "age": "",
+      "sex": "",
+      "dob": "",
+      "day_of_life": "",
+      "gestation": "",
+      "weight_kg": "",
+      "date": "",
+      "time": "",
+      "parent_name": "",
+      "contact_number": ""
+    },
+    "chief_complaints": [
+      "Yellow discoloration persisting beyond expected period",
+      "Feeding pattern",
+      "Weight gain status",
+      "Urine/stool color concern"
+    ],
+    "clinical_assessment": {
+      "term_or_preterm": "",
+      "duration_of_jaundice": "",
+      "feeding_adequacy": "",
+      "weight_gain": "",
+      "stool_color": "",
+      "urine_color": "",
+      "activity_tone": "",
+      "pallor": "",
+      "hepatosplenomegaly": "",
+      "cephalhematoma": "",
+      "signs_of_hypothyroidism": "",
+      "neurological_status": ""
+    },
+    "provisional_diagnosis_options": [
+      "Prolonged unconjugated jaundice - likely breast milk jaundice",
+      "Prolonged jaundice - rule out hemolysis",
+      "Prolonged jaundice - rule out congenital hypothyroidism",
+      "Prolonged jaundice - rule out cholestasis"
+    ],
+    "investigation_orders": [
+      "TOTAL BILIRUBIN + DIRECT BILIRUBIN",
+      "TSH + FREE T4",
+      "CBC",
+      "RETICULOCYTE COUNT",
+      "BLOOD GROUP + COOMBS TEST",
+      "G6PD LEVEL",
+      "PERIPHERAL SMEAR",
+      "URINE EXAMINATION"
+    ],
+    "optional_investigation_orders": [
+      "LFTs",
+      "SERUM ALBUMIN",
+      "URINE REDUCING SUBSTANCES"
+    ],
+    "treatment_plan": {
+      "general_advice": [
+        "Continue breastfeeding",
+        "Ensure adequate feeding",
+        "Monitor growth and hydration"
+      ],
+      "if_likely_breast_milk_jaundice": [
+        "Observe clinically",
+        "Repeat bilirubin as advised",
+        "Routine follow-up"
+      ],
+      "if_hemolysis_suspected": [
+        "Evaluate cause",
+        "Avoid triggers if G6PD deficiency suspected or confirmed",
+        "Consider PHOTOTHERAPY if clinically indicated"
+      ],
+      "if_hypothyroidism_confirmed": [
+        "Start LEVOTHYROXINE",
+        "Arrange endocrinology / pediatric follow-up"
+      ],
+      "if_direct_bilirubin_high_or_baby_unwell": [
+        "Urgent referral for cholestasis / liver work-up",
+        "Further inpatient evaluation if required"
+      ]
+    },
+    "follow_up": {
+      "review_in": "",
+      "monitor": [
+        "Clinical jaundice",
+        "Weight gain",
+        "Feeding pattern",
+        "Repeat bilirubin if indicated"
+      ],
+      "emergency_if": [
+        "Baby becomes lethargic",
+        "Poor feeding develops",
+        "Dark urine",
+        "Pale stools",
+        "Fever or illness",
+        "Reduced activity"
+      ]
+    },
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "snomed_code": "206462004",
+  "snomed_display": "Prolonged neonatal jaundice (disorder)",
+  "icd10": "P59.9",
+  "diagnosis_name": "Prolonged Unconjugated Jaundice",
+  "category": "Neonatology",
+  "warning_signs": [
+    "Dark urine — गहरे रंग का पेशाब",
+    "Pale or white stools — सफ़ेद या हल्के रंग की पोटी",
+    "Poor feeding or lethargy — दूध न पीना या सुस्ती",
+    "Worsening jaundice — पीलिया बढ़ना",
+    "Fever or illness — बुखार या बीमारी",
+    "Bleeding from any site — कहीं से खून आना"
+  ],
+  "expected_course": "Breast milk jaundice (the most common cause) is benign and self-limiting, typically resolving by 3-4 months of age. Breastfeeding should be continued. However, treatable conditions like congenital hypothyroidism, hemolysis, and cholestasis must be ruled out before labeling jaundice as breast milk jaundice.",
+  "key_clinical_points": [
+    "Always fractionate bilirubin (total + direct) before attributing jaundice to breast milk.",
+    "Prolonged jaundice cutoff: >14 days (term), >21 days (preterm).",
+    "TSH and Free T4 must be checked to rule out congenital hypothyroidism.",
+    "Reticulocyte count, blood group, Coombs test, and G6PD screen for hemolysis.",
+    "Normal stool and urine color with a thriving baby suggests breast milk jaundice.",
+    "Never label jaundice as benign until conjugated bilirubin is confirmed normal."
+  ],
+  "severity_assessment": {
+    "mild": "Thriving baby with unconjugated jaundice, normal stools, normal feeding — likely breast milk jaundice, monitor.",
+    "moderate": "Unconjugated jaundice with borderline weight gain or mildly elevated reticulocytes — complete hemolysis and thyroid workup.",
+    "severe": "Elevated direct bilirubin, pale stools, dark urine, sick baby, hepatosplenomegaly — urgent cholestasis/liver workup and referral."
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Total and direct bilirubin",
+      "frequency": "At presentation; repeat as advised"
+    },
+    {
+      "parameter": "TSH and Free T4",
+      "frequency": "At presentation"
+    },
+    {
+      "parameter": "Weight gain and feeding",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Stool and urine color",
+      "frequency": "Daily by parents"
+    },
+    {
+      "parameter": "CBC with reticulocyte count",
+      "frequency": "At presentation"
+    },
+    {
+      "parameter": "Blood group and Coombs test",
+      "frequency": "At presentation"
+    }
+  ]
+}

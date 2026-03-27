@@ -1,0 +1,217 @@
+{
+  "template_name": "Standard Prescription Format - Retinopathy of Prematurity (ROP) Screening",
+  "condition": {
+    "name": "Retinopathy of Prematurity (ROP)",
+    "definition": "Vaso-proliferative disorder of the immature retina that can lead to blindness if not detected early.",
+    "purpose": [
+      "Early detection of treatable stages",
+      "Prevention of vision loss",
+      "Structured follow-up of preterm infants"
+    ]
+  },
+  "screening_criteria": {
+    "mandatory": ["Gestational Age ≤34 weeks", "Birth Weight ≤2000 grams"],
+    "additional": [
+      "GA >34 weeks or BW >2000 grams with risk factors",
+      "Risk factors: prolonged oxygen therapy, sepsis, multiple transfusions"
+    ]
+  },
+  "screening_timing": {
+    "<28_weeks": "2–3 weeks postnatal age",
+    "28-32_weeks": "3–4 weeks postnatal age",
+    "32-34_weeks": "By 4 weeks postnatal age",
+    "general_rule": "Screen by 30 days of life (earlier if very premature or sick)"
+  },
+  "screening_method": [
+    "Indirect ophthalmoscopy (preferred)",
+    "Fundus camera screening (where available)",
+    "Performed by trained pediatric ophthalmologist"
+  ],
+  "preparation": [
+    "Pupil dilation using Tropicamide 0.5% + Phenylephrine 2.5%",
+    "Ensure thermal stability and feeding before procedure"
+  ],
+  "documentation": [
+    "Zone of retina",
+    "Stage of ROP",
+    "Presence or absence of plus disease"
+  ],
+  "follow_up_protocol": [
+    {
+      "finding": "No ROP, immature retina",
+      "follow_up": "Every 1–2 weeks"
+    },
+    {
+      "finding": "Stage 1–2 without plus disease",
+      "follow_up": "1 week"
+    },
+    {
+      "finding": "Stage 1–2 with plus disease",
+      "follow_up": "Frequent follow-up / consider treatment"
+    },
+    {
+      "finding": "Stage 3 or more",
+      "follow_up": "Immediate treatment referral"
+    }
+  ],
+  "treatment_guidelines": [
+    {
+      "type": "Type 1 ROP",
+      "action": "Treatment required (laser therapy or anti-VEGF)"
+    },
+    {
+      "type": "Type 2 ROP",
+      "action": "Close monitoring"
+    }
+  ],
+  "stop_screening_when": [
+    "Full vascularization into Zone III",
+    "ROP regressed without intervention",
+    "Postmenstrual age ≥45 weeks with no active disease"
+  ],
+  "red_flags": ["Stage 3 or higher ROP", "Presence of plus disease"],
+  "parent_counseling": [
+    "Screening is essential even if baby appears normal — बच्चा सामान्य दिखे तब भी आंखों की जांच ज़रूरी है।",
+    "Multiple follow-up visits are required — कई बार जांच करानी पड़ेगी।",
+    "Procedure is safe — जांच सुरक्षित है।",
+    "Early treatment can prevent blindness — जल्दी इलाज से अंधापन रोका जा सकता है।",
+    "Do not miss any scheduled eye examination — कोई भी आंख की जांच की तारीख़ न छोड़ें।",
+    "Premature babies need long-term eye follow-up — समय से पहले जन्मे बच्चों को लंबे समय तक आंखों की जांच चाहिए।"
+  ],
+  "quick_checklist_for_opd": [
+    "Identify eligibility for ROP screening",
+    "Schedule first screening on time",
+    "Ensure follow-up adherence",
+    "Counsel parents properly",
+    "Refer urgently if treatment threshold reached"
+  ],
+  "flow_logic": [
+    "Identify preterm infant",
+    "Check eligibility for screening",
+    "Schedule first exam by 30 days",
+    "If normal → follow-up",
+    "If ROP present → assess stage and zone",
+    "If Type 1 → immediate treatment",
+    "Continue till full vascularization or PMA 45 weeks"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "NICU / Pediatric OPD",
+    "title": "ROP Screening Prescription & Follow-up Sheet",
+    "patient_identification": {
+      "baby_name": "",
+      "uhid": "",
+      "ipid": "",
+      "sex": "",
+      "date_of_birth": "",
+      "gestational_age_weeks": "",
+      "birth_weight_kg": "",
+      "current_weight_kg": "",
+      "postnatal_age_days": "",
+      "postmenstrual_age_weeks": "",
+      "mother_name": "",
+      "father_name": "",
+      "contact_number": "",
+      "date": "",
+      "time": ""
+    },
+    "screening_assessment": {
+      "eligibility": "",
+      "risk_factors": [],
+      "first_screen_due_date": "",
+      "screening_done": "",
+      "zone": "",
+      "stage": "",
+      "plus_disease": "",
+      "provisional_status": ""
+    },
+    "diagnosis_options": [
+      "No ROP (immature retina)",
+      "Stage 1 ROP",
+      "Stage 2 ROP",
+      "Stage 3 ROP",
+      "Type 1 ROP",
+      "Type 2 ROP",
+      "ROP regressed"
+    ],
+    "investigation_orders": [
+      {
+        "test": "ROP SCREENING (INDIRECT OPHTHALMOSCOPY)",
+        "purpose": "Detect and stage ROP"
+      }
+    ],
+    "treatment_plan": {
+      "no_rop": ["Routine follow-up in 1–2 weeks"],
+      "mild_rop": ["Weekly monitoring"],
+      "type_1_rop": ["Urgent referral for laser therapy / anti-VEGF"]
+    },
+    "follow_up": {
+      "next_visit": "",
+      "frequency": "",
+      "stop_when": [
+        "Full vascularization achieved",
+        "PMA ≥45 weeks without disease"
+      ]
+    },
+    "parent_advice": [
+      "Do not miss follow-up visits",
+      "Early treatment prevents blindness",
+      "Baby may need multiple eye examinations",
+      "Contact immediately if advised urgently"
+    ],
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "snomed_code": "415297005",
+  "snomed_display": "Retinopathy of prematurity (disorder)",
+  "icd10": "H35.10",
+  "diagnosis_name": "Retinopathy of Prematurity (ROP) Screening",
+  "category": "Neonatology",
+  "warning_signs": [
+    "White reflex in pupil — आंख की पुतली में सफ़ेद चमक",
+    "Abnormal eye movements — आंखों की असामान्य हरकत",
+    "Baby not following objects with eyes — बच्चा आंखों से चीज़ों को न देखना",
+    "Squinting — तिरछा देखना",
+    "Missed screening appointment — जांच की तारीख़ छूटना"
+  ],
+  "expected_course": "ROP screening begins at 2-4 weeks postnatal age depending on gestational age. Most preterm infants will have immature retina that vascularizes normally. Type 2 ROP requires close monitoring. Type 1 ROP requires urgent treatment (laser therapy or anti-VEGF). Screening continues until full retinal vascularization or PMA >=45 weeks without active disease.",
+  "key_clinical_points": [
+    "Screen all infants with GA <=34 weeks or birth weight <=2000 grams.",
+    "First screening by 30 days of life (earlier if very premature or sick).",
+    "Pupil dilation with Tropicamide 0.5% + Phenylephrine 2.5% before examination.",
+    "Document zone, stage, and presence of plus disease at each screening.",
+    "Type 1 ROP requires treatment within 48-72 hours of diagnosis.",
+    "Stop screening when full vascularization into Zone III or PMA >=45 weeks without active disease."
+  ],
+  "severity_assessment": {
+    "mild": "No ROP or Stage 1 without plus disease — routine follow-up every 1-2 weeks.",
+    "moderate": "Stage 2 or any stage with plus disease features — weekly monitoring, close ophthalmology follow-up.",
+    "severe": "Stage 3 or more, Type 1 ROP, aggressive posterior ROP — immediate referral for laser therapy or anti-VEGF treatment."
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "ROP screening (indirect ophthalmoscopy)",
+      "frequency": "Every 1-2 weeks until retina fully vascularized"
+    },
+    {
+      "parameter": "Zone and stage of ROP",
+      "frequency": "At each screening examination"
+    },
+    {
+      "parameter": "Plus disease assessment",
+      "frequency": "At each screening examination"
+    },
+    {
+      "parameter": "Post-treatment follow-up",
+      "frequency": "As per ophthalmologist advice"
+    },
+    {
+      "parameter": "Visual development",
+      "frequency": "At each well-child visit"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "template_name": "Standard Prescription Format – Bathing a Newborn",
+  "template_code": "NB_BATHING_EDUCATION_V1",
+  "icd10": "Z00.110",
+  "diagnosis_name": "Bathing a Newborn",
+  "snomed_code": "409063005",
+  "snomed_display": "Counseling (procedure)",
+  "category": "Neonatology",
+  "condition": "Bathing a Newborn",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "age_in_days": "",
+    "sex": "",
+    "gestation": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "baby_type": "term_stable / low_birth_weight_or_preterm / sick_or_unstable"
+  },
+  "clinical_assessment": {
+    "baby_stable": true,
+    "thermoregulated": true,
+    "cord_status": "intact / fallen_off",
+    "skin_condition": "normal / dry / rash / infection / other",
+    "feeding_status": "adequate / poor",
+    "remarks": ""
+  },
+  "diagnosis": [
+    "Newborn bathing counseling given",
+    "Routine newborn hygiene advice",
+    "Safe bathing education provided"
+  ],
+  "first_bath_recommendation": {
+    "term_stable_newborn": "After 24 hours of life (or at least after 6 hours if necessary)",
+    "low_birth_weight_or_preterm": "Delay bathing for 48–72 hours",
+    "sick_or_unstable_baby": "Wait until baby is stable and thermoregulated"
+  },
+  "bathing_type_advice": [
+    {
+      "type": "SPONGE BATH",
+      "description": "Wipe with wet cloth, no immersion",
+      "use_when": "Before cord falls off or in preterm babies"
+    },
+    {
+      "type": "TUB BATH",
+      "description": "Immersion in shallow warm water",
+      "use_when": "Once cord has fallen off and baby is stable"
+    },
+    {
+      "type": "TOP AND TAIL",
+      "description": "Clean face, hands, neck folds, diaper area only",
+      "use_when": "On non-bath days or in winter"
+    }
+  ],
+  "materials_needed": [
+    "Shallow tub or basin",
+    "Mild fragrance-free baby cleanser if needed",
+    "Soft towel and washcloth",
+    "Cotton for eyes",
+    "Clean diaper and clothes",
+    "Safe flat surface after bath"
+  ],
+  "standard_instructions": {
+    "room_temperature": "Keep room warm (at least 25°C) and free from drafts",
+    "water_temperature": "Use warm water around 37°C",
+    "bath_duration": "Limit bath to 5–10 minutes",
+    "frequency": "2–3 times per week is sufficient",
+    "method": [
+      "Gather all supplies before starting",
+      "Undress baby gradually and keep wrapped as much as possible",
+      "Clean eyes from inner to outer side using separate clean cotton",
+      "Clean face, neck, and diaper area gently",
+      "Support baby's head and neck throughout bath",
+      "Use gentle strokes and avoid vigorous scrubbing",
+      "Pat dry thoroughly, especially skin folds",
+      "Dress baby immediately after bath",
+      "Feed after bath if needed and monitor warmth"
+    ]
+  },
+  "what_to_avoid": [
+    "Bathing before 24 hours of life unless necessary",
+    "Using hot water",
+    "Using harsh soaps, antiseptics, or strong cleansers",
+    "Bathing in cold or drafty rooms",
+    "Prolonged bathing",
+    "Use of talcum powder after bath"
+  ],
+  "optional_skin_care": {
+    "emollient": "May apply gentle emollient after bath if skin is dry",
+    "soap_use": "Soap or cleanser is optional; if used, choose mild fragrance-free product"
+  },
+  "red_flags_during_or_after_bath": [
+    {
+      "observation": "Baby turns blue",
+      "possible_concern": "Hypothermia or cardiopulmonary issue"
+    },
+    {
+      "observation": "Excessive crying",
+      "possible_concern": "Water too hot/cold or discomfort"
+    },
+    {
+      "observation": "Skin rash after bath",
+      "possible_concern": "Irritant cleanser or dermatitis"
+    },
+    {
+      "observation": "Vomiting or unusual drowsiness",
+      "possible_concern": "Overstimulation or unwell baby"
+    }
+  ],
+  "counselling": [
+    "Delay the first bath; vernix has protective benefits — पहला नहाना देर से करें; वर्निक्स (सफेद परत) बच्चे की त्वचा की रक्षा करती है",
+    "Sponge bath is enough until cord falls off — नाल गिरने तक स्पंज से पोंछना काफी है",
+    "Avoid over-bathing; 2–3 baths per week are sufficient — ज़्यादा नहलाने से बचें; हफ्ते में 2–3 बार काफी है",
+    "Daily cleaning of face, neck folds, and diaper area is more important than frequent full baths — चेहरे, गर्दन की सिलवटों और डायपर वाली जगह की रोज़ सफ़ाई, बार-बार नहलाने से ज़्यादा ज़रूरी है",
+    "Always support the baby's head and neck during bath — नहलाते समय बच्चे के सिर और गर्दन को हमेशा सहारा दें",
+    "Keep baby warm before, during, and after the bath — नहलाने से पहले, बीच में और बाद में बच्चे को गर्म रखें",
+    "Seek medical advice if baby becomes cold, blue, excessively sleepy, or develops skin irritation — अगर बच्चा ठंडा, नीला, ज़्यादा सुस्त हो जाए या त्वचा पर जलन हो तो डॉक्टर को दिखाएं"
+  ],
+  "warning_signs": [
+    "Baby turns blue or pale during or after bath — नहाते समय या बाद में बच्चा नीला या पीला पड़ जाए",
+    "Baby feels cold to touch after bath — नहाने के बाद बच्चा छूने में ठंडा लगे",
+    "Excessive crying that does not settle — बहुत ज़्यादा रोना जो शांत न हो",
+    "Skin rash, redness or peeling after bath — नहाने के बाद त्वचा पर दाने, लालिमा या छिलना",
+    "Vomiting or drowsiness after bath — नहाने के बाद उल्टी या सुस्ती",
+    "Cord area becomes red, smelly or has pus — नाल वाली जगह लाल हो जाए, बदबू आए या मवाद निकले"
+  ],
+  "expected_course": "Newborns generally tolerate bathing well once stable and thermoregulated. The first bath can be safely given after 24 hours of life. Sponge baths are recommended until the umbilical cord falls off (usually 7–14 days). Skin dryness and mild peeling in the first 2 weeks is normal and resolves spontaneously.",
+  "key_clinical_points": [
+    "WHO recommends delaying the first bath to at least 24 hours after birth",
+    "Vernix caseosa is protective — do not scrub it off",
+    "Hypothermia risk is highest in preterm and LBW babies during bathing",
+    "Room temperature should be at least 25°C during bath",
+    "Water temperature 37°C — test with elbow or thermometer",
+    "Sponge bath until umbilical cord separates",
+    "Avoid talcum powder — aspiration risk",
+    "No soap needed for neonates; plain warm water is sufficient"
+  ],
+  "follow_up_advice": {
+    "review_if": [
+      "Cord redness or discharge develops",
+      "Skin rash worsens",
+      "Baby feels cold after bathing",
+      "Poor feeding or lethargy appears"
+    ],
+    "routine_follow_up": "At next newborn or well-baby visit"
+  },
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  }
+}

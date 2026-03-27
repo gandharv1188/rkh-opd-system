@@ -1,0 +1,157 @@
+{
+  "template_name": "Standard Prescription Format – Deformational Plagiocephaly",
+  "template_code": "NB_PLAGIOCEPHALY_V1",
+  "category": "Neonatology",
+  "condition": "Deformational Plagiocephaly",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "age_in_months": "",
+    "sex": "",
+    "birth_history": "",
+    "current_weight_kg": ""
+  },
+  "diagnosis": {
+    "primary": "Deformational (Positional) Plagiocephaly",
+    "type": "Non-synostotic, positional skull asymmetry"
+  },
+  "clinical_assessment": {
+    "history": [
+      "Sleeping position (supine, head preference)",
+      "Time spent in car seats / swings",
+      "Feeding preference (one side)",
+      "Prenatal and birth history"
+    ],
+    "examination": [
+      "Unilateral occipital flattening",
+      "Ear displacement (anterior shift)",
+      "Forehead prominence",
+      "Neck movement (rule out torticollis)",
+      "Palpation of sutures (should be open, no ridging)"
+    ],
+    "differential_diagnosis": [
+      "Craniosynostosis (if sutures fused, ridging present, abnormal head shape)"
+    ]
+  },
+  "red_flags": [
+    "Cranial ridging or fused sutures",
+    "Progressive asymmetry despite repositioning",
+    "Developmental delay",
+    "Associated syndromic features",
+    "Abnormal neurological findings"
+  ],
+  "investigations": {
+    "routine": "Not required in typical cases",
+    "if_doubt": [
+      "Cranial ultrasound (if fontanelle open)",
+      "3D CT scan (only if craniosynostosis suspected)"
+    ]
+  },
+  "management_plan": {
+    "mild": ["Repositioning therapy", "Increase tummy time"],
+    "moderate": [
+      "Repositioning + tummy time",
+      "Physiotherapy for torticollis if present"
+    ],
+    "severe_or_persistent": [
+      "Consider helmet therapy (after 5–6 months of age)",
+      "Refer to specialist if needed"
+    ]
+  },
+  "prescription": {
+    "medications": [],
+    "non_pharmacological_advice": [
+      "Increase tummy time during awake periods (multiple short sessions daily)",
+      "Alternate head position during sleep",
+      "Encourage upright holding and babywearing",
+      "Minimize prolonged use of car seats/swings",
+      "Treat associated torticollis early"
+    ]
+  },
+  "parent_counseling": [
+    "Condition is common and usually benign — यह आम है और आमतौर पर गंभीर नहीं है।",
+    "Does not affect brain development or intelligence — इससे दिमाग के विकास या बुद्धि पर कोई असर नहीं पड़ता।",
+    "Early repositioning gives excellent outcomes — जल्दी करवट बदलने से बहुत अच्छे नतीजे मिलते हैं।",
+    "Head shape improves gradually with growth — सिर की शक्ल बढ़ने के साथ धीरे-धीरे ठीक होती है।",
+    "Helmet therapy rarely needed and only in selected cases — हेलमेट की ज़रूरत बहुत कम होती है।",
+    "Follow advice consistently for best results — सलाह का नियमित रूप से पालन करें।",
+    "Increase tummy time during awake hours — जागते समय बच्चे को पेट के बल ज़्यादा लिटाएं।"
+  ],
+  "follow_up": {
+    "interval": "4–6 weeks",
+    "monitor": [
+      "Head shape improvement",
+      "Neck mobility",
+      "Developmental milestones"
+    ],
+    "escalation": [
+      "No improvement after adequate repositioning",
+      "Worsening asymmetry",
+      "Appearance of red flag signs"
+    ]
+  },
+  "opd_checklist": [
+    "Head shape assessed?",
+    "Neck range of motion normal?",
+    "Repositioning advice given?",
+    "Red flags ruled out?",
+    "Parental reassurance provided?"
+  ],
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "snomed_code": "21880004",
+  "snomed_display": "Plagiocephaly (disorder)",
+  "icd10": "Q67.3",
+  "diagnosis_name": "Deformational Plagiocephaly",
+  "warning_signs": [
+    "Cranial ridging or hard ridge along sutures — सिर पर कड़ी लकीर या उभार",
+    "Progressive worsening despite repositioning — करवट बदलने के बावजूद बिगड़ना",
+    "Developmental delay — विकास में देरी",
+    "Abnormal head circumference growth — सिर की गोलाई असामान्य बढ़ना या न बढ़ना",
+    "Associated syndromic features — अन्य असामान्य लक्षण दिखना"
+  ],
+  "expected_course": "Deformational plagiocephaly improves with repositioning therapy and increased tummy time in the majority of cases. Head shape typically normalizes by 12-18 months as the infant becomes more mobile. Helmet therapy (cranial orthosis) may be considered for persistent moderate-severe cases after 5-6 months of age. Craniosynostosis must always be ruled out.",
+  "key_clinical_points": [
+    "Distinguish deformational plagiocephaly from craniosynostosis — open, non-ridged sutures favor deformational cause.",
+    "Check for associated congenital muscular torticollis (present in 20% of cases).",
+    "Tummy time is the most effective conservative treatment.",
+    "Alternate head position during sleep to reduce pressure on flat side.",
+    "Helmet therapy is effective if started between 4-12 months of age when needed.",
+    "CT scan is only indicated if craniosynostosis is suspected — avoid unnecessary radiation."
+  ],
+  "severity_assessment": {
+    "mild": "Slight asymmetry, no ear displacement, open sutures — repositioning and tummy time advice.",
+    "moderate": "Obvious asymmetry with ear displacement, forehead prominence — repositioning, physiotherapy if torticollis present, close follow-up.",
+    "severe": "Marked asymmetry not improving with repositioning after 2-3 months, or craniosynostosis concern — consider helmet therapy referral or imaging."
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Head shape symmetry",
+      "frequency": "Every 4-6 weeks"
+    },
+    {
+      "parameter": "Neck range of motion",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Head circumference",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Developmental milestones",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Response to repositioning therapy",
+      "frequency": "At 4-6 week follow-up"
+    }
+  ]
+}

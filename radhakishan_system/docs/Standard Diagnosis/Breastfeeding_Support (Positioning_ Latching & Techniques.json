@@ -1,0 +1,179 @@
+{
+  "template_name": "Standard Prescription Format – Breastfeeding Support (Positioning, Latching & Techniques)",
+  "condition": {
+    "name": "Breastfeeding Support & Counseling",
+    "goal": [
+      "Ensure effective latch and milk transfer",
+      "Prevent nipple pain and feeding difficulties",
+      "Promote adequate weight gain and bonding"
+    ]
+  },
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "age_days": "",
+    "sex": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "mother_name": "",
+    "contact_number": "",
+    "date": "",
+    "time": ""
+  },
+  "feeding_assessment": {
+    "latch_quality": "Good / Poor / Needs correction",
+    "feeding_frequency_per_day": "8–12 / <8 / >12",
+    "feeding_duration_minutes": "",
+    "swallowing_sounds": "Present / Absent",
+    "maternal_pain": "Yes / No",
+    "urine_output": "Adequate / Inadequate",
+    "weight_gain": "Adequate / Poor",
+    "remarks": ""
+  },
+  "diagnosis": [
+    "Normal breastfeeding",
+    "Poor latch",
+    "Feeding difficulty",
+    "Inadequate breastfeeding technique"
+  ],
+  "non_pharmacological_management": {
+    "positioning_advice": [
+      "Baby close to mother, tummy-to-tummy",
+      "Head and body aligned",
+      "Nose opposite nipple"
+    ],
+    "latching_steps": [
+      "Stimulate wide mouth opening",
+      "Bring baby to breast (not breast to baby)",
+      "Chin touches breast, nose free",
+      "More areola visible above than below",
+      "Lips flanged outward"
+    ],
+    "breastfeeding_positions": [
+      "Cradle hold",
+      "Cross-cradle hold (early learning)",
+      "Football hold (C-section, twins)",
+      "Side-lying position (night feeds)"
+    ],
+    "feeding_pattern": [
+      "Feed on demand (8–12 times/day)",
+      "Allow baby to finish first breast",
+      "Watch baby cues, not clock"
+    ],
+    "pain_prevention": [
+      "Ensure deep latch",
+      "Break suction gently before unlatching",
+      "Avoid pulling baby directly"
+    ]
+  },
+  "medications_if_required": [
+    {
+      "name": "LANOLIN OINTMENT",
+      "dose": "Apply locally after feeds",
+      "route": "Topical",
+      "frequency": "After each feed",
+      "duration": "5–7 days",
+      "indication": "Nipple soreness"
+    },
+    {
+      "name": "PARACETAMOL",
+      "dose": "10–15 mg/kg",
+      "route": "Oral",
+      "frequency": "6–8 hourly if needed",
+      "duration": "As required",
+      "indication": "Maternal pain (if severe)"
+    }
+  ],
+  "common_mistakes_to_correct": [
+    "Baby sucking only nipple → reposition",
+    "Clicking sound → re-latch",
+    "Painful feeding → break and correct latch",
+    "Sleepy baby → stimulate gently"
+  ],
+  "red_flags": [
+    "Persistent maternal pain",
+    "Poor weight gain after day 5–7",
+    "Baby not waking for feeds",
+    "Clicking sounds or shallow latch",
+    "Reduced urine output"
+  ],
+  "follow_up_plan": {
+    "next_visit": "2–3 days",
+    "monitor": [
+      "Weight gain",
+      "Feeding frequency",
+      "Latch quality",
+      "Urine output"
+    ]
+  },
+  "parent_counseling": [
+    "Breastfeeding is a learned skill—improves with time",
+    "Feed on demand and watch baby cues",
+    "Avoid pacifiers in first 4–6 weeks",
+    "Seek help early if pain or poor feeding",
+    "Exclusive breastfeeding recommended"
+  ],
+  "doctor_details": {
+    "name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "signature": ""
+  },
+  "emergency_contact": {
+    "numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "Z39.1",
+  "diagnosis_name": "Breastfeeding Support (Positioning, Latching and Techniques)",
+  "snomed_code": "243094000",
+  "snomed_display": "Breastfeeding support (regime/therapy)",
+  "category": "Neonatology",
+  "template_code": "NEO_BF_SUPPORT_V1",
+  "counselling": [
+    "Breastfeeding is a learned skill that improves with time — स्तनपान एक सीखने वाली कला है जो समय के साथ बेहतर होती है",
+    "Feed on demand and watch baby cues — बच्चे की ज़रूरत के अनुसार दूध पिलाएं और उसके संकेत देखें",
+    "Avoid pacifiers in first 4-6 weeks — पहले 4-6 हफ़्ते चुसनी न दें",
+    "Seek help early if pain or poor feeding — अगर दर्द हो या बच्चा ठीक से दूध न पिए तो जल्दी मदद लें",
+    "Exclusive breastfeeding recommended for first 6 months — पहले 6 महीने केवल माँ का दूध पिलाएं"
+  ],
+  "warning_signs": [
+    "Baby not waking for feeds for more than 4 hours — बच्चा 4 घंटे से ज़्यादा दूध के लिए न जागे",
+    "Less than 6 wet diapers in 24 hours after day 4 — चौथे दिन के बाद 24 घंटे में 6 से कम गीले डायपर",
+    "Poor weight gain or weight loss after day 5 — पांचवें दिन के बाद वज़न न बढ़ना या घटना",
+    "Persistent clicking sounds during feeding — दूध पीते समय लगातार क्लिक की आवाज़",
+    "Cracked or bleeding nipples — फटे या खून निकलते निप्पल",
+    "Baby appears jaundiced or lethargic — बच्चा पीला या सुस्त दिखे"
+  ],
+  "expected_course": "Most mothers and babies establish effective breastfeeding by day 3-5 of life. Initial breast engorgement peaks around day 3-4 and resolves within 24-48 hours. Weight loss of up to 7-10% in first 3-5 days is physiological. Birth weight is typically regained by day 10-14. Mature milk comes in by day 3-5.",
+  "key_clinical_points": [
+    "Colostrum (first milk) is adequate for the first 2-3 days — no supplements needed",
+    "Proper latch: wide open mouth, chin touching breast, nose free, lower areola in mouth",
+    "Feeding frequency: 8-12 times in 24 hours in the first few weeks",
+    "Cross-cradle hold is best for learning; football hold for C-section mothers",
+    "Signs of adequate intake: audible swallowing, relaxed hands, satisfied baby after feed",
+    "Weight loss >10% or no regain by day 14 requires evaluation",
+    "Avoid prelacteal feeds (honey, ghutti, formula) — harmful and unnecessary"
+  ],
+  "monitoring_parameters": [
+    {
+      "parameter": "Weight",
+      "frequency": "Day 3-5, day 10-14, then weekly for first month"
+    },
+    {
+      "parameter": "Wet diapers",
+      "frequency": "Daily count by parents"
+    },
+    {
+      "parameter": "Stool frequency and color",
+      "frequency": "Daily by parents"
+    },
+    {
+      "parameter": "Latch quality",
+      "frequency": "At each OPD visit in first 2 weeks"
+    },
+    {
+      "parameter": "Maternal nipple condition",
+      "frequency": "At each visit"
+    }
+  ]
+}

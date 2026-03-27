@@ -1,0 +1,281 @@
+{
+  "template_name": "Standard Prescription Format - Antenatally Detected Hydronephrosis",
+  "condition": {
+    "name": "Antenatally Detected Hydronephrosis",
+    "icd10_suggestions": ["Q62.0", "N13.3", "Q64.2"],
+    "overview": [
+      "Hydronephrosis is the most common urinary tract anomaly detected on antenatal ultrasound.",
+      "It refers to dilation of the renal pelvis with or without calyceal involvement.",
+      "Most cases are transient and resolve spontaneously, but some indicate obstruction or vesicoureteral reflux (VUR)."
+    ]
+  },
+  "postnatal_followup_timing": [
+    "First renal ultrasound at 3–7 days of life",
+    "Repeat ultrasound at 4–6 weeks if abnormal"
+  ],
+  "grading_sfu_system": [
+    {
+      "grade": "Grade 1",
+      "finding": "Mild pelvic dilation only"
+    },
+    {
+      "grade": "Grade 2",
+      "finding": "Pelvis and few calyces dilated"
+    },
+    {
+      "grade": "Grade 3",
+      "finding": "Pelvis and all calyces dilated, parenchyma preserved"
+    },
+    {
+      "grade": "Grade 4",
+      "finding": "Severe dilation with thinning of renal parenchyma"
+    }
+  ],
+  "common_causes": {
+    "benign": [
+      "Transient hydronephrosis",
+      "Mild isolated pelvic dilation",
+      "Physiological neonatal dilation",
+      "Extrarenal pelvis"
+    ],
+    "pathological": [
+      "Pelviureteric junction (PUJ) obstruction",
+      "Posterior urethral valves (PUV)",
+      "Vesicoureteral reflux (VUR)",
+      "Megaureter",
+      "Ureterocele",
+      "Duplicated collecting system"
+    ]
+  },
+  "history_template": [
+    "Antenatal ultrasound findings",
+    "Any postnatal ultrasound done",
+    "Urinary symptoms (poor stream, dribbling)",
+    "Fever or irritability (UTI suspicion)",
+    "Feeding pattern and growth",
+    "Family history of renal disease"
+  ],
+  "examination_template": [
+    "General condition and hydration",
+    "Growth parameters",
+    "Abdominal mass or palpable kidney",
+    "Bladder distension",
+    "External genitalia examination",
+    "Signs of urinary tract infection"
+  ],
+  "red_flags": [
+    "Grade 3 or 4 hydronephrosis",
+    "Worsening hydronephrosis",
+    "Bilateral involvement",
+    "Single functioning kidney",
+    "UTI symptoms",
+    "Abnormal bladder findings",
+    "Rising serum creatinine"
+  ],
+  "investigations": [
+    {
+      "name": "Ultrasound (USG KUB)",
+      "purpose": "Initial assessment and grading"
+    },
+    {
+      "name": "VCUG (Voiding Cystourethrogram)",
+      "indication": "Bilateral dilation, ureteral dilation, abnormal bladder, or UTI"
+    },
+    {
+      "name": "DTPA / MAG3 scan",
+      "indication": "Obstruction or worsening hydronephrosis"
+    },
+    {
+      "name": "Serum creatinine",
+      "indication": "Bilateral or high-grade disease"
+    }
+  ],
+  "management_protocol": {
+    "grade_1_2_mild": [
+      "Monitor with serial ultrasounds",
+      "No antibiotic prophylaxis routinely needed"
+    ],
+    "grade_3_4_moderate_severe": [
+      "Consider antibiotic prophylaxis",
+      "Further imaging (VCUG, nuclear scan)",
+      "Close follow-up"
+    ],
+    "puj_obstruction_suspected": ["Refer to pediatric urologist"],
+    "pvu_or_vur_suspected": [
+      "Evaluate for UTI",
+      "Manage under nephrology/urology",
+      "Hospital admission if infection present"
+    ]
+  },
+  "parent_counseling": [
+    "Most cases resolve without surgery.",
+    "Regular follow-up and scans are essential.",
+    "Watch for signs of UTI such as fever, irritability, or poor feeding.",
+    "Serial imaging helps guide treatment decisions.",
+    "Early detection prevents kidney damage."
+  ],
+  "summary_table": [
+    {
+      "scenario": "Normal postnatal scan",
+      "next_step": "No further action; repeat USG if suspicion remains"
+    },
+    {
+      "scenario": "Persistent mild dilation",
+      "next_step": "Repeat USG at 4–6 weeks"
+    },
+    {
+      "scenario": "Moderate to severe dilation",
+      "next_step": "VCUG ± scan, consider antibiotics"
+    },
+    {
+      "scenario": "UTI or abnormal bladder",
+      "next_step": "Full urological work-up"
+    }
+  ],
+  "flow_logic": [
+    "Antenatal hydronephrosis detected",
+    "Postnatal ultrasound at 3–7 days",
+    "If Grade 1–2 → repeat ultrasound at 6 weeks",
+    "If resolved → stop follow-up",
+    "If Grade 3–4 or bilateral → VCUG and nuclear scan",
+    "Consider antibiotic prophylaxis",
+    "Refer to pediatric urology/nephrology if abnormal findings"
+  ],
+  "quick_checklist_for_opd": [
+    "Antenatal hydronephrosis documented?",
+    "Postnatal ultrasound done after day 3?",
+    "SFU grade assessed?",
+    "Any UTI history or abnormal bladder signs?",
+    "Referral done for high-grade or symptomatic cases?"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Neonatology OPD",
+    "title": "Standard Prescription - Antenatal Hydronephrosis Follow-up",
+    "patient_identification": {
+      "patient_name": "",
+      "uhid": "",
+      "ipid": "",
+      "age": "Neonate",
+      "sex": "",
+      "dob": "",
+      "day_of_life": "",
+      "weight_kg": "",
+      "date": "",
+      "time": "",
+      "parent_name": "",
+      "contact_number": ""
+    },
+    "chief_complaints": [
+      "Antenatal hydronephrosis follow-up",
+      "Urinary symptoms (if any)",
+      "Fever or irritability"
+    ],
+    "clinical_assessment": {
+      "antenatal_findings": "",
+      "postnatal_usg": "",
+      "sfu_grade": "",
+      "laterality": "",
+      "uti_symptoms": "",
+      "feeding_status": "",
+      "growth": "",
+      "bladder_findings": ""
+    },
+    "provisional_diagnosis_options": [
+      "Antenatal hydronephrosis - mild (Grade 1–2)",
+      "Antenatal hydronephrosis - moderate/severe",
+      "Suspected PUJ obstruction",
+      "Suspected VUR / PUV"
+    ],
+    "investigation_orders": [
+      "USG KUB",
+      "VCUG (if indicated)",
+      "DTPA / MAG3 scan",
+      "SERUM CREATININE"
+    ],
+    "treatment_plan": {
+      "mild_cases": ["Observation", "Repeat ultrasound at 4–6 weeks"],
+      "moderate_severe_cases": [
+        "Consider antibiotic prophylaxis",
+        "Further imaging",
+        "Specialist referral"
+      ],
+      "if_uti": ["Treat infection", "Hospital admission if needed"]
+    },
+    "follow_up": {
+      "review_in": "",
+      "monitor": ["Growth", "UTI symptoms", "Repeat imaging findings"],
+      "emergency_if": [
+        "Fever",
+        "Poor feeding",
+        "Vomiting",
+        "Decreased urine output",
+        "Irritability"
+      ]
+    },
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "Q62.0",
+  "diagnosis_name": "Antenatally Detected Hydronephrosis",
+  "snomed_code": "111631000119106",
+  "snomed_display": "Congenital hydronephrosis (disorder)",
+  "category": "Neonatology",
+  "counselling": [
+    "Most cases resolve without surgery — ज़्यादातर मामले बिना ऑपरेशन के ठीक हो जाते हैं",
+    "Regular follow-up and scans are essential — नियमित जांच और अल्ट्रासाउंड ज़रूरी है",
+    "Watch for signs of UTI such as fever, irritability, or poor feeding — पेशाब के संक्रमण के संकेत देखें जैसे बुखार, चिड़चिड़ापन, या कम दूध पीना",
+    "Serial imaging helps guide treatment decisions — बार-बार की जाने वाली तस्वीरें इलाज का फैसला करने में मदद करती हैं",
+    "Early detection prevents kidney damage — जल्दी पता लगने से गुर्दे की क्षति रुकती है"
+  ],
+  "warning_signs": [
+    "Fever or irritability suggesting UTI — बुखार या चिड़चिड़ापन जो पेशाब के संक्रमण का संकेत हो",
+    "Poor feeding or vomiting — कम दूध पीना या उल्टी",
+    "Palpable abdominal mass — पेट में गांठ महसूस होना",
+    "Poor urine stream or dribbling — पेशाब की कमज़ोर धार या टपकना",
+    "Failure to thrive — वज़न और विकास न बढ़ना",
+    "Decreased urine output — पेशाब कम आना"
+  ],
+  "expected_course": "Mild hydronephrosis (Grade 1-2): resolves spontaneously in 50-70% of cases by 12-18 months. Moderate hydronephrosis (Grade 3): requires close monitoring; may need surgery if worsening. Severe hydronephrosis (Grade 4): often requires surgical intervention (pyeloplasty). PUJ obstruction is the most common pathological cause. Postnatal ultrasound should be done after day 3.",
+  "key_clinical_points": [
+    "First postnatal ultrasound at 3-7 days of life (not immediately - early scan may be falsely reassuring)",
+    "SFU grading system: Grade 1-4 based on pelvic and calyceal dilation",
+    "Grade 1-2: serial ultrasound monitoring; no routine antibiotic prophylaxis",
+    "Grade 3-4: antibiotic prophylaxis, VCUG, nuclear scan (DTPA/MAG3)",
+    "Bilateral hydronephrosis or abnormal bladder: rule out posterior urethral valves",
+    "Check serum creatinine at day 3-5 (reflects neonatal renal function, not maternal)",
+    "UTI prevention with antibiotic prophylaxis in high-grade cases",
+    "Refer to pediatric urologist/nephrologist for Grade 3-4 or bilateral cases"
+  ],
+  "severity_assessment": {
+    "mild": "Grade 1-2 unilateral hydronephrosis, normal renal parenchyma - serial ultrasound at 6 weeks, 3 months, 6 months",
+    "moderate": "Grade 3 or bilateral Grade 2, no parenchymal thinning - antibiotic prophylaxis, VCUG, consider nuclear scan, pediatric nephrology referral",
+    "severe": "Grade 4, parenchymal thinning, bilateral involvement, abnormal bladder, elevated creatinine - urgent urology referral, full imaging workup, possible surgical intervention"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Renal ultrasound",
+      "frequency": "Day 3-7, then 4-6 weeks, then 3 months, 6 months, 12 months (adjust based on grade)"
+    },
+    {
+      "parameter": "Serum creatinine",
+      "frequency": "Day 3-5 for bilateral or high-grade; repeat if abnormal"
+    },
+    {
+      "parameter": "Urine culture",
+      "frequency": "If fever or UTI symptoms; consider periodic screening in high-grade cases"
+    },
+    {
+      "parameter": "Growth and weight",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Blood pressure",
+      "frequency": "At each visit (renal hypertension screening)"
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "template_name": "Standard Prescription Format - Umbilical Sepsis (Omphalitis)",
+  "diagnosis_name": "Umbilical Sepsis (Omphalitis)",
+  "icd10": "P38",
+  "snomed_code": "239095007",
+  "category": "Neonatology",
+  "condition": {
+    "name": "Umbilical Sepsis (Omphalitis)",
+    "icd10_suggestions": ["P38", "L08.9"],
+    "overview": [
+      "Umbilical sepsis is infection of the umbilical stump and surrounding tissues, commonly in the first weeks of life.",
+      "It can rapidly progress to systemic sepsis if not recognized and treated early.",
+      "Early identification prevents complications like necrotizing fasciitis and systemic spread."
+    ]
+  },
+
+  "risk_factors": [
+    "Poor cord hygiene",
+    "Home delivery without sterile practices",
+    "Prematurity or low birth weight",
+    "Umbilical catheter use",
+    "Delayed cord separation (>3 weeks)"
+  ],
+
+  "differential": {
+    "benign": [
+      "Normal serous discharge",
+      "Umbilical granuloma (non-purulent)",
+      "Moist umbilicus (slow drying)",
+      "Delayed cord separation without infection"
+    ],
+    "pathological": [
+      "Bacterial infection (Staphylococcus, Streptococcus, Gram-negative bacilli)",
+      "Omphalitis (erythema, swelling, pus)",
+      "Infected urachal or vitelline duct remnants",
+      "Underlying immune deficiency (rare)"
+    ]
+  },
+
+  "history_template": [
+    "Onset and duration of discharge",
+    "Type of discharge (serous / purulent)",
+    "Foul smell present or not",
+    "Associated fever or irritability",
+    "Feeding difficulty",
+    "Cord care practices at home",
+    "Delivery setting (home/hospital)",
+    "NICU interventions or catheter use"
+  ],
+
+  "examination_template": [
+    "Inspect umbilical stump",
+    "Check for erythema around stump",
+    "Measure spread of redness (>0.5–1 cm concerning)",
+    "Presence of purulent or foul-smelling discharge",
+    "Tenderness or induration",
+    "Swelling around stump",
+    "Check systemic signs: fever, lethargy, poor feeding"
+  ],
+
+  "red_flags": [
+    "Purulent or foul-smelling discharge",
+    "Redness extending beyond 0.5–1 cm from base",
+    "Tenderness or induration",
+    "Fever",
+    "Lethargy",
+    "Poor feeding",
+    "Spreading cellulitis",
+    "Delayed cord separation with discharge (>3 weeks)"
+  ],
+
+  "investigations": {
+    "localized_no_systemic_signs": [
+      "Swab for culture (if discharge purulent)",
+      "CBC and CRP if not improving"
+    ],
+    "systemic_signs_present": [
+      "CBC",
+      "CRP",
+      "Blood culture",
+      "Urine culture",
+      "Lumbar puncture if indicated",
+      "Admit for full sepsis work-up"
+    ]
+  },
+
+  "management_protocol": {
+    "mild_localized": [
+      {
+        "step": "Cleaning",
+        "details": "Clean with antiseptic (CHLORHEXIDINE)"
+      },
+      {
+        "step": "Topical antibiotic",
+        "details": "MUPIROCIN ointment local application"
+      },
+      {
+        "step": "Advice",
+        "details": "Maintain hygiene, keep cord dry"
+      }
+    ],
+    "moderate_to_severe": [
+      {
+        "step": "Admission",
+        "details": "Admit for IV antibiotics"
+      },
+      {
+        "step": "Antibiotics",
+        "details": "AMPICILLIN + GENTAMICIN (add CLOXACILLIN if staphylococcal infection suspected)"
+      },
+      {
+        "step": "Monitoring",
+        "details": "Monitor for systemic sepsis"
+      },
+      {
+        "step": "Surgical consult",
+        "details": "If abscess, necrosis or complications"
+      }
+    ]
+  },
+
+  "parent_counseling": [
+    "Keep umbilical cord clean and dry. — नाल को साफ़ और सूखा रखें।",
+    "Avoid tight clothing over cord. — नाल पर कसे कपड़े न पहनाएं।",
+    "Do not apply oils, powders or traditional substances. — तेल, पाउडर या घरेलू चीज़ें न लगाएं।",
+    "Watch for warning signs: redness, swelling, foul smell, pus, fever. — लालिमा, सूजन, बदबू, पीप या बुखार पर ध्यान दें।",
+    "Normal cord separation occurs in 7–14 days. — नाल आमतौर पर 7-14 दिन में गिर जाती है।",
+    "Seek medical help if discharge or redness increases. — रिसाव या लालिमा बढ़े तो तुरंत डॉक्टर को दिखाएं।"
+  ],
+
+  "clinical_summary_table": [
+    {
+      "feature": "Cord separation",
+      "benign": "<3 weeks without symptoms",
+      "red_flag": ">3 weeks with discharge or fever"
+    },
+    {
+      "feature": "Discharge",
+      "benign": "Serous, odorless",
+      "red_flag": "Purulent, foul-smelling"
+    },
+    {
+      "feature": "Redness",
+      "benign": "Minimal at base",
+      "red_flag": "Spreading beyond 0.5 cm"
+    },
+    {
+      "feature": "Systemic signs",
+      "benign": "Absent",
+      "red_flag": "Fever, lethargy, poor feeding"
+    }
+  ],
+
+  "flow_logic": [
+    "Assess umbilical discharge or redness",
+    "If purulent or foul-smelling → check for spreading redness",
+    "If systemic signs present → admit and start IV antibiotics",
+    "If localized only → topical treatment and hygiene care",
+    "If no discharge or mild serous → reassure and dry cord care"
+  ],
+
+  "quick_checklist_for_opd": [
+    "Cord separated in expected time?",
+    "Any discharge? Type and smell?",
+    "Redness around stump? Spreading?",
+    "Any fever or feeding difficulty?",
+    "Need for referral or admission?"
+  ],
+
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Neonatology OPD",
+    "title": "Standard Prescription - Umbilical Sepsis",
+
+    "patient_identification": {
+      "patient_name": "",
+      "uhid": "",
+      "ipid": "",
+      "age": "Neonate",
+      "sex": "",
+      "dob": "",
+      "day_of_life": "",
+      "weight_kg": "",
+      "date": "",
+      "time": "",
+      "parent_name": "",
+      "contact_number": ""
+    },
+
+    "chief_complaints": [
+      "Umbilical discharge",
+      "Redness around umbilicus",
+      "Foul smell",
+      "Fever / poor feeding"
+    ],
+
+    "clinical_assessment": {
+      "type_of_discharge": "",
+      "smell": "",
+      "erythema_extent": "",
+      "tenderness": "",
+      "swelling": "",
+      "systemic_signs": "",
+      "cord_separation_time": ""
+    },
+
+    "provisional_diagnosis_options": [
+      "Umbilical sepsis (omphalitis)",
+      "Umbilical granuloma",
+      "Benign umbilical discharge"
+    ],
+
+    "investigation_orders": [
+      "CBC",
+      "CRP",
+      "BLOOD CULTURE",
+      "SWAB CULTURE (if pus present)",
+      "URINE CULTURE (if systemic signs)"
+    ],
+
+    "medication_template": [
+      {
+        "drug_name": "MUPIROCIN OINTMENT",
+        "dose": "Apply thin layer",
+        "route": "Topical",
+        "frequency": "2–3 times daily",
+        "duration": "5–7 days",
+        "instructions_en": "Apply over umbilical area after cleaning",
+        "instructions_hi": "साफ करने के बाद नाभि पर लगाएं"
+      },
+      {
+        "drug_name": "AMPICILLIN + GENTAMICIN",
+        "dose": "As per weight",
+        "route": "IV",
+        "frequency": "As per protocol",
+        "duration": "As per clinical response",
+        "instructions_en": "Given in hospital setting",
+        "instructions_hi": "अस्पताल में दिया जाएगा"
+      }
+    ],
+
+    "treatment_plan": {
+      "general_advice": [
+        "Keep cord clean and dry",
+        "Avoid covering with tight clothes",
+        "No home remedies"
+      ],
+      "if_mild": ["Topical antibiotic", "Local cleaning", "Follow-up"],
+      "if_severe": [
+        "Admit immediately",
+        "Start IV antibiotics",
+        "Monitor for sepsis"
+      ]
+    },
+
+    "follow_up": {
+      "review_in": "",
+      "emergency_if": [
+        "Fever develops",
+        "Redness increases",
+        "Pus discharge",
+        "Poor feeding",
+        "Lethargy"
+      ]
+    },
+
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "warning_signs": [
+    "Purulent or foul-smelling umbilical discharge — नाल से पीप या बदबू आना",
+    "Spreading redness beyond 1 cm from stump — नाल से 1 सेमी से ज़्यादा लालिमा फैलना",
+    "Fever or hypothermia — बुखार या शरीर ठंडा पड़ना",
+    "Lethargy or poor feeding — सुस्ती या दूध न पीना",
+    "Abdominal distension — पेट का फूलना",
+    "Skin discoloration around umbilicus — नाभि के आस-पास त्वचा का रंग बदलना"
+  ],
+  "expected_course": "Localized mild omphalitis with topical treatment usually resolves within 5-7 days. Moderate to severe omphalitis requires hospitalization with IV antibiotics (Ampicillin + Gentamicin) for 7-10 days. Complications like necrotizing fasciitis, peritonitis, or systemic sepsis are life-threatening and require urgent surgical intervention. Mortality is 7-15% even with treatment in severe cases.",
+  "key_clinical_points": [
+    "Omphalitis is a neonatal emergency that can progress rapidly to sepsis",
+    "Redness spreading >0.5-1 cm from stump base is concerning",
+    "Most common organisms: Staph aureus, Group A Streptococcus, Gram-negative bacilli",
+    "Home delivery with unsterile cord care is the biggest risk factor in India",
+    "4% chlorhexidine application at birth reduces omphalitis risk (WHO recommendation)",
+    "Delayed cord separation (>3 weeks) with discharge may indicate underlying immune deficiency"
+  ],
+  "severity_assessment": {
+    "mild": "Minimal periumbilical erythema (<0.5 cm), no systemic signs, baby feeding well — topical mupirocin, dry cord care, close follow-up",
+    "moderate": "Erythema 0.5-2 cm, mild induration, no systemic signs — oral antibiotics, daily review, consider admission",
+    "severe": "Spreading cellulitis >2 cm, systemic signs (fever, lethargy, poor feeding), pus — immediate admission, IV Ampicillin + Gentamicin, surgical consult"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Erythema extent measurement",
+      "frequency": "Every 6-12 hours if admitted"
+    },
+    { "parameter": "Temperature", "frequency": "Every 4-6 hours" },
+    { "parameter": "Feeding tolerance", "frequency": "Every feed" },
+    { "parameter": "CRP", "frequency": "At admission and 48-72 hours" },
+    { "parameter": "Blood culture", "frequency": "Before starting antibiotics" }
+  ]
+}

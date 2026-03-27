@@ -1,0 +1,284 @@
+{
+  "template_name": "Standard Prescription Format – Vomiting in a Neonate",
+  "template_code": "NEO_VOMITING_V1",
+  "diagnosis_name": "Vomiting in a Neonate",
+  "icd10": "P92.09",
+  "snomed_code": "249497008",
+  "category": "Neonatology",
+  "condition": "Vomiting in Neonate",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "date_of_birth": "",
+    "sex": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "gestational_age_weeks": "",
+    "day_of_life": ""
+  },
+  "presenting_complaint": {
+    "complaint": "Vomiting / Regurgitation",
+    "onset": "",
+    "duration": "",
+    "frequency": "",
+    "relation_to_feeds": "",
+    "type": "posseting / non-bilious / bilious / projectile",
+    "color": "milk / yellow / green / blood-stained",
+    "volume": "",
+    "associated_symptoms": {
+      "fever": "",
+      "lethargy": "",
+      "poor_feeding": "",
+      "weight_loss": "",
+      "abdominal_distension": "",
+      "delayed_meconium": ""
+    }
+  },
+  "definitions": {
+    "posseting": "Small amount of milk after feeds, no distress",
+    "vomiting": "Forceful expulsion of gastric contents",
+    "projectile_vomiting": "Forceful ejection, may indicate obstruction",
+    "bilious_vomiting": "Green vomit – always abnormal, surgical emergency"
+  },
+  "common_causes": {
+    "benign": [
+      "Gastroesophageal reflux (GER)",
+      "Overfeeding",
+      "Swallowed air",
+      "Delayed gastric emptying",
+      "Cow milk protein allergy (CMPA)"
+    ],
+    "pathological": [
+      "Pyloric stenosis",
+      "Sepsis / meningitis",
+      "Intestinal obstruction (malrotation, atresia)",
+      "Inborn errors of metabolism",
+      "Raised intracranial pressure"
+    ]
+  },
+  "history_points": [
+    "Onset: since birth or later",
+    "Relation to feeding: immediate or delayed",
+    "Frequency and volume",
+    "Color of vomitus",
+    "Associated symptoms: fever, lethargy, poor feeding",
+    "Meconium passage history",
+    "Feeding type: breastfed / formula / mixed",
+    "Weight gain pattern"
+  ],
+  "clinical_evaluation": {
+    "general_condition": "well / irritable / sick",
+    "vitals": {
+      "temperature": "",
+      "heart_rate": "",
+      "respiratory_rate": "",
+      "perfusion": ""
+    },
+    "hydration_status": "normal / mild dehydration / severe dehydration",
+    "weight_trend": "gaining / static / losing",
+    "abdominal_exam": {
+      "distension": "",
+      "visible_peristalsis": "",
+      "tenderness": "",
+      "palpable_mass": "e.g., olive in RUQ"
+    },
+    "neurological_exam": {
+      "tone": "",
+      "activity": "",
+      "seizures": "",
+      "fontanel": "normal / bulging"
+    }
+  },
+  "red_flags": [
+    "Bilious (green) vomiting",
+    "Projectile vomiting with weight loss",
+    "Abdominal distension",
+    "Delayed passage of meconium",
+    "Poor feeding / lethargy",
+    "Fever or hypothermia",
+    "Seizures or irritability"
+  ],
+  "investigations_if_indicated": [
+    "CBC, CRP, blood culture",
+    "Serum electrolytes, blood gas",
+    "Abdominal X-ray / ultrasound",
+    "Upper GI contrast study",
+    "CSF analysis (if sepsis suspected)",
+    "Metabolic screening"
+  ],
+  "diagnosis": {
+    "provisional_diagnosis": "",
+    "differential_diagnosis": [
+      "GER",
+      "Overfeeding",
+      "Pyloric stenosis",
+      "Intestinal obstruction",
+      "Sepsis",
+      "CMPA",
+      "Metabolic disorder",
+      "Raised ICP"
+    ],
+    "severity": "benign / moderate / emergency"
+  },
+  "prescription": {
+    "medicines": [
+      {
+        "name": "No medicine required",
+        "dose": "",
+        "route": "",
+        "frequency": "",
+        "duration": "",
+        "indication": "Physiological reflux / posseting"
+      }
+    ],
+    "supportive_care": [
+      "Keep baby upright after feeds",
+      "Ensure proper burping",
+      "Avoid overfeeding",
+      "Give small, frequent feeds",
+      "Consider thickened feeds (if formula-fed)",
+      "Monitor weight gain and hydration"
+    ]
+  },
+  "management_plan": {
+    "benign_case": [
+      "Reassure parents",
+      "Educate on feeding techniques",
+      "Advise positioning after feeds",
+      "Regular follow-up"
+    ],
+    "moderate_case": [
+      "Monitor weight and hydration",
+      "Consider CMPA (trial maternal dairy restriction)",
+      "Follow-up closely"
+    ],
+    "emergency_case": [
+      "Immediate referral / admission",
+      "Keep baby NPO",
+      "Start IV fluids",
+      "Surgical evaluation if obstruction suspected"
+    ]
+  },
+  "parent_counseling": [
+    "Spitting up is common and improves by 4-6 months — दूध उगलना आम है और 4-6 महीने तक ठीक हो जाता है",
+    "Avoid overfeeding and home remedies — ज़्यादा दूध और घरेलू नुस्खे न दें",
+    "Maintain proper feeding position and burping — सही स्थिति में दूध पिलाएं और डकार दिलाएं",
+    "Return immediately if green vomiting, fever, poor feeding, or weight loss — हरी उल्टी, बुखार, दूध न पीना या वज़न घटे तो तुरंत आएं",
+    "Monitor baby's growth and activity — बच्चे का वज़न और गतिविधि देखते रहें"
+  ],
+  "summary_table": [
+    {
+      "type": "Effortless spitting",
+      "likely_cause": "GER / overfeeding"
+    },
+    {
+      "type": "Projectile non-bilious",
+      "likely_cause": "Pyloric stenosis"
+    },
+    {
+      "type": "Bilious (green)",
+      "likely_cause": "Intestinal obstruction (emergency)"
+    },
+    {
+      "type": "Blood-stained",
+      "likely_cause": "Swallowed maternal blood / gastritis"
+    },
+    {
+      "type": "Vomiting with fever",
+      "likely_cause": "Sepsis / meningitis"
+    }
+  ],
+  "opd_checklist": [
+    "Vomiting or posseting?",
+    "Color and force of vomitus?",
+    "Meconium passed in first 48 hours?",
+    "Baby gaining weight and feeding well?",
+    "Any red flag signs present?",
+    "If well baby → reassure and monitor"
+  ],
+  "follow_up": {
+    "routine_follow_up": "3–5 days or earlier if symptoms persist",
+    "urgent_follow_up": "Immediate if red flag symptoms develop"
+  },
+  "referral_indications": [
+    "Bilious vomiting",
+    "Projectile vomiting with weight loss",
+    "Abdominal distension",
+    "Delayed meconium",
+    "Poor feeding or lethargy",
+    "Suspected obstruction or sepsis"
+  ],
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "P92.0",
+  "diagnosis_name": "Vomiting in a Neonate",
+  "snomed_code": "249497008",
+  "snomed_display": "Vomiting in newborn (disorder)",
+  "severity": "any",
+  "active": true,
+  "duration_days_default": 3,
+  "counselling": [
+    "Spitting up is common and improves by 4–6 months",
+    "Avoid overfeeding and home remedies",
+    "Maintain proper feeding position and burping",
+    "Return immediately if green vomiting, fever, poor feeding, or weight loss",
+    "Monitor baby's growth and activity"
+  ],
+  "warning_signs": [
+    "Bilious (green/yellow) vomiting — हरी या पीली उल्टी",
+    "Projectile vomiting — तेज़ ज़ोर से उल्टी आना",
+    "Blood in vomit — उल्टी में खून आना",
+    "Abdominal distension — पेट का फूलना",
+    "Failure to pass meconium within 24 hours — 24 घंटे में पहला मल न आना",
+    "Lethargy or poor feeding — सुस्ती या दूध न पीना",
+    "Dehydration (dry mouth, sunken eyes, no tears) — पानी की कमी",
+    "Fever or hypothermia — बुखार या शरीर का ठंडा पड़ना"
+  ],
+  "expected_course": "Most functional vomiting (GER, overfeeding) resolves within days with positional and feeding modifications. Bilious or projectile vomiting requires urgent evaluation. Pyloric stenosis presents at 3-6 weeks with progressive projectile vomiting.",
+  "key_clinical_points": [
+    "Bilious vomiting in a neonate is a surgical emergency until proven otherwise",
+    "Always check for abdominal distension and bowel sounds",
+    "Assess hydration status and weight change",
+    "Pyloric stenosis: non-bilious projectile vomiting at 3-6 weeks, olive-shaped mass",
+    "Sepsis can present as vomiting with lethargy in neonates"
+  ],
+  "severity_assessment": {
+    "mild": "Occasional spit-up after feeds, gaining weight, no distress",
+    "moderate": "Frequent vomiting, some weight loss, mild dehydration, irritability",
+    "severe": "Bilious/projectile vomiting, significant dehydration, abdominal distension, lethargy"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Frequency and volume of vomiting",
+      "frequency": "Each feed"
+    },
+    {
+      "parameter": "Weight",
+      "frequency": "Daily"
+    },
+    {
+      "parameter": "Hydration status (fontanelle, mucosa, urine)",
+      "frequency": "4-6 hourly"
+    },
+    {
+      "parameter": "Abdominal examination",
+      "frequency": "6 hourly"
+    },
+    {
+      "parameter": "Feeding tolerance",
+      "frequency": "Each feed"
+    }
+  ],
+  "referral_criteria": "Refer to pediatric surgeon if bilious vomiting, abdominal distension, or suspected intestinal obstruction. Refer to pediatric GI if persistent non-bilious vomiting not responding to conservative management.",
+  "hospitalisation_criteria": "Admit if bilious vomiting, projectile vomiting with dehydration, suspected surgical cause, sepsis, or failure to thrive.",
+  "notes": "Bilious vomiting in a neonate is malrotation with volvulus until proven otherwise. Requires urgent upper GI contrast study.",
+  "source": "NNF Guidelines 2024, Nelson Textbook of Pediatrics 22e"
+}

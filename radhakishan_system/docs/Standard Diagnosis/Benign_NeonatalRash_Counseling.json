@@ -1,0 +1,203 @@
+{
+  "template_name": "Standard Prescription Format – Benign Neonatal Rash Counseling",
+  "template_code": "NEO_RASH_BENIGN_V1",
+  "icd10": "P83.1",
+  "diagnosis_name": "Benign Neonatal Rash",
+  "snomed_code": "240302002",
+  "snomed_display": "Erythema toxicum neonatorum (disorder)",
+  "category": "Neonatology",
+  "condition": "Benign Rashes in a Newborn",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "date_of_birth": "",
+    "sex": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "gestational_age_weeks": ""
+  },
+  "clinical_context": {
+    "age_at_onset": "",
+    "rash_type": "",
+    "distribution": "",
+    "onset_since_birth": "",
+    "progression": "",
+    "fever": "",
+    "feeding_status": "",
+    "systemic_symptoms": "",
+    "exposure_history": {
+      "oils": "",
+      "powders": "",
+      "home_remedies": ""
+    }
+  },
+  "diagnosis": {
+    "primary": "Benign Neonatal Rash",
+    "possible_types": [
+      "Erythema toxicum neonatorum",
+      "Milia",
+      "Neonatal acne",
+      "Transient neonatal pustular melanosis",
+      "Cutis marmorata",
+      "Sebaceous hyperplasia",
+      "Epstein pearls",
+      "Salmon patch (nevus simplex)"
+    ],
+    "category": "Physiological / Self-limiting neonatal condition"
+  },
+  "principles": [
+    "Most neonatal rashes are benign and self-limiting",
+    "Reassurance is the primary management",
+    "Avoid unnecessary medications or investigations",
+    "Differentiate from serious pathological conditions"
+  ],
+  "prescription": {
+    "treatment": [
+      {
+        "name": "No active medication required",
+        "indication": "Benign neonatal rash",
+        "instruction": "Observation and reassurance only"
+      }
+    ],
+    "general_care": [
+      {
+        "advice": "Maintain skin hygiene",
+        "details": "Clean with plain lukewarm water"
+      },
+      {
+        "advice": "Avoid irritants",
+        "details": "Do not apply talcum powder, scented oils, or creams"
+      },
+      {
+        "advice": "Clothing",
+        "details": "Use soft, breathable cotton clothes"
+      },
+      {
+        "advice": "Temperature",
+        "details": "Keep baby warm; avoid excessive exposure"
+      }
+    ]
+  },
+  "condition_specific_guidance": [
+    {
+      "rash": "Erythema toxicum neonatorum",
+      "management": "No treatment needed; resolves in few days"
+    },
+    {
+      "rash": "Milia",
+      "management": "Spontaneous resolution; avoid squeezing"
+    },
+    {
+      "rash": "Neonatal acne",
+      "management": "Self-limited; avoid oils and creams"
+    },
+    {
+      "rash": "Transient pustular melanosis",
+      "management": "Pigmentation fades over weeks"
+    },
+    {
+      "rash": "Cutis marmorata",
+      "management": "Improves with warmth"
+    }
+  ],
+  "red_flags": [
+    "Vesicles or pustules with fever",
+    "Bullous lesions",
+    "Petechiae or purpura",
+    "Rash with hepatosplenomegaly",
+    "Mucosal involvement",
+    "Poor feeding or lethargy",
+    "Persistent or worsening rash"
+  ],
+  "differential_concerns": [
+    "Neonatal sepsis",
+    "Herpes simplex infection",
+    "Staphylococcal skin infection",
+    "TORCH infections",
+    "Congenital ichthyosis",
+    "Candidiasis"
+  ],
+  "management_plan": [
+    "Identify rash type clinically",
+    "Exclude systemic illness",
+    "Provide reassurance",
+    "Avoid unnecessary medications",
+    "Follow-up only if symptoms persist or worsen"
+  ],
+  "counselling": [
+    "Most newborn rashes are harmless and self-resolving — ज़्यादातर नवजात के दाने हानिरहित होते हैं और अपने आप ठीक हो जाते हैं",
+    "No need for creams, antibiotics, or medications — किसी क्रीम, एंटीबायोटिक या दवा की ज़रूरत नहीं है",
+    "Avoid talcum powder and scented products — टैल्कम पाउडर और खुशबूदार चीज़ों से बचें",
+    "Maintain hygiene with plain lukewarm water bathing — गुनगुने पानी से साफ़ सफ़ाई रखें",
+    "Rash will gradually resolve over days to weeks — दाने धीरे-धीरे कुछ दिनों से हफ़्तों में ठीक हो जाएंगे",
+    "Seek medical care if red flag symptoms appear — अगर खतरे के संकेत दिखें तो तुरंत डॉक्टर को दिखाएं"
+  ],
+  "warning_signs": [
+    "Fever with rash — दाने के साथ बुखार",
+    "Blisters or pus-filled bumps — छाले या मवाद वाले दाने",
+    "Rash spreading rapidly — दाने तेज़ी से फैलना",
+    "Baby not feeding well — बच्चे का ठीक से दूध न पीना",
+    "Baby becoming lethargic or irritable — बच्चे का सुस्त या चिड़चिड़ा हो जाना",
+    "Purple or dark red spots on skin — त्वचा पर बैंगनी या गहरे लाल धब्बे"
+  ],
+  "expected_course": "Most benign neonatal rashes appear within the first 1–2 weeks of life and resolve spontaneously within days to weeks without any treatment. Erythema toxicum typically appears on day 1–3 and resolves by 5–14 days. Milia resolve within 4 weeks. Neonatal acne may take 1–3 months to clear.",
+  "key_clinical_points": [
+    "Erythema toxicum is the most common benign neonatal rash — seen in up to 50% of term neonates",
+    "Milia are tiny white papules on the nose and face — do not squeeze",
+    "Neonatal acne is hormonal and self-limiting",
+    "Transient neonatal pustular melanosis is more common in dark-skinned neonates",
+    "Cutis marmorata is a normal vasomotor response to cold",
+    "Key differentiator: benign rashes occur in well, afebrile neonates with good feeding",
+    "Investigate only if systemic signs (fever, poor feeding, hepatosplenomegaly) are present",
+    "Avoid unnecessary topical steroids or antibiotics"
+  ],
+  "severity_assessment": {
+    "mild": "Localized rash, well baby, feeding normally, afebrile — observation and reassurance only",
+    "moderate": "Widespread rash but baby otherwise well — close observation, consider dermatology review if persistent beyond 2 weeks",
+    "severe": "Rash with fever, vesicles/bullae, poor feeding, lethargy, or systemic signs — investigate for infection (CBC, CRP, blood culture, skin swab), consider NICU admission"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Rash progression",
+      "frequency": "Daily by parents, at each OPD visit"
+    },
+    {
+      "parameter": "Temperature",
+      "frequency": "If any new rash or systemic concern"
+    },
+    {
+      "parameter": "Feeding adequacy",
+      "frequency": "At each feed"
+    },
+    {
+      "parameter": "Weight gain",
+      "frequency": "At follow-up visit (2–4 weeks)"
+    }
+  ],
+  "opd_checklist": [
+    "Rash onset and type assessed?",
+    "Baby afebrile and feeding well?",
+    "No systemic red flags?",
+    "Parents reassured?",
+    "Unnecessary medications avoided?"
+  ],
+  "follow_up": {
+    "routine_follow_up": "2–4 weeks or earlier if needed",
+    "indications_for_early_review": [
+      "Fever",
+      "Rash worsening",
+      "Poor feeding",
+      "New symptoms"
+    ]
+  },
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  }
+}

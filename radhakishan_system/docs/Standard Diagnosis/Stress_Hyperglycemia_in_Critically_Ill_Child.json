@@ -1,0 +1,90 @@
+{
+  "icd10": "R73.9",
+  "diagnosis_name": "Stress Hyperglycemia in Critically Ill Child",
+  "category": "Emergency",
+  "severity": "moderate",
+  "first_line_drugs": [
+    {
+      "drug": "Regular Insulin (IV infusion)",
+      "notes": "Start 0.02–0.05 units/kg/hr IV infusion; titrate to maintain RBS 80–180 mg/dL",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Normal Saline (0.9%)",
+      "notes": "Use for dilution of insulin infusion (e.g., 1 unit/ml concentration); maintain IV fluids as per requirement",
+      "is_new_2024_2025": false
+    }
+  ],
+  "second_line_drugs": [
+    {
+      "drug": "Dextrose infusion (D10/D12.5)",
+      "notes": "Add if glucose falls <100 mg/dL or to maintain GIR in metabolic conditions",
+      "is_new_2024_2025": false
+    }
+  ],
+  "investigations": [
+    {
+      "name": "Capillary Blood Glucose (RBS)",
+      "indication": "All critically ill patients",
+      "urgency": "stat"
+    },
+    {
+      "name": "Serum Electrolytes",
+      "indication": "During insulin therapy (risk of hypokalemia)",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Blood Gas (ABG)",
+      "indication": "To rule out acidosis (DKA vs stress hyperglycemia)",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Serum Ketones",
+      "indication": "If DKA suspected",
+      "urgency": "urgent"
+    }
+  ],
+  "counselling": [
+    "High blood sugar is common in critically ill children — गंभीर बीमार बच्चों में शुगर बढ़ना आम है",
+    "Insulin infusion will be used to control glucose safely — इंसुलिन इन्फ्यूजन से शुगर को सुरक्षित तरीके से नियंत्रित किया जाएगा",
+    "Frequent monitoring of sugar levels is required — बार-बार शुगर की जांच जरूरी है",
+    "Do not stop feeding unless advised — जब तक डॉक्टर न कहें, खाना-पीना बंद न करें",
+    "Condition will be closely monitored in ICU — ICU में हालत की करीबी निगरानी की जाएगी"
+  ],
+  "warning_signs": [
+    "Very high glucose (>300–400 mg/dL)",
+    "Dehydration or poor perfusion",
+    "Altered sensorium",
+    "Acidosis (deep breathing)",
+    "Seizures",
+    "Hypoglycemia during treatment"
+  ],
+  "referral_criteria": "Refer to pediatric intensivist/endocrinologist if persistent hyperglycemia or suspected DKA",
+  "hospitalisation_criteria": "All critically ill children with hyperglycemia requiring insulin infusion",
+  "notes": "Do not reduce glucose infusion rate in metabolic conditions; instead add insulin to prevent catabolism",
+  "source": "PICU Glycemic Control Guidelines, IAP 2024",
+  "duration_days_default": 3,
+  "active": true,
+  "guideline_changes": "Target glucose range relaxed to 80–180 mg/dL to avoid hypoglycemia risk",
+  "snomed_code": "80394007",
+  "expected_course": "Glucose stabilizes within 24–48 hrs with proper insulin titration",
+  "key_clinical_points": [
+    "Start insulin if RBS >180 mg/dL",
+    "Avoid tight glycemic control to prevent hypoglycemia",
+    "Continue nutritional support (do not reduce GIR unnecessarily)"
+  ],
+  "severity_assessment": {
+    "mild": "RBS 180–250 mg/dL, no symptoms",
+    "moderate": "RBS 250–400 mg/dL, mild dehydration",
+    "severe": "RBS >400 mg/dL or associated with acidosis/altered sensorium"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Blood glucose",
+      "frequency": "Hourly for first 4 hours, then 2–4 hourly"
+    },
+    { "parameter": "Electrolytes (especially K+)", "frequency": "6–12 hourly" },
+    { "parameter": "Vitals", "frequency": "Hourly" },
+    { "parameter": "Fluid balance", "frequency": "Strict monitoring" }
+  ]
+}

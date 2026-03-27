@@ -1,0 +1,105 @@
+{
+  "icd10": "E16.2",
+  "diagnosis_name": "Hypoglycemia (Pediatric)",
+  "category": "Emergency",
+  "severity": "severe",
+  "first_line_drugs": [
+    {
+      "drug": "Dextrose 10% (D10)",
+      "notes": "Neonates: 2 ml/kg IV bolus (200 mg/kg), then start infusion",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Dextrose (D25 or D50)",
+      "notes": "Children: 2–4 ml/kg IV bolus (max D25 preferred), repeat if needed after 5–10 min",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Dextrose infusion",
+      "notes": "Start GIR 4–6 mg/kg/min, titrate up to 8–12 mg/kg/min (up to 20 mg/kg/min in hyperinsulinism)",
+      "is_new_2024_2025": false
+    }
+  ],
+  "second_line_drugs": [
+    {
+      "drug": "Glucagon",
+      "notes": "0.03–0.1 mg/kg IM/IV (max 1 mg) in refractory hypoglycemia or no IV access",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Hydrocortisone",
+      "notes": "2–5 mg/kg IV if adrenal insufficiency suspected",
+      "is_new_2024_2025": false
+    }
+  ],
+  "investigations": [
+    {
+      "name": "Capillary Blood Glucose",
+      "indication": "All suspected cases",
+      "urgency": "stat"
+    },
+    {
+      "name": "Serum Glucose (venous)",
+      "indication": "Confirmatory test",
+      "urgency": "stat"
+    },
+    {
+      "name": "Blood Gas and Electrolytes",
+      "indication": "Metabolic assessment",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Critical Sample Panel",
+      "indication": "Recurrent/severe hypoglycemia",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Insulin, C-peptide, Cortisol, GH",
+      "indication": "Etiology evaluation",
+      "urgency": "urgent"
+    }
+  ],
+  "counselling": [
+    "Child needs urgent glucose correction and monitoring — बच्चे को तुरंत शुगर (ग्लूकोज़) ठीक करना और निगरानी ज़रूरी है।",
+    "Ensure frequent feeding after stabilization — स्थिति ठीक होने के बाद बार-बार थोड़ा-थोड़ा दूध/खाना दें।",
+    "Avoid prolonged fasting — बच्चे को लंबे समय तक भूखा न रखें।",
+    "Give medicines as advised strictly — दवाइयाँ समय पर और बताई गई मात्रा में दें।",
+    "Follow-up for cause evaluation is important — कारण की जाँच के लिए फॉलो-अप ज़रूरी है।"
+  ],
+  "warning_signs": [
+    "Seizures",
+    "Lethargy or unconsciousness",
+    "Poor feeding",
+    "Apnea or irregular breathing",
+    "Recurrent hypoglycemia",
+    "Abnormal movements"
+  ],
+  "referral_criteria": "Refer to pediatric intensivist/endocrinologist if persistent or recurrent hypoglycemia",
+  "hospitalisation_criteria": "Symptomatic hypoglycemia, seizures, need for IV glucose infusion, recurrent episodes",
+  "notes": "Always treat hypoglycemia immediately before confirming cause. Avoid delays.",
+  "source": "IAP Guidelines 2024, WHO Emergency Care, Pediatric Endocrine Protocols",
+  "duration_days_default": 3,
+  "active": true,
+  "guideline_changes": "Higher GIR targets recommended in hyperinsulinemic states",
+  "snomed_code": "302866003",
+  "expected_course": "Rapid improvement within minutes after correction; recurrence depends on underlying cause",
+  "key_clinical_points": [
+    "Hypoglycemia is a medical emergency",
+    "Check glucose in all sick children",
+    "Start treatment immediately without waiting for reports"
+  ],
+  "severity_assessment": {
+    "mild": "Asymptomatic low glucose",
+    "moderate": "Irritability, sweating, poor feeding",
+    "severe": "Seizures, coma, apnea"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Blood glucose",
+      "frequency": "30 min after bolus, then 2–4 hourly"
+    },
+    { "parameter": "Vitals", "frequency": "Hourly" },
+    { "parameter": "Neurological status", "frequency": "Hourly" },
+    { "parameter": "Infusion rate (GIR)", "frequency": "Continuous monitoring" }
+  ]
+}

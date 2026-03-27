@@ -1,0 +1,283 @@
+{
+  "template_name": "Standard Prescription Format - Oral Thrush in Neonate",
+  "condition": {
+    "name": "Oral Thrush (Neonatal Candidiasis)",
+    "icd10_suggestions": ["B37.0", "P37.5"],
+    "overview": [
+      "Oral thrush is a common fungal infection in neonates caused by Candida albicans.",
+      "Presents as white adherent plaques over tongue, gums, inner cheeks and palate.",
+      "Usually benign but may cause feeding difficulty and irritability."
+    ]
+  },
+  "differential_diagnosis": {
+    "oral_thrush": [
+      "White adherent plaques on mucosa",
+      "Difficult to scrape off",
+      "May leave erythematous or bleeding base",
+      "Associated feeding refusal or irritability"
+    ],
+    "milk_residue": [
+      "White coating mainly on tongue",
+      "Easily wiped off",
+      "No underlying redness",
+      "Baby usually asymptomatic"
+    ]
+  },
+  "risk_factors": [
+    "Prematurity",
+    "Recent antibiotic use",
+    "Bottle feeding or pacifier use",
+    "Maternal vaginal candidiasis",
+    "Poor oral hygiene practices",
+    "Immature immune system"
+  ],
+  "history_template": [
+    "Onset and duration of white patches",
+    "Feeding difficulty or refusal",
+    "Irritability during feeding",
+    "Recent antibiotic exposure",
+    "Use of pacifier or bottle",
+    "Maternal nipple pain or infection",
+    "Previous similar episodes"
+  ],
+  "examination_template": [
+    "Inspect oral cavity: tongue, gums, inner cheeks, palate",
+    "Check for white plaques adherence",
+    "Attempt gentle scraping test",
+    "Look for erythema or bleeding after removal",
+    "Assess feeding pattern",
+    "Check weight gain",
+    "Look for systemic signs if severe"
+  ],
+  "red_flags": [
+    "Extensive thrush spreading beyond oral cavity",
+    "Involvement of esophagus (feeding refusal)",
+    "Failure to thrive",
+    "Severe irritability",
+    "Systemic symptoms (fever, rash)",
+    "Immunocompromised neonate",
+    "Recurrent or resistant infection"
+  ],
+  "investigations": [
+    {
+      "name": "Clinical diagnosis",
+      "purpose": "Usually sufficient in most cases"
+    },
+    {
+      "name": "KOH preparation / fungal culture",
+      "indication": "Severe, recurrent or treatment-resistant cases"
+    }
+  ],
+  "management_protocol": {
+    "topical_first_line": [
+      {
+        "drug": "CLOTRIMAZOLE 1% MOUTH PAINT",
+        "dose": "Apply thin layer over affected areas",
+        "frequency": "3–4 times/day",
+        "duration": "7–14 days or until 48 hours after resolution"
+      }
+    ],
+    "alternative_options": [
+      {
+        "drug": "NYSTATIN ORAL SUSPENSION (100,000 units/mL)",
+        "dose": "1 mL applied inside cheeks, tongue, gums",
+        "frequency": "4 times/day",
+        "duration": "Continue until 48 hours after resolution"
+      },
+      {
+        "drug": "MICONAZOLE ORAL GEL",
+        "note": "Use cautiously if choking risk absent"
+      }
+    ],
+    "systemic_therapy": [
+      {
+        "drug": "FLUCONAZOLE ORAL SUSPENSION",
+        "indication": "Refractory or systemic candidiasis",
+        "note": "Specialist guidance required"
+      }
+    ],
+    "supportive_measures": [
+      "Maintain oral hygiene",
+      "Clean oral cavity gently after feeds",
+      "Ensure adequate feeding",
+      "Monitor weight gain"
+    ],
+    "hygiene_measures": [
+      "Sterilize bottles, nipples and pacifiers daily",
+      "Treat maternal nipple candidiasis if breastfeeding",
+      "Maintain hand hygiene before feeding"
+    ]
+  },
+  "clinical_clues_summary": [
+    {
+      "feature": "White patches adherent to mucosa",
+      "suggestion": "Oral thrush"
+    },
+    {
+      "feature": "Easily wiped white coating",
+      "suggestion": "Milk residue"
+    },
+    {
+      "feature": "Feeding difficulty with plaques",
+      "suggestion": "Symptomatic thrush"
+    },
+    {
+      "feature": "Extensive lesions or poor weight gain",
+      "suggestion": "Needs further evaluation"
+    }
+  ],
+  "flow_logic": [
+    "Identify white oral patches",
+    "Attempt gentle wiping",
+    "If easily removable → likely milk residue",
+    "If adherent → suspect oral thrush",
+    "Start topical antifungal therapy",
+    "Educate regarding hygiene",
+    "If severe or no improvement → consider systemic therapy or further evaluation"
+  ],
+  "quick_checklist_for_opd": [
+    "Are white patches adherent to mucosa?",
+    "Do they not wipe off easily?",
+    "Is there redness after removal?",
+    "Is feeding affected?",
+    "Are there systemic symptoms?",
+    "Has antifungal treatment been started?",
+    "Has hygiene counseling been done?"
+  ],
+  "parent_counseling": [
+    "Oral thrush is common and easily treatable. — मुंह का छाला आम है और आसानी से ठीक हो जाता है।",
+    "It is not due to poor care. — यह खराब देखभाल की वजह से नहीं होता।",
+    "Maintain proper hygiene of feeding equipment. — दूध पिलाने के बर्तन साफ़ रखें।",
+    "Complete full course of medication even if symptoms improve early. — लक्षण कम होने पर भी दवाई पूरी करें।",
+    "Consult doctor if baby develops fever, feeding refusal or spreading lesions. — बुखार, दूध न पीना, या छाले बढ़ना दिखे तो डॉक्टर को दिखाएं।"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Neonatology OPD",
+    "title": "Standard Prescription - Oral Thrush in Neonate",
+    "patient_identification": {
+      "patient_name": "",
+      "uhid": "",
+      "ipid": "",
+      "age": "Neonate",
+      "sex": "",
+      "dob": "",
+      "day_of_life": "",
+      "weight_kg": "",
+      "date": "",
+      "time": "",
+      "parent_name": "",
+      "contact_number": ""
+    },
+    "chief_complaints": [
+      "White patches in mouth",
+      "Feeding difficulty",
+      "Irritability during feeds"
+    ],
+    "clinical_assessment": {
+      "location_of_patches": "",
+      "scraping_test": "",
+      "feeding_status": "",
+      "weight_gain": "",
+      "associated_symptoms": ""
+    },
+    "provisional_diagnosis_options": [
+      "Oral thrush (neonatal candidiasis)",
+      "Milk residue",
+      "Oral thrush with feeding difficulty"
+    ],
+    "medication_template": [
+      {
+        "drug_name": "CLOTRIMAZOLE 1% MOUTH PAINT",
+        "dose": "Apply locally",
+        "route": "Topical oral",
+        "frequency": "4 times daily",
+        "duration": "7–14 days or 48 hrs after symptom resolution",
+        "instructions_en": "Apply gently over tongue, cheeks, gums after feeding",
+        "instructions_hi": "दूध पिलाने के बाद जीभ, गाल और मसूड़ों पर हल्के से लगाएं"
+      },
+      {
+        "drug_name": "NYSTATIN ORAL SUSPENSION",
+        "dose": "1 mL",
+        "route": "Oral local application",
+        "frequency": "4 times daily",
+        "duration": "Until 48 hrs after resolution",
+        "instructions_en": "Apply inside cheeks and tongue",
+        "instructions_hi": "गालों और जीभ के अंदर लगाएं"
+      }
+    ],
+    "treatment_plan": {
+      "general_advice": [
+        "Maintain oral hygiene",
+        "Feed in comfortable position",
+        "Continue breastfeeding"
+      ],
+      "hygiene_advice": [
+        "Sterilize feeding bottles and pacifiers daily",
+        "Clean mouth after feeds",
+        "Treat maternal nipple infection if present"
+      ]
+    },
+    "follow_up": {
+      "review_in": "",
+      "emergency_if": [
+        "Feeding refusal",
+        "Fever",
+        "Spread of lesions",
+        "Poor weight gain",
+        "Persistent symptoms"
+      ]
+    },
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "snomed_code": "79740000",
+  "snomed_display": "Candidiasis of mouth (disorder)",
+  "icd10": "B37.0",
+  "diagnosis_name": "Oral Thrush in Neonate",
+  "category": "Neonatology",
+  "warning_signs": [
+    "Feeding refusal or excessive crying during feeds — दूध पीने से मना करना या दूध पीते समय बहुत रोना",
+    "Spreading lesions beyond mouth — छाले मुंह से बाहर फैलना",
+    "Fever — बुखार",
+    "Poor weight gain — वज़न न बढ़ना",
+    "Persistent or recurring infection despite treatment — इलाज के बावजूद बार-बार होना",
+    "Rash in diaper area — डायपर वाली जगह पर दाने"
+  ],
+  "expected_course": "Oral thrush in neonates usually responds well to topical antifungal therapy (clotrimazole or nystatin) within 7-14 days. Treatment should continue for 48 hours after resolution of lesions. Recurrence is common if hygiene measures are not followed or if maternal nipple candidiasis is untreated.",
+  "key_clinical_points": [
+    "White adherent plaques that do not wipe off easily are the hallmark of oral thrush.",
+    "Milk residue is easily wiped away and does not leave erythema underneath.",
+    "Clotrimazole 1% mouth paint or Nystatin oral suspension are first-line treatments.",
+    "Always treat concurrent maternal nipple candidiasis to prevent reinfection.",
+    "Sterilize all feeding equipment (bottles, nipples, pacifiers) daily.",
+    "Systemic fluconazole is reserved for refractory or systemic candidiasis under specialist guidance."
+  ],
+  "severity_assessment": {
+    "mild": "Few white patches, feeding unaffected, no systemic symptoms — topical antifungal and hygiene advice.",
+    "moderate": "Multiple patches, some feeding difficulty or irritability — topical antifungal, close follow-up.",
+    "severe": "Extensive lesions, feeding refusal, failure to thrive, systemic symptoms — consider systemic therapy, rule out immunodeficiency."
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Oral cavity examination",
+      "frequency": "At each visit until resolved"
+    },
+    {
+      "parameter": "Feeding adequacy",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Weight gain",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Maternal nipple assessment",
+      "frequency": "At initial and follow-up visits"
+    }
+  ]
+}

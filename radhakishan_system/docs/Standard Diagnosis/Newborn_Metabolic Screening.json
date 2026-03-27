@@ -1,0 +1,246 @@
+{
+  "template_name": "Standard Prescription Format - Newborn Metabolic Screening",
+  "condition": {
+    "name": "Newborn Metabolic Screening",
+    "purpose": [
+      "Detect rare but serious metabolic and genetic disorders before symptoms appear.",
+      "Enable timely intervention to prevent severe disability, organ damage, or death."
+    ],
+    "overview": [
+      "Many inborn errors of metabolism have silent onset initially.",
+      "A simple heel-prick dried blood spot test can screen for multiple disorders efficiently.",
+      "Screening is preventive, not diagnostic."
+    ]
+  },
+  "disorders_commonly_screened": [
+    "Congenital Hypothyroidism (CH)",
+    "Congenital Adrenal Hyperplasia (CAH)",
+    "Phenylketonuria (PKU)",
+    "Galactosemia",
+    "Biotinidase Deficiency",
+    "Glucose-6-Phosphate Dehydrogenase (G6PD) Deficiency",
+    "Hemoglobinopathies",
+    "Cystic Fibrosis (optional in some centers)"
+  ],
+  "sample_collection_timing": {
+    "ideal_time": "After 24 hours of birth and before 72 hours",
+    "if_early_discharge": "If sample taken before 24 hours, repeat sample at 48-72 hours",
+    "special_groups": ["Preterm babies", "Sick neonates", "Transfused babies"],
+    "note": "These special groups may require repeat screening"
+  },
+  "screening_method": {
+    "method": "Heel prick blood sample",
+    "sample_type": "Dried Blood Spot (DBS) on filter paper card",
+    "laboratory": "Sent to specialized screening laboratory",
+    "result_time": "Typically available in 5-7 days"
+  },
+  "early_treatment_benefits": [
+    {
+      "disorder": "Congenital Hypothyroidism",
+      "benefit": "Prevents intellectual disability"
+    },
+    {
+      "disorder": "Phenylketonuria (PKU)",
+      "benefit": "Prevents neurocognitive impairment"
+    },
+    {
+      "disorder": "CAH",
+      "benefit": "Prevents adrenal crisis and salt-wasting"
+    },
+    {
+      "disorder": "Galactosemia",
+      "benefit": "Prevents liver failure and cataracts"
+    },
+    {
+      "disorder": "G6PD Deficiency",
+      "benefit": "Prevents hemolytic crises"
+    },
+    {
+      "disorder": "Hemoglobinopathies",
+      "benefit": "Prevents anemia, infections, and stroke complications"
+    }
+  ],
+  "result_interpretation": [
+    {
+      "result_type": "Normal",
+      "action": "Routine care; no action needed"
+    },
+    {
+      "result_type": "Borderline",
+      "action": "Repeat sample or additional testing"
+    },
+    {
+      "result_type": "Abnormal / Positive",
+      "action": "Confirmatory diagnostic tests"
+    },
+    {
+      "result_type": "Confirmed diagnosis",
+      "action": "Start disease-specific treatment as soon as possible"
+    }
+  ],
+  "red_flags": [
+    "Sick neonate without obvious cause",
+    "Vomiting",
+    "Lethargy",
+    "Seizures",
+    "Family history of unexplained neonatal deaths",
+    "Failure to thrive",
+    "Metabolic acidosis",
+    "Unusual body odor"
+  ],
+  "parent_counseling": [
+    "Explain that newborn metabolic screening is preventive, not diagnostic. — नवजात की मेटाबोलिक जांच बीमारी पहचानने के लिए नहीं, बचाव के लिए है।",
+    "Discuss that false-positive results can occur and are clarified by confirmatory testing. — कभी-कभी गलत रिपोर्ट आ सकती है, जो दोबारा जांच से साफ़ हो जाती है।",
+    "Emphasize that early detection significantly improves long-term outcomes. — जल्दी पता लगने से बच्चे का भविष्य बहुत बेहतर होता है।",
+    "If screened too early, repeat testing may be needed. — अगर जन्म के तुरंत बाद जांच हुई तो दोबारा करानी पड़ सकती है।",
+    "Heel prick test is safe and causes only brief discomfort. — एड़ी से खून लेना सुरक्षित है और थोड़ी ही देर तकलीफ़ होती है।"
+  ],
+  "quick_checklist_for_opd": [
+    "Confirm whether newborn metabolic screening has been done.",
+    "Ensure sample timing was appropriate.",
+    "Arrange retesting if early discharge or sample collected before 24 hours.",
+    "Track borderline or abnormal results closely.",
+    "Counsel parents clearly and calmly."
+  ],
+  "flow_logic": [
+    "Newborn birth",
+    "Screen at 24-72 hours",
+    "If normal -> routine care",
+    "If borderline -> repeat or clarify",
+    "If positive -> confirmatory test",
+    "If diagnosis confirmed -> early treatment initiation"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Newborn Follow-up OPD",
+    "title": "Standard Prescription / Advice Sheet - Newborn Metabolic Screening",
+    "patient_identification": {
+      "baby_name": "",
+      "uhid": "",
+      "ipid": "",
+      "sex": "",
+      "date_of_birth": "",
+      "birth_weight_kg": "",
+      "current_weight_kg": "",
+      "day_of_life": "",
+      "mother_name": "",
+      "father_name": "",
+      "address": "",
+      "contact_number": "",
+      "date": "",
+      "time": ""
+    },
+    "screening_status": {
+      "screening_done": "",
+      "sample_collection_date_time": "",
+      "sample_collected_at_age_hours": "",
+      "dbs_card_sent": "",
+      "laboratory_name": "",
+      "report_status": "",
+      "special_group": "",
+      "remarks": ""
+    },
+    "provisional_assessment_options": [
+      "Newborn metabolic screening advised",
+      "Newborn metabolic screening sample collected",
+      "Repeat metabolic screening advised",
+      "Abnormal screening report - confirmatory evaluation advised"
+    ],
+    "investigation_or_order_template": [
+      {
+        "order": "NEWBORN METABOLIC SCREENING PANEL (DBS)",
+        "timing": "After 24 hours and before 72 hours of life",
+        "purpose": "Universal newborn screening"
+      },
+      {
+        "order": "REPEAT DBS SAMPLE",
+        "timing": "At 48-72 hours if first sample taken before 24 hours",
+        "purpose": "Avoid false-negative screening"
+      },
+      {
+        "order": "CONFIRMATORY TESTING",
+        "timing": "If screening report positive/borderline",
+        "purpose": "Disease-specific confirmation"
+      }
+    ],
+    "treatment_plan": {
+      "if_not_done": [
+        "Arrange newborn metabolic screening immediately as per age eligibility."
+      ],
+      "if_sample_early": ["Repeat screening sample at appropriate age."],
+      "if_normal": ["Routine newborn care and follow-up."],
+      "if_borderline_or_positive": [
+        "Urgent confirmatory diagnostic testing.",
+        "Specialist referral as per suspected disorder."
+      ]
+    },
+    "follow_up": {
+      "routine_review": "",
+      "urgent_review_if": [
+        "Poor feeding",
+        "Vomiting",
+        "Lethargy",
+        "Seizures",
+        "Jaundice worsening",
+        "Excessive sleepiness",
+        "Any abnormal screening report"
+      ]
+    },
+    "parent_advice": [
+      "Heel-prick screening is important even if baby appears healthy.",
+      "Keep report safely and bring it on follow-up.",
+      "Do not delay confirmatory testing if report is abnormal.",
+      "Seek urgent care if baby becomes sick."
+    ],
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "snomed_code": "60151004",
+  "snomed_display": "Newborn screening (procedure)",
+  "icd10": "Z13.228",
+  "diagnosis_name": "Newborn Metabolic Screening",
+  "category": "Neonatology",
+  "warning_signs": [
+    "Poor feeding or vomiting — दूध न पीना या उल्टी",
+    "Excessive sleepiness or lethargy — बहुत ज़्यादा सोना या सुस्ती",
+    "Seizures or abnormal movements — दौरे या असामान्य हरकत",
+    "Unusual body odor — शरीर से अजीब गंध",
+    "Failure to gain weight — वज़न न बढ़ना",
+    "Jaundice that is worsening — पीलिया बढ़ना"
+  ],
+  "expected_course": "Normal screening results require no further action. Borderline results need repeat testing. Abnormal or positive results require urgent confirmatory diagnostic testing and disease-specific treatment. With early detection and treatment, many metabolic disorders have excellent outcomes.",
+  "key_clinical_points": [
+    "Ideal sample timing is 24-72 hours after birth.",
+    "Samples collected before 24 hours may give false negatives and must be repeated.",
+    "Preterm babies, sick neonates, and transfused babies require repeat screening.",
+    "Congenital hypothyroidism is the most common condition detected — early levothyroxine prevents intellectual disability.",
+    "G6PD deficiency screening helps prevent hemolytic crises with trigger avoidance.",
+    "Parents must be counseled to keep results safely and follow up promptly."
+  ],
+  "monitoring_parameters": [
+    {
+      "parameter": "NBS sample collection",
+      "frequency": "At 24-72 hours of birth"
+    },
+    {
+      "parameter": "Repeat sample if early/inadequate",
+      "frequency": "At 48-72 hours"
+    },
+    {
+      "parameter": "NBS report review",
+      "frequency": "Within 5-7 days of collection"
+    },
+    {
+      "parameter": "Confirmatory testing if abnormal",
+      "frequency": "Urgently on positive result"
+    },
+    {
+      "parameter": "Disease-specific follow-up",
+      "frequency": "As per specialist advice"
+    }
+  ]
+}

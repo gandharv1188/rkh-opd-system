@@ -1,0 +1,195 @@
+{
+  "template_name": "Standard Prescription Format - Newborn Screening (NBS) Repeat & Follow-up",
+  "condition": {
+    "name": "Newborn Screening (NBS) – Repeat Strategy",
+    "purpose": [
+      "Detect metabolic, endocrine, hematologic, and hearing disorders early",
+      "Avoid false negatives due to early sampling or poor sample quality",
+      "Ensure timely diagnosis and treatment"
+    ]
+  },
+  "screening_principles": {
+    "ideal_timing": "24–48 hours after birth",
+    "early_sample_issue": "<24 hours may give false negative → repeat mandatory",
+    "sample_quality": "Inadequate/poor sample → immediate repeat",
+    "high_risk_population": [
+      "Preterm infants",
+      "NICU admission",
+      "Blood transfusion",
+      "Family history of metabolic disorders"
+    ]
+  },
+  "repeat_screening_indications": [
+    {
+      "situation": "Sample collected <24 hours",
+      "action": "Repeat at 48–72 hours"
+    },
+    {
+      "situation": "NICU stay >5 days",
+      "action": "Repeat at discharge or day 7–14"
+    },
+    {
+      "situation": "Blood transfusion before screening",
+      "action": "Repeat after 72 hours"
+    },
+    {
+      "situation": "Prematurity (<32 weeks)",
+      "action": "Repeat at term corrected age"
+    },
+    {
+      "situation": "Poor or inadequate sample",
+      "action": "Immediate recollection"
+    },
+    {
+      "situation": "Borderline or abnormal result",
+      "action": "Confirmatory diagnostic testing urgently"
+    }
+  ],
+  "conditions_affected": [
+    "Congenital Hypothyroidism",
+    "Congenital Adrenal Hyperplasia",
+    "Hemoglobinopathies",
+    "Inborn Errors of Metabolism",
+    "Hearing Screening abnormalities"
+  ],
+  "red_flags": [
+    "Delayed repeat after NICU stay or transfusion",
+    "Failure to follow-up abnormal results",
+    "Parental unawareness about repeat necessity"
+  ],
+  "parent_counseling": [
+    "Repeat testing ensures accurate diagnosis — दोबारा जांच से सही पहचान होती है।",
+    "Repeat does not always indicate disease — दोबारा जांच का मतलब बीमारी नहीं है।",
+    "Early detection improves outcomes — जल्दी पहचान से इलाज बेहतर होता है।",
+    "Strict follow-up is essential — समय पर जांच कराना बहुत ज़रूरी है।",
+    "Keep all reports safely for every visit — सभी रिपोर्ट संभालकर रखें और हर बार लाएं।"
+  ],
+  "standard_prescription_format": {
+    "hospital_details": {
+      "hospital_name": "RADHAKISHAN HOSPITAL",
+      "department": "NICU / Pediatric OPD"
+    },
+    "patient_identification": {
+      "baby_name": "",
+      "uhid": "",
+      "ipid": "",
+      "sex": "",
+      "date_of_birth": "",
+      "gestational_age_weeks": "",
+      "birth_weight_kg": "",
+      "current_weight_kg": "",
+      "postnatal_age_days": "",
+      "mother_name": "",
+      "father_name": "",
+      "contact_number": "",
+      "date": "",
+      "time": ""
+    },
+    "nbs_details": {
+      "initial_screen_done": "Yes/No",
+      "date_of_first_sample": "",
+      "timing_after_birth_hours": "",
+      "sample_quality": "Adequate / Inadequate",
+      "nicu_admission": "Yes/No",
+      "blood_transfusion": "Yes/No",
+      "risk_category": "Low / High",
+      "remarks": ""
+    },
+    "provisional_status": [
+      "Screen done at appropriate time",
+      "Early sample (<24 hrs)",
+      "Poor sample quality",
+      "High-risk neonate",
+      "Abnormal / borderline result"
+    ],
+    "investigations_orders": [
+      {
+        "test": "Repeat Newborn Screening (DBS)",
+        "purpose": "Confirm initial screening"
+      },
+      {
+        "test": "TSH / Free T4",
+        "purpose": "Rule out congenital hypothyroidism"
+      },
+      {
+        "test": "17-OHP",
+        "purpose": "Screen CAH"
+      },
+      {
+        "test": "Confirmatory metabolic panel",
+        "purpose": "If abnormal NBS"
+      }
+    ],
+    "management_plan": {
+      "early_sample": "Repeat at 48–72 hours",
+      "nicu_case": "Repeat at discharge or day 7–14",
+      "post_transfusion": "Repeat after 72 hours",
+      "premature": "Repeat at term corrected age",
+      "poor_sample": "Immediate recollection",
+      "abnormal_result": "Urgent confirmatory testing + specialist referral"
+    },
+    "follow_up_plan": {
+      "next_visit_date": "",
+      "monitoring": [
+        "Track repeat sample completion",
+        "Ensure lab report follow-up",
+        "Refer if abnormal"
+      ]
+    },
+    "parent_advice": [
+      "Repeat screening is essential for accuracy",
+      "Do not miss scheduled repeat test",
+      "Early treatment prevents complications",
+      "Keep all reports for follow-up"
+    ],
+    "doctor_authentication": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_number": "HN 21452",
+      "signature": ""
+    },
+    "emergency_contact": {
+      "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+    }
+  },
+  "snomed_code": "60151004",
+  "snomed_display": "Newborn screening (procedure)",
+  "icd10": "Z13.228",
+  "diagnosis_name": "Newborn Screening (NBS) Repeat and Follow-up",
+  "category": "Neonatology",
+  "warning_signs": [
+    "Poor feeding or vomiting — दूध न पीना या उल्टी",
+    "Lethargy or excessive sleepiness — सुस्ती या बहुत ज़्यादा सोना",
+    "Seizures — दौरे पड़ना",
+    "Jaundice worsening — पीलिया बढ़ना",
+    "Failure to gain weight — वज़न न बढ़ना",
+    "Unusual body odor — शरीर से अजीब गंध"
+  ],
+  "expected_course": "Repeat screening is required when the initial sample was collected too early, was inadequate, or when the baby has risk factors (prematurity, NICU stay, blood transfusion). Most repeat screens are normal. Abnormal results require urgent confirmatory testing and specialist referral.",
+  "key_clinical_points": [
+    "Sample collected before 24 hours must be repeated at 48-72 hours.",
+    "NICU babies need repeat screening at discharge or day 7-14.",
+    "Post-transfusion babies require repeat screening after 72 hours.",
+    "Preterm infants (<32 weeks) need repeat at term corrected age.",
+    "Poor or inadequate samples need immediate recollection.",
+    "Failure to follow up abnormal results is the most dangerous gap in screening programs."
+  ],
+  "monitoring_parameters": [
+    {
+      "parameter": "Repeat NBS sample",
+      "frequency": "As per indication (48-72h, discharge, post-transfusion)"
+    },
+    {
+      "parameter": "Lab report follow-up",
+      "frequency": "Within 5-7 days of repeat sample"
+    },
+    {
+      "parameter": "Confirmatory testing",
+      "frequency": "Urgently if abnormal"
+    },
+    {
+      "parameter": "Growth and feeding",
+      "frequency": "At each visit"
+    }
+  ]
+}

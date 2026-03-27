@@ -1,0 +1,159 @@
+{
+  "template_name": "Standard Prescription Format – Heel Prick in Neonates",
+  "template_code": "NB_HEEL_PRICK_V1",
+  "category": "Neonatology",
+  "procedure": "Heel Prick Blood Sampling",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "age_in_days": "",
+    "sex": "",
+    "gestation": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": ""
+  },
+  "indications": [
+    "Newborn metabolic screening (CH, CAH, PKU, G6PD etc.)",
+    "Blood glucose monitoring (hypoglycemia)",
+    "Blood gas sampling (limited use)",
+    "Hemoglobin estimation"
+  ],
+  "pre_procedure_assessment": {
+    "indication_confirmed": true,
+    "baby_stable": true,
+    "feeding_status": "adequate / poor",
+    "perfusion": "normal / poor",
+    "contraindications_checked": true,
+    "remarks": ""
+  },
+  "procedure_steps": {
+    "preparation": [
+      "Wash hands and wear sterile gloves",
+      "Warm heel (37–40°C for 3–5 minutes) to improve blood flow",
+      "Position baby comfortably (preferably held by caregiver)"
+    ],
+    "site_selection": [
+      "Use medial or lateral plantar surface of heel",
+      "Avoid center and posterior heel (risk of bone injury)"
+    ],
+    "cleaning": [
+      "Clean skin with 70% alcohol swab",
+      "Allow to air dry completely"
+    ],
+    "prick_technique": [
+      "Use single-use sterile lancet",
+      "Puncture quickly and gently (depth ≤2 mm)",
+      "Avoid deep puncture"
+    ],
+    "sample_collection": [
+      "Wipe away first drop (may be contaminated)",
+      "Collect subsequent drops on filter paper or capillary tube",
+      "Apply gentle intermittent pressure (avoid excessive squeezing)"
+    ],
+    "post_procedure": [
+      "Apply gentle pressure with sterile gauze until bleeding stops",
+      "Apply small sterile dressing if required"
+    ]
+  },
+  "pain_minimization": [
+    "Skin-to-skin contact during procedure",
+    "Breastfeeding during procedure if possible",
+    "Oral sucrose solution (as per protocol)",
+    "Warm heel before puncture",
+    "Use quick and gentle technique"
+  ],
+  "complications_to_monitor": [
+    "Hematoma formation",
+    "Local infection",
+    "Osteomyelitis (rare, due to wrong site)",
+    "Excessive pain or distress",
+    "Hemolysis due to excessive squeezing"
+  ],
+  "prevention_of_complications": [
+    "Correct site selection (avoid center of heel)",
+    "Maintain strict sterile technique",
+    "Use minimal pressure during collection",
+    "Limit puncture depth to ≤2 mm",
+    "Proper post-procedure pressure application"
+  ],
+  "post_procedure_advice": [
+    "Mild discomfort is normal and temporary",
+    "No special care required at puncture site",
+    "Observe for redness, swelling, or discharge",
+    "Continue breastfeeding normally after procedure"
+  ],
+  "red_flags": [
+    "Persistent bleeding from puncture site",
+    "Swelling or redness suggesting infection",
+    "Excessive crying or irritability",
+    "Signs of poor perfusion or lethargy"
+  ],
+  "parent_counseling": [
+    "Heel prick is safe and essential for early detection of serious diseases",
+    "Pain is minimal and short-lasting",
+    "Proper technique prevents complications",
+    "Early screening helps prevent long-term disability",
+    "Report any swelling, redness, or persistent bleeding"
+  ],
+  "follow_up": {
+    "routine": "As per newborn screening protocol",
+    "repeat_if": [
+      "Inadequate sample",
+      "Early sample (<24 hours)",
+      "Abnormal or borderline result"
+    ]
+  },
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "Z13.228",
+  "diagnosis_name": "Heel Prick in Neonates (Newborn Screening)",
+  "snomed_code": "428571003",
+  "snomed_display": "Neonatal blood spot screening (procedure)",
+  "counselling": [
+    "Heel prick is safe and essential for early detection of serious diseases — एड़ी की चुभन सुरक्षित है और गंभीर बीमारियों की जल्दी पहचान के लिए ज़रूरी है",
+    "Pain is minimal and short-lasting — दर्द बहुत कम और थोड़ी देर का होता है",
+    "Proper technique prevents complications — सही तरीके से करने पर कोई समस्या नहीं होती",
+    "Early screening helps prevent long-term disability — जल्दी जांच से लंबी अक्षमता रोकी जा सकती है",
+    "Report any swelling, redness, or persistent bleeding — अगर सूजन, लालिमा या लगातार खून बहे तो बताएं",
+    "Breastfeeding during procedure reduces pain — जांच के दौरान दूध पिलाने से दर्द कम होता है"
+  ],
+  "warning_signs": [
+    "Persistent bleeding from puncture site — चुभन की जगह से लगातार खून बहना",
+    "Swelling or redness suggesting infection — संक्रमण की ओर इशारा करती सूजन या लालिमा",
+    "Excessive crying or irritability — बहुत ज़्यादा रोना या चिड़चिड़ापन",
+    "Signs of poor perfusion or lethargy — कमज़ोर रक्त प्रवाह या सुस्ती के संकेत"
+  ],
+  "expected_course": "The heel prick site heals within 1-2 days. Mild redness at the puncture site is normal and resolves within hours. Results of newborn screening tests are typically available within 1-2 weeks. Abnormal or borderline results require repeat testing.",
+  "key_clinical_points": [
+    "Optimal timing: 48-72 hours after birth (after adequate feeding)",
+    "Use medial or lateral plantar surface of heel only — avoid center (bone injury risk)",
+    "Warm the heel for 3-5 minutes before puncture to improve blood flow",
+    "Puncture depth must not exceed 2 mm",
+    "Wipe away first drop — collect subsequent drops",
+    "Avoid excessive squeezing — causes hemolysis and false results",
+    "Non-pharmacological pain relief: skin-to-skin, sucrose, breastfeeding during procedure",
+    "Screens for: CH, CAH, PKU, G6PD, sickle cell disease, galactosemia"
+  ],
+  "monitoring_parameters": [
+    {
+      "parameter": "Puncture site",
+      "frequency": "Check at 1 hour and next feed for bleeding or hematoma"
+    },
+    {
+      "parameter": "Screening results",
+      "frequency": "Review within 1-2 weeks of sample collection"
+    },
+    {
+      "parameter": "Repeat sample",
+      "frequency": "If inadequate sample, <24 hours sample, or borderline results"
+    }
+  ]
+}

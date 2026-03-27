@@ -1,0 +1,325 @@
+{
+  "template_name": "Standard Prescription Format - Neonatal Cholestasis",
+  "condition": {
+    "name": "Neonatal Cholestasis",
+    "icd10_suggestions": ["P59.8", "P78.89", "Q44.2", "K83.1"],
+    "overview": [
+      "Neonatal cholestasis is conjugated hyperbilirubinemia in the first months of life.",
+      "Early recognition and referral are critical to prevent progressive liver damage, biliary cirrhosis and death.",
+      "Cholestasis is often mistaken for prolonged physiological jaundice, so any prolonged jaundice must be fractionated."
+    ]
+  },
+  "definition": {
+    "iap_espghan_criteria": [
+      "Direct (conjugated) bilirubin >1 mg/dL if total bilirubin is <5 mg/dL",
+      "Direct bilirubin >20% of total bilirubin if total bilirubin is >5 mg/dL"
+    ],
+    "screening_trigger": "Evaluation should begin if jaundice persists beyond 14 days in term infants."
+  },
+  "common_causes": {
+    "obstructive_causes": [
+      "Biliary atresia",
+      "Choledochal cyst",
+      "Alagille syndrome",
+      "Inspissated bile syndrome",
+      "Cystic fibrosis"
+    ],
+    "hepatocellular_or_metabolic_causes": [
+      "Neonatal hepatitis",
+      "Galactosemia",
+      "Tyrosinemia",
+      "Progressive familial intrahepatic cholestasis (PFIC)",
+      "TORCH infections"
+    ]
+  },
+  "history_template": [
+    "Duration of jaundice",
+    "Whether jaundice is persisting beyond 14 days",
+    "Color of stool (pale, clay, white or acholic)",
+    "Color of urine (dark urine)",
+    "Feeding pattern",
+    "Weight gain / growth failure",
+    "Family history including sibling deaths or liver disease",
+    "Antenatal infections such as TORCH",
+    "History suggestive of IUGR or syndromic disorder"
+  ],
+  "examination_template": [
+    "General appearance and nutritional status",
+    "Jaundice severity",
+    "Hepatomegaly",
+    "Splenomegaly",
+    "Firm liver on palpation",
+    "Growth failure / failure to thrive",
+    "Dysmorphic features such as features of Alagille syndrome",
+    "Bleeding tendency",
+    "Signs of fat-soluble vitamin deficiency"
+  ],
+  "red_flags": [
+    "Persistent jaundice beyond 14 days",
+    "Pale / clay / acholic stools",
+    "Dark urine",
+    "Firm hepatomegaly",
+    "Rising conjugated bilirubin",
+    "High GGT (>300 IU/L)",
+    "Coagulopathy",
+    "Failure to thrive",
+    "Sibling deaths due to liver disease"
+  ],
+  "first_line_investigations": [
+    {
+      "name": "Liver Function Tests",
+      "includes": ["Total bilirubin", "Direct bilirubin", "ALT", "AST"],
+      "purpose": "Confirm cholestasis and assess hepatocellular injury"
+    },
+    {
+      "name": "PT / INR",
+      "purpose": "Assess coagulation status and vitamin K related malabsorption"
+    },
+    {
+      "name": "GGT and ALP",
+      "purpose": "Clues to biliary versus hepatocellular origin"
+    },
+    {
+      "name": "Abdominal USG",
+      "purpose": "Rule out choledochal cyst or biliary atresia and assess gallbladder"
+    },
+    {
+      "name": "Stool color card",
+      "purpose": "Visual parent-based recognition of pale stools"
+    },
+    {
+      "name": "TORCH serology",
+      "purpose": "CMV / Rubella evaluation when suspected"
+    },
+    {
+      "name": "Urine reducing substances",
+      "purpose": "Screen for galactosemia"
+    },
+    {
+      "name": "Serum alpha-1 antitrypsin",
+      "purpose": "Evaluate metabolic / cholestatic cause"
+    }
+  ],
+  "additional_workup_if_indicated": [
+    "HIDA scan",
+    "Pediatric gastroenterology / hepatology consultation",
+    "Further metabolic work-up",
+    "Liver biopsy if advised by specialist"
+  ],
+  "clinical_clues_summary": [
+    {
+      "clinical_feature": "Pale stools",
+      "clue_toward": "Obstructive jaundice such as biliary atresia"
+    },
+    {
+      "clinical_feature": "Normal-colored stools",
+      "clue_toward": "Hepatitis or metabolic causes"
+    },
+    {
+      "clinical_feature": "Hepatomegaly with high GGT",
+      "clue_toward": "Biliary atresia"
+    },
+    {
+      "clinical_feature": "Dysmorphic features",
+      "clue_toward": "Syndromic disorder such as Alagille syndrome"
+    },
+    {
+      "clinical_feature": "Coagulopathy",
+      "clue_toward": "Severe liver dysfunction"
+    }
+  ],
+  "management_protocol": {
+    "immediate_actions": [
+      "Confirm conjugated hyperbilirubinemia",
+      "Measure direct and total bilirubin urgently",
+      "Order LFTs, PT/INR and abdominal ultrasound",
+      "Refer early to pediatric gastroenterologist / hepatologist if biliary atresia suspected"
+    ],
+    "supportive_management": [
+      "Support nutrition with high-calorie feeds",
+      "Supplement fat-soluble vitamins",
+      "Give vitamin K where indicated",
+      "Monitor weight gain and hydration"
+    ],
+    "definitive_management": [
+      {
+        "condition": "Biliary atresia suspected or confirmed",
+        "action": [
+          "Urgent specialist referral",
+          "Ultrasound and HIDA scan as advised",
+          "Early Kasai procedure ideally before 45-60 days"
+        ]
+      },
+      {
+        "condition": "Metabolic / infectious cause suspected",
+        "action": [
+          "Targeted work-up and disease-specific treatment",
+          "Specialist referral"
+        ]
+      }
+    ]
+  },
+  "parent_counseling": [
+    "Not all jaundice is benign after 2 weeks of age. — 2 हफ्ते बाद भी पीलिया सामान्य नहीं माना जाना चाहिए।",
+    "Pale stools and dark urine are danger signs and need urgent evaluation. — सफ़ेद पोटी और गहरे रंग का पेशाब खतरे के निशान हैं, तुरंत जांच कराएं।",
+    "Early surgery in biliary atresia can preserve native liver function. — पित्त नली की बीमारी में जल्दी ऑपरेशन से लीवर बचाया जा सकता है।",
+    "Good nutrition and vitamin supplementation are important. — अच्छा पोषण और विटामिन की खुराक ज़रूरी है।",
+    "Regular follow-up and monitoring are essential. — नियमित जांच बहुत ज़रूरी है।"
+  ],
+  "flow_logic": [
+    "If jaundice persists beyond 14 days, check stool and urine color",
+    "If pale stools or dark urine are present, do LFT with direct bilirubin",
+    "If conjugated hyperbilirubinemia is confirmed, suspect neonatal cholestasis",
+    "Rule out biliary atresia urgently",
+    "Refer early for imaging and specialist evaluation",
+    "Plan surgery if needed"
+  ],
+  "quick_checklist_for_opd": [
+    "Is jaundice persisting beyond 14 days?",
+    "Is stool color pale or white?",
+    "Is urine dark?",
+    "Has direct / conjugated bilirubin been measured?",
+    "Have LFTs, PT/INR and abdominal USG been ordered?",
+    "Has early referral been made if biliary atresia is suspected?"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Neonatology OPD",
+    "title": "Standard Prescription - Neonatal Cholestasis",
+    "patient_identification": {
+      "patient_name": "",
+      "uhid": "",
+      "ipid": "",
+      "age": "",
+      "sex": "",
+      "dob": "",
+      "day_of_life": "",
+      "weight_kg": "",
+      "date": "",
+      "time": "",
+      "parent_name": "",
+      "contact_number": ""
+    },
+    "chief_complaints": [
+      "Jaundice persisting beyond 14 days",
+      "Pale / clay / white stools",
+      "Dark urine",
+      "Poor weight gain / poor feeding"
+    ],
+    "clinical_assessment": {
+      "duration_of_jaundice": "",
+      "stool_color": "",
+      "urine_color": "",
+      "feeding_status": "",
+      "weight_gain": "",
+      "hepatomegaly": "",
+      "splenomegaly": "",
+      "firm_liver": "",
+      "bleeding_tendency": "",
+      "dysmorphic_features": "",
+      "family_history": ""
+    },
+    "provisional_diagnosis_options": [
+      "Neonatal cholestasis - rule out biliary atresia",
+      "Conjugated hyperbilirubinemia",
+      "Neonatal cholestasis - likely hepatocellular / metabolic cause"
+    ],
+    "investigation_orders": [
+      "TOTAL BILIRUBIN + DIRECT BILIRUBIN",
+      "LFT (AST, ALT, GGT, ALP)",
+      "PT / INR",
+      "ABDOMINAL ULTRASOUND",
+      "STOOL COLOR ASSESSMENT",
+      "TORCH SEROLOGY IF INDICATED",
+      "URINE REDUCING SUBSTANCES",
+      "SERUM ALPHA-1 ANTITRYPSIN"
+    ],
+    "treatment_plan": {
+      "general_advice": [
+        "Urgent evaluation required",
+        "Maintain feeding and hydration",
+        "Nutritional support with high-calorie feeds",
+        "Fat-soluble vitamin supplementation if advised",
+        "VITAMIN K support if indicated"
+      ],
+      "if_biliary_atresia_suspected": [
+        "Urgent pediatric hepatology / gastroenterology referral",
+        "Further imaging including HIDA scan if advised",
+        "Early surgical planning"
+      ],
+      "if_unwell_or_coagulopathy_present": [
+        "Admit for further evaluation and stabilization"
+      ]
+    },
+    "follow_up": {
+      "review_in": "",
+      "emergency_if": [
+        "Stools become pale or white",
+        "Urine becomes dark",
+        "Bleeding develops",
+        "Poor feeding",
+        "Lethargy",
+        "Worsening jaundice"
+      ]
+    },
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "snomed_code": "276555003",
+  "snomed_display": "Neonatal cholestasis (disorder)",
+  "icd10": "P59.8",
+  "diagnosis_name": "Neonatal Cholestasis",
+  "category": "Neonatology",
+  "warning_signs": [
+    "Pale or white stools — सफ़ेद या मिट्टी जैसी पोटी",
+    "Dark yellow or brown urine — गहरे पीले या भूरे रंग का पेशाब",
+    "Worsening jaundice — पीलिया बढ़ना",
+    "Bleeding from any site — कहीं से भी खून आना",
+    "Poor feeding or weight loss — दूध न पीना या वज़न कम होना",
+    "Swollen abdomen — पेट फूलना"
+  ],
+  "expected_course": "Neonatal cholestasis requires urgent evaluation. Biliary atresia must be ruled out within the first 45-60 days of life for best surgical outcomes (Kasai procedure). Metabolic and infectious causes may respond to specific treatment. Without timely intervention, progressive liver damage and cirrhosis can occur.",
+  "key_clinical_points": [
+    "Any jaundice persisting beyond 14 days in a term infant must be fractionated (total + direct bilirubin).",
+    "Direct bilirubin >1 mg/dL (if total <5) or >20% of total (if total >5) defines cholestasis.",
+    "Stool color card is a simple, effective screening tool for parents.",
+    "High GGT (>300 IU/L) with hepatomegaly is suggestive of biliary atresia.",
+    "Kasai portoenterostomy should ideally be performed before 45-60 days of age.",
+    "Fat-soluble vitamin supplementation (A, D, E, K) is essential in cholestasis."
+  ],
+  "severity_assessment": {
+    "mild": "Persistent jaundice with normal direct bilirubin, normal stool color, thriving baby — monitor and recheck.",
+    "moderate": "Elevated direct bilirubin, slightly abnormal LFTs, normal stool color — complete workup urgently.",
+    "severe": "Pale/acholic stools, high GGT, hepatomegaly, coagulopathy, failure to thrive — urgent specialist referral, suspect biliary atresia."
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Total and direct bilirubin",
+      "frequency": "Weekly until resolved or diagnosis confirmed"
+    },
+    {
+      "parameter": "LFTs (AST, ALT, GGT, ALP)",
+      "frequency": "At presentation and as directed"
+    },
+    {
+      "parameter": "PT/INR",
+      "frequency": "At presentation; repeat if abnormal"
+    },
+    {
+      "parameter": "Stool color",
+      "frequency": "Daily by parents using stool color card"
+    },
+    {
+      "parameter": "Weight gain",
+      "frequency": "At each visit"
+    },
+    {
+      "parameter": "Abdominal ultrasound",
+      "frequency": "At presentation"
+    }
+  ]
+}

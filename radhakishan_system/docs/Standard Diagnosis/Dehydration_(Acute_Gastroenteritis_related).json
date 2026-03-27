@@ -1,0 +1,102 @@
+{
+  "icd10": "E86.0",
+  "diagnosis_name": "Dehydration (Acute Gastroenteritis related)",
+  "category": "GI",
+  "severity": "any",
+  "first_line_drugs": [
+    {
+      "drug": "Oral Rehydration Solution (ORS)",
+      "notes": "Plan A: <2 yrs: 50–100 ml after each loose stool; 2–10 yrs: 100–200 ml; >10 yrs: as tolerated",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Oral Rehydration Solution (ORS)",
+      "notes": "Plan B: 75 ml/kg over 4 hours (for some dehydration), reassess after 4 hrs",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Ringer Lactate (RL) / Normal Saline (NS)",
+      "notes": "Plan C: 100 ml/kg IV (30 ml/kg rapid then 70 ml/kg over 2.5–5 hrs depending on age)",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Zinc",
+      "notes": "<6 months: 10 mg OD for 14 days; >6 months: 20 mg OD for 14 days",
+      "is_new_2024_2025": false
+    }
+  ],
+  "second_line_drugs": [
+    {
+      "drug": "Ondansetron",
+      "notes": "0.15 mg/kg/dose PO/IV if persistent vomiting interfering with ORS",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Probiotics",
+      "notes": "Optional; may reduce duration of diarrhea",
+      "is_new_2024_2025": false
+    }
+  ],
+  "investigations": [
+    {
+      "name": "Serum Electrolytes",
+      "indication": "Moderate to severe dehydration",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Blood Urea/Creatinine",
+      "indication": "Severe dehydration or shock",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Stool Routine/Microscopy",
+      "indication": "Persistent diarrhea or dysentery",
+      "urgency": "routine"
+    },
+    {
+      "name": "Blood Glucose",
+      "indication": "Lethargy or altered sensorium",
+      "urgency": "stat"
+    }
+  ],
+  "counselling": [
+    "Give ORS frequently in small amounts — ORS बार-बार थोड़ी-थोड़ी मात्रा में पिलाएं।",
+    "Continue breastfeeding and normal diet — माँ का दूध और सामान्य खाना जारी रखें।",
+    "Avoid sugary drinks and packaged juices — मीठे पेय और पैकेट वाले जूस न दें।",
+    "Maintain hand hygiene to prevent spread — हाथों की सफ़ाई रखें ताकि बीमारी न फैले।",
+    "Follow-up if no improvement in 2–3 days — 2-3 दिन में सुधार न हो तो दोबारा डॉक्टर को दिखाएं।"
+  ],
+  "warning_signs": [
+    "Lethargy or unconsciousness",
+    "Sunken eyes and poor drinking",
+    "Persistent vomiting",
+    "No urine for >6 hours",
+    "Blood in stool",
+    "Severe weakness or shock signs"
+  ],
+  "referral_criteria": "Refer if severe dehydration, shock, persistent vomiting, or no improvement after ORS therapy",
+  "hospitalisation_criteria": "Severe dehydration, inability to drink, repeated vomiting, shock, altered sensorium",
+  "notes": "ORS is cornerstone therapy. Avoid unnecessary antibiotics unless dysentery or specific infection suspected.",
+  "source": "WHO Diarrhea Guidelines 2023, IAP 2024",
+  "duration_days_default": 3,
+  "active": true,
+  "guideline_changes": "Low osmolar ORS recommended universally; early feeding emphasized",
+  "snomed_code": "34095006",
+  "expected_course": "Diarrhea improves in 3–5 days; hydration improves within 24–48 hours",
+  "key_clinical_points": [
+    "ORS is lifesaving and first-line treatment",
+    "Assess dehydration clinically before treatment",
+    "Reassess after 4 hours in Plan B"
+  ],
+  "severity_assessment": {
+    "mild": "No signs of dehydration, normal drinking",
+    "moderate": "Restless, sunken eyes, thirsty, reduced skin turgor",
+    "severe": "Lethargic, unable to drink, weak pulse, delayed capillary refill"
+  },
+  "monitoring_parameters": [
+    { "parameter": "Hydration status", "frequency": "Every 4 hours" },
+    { "parameter": "Urine output", "frequency": "6-hourly" },
+    { "parameter": "Weight", "frequency": "Daily" },
+    { "parameter": "Pulse and BP", "frequency": "4-hourly" }
+  ]
+}

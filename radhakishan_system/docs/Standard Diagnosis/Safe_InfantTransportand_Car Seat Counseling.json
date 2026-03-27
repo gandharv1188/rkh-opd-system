@@ -1,0 +1,161 @@
+{
+  "template_name": "Standard Prescription Format – Safe Infant Transport and Car Seat Counseling",
+  "template_code": "NEO_TRANSPORT_CAR_SEAT_V1",
+  "diagnosis_name": "Safe Infant Transport and Car Seat Counseling",
+  "icd10": "Z00.1",
+  "snomed_code": "410265008",
+  "category": "Neonatal Counseling",
+  "condition": "Safe Infant Transport and Car Seat Use",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "date_of_birth": "",
+    "sex": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "gestational_age_weeks": ""
+  },
+  "clinical_context": {
+    "mode_of_transport": "",
+    "car_seat_available": "",
+    "car_seat_type": "",
+    "rear_facing": "",
+    "strap_fit": "",
+    "chest_clip_position": "",
+    "recline_angle": "",
+    "nicu_graduate": "",
+    "prematurity": ""
+  },
+  "diagnosis": {
+    "primary": "Parental Counseling for Safe Infant Transport",
+    "category": [
+      "Neonatal safety counseling",
+      "Car seat usage education",
+      "Prevention of injury"
+    ]
+  },
+  "principles": [
+    "All infants must travel in a rear-facing car seat",
+    "Correct installation and positioning are essential",
+    "Use car seat only for transport, not routine sleep",
+    "Regular assessment and reinforcement at OPD visits"
+  ],
+  "prescription": {
+    "advice": [
+      {
+        "topic": "Car seat position",
+        "recommendation": "Rear-facing car seat in back seat, preferably center position"
+      },
+      {
+        "topic": "Harness positioning",
+        "recommendation": "Straps at or below shoulder level, snug fit"
+      },
+      {
+        "topic": "Chest clip",
+        "recommendation": "At armpit level"
+      },
+      {
+        "topic": "Recline angle",
+        "recommendation": "Approximately 45 degrees for newborns"
+      },
+      {
+        "topic": "Clothing",
+        "recommendation": "Avoid bulky clothing under harness"
+      },
+      {
+        "topic": "Seat usage",
+        "recommendation": "Use only during travel; not for sleeping at home"
+      }
+    ]
+  },
+  "special_situations": [
+    {
+      "condition": "Preterm or low birth weight infant",
+      "recommendation": "Monitor tolerance in car seat (risk of desaturation)"
+    },
+    {
+      "condition": "NICU graduates (<2.5 kg)",
+      "recommendation": "Perform car seat challenge test before discharge"
+    },
+    {
+      "condition": "Unable to tolerate upright position",
+      "recommendation": "Consider car bed use"
+    }
+  ],
+  "car_seat_challenge_test": {
+    "indication": "Preterm or <2.5 kg infants",
+    "duration": "90–120 minutes",
+    "monitoring": ["Apnea", "Bradycardia", "Desaturation"]
+  },
+  "common_errors": [
+    "Loose installation or incorrect angle",
+    "Loose harness or incorrect chest clip position",
+    "Forward-facing too early",
+    "Use of non-approved padding or accessories"
+  ],
+  "contraindications_or_warnings": [
+    "Expired or damaged car seats",
+    "Use of second-hand seat with unknown history",
+    "Using car seat for sleep outside vehicle"
+  ],
+  "red_flags": [
+    "No car seat available",
+    "Forward-facing in newborn period",
+    "Improper harness fit",
+    "Infant desaturation in car seat",
+    "Use of expired or unsafe seat"
+  ],
+  "management_plan": [
+    "Assess car seat usage at every OPD visit",
+    "Demonstrate correct positioning if needed",
+    "Advise on appropriate car seat selection",
+    "Provide written safety instructions",
+    "Plan follow-up for reinforcement"
+  ],
+  "parent_counseling": [
+    "Always use a car seat, even for short trips — छोटी यात्रा में भी कार सीट ज़रूर लगाएं",
+    "Rear-facing is safest until at least 2 years or weight/height limit — पीछे की ओर मुंह करके बैठाना 2 साल तक सबसे सुरक्षित है",
+    "Ensure snug harness and proper clip position — बेल्ट कसी हो और क्लिप सही जगह हो",
+    "Never leave baby unattended in car seat outside vehicle — गाड़ी के बाहर कार सीट में बच्चे को अकेला न छोड़ें",
+    "Avoid aftermarket accessories unless approved — बिना मान्यता वाले एक्सेसरीज़ का इस्तेमाल न करें",
+    "Check expiry date of car seat — कार सीट की एक्सपायरी डेट जांचें"
+  ],
+  "opd_checklist": [
+    "Mode of transport assessed?",
+    "Car seat present and inspected?",
+    "Rear-facing confirmed?",
+    "Harness fit and chest clip position correct?",
+    "Recline angle appropriate?",
+    "Screened for prematurity-related risk?",
+    "Parental counseling provided?"
+  ],
+  "follow_up": {
+    "next_visit": "Routine OPD visit",
+    "monitoring": "Check proper use and positioning",
+    "reinforcement": "Repeat demonstration if needed"
+  },
+  "warning_signs": [
+    "Infant shows color change or breathing difficulty in car seat — कार सीट में बच्चे का रंग बदलना या सांस लेने में तकलीफ़",
+    "Head slumping forward or chin on chest — सिर आगे गिरना या ठोड़ी छाती पर",
+    "Apnea or desaturation episodes — सांस रुकना या ऑक्सीजन कम होना",
+    "Sweating or excessive irritability — ज़्यादा पसीना या चिड़चिड़ापन"
+  ],
+  "expected_course": "Counseling is provided at discharge and reinforced at every OPD visit. Most families adapt well with demonstration. Preterm and low-birth-weight infants require a car seat challenge test before discharge to ensure safe tolerance of the semi-upright position.",
+  "key_clinical_points": [
+    "Indian context: car seat use is low but injury prevention counseling is essential",
+    "Preterm infants (<37 weeks) and LBW (<2.5 kg) need car seat challenge test",
+    "Car seat should NOT be used as a routine sleep device at home",
+    "Rear-facing position is mandatory until at least 2 years of age",
+    "Avoid bulky clothing under harness straps"
+  ],
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  }
+}

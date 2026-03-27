@@ -1,0 +1,98 @@
+{
+  "icd10": "J00",
+  "diagnosis_name": "Common Cold (Acute Viral Upper Respiratory Infection)",
+  "category": "Respiratory",
+  "severity": "mild",
+
+  "first_line_drugs": [
+    {
+      "drug": "PARACETAMOL",
+      "notes": "10–15 mg/kg/dose PO every 6–8 hours SOS for fever >100°F, maximum 60 mg/kg/day, duration 3–5 days",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "NASAL SALINE (0.65% NORMAL SALINE)",
+      "notes": "2–3 drops in each nostril 4–6 times/day for nasal blockage relief and feeding improvement",
+      "is_new_2024_2025": false
+    }
+  ],
+
+  "second_line_drugs": [
+    {
+      "drug": "PHENYLEPHRINE + CHLORPHENIRAMINE",
+      "notes": "Oral drops as per weight (typically 2–6 drops TDS depending on age), use only if significant nasal discharge/congestion and child is symptomatic; avoid use >5 days and use cautiously in infants",
+      "is_new_2024_2025": false
+    }
+  ],
+
+  "investigations": [
+    {
+      "name": "CBC",
+      "indication": "Persistent fever >3 days, toxic appearance, suspicion of bacterial infection",
+      "urgency": "routine"
+    },
+    {
+      "name": "CRP",
+      "indication": "To rule out bacterial infection if symptoms persist or worsen",
+      "urgency": "routine"
+    }
+  ],
+
+  "counselling": [
+    "This is a common viral illness and usually resolves on its own within few days — यह एक सामान्य वायरल बीमारी है, कुछ दिनों में अपने आप ठीक हो जाती है।",
+    "Continue breastfeeding and give adequate fluids; small frequent feeds are better — माँ का दूध जारी रखें और पर्याप्त तरल पदार्थ दें; थोड़ा-थोड़ा बार-बार पिलाएं।",
+    "Use medicines only as prescribed; avoid over-the-counter cough syrups in infants — केवल डॉक्टर की बताई दवा दें; छोटे बच्चों को बाज़ार की खांसी की दवा न दें।",
+    "Keep child warm, avoid cold exposure, and maintain hygiene — बच्चे को गर्म रखें, ठंड से बचाएं और साफ़-सफ़ाई रखें।",
+    "Follow-up after 2–3 days or earlier if symptoms worsen — 2-3 दिन बाद या लक्षण बिगड़ें तो पहले डॉक्टर को दिखाएं।"
+  ],
+
+  "warning_signs": [
+    "Fast breathing or chest indrawing",
+    "Bluish lips or tongue",
+    "Convulsions or fits",
+    "Excessive sleepiness or unresponsiveness",
+    "Persistent vomiting",
+    "Poor feeding or refusal to feed",
+    "Fever lasting more than 3 days",
+    "Drop in oxygen saturation"
+  ],
+
+  "referral_criteria": "Refer to pediatrician or higher center if no improvement after 3 days, recurrent episodes, or development of warning signs",
+
+  "hospitalisation_criteria": "Admit if SpO2 <92%, severe respiratory distress, poor feeding, dehydration, lethargy, or age <2 months with symptoms",
+
+  "notes": "Viral upper respiratory infection; self-limiting illness lasting 5–7 days; antibiotics are not indicated routinely",
+
+  "source": ["IAP 2024", "WHO 2023", "AAP Guidelines"],
+
+  "duration_days_default": 5,
+  "active": true,
+  "guideline_changes": null,
+  "snomed_code": "82272006",
+
+  "expected_course": "Fever may last 2–3 days; nasal symptoms 5–7 days; cough may persist up to 7–10 days",
+
+  "key_clinical_points": [
+    "Most common cause is viral; no role of antibiotics",
+    "Nasal saline is safest and most effective symptomatic relief in infants",
+    "Avoid strong cough syrups in children below 5 years",
+    "Maintain hydration and feeding is key to recovery"
+  ],
+
+  "severity_assessment": {
+    "mild": "Runny nose, mild cough, no respiratory distress, feeding well",
+    "moderate": "Fever, irritability, reduced feeding, mild nasal blockage",
+    "severe": "Respiratory distress, hypoxia, poor feeding, lethargy"
+  },
+
+  "monitoring_parameters": [
+    { "parameter": "Temperature", "frequency": "4–6 hourly" },
+    { "parameter": "Respiratory rate", "frequency": "4–6 hourly" },
+    { "parameter": "SpO2", "frequency": "if symptomatic or severe" },
+    {
+      "parameter": "Feeding / hydration status",
+      "frequency": "continuous observation"
+    },
+    { "parameter": "Urine output", "frequency": "monitor daily" }
+  ]
+}

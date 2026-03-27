@@ -1,0 +1,128 @@
+{
+  "icd10": "E87.5",
+  "diagnosis_name": "Hyperkalemia",
+  "category": "Emergency",
+  "severity": "any",
+  "first_line_drugs": [
+    {
+      "drug": "Calcium Gluconate",
+      "notes": "100 mg/kg/dose IV (approximately 1 mL/kg/dose) over 5-10 minutes for ECG changes or severe hyperkalemia; membrane stabilizing; onset 1-3 min; duration about 30 min",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Sodium Bicarbonate",
+      "notes": "1-2 mEq/kg/dose IV over 5-10 minutes; especially useful if associated acidosis; onset 10-30 min; duration about 2 hours",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Regular Insulin with Glucose",
+      "notes": "Glucose 0.5 g/kg (approximately 2 mL/kg of 25% dextrose) plus regular insulin 0.1 U/kg IV over 15-30 minutes; shifts potassium intracellularly; onset about 30 min; duration 2-4 hours",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Salbutamol Nebulization",
+      "notes": "2.5 mg if <25 kg, 5 mg if >25 kg, nebulized over 10 minutes; promotes intracellular shift of potassium; onset about 120 min",
+      "is_new_2024_2025": false
+    }
+  ],
+  "second_line_drugs": [
+    {
+      "drug": "Sodium Polystyrene Sulfonate",
+      "notes": "0.5-1 g orally or rectally; enhances gastrointestinal potassium elimination; onset 60-120 min; duration 4-6 hours",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Furosemide",
+      "notes": "1-2 mg/kg IV if urine output is adequate; enhances urinary potassium excretion; onset 15-30 min; duration 4-6 hours",
+      "is_new_2024_2025": false
+    }
+  ],
+  "investigations": [
+    {
+      "name": "12-lead ECG",
+      "indication": "All suspected or confirmed hyperkalemia; assess ECG changes and severity",
+      "urgency": "stat"
+    },
+    {
+      "name": "Serum Potassium",
+      "indication": "Diagnosis and serial monitoring during treatment",
+      "urgency": "stat"
+    },
+    {
+      "name": "Serum Sodium, Bicarbonate, Calcium, Magnesium",
+      "indication": "Associated electrolyte and acid-base abnormalities",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Renal Function Tests",
+      "indication": "Assess renal cause and need for dialysis",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Blood Gas",
+      "indication": "If acidosis is suspected",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Urine Output Monitoring",
+      "indication": "Guide diuretic use and assess renal perfusion",
+      "urgency": "stat"
+    }
+  ],
+  "counselling": [
+    "High potassium can affect the heart and may become life-threatening. — ज्यादा पोटैशियम दिल को प्रभावित कर सकता है और जानलेवा हो सकता है।",
+    "Continuous monitoring is needed until potassium becomes safe. — पोटैशियम सामान्य होने तक लगातार निगरानी जरूरी है।",
+    "All potassium-containing oral feeds, IV fluids, and medicines should be reviewed and stopped if advised. — पोटैशियम वाले खाने, तरल पदार्थ और दवाइयाँ बंद करें जैसा डॉक्टर कहें।",
+    "Do not use over-the-counter supplements or salt substitutes unless approved. — डॉक्टर की मंजूरी के बिना कोई सप्लीमेंट या नमक का विकल्प न लें।",
+    "Seek urgent care if weakness, palpitations, or reduced urine output develops. — कमजोरी, धड़कन बढ़ना या पेशाब कम होने पर तुरंत डॉक्टर को दिखाएं।"
+  ],
+  "warning_signs": [
+    "Muscle weakness",
+    "Paresthesia",
+    "Palpitations",
+    "Bradycardia",
+    "Arrhythmia",
+    "Reduced urine output"
+  ],
+  "referral_criteria": "Refer urgently to pediatric intensivist/nephrologist if ECG changes are present, serum potassium is markedly elevated, medical treatment fails, renal failure is suspected, or dialysis may be required.",
+  "hospitalisation_criteria": "Admit if serum potassium >5.5 mEq/L with symptoms, ECG changes, renal dysfunction, ongoing potassium load, or need for IV therapy/cardiac monitoring.",
+  "notes": "Obtain ECG and place on cardiac monitor immediately. Eliminate potassium from diet and parenteral fluids. Stop drugs that can worsen hyperkalemia, such as ACE inhibitors and beta blockers. Dialysis is recommended if medical measures are unsuccessful.",
+  "source": "Provided pediatric hyperkalemia correction protocol",
+  "duration_days_default": 1,
+  "active": true,
+  "guideline_changes": null,
+  "snomed_code": "14140009",
+  "expected_course": "Cardiac stabilization is immediate after calcium therapy, while potassium shift and elimination occur over minutes to hours. Serial reassessment is required until potassium normalizes and ECG changes resolve.",
+  "key_clinical_points": [
+    "Calcium stabilizes myocardium but does not lower total body potassium.",
+    "Insulin with glucose, bicarbonate, and salbutamol shift potassium intracellularly.",
+    "Definitive potassium removal may require resin, diuresis, or dialysis."
+  ],
+  "severity_assessment": {
+    "mild": "Serum K+ 5.5-6.5 mEq/L; may show tall peaked T waves and prolonged PR interval.",
+    "moderate": "Serum K+ 6.5-8 mEq/L; may show loss of P waves, QRS widening, ST changes, ectopic beats, or escape rhythm.",
+    "severe": "Serum K+ >8 mEq/L or any level with severe ECG changes such as sine wave pattern, AV block, ventricular arrhythmias, bradycardia, or asystole."
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Cardiac rhythm / ECG",
+      "frequency": "Continuous"
+    },
+    {
+      "parameter": "Serum potassium",
+      "frequency": "2-4 hourly initially"
+    },
+    {
+      "parameter": "Blood glucose",
+      "frequency": "30-60 min after insulin, then as needed"
+    },
+    {
+      "parameter": "Urine output",
+      "frequency": "Hourly"
+    },
+    {
+      "parameter": "Renal function and acid-base status",
+      "frequency": "6-12 hourly or as clinically indicated"
+    }
+  ]
+}

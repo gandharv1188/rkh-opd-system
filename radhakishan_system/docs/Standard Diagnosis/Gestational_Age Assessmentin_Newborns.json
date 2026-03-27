@@ -1,0 +1,242 @@
+{
+  "template_name": "Standard Prescription Format – Gestational Age Assessment in Newborns",
+  "template_code": "GA_ASSESSMENT_NEWBORN_V1",
+  "category": "Neonatology",
+  "condition": "Assessment of Gestational Age in Newborns",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "date_of_birth": "",
+    "sex": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "head_circumference_cm": "",
+    "length_cm": "",
+    "postnatal_age_days": ""
+  },
+  "birth_history": {
+    "mode_of_delivery": "",
+    "place_of_birth": "",
+    "antenatal_care_available": "",
+    "lmp_available": "",
+    "early_ultrasound_available": "",
+    "documented_ga_weeks": "",
+    "discrepant_dates": "",
+    "preterm_labor_history": ""
+  },
+  "diagnosis": {
+    "primary": "Gestational Age Assessment",
+    "provisional_category": "",
+    "possible_classification": [
+      "Preterm infant",
+      "Term infant",
+      "Post-term infant",
+      "Unclear gestational age"
+    ]
+  },
+  "indications_for_ga_assessment": [
+    "No antenatal care",
+    "Unknown or uncertain gestational age",
+    "Discrepant dates",
+    "Birth weight not matching expected size for gestation",
+    "Suspected prematurity",
+    "Home delivery or missing records"
+  ],
+  "clinical_tools": {
+    "preferred_tool": "New Ballard Score",
+    "valid_range_weeks": "20–44 weeks",
+    "components": {
+      "neuromuscular_signs": [
+        "Posture",
+        "Square window (wrist)",
+        "Arm recoil",
+        "Popliteal angle",
+        "Scarf sign",
+        "Heel to ear"
+      ],
+      "physical_signs": [
+        "Skin texture",
+        "Lanugo",
+        "Plantar creases",
+        "Breast tissue",
+        "Eye/ear formation",
+        "Genitalia"
+      ]
+    },
+    "scoring_note": "Each item scored 0–5; total score converted to gestational age"
+  },
+  "simplified_clinical_clues": {
+    "preterm_features": [
+      "Thin, translucent skin",
+      "Ear cartilage flat or stays folded",
+      "Minimal breast tissue",
+      "Hypotonia",
+      "Male: smooth scrotum / undescended testes",
+      "Female: prominent clitoris / labia"
+    ],
+    "term_features": [
+      "Opaque, pink skin",
+      "Ear recoils promptly",
+      "Palpable breast nodule",
+      "Flexed posture",
+      "Male: scrotal rugae present",
+      "Female: labia majora cover labia minora"
+    ]
+  },
+  "clinical_assessment": {
+    "history": [
+      "Last menstrual period (LMP)",
+      "Early ultrasound details",
+      "Birth records",
+      "Antenatal history",
+      "History of preterm labor"
+    ],
+    "examination": [
+      "General appearance and maturity",
+      "Skin texture",
+      "Posture and muscle tone",
+      "Ear cartilage recoil",
+      "Breast tissue",
+      "Genital maturity",
+      "Neuromuscular Ballard signs"
+    ],
+    "compare_with_growth": [
+      "Weight vs GA",
+      "Head circumference vs GA",
+      "Classify as SGA / AGA / LGA"
+    ],
+    "documentation": [
+      "Record assessed gestational age",
+      "Record physical maturity signs",
+      "Record neuromuscular maturity signs",
+      "Mention consistency or discrepancy with available records"
+    ]
+  },
+  "prescription": {
+    "medications": [],
+    "investigations_advised": [
+      {
+        "test": "Early Ultrasound Report review",
+        "indication": "If available for confirmation"
+      },
+      {
+        "test": "Postnatal metabolic screening",
+        "indication": "If syndromic concern or unclear maturity"
+      },
+      {
+        "test": "Neuroimaging",
+        "indication": "If discordance with clinical signs or abnormal neurological findings"
+      }
+    ],
+    "non_pharmacological_advice": [
+      "Assess GA clinically when records are uncertain",
+      "Monitor feeding, weight, and thermoregulation according to maturity",
+      "Document GA clearly in OPD record"
+    ]
+  },
+  "management_plan": {
+    "term_infant_ge_37_weeks": [
+      "Routine OPD newborn care",
+      "Routine feeding advice",
+      "Routine growth monitoring"
+    ],
+    "late_preterm_34_to_36_plus_6_weeks": [
+      "Monitor feeding closely",
+      "Monitor weight gain",
+      "Monitor thermoregulation",
+      "Arrange closer follow-up"
+    ],
+    "less_than_34_weeks_or_unclear_ga": [
+      "Refer to hospital for full neonatal evaluation",
+      "Assess for complications of prematurity",
+      "Plan enhanced monitoring"
+    ]
+  },
+  "red_flags": [
+    "Gestational age <34 weeks",
+    "Abnormal neurological signs",
+    "Growth abnormalities not matching gestational age",
+    "Major discrepancy between Ballard score and available antenatal records"
+  ],
+  "parent_counseling": [
+    "Explain what gestational age means",
+    "Explain why correct gestational age matters for feeding, warmth, screening, and monitoring",
+    "Clarify that prematurity does not always mean low birth weight alone",
+    "Reassure in mild prematurity with proper follow-up",
+    "Discuss need for closer monitoring if baby appears less mature"
+  ],
+  "opd_checklist": [
+    "Birth history available?",
+    "Clinical suspicion of prematurity?",
+    "Signs consistent with gestational age?",
+    "Weight and head circumference correlated with gestational age?",
+    "Any red flags needing referral?",
+    "Gestational age documented in record?"
+  ],
+  "follow_up": {
+    "routine_term_baby": "As per standard newborn follow-up schedule",
+    "late_preterm_or_mild_discrepancy": "Early follow-up in 48–72 hours or as clinically indicated",
+    "major_concern": "Immediate referral / hospital evaluation"
+  },
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "Z00.110",
+  "diagnosis_name": "Gestational Age Assessment in Newborns",
+  "snomed_code": "364581007",
+  "snomed_display": "Gestational age finding (finding)",
+  "counselling": [
+    "Gestational age tells us how mature your baby is — गर्भकालीन आयु बताती है कि आपका बच्चा कितना परिपक्व है",
+    "Correct gestational age matters for feeding, warmth, screening, and monitoring — सही गर्भकालीन आयु दूध पिलाने, गर्मी, जांच और निगरानी के लिए ज़रूरी है",
+    "Prematurity does not always mean low birth weight alone — समय से पहले जन्म का मतलब सिर्फ़ कम वज़न नहीं है",
+    "Mild prematurity is manageable with proper follow-up — हल्की अपरिपक्वता सही देखभाल से ठीक हो जाती है",
+    "Closer monitoring may be needed if baby appears less mature — अगर बच्चा कम परिपक्व दिखे तो ज़्यादा निगरानी की ज़रूरत हो सकती है"
+  ],
+  "warning_signs": [
+    "Poor feeding or weak suck — कम दूध पीना या कमज़ोर चूसना",
+    "Temperature instability (feeling cold or hot) — तापमान अस्थिरता (ठंडा या गर्म लगना)",
+    "Breathing difficulty or apnea — सांस लेने में तकलीफ़ या सांस रुकना",
+    "Excessive jaundice — बहुत ज़्यादा पीलिया",
+    "Poor weight gain — वज़न न बढ़ना",
+    "Lethargy or irritability — सुस्ती या चिड़चिड़ापन"
+  ],
+  "expected_course": "Term infants (37-42 weeks) follow standard growth trajectories. Late preterm infants (34-36 weeks) may have feeding difficulties and temperature instability for the first 1-2 weeks but generally catch up by 4-6 weeks. Very preterm infants (<34 weeks) require specialized care. Growth and development milestones should be assessed using corrected age for preterm infants until 2 years.",
+  "key_clinical_points": [
+    "New Ballard Score is the standard clinical tool for GA assessment (valid 20-44 weeks)",
+    "Best performed within first 4 days of life",
+    "Six neuromuscular + six physical maturity criteria scored",
+    "Early ultrasound (first trimester) is the most accurate method for GA dating",
+    "Classify as SGA/AGA/LGA based on weight-for-GA centile",
+    "Use corrected age for growth and development in preterms",
+    "Use chronological age for vaccination scheduling"
+  ],
+  "monitoring_parameters": [
+    {
+      "parameter": "Weight",
+      "frequency": "At birth, daily if admitted, then weekly for first month"
+    },
+    {
+      "parameter": "Head circumference",
+      "frequency": "At birth and at each visit"
+    },
+    {
+      "parameter": "Temperature",
+      "frequency": "Every 4-6 hours for late preterm; at each visit for term"
+    },
+    {
+      "parameter": "Feeding adequacy",
+      "frequency": "At each feed for first week; then at each visit"
+    },
+    {
+      "parameter": "Blood glucose",
+      "frequency": "If preterm, SGA, LGA, or IDM — per protocol"
+    }
+  ]
+}

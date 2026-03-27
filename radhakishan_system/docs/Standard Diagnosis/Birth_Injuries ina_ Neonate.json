@@ -1,0 +1,346 @@
+{
+  "template_name": "Standard Prescription Format – Birth Injuries in a Neonate",
+  "template_code": "NEO_BIRTH_INJURY_V1",
+  "category": "Neonatology",
+  "condition": "Birth Injuries in a Neonate",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "date_of_birth": "",
+    "sex": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": "",
+    "gestational_age_weeks": "",
+    "day_of_life": ""
+  },
+  "birth_history": {
+    "mode_of_delivery": "",
+    "instrumental_delivery": "",
+    "prolonged_labor": "",
+    "shoulder_dystocia": "",
+    "presentation": "",
+    "macrosomia": "",
+    "prematurity": "",
+    "multiple_pregnancy": "",
+    "maternal_risk_factors": ""
+  },
+  "risk_factors_for_birth_injury": [
+    "Primigravida",
+    "Macrosomia",
+    "Instrumental delivery (forceps/vacuum)",
+    "Prolonged labor",
+    "Prematurity",
+    "Breech or abnormal presentation",
+    "Cephalopelvic disproportion",
+    "Congenital anomalies",
+    "Shoulder dystocia",
+    "Excessive uterine contractions",
+    "Low birth weight",
+    "Abnormal labor dynamics",
+    "Oligohydramnios",
+    "Multiple pregnancy",
+    "Second-stage LSCS"
+  ],
+  "clinical_evaluation": {
+    "history": [
+      "Mode of delivery",
+      "Difficult labor",
+      "Fetal size and presentation"
+    ],
+    "examination": {
+      "general_physical": {
+        "bruising": "",
+        "swelling": "",
+        "asymmetry": "",
+        "scalp_swelling": ""
+      },
+      "head": {
+        "crosses_sutures": "",
+        "localized_swelling": "",
+        "expanding_mass": ""
+      },
+      "extremities": {
+        "movement_symmetry": "",
+        "crepitus": "",
+        "deformity": "",
+        "fracture_suspected": ""
+      },
+      "neurological": {
+        "tone": "",
+        "reflexes": "",
+        "facial_movement": "",
+        "seizures": ""
+      },
+      "abdomen": {
+        "organomegaly": "",
+        "tenderness": "",
+        "internal_bleeding_signs": ""
+      }
+    }
+  },
+  "common_birth_injuries": [
+    {
+      "injury": "Caput succedaneum",
+      "description": "Scalp edema crossing sutures",
+      "typical_course": "Resolves in 48–72 hours",
+      "management": "Observation and reassurance"
+    },
+    {
+      "injury": "Cephalhematoma",
+      "description": "Subperiosteal hemorrhage not crossing sutures",
+      "typical_course": "May calcify; monitor for jaundice/anemia",
+      "management": "Observation"
+    },
+    {
+      "injury": "Clavicle fracture",
+      "description": "Most common bony injury",
+      "typical_course": "Crepitus, reduced arm movement",
+      "management": "Minimal handling; arm immobilization"
+    },
+    {
+      "injury": "Brachial plexus injury",
+      "description": "Weakness of affected arm",
+      "typical_course": "Erb’s palsy most common",
+      "management": "Gentle physiotherapy and follow-up"
+    },
+    {
+      "injury": "Facial nerve palsy",
+      "description": "Facial asymmetry",
+      "typical_course": "Often due to pressure/forceps; may resolve spontaneously",
+      "management": "Observation and follow-up"
+    },
+    {
+      "injury": "Subgaleal hemorrhage",
+      "description": "Bleeding between scalp and skull periosteum",
+      "typical_course": "Potentially life-threatening",
+      "management": "Emergency care / NICU admission"
+    },
+    {
+      "injury": "Skull fracture",
+      "description": "Linear or depressed fracture",
+      "typical_course": "May be benign or require surgery",
+      "management": "Observation or referral depending on severity"
+    },
+    {
+      "injury": "Soft tissue bruises",
+      "description": "Face, scalp, extremities",
+      "typical_course": "Resolve spontaneously",
+      "management": "Reassurance"
+    },
+    {
+      "injury": "Liver / spleen injury",
+      "description": "Rare; seen in traumatic deliveries",
+      "typical_course": "May present with shock/anemia",
+      "management": "Urgent evaluation"
+    },
+    {
+      "injury": "Femur / humerus fracture",
+      "description": "May present later if undisplaced",
+      "typical_course": "Swelling and decreased limb movement",
+      "management": "Splinting and orthopedic care"
+    }
+  ],
+  "red_flags": [
+    "Palpable expanding scalp mass",
+    "Decreased limb movement or hypotonia",
+    "Facial asymmetry during crying",
+    "Signs of shock, pallor, poor perfusion",
+    "Persistent seizures or marked irritability",
+    "Abdominal distension or tenderness",
+    "Progressive swelling",
+    "Poor feeding with lethargy"
+  ],
+  "investigations_as_needed": [
+    {
+      "scenario": "Suspected skull fracture",
+      "test": "Skull X-ray or ultrasound"
+    },
+    {
+      "scenario": "Subgaleal hemorrhage",
+      "test": "CBC, coagulation profile, head ultrasound"
+    },
+    {
+      "scenario": "Clavicle fracture",
+      "test": "X-ray clavicle"
+    },
+    {
+      "scenario": "Brachial plexus injury",
+      "test": "Clinical assessment; MRI if persistent weakness after 3 months"
+    },
+    {
+      "scenario": "Organ injury",
+      "test": "Abdominal ultrasound, CBC, liver function tests"
+    }
+  ],
+  "diagnosis": {
+    "provisional_diagnosis": "",
+    "injury_type": "",
+    "severity": "",
+    "associated_complications": ""
+  },
+  "prescription": {
+    "medicines": [
+      {
+        "name": "No routine medicine required for minor birth injuries",
+        "dose": "",
+        "route": "",
+        "frequency": "",
+        "duration": "",
+        "indication": "Caput succedaneum / small bruise / observation cases"
+      },
+      {
+        "name": "PARACETAMOL",
+        "dose": "",
+        "route": "Oral",
+        "frequency": "",
+        "duration": "",
+        "indication": "Pain relief if clinically indicated"
+      }
+    ],
+    "supportive_care": [
+      "Observation and reassurance for minor injuries",
+      "Gentle handling of baby",
+      "Avoid lifting under armpits if clavicle or brachial plexus injury suspected",
+      "Immobilize affected arm if fracture suspected/confirmed",
+      "Gentle physiotherapy for brachial plexus injury as advised",
+      "NICU support for subgaleal hemorrhage or shock"
+    ]
+  },
+  "management_plan": [
+    {
+      "injury": "Caput succedaneum",
+      "plan": "Observation and reassurance"
+    },
+    {
+      "injury": "Cephalhematoma",
+      "plan": "Observe; monitor for jaundice and anemia"
+    },
+    {
+      "injury": "Clavicle fracture",
+      "plan": "Minimal handling; arm immobilization/sling"
+    },
+    {
+      "injury": "Brachial plexus injury",
+      "plan": "Gentle physiotherapy; refer if persistent after 2–3 months"
+    },
+    {
+      "injury": "Facial nerve palsy",
+      "plan": "Usually spontaneous recovery in 2–3 weeks; follow-up"
+    },
+    {
+      "injury": "Subgaleal hemorrhage",
+      "plan": "Emergency stabilization, volume resuscitation, NICU admission"
+    },
+    {
+      "injury": "Skull fracture",
+      "plan": "Observe most linear fractures; surgical opinion if depressed"
+    },
+    {
+      "injury": "Femur/Humerus fracture",
+      "plan": "Splinting for 2–6 weeks; careful handling"
+    }
+  ],
+  "parent_counseling": [
+    "Most birth injuries are mild and heal without long-term problems",
+    "Minor scalp swelling or bruising often settles on its own",
+    "Handle the baby gently",
+    "Do not pull or lift forcefully under the arms",
+    "Follow-up is important if there is decreased limb movement or persistent swelling",
+    "Seek urgent care if baby becomes pale, lethargic, poorly feeding, excessively irritable, or swelling increases"
+  ],
+  "opd_checklist": [
+    "Full body examination done?",
+    "Neurological examination done?",
+    "Scalp swelling evaluated?",
+    "Limb movements symmetric?",
+    "Any fracture suspected?",
+    "Parental reassurance/referral provided?",
+    "Red flag signs explained?"
+  ],
+  "follow_up": {
+    "routine_follow_up": "Within 3–7 days or earlier if symptoms worsen",
+    "special_follow_up": [
+      "Cephalhematoma: monitor jaundice/anemia",
+      "Brachial plexus injury: serial motor assessment",
+      "Fracture: repeat examination and healing review",
+      "Facial palsy: reassess improvement in 2–3 weeks"
+    ]
+  },
+  "referral_indications": [
+    "Suspected subgaleal hemorrhage",
+    "Shock or poor perfusion",
+    "Persistent seizures",
+    "Organ injury suspected",
+    "Depressed skull fracture",
+    "Persistent brachial plexus weakness",
+    "Major fracture requiring splinting/orthopedic care"
+  ],
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "P15.9",
+  "diagnosis_name": "Birth Injuries in a Neonate",
+  "snomed_code": "56110009",
+  "snomed_display": "Birth trauma (disorder)",
+  "counselling": [
+    "Most birth injuries are mild and heal without long-term problems — ज़्यादातर जन्म-चोटें हल्की होती हैं और बिना किसी लंबी समस्या के ठीक हो जाती हैं",
+    "Minor scalp swelling or bruising often settles on its own — सिर की हल्की सूजन या नील अपने आप ठीक हो जाती है",
+    "Handle the baby gently — बच्चे को नरमी से पकड़ें",
+    "Do not pull or lift forcefully under the arms — बच्चे को बाज़ुओं के नीचे से ज़ोर से न उठाएं",
+    "Follow-up is important if there is decreased limb movement or persistent swelling — अगर हाथ-पैर की हलचल कम हो या सूजन बनी रहे तो जांच ज़रूरी है",
+    "Seek urgent care if baby becomes pale, lethargic, poorly feeding, or swelling increases — अगर बच्चा पीला, सुस्त, कम दूध पीने वाला हो जाए या सूजन बढ़ जाए तो तुरंत डॉक्टर को दिखाएं"
+  ],
+  "warning_signs": [
+    "Expanding or tense swelling on scalp — सिर पर बढ़ती या तनी हुई सूजन",
+    "Baby not moving one arm or leg — बच्चे का एक हाथ या पैर न हिलाना",
+    "Facial asymmetry during crying — रोते समय चेहरे का एक तरफ़ लटकना",
+    "Pale or blue color — बच्चे का पीला या नीला पड़ जाना",
+    "Seizures or excessive irritability — दौरे या बहुत ज़्यादा चिड़चिड़ापन",
+    "Poor feeding or vomiting — ठीक से दूध न पीना या उल्टी",
+    "Increasing jaundice — बढ़ता हुआ पीलिया"
+  ],
+  "expected_course": "Caput succedaneum resolves within 48-72 hours. Cephalhematoma may take 2-8 weeks to resolve and may calcify. Clavicle fractures heal within 2-3 weeks with callus formation. Erb palsy recovers in 80-90% of cases within 3-6 months. Facial nerve palsy usually resolves within 2-3 weeks. Subgaleal hemorrhage is a medical emergency requiring immediate NICU care.",
+  "key_clinical_points": [
+    "Caput succedaneum crosses suture lines; cephalhematoma does not",
+    "Cephalhematoma may cause significant jaundice requiring phototherapy",
+    "Clavicle fracture: Moro reflex asymmetry is the key clinical sign",
+    "Erb palsy: waiter tip posture (arm adducted, internally rotated, wrist flexed)",
+    "Subgaleal hemorrhage can cause hypovolemic shock - monitor head circumference serially",
+    "Always check for associated injuries when one birth injury is found",
+    "Document mode of delivery and risk factors carefully"
+  ],
+  "severity_assessment": {
+    "mild": "Caput succedaneum, small bruises, small cephalhematoma - observation and reassurance",
+    "moderate": "Clavicle fracture, Erb palsy, facial nerve palsy, large cephalhematoma - active monitoring, immobilization, physiotherapy referral",
+    "severe": "Subgaleal hemorrhage, skull fracture, organ injury, persistent neurological deficit - emergency stabilization, NICU admission, surgical referral"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Head circumference",
+      "frequency": "Daily for first 3 days if cephalhematoma or subgaleal hemorrhage"
+    },
+    {
+      "parameter": "Serum bilirubin",
+      "frequency": "If cephalhematoma - check at 48-72 hours and as clinically indicated"
+    },
+    {
+      "parameter": "Limb movements",
+      "frequency": "At each assessment for brachial plexus or fracture cases"
+    },
+    {
+      "parameter": "Hemoglobin",
+      "frequency": "If significant hemorrhage suspected"
+    },
+    {
+      "parameter": "Vitals (HR, BP, perfusion)",
+      "frequency": "Continuously if subgaleal hemorrhage; otherwise at each visit"
+    }
+  ]
+}

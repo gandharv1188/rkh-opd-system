@@ -1,0 +1,108 @@
+{
+  "icd10": "E87.2",
+  "diagnosis_name": "Metabolic Acidosis / Indications for Sodium Bicarbonate Therapy",
+  "category": "Emergency",
+  "severity": "any",
+  "first_line_drugs": [
+    {
+      "drug": "Sodium Bicarbonate",
+      "notes": "Indicated in selected severe metabolic acidosis: pH <7.1 and/or bicarbonate <8-10 mEq/L and/or base excess >10 mmol/L. Dose based on HCO3 deficit: HCO3 needed (mEq) = 0.3 x weight (kg) x base deficit (or 0.3 x weight x (24 - serum HCO3)). Give half of calculated dose over 60 minutes, then reassess blood gases.",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "Sodium Bicarbonate Infusion (0.5 mEq/mL solution)",
+      "notes": "Prepare by mixing sodium bicarbonate solution with equal volume of sterile water or compatible solution. Administer as slow IV infusion over 30-60 minutes. In emergency, may be given as bolus 1 mEq/kg.",
+      "is_new_2024_2025": false
+    }
+  ],
+  "second_line_drugs": [
+    {
+      "drug": "Definitive therapy for underlying cause",
+      "notes": "Examples: shock correction, sepsis treatment, insulin for DKA, antidote/toxin management, ventilation support, renal support depending on etiology.",
+      "is_new_2024_2025": false
+    }
+  ],
+  "investigations": [
+    {
+      "name": "Arterial / Venous Blood Gas",
+      "indication": "Confirm severe metabolic acidosis and monitor response to bicarbonate",
+      "urgency": "stat"
+    },
+    {
+      "name": "Serum Electrolytes including HCO3, Na, K, Cl",
+      "indication": "Assess severity, base deficit, associated electrolyte abnormalities",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Serum Calcium",
+      "indication": "Monitor during bicarbonate therapy",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Renal Function Tests",
+      "indication": "Assess renal cause or consequence of acidosis",
+      "urgency": "urgent"
+    },
+    {
+      "name": "Lactate / Anion Gap / Cause-specific tests",
+      "indication": "Evaluate high anion gap metabolic acidosis and underlying etiology",
+      "urgency": "urgent"
+    }
+  ],
+  "counselling": [
+    "Sodium bicarbonate is not used routinely in all acidosis cases. — सोडियम बाइकार्बोनेट हर एसिडोसिस में नहीं दिया जाता।",
+    "It is reserved for selected severe situations after doctor assessment. — यह केवल गंभीर स्थितियों में डॉक्टर की जांच के बाद दिया जाता है।",
+    "Treatment of the underlying cause is more important than bicarbonate alone. — मूल कारण का इलाज बाइकार्बोनेट से ज्यादा जरूरी है।",
+    "Frequent blood gas and electrolyte monitoring is needed during therapy. — इलाज के दौरान बार-बार ब्लड गैस और इलेक्ट्रोलाइट जांच जरूरी है।",
+    "Inform staff immediately if breathing worsens, irritability increases, or seizures occur. — सांस बिगड़ने, चिड़चिड़ापन बढ़ने या दौरे पड़ने पर तुरंत स्टाफ को बताएं।"
+  ],
+  "warning_signs": [
+    "Severe fast or labored breathing",
+    "Shock or poor perfusion",
+    "Altered sensorium",
+    "Cardiac dysfunction",
+    "Seizures",
+    "Worsening acidosis on repeat blood gas"
+  ],
+  "referral_criteria": "Refer to PICU/intensivist if severe metabolic acidosis, high anion gap acidosis with hemodynamic compromise, cardiopulmonary resuscitation setting, toxin-related acidosis, or refractory acidosis.",
+  "hospitalisation_criteria": "Admit if pH <7.2, bicarbonate markedly low, shock, altered sensorium, need for IV bicarbonate, suspected toxin/metabolic disease, or need for serial blood gas monitoring.",
+  "notes": "Routine use in older children is not recommended unless specific indications are present. Common indications include severe normal anion gap acidosis, selected severe high anion gap acidosis, hyperkalemia, TCA poisoning, beta-blocker poisoning, and some peri-resuscitation situations. Ensure adequate ventilation before giving bicarbonate.",
+  "source": "Provided sodium bicarbonate indication and administration protocol",
+  "duration_days_default": 1,
+  "active": true,
+  "guideline_changes": null,
+  "snomed_code": "59455009",
+  "expected_course": "pH and bicarbonate improve gradually after infusion if the underlying cause is also corrected. Repeat reassessment is required within 1-2 hours or sooner in unstable patients.",
+  "key_clinical_points": [
+    "Do not use sodium bicarbonate routinely in all acidosis.",
+    "Correct severe acidosis only in selected indications and reassess with blood gas.",
+    "Ensure IV line patency, compatibility, and adequate ventilation before administration."
+  ],
+  "severity_assessment": {
+    "mild": "Mild acidosis without hemodynamic compromise; usually treat underlying cause only.",
+    "moderate": "Biochemical acidosis with clinical illness but no clear bicarbonate indication yet.",
+    "severe": "pH <7.1 and/or HCO3 <8-10 mEq/L, significant base deficit, shock, cardiac dysfunction, or selected toxic/metabolic indication."
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Blood gas (pH, HCO3, PCO2)",
+      "frequency": "After first infusion and then 1-2 hourly as needed"
+    },
+    {
+      "parameter": "Serum electrolytes",
+      "frequency": "4-6 hourly or earlier if unstable"
+    },
+    {
+      "parameter": "Serum calcium",
+      "frequency": "As clinically indicated during therapy"
+    },
+    {
+      "parameter": "Vitals and perfusion",
+      "frequency": "Continuous / hourly"
+    },
+    {
+      "parameter": "Respiratory status / ventilation adequacy",
+      "frequency": "Continuous"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "template_name": "Standard Prescription Format – Sacral Dimple (Neonate)",
+  "template_code": "NB_SACRAL_DIMPLE_V1",
+  "diagnosis_name": "Sacral Dimple (Neonate)",
+  "snomed_code": "311897005",
+  "category": "Neonatology",
+  "condition": "Sacral Dimple",
+  "patient_details": {
+    "baby_name": "",
+    "uhid": "",
+    "ipid": "",
+    "age_in_days": "",
+    "sex": "",
+    "gestation": "",
+    "birth_weight_kg": "",
+    "current_weight_kg": ""
+  },
+  "diagnosis": {
+    "provisional_diagnosis": "Sacral Dimple – Likely benign / Suspicious (specify)",
+    "icd10_code": "Q82.6",
+    "type": "Benign / High-risk (to be selected clinically)"
+  },
+  "clinical_assessment": {
+    "history": [
+      "Birth history (gestational age, anomalies)",
+      "Family history of neural tube defects",
+      "Bowel/bladder function (if applicable)"
+    ],
+    "examination": {
+      "size_mm": "",
+      "location_midline": true,
+      "distance_from_anus_cm": "",
+      "base_visible": true,
+      "associated_findings": [
+        "Hair tuft",
+        "Hemangioma",
+        "Skin tag",
+        "Sinus tract"
+      ],
+      "neurological_exam": {
+        "tone": "normal / abnormal",
+        "reflexes": "normal / abnormal",
+        "limb_movement": "normal / abnormal",
+        "foot_deformity": "present / absent"
+      }
+    }
+  },
+  "risk_stratification": {
+    "benign_features": [
+      "Size <5 mm",
+      "Midline location",
+      "Distance <2.5 cm from anus",
+      "Base visible",
+      "No associated skin lesions",
+      "Normal neurological exam"
+    ],
+    "high_risk_features": [
+      "Size >5 mm",
+      "Deep dimple",
+      "Located above gluteal cleft",
+      "Distance >2.5 cm from anus",
+      "Base not visible",
+      "Hair tuft / hemangioma / skin tag",
+      "Neurological abnormalities"
+    ]
+  },
+  "investigations": {
+    "indications": [
+      "High-risk sacral dimple",
+      "Deep or atypical dimple",
+      "Associated skin or neurological findings"
+    ],
+    "recommended_tests": [
+      "Spinal Ultrasound (<3 months)",
+      "MRI Spine (>3 months or if US unavailable)",
+      "Pediatric Neurology / Neurosurgery referral if abnormal"
+    ]
+  },
+  "management_plan": {
+    "benign_dimple": [
+      "No further investigation required",
+      "Reassure parents",
+      "Document findings",
+      "Routine follow-up"
+    ],
+    "suspicious_dimple": [
+      "Order spinal imaging (USG / MRI)",
+      "Refer to pediatric neurology/neurosurgery",
+      "Monitor neurological development",
+      "Assess bladder/bowel function over time"
+    ]
+  },
+  "parent_counseling": [
+    "Most sacral dimples are benign and harmless — अधिकतर सैक्रल डिम्पल सामान्य और हानिरहित होते हैं",
+    "Small, midline dimples with visible base usually do not need tests — छोटे, बीच में स्थित गड्ढे जिनका तल दिखता है, आमतौर पर जांच की ज़रूरत नहीं",
+    "Certain features may require imaging to rule out spinal problems — कुछ विशेषताओं में रीढ़ की समस्या जांचने के लिए स्कैन ज़रूरी हो सकता है",
+    "Observe for warning signs like limb weakness or urinary issues — पैरों की कमज़ोरी या पेशाब की समस्या जैसे लक्षणों पर ध्यान दें",
+    "Early detection ensures better outcomes — जल्दी पहचान से बेहतर इलाज होता है"
+  ],
+  "red_flags": [
+    "Large or deep dimple",
+    "Base not visible",
+    "Dimple located higher on back",
+    "Hair tuft / hemangioma / skin tag",
+    "Limb weakness or asymmetry",
+    "Bladder or bowel dysfunction"
+  ],
+  "follow_up": {
+    "benign": "Routine pediatric follow-up",
+    "high_risk": "Follow-up after imaging / specialist consultation",
+    "monitor_for": [
+      "Motor milestones",
+      "Lower limb tone and strength",
+      "Bladder and bowel function"
+    ]
+  },
+  "warning_signs": [
+    "Limb weakness or asymmetry — पैरों में कमज़ोरी या असमानता",
+    "Bladder or bowel dysfunction — पेशाब या मल त्याग में समस्या",
+    "Foot deformity — पैर की विकृति",
+    "Growing lesion or discharge from dimple — गड्ढे का बढ़ना या उसमें से रिसाव",
+    "Hair tuft or hemangioma near dimple — गड्ढे के पास बालों का गुच्छा या लाल धब्बा"
+  ],
+  "expected_course": "Simple sacral dimples that are small (<5 mm), midline, with visible base and no associated skin findings are benign and require no further workup. Spontaneous resolution is expected. High-risk dimples require imaging within 3 months of age (spinal ultrasound) or MRI if older.",
+  "key_clinical_points": [
+    "Differentiate benign from high-risk sacral dimple at first exam",
+    "Spinal ultrasound is best done before 3 months (open acoustic window)",
+    "Distance >2.5 cm from anus increases suspicion for occult spinal dysraphism",
+    "Normal neurological exam is reassuring but does not exclude deep pathology",
+    "Document size, location, base visibility, and associated findings at each visit"
+  ],
+  "doctor_details": {
+    "doctor_name": "Dr. Lokender Goyal",
+    "qualification": "MD Pediatrics",
+    "registration_no": "HN 21452",
+    "hospital": "Radhakishan Hospital, Kurukshetra"
+  },
+  "emergency_contact": {
+    "hospital_emergency_numbers": ["01744-251441", "270516", "7206029516"]
+  }
+}

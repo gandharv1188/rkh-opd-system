@@ -1,0 +1,277 @@
+{
+  "template_name": "Standard Prescription Format - Hernia and Hydrocele in Neonate",
+  "condition": {
+    "name": "Inguinal Hernia and Hydrocele in Neonates",
+    "icd10_suggestions": ["K40.9", "P83.5", "N43.3"],
+    "overview": [
+      "Inguinal hernia and hydrocele are common neonatal surgical conditions.",
+      "Both result from persistence of processus vaginalis but differ in urgency and management.",
+      "Early differentiation prevents complications like incarceration and testicular damage."
+    ]
+  },
+  "definitions": {
+    "inguinal_hernia": "Protrusion of abdominal contents through inguinal canal",
+    "hydrocele": "Fluid collection within tunica vaginalis around testis",
+    "communicating_hydrocele": "Persistent communication between peritoneum and scrotum",
+    "non_communicating_hydrocele": "No communication; fluid trapped and reabsorbed"
+  },
+  "pathophysiology": [
+    "Processus vaginalis normally closes after testicular descent",
+    "Failure leads to hernia (open sac) or hydrocele (fluid-filled sac)"
+  ],
+  "risk_factors": [
+    "Prematurity",
+    "Male sex",
+    "Low birth weight",
+    "Family history of hernia",
+    "Connective tissue disorders",
+    "Peritoneal dialysis (rare)"
+  ],
+  "history_template": [
+    "Onset of swelling (since birth or later)",
+    "Variation in size (crying, straining)",
+    "Pain or irritability",
+    "Vomiting (suggesting incarceration)",
+    "Feeding difficulty",
+    "Unilateral or bilateral swelling"
+  ],
+  "examination_template": [
+    "Inspect inguinal region and scrotum",
+    "Assess size variation with crying",
+    "Check reducibility",
+    "Perform transillumination test",
+    "Check for tenderness or redness",
+    "Assess for signs of incarceration"
+  ],
+  "clinical_differentiation": {
+    "hernia": {
+      "swelling": "Varies with crying",
+      "reducibility": "Usually reducible",
+      "transillumination": "Negative",
+      "tenderness": "May be present if incarcerated",
+      "urgency": "Requires early surgery"
+    },
+    "hydrocele": {
+      "swelling": "Constant size",
+      "reducibility": "Not reducible",
+      "transillumination": "Positive",
+      "tenderness": "Usually painless",
+      "urgency": "Observe unless persistent"
+    }
+  },
+  "red_flags": [
+    "Irreducible swelling",
+    "Sudden increase in size",
+    "Tender, tense swelling",
+    "Redness over swelling",
+    "Vomiting or abdominal distension",
+    "Refusal to feed",
+    "Loss of transillumination",
+    "Fever or systemic symptoms"
+  ],
+  "investigations": [
+    {
+      "name": "Clinical diagnosis",
+      "purpose": "Usually sufficient"
+    },
+    {
+      "name": "Ultrasound",
+      "indication": "Unclear diagnosis or atypical swelling"
+    },
+    {
+      "name": "Color Doppler",
+      "indication": "Assess testicular perfusion in suspected incarceration"
+    }
+  ],
+  "management_protocol": {
+    "reducible_hernia": [
+      "Elective herniotomy within 1–2 weeks",
+      "Early referral to pediatric surgeon"
+    ],
+    "incarcerated_hernia": [
+      "Emergency reduction",
+      "Urgent surgery",
+      "Immediate hospital referral"
+    ],
+    "non_communicating_hydrocele": [
+      "Observe until 12–18 months",
+      "Usually resolves spontaneously"
+    ],
+    "communicating_hydrocele": [
+      "Surgery if persists beyond 12 months",
+      "Earlier if increasing size"
+    ]
+  },
+  "timing_of_surgery": [
+    "Inguinal hernia: Early elective repair (even earlier in preterm infants)",
+    "Hydrocele: Surgery deferred until 12–18 months unless complications"
+  ],
+  "parent_counseling": [
+    "Hernias do not resolve spontaneously and require surgery.",
+    "Hydroceles often resolve without treatment.",
+    "Seek urgent care if swelling becomes painful or irreducible.",
+    "Surgery is safe with excellent outcomes.",
+    "Monitor swelling size and behavior."
+  ],
+  "summary_table": [
+    {
+      "scenario": "Reducible hernia",
+      "action": "Elective herniotomy"
+    },
+    {
+      "scenario": "Incarcerated hernia",
+      "action": "Emergency surgery"
+    },
+    {
+      "scenario": "Non-communicating hydrocele",
+      "action": "Observe until 12–18 months"
+    },
+    {
+      "scenario": "Persistent communicating hydrocele",
+      "action": "Surgical repair"
+    }
+  ],
+  "flow_logic": [
+    "Identify inguinal or scrotal swelling",
+    "Check reducibility",
+    "If reducible and varies with crying → hernia",
+    "Refer for elective surgery",
+    "If constant and transilluminates → hydrocele",
+    "Observe till 1 year",
+    "If irreducible with pain → incarcerated hernia",
+    "Emergency referral"
+  ],
+  "quick_checklist_for_opd": [
+    "Swelling in inguinal or scrotal region?",
+    "Reducible or transilluminant?",
+    "Varies with crying or straining?",
+    "Any tenderness or redness?",
+    "Urgent referral needed?",
+    "Elective referral planned?"
+  ],
+  "standard_prescription_format": {
+    "hospital_name": "RADHAKISHAN HOSPITAL",
+    "department": "Pediatrics / Neonatology OPD",
+    "title": "Standard Prescription - Hernia / Hydrocele in Neonate",
+    "patient_identification": {
+      "patient_name": "",
+      "uhid": "",
+      "ipid": "",
+      "age": "Neonate",
+      "sex": "",
+      "dob": "",
+      "day_of_life": "",
+      "weight_kg": "",
+      "date": "",
+      "time": "",
+      "parent_name": "",
+      "contact_number": ""
+    },
+    "chief_complaints": [
+      "Swelling in groin/scrotum",
+      "Increase in size with crying",
+      "Pain or irritability",
+      "Vomiting (if present)"
+    ],
+    "clinical_assessment": {
+      "side": "Unilateral/Bilateral",
+      "reducibility": "",
+      "transillumination": "",
+      "variation_with_crying": "",
+      "tenderness": "",
+      "redness": "",
+      "vomiting": "",
+      "feeding_status": ""
+    },
+    "provisional_diagnosis_options": [
+      "Inguinal hernia",
+      "Hydrocele",
+      "Incarcerated hernia (emergency)"
+    ],
+    "investigation_orders": [
+      "ULTRASOUND (if diagnosis unclear)",
+      "COLOR DOPPLER (if suspected incarceration)"
+    ],
+    "treatment_plan": {
+      "if_hernia": [
+        "Refer to pediatric surgeon",
+        "Plan early elective surgery"
+      ],
+      "if_hydrocele": ["Observation", "Follow-up till 12–18 months"],
+      "if_emergency": ["Immediate referral", "Emergency surgical management"]
+    },
+    "follow_up": {
+      "review_in": "",
+      "emergency_if": [
+        "Swelling becomes painful",
+        "Irreducible swelling",
+        "Vomiting",
+        "Redness or tension over swelling",
+        "Poor feeding"
+      ]
+    },
+    "doctor_signature_block": {
+      "doctor_name": "Dr. Lokender Goyal",
+      "qualification": "MD Pediatrics",
+      "registration_no": "HN 21452"
+    },
+    "emergency_contact_numbers": ["01744-251441", "270516", "7206029516"]
+  },
+  "icd10": "K40.90",
+  "diagnosis_name": "Hernia and Hydrocele in Neonate",
+  "snomed_code": "396232000",
+  "snomed_display": "Inguinal hernia (disorder)",
+  "category": "Neonatology",
+  "counselling": [
+    "Hernias do not resolve spontaneously and require surgery — हर्निया अपने आप ठीक नहीं होता, ऑपरेशन ज़रूरी है",
+    "Hydroceles often resolve without treatment — हाइड्रोसील अक्सर बिना इलाज के ठीक हो जाता है",
+    "Seek urgent care if swelling becomes painful or irreducible — अगर सूजन दर्दनाक हो या अंदर न जाए तो तुरंत डॉक्टर को दिखाएं",
+    "Surgery is safe with excellent outcomes — ऑपरेशन सुरक्षित है और परिणाम बहुत अच्छे होते हैं",
+    "Monitor swelling size and behavior — सूजन के आकार और बदलाव पर नज़र रखें"
+  ],
+  "warning_signs": [
+    "Irreducible swelling (does not go back in) — सूजन जो अंदर न जाए",
+    "Sudden increase in size of swelling — सूजन का अचानक बढ़ जाना",
+    "Tender, tense or red swelling — दर्दनाक, तनी हुई या लाल सूजन",
+    "Vomiting or abdominal distension — उल्टी या पेट फूलना",
+    "Refusal to feed or excessive crying — दूध न पीना या बहुत रोना",
+    "Fever — बुखार"
+  ],
+  "expected_course": "Inguinal hernia: requires surgical repair (herniotomy) within 1-2 weeks of diagnosis. In preterm infants, surgery may be done before discharge. Non-communicating hydrocele: usually resolves by 12-18 months. Communicating hydrocele: may need surgery if persistent beyond 12 months or increasing in size.",
+  "key_clinical_points": [
+    "Hernia: varies with crying, reducible, transillumination negative",
+    "Hydrocele: constant size, not reducible, transillumination positive",
+    "Incarcerated hernia is a surgical emergency - irreducible, tender, vomiting",
+    "Risk of incarceration is highest in first year - early surgical referral for hernia",
+    "Preterm infants have higher risk of inguinal hernia",
+    "Bilateral inguinal hernia is more common in preterm babies",
+    "Always examine contralateral side - bilateral hernias occur in 10-15% of neonates"
+  ],
+  "severity_assessment": {
+    "mild": "Small reducible hernia or non-communicating hydrocele - elective surgical referral for hernia, observation for hydrocele",
+    "moderate": "Large hernia, communicating hydrocele increasing in size - early surgical referral, close monitoring",
+    "severe": "Incarcerated or strangulated hernia - emergency surgical management, immediate hospital referral"
+  },
+  "monitoring_parameters": [
+    {
+      "parameter": "Swelling size",
+      "frequency": "At each visit; parents to monitor daily"
+    },
+    {
+      "parameter": "Reducibility",
+      "frequency": "At each clinical visit"
+    },
+    {
+      "parameter": "Transillumination",
+      "frequency": "At initial assessment and if character changes"
+    },
+    {
+      "parameter": "Feeding and bowel pattern",
+      "frequency": "Daily by parents; at each visit"
+    },
+    {
+      "parameter": "Testicular size and position",
+      "frequency": "At each visit to rule out testicular torsion"
+    }
+  ]
+}

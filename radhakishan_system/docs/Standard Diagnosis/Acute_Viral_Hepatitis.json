@@ -1,0 +1,137 @@
+{
+  "icd10": "B17.9",
+  "diagnosis_name": "Acute Severe Viral Hepatitis (with risk of Acute Liver Failure / Hyperammonemia)",
+  "category": "GI",
+  "severity": "severe",
+
+  "first_line_drugs": [
+    {
+      "drug": "ACETYLCYSTEINE (NAC)",
+      "notes": "IV infusion regimen: Loading 125 mg/kg over 1 hour, then 50 mg/kg over 4 hours, then 125 mg/kg over 19 hours; Day 2 onward: 150 mg/kg over 24 hours, repeat next 24 hours as required. Preparation: Add 1000 mg NAC (2 ampoules of 5 ml each) in 40 ml of 5% DEXTROSE; adjust total volume and rate as per weight-based dose and infusion duration",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "VITAMIN K",
+      "notes": "10 mg IM once daily for 3 days for coagulopathy correction",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "URSODEOXYCHOLIC ACID",
+      "notes": "5 mg/kg/dose PO every 12 hours for 21 days for cholestasis and bile flow improvement",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "LACTULOSE",
+      "notes": "1 ml/kg/dose PO 2–3 times daily; titrate to achieve 2–3 soft stools/day for prevention/treatment of hepatic encephalopathy",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "SODIUM BENZOATE",
+      "notes": "250–500 mg/kg/day PO in 4 divided doses every 6 hours for hyperammonemia management",
+      "is_new_2024_2025": false
+    },
+    {
+      "drug": "INTRAVENOUS FLUIDS (DNS 0.9% + MULTIVITAMIN INFUSION)",
+      "notes": "Maintenance IV fluids as per Holliday-Segar calculation; avoid fluid overload; add MVI as per standard pediatric dosing",
+      "is_new_2024_2025": false
+    }
+  ],
+
+  "second_line_drugs": [
+    {
+      "drug": "RIFAXIMIN",
+      "notes": "10–15 mg/kg/day PO in 2 divided doses; use if persistent or worsening hepatic encephalopathy despite lactulose",
+      "is_new_2024_2025": false
+    }
+  ],
+
+  "investigations": [
+    {
+      "name": "BLOOD GLUCOSE",
+      "indication": "Monitor for hypoglycemia in acute liver failure",
+      "urgency": "stat"
+    },
+    {
+      "name": "SERUM AMMONIA",
+      "indication": "Assess and monitor hyperammonemia and encephalopathy",
+      "urgency": "urgent"
+    },
+    {
+      "name": "PT / INR",
+      "indication": "Assess severity of liver dysfunction and coagulopathy",
+      "urgency": "stat"
+    },
+    {
+      "name": "LIVER FUNCTION TEST (LFT)",
+      "indication": "Monitor disease progression and hepatic injury",
+      "urgency": "urgent"
+    },
+    {
+      "name": "RENAL FUNCTION TEST (RFT)",
+      "indication": "Assess renal involvement and hepatorenal syndrome risk",
+      "urgency": "urgent"
+    }
+  ],
+
+  "counselling": [
+    "Child has severe liver infection which can affect brain and blood clotting; close monitoring is required — बच्चे को गंभीर लिवर संक्रमण है जो दिमाग और खून के थक्कों को प्रभावित कर सकता है; नज़दीकी निगरानी ज़रूरी है",
+    "Strict medication adherence is essential; do not miss doses especially lactulose and NAC — दवाइयाँ समय पर लेना बहुत जरूरी है; खासकर लैक्टुलोज़ और NAC की खुराक न छोड़ें",
+    "Avoid outside food, ensure adequate carbohydrate intake and hydration — बाहर का खाना न दें, पर्याप्त कार्बोहाइड्रेट और पानी दें",
+    "Do NOT give PARACETAMOL, antiemetics, or any over-the-counter drugs without doctor advice — डॉक्टर की सलाह के बिना पैरासिटामोल, उल्टी की दवा या कोई भी दवा न दें",
+    "Immediate follow-up required if child becomes drowsy, vomits repeatedly, or stops feeding — अगर बच्चा सुस्त हो जाए, बार-बार उल्टी करे या दूध न पिए तो तुरंत डॉक्टर को दिखाएं"
+  ],
+
+  "warning_signs": [
+    "Altered sensorium or excessive sleepiness",
+    "Persistent vomiting",
+    "Bleeding from gums / nose",
+    "Seizures or abnormal movements",
+    "Reduced urine output",
+    "Worsening jaundice or abdominal distension"
+  ],
+
+  "referral_criteria": "Refer urgently to pediatric gastroenterologist or liver transplant center if INR >2, rising ammonia, worsening encephalopathy, or no improvement within 24–48 hours",
+
+  "hospitalisation_criteria": "All cases of severe hepatitis with coagulopathy, encephalopathy, persistent vomiting, hypoglycemia, or rising bilirubin/ammonia require admission (preferably ICU monitoring)",
+
+  "notes": "Acute severe viral hepatitis can progress to acute liver failure; early NAC improves outcomes even in non-paracetamol liver injury. Strict drug avoidance (especially hepatotoxic drugs) is critical.",
+
+  "source": [
+    "IAP 2024",
+    "WHO Guidelines",
+    "AAP",
+    "Pediatric Hepatology Protocols"
+  ],
+
+  "duration_days_default": 5,
+  "active": true,
+  "guideline_changes": "NAC recommended even in non-acetaminophen acute liver failure (updated global practice)",
+  "snomed_code": "3738000",
+
+  "expected_course": "Initial worsening may occur over 3–5 days; recovery may take 2–4 weeks; close monitoring required for early detection of liver failure",
+
+  "key_clinical_points": [
+    "NAC improves survival even in viral hepatitis-related liver failure",
+    "Lactulose is essential to prevent hepatic encephalopathy",
+    "Avoid hepatotoxic drugs including PARACETAMOL",
+    "Monitor INR and ammonia closely – key prognostic markers"
+  ],
+
+  "severity_assessment": {
+    "mild": "Jaundice with stable vitals, no coagulopathy",
+    "moderate": "Jaundice with mild coagulopathy and elevated enzymes",
+    "severe": "Coagulopathy (INR >1.5), encephalopathy, hypoglycemia, rising ammonia"
+  },
+
+  "monitoring_parameters": [
+    { "parameter": "Temperature", "frequency": "4-hourly" },
+    { "parameter": "Pulse and BP", "frequency": "4-hourly" },
+    {
+      "parameter": "Neurological status (GCS/AVPU)",
+      "frequency": "2–4 hourly"
+    },
+    { "parameter": "Blood glucose", "frequency": "4–6 hourly" },
+    { "parameter": "Urine output", "frequency": "Hourly" },
+    { "parameter": "Weight", "frequency": "Daily" }
+  ]
+}
