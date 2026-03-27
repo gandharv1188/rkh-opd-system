@@ -7250,12 +7250,24 @@
         dose_display: "",
         dose_qty: 1,
         dose_fraction: null,
-        times: ["morning", "evening"],
+        times: (function (freq) {
+          if (freq === 1) return ["morning"];
+          if (freq === 2) return ["morning", "evening"];
+          if (freq === 3) return ["morning", "afternoon", "evening"];
+          if (freq === 4) return ["morning", "afternoon", "evening", "bedtime"];
+          return ["morning", "evening"];
+        })(band.frequency_per_day || 2),
         prn: false,
         max_per_day: null,
-        duration_days: band.duration_days_default || null,
-        with_food: true,
-        special: null,
+        duration_days: band.duration_days_default || band.duration_days || null,
+        with_food: !(f.food_instructions || "")
+          .toLowerCase()
+          .match(/empty.*stomach|before.*food|before.*meal/),
+        special: (f.food_instructions || "")
+          .toLowerCase()
+          .match(/empty.*stomach/)
+          ? "empty_stomach"
+          : null,
       },
     };
     if (!rxData.medicines) rxData.medicines = [];
