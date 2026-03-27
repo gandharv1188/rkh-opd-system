@@ -17,16 +17,16 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const SYSTEM_PROMPT = `You are a clinical summary assistant for a pediatric hospital. Generate a concise clinical summary of a patient's previous visits for the doctor who is about to see them today.
+const SYSTEM_PROMPT = `You are a clinical summary assistant for a pediatric hospital. Generate a concise clinical summary for the doctor who is about to see this patient.
 
 RULES:
 - Write in clinical note style — concise, factual, no pleasantries
-- Weight the most recent visit HEAVILY — include diagnosis, treatment, examination findings, doctor's notes, and outcome expectations
-- For older visits, mention only diagnosis and key treatment
+- If previous visits exist: weight the most recent visit HEAVILY — include diagnosis, treatment, examination findings, doctor's notes, and outcome expectations. For older visits, mention only diagnosis and key treatment.
+- If uploaded documents exist (lab reports, discharge summaries, imaging): summarize key findings, abnormal values, and clinically relevant information from those documents.
 - Note trends: weight changes, recurring conditions, escalation/de-escalation of treatment
-- Flag: ongoing medications, unresolved conditions, allergies, pending follow-ups
+- Flag: ongoing medications, unresolved conditions, allergies, pending follow-ups, abnormal lab values
 - If the last visit had a follow-up recommendation, note whether the patient is returning within or past the recommended window
-- Keep under 200 words
+- Keep under 250 words
 - Write in English
 - Do NOT include patient name, UHID, or other PII — the summary will be attached to the visit record which already has that
 - Start directly with clinical content — no headers or labels`;
@@ -42,8 +42,13 @@ serve(async (req: Request) => {
       throw new Error("ANTHROPIC_API_KEY not configured.");
     }
 
-    const { patient_id, current_weight_kg, current_complaints, patient_age } =
-      await req.json();
+    const {
+      patient_id,
+      current_weight_kg,
+      current_complaints,
+      patient_age,
+      document_summaries,
+    } = await req.json();
 
     if (!patient_id) {
       return new Response(JSON.stringify({ error: "patient_id is required" }), {
@@ -72,9 +77,14 @@ serve(async (req: Request) => {
     }
 
     const rxList = await rxRes.json();
-    if (!rxList.length) {
+    const hasDocuments =
+      Array.isArray(document_summaries) && document_summaries.length > 0;
+    if (!rxList.length && !hasDocuments) {
       return new Response(
-        JSON.stringify({ summary: null, reason: "No previous prescriptions" }),
+        JSON.stringify({
+          summary: null,
+          reason: "No previous prescriptions and no documents",
+        }),
         {
           status: 200,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -111,15 +121,18 @@ serve(async (req: Request) => {
       };
     });
 
-    const userMessage = `Generate a clinical summary for a returning pediatric patient.
+    // Build document summaries section
+    const docSection = hasDocuments
+      ? `\n\nUPLOADED DOCUMENTS (scanned at reception today):\n${document_summaries.join("\n")}`
+      : "";
+
+    const userMessage = `Generate a clinical summary for a pediatric patient.
 
 CURRENT VISIT CONTEXT:
 - Patient age: ${patient_age || "unknown"}
 - Current weight: ${current_weight_kg || "not yet recorded"} kg
 - Today's complaints: ${current_complaints || "not yet recorded"}
-
-PREVIOUS VISITS (most recent first):
-${JSON.stringify(visits, null, 2)}
+${visits.length ? `\nPREVIOUS VISITS (most recent first):\n${JSON.stringify(visits, null, 2)}` : "\nNo previous visits on record (first-time patient)."}${docSection}
 
 Generate the clinical summary now.`;
 

@@ -4923,27 +4923,14 @@
       rxLang !== "bilingual"
         ? "\nLANGUAGE: " + (rxLang === "hindi" ? "Hindi" : "English")
         : "";
-    // Include previous visit summary for returning patients (clearly separated)
+    // Include visit summary (comprehensive — covers prior history + uploaded document findings)
     const curVisit = selectedPatient?.visit;
     const visitSummary = curVisit?.visit_summary;
     const summaryNote = visitSummary
-      ? "\n\nPREVIOUS VISIT SUMMARY (AI-generated from prior visits — for context only, DO NOT confuse with current clinical note above):\n" +
+      ? "\n\nCLINICAL SUMMARY (AI-generated — for context only, DO NOT confuse with current clinical note above):\n" +
         visitSummary
       : "";
-    // Include OCR summaries from uploaded documents (scans, lab reports, etc.)
-    const attachedDocs = curVisit?.attached_documents;
-    let docsNote = "";
-    if (Array.isArray(attachedDocs) && attachedDocs.length) {
-      const ocrSummaries = attachedDocs
-        .filter((d) => d.ocr_summary)
-        .map((d) => (d.category || "Document") + ": " + d.ocr_summary);
-      if (ocrSummaries.length) {
-        docsNote =
-          "\n\nUPLOADED DOCUMENT SUMMARIES (scanned by reception — use these findings in your clinical assessment):\n" +
-          ocrSummaries.join("\n");
-      }
-    }
-    const fullNote = note + sectionsNote + langNote + summaryNote + docsNote;
+    const fullNote = note + sectionsNote + langNote + summaryNote;
 
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];
