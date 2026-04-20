@@ -483,24 +483,24 @@ understanding + structured output**.
 
 ### 12.4. Pricing comparison
 
-All prices below are from published sources as of April 2026. Datalab's
-public pricing page was not parseable at fetch time; the numbers below are
-drawn from the Replicate integration blog and Datalab's own model docs.
-Verify on [datalab.to/pricing](https://www.datalab.to/pricing) before
-committing.
+Pricing below is from the official Datalab Cloud-Hosted API plan
+(verified April 2026). The plan is a flat monthly subscription with
+included credit; pages beyond the credit are billed pay-as-you-go at the
+per-mode rates.
 
-**Datalab hosted API (pay-per-page):**
+**Datalab Cloud-Hosted API plan:**
 
-| Product                                        | Price                              | Notes                                |
-| ---------------------------------------------- | ---------------------------------- | ------------------------------------ |
-| Datalab OCR (standard)                         | **$2 / 1 000 pages**               | = $0.002/page                        |
-| Datalab Marker — fast/balanced                 | **$4 / 1 000 pages**               | = $0.004/page; includes layout       |
-| Datalab Marker — accurate / with `page_schema` | **$6 / 1 000 pages**               | = $0.006/page; structured extraction |
-| Free playground                                | available at datalab.to/playground | No-card trial                        |
+| Component                                                 | Price                   | Notes                                              |
+| --------------------------------------------------------- | ----------------------- | -------------------------------------------------- |
+| Plan fee                                                  | **$25 / month**         | Flat; includes **$25** in usage credit             |
+| Markdown, layout, table recognition (with model training) | **$3.00 / 1 000 pages** | = $0.003/page                                      |
+| Extraction, Marker accurate mode (with model training)    | **$4.50 / 1 000 pages** | = $0.0045/page; this is the mode that runs Chandra |
+| Minimum charge                                            | **$0.01 / request**     | Applies to every API call regardless of page count |
 
-Chandra-specific per-page pricing on the hosted API is not separately
-published; Datalab positions Chandra as the engine powering their Marker /
-OCR products, so the per-page rates above are the effective cost.
+The $25 credit is consumed first; overage is billed at the per-mode rates
+above. For Radhakishan's extraction use-case (clinical documents via
+Chandra / Marker accurate), the effective rate is **$4.50 / 1 000 pages**
+once the monthly credit is exhausted.
 
 **Self-hosted Chandra (our own GPU):**
 
@@ -526,14 +526,41 @@ OCR products, so the per-page rates above are the effective cost.
 
 ### 12.5. Cost summary table (per 1 000 pages, rough)
 
-| Path                                                                      | Per-1K-pages             | Notes                                                                                             |
-| ------------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------- |
-| **Claude Vision Sonnet 4 (current — structured JSON + clinical summary)** | **$8 – $20**             | Includes clinical summary, normalization, and drug/diagnosis extraction in a single call          |
-| **Claude Vision Sonnet 4 (pad mode, verbatim text)**                      | **$4 – $10**             | Shorter output                                                                                    |
-| Datalab Chandra via Datalab OCR API                                       | **$2**                   | Transcription only; no clinical summary, no structured drug/lab schema — post-processing required |
-| Datalab Marker (fast/balanced)                                            | **$4**                   | Includes Markdown + layout                                                                        |
-| Datalab Marker (accurate + schema)                                        | **$6**                   | Closest to Claude's structured JSON but still not clinical                                        |
-| **Chandra self-hosted on our own GPU**                                    | **~$1 – $5** (amortised) | Plus engineering + ops time; plus a follow-up LLM call for clinical summary/extraction            |
+| Path                                                                      | Per-1K-pages             | Notes                                                                                                      |
+| ------------------------------------------------------------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| **Claude Vision Sonnet 4 (current — structured JSON + clinical summary)** | **$8 – $20**             | Includes clinical summary, normalization, and drug/diagnosis extraction in a single call                   |
+| **Claude Vision Sonnet 4 (pad mode, verbatim text)**                      | **$4 – $10**             | Shorter output                                                                                             |
+| Datalab markdown / layout / table recognition                             | **$3**                   | Transcription + layout only; no clinical summary, no structured drug/lab schema — post-processing required |
+| Datalab extraction / Marker accurate (Chandra)                            | **$4.50**                | Closest to Claude's structured JSON but still not clinical                                                 |
+| **Chandra self-hosted on our own GPU**                                    | **~$1 – $5** (amortised) | Plus engineering + ops time; plus a follow-up LLM call for clinical summary/extraction                     |
+
+Note: the Datalab Cloud-Hosted plan carries a **$25/month floor** (flat
+fee with $25 included credit). Small-volume months effectively cost
+$25 even if metered usage is below that; per-1K rates above apply to
+overage once the credit is exhausted.
+
+### 12.5a. Monthly cost projections (Radhakishan volume)
+
+Assumes ~2 pages/document average, extraction mode ($4.50/1K pages) for
+Datalab, plus a follow-up Haiku structuring call at ~$1/1K pages.
+
+| Daily docs       | Pages/month (~2pp avg) | Datalab cost                    | Haiku structuring cost | **Total/month** | Notes                                   |
+| ---------------- | ---------------------- | ------------------------------- | ---------------------- | --------------- | --------------------------------------- |
+| 20 (current POC) | 1 200                  | $25 (flat, credit covers usage) | $1                     | **$26**         | Inside $25 credit                       |
+| 50               | 3 000                  | $25                             | $3                     | **$28**         | Still inside credit                     |
+| 100              | 6 000                  | $25 + (500 × $4.50/1k) = $27.25 | $6                     | **$33**         | Credit exhausted, small overage         |
+| 250              | 15 000                 | $25 + $45 = $70                 | $15                    | **$85**         |                                         |
+| 500              | 30 000                 | $25 + $112.50 = $137.50         | $30                    | **$168**        |                                         |
+| 1 000            | 60 000                 | $25 + $247.50 = $272.50         | $60                    | **$333**        | **Inflection point for self-host eval** |
+| 2 500            | 150 000                | $25 + $652.50 = $677.50         | $150                   | **$828**        | Self-hosted likely cheaper here         |
+
+- **Inflection point:** ~1 000 docs/day sustained for 60+ days is when
+  self-hosted Chandra (~$200–400/month GPU) becomes worth evaluating.
+  Below that, hosted wins on both cost and operational simplicity.
+- **Caveat:** these numbers assume 2 pages/doc average. Discharge
+  summaries (multi-page) will push the average higher; single-page OPD
+  slips pull it lower. Re-run projections against real volume data
+  quarterly.
 
 ### 12.6. What Chandra would actually replace — and what it wouldn't
 
