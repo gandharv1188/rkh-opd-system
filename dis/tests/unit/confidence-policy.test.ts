@@ -9,9 +9,9 @@ import {
 const baseRules = [
   { field: 'labs', threshold: 0.95, block_type: 'table' as const },
   { field: 'vaccinations', threshold: 0.9 },
-  { field: 'medications', threshold: 1.01 },
-  { field: 'diagnoses', threshold: 1.01 },
-  { field: 'summary', threshold: 0.0 },
+  { field: 'medications', threshold: 0.9 },
+  { field: 'diagnoses', threshold: 0.9 },
+  { field: 'summary', threshold: 0.5 },
 ];
 
 function policy(enabled: boolean, version = 1): ConfidencePolicy {
