@@ -58,6 +58,6 @@ Every ticket copies this template into `backlog.md` (or into
 - [ ] Gate 6b Integration (if tagged — user approval required)
 - [ ] Gate 6c Security (if tagged)
 - [ ] Gate 6d Breaking (if tagged)
-- [ ] Gate 7 DoD
+- [ ] Gate 7 DoD (includes session handoff file — see `08_team/session_handoff.md`)
 
 **Status:** Ready | In Progress | Blocked | In Review | Conditional Review | Done

@@ -87,3 +87,4 @@ not silently proceed.
 - [Team & RACI](./08_team/RACI.md)
 - [Review Gates](./08_team/review_gates.md)
 - [Runbooks](./09_runbooks/README.md)
+- [Session Handoff Protocol](./08_team/session_handoff.md)

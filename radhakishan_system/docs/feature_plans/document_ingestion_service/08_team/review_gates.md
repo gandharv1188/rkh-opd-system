@@ -187,6 +187,7 @@ failure.
 - [ ] No TODO / FIXME / `console.log` in production code paths.
 - [ ] Changelog entry added (`dis/CHANGELOG.md`).
 - [ ] Audit log entry added for migration tickets.
+- [ ] **Session handoff file exists at `dis/handoffs/DIS-###.md` and all sections are filled in** (per `08_team/session_handoff.md` §3).
 
 **Fail action:** PR reopened; author addresses gaps.
 
