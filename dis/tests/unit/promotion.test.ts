@@ -144,6 +144,41 @@ describe('buildPromotionPlan — CS-10 discharge-summary latest-only', () => {
   });
 });
 
+describe('buildPromotionPlan — partial dedup', () => {
+  it('skips only rows that match hints; inserts the rest', () => {
+    const extraction = baseExtraction({
+      documentType: 'lab_report',
+      labs: [
+        {
+          testNameNormalized: 'TSB',
+          valueNumeric: 8.2,
+          unit: 'mg/dL',
+          testDate: '2026-04-20',
+          flag: 'normal',
+          testCategory: 'Biochemistry',
+        },
+        {
+          testNameNormalized: 'Hb',
+          valueNumeric: 12.0,
+          unit: 'g/dL',
+          testDate: '2026-04-20',
+          flag: 'normal',
+          testCategory: 'Hematology',
+        },
+      ],
+    });
+    const hints: ExistingRowHints = {
+      labKeys: new Set(['pat-1|TSB|2026-04-20|8.2']),
+      vaxKeys: new Set<string>(),
+    };
+    const plan = buildPromotionPlan(extraction, hints);
+    expect(plan.labInserts).toHaveLength(1);
+    expect(plan.labInserts[0]?.testName).toBe('Hb');
+    expect(plan.skipped).toHaveLength(1);
+    expect(plan.skipped[0]?.reason).toBe('duplicate_pkid_match');
+  });
+});
+
 describe('buildPromotionPlan — non-discharge documents preserve all rows', () => {
   it('lab_report with 3 labs promotes 3 rows, no dedup across dates', () => {
     const extraction = baseExtraction({
