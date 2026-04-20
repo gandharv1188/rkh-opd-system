@@ -11,7 +11,7 @@ This ticket introduces new dependencies that must be merged into
 | `hono`              | `^4.6.0`  | Portable HTTP framework (per coding_standards §1). Used by `src/http/server`. |
 | `@hono/node-server` | `^1.13.0` | Node adapter for Hono — binds the app to a Node `http.Server`.                |
 | `pino`              | `^9.5.0`  | Structured logger (per coding_standards §8). Not wired yet — DIS-008.         |
-| `sharp`             | `^0.33.0` | Image pipeline (HEIC/WebP/BMP/TIFF → JPEG, resize, normalise) — DIS-058.      |
+| `sharp`             | `^0.33.0` | Image pipeline (HEIC/WebP/BMP/TIFF → JPEG, resize, normalise) — DIS-058b.     |
 
 ## Dev dependencies
 
@@ -19,6 +19,14 @@ This ticket introduces new dependencies that must be merged into
 | ------------- | -------- | --------------------------------------------------------------- |
 | `vitest`      | `^2.1.0` | Test runner for `tests/integration/**/*.test.ts`.               |
 | `@types/node` | `^20`    | Node typings. Already covered by DIS-001; listed here for info. |
+
+## DIS-058 stub note
+
+DIS-058 landed as a type-safe passthrough (`DefaultPreprocessor`) that satisfies the
+`PreprocessorPort` contract and enforces a default 50-page cap. It does **not**
+import `sharp` and does not perform any image processing. The real pipeline
+(deskew, blank/duplicate drop, resize, CLAHE, JPEG re-encode) will land in
+DIS-058b, which is when `sharp ^0.33` must actually be installed.
 
 ## Integrator notes
 
