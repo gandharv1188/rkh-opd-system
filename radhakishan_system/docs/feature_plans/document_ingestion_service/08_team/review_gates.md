@@ -106,6 +106,9 @@ failure.
 - All review comments addressed (either fixed or explicitly deferred to a follow-up ticket).
 - Reviewer has verified: acceptance criteria met, tests cover the changes, documentation updated.
 
+> **Verify re-run sampling (Control 10 from 02_architecture/drift_prevention.md).**
+> Before approving, the reviewer re-runs at least **20% (rounded up, minimum 1)** of the VERIFY commands pasted in the PR's session handoff. For PRs tagged `clinical-safety` or `integration`, the reviewer re-runs **100%**. Any discrepancy between the pasted output and the reviewer's re-run is a Gate 5 failure. The reviewer records which commands were sampled in a single comment on the PR before approving.
+
 **Fail action:** PR remains open with `Changes Requested`. Author iterates.
 
 ---
