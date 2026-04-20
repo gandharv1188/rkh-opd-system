@@ -94,3 +94,30 @@ The Architect owns the backlog. Worker agents do NOT edit `epics.md`,
 `backlog.md`, or the status lists — they only touch files inside
 `dis/` per their ticket brief. Status transitions happen when the
 Architect merges their branch.
+
+## Verify-Driven Ticketing
+
+Every DIS ticket ends with a numbered `VERIFY-N` block of
+copy-pasteable shell commands, each with a literal expected output (or
+regex) and a one-line pass criterion. Prose acceptance criteria are
+not accepted — if a criterion cannot be reduced to a shell command
+with a deterministic output, it is restated or split until it can.
+Reviewers re-run the VERIFY steps verbatim; any drift between the
+command output pasted in the handoff and the reviewer's re-run is a
+Gate 5 failure. The template also requires an exhaustive
+`files_allowed` list; any PR that writes outside that list is rejected
+by CI (enforced from Wave 3+).
+
+This format composes cleanly with the other controls. Test-first
+(Gate 2) proves the code meets its own unit tests; VERIFY proves the
+ticket met its acceptance conditions; the session handoff (see
+[`../08_team/session_handoff.md`](../08_team/session_handoff.md) §3)
+captures the actual pasted outputs so a reviewer — or a future agent
+resuming cold — has a single artifact that is both reproducible and
+auditable. Combined with the Phase 1 drift-prevention controls
+arriving in Wave 3 (see
+[`../02_architecture/drift_prevention.md`](../02_architecture/drift_prevention.md)),
+Verify-Driven Ticketing is what keeps multi-agent waves honest: no
+ticket claims "done" without machine-checkable evidence, and no agent
+silently widens its blast radius beyond `files_allowed`. Binding spec:
+[`../05_testing/verify_format.md`](../05_testing/verify_format.md).
