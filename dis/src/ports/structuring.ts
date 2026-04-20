@@ -5,7 +5,7 @@
  * @see TDD §10
  */
 
-import type { Block } from "./ocr";
+import type { Block } from './ocr';
 
 /**
  * Placeholder for the validated clinical extraction shape.
@@ -31,7 +31,7 @@ export type ClinicalExtractionShape = unknown;
  */
 export type StructuringPatientContext = {
   readonly age_years?: number;
-  readonly sex?: "M" | "F";
+  readonly sex?: 'M' | 'F';
   readonly allergies?: readonly string[];
 };
 
@@ -56,11 +56,7 @@ export type StructuringInput = {
  *
  * @see TDD §10.1
  */
-export type StructuringProvider =
-  | "claude-haiku"
-  | "claude-sonnet"
-  | "claude-opus"
-  | "onprem";
+export type StructuringProvider = 'claude-haiku' | 'claude-sonnet' | 'claude-opus' | 'onprem';
 
 /**
  * Token usage reported by the structuring provider.

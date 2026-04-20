@@ -25,7 +25,7 @@ export type PutObjectInput = {
  * Result of a successful put — discriminated so callers can pattern-match.
  */
 export type PutObjectResult = {
-  readonly kind: "put";
+  readonly kind: 'put';
   readonly etag: string;
 };
 
@@ -33,7 +33,7 @@ export type PutObjectResult = {
  * Result of a successful get — discriminated union with body payload.
  */
 export type GetObjectResult = {
-  readonly kind: "get";
+  readonly kind: 'get';
   readonly body: Buffer;
   readonly contentType: string;
   readonly metadata?: ObjectMetadata;
@@ -53,7 +53,7 @@ export type SignedUploadUrlInput = {
  * Result of a signed upload URL request.
  */
 export type SignedUploadUrlResult = {
-  readonly kind: "signed-upload";
+  readonly kind: 'signed-upload';
   readonly url: string;
   readonly fields?: Readonly<Record<string, string>>;
 };
@@ -62,7 +62,7 @@ export type SignedUploadUrlResult = {
  * Result of a signed download URL request.
  */
 export type SignedDownloadUrlResult = {
-  readonly kind: "signed-download";
+  readonly kind: 'signed-download';
   readonly url: string;
 };
 
@@ -74,12 +74,7 @@ export type SignedDownloadUrlResult = {
 export interface StoragePort {
   putObject(input: PutObjectInput): Promise<PutObjectResult>;
   getObject(key: string): Promise<GetObjectResult>;
-  getSignedUploadUrl(
-    input: SignedUploadUrlInput,
-  ): Promise<SignedUploadUrlResult>;
-  getSignedDownloadUrl(
-    key: string,
-    expiresSec: number,
-  ): Promise<SignedDownloadUrlResult>;
+  getSignedUploadUrl(input: SignedUploadUrlInput): Promise<SignedUploadUrlResult>;
+  getSignedDownloadUrl(key: string, expiresSec: number): Promise<SignedDownloadUrlResult>;
   deleteObject(key: string): Promise<void>;
 }

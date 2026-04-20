@@ -25,5 +25,6 @@
       "Bash(git push:*)",
       "Bash(node:*)"
     ]
-  }
+  },
+  "prefersReducedMotion": false
 }

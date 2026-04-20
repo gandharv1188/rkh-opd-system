@@ -12,19 +12,19 @@
  * @see TDD §9.1
  */
 export type BlockType =
-  | "text"
-  | "section-header"
-  | "caption"
-  | "table"
-  | "form"
-  | "list-group"
-  | "image"
-  | "figure"
-  | "equation-block"
-  | "code-block"
-  | "page-header"
-  | "page-footer"
-  | "complex-block";
+  | 'text'
+  | 'section-header'
+  | 'caption'
+  | 'table'
+  | 'form'
+  | 'list-group'
+  | 'image'
+  | 'figure'
+  | 'equation-block'
+  | 'code-block'
+  | 'page-header'
+  | 'page-footer'
+  | 'complex-block';
 
 /**
  * Bounding box for a single OCR block, in page-local coordinates.
@@ -58,14 +58,14 @@ export type Block = {
  *
  * @see TDD §9.1
  */
-export type OcrOutputFormat = "markdown" | "json" | "html";
+export type OcrOutputFormat = 'markdown' | 'json' | 'html';
 
 /**
  * Media types accepted by the OCR port.
  *
  * @see TDD §9.1
  */
-export type OcrMediaType = "image/jpeg" | "application/pdf";
+export type OcrMediaType = 'image/jpeg' | 'application/pdf';
 
 /**
  * Optional hints supplied to the OCR engine (language, domain category).
@@ -95,7 +95,7 @@ export type OcrInput = {
  *
  * @see TDD §9.1
  */
-export type OcrProvider = "datalab" | "claude-vision" | "onprem-chandra";
+export type OcrProvider = 'datalab' | 'claude-vision' | 'onprem-chandra';
 
 /**
  * Token usage reported by the provider, when available.

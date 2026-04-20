@@ -42,10 +42,6 @@ export type QueueHandler = (payload: unknown) => Promise<void>;
  * @see portability.md §Queue portability
  */
 export interface QueuePort {
-  enqueue(
-    topic: string,
-    payload: QueuePayload,
-    opts?: EnqueueOptions,
-  ): Promise<EnqueueResult>;
+  enqueue(topic: string, payload: QueuePayload, opts?: EnqueueOptions): Promise<EnqueueResult>;
   startConsumer(topic: string, handler: QueueHandler): Promise<void>;
 }

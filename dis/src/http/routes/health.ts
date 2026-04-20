@@ -1,7 +1,7 @@
-import type { Hono } from "hono";
+import type { Hono } from 'hono';
 
 export interface HealthResponse {
-  status: "ok";
+  status: 'ok';
   version: string;
 }
 
@@ -13,9 +13,9 @@ export interface HealthResponse {
  * for DIS-004 — this is a liveness endpoint only.
  */
 export function registerHealthRoute(app: Hono): void {
-  app.get("/health", (c) => {
-    const version = process.env.DIS_VERSION ?? "0.0.1";
-    const body: HealthResponse = { status: "ok", version };
+  app.get('/health', (c) => {
+    const version = process.env.DIS_VERSION ?? '0.0.1';
+    const body: HealthResponse = { status: 'ok', version };
     return c.json(body, 200);
   });
 }

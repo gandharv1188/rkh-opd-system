@@ -10,7 +10,7 @@
  *
  * @see TDD §8
  */
-export type PreprocessorMediaType = "image/jpeg" | "application/pdf";
+export type PreprocessorMediaType = 'image/jpeg' | 'application/pdf';
 
 /**
  * Input payload for {@link PreprocessorPort.preprocess}.

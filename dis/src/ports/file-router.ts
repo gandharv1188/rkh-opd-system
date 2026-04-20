@@ -15,12 +15,12 @@
  * @see TDD §7
  */
 export type RoutingDecision =
-  | { readonly kind: "native_text"; readonly pageCount: number }
-  | { readonly kind: "ocr_scan"; readonly pageCount: number }
-  | { readonly kind: "ocr_image" }
-  | { readonly kind: "office_word" }
-  | { readonly kind: "office_sheet" }
-  | { readonly kind: "unsupported"; readonly reason: string };
+  | { readonly kind: 'native_text'; readonly pageCount: number }
+  | { readonly kind: 'ocr_scan'; readonly pageCount: number }
+  | { readonly kind: 'ocr_image' }
+  | { readonly kind: 'office_word' }
+  | { readonly kind: 'office_sheet' }
+  | { readonly kind: 'unsupported'; readonly reason: string };
 
 /**
  * Input payload for {@link FileRouterPort.route}.

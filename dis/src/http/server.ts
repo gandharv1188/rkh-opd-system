@@ -1,7 +1,7 @@
-import { serve } from "@hono/node-server";
-import { Hono } from "hono";
-import { correlationId } from "./middleware/correlation-id.ts";
-import { registerHealthRoute } from "./routes/health.ts";
+import { serve } from '@hono/node-server';
+import { Hono } from 'hono';
+import { correlationId } from './middleware/correlation-id.ts';
+import { registerHealthRoute } from './routes/health.ts';
 
 /**
  * Hono context variable map.
@@ -22,7 +22,7 @@ export type App = Hono<{ Variables: AppVariables }>;
  */
 export function createServer(): App {
   const app = new Hono<{ Variables: AppVariables }>();
-  app.use("*", correlationId());
+  app.use('*', correlationId());
   registerHealthRoute(app);
   return app;
 }
@@ -46,18 +46,15 @@ export async function start(port: number): Promise<StartedServer> {
 
   return await new Promise<StartedServer>((resolve, reject) => {
     try {
-      const server = serve(
-        { fetch: app.fetch, port, hostname: "127.0.0.1" },
-        (info) => {
-          resolve({
-            port: info.port,
-            close: () =>
-              new Promise<void>((res, rej) => {
-                server.close((err) => (err ? rej(err) : res()));
-              }),
-          });
-        },
-      );
+      const server = serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, (info) => {
+        resolve({
+          port: info.port,
+          close: () =>
+            new Promise<void>((res, rej) => {
+              server.close((err) => (err ? rej(err) : res()));
+            }),
+        });
+      });
     } catch (err) {
       reject(err instanceof Error ? err : new Error(String(err)));
     }
