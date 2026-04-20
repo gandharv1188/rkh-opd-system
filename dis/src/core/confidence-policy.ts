@@ -57,8 +57,9 @@ export function evaluatePolicy(
     };
   });
 
-  // CS-7 fail-closed: when disabled, never auto-approve regardless of confidence.
-  if (!policy.enabled) {
+  // CS-7 fail-closed short-circuit: !enabled ⇒ auto_approved=false always.
+  const enabled = policy.enabled;
+  if (!enabled) {
     return {
       auto_approved: false,
       rule_results,

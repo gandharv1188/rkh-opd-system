@@ -114,4 +114,10 @@ describe('evaluatePolicy — policy version stamping', () => {
     const result = evaluatePolicy(allFieldsAt(1.0), policy(true, 7), tableBlocks);
     expect(result.policy_version).toBe(7);
   });
+
+  it('stamps version on disabled-policy decision too', () => {
+    const result = evaluatePolicy(allFieldsAt(1.0), policy(false, 42), tableBlocks);
+    expect(result.policy_version).toBe(42);
+    expect(result.auto_approved).toBe(false);
+  });
 });
