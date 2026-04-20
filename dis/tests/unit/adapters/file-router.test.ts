@@ -45,22 +45,46 @@ describe('DefaultFileRouter — TDD §7 decision tree', () => {
     }
   });
 
-  it.each([
-    ['photo.jpg'],
-    ['photo.jpeg'],
-    ['photo.png'],
-    ['photo.heic'],
-    ['photo.webp'],
-    ['photo.bmp'],
-    ['photo.tiff'],
-  ])('routes image file %s to ocr_image', async (filename) => {
+  it('routes .jpg to ocr_image', async () => {
     const router = new DefaultFileRouter({ pdfTextExtractor: fakePdfPages([]) });
     const decision = await router.route({
       body: emptyBuf,
       contentType: 'application/octet-stream',
-      filename,
+      filename: 'photo.jpg',
     });
     expect(decision.kind).toBe('ocr_image');
+  });
+
+  it('routes .png to ocr_image', async () => {
+    const router = new DefaultFileRouter({ pdfTextExtractor: fakePdfPages([]) });
+    const decision = await router.route({
+      body: emptyBuf,
+      contentType: 'application/octet-stream',
+      filename: 'photo.png',
+    });
+    expect(decision.kind).toBe('ocr_image');
+  });
+
+  it('routes .heic to ocr_image', async () => {
+    const router = new DefaultFileRouter({ pdfTextExtractor: fakePdfPages([]) });
+    const decision = await router.route({
+      body: emptyBuf,
+      contentType: 'application/octet-stream',
+      filename: 'photo.heic',
+    });
+    expect(decision.kind).toBe('ocr_image');
+  });
+
+  it('routes .webp/.bmp/.tiff to ocr_image', async () => {
+    const router = new DefaultFileRouter({ pdfTextExtractor: fakePdfPages([]) });
+    for (const filename of ['photo.webp', 'photo.bmp', 'photo.tiff']) {
+      const decision = await router.route({
+        body: emptyBuf,
+        contentType: 'application/octet-stream',
+        filename,
+      });
+      expect(decision.kind).toBe('ocr_image');
+    }
   });
 
   it('routes .docx to office_word', async () => {
