@@ -13,6 +13,7 @@ This ticket introduces new dependencies that must be merged into
 | `pino`              | `^9.5.0`  | Structured logger (per coding_standards §8). Not wired yet — DIS-008.                                                                                                   |
 | `postgres`          | `^3.4.4`  | Postgres driver (porsager/postgres). Runtime: node. Used by `SupabasePostgresAdapter` (DIS-054). Wired via `setPostgresDriverLoader` — no static import in the adapter. |
 | `pdfjs-dist`        | `^4.7.0`  | PDF native-text extraction for DefaultFileRouter (DIS-057). Lazy-imported.                                                                                              |
+| `sharp`             | `^0.33.0` | Image pipeline — deferred to DIS-058b (DIS-058 stub does not import).                                                                                                   |
 
 ## Dev dependencies
 
@@ -20,6 +21,14 @@ This ticket introduces new dependencies that must be merged into
 | ------------- | -------- | --------------------------------------------------------------- |
 | `vitest`      | `^2.1.0` | Test runner for `tests/integration/**/*.test.ts`.               |
 | `@types/node` | `^20`    | Node typings. Already covered by DIS-001; listed here for info. |
+
+## DIS-058 stub note
+
+DIS-058 landed as a type-safe passthrough (`DefaultPreprocessor`) that satisfies the
+`PreprocessorPort` contract and enforces a default 50-page cap. It does **not**
+import `sharp` and does not perform any image processing. The real pipeline
+(deskew, blank/duplicate drop, resize, CLAHE, JPEG re-encode) will land in
+DIS-058b, which is when `sharp ^0.33` must actually be installed.
 
 ## Integrator notes
 
