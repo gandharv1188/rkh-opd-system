@@ -1,12 +1,21 @@
 /**
- * Exhaustiveness helper. Invoke in the `default:` branch of a `switch` on
- * a discriminated union so the compiler proves every variant is handled.
+ * Exhaustiveness helper for discriminated unions.
  *
- * See: coding_standards.md §1 — "Exhaustiveness checks".
+ * Invoke in the `default` branch of a `switch` over a discriminator, or in
+ * any code path that should be statically unreachable. If the compiler can
+ * reach the call site with a non-`never` type, type-checking fails — which is
+ * exactly how we catch missed cases when a union grows.
  *
- * @param x - a value the compiler has narrowed to `never`
- * @throws {Error} always, at runtime, if reached (defense in depth)
+ * @see coding_standards.md §1
+ *
+ * @example
+ *   switch (decision.kind) {
+ *     case 'native_text': return handleNative(decision);
+ *     case 'ocr_scan':    return handleOcr(decision);
+ *     // …
+ *     default:            return assertNever(decision);
+ *   }
  */
 export function assertNever(x: never): never {
-  throw new Error(`Unhandled discriminated union member: ${JSON.stringify(x)}`);
+  throw new Error(`Unexpected value: ${JSON.stringify(x)}`);
 }
