@@ -1,0 +1,282 @@
+openapi: 3.1.0
+info:
+  title: Document Ingestion Service
+  version: 1.0.0
+  description: |
+    Staged, verification-gated ingestion of medical documents.
+    Replaces the legacy process-document Edge Function.
+servers:
+  - url: https://{host}/dis/v1
+    variables:
+      host:
+        default: ecywxuqhnlkjtdshpcbc.functions.supabase.co
+security:
+  - bearerAuth: []
+paths:
+  /uploads/signed-url:
+    post:
+      summary: Get a signed URL to upload a document directly to storage
+      operationId: createSignedUploadUrl
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignedUrlRequest'
+      responses:
+        '200':
+          description: Signed URL issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignedUrlResponse'
+
+  /ingest:
+    post:
+      summary: Submit a document for ingestion
+      operationId: ingest
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestRequest'
+      responses:
+        '201':
+          description: Accepted — extraction created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IngestResponse' }
+        '409':
+          description: Duplicate idempotency key
+        '415':
+          description: Unsupported media type
+
+  /extractions:
+    get:
+      summary: List extractions
+      operationId: listExtractions
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [uploaded, preprocessing, ocr, structuring, ready_for_review, auto_approved, verified, promoted, rejected, failed]
+        - in: query
+          name: patient_id
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+        - in: query
+          name: cursor
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExtractionList' }
+
+  /extractions/{id}:
+    get:
+      summary: Get one extraction
+      operationId: getExtraction
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Extraction' }
+        '404':
+          description: Not found
+
+  /extractions/{id}/approve:
+    post:
+      summary: Approve an extraction (optionally with edits)
+      operationId: approveExtraction
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ApproveRequest' }
+      responses:
+        '200':
+          description: Verified and promoted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PromotionSummary' }
+        '409':
+          description: Version conflict or invalid state transition
+
+  /extractions/{id}/reject:
+    post:
+      summary: Reject an extraction
+      operationId: rejectExtraction
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RejectRequest' }
+      responses:
+        '200':
+          description: Rejected
+        '409':
+          description: Cannot reject from current state
+
+  /extractions/{id}/retry:
+    post:
+      summary: Retry a failed extraction (creates a new one)
+      operationId: retryExtraction
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '201':
+          description: New extraction created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IngestResponse' }
+
+  /admin/metrics:
+    get:
+      summary: Service-role metrics
+      operationId: getMetrics
+      responses:
+        '200':
+          description: OK
+
+  /internal/process-job:
+    post:
+      summary: Worker endpoint — not called from the browser
+      operationId: processJob
+      security:
+        - workerAuth: []
+      responses:
+        '204':
+          description: Processed
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    workerAuth:
+      type: apiKey
+      in: header
+      name: x-worker-token
+  schemas:
+    SignedUrlRequest:
+      type: object
+      required: [filename, content_type, size_bytes, patient_id, visit_id, category]
+      properties:
+        filename:       { type: string }
+        content_type:   { type: string }
+        size_bytes:     { type: integer, maximum: 20971520 }
+        patient_id:     { type: string }
+        visit_id:       { type: string, format: uuid }
+        category:       { type: string }
+    SignedUrlResponse:
+      type: object
+      properties:
+        url:            { type: string, format: uri }
+        fields:         { type: object, additionalProperties: true }
+        storage_key:    { type: string }
+    IngestRequest:
+      type: object
+      required: [storage_key, patient_id, visit_id, category, filename, content_type]
+      properties:
+        storage_key:    { type: string }
+        patient_id:     { type: string }
+        visit_id:       { type: string, format: uuid }
+        category:       { type: string }
+        filename:       { type: string }
+        content_type:   { type: string }
+        doc_date:       { type: string, format: date, nullable: true }
+    IngestResponse:
+      type: object
+      required: [extraction_id, status]
+      properties:
+        extraction_id:  { type: string, format: uuid }
+        status:         { type: string }
+        correlation_id: { type: string, format: uuid }
+    ApproveRequest:
+      type: object
+      required: [version]
+      properties:
+        version:        { type: integer }
+        verified_structured:
+          description: Edited structured payload. If omitted, AI output is used as-is.
+          type: object
+        override_duplicates: { type: boolean, default: false }
+    RejectRequest:
+      type: object
+      required: [version, reason_code]
+      properties:
+        version:        { type: integer }
+        reason_code:
+          type: string
+          enum: [illegible, wrong_patient, not_medical, duplicate, other]
+        reason_note:    { type: string }
+    PromotionSummary:
+      type: object
+      properties:
+        labs_inserted:  { type: integer }
+        labs_skipped:   { type: integer }
+        vax_inserted:   { type: integer }
+        vax_skipped:    { type: integer }
+        document_patched: { type: boolean }
+    Extraction:
+      type: object
+      properties:
+        id:             { type: string, format: uuid }
+        status:         { type: string }
+        version:        { type: integer }
+        patient_id:     { type: string }
+        visit_id:       { type: string, format: uuid }
+        document_category: { type: string }
+        structured:     { type: object }
+        verified_structured: { type: object, nullable: true }
+        confidence_summary: { type: object }
+        raw_ocr_markdown: { type: string, nullable: true }
+        raw_ocr_blocks: { type: array, items: { type: object } }
+        source_storage_key: { type: string }
+        created_at:     { type: string, format: date-time }
+        updated_at:     { type: string, format: date-time }
+    ExtractionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Extraction' }
+        next_cursor: { type: string, nullable: true }
