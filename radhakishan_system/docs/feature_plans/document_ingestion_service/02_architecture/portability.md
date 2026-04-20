@@ -5,16 +5,16 @@ document is the contract that guarantees it.
 
 ## The two target stacks
 
-| Concern | POC (Supabase) | Prod (AWS) |
-|---------|----------------|------------|
-| Compute | Supabase Edge Functions (Deno) **or** self-hosted Node.js container on Fly.io/Render if the 150s limit becomes a blocker | ECS Fargate service (Node.js) or Lambda (for short ingest endpoint) |
-| Object storage | Supabase Storage | S3 |
-| Database | Supabase Postgres | RDS Postgres 16 |
-| Background jobs | `pg_cron` triggering a `process_pending()` Postgres function that enqueues HTTP calls via `pg_net` | SQS + Lambda consumer |
-| Secrets | Supabase project secrets | AWS Secrets Manager |
-| Realtime notify | Supabase Realtime (LISTEN/NOTIFY wrapper) | AppSync subscriptions / SNS → WebSocket |
-| Auth | Supabase Auth (JWT) | Cognito |
-| CDN for uploads | Supabase Storage signed URLs | CloudFront + signed URLs |
+| Concern         | POC (Supabase)                                                                                                           | Prod (AWS)                                                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| Compute         | Supabase Edge Functions (Deno) **or** self-hosted Node.js container on Fly.io/Render if the 150s limit becomes a blocker | ECS Fargate service (Node.js) or Lambda (for short ingest endpoint) |
+| Object storage  | Supabase Storage                                                                                                         | S3                                                                  |
+| Database        | Supabase Postgres                                                                                                        | RDS Postgres 16                                                     |
+| Background jobs | `pg_cron` triggering a `process_pending()` Postgres function that enqueues HTTP calls via `pg_net`                       | SQS + Lambda consumer                                               |
+| Secrets         | Supabase project secrets                                                                                                 | AWS Secrets Manager                                                 |
+| Realtime notify | Supabase Realtime (LISTEN/NOTIFY wrapper)                                                                                | AppSync subscriptions / SNS → WebSocket                             |
+| Auth            | Supabase Auth (JWT)                                                                                                      | Cognito                                                             |
+| CDN for uploads | Supabase Storage signed URLs                                                                                             | CloudFront + signed URLs                                            |
 
 ## The three containment boundaries
 
@@ -56,6 +56,7 @@ A single `Dockerfile` produces an image that runs anywhere:
 ## Database portability
 
 **Rules:**
+
 - Migrations are plain SQL (`.sql` files in `dis/migrations/`).
 - Tool: `node-pg-migrate` or `dbmate`. **Not** `supabase db push` —
   that's a Supabase-side convenience only.
@@ -65,6 +66,7 @@ A single `Dockerfile` produces an image that runs anywhere:
   pattern; wiring sets this from JWT claims on the respective stack.
 
 **Extensions we rely on (both stacks support them):**
+
 - `pgcrypto` — UUID generation.
 - `pg_stat_statements` — metrics.
 - `pg_trgm` — fuzzy search on test names.
@@ -78,10 +80,27 @@ All storage operations go through `StoragePort`:
 
 ```ts
 interface StoragePort {
-  putObject(input: { key: string; body: Buffer; contentType: string; metadata?: Record<string, string> }): Promise<{ etag: string }>;
-  getObject(key: string): Promise<{ body: Buffer; contentType: string; metadata?: Record<string, string> }>;
-  getSignedUploadUrl(input: { key: string; expiresSec: number; maxSizeBytes: number; contentType: string }): Promise<{ url: string; fields?: Record<string, string> }>;
-  getSignedDownloadUrl(key: string, expiresSec: number): Promise<{ url: string }>;
+  putObject(input: {
+    key: string;
+    body: Buffer;
+    contentType: string;
+    metadata?: Record<string, string>;
+  }): Promise<{ etag: string }>;
+  getObject(key: string): Promise<{
+    body: Buffer;
+    contentType: string;
+    metadata?: Record<string, string>;
+  }>;
+  getSignedUploadUrl(input: {
+    key: string;
+    expiresSec: number;
+    maxSizeBytes: number;
+    contentType: string;
+  }): Promise<{ url: string; fields?: Record<string, string> }>;
+  getSignedDownloadUrl(
+    key: string,
+    expiresSec: number,
+  ): Promise<{ url: string }>;
   deleteObject(key: string): Promise<void>;
 }
 ```
@@ -95,8 +114,15 @@ URLs. Both satisfy the contract.
 
 ```ts
 interface QueuePort {
-  enqueue(topic: string, payload: Record<string, unknown>, opts?: { delaySec?: number }): Promise<{ messageId: string }>;
-  startConsumer(topic: string, handler: (payload: unknown) => Promise<void>): Promise<void>;
+  enqueue(
+    topic: string,
+    payload: Record<string, unknown>,
+    opts?: { delaySec?: number },
+  ): Promise<{ messageId: string }>;
+  startConsumer(
+    topic: string,
+    handler: (payload: unknown) => Promise<void>,
+  ): Promise<void>;
 }
 ```
 
@@ -113,7 +139,7 @@ Business logic doesn't know the difference.
 
 ```ts
 interface SecretsPort {
-  get(name: string): Promise<string>;   // throws if not set
+  get(name: string): Promise<string>; // throws if not set
 }
 ```
 

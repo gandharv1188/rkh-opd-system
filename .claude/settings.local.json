@@ -1,5 +1,29 @@
 {
   "permissions": {
-    "allow": ["Bash(node migrate_dosing_bands.js)"]
+    "allow": [
+      "Bash(node migrate_dosing_bands.js)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(pwd)",
+      "Bash(echo:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git stash:*)",
+      "Bash(git restore:*)",
+      "Bash(git checkout:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git worktree:*)",
+      "Bash(git merge:*)",
+      "Bash(git push:*)",
+      "Bash(node:*)"
+    ]
   }
 }

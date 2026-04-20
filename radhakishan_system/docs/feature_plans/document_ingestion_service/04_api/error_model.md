@@ -19,21 +19,21 @@ Single consistent error envelope across all endpoints.
 
 ## HTTP status mapping
 
-| Status | When |
-|--------|------|
-| 400 `INVALID_ARGUMENT` | Malformed request body or params. |
-| 401 `UNAUTHENTICATED` | Missing or invalid auth. |
-| 403 `FORBIDDEN` | Authenticated but insufficient role for action. |
-| 404 `NOT_FOUND` | Extraction/patient/visit not found. |
-| 409 `CONFLICT` | Idempotency collision, version mismatch, invalid state transition. |
-| 413 `PAYLOAD_TOO_LARGE` | File > 20 MB. |
-| 415 `UNSUPPORTED_MEDIA_TYPE` | Extension not on the allowlist. |
-| 422 `VALIDATION_FAILED` | Payload valid shape but fails domain rules (e.g., required edit missing). |
-| 429 `RATE_LIMITED` | Per-user or global throttle. |
-| 500 `INTERNAL` | Unhandled server error. |
-| 502 `UPSTREAM_FAILED` | OCR/structuring provider returned an error. Includes `provider` in details. |
-| 503 `UNAVAILABLE` | Kill switch active or maintenance mode. |
-| 504 `UPSTREAM_TIMEOUT` | Provider did not respond within timeout. |
+| Status                       | When                                                                        |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| 400 `INVALID_ARGUMENT`       | Malformed request body or params.                                           |
+| 401 `UNAUTHENTICATED`        | Missing or invalid auth.                                                    |
+| 403 `FORBIDDEN`              | Authenticated but insufficient role for action.                             |
+| 404 `NOT_FOUND`              | Extraction/patient/visit not found.                                         |
+| 409 `CONFLICT`               | Idempotency collision, version mismatch, invalid state transition.          |
+| 413 `PAYLOAD_TOO_LARGE`      | File > 20 MB.                                                               |
+| 415 `UNSUPPORTED_MEDIA_TYPE` | Extension not on the allowlist.                                             |
+| 422 `VALIDATION_FAILED`      | Payload valid shape but fails domain rules (e.g., required edit missing).   |
+| 429 `RATE_LIMITED`           | Per-user or global throttle.                                                |
+| 500 `INTERNAL`               | Unhandled server error.                                                     |
+| 502 `UPSTREAM_FAILED`        | OCR/structuring provider returned an error. Includes `provider` in details. |
+| 503 `UNAVAILABLE`            | Kill switch active or maintenance mode.                                     |
+| 504 `UPSTREAM_TIMEOUT`       | Provider did not respond within timeout.                                    |
 
 ## Error codes — full list
 
@@ -69,6 +69,7 @@ Single consistent error envelope across all endpoints.
 ## Logging
 
 Every response logs:
+
 - `method, path, status, duration_ms, request_id, correlation_id, error.code (if any)`.
 - No PII in logs — `patient_id` only, not name or UHID.
 

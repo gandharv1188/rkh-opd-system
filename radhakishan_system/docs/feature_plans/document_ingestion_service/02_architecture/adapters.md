@@ -70,16 +70,16 @@ dis/
 
 ## Port inventory
 
-| Port | File | POC adapter | Prod adapter |
-|------|------|-------------|--------------|
-| `OcrPort` | `ports/ocr.ts` | `DatalabChandraAdapter` | `DatalabChandraAdapter` (same — HTTP API is cloud-agnostic) |
-| `StructuringPort` | `ports/structuring.ts` | `ClaudeHaikuAdapter` | same |
-| `StoragePort` | `ports/storage.ts` | `SupabaseStorageAdapter` | `S3Adapter` |
-| `DatabasePort` | `ports/database.ts` | `SupabasePostgresAdapter` | `AwsRdsAdapter` |
-| `QueuePort` | `ports/queue.ts` | `PgCronAdapter` | `SqsAdapter` |
-| `SecretsPort` | `ports/secrets.ts` | `SupabaseSecretsAdapter` | `AwsSecretsManagerAdapter` |
-| `FileRouterPort` | `ports/file-router.ts` | `DefaultFileRouter` | same |
-| `PreprocessorPort` | `ports/preprocessor.ts` | `DefaultPreprocessor` | same |
+| Port               | File                    | POC adapter               | Prod adapter                                                |
+| ------------------ | ----------------------- | ------------------------- | ----------------------------------------------------------- |
+| `OcrPort`          | `ports/ocr.ts`          | `DatalabChandraAdapter`   | `DatalabChandraAdapter` (same — HTTP API is cloud-agnostic) |
+| `StructuringPort`  | `ports/structuring.ts`  | `ClaudeHaikuAdapter`      | same                                                        |
+| `StoragePort`      | `ports/storage.ts`      | `SupabaseStorageAdapter`  | `S3Adapter`                                                 |
+| `DatabasePort`     | `ports/database.ts`     | `SupabasePostgresAdapter` | `AwsRdsAdapter`                                             |
+| `QueuePort`        | `ports/queue.ts`        | `PgCronAdapter`           | `SqsAdapter`                                                |
+| `SecretsPort`      | `ports/secrets.ts`      | `SupabaseSecretsAdapter`  | `AwsSecretsManagerAdapter`                                  |
+| `FileRouterPort`   | `ports/file-router.ts`  | `DefaultFileRouter`       | same                                                        |
+| `PreprocessorPort` | `ports/preprocessor.ts` | `DefaultPreprocessor`     | same                                                        |
 
 ## Ground rules
 

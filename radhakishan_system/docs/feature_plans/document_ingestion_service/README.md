@@ -17,18 +17,18 @@ Read the documents in numbered order. Each level assumes the previous one.
 Agents executing tickets MUST reference the relevant sections in their
 commit messages and PR descriptions.
 
-| # | Folder | Purpose | Primary audience |
-|---|--------|---------|------------------|
-| 00 | `00_overview` | North Star, glossary, non-goals | Everyone |
-| 01 | `01_product` | Product brief, user stories, clinical safety requirements | PM, clinical reviewer, all engineers |
-| 02 | `02_architecture` | TDD, sequence diagrams, adapter interfaces, portability plan | Backend + frontend engineers |
-| 03 | `03_data` | Data model, migrations, retention | Backend engineers, DBA |
-| 04 | `04_api` | OpenAPI contract, error model, idempotency rules | Frontend + backend engineers |
-| 05 | `05_testing` | Test strategy, clinical acceptance tests, fixtures | QA, all engineers |
-| 06 | `06_rollout` | Shadow → opt-in → default, feature flags, kill-switch | PM, ops |
-| 07 | `07_tickets` | Epic → stories → tasks with acceptance criteria | Agent executors |
-| 08 | `08_team` | Roles, RACI, review gates | PM, all engineers |
-| 09 | `09_runbooks` | Incident response, key rotation, disaster recovery | Ops, on-call |
+| #   | Folder            | Purpose                                                      | Primary audience                     |
+| --- | ----------------- | ------------------------------------------------------------ | ------------------------------------ |
+| 00  | `00_overview`     | North Star, glossary, non-goals                              | Everyone                             |
+| 01  | `01_product`      | Product brief, user stories, clinical safety requirements    | PM, clinical reviewer, all engineers |
+| 02  | `02_architecture` | TDD, sequence diagrams, adapter interfaces, portability plan | Backend + frontend engineers         |
+| 03  | `03_data`         | Data model, migrations, retention                            | Backend engineers, DBA               |
+| 04  | `04_api`          | OpenAPI contract, error model, idempotency rules             | Frontend + backend engineers         |
+| 05  | `05_testing`      | Test strategy, clinical acceptance tests, fixtures           | QA, all engineers                    |
+| 06  | `06_rollout`      | Shadow → opt-in → default, feature flags, kill-switch        | PM, ops                              |
+| 07  | `07_tickets`      | Epic → stories → tasks with acceptance criteria              | Agent executors                      |
+| 08  | `08_team`         | Roles, RACI, review gates                                    | PM, all engineers                    |
+| 09  | `09_runbooks`     | Incident response, key rotation, disaster recovery           | Ops, on-call                         |
 
 ## Execution rules (binding on all agents)
 

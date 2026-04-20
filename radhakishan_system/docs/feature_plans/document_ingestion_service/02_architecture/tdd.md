@@ -56,14 +56,14 @@ across the boundary.
 
 The only browser-facing entry points are:
 
-| Path | Purpose |
-|------|---------|
-| `POST /ingest` | Submit a new document. Returns `extraction_id` immediately. |
-| `GET /extractions/:id` | Read extraction status + data for the verification UI. |
-| `POST /extractions/:id/approve` | Nurse approves (optionally with edits). |
-| `POST /extractions/:id/reject` | Nurse rejects with reason code. |
-| `GET /extractions?status=pending_review` | Queue page. |
-| `GET /admin/metrics` | Admin dashboard. Service-role only. |
+| Path                                     | Purpose                                                     |
+| ---------------------------------------- | ----------------------------------------------------------- |
+| `POST /ingest`                           | Submit a new document. Returns `extraction_id` immediately. |
+| `GET /extractions/:id`                   | Read extraction status + data for the verification UI.      |
+| `POST /extractions/:id/approve`          | Nurse approves (optionally with edits).                     |
+| `POST /extractions/:id/reject`           | Nurse rejects with reason code.                             |
+| `GET /extractions?status=pending_review` | Queue page.                                                 |
+| `GET /admin/metrics`                     | Admin dashboard. Service-role only.                         |
 
 Realtime status changes push through Supabase Realtime / (AWS: AppSync
 subscriptions). Fallback: 5 s polling.
@@ -162,18 +162,18 @@ interface OcrPort {
 }
 
 type OcrInput = {
-  pages: Buffer[];             // JPEGs, one per page
-  mediaType: 'image/jpeg' | 'application/pdf';
-  outputFormats: ('markdown' | 'json' | 'html')[];
+  pages: Buffer[]; // JPEGs, one per page
+  mediaType: "image/jpeg" | "application/pdf";
+  outputFormats: ("markdown" | "json" | "html")[];
   hints?: { languageCodes?: string[]; documentCategory?: string };
 };
 
 type OcrResult = {
-  provider: 'datalab' | 'claude-vision' | 'onprem-chandra';
+  provider: "datalab" | "claude-vision" | "onprem-chandra";
   providerVersion: string;
-  rawResponse: unknown;        // stored verbatim
+  rawResponse: unknown; // stored verbatim
   markdown?: string;
-  blocks?: Block[];            // from JSON output
+  blocks?: Block[]; // from JSON output
   html?: string;
   pageCount: number;
   tokensUsed?: { input: number; output: number };
@@ -183,12 +183,23 @@ type OcrResult = {
 
 type Block = {
   id: string;
-  blockType: 'text'|'section-header'|'caption'|'table'|'form'|
-             'list-group'|'image'|'figure'|'equation-block'|
-             'code-block'|'page-header'|'page-footer'|'complex-block';
+  blockType:
+    | "text"
+    | "section-header"
+    | "caption"
+    | "table"
+    | "form"
+    | "list-group"
+    | "image"
+    | "figure"
+    | "equation-block"
+    | "code-block"
+    | "page-header"
+    | "page-footer"
+    | "complex-block";
   bbox: { page: number; x: number; y: number; w: number; h: number };
   content: string;
-  confidence?: number;          // 0..1 where available
+  confidence?: number; // 0..1 where available
 };
 ```
 
@@ -222,14 +233,18 @@ type StructuringInput = {
   markdown?: string;
   blocks?: Block[];
   documentCategory: string;
-  patientContext?: { age_years?: number; sex?: 'M'|'F'; allergies?: string[] };
+  patientContext?: {
+    age_years?: number;
+    sex?: "M" | "F";
+    allergies?: string[];
+  };
 };
 
 type StructuringResult = {
-  provider: 'claude-haiku' | 'claude-sonnet' | 'claude-opus' | 'onprem';
+  provider: "claude-haiku" | "claude-sonnet" | "claude-opus" | "onprem";
   providerVersion: string;
   rawResponse: unknown;
-  structured: ClinicalExtraction;   // the JSON schema in §11
+  structured: ClinicalExtraction; // the JSON schema in §11
   tokensUsed: { input: number; output: number };
   costMicroINR: number;
   latencyMs: number;
@@ -252,40 +267,48 @@ type StructuringResult = {
   "summary": "string",
   "document_date": "YYYY-MM-DD | null",
   "lab_name": "string | null",
-  "labs": [{
-    "test_name_raw": "string",
-    "test_name_normalized": "string",
-    "value_text": "string",
-    "value_numeric": "number | null",
-    "unit": "string | null",
-    "reference_range": "string | null",
-    "flag": "normal | low | high | critical | unknown",
-    "test_category": "Hematology | Biochemistry | Microbiology | Imaging | Other",
-    "test_date": "YYYY-MM-DD | null",
-    "confidence": "number 0..1"
-  }],
-  "medications": [{
-    "drug": "string",
-    "dose": "string | null",
-    "frequency": "string | null",
-    "duration": "string | null",
-    "confidence": "number 0..1"
-  }],
-  "diagnoses": [{
-    "text": "string",
-    "icd10": "string | null",
-    "confidence": "number 0..1"
-  }],
-  "vaccinations": [{
-    "vaccine_name_raw": "string",
-    "vaccine_name_normalized": "string",
-    "dose_number": "integer | null",
-    "date_given": "YYYY-MM-DD | null",
-    "site": "string | null",
-    "batch_no": "string | null",
-    "confidence": "number 0..1"
-  }],
-  "clinical_notes": "string | null"
+  "labs": [
+    {
+      "test_name_raw": "string",
+      "test_name_normalized": "string",
+      "value_text": "string",
+      "value_numeric": "number | null",
+      "unit": "string | null",
+      "reference_range": "string | null",
+      "flag": "normal | low | high | critical | unknown",
+      "test_category": "Hematology | Biochemistry | Microbiology | Imaging | Other",
+      "test_date": "YYYY-MM-DD | null",
+      "confidence": "number 0..1",
+    },
+  ],
+  "medications": [
+    {
+      "drug": "string",
+      "dose": "string | null",
+      "frequency": "string | null",
+      "duration": "string | null",
+      "confidence": "number 0..1",
+    },
+  ],
+  "diagnoses": [
+    {
+      "text": "string",
+      "icd10": "string | null",
+      "confidence": "number 0..1",
+    },
+  ],
+  "vaccinations": [
+    {
+      "vaccine_name_raw": "string",
+      "vaccine_name_normalized": "string",
+      "dose_number": "integer | null",
+      "date_given": "YYYY-MM-DD | null",
+      "site": "string | null",
+      "batch_no": "string | null",
+      "confidence": "number 0..1",
+    },
+  ],
+  "clinical_notes": "string | null",
 }
 ```
 
@@ -302,14 +325,17 @@ Stored as JSON in `dis_confidence_policy` table:
   "version": 1,
   "enabled": false,
   "rules": [
-    { "field": "labs", "auto_approve_if": "confidence >= 0.95 AND block_type = 'table'" },
+    {
+      "field": "labs",
+      "auto_approve_if": "confidence >= 0.95 AND block_type = 'table'",
+    },
     { "field": "vaccinations", "auto_approve_if": "confidence >= 0.90" },
     { "field": "medications", "auto_approve_if": false },
     { "field": "diagnoses", "auto_approve_if": false },
-    { "field": "summary", "auto_approve_if": true }
+    { "field": "summary", "auto_approve_if": true },
   ],
   "activated_by": "user_id",
-  "activated_at": "2026-..."
+  "activated_at": "2026-...",
 }
 ```
 
@@ -323,6 +349,7 @@ Outputs: rows in `lab_results`, `vaccinations`, updates to
 `visits.attached_documents`.
 
 Guards (CS-10, CS-11):
+
 1. For `document_type=discharge_summary`, dedupe `labs[]` by
    `test_name_normalized`, keeping the latest `test_date`.
 2. For every row, check `(patient_id, test_name, test_date, value_numeric)`
@@ -367,6 +394,7 @@ Every port has an adapter for Supabase (POC) and an adapter for AWS
 (prod). See `02_architecture/portability.md` for the matrix.
 
 Porting checklist:
+
 1. Set env vars to AWS adapter names.
 2. Run migrations on RDS (same SQL).
 3. Deploy service image to ECS/Lambda.
@@ -375,14 +403,14 @@ Porting checklist:
 
 ## §18. Non-functional targets
 
-| Attribute | Target |
-|-----------|--------|
-| P50 ingest latency (return extraction_id) | <1 s |
-| P95 end-to-end to `ready_for_review` | <90 s |
-| Availability | 99.5% during business hours |
-| Per-document cost (OCR + structuring) | ≤ ₹0.40 |
-| Recovery Time Objective (kill-switch to legacy) | <5 min |
-| Data retention for raw responses | indefinite (compliance archive) |
+| Attribute                                       | Target                          |
+| ----------------------------------------------- | ------------------------------- |
+| P50 ingest latency (return extraction_id)       | <1 s                            |
+| P95 end-to-end to `ready_for_review`            | <90 s                           |
+| Availability                                    | 99.5% during business hours     |
+| Per-document cost (OCR + structuring)           | ≤ ₹0.40                         |
+| Recovery Time Objective (kill-switch to legacy) | <5 min                          |
+| Data retention for raw responses                | indefinite (compliance archive) |
 
 ## §19. What the legacy pipeline does that DIS must keep doing
 

@@ -25,12 +25,12 @@ can each be swapped without touching business logic.
 
 ## Users
 
-| Role | Interaction with DIS |
-|------|----------------------|
-| Reception clerk | Uploads files at registration. Unchanged UX. Sees a "Processing" → "Ready for review" status instead of "AI extracted: …" today. |
-| Nurse / verifier | **New role in this flow.** Opens the Verification UI, reviews extracted fields side-by-side with the source, approves or edits. |
-| Doctor | Reads verified labs on the prescription pad. Never sees unverified OCR output again. |
-| System admin | Monitors extraction queue, handles stuck jobs, rotates provider keys. |
+| Role             | Interaction with DIS                                                                                                             |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Reception clerk  | Uploads files at registration. Unchanged UX. Sees a "Processing" → "Ready for review" status instead of "AI extracted: …" today. |
+| Nurse / verifier | **New role in this flow.** Opens the Verification UI, reviews extracted fields side-by-side with the source, approves or edits.  |
+| Doctor           | Reads verified labs on the prescription pad. Never sees unverified OCR output again.                                             |
+| System admin     | Monitors extraction queue, handles stuck jobs, rotates provider keys.                                                            |
 
 ## Success criteria
 
@@ -51,6 +51,7 @@ Measured 30 days after default rollout:
 ## Scope (v1)
 
 **In scope:**
+
 - New `ocr_extractions` table + FK column on `lab_results` and `vaccinations`.
 - New HTTP service with file router, preprocessor, OCR adapter, structuring adapter.
 - Datalab `/convert` integration.
@@ -74,16 +75,16 @@ Measured 30 days after default rollout:
 
 ## Risks and mitigations
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|-----------|--------|------------|
-| Datalab API outage | M | H | Fallback adapter → Claude Vision. Kill switch → legacy `process-document`. |
-| Claude Haiku JSON drift | M | M | Schema validation on every response; on failure, re-prompt with `strict: true` or fall back to Sonnet. |
-| Verification backlog grows | M | H | Alerting at queue depth > 20; nurse role is accountable per RACI. |
-| Nurse fatigue → rubber-stamp approvals | H | H | UI shows diff-from-Claude if edited; weekly sample audit by clinician. |
-| Migration collision with live data | L | H | All new columns are nullable; deploys via shadow mode first. |
-| Supabase free-tier storage cap | H | M | PDF compression on ingest; planned S3 migration at 70% capacity. |
-| Claude/Datalab key leak | L | H | Keys in secrets manager only; rotation runbook; CI secret-scan. |
-| Model hallucination slips through verification | M | H | Clinical reviewer does weekly sample audit. Metrics track override rate. |
+| Risk                                           | Likelihood | Impact | Mitigation                                                                                             |
+| ---------------------------------------------- | ---------- | ------ | ------------------------------------------------------------------------------------------------------ |
+| Datalab API outage                             | M          | H      | Fallback adapter → Claude Vision. Kill switch → legacy `process-document`.                             |
+| Claude Haiku JSON drift                        | M          | M      | Schema validation on every response; on failure, re-prompt with `strict: true` or fall back to Sonnet. |
+| Verification backlog grows                     | M          | H      | Alerting at queue depth > 20; nurse role is accountable per RACI.                                      |
+| Nurse fatigue → rubber-stamp approvals         | H          | H      | UI shows diff-from-Claude if edited; weekly sample audit by clinician.                                 |
+| Migration collision with live data             | L          | H      | All new columns are nullable; deploys via shadow mode first.                                           |
+| Supabase free-tier storage cap                 | H          | M      | PDF compression on ingest; planned S3 migration at 70% capacity.                                       |
+| Claude/Datalab key leak                        | L          | H      | Keys in secrets manager only; rotation runbook; CI secret-scan.                                        |
+| Model hallucination slips through verification | M          | H      | Clinical reviewer does weekly sample audit. Metrics track override rate.                               |
 
 ## Out-of-the-box wins
 

@@ -74,7 +74,7 @@ Rationale: minimize blast radius during rollout.
 ## 9. Replacing `generate-prescription`
 
 The Rx generation Edge Function is untouched. It continues to read from
-`lab_results` and `vaccinations` the same way. DIS just changes *how*
+`lab_results` and `vaccinations` the same way. DIS just changes _how_
 rows arrive there.
 
 ## 10. Auth / SSO rework

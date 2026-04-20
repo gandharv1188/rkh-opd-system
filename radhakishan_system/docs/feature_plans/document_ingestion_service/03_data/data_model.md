@@ -168,6 +168,7 @@ create unique index if not exists uniq_lab_dedupe
 ```
 
 Existing rows: set `verification_status` backfill:
+
 - rows with `source='manual'` → `'manual'`
 - rows with `source='ai_extracted'` → `'ai_extracted'` (legacy)
 - rows with `source='upload'` → `'verified'`
@@ -195,7 +196,7 @@ promotion step:
   "category": "...",
   "ocr_summary": "...",
   "ocr_extraction_id": "uuid",
-  "ocr_verification_status": "verified | pending_review | rejected"
+  "ocr_verification_status": "verified | pending_review | rejected",
 }
 ```
 
