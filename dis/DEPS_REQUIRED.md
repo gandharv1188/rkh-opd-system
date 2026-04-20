@@ -11,6 +11,7 @@ This ticket introduces new dependencies that must be merged into
 | `hono`              | `^4.6.0`  | Portable HTTP framework (per coding_standards §1). Used by `src/http/server`. |
 | `@hono/node-server` | `^1.13.0` | Node adapter for Hono — binds the app to a Node `http.Server`.                |
 | `pino`              | `^9.5.0`  | Structured logger (per coding_standards §8). Not wired yet — DIS-008.         |
+| `pdfjs-dist`        | `^4.7.0`  | PDF native-text extraction for DefaultFileRouter (DIS-057). Lazy-imported.    |
 
 ## Dev dependencies
 
