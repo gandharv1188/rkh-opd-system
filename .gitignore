@@ -24,3 +24,4 @@ Consolelog.txt
 # Supabase CLI
 supabase/.temp/
 supabase/config.toml
+.claude/scheduled_tasks.lock
