@@ -738,3 +738,347 @@ The recommendation in §12.7 is unchanged, with two refinements:
 - [Datalab pricing page](https://www.datalab.to/pricing) (verify in-product before committing)
 - [Perficient — Chandra OCR open-source review](https://blogs.perficient.com/2025/11/19/chandra-ocr-open-source-document-parsing/)
 - Anthropic Claude pricing — Sonnet 4 rates from Anthropic's public pricing page as of April 2026.
+
+---
+
+## 13. Session 2 findings — live API re-verification (2026-04-20, orientation session)
+
+> Authored during the post-Wave-3 orientation session after re-reading
+> the built `dis/` code against the current Datalab documentation.
+> Purpose: capture every discrepancy between what the adapter does,
+> what the plan says, and what the live API currently exposes, so the
+> next wave (Epic D) does not compound drift that already snuck in
+> during Wave 3.
+>
+> Research method: fetched the canonical pages at
+> `documentation.datalab.to/api-reference/convert-document.md`,
+> `documentation.datalab.to/docs/common/limits.md`, and
+> `documentation.datalab.to/platform/webhooks.md`. Cross-referenced
+> against `dis/src/adapters/ocr/datalab-chandra.ts` and §12 above.
+
+### 13.1. What the live API contract looks like today (authoritative)
+
+Verified against `POST /api/v1/convert` documentation:
+
+**Request — multipart form-data fields (complete list):**
+
+| Field                        | Type    | Default    | Notes                                                                                              |
+| ---------------------------- | ------- | ---------- | -------------------------------------------------------------------------------------------------- |
+| `file`                       | binary  | —          | PDF / image / Word / PowerPoint                                                                    |
+| `file_url`                   | string  | —          | Optional HTTP/HTTPS URL as an alternative to `file`                                                |
+| `mode`                       | string  | `fast`     | **Enum: `fast` \| `balanced` \| `accurate`.** `accurate` runs **Chandra**.                         |
+| `output_format`              | string  | `markdown` | **Singular field.** Accepts `json`, `html`, `markdown`, `chunks`. **Comma-separated** if multiple. |
+| `max_pages`                  | integer | —          | Per-request cap                                                                                    |
+| `page_range`                 | string  | —          | e.g. `"0,5-10,20"`                                                                                 |
+| `paginate`                   | boolean | `false`    | —                                                                                                  |
+| `add_block_ids`              | boolean | `false`    | —                                                                                                  |
+| `include_markdown_in_chunks` | boolean | `false`    | —                                                                                                  |
+| `disable_image_extraction`   | boolean | `false`    | —                                                                                                  |
+| `disable_image_captions`     | boolean | `false`    | —                                                                                                  |
+| `fence_synthetic_captions`   | boolean | `false`    | —                                                                                                  |
+| `token_efficient_markdown`   | boolean | `false`    | —                                                                                                  |
+| `skip_cache`                 | boolean | `false`    | Forces a fresh run — relevant to CS-2 re-ingest audit                                              |
+| `save_checkpoint`            | boolean | `false`    | Saves parsed state so a later `/extract` or `/segment` can reuse it                                |
+| `additional_config`          | string  | —          | JSON string for advanced tuning                                                                    |
+| `extras`                     | string  | —          | Comma-separated extra features                                                                     |
+| `webhook_url`                | string  | —          | **Alternative to polling** (see §13.4)                                                             |
+| `force_new`                  | boolean | `false`    | —                                                                                                  |
+| `model_override_settings`    | string  | —          | —                                                                                                  |
+| `eval_rubric_id`             | integer | —          | —                                                                                                  |
+| `workflowstepdata_id`        | integer | —          | —                                                                                                  |
+
+**No language-hint field exists.** No `langs`, no `language_codes`, no
+`language`. This is a hard disconfirmation of our adapter's behavior
+(see §13.2.2).
+
+**Authentication:** `X-API-Key` header (case-insensitive in HTTP, so
+our `X-Api-Key` works; docs use uppercase).
+
+**Initial response (from `POST /api/v1/convert`):**
+
+```json
+{
+  "success": true,
+  "error": null | "string",
+  "request_id": "string (required)",
+  "request_check_url": "string (required)",
+  "versions": {...} | null
+}
+```
+
+**Polling:** `GET` the `request_check_url` returned in the initial
+response. The URL is server-assigned; **do not hardcode
+`/convert-result-check`** (our adapter already does the right thing
+here at `datalab-chandra.ts:159`).
+
+**Final response** (polled from `request_check_url`): spec does not
+fully enumerate, but response includes `status`, `markdown`,
+`html`, `json`, `page_count`, `error`, `version` — matching what §3
+above described.
+
+### 13.2. Bugs found in `dis/src/adapters/ocr/datalab-chandra.ts`
+
+Flagged for a small hotfix ticket (proposed DIS-050-followup-a).
+None of these are CS-tagged surfaces, but they compound drift.
+
+#### 13.2.1. 🔴 `output_format` sent as multiple form fields, not comma-separated
+
+```ts
+// datalab-chandra.ts:148-150 — CURRENT (wrong)
+for (const fmt of input.outputFormats) {
+  form.append("output_format", fmt);
+}
+```
+
+`output_format` is a **singular** field. The docs state explicitly:
+_"Comma separate multiple formats"_. Appending the same key N times
+in `multipart/form-data` is a well-defined operation (N distinct
+parts with the same name), but the Datalab server reads only one
+value per key. Today this works by accident because DIS-050's only
+caller passes `['markdown']` (length 1). It will silently drop
+formats the moment we ask for `['markdown', 'json']` in
+DIS-051/DIS-058.
+
+**Fix:**
+
+```ts
+form.append("output_format", input.outputFormats.join(","));
+```
+
+**Urgency:** Low today (only breaks when DIS-051/DIS-058 start
+requesting multiple formats). **Medium** before Wave 4 ships, because
+DIS-097 (worker endpoint) will exercise the multi-format path.
+
+#### 13.2.2. 🔴 `langs` parameter is not part of the API
+
+```ts
+// datalab-chandra.ts:152-154 — CURRENT (wrong)
+if (input.hints?.languageCodes?.length) {
+  form.append("langs", input.hints.languageCodes.join(","));
+}
+```
+
+No `langs` (or any language-hint) field exists on `/api/v1/convert`.
+The field is either silently ignored by the server (best case:
+wasted bandwidth) or will be rejected in a future API version
+(worst case: CS-2 audit trail breaks when a production adapter
+starts returning errors on an ignored field the team forgot about).
+
+**Fix options:**
+
+- **A — Remove the field entirely.** Accept that Chandra auto-detects
+  language (the docs don't describe a hint mechanism). Simplest.
+- **B — Marshal via `additional_config`.** The `additional_config`
+  field takes a JSON string for advanced tuning. If Datalab
+  eventually documents a language-hint inside `additional_config`,
+  this is where it would go. Today the shape is unknown.
+- **C — Keep it, add a `// lint-allow:` comment citing
+  `DIS-050-followup-a` (or an ADR).** Contradicts coding_standards
+  §1 (`any` escape hatches need reasons); functionally equivalent
+  to A.
+
+**Recommendation:** A. Strip the `langs` send-path, preserve the
+port's `hints.languageCodes` field (it costs us nothing in the
+`OcrPort` contract), and add a comment in the adapter saying
+Datalab's `/convert` auto-detects language as of 2026-04-20.
+
+#### 13.2.3. 🟡 No awareness of `skip_cache` / `force_new`
+
+For CS-2 (raw response preserved forever) and CS-4 (re-ingest
+creates a new extraction, never overwrites), a re-ingest on the
+same content hash should probably run with `skip_cache=true` so
+the raw response is genuinely new. Today the adapter doesn't pass
+it, so Datalab is free to serve a cached response — which would
+be a semantically different raw_response from a fresh run.
+
+**Fix:** Expose a `skipCache?: boolean` on the adapter options
+(not the port — keep the port clean), default `false`, set `true`
+on retry paths. Not a CS violation today because we preserve the
+response either way; it is a CS-2 audit-clarity improvement.
+
+**Urgency:** Low. Worth bundling into DIS-050-followup-a.
+
+#### 13.2.4. 🟡 Polling max-wait of 120s is tight for accurate mode
+
+```ts
+// datalab-chandra.ts:29 — CURRENT
+const DEFAULT_MAX_TOTAL_WAIT_MS = 120_000;
+```
+
+Accurate-mode Chandra on a multi-page discharge summary routinely
+takes 30-90s. A 20-page TSB-serial discharge summary at the
+adversarial end of our fixture set (fixture #6 per
+`05_testing/clinical_acceptance.md`) could run past 120s. We would
+surface `OcrProviderTimeoutError` on a document the provider would
+have completed successfully.
+
+**Fix:** Raise default to **300s** and make it env-configurable
+(`DIS_OCR_MAX_WAIT_MS`). Aligns with TDD §18 "P95 end-to-end to
+ready_for_review < 90s" (which is end-to-end, inclusive of
+structuring) — the OCR slice can consume up to ~60-70s before
+cutting into structuring budget.
+
+**Urgency:** Low today, **Medium** before first real-traffic
+fixture run. Adjust in the same hotfix.
+
+#### 13.2.5. 🟡 429 handling is generic
+
+Our adapter treats any non-2xx as `OcrProviderError`. Datalab
+explicitly documents 429 for rate-limit exceeded (400 req/min
+ceiling). `error_model.md` has `RATE_LIMITED` as a first-class
+code; we should map Datalab's 429 to it and mark `retryable: true`
+with the backoff policy `04_api/error_model.md §Retry policy`
+specifies (base 1s, factor 2, cap 30s, jitter ±20%).
+
+**Urgency:** Low at POC volumes (20 docs/day ≪ 400 rpm). Add to
+DIS-050-followup-a so the contract is correct before volume grows.
+
+### 13.3. Rate limits and platform constraints (now documented — were 404 in §12.8.3)
+
+From `documentation.datalab.to/docs/common/limits.md`:
+
+| Limit                                | Value                    | Notes                                                                                                                            |
+| ------------------------------------ | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| Requests per minute                  | **400**                  | 429 on exceed. Retriable per §13.2.5.                                                                                            |
+| Concurrent requests                  | **400**                  | Hard cap.                                                                                                                        |
+| Concurrent pages in flight           | **5 000**                | Enforced **at processing time**, not submission. Fails soft.                                                                     |
+| Max file size (PDF / image / Office) | **200 MB**               | Our `DIS_MAX_UPLOAD_MB=20` is well inside this.                                                                                  |
+| Max pages per request                | **7 000**                | Our `DIS_MAX_PAGES=50` is well inside this.                                                                                      |
+| 429 response                         | returned on RPM exceed   | SDK auto-retries; raw calls (ours) need manual retry.                                                                            |
+| Soft failure on page-concurrency cap | `success: false` in body | **Not** an HTTP error. Our adapter parses the body — we'll catch this at `isComplete(body)`, but should branch on it explicitly. |
+| Enterprise                           | custom limits            | Not relevant at Radhakishan volumes.                                                                                             |
+
+**Implication for the adapter:** we need a soft-failure branch.
+Today a `success: false` response with `status: "failed"` surfaces
+as `OcrProviderError` (which is correct behaviour) — but we should
+distinguish "hit page-concurrency cap" (retriable with delay) from
+"document is genuinely unparseable" (not retriable, goes to
+`failed` terminal state per TDD §4). Add a discriminator on
+`body.error` if Datalab populates an error code; otherwise leave
+as-is and rely on the on-call runbook (`09_runbooks/stuck_jobs.md`)
+to diagnose.
+
+### 13.4. Webhooks are supported — relevant to DIS-097
+
+From `documentation.datalab.to/platform/webhooks.md`:
+
+- **Parameter:** `webhook_url` on `POST /api/v1/convert` (and other
+  long-running endpoints).
+- **Payload** (POSTed to our URL):
+
+  ```json
+  {
+    "request_id": "...",
+    "request_check_url": "...",
+    "webhook_secret": "..."
+  }
+  ```
+
+- **Auth:** shared-secret model. The `webhook_secret` is transmitted
+  **in plaintext** inside the payload; compare against our
+  configured secret. **HTTPS is required.** No HMAC signature
+  header.
+- **Retries:** Datalab retries on 5xx and timeouts, not on 4xx.
+  Timeout is 30s to our endpoint. Handlers must be **idempotent**
+  (possible duplicate deliveries).
+
+**Architectural implication:** this is ADR-004 territory.
+
+- **Current state:** our adapter polls `request_check_url` with
+  exponential backoff. Works, wastes a little bandwidth, adds up to
+  120s of wall-clock even on fast jobs.
+- **Alternative state:** submit with `webhook_url =
+<our DIS host>/internal/datalab-webhook`. Drop the poll loop.
+  DIS-097 (worker endpoint) is the natural hook-point.
+- **Why not now:** adds a second failure surface (webhook delivery
+  vs. provider completion), and requires our `/internal/...`
+  endpoint to be publicly reachable (Fly.io / Render on POC, ALB on
+  AWS). For POC volumes (20 docs/day, P95 < 90s target), polling
+  is fine.
+- **Recommendation (ADR-004):** **poll in v1; add webhook path as
+  DIS-097.5 once the public `/internal/process-job` endpoint
+  exists in Wave 4.** No code change to the adapter; wiring-only.
+
+### 13.5. Documentation prose corrections (minor)
+
+- **§12.8.1** of this file says the result-check pattern is
+  `/convert-result-check`. The live docs show the canonical pattern
+  is whatever URL the initial response returns in `request_check_url`
+  — we should never hardcode the path. Our adapter is already
+  correct here; only the prose is stale.
+- **§12.8.3** said the limits page was 404. It is now live at
+  `documentation.datalab.to/docs/common/limits.md` with the numbers
+  captured in §13.3 above.
+- **§12.8.2** said subscription tier dollar amounts were not
+  published in public docs. Still true as of 2026-04-20; the
+  $3/$4.50/$25-flat numbers remain best-effort from third-party
+  sources. Flag for in-product verification before any contract
+  commitment.
+
+### 13.6. What this changes in the plan
+
+| Document / artefact                              | Change                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `02_architecture/adrs/ADR-002-*.md` (to write)   | Incorporate §13.3 limits, §13.4 webhook option, and the `mode=accurate` → Chandra mapping. Raise polling max-wait default to 300s.                                                                                                                                                                                 |
+| `02_architecture/adrs/ADR-004-*.md` (new)        | Poll-first, webhook-later. Document the DIS-097.5 hook-point.                                                                                                                                                                                                                                                      |
+| `07_tickets/backlog.md` — **DIS-050-followup-a** | New adapter-hotfix ticket: fix `output_format` comma-join, remove `langs`, raise polling max-wait to 300s, add 429 handling, add `skipCache` option. Files allowed: `dis/src/adapters/ocr/datalab-chandra.ts`, `dis/tests/unit/adapters/datalab-chandra.test.ts`, `dis/handoffs/DIS-050-followup-a.md`. No CS tag. |
+| `09_runbooks/provider_outage.md`                 | Add: 429 handling via base-1s exponential backoff; `success:false` soft failure on concurrent-pages cap; webhook delivery retry semantics once ADR-004 implements the webhook path.                                                                                                                                |
+| `09_runbooks/stuck_jobs.md`                      | Add: distinguish "page-concurrency soft-fail" (retriable) from "genuine failed" (not retriable) via the `error` field in the final response.                                                                                                                                                                       |
+| `04_api/error_model.md`                          | No change. `RATE_LIMITED` already exists as a code — the adapter just needs to emit it for Datalab 429s.                                                                                                                                                                                                           |
+| `06_rollout/feature_flags.md`                    | Add `DIS_OCR_MAX_WAIT_MS` (default 300000) once the hotfix lands.                                                                                                                                                                                                                                                  |
+
+### 13.7. What this does NOT change
+
+- **CS-1..CS-12** — none are affected. The bugs in §13.2 are
+  correctness issues on the adapter wire, not clinical-safety
+  surfaces.
+- **State machine (TDD §4)** — unchanged.
+- **Port contracts** — `OcrPort`, `OcrInput`, `OcrResult` all stay.
+  The `hints.languageCodes` field stays on the port (it is
+  provider-agnostic), only the Datalab adapter stops sending it.
+- **DIS-025 reconciliation scope** — unrelated. The adapter hotfix
+  is a separate, parallel track.
+- **Integration hold** — no Epic G ticket is affected. Safe to run
+  DIS-050-followup-a without gatekeeper approval.
+
+### 13.8. Verification commands used (reproducible)
+
+Each finding in §13.1–§13.4 is reproducible by fetching the
+documentation pages directly:
+
+```bash
+# Convert endpoint contract
+curl -s https://documentation.datalab.to/api-reference/convert-document.md
+
+# Rate limits
+curl -s https://documentation.datalab.to/docs/common/limits.md
+
+# Webhooks
+curl -s https://documentation.datalab.to/platform/webhooks.md
+
+# Machine-readable documentation index (for future re-verification)
+curl -s https://documentation.datalab.to/llms.txt
+
+# OpenAPI spec (canonical field list, but less verbose than the
+# convert-document reference — use the reference as primary source)
+curl -s https://www.datalab.to/openapi.json | jq '.paths."/api/v1/convert"'
+```
+
+Re-run these quarterly (or before any ADR-004 implementation PR) to
+catch drift in the API contract.
+
+### 13.9. Sources for session 2
+
+- [Datalab — Convert endpoint reference](https://documentation.datalab.to/api-reference/convert-document.md) (primary source for §13.1, §13.2.1, §13.2.2)
+- [Datalab — API limits & rate limiting](https://documentation.datalab.to/docs/common/limits.md) (primary source for §13.3)
+- [Datalab — Webhooks](https://documentation.datalab.to/platform/webhooks.md) (primary source for §13.4)
+- [Datalab — docs index (machine-readable)](https://documentation.datalab.to/llms.txt) (used to locate the three primary pages above)
+- [Datalab — OpenAPI spec](https://www.datalab.to/openapi.json) (cross-reference; the convert-document reference is more detailed)
+- `dis/src/adapters/ocr/datalab-chandra.ts` at commit `602c634` (adapter under review)
+
+### 13.10. Sign-off (session 2)
+
+- **Reviewer:** Claude Opus 4.7 (1M context), orientation session post-Wave-3
+- **Date:** 2026-04-20
+- **Method:** live docs fetch + code re-read, no code changes made
+- **Next action gated on user approval:** ADR-002 + ADR-004 drafts in PR #3; DIS-050-followup-a ticket added to backlog for execution after DIS-025 lands

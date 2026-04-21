@@ -70,7 +70,9 @@
   done, blocked)
 
 Plus the Chandra vs. Claude Vision comparison + pricing appendix in
-`radhakishan_system/docs/document_ocr_flow.md`, the sample OCR PDFs
+`radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md`
+(moved into the handoff folder on 2026-04-20; session 2 findings
+appended as §13 in that file), the sample OCR PDFs
 in `radhakishan_system/data/sample_ocr_pdfs/`, the Levetiracetam dose
 sanity check in `radhakishan_system/scripts/calc_levetiracetam_8_7kg.js`.
 
