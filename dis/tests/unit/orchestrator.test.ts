@@ -1,7 +1,8 @@
 /**
- * Unit tests — IngestionOrchestrator (DIS-021).
+ * Unit tests — IngestionOrchestrator (DIS-021 / DIS-021b).
  *
  * TDD §4 (state machine), §5 (idempotency), §6 (optimistic lock).
+ * CS-1: invalid state transitions MUST throw and MUST NOT be persisted.
  * All ports are fakes; no network I/O.
  */
 
@@ -18,6 +19,7 @@ import {
   FakeOcr,
   FakeStructuring,
 } from '../../src/core/__fakes__/index.js';
+import { InvalidStateTransitionError } from '../../src/core/state-machine.js';
 import type { OcrResult } from '../../src/ports/ocr.js';
 import type { StructuringResult } from '../../src/ports/structuring.js';
 
@@ -103,23 +105,59 @@ describe('IngestionOrchestrator.ingest', () => {
   });
 });
 
-describe('IngestionOrchestrator.process', () => {
-  it('native_text path transitions uploaded → structuring → ready_for_review', async () => {
+describe('IngestionOrchestrator.process (pipeline goes through transition() — CS-1)', () => {
+  it('native_text path ends in ready_for_review with a single persisted version bump', async () => {
     const { orch, db } = makeOrchestrator({ routing: 'native_text' });
     const r = await orch.ingest(sampleIngest);
     const after = await orch.process(r.id);
     expect(after.status).toBe('ready_for_review');
+    expect(after.version).toBe(2);
     expect(db.rows[0]?.status).toBe('ready_for_review');
   });
 
   it('ocr_scan path calls preprocessor and OCR before structuring', async () => {
-    const { orch, preprocessor, ocr } = makeOrchestrator({
-      routing: 'ocr_scan',
-    });
+    const { orch, preprocessor, ocr } = makeOrchestrator({ routing: 'ocr_scan' });
     const r = await orch.ingest(sampleIngest);
     await orch.process(r.id);
     expect(preprocessor.calls).toHaveLength(1);
     expect(ocr.calls).toHaveLength(1);
+  });
+
+  it('CS-1: invalid pipeline transition throws InvalidStateTransitionError without persisting', async () => {
+    // Drive the row into a terminal state (rejected) and then attempt to
+    // re-run the pipeline. transition() must refuse `routed_native` from
+    // `rejected` — and the status must remain `rejected` (never silently
+    // overwritten).
+    const { orch, db } = makeOrchestrator({ routing: 'native_text' });
+    const r = await orch.ingest(sampleIngest);
+    await orch.process(r.id);
+    await orch.reject({
+      id: r.id,
+      expectedVersion: 2,
+      actor: 'nurse-1',
+      reasonCode: 'illegible',
+    });
+    const rowBefore = db.rows[0];
+    const versionBefore = rowBefore?.version;
+    const statusBefore = rowBefore?.status;
+    expect(statusBefore).toBe('rejected');
+
+    await expect(orch.process(r.id)).rejects.toBeInstanceOf(InvalidStateTransitionError);
+
+    // CS-1 invariant: status is unchanged; version is unchanged.
+    expect(db.rows[0]?.status).toBe(statusBefore);
+    expect(db.rows[0]?.version).toBe(versionBefore);
+  });
+
+  it('every pipeline state change is routed through the state machine (uses updateExtractionStatus exactly once per process call, native_text)', async () => {
+    const { orch, db } = makeOrchestrator({ routing: 'native_text' });
+    const r = await orch.ingest(sampleIngest);
+    const updatesBefore = db.calls.filter((c) => c.op === 'updateExtractionStatus').length;
+    await orch.process(r.id);
+    const updatesAfter = db.calls.filter((c) => c.op === 'updateExtractionStatus').length;
+    // Pipeline transitions are computed pure-functionally via transition();
+    // only the final state is persisted — one version bump for the whole run.
+    expect(updatesAfter - updatesBefore).toBe(1);
   });
 });
 

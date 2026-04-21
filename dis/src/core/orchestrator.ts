@@ -1,16 +1,23 @@
 /**
- * IngestionOrchestrator — drives an `ocr_extractions` row through the state
+ * IngestionOrchestrator — drives an `extractions` row through the state
  * machine, composing ports for file routing, storage, preprocessing, OCR,
  * structuring, queueing, and persistence.
  *
  * Pure core: imports only ports (DIP). Receives all dependencies via the
- * constructor. No `fetch`, no `fs`, no adapter imports.
+ * constructor. No `fetch`, no `fs`, no adapter imports, no SQL literals.
+ *
+ * Clinical-safety invariant CS-1: every state change — including pipeline
+ * steps — is computed via `transition()`. Invalid transitions throw
+ * `InvalidStateTransitionError` and MUST never be persisted.
  *
  * @see TDD §4 (state machine), §5 (idempotency), §6 (optimistic lock)
- * @see coding_standards.md §2, §4, §5
+ * @see clinical_safety.md CS-1
+ * @see coding_standards.md §2, §4, §5, §11, §15
+ * @see ADR-006 (postgres driver over pg or drizzle)
+ * @see DRIFT-PHASE-1 §5 FOLLOWUP-A
  */
 
-import type { DatabasePort } from '../ports/database.js';
+import type { DatabasePort, ExtractionRow, InsertExtractionInput } from '../ports/database.js';
 import type { StoragePort } from '../ports/storage.js';
 import type { QueuePort } from '../ports/queue.js';
 import type { SecretsPort } from '../ports/secrets.js';
@@ -19,7 +26,7 @@ import type { PreprocessorPort } from '../ports/preprocessor.js';
 import type { OcrPort } from '../ports/ocr.js';
 import type { StructuringPort } from '../ports/structuring.js';
 import { assertNever } from '../types/assert-never.js';
-import { transition, type ExtractionState } from './state-machine.js';
+import { transition, type Event, type State } from './state-machine.js';
 
 /** Base error for all orchestrator failures. */
 export class OrchestratorError extends Error {
@@ -41,7 +48,7 @@ export class VersionConflictError extends OrchestratorError {
   constructor(
     readonly extractionId: string,
     readonly currentVersion: number,
-    readonly currentStatus: ExtractionState,
+    readonly currentStatus: State,
   ) {
     super(
       'VERSION_CONFLICT',
@@ -83,19 +90,9 @@ export type IngestInput = {
 export type ExtractionRecord = {
   readonly id: string;
   readonly patientId: string;
-  readonly status: ExtractionState;
+  readonly status: State;
   readonly version: number;
   readonly parentExtractionId: string | null;
-};
-
-type DbExtractionRow = {
-  id: string;
-  patient_id: string;
-  status: ExtractionState;
-  version: number;
-  idempotency_key: string;
-  payload_hash: string;
-  parent_extraction_id: string | null;
 };
 
 export type ApproveInput = {
@@ -124,10 +121,7 @@ export class IngestionOrchestrator {
   async ingest(input: IngestInput): Promise<ExtractionRecord> {
     const payloadHash = this.hashPayload(input);
 
-    const existing = await this.deps.db.queryOne<DbExtractionRow>(
-      'SELECT * FROM extractions WHERE idempotency_key = $1',
-      [input.idempotencyKey],
-    );
+    const existing = await this.deps.db.findExtractionByIdempotencyKey(input.idempotencyKey);
     if (existing) {
       if (existing.payload_hash !== payloadHash) {
         throw new OrchestratorError(
@@ -146,13 +140,15 @@ export class IngestionOrchestrator {
       contentType: input.contentType,
     });
 
-    const row = await this.deps.db.queryOne<DbExtractionRow>(
-      'INSERT INTO extractions (id, patient_id, status, idempotency_key, payload_hash, parent_extraction_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
-      [id, input.patientId, 'uploaded', input.idempotencyKey, payloadHash, null],
-    );
-    if (!row) {
-      throw new OrchestratorError('DB_INSERT_FAILED', 'insert returned no row');
-    }
+    const insertInput: InsertExtractionInput = {
+      id,
+      patientId: input.patientId,
+      status: 'uploaded',
+      idempotencyKey: input.idempotencyKey,
+      payloadHash,
+      parentExtractionId: null,
+    };
+    const row = await this.deps.db.insertExtraction(insertInput);
     return this.toRecord(row);
   }
 
@@ -165,78 +161,89 @@ export class IngestionOrchestrator {
     });
 
     try {
-      const nextStatus = await this.runPipeline(row, decision);
-      return await this.advance(row, nextStatus);
+      const finalState = await this.runPipeline(row, decision);
+      return await this.persistTransition(row, finalState);
     } catch (err) {
-      await this.advance(row, 'failed').catch(() => undefined);
+      // Failure path: compute the failure target through the state machine
+      // (CS-1 — never persist an invalid transition, even on the unhappy
+      // path). If transition() rejects `fail` from row.status we swallow
+      // the secondary error and rethrow the original.
+      try {
+        const failState = transition(row.status, { kind: 'fail', reason: errorReason(err) });
+        await this.persistTransition(row, failState).catch(() => undefined);
+      } catch {
+        // row.status cannot fail — skip persisting, rethrow original.
+      }
       throw err;
     }
   }
 
   async approve(input: ApproveInput): Promise<ExtractionRecord> {
     return this.transitionWithLock(input.id, input.expectedVersion, {
-      kind: 'approved',
+      kind: 'nurse_approve',
       actor: input.actor,
     });
   }
 
   async reject(input: RejectInput): Promise<ExtractionRecord> {
     return this.transitionWithLock(input.id, input.expectedVersion, {
-      kind: 'rejected',
+      kind: 'nurse_reject',
       actor: input.actor,
-      reasonCode: input.reasonCode,
+      reason: input.reasonCode,
     });
   }
 
   async retry(input: RetryInput): Promise<ExtractionRecord> {
     const parent = await this.loadRow(input.id);
     const newId = this.nextId('ext');
-    const row = await this.deps.db.queryOne<DbExtractionRow>(
-      'INSERT INTO extractions (id, patient_id, status, idempotency_key, payload_hash, parent_extraction_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
-      [newId, parent.patient_id, 'uploaded', `retry:${newId}`, parent.payload_hash, parent.id],
-    );
-    if (!row) {
-      throw new OrchestratorError('DB_INSERT_FAILED', 'retry insert failed');
-    }
+    const row = await this.deps.db.insertExtraction({
+      id: newId,
+      patientId: parent.patient_id,
+      status: 'uploaded',
+      idempotencyKey: `retry:${newId}`,
+      payloadHash: parent.payload_hash,
+      parentExtractionId: parent.id,
+    });
     return this.toRecord(row);
   }
 
   // ---------- internals ----------
 
-  private async runPipeline(
-    row: DbExtractionRow,
-    decision: RoutingDecision,
-  ): Promise<ExtractionState> {
+  /**
+   * Run the side-effecting pipeline steps (preprocess/OCR/structure) and
+   * return the final `State` computed via `transition()`. Intermediate
+   * transitions are validated through the state machine — CS-1 guarantees
+   * that an invalid chain throws before any DB write.
+   */
+  private async runPipeline(row: ExtractionRow, decision: RoutingDecision): Promise<State> {
     switch (decision.kind) {
       case 'native_text':
       case 'office_word':
       case 'office_sheet': {
-        await this.advance(row, 'structuring');
-        await this.deps.structuring.structure({
-          documentCategory: 'generic',
-        });
-        return 'ready_for_review';
+        // uploaded → structuring → ready_for_review
+        const sStructuring = transition(row.status, { kind: 'routed_native' });
+        await this.deps.structuring.structure({ documentCategory: 'generic' });
+        const sReady = transition(sStructuring, { kind: 'structured' });
+        return sReady;
       }
       case 'ocr_scan':
       case 'ocr_image': {
-        await this.advance(row, 'preprocessing');
+        // uploaded → preprocessing → ocr → structuring → ready_for_review
+        const sPre = transition(row.status, { kind: 'routed_scan' });
         const pre = await this.deps.preprocessor.preprocess({
           pages: [Buffer.alloc(0)],
           mediaType: 'image/jpeg',
         });
-        row.status = 'preprocessing';
-        await this.advance(row, 'ocr');
+        const sOcr = transition(sPre, { kind: 'preprocessed' });
         await this.deps.ocr.extract({
           pages: pre.pages.length > 0 ? pre.pages : [Buffer.alloc(0)],
           mediaType: 'image/jpeg',
           outputFormats: ['markdown'],
         });
-        row.status = 'ocr';
-        await this.advance(row, 'structuring');
-        await this.deps.structuring.structure({
-          documentCategory: 'generic',
-        });
-        return 'ready_for_review';
+        const sStructuring = transition(sOcr, { kind: 'ocr_complete' });
+        await this.deps.structuring.structure({ documentCategory: 'generic' });
+        const sReady = transition(sStructuring, { kind: 'structured' });
+        return sReady;
       }
       case 'unsupported':
         throw new OrchestratorError('UNSUPPORTED_MEDIA', `unsupported: ${decision.reason}`);
@@ -245,16 +252,15 @@ export class IngestionOrchestrator {
     }
   }
 
-  private async advance(row: DbExtractionRow, to: ExtractionState): Promise<ExtractionRecord> {
-    const updated = await this.deps.db.queryOne<DbExtractionRow>(
-      'UPDATE extractions SET status = $1 WHERE id = $2 AND version = $3 RETURNING *',
-      [to, row.id, row.version],
-    );
+  /**
+   * Persist a computed target state under optimistic lock. Caller has
+   * already validated the transition through `transition()`; we only need
+   * an atomic version-bump write here.
+   */
+  private async persistTransition(row: ExtractionRow, to: State): Promise<ExtractionRecord> {
+    const updated = await this.deps.db.updateExtractionStatus(row.id, row.version, to);
     if (!updated) {
-      const fresh = await this.deps.db.queryOne<DbExtractionRow>(
-        'SELECT * FROM extractions WHERE id = $1',
-        [row.id],
-      );
+      const fresh = await this.deps.db.findExtractionById(row.id);
       if (!fresh) throw new ExtractionNotFoundError(row.id);
       throw new VersionConflictError(row.id, fresh.version, fresh.status);
     }
@@ -266,40 +272,25 @@ export class IngestionOrchestrator {
   private async transitionWithLock(
     id: string,
     expectedVersion: number,
-    event:
-      | { kind: 'approved'; actor: string }
-      | { kind: 'rejected'; actor: string; reasonCode: string },
+    event: Event,
   ): Promise<ExtractionRecord> {
     const row = await this.loadRow(id);
     if (row.version !== expectedVersion) {
       throw new VersionConflictError(id, row.version, row.status);
     }
+    // CS-1: compute next state through the state machine. An invalid
+    // event throws InvalidStateTransitionError — no DB write happens.
     const nextStatus = transition(row.status, event);
-    const updated = await this.deps.db.queryOne<DbExtractionRow>(
-      'UPDATE extractions SET status = $1 WHERE id = $2 AND version = $3 RETURNING *',
-      [nextStatus, id, expectedVersion],
-    );
-    if (!updated) {
-      const fresh = await this.deps.db.queryOne<DbExtractionRow>(
-        'SELECT * FROM extractions WHERE id = $1',
-        [id],
-      );
-      if (!fresh) throw new ExtractionNotFoundError(id);
-      throw new VersionConflictError(id, fresh.version, fresh.status);
-    }
-    return this.toRecord(updated);
+    return this.persistTransition(row, nextStatus);
   }
 
-  private async loadRow(id: string): Promise<DbExtractionRow> {
-    const row = await this.deps.db.queryOne<DbExtractionRow>(
-      'SELECT * FROM extractions WHERE id = $1',
-      [id],
-    );
+  private async loadRow(id: string): Promise<ExtractionRow> {
+    const row = await this.deps.db.findExtractionById(id);
     if (!row) throw new ExtractionNotFoundError(id);
     return row;
   }
 
-  private toRecord(row: DbExtractionRow): ExtractionRecord {
+  private toRecord(row: ExtractionRow): ExtractionRecord {
     return {
       id: row.id,
       patientId: row.patient_id,
@@ -319,4 +310,9 @@ export class IngestionOrchestrator {
     this.idCounter += 1;
     return `${prefix}-${this.idCounter}`;
   }
+}
+
+function errorReason(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  return String(err);
 }

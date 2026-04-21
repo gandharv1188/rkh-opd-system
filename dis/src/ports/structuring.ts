@@ -5,7 +5,7 @@
  * @see TDD §10
  */
 
-import type { Block } from './ocr';
+import type { Block } from './ocr.js';
 
 /**
  * Placeholder for the validated clinical extraction shape.
