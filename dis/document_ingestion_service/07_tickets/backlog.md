@@ -4162,8 +4162,10 @@ Update `DEPS_REQUIRED.md` to mark the merge as done, retaining the
   - dis/src/ports/database.ts
   - dis/tests/unit/orchestrator.test.ts
   - dis/tests/unit/state-machine.test.ts
+  - dis/tsconfig.json (added 2026-04-21 per DIS-002i — fix DIS-001 rootDir/include inconsistency surfaced by DIS-001b V7)
+  - dis/tests/integration/health.test.ts (added 2026-04-21 per DIS-002i — one-line `.ts`→`.js` import fix, same bug class as DIS-001b handled in src/http/)
   - dis/handoffs/DIS-021b.md
-- **Out of scope:** any adapter code; any HTTP-route code; any schema / migration.
+- **Out of scope:** any adapter code; any HTTP-route code; any schema / migration. Note: DIS-002d inadvertently listed the `__fakes__/database.ts` path with wrapped asterisks from markdown rendering; the authoritative path is `dis/src/core/__fakes__/database.ts` (double-underscore directory).
 
 **Description:**
 Resolve the DIS-020/DIS-021 coordination scar flagged in DIS-021
