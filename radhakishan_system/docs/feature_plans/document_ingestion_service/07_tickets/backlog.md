@@ -3964,6 +3964,316 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 
 ---
 
+## Session-1 follow-ups (Wave A + Wave B, drafted 2026-04-21)
+
+> These six tickets were drafted as a single batch in DIS-002c after
+> the post-Wave-3 orientation surfaced: (a) two protocol-bypass
+> commits on `feat/dis-plan` that needed rewinding and redoing
+> through proper tickets, (b) the 5 pre-existing `fitness.mjs`
+> violations flagged by DRIFT-PHASE-1 FOLLOWUP-A, (c) the
+> DIS-020/021 coordination scar, and (d) the Datalab adapter
+> wire-contract bugs documented in `10_handoff/document_ocr_flow.md
+§13`. See `10_handoff/SESSION_PLAN_2026-04-21.md` for the
+> session-level wave dispatch.
+
+### DIS-002c — Append session-1 follow-up tickets to backlog
+
+- **Tags:** `doc-only`, `process`
+- **Epic:** A (meta / process)
+- **Depends on:** DIS-002
+- **TDD ref:** none (meta)
+- **CS ref:** none
+- **Files allowed:**
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
+  - dis/handoffs/DIS-002c.md
+- **Out of scope:** any file edit outside `backlog.md` + this handoff; any implementation work; any ticket retrofit beyond registration.
+
+**Description:**
+Register the five follow-up tickets (DIS-001b, DIS-002d, DIS-002e, DIS-021b, DIS-050a) in `backlog.md` under a new `## Session-1 follow-ups` section, plus this ticket as the meta-entry. Every entry carries Tags, Epic, Depends-on, TDD ref, CS ref, Files allowed, Out of scope, Description, numbered VERIFY-N block, Status. Pure documentation ticket — no code touched.
+
+**VERIFY:**
+
+- VERIFY-1: `grep -c "^### DIS-001b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-2: `grep -c "^### DIS-002c " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-3: `grep -c "^### DIS-002d " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-4: `grep -c "^### DIS-002e " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-5: `grep -c "^### DIS-021b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-6: `grep -c "^### DIS-050a " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-7: `grep -c "\*\*Files allowed:\*\*" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect ≥ `194` (188 pre-existing + 6 new = 194 minimum; `**Files allowed:**` is the human-readable label used in every ticket body, not the YAML `files_allowed:` key that only appears in `_ticket_template.md`).
+- VERIFY-8: `test -f dis/handoffs/DIS-002c.md && echo EXISTS` — expect `EXISTS`
+
+**Status:** Ready
+
+---
+
+### DIS-002d — Scaffold hygiene: adrs/ + clarifications/ + done.md backfill + stale refs
+
+- **Tags:** `doc-only`, `process`
+- **Epic:** A (meta / process)
+- **Depends on:** DIS-002, DIS-002c
+- **TDD ref:** none (meta)
+- **CS ref:** none
+- **Files allowed:**
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md
+  - radhakishan_system/docs/document_ocr_flow.md
+  - dis/handoffs/DIS-002d.md
+- **Out of scope:** any ADR body (that is DIS-002e); any code edit; any backlog edit.
+
+**Description:**
+Create the two process folders the drift-prevention controls assume exist:
+(a) `02_architecture/adrs/` with a README documenting the ADR template +
+supersession discipline + gate integration, (b)
+`07_tickets/clarifications/` with a README documenting the CLAR-NNN
+format. Move `document_ocr_flow.md` from `radhakishan_system/docs/`
+into `10_handoff/` (it belongs with the session handovers) and fix
+the stale path reference in `SESSION_HANDOVER_2026-04-20.md §2`.
+Backfill `07_tickets/done.md` with the 15 Wave-1–3 merged tickets per
+`session_handoff.md §8`. Ensure `07_tickets/in_progress.md` reads
+"empty" (placeholder).
+
+**VERIFY:**
+
+- VERIFY-1: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-3: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-4: `test -e radhakishan_system/docs/document_ocr_flow.md || echo MOVED` — expect `MOVED`
+- VERIFY-5: `grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` — expect ≥ `15`
+- VERIFY-6: `grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` — expect ≥ `1`
+- VERIFY-7: `test -f dis/handoffs/DIS-002d.md && echo EXISTS` — expect `EXISTS`
+
+**Status:** Ready
+
+---
+
+### DIS-002e — ADR pack: ADR-001..007
+
+- **Tags:** `doc-only`, `architecture`
+- **Epic:** A (meta / architecture)
+- **Depends on:** DIS-002d
+- **TDD ref:** §1 (hexagonal), §9 (OCR), §10 (structuring), §17 (portability)
+- **CS ref:** none directly (ADR-003 touches CS-9 kill-switch semantics; ADR-004 touches CS-2 raw-response audit via webhook path)
+- **Files allowed:**
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-001-hexagonal-ports-and-adapters.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-005-hono-over-fastify.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-006-postgres-driver-over-pg-or-drizzle.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-007-claude-haiku-default-sonnet-escalation.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/06_rollout/kill_switch.md
+  - dis/handoffs/DIS-002e.md
+- **Out of scope:** any code, schema, or backlog edit; any ADR beyond ADR-001..007 (future ADRs open new tickets).
+
+**Description:**
+Write 7 ADRs in the `Context / Decision / Consequences / Alternatives`
+format mandated by `coding_standards.md §15`:
+
+- **ADR-001** — Hexagonal Ports & Adapters (captures `tdd.md §1` + 8-port inventory).
+- **ADR-002** — Datalab hosted (Chandra) at POC; self-host threshold at **sustained 1000 docs/day** (per user memory + §13 live-verified limits).
+- **ADR-003** — Kill switch returns **503 UNAVAILABLE**, not 307 proxy. Reconciles `rollout_plan.md` + `feature_flags.md` + DIS-100 with the prose in `kill_switch.md` by amending the latter to say 503.
+- **ADR-004** — Datalab webhooks over polling (per user preference; captures the `webhook_url` field + shared-secret auth documented in `10_handoff/document_ocr_flow.md §13.4`). DIS-050a implements it.
+- **ADR-005** — Hono over Fastify (per DIS-004 handoff D-1, §Portability edge-compatible).
+- **ADR-006** — `postgres` driver over `pg` / Drizzle (portability; `supabase-postgres.ts` uses `unsafe(sql, params)` parameterised).
+- **ADR-007** — Claude Haiku default, Sonnet escalation (per `tdd.md §10.2` + DIS-051 prompt-loader).
+
+Update README index table with all 7 rows. Amend
+`06_rollout/kill_switch.md` prose to reflect the 503 decision (replace
+"307 proxy" wording).
+
+**VERIFY:**
+
+- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l` — expect `7`
+- VERIFY-2: `grep -lE "^## (Context|Decision|Consequences|Alternatives)" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l` — expect `7`
+- VERIFY-3: `grep -c "^## Status" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md` — expect ≥ `1`
+- VERIFY-4: `grep -c "503" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md` — expect ≥ `3`
+- VERIFY-5: `grep -c "webhook_url" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md` — expect ≥ `2`
+- VERIFY-6: `grep -c "1000 docs/day" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md` — expect ≥ `1`
+- VERIFY-7: `grep -c "ADR-00" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md` — expect ≥ `7`
+- VERIFY-8: `grep -ci "307" radhakishan_system/docs/feature_plans/document_ingestion_service/06_rollout/kill_switch.md` — expect `0` (reconciled to 503)
+- VERIFY-9: `test -f dis/handoffs/DIS-002e.md && echo EXISTS` — expect `EXISTS`
+
+**Status:** Ready
+
+---
+
+### DIS-001b — Merge DEPS_REQUIRED into package.json + fix `.ts`→`.js` imports
+
+- **Tags:** `core`, `infra`
+- **Epic:** A
+- **Depends on:** DIS-001, DIS-002e (ADR-005 binds Hono)
+- **TDD ref:** §1, §2 (architectural style, component layout)
+- **CS ref:** none
+- **Files allowed:**
+  - dis/package.json
+  - dis/package-lock.json
+  - dis/src/http/server.ts
+  - dis/src/http/index.ts
+  - dis/DEPS_REQUIRED.md
+  - dis/handoffs/DIS-001b.md
+- **Out of scope:** any new business logic; any other `.ts` file edit beyond extension-fix in `src/http/`; the DIS-020/021 reconciliation (DIS-021b owns that).
+
+**Description:**
+Finally run the deferred `npm install`. Merge runtime deps from
+`DEPS_REQUIRED.md` into `dis/package.json.dependencies`: `hono
+^4.6.0`, `@hono/node-server ^1.13.0`, `pino ^9.5.0`, `postgres
+^3.4.4`, `pdfjs-dist ^4.7.0`, plus `@anthropic-ai/sdk ^0.27.0` (not
+previously in DEPS_REQUIRED.md but required for live Haiku calls).
+Defer `sharp ^0.33.0` until DIS-058b. Merge dev deps already present
+(`typescript`, `vitest`, `@types/node`, `eslint`, `prettier`). Commit
+the resulting `package-lock.json`. Fix `.ts`→`.js` extension imports
+in `dis/src/http/server.ts` (lines importing `./middleware/...` and
+`./routes/...`) and in `dis/src/http/index.ts` (barrel re-exports).
+Update `DEPS_REQUIRED.md` to mark the merge as done, retaining the
+`sharp` entry for DIS-058b.
+
+**VERIFY:**
+
+- VERIFY-1: `cd dis && grep -c '"hono"' package.json` — expect ≥ `1` inside a `dependencies` block.
+- VERIFY-2: `cd dis && grep -c '"@anthropic-ai/sdk"' package.json` — expect ≥ `1`.
+- VERIFY-3: `test -f dis/package-lock.json && echo EXISTS` — expect `EXISTS`.
+- VERIFY-4: `grep -cE "from ['\"]\\./(middleware|routes)/[a-z-]+\\.ts['\"]" dis/src/http/server.ts dis/src/http/index.ts` — expect `0` (no `.ts` imports remain).
+- VERIFY-5: `grep -cE "from ['\"]\\./(middleware|routes)/[a-z-]+\\.js['\"]" dis/src/http/server.ts dis/src/http/index.ts` — expect ≥ `2` (both extensions fixed).
+- VERIFY-6: `cd dis && npm install --no-audit --no-fund 2>&1 | tail -5` — paste actual output; expect exit 0 and "added N packages" line.
+- VERIFY-7: `cd dis && npx tsc --noEmit 2>&1 | head -30` — paste actual output; **expected to FAIL** with DIS-020/021 mismatch errors. This failure is the trigger that justifies DIS-021b. VERIFY-7 passes when the error list contains references to `orchestrator.ts` and `state-machine.js` import/event-kind mismatches.
+- VERIFY-8: `test -f dis/handoffs/DIS-001b.md && echo EXISTS` — expect `EXISTS`.
+
+**Status:** Ready
+
+---
+
+### DIS-021b — Reconcile state-machine; route pipeline through `transition()`; clear fitness violations
+
+- **Tags:** `core`, `clinical-safety` (CS-1)
+- **Epic:** B
+- **Depends on:** DIS-020, DIS-021, DIS-001b (needs `npx tsc` working)
+- **TDD ref:** §4 (state machine), §5 (idempotency), §6 (optimistic lock)
+- **CS ref:** CS-1 (no bypass of verification)
+- **Files allowed:**
+  - dis/src/core/orchestrator.ts
+  - dis/src/core/state-machine.ts
+  - dis/src/core/errors.ts
+  - dis/src/core/**fakes**/database.ts
+  - dis/src/ports/database.ts
+  - dis/tests/unit/orchestrator.test.ts
+  - dis/tests/unit/state-machine.test.ts
+  - dis/handoffs/DIS-021b.md
+- **Out of scope:** any adapter code; any HTTP-route code; any schema / migration.
+
+**Description:**
+Resolve the DIS-020/DIS-021 coordination scar flagged in DIS-021
+handoff §3 D-1 + §5 AND the 5 `core_no_sql_literals` fitness
+violations flagged in DRIFT-PHASE-1 §5 in a single atomic change.
+
+1. **Rename orchestrator's approve/reject event kinds** from
+   `'approved'` / `'rejected'` to `'nurse_approve'` /
+   `'nurse_reject'` to match state-machine's authoritative `Event`
+   union.
+2. **Alias `ExtractionState = State`** on state-machine re-exports
+   OR rename orchestrator's import to use `State`. Pick the cleaner
+   option and document in the handoff.
+3. **Route pipeline progressions through `transition()`.** Every
+   state change in `orchestrator.process()` (uploaded →
+   preprocessing → ocr → structuring → ready_for_review) must call
+   `transition(row.status, event)` and persist the returned state,
+   so CS-1 guards fire on the happy path too — not just on
+   approve/reject.
+4. **Extract named DatabasePort methods** (resolution option (a)
+   from DRIFT-PHASE-1 §5 DIS-FOLLOWUP-A): add
+   `findExtractionById`, `findExtractionByIdempotencyKey`,
+   `updateExtractionStatus`, `insertExtraction` to `DatabasePort`;
+   update `FakeDatabase` + orchestrator to call them. Clears the 4
+   `orchestrator.ts` + 1 `__fakes__/database.ts` fitness violations.
+5. **Add/update unit tests** to prove CS-1 guards fire on every
+   transition including pipeline progressions.
+
+Gate 2 test-first: commit a test that asserts `fitness.mjs` returns
+0 violations AND that pipeline transitions throw
+`InvalidStateTransitionError` on an invalid sequence; see it red;
+then implement; see it green.
+
+**VERIFY:**
+
+- VERIFY-1: `node dis/scripts/fitness.mjs; echo EXIT=$?` — paste output; expect `EXIT=0` (no violations).
+- VERIFY-2: `cd dis && npx tsc --noEmit 2>&1 | tail -5` — paste output; expect empty (no type errors).
+- VERIFY-3: `cd dis && npx vitest run tests/unit/orchestrator.test.ts 2>&1 | tail -5` — paste output; expect all pass.
+- VERIFY-4: `cd dis && npx vitest run tests/unit/state-machine.test.ts 2>&1 | tail -5` — paste output; expect all pass.
+- VERIFY-5: `grep -cE "from ['\"].*/adapters/" dis/src/core/orchestrator.ts dis/src/core/state-machine.ts` — expect `0` (DIP preserved).
+- VERIFY-6: `grep -cE "'approved'|'rejected'" dis/src/core/orchestrator.ts` — expect `0` (event kinds renamed).
+- VERIFY-7: `grep -cE "'nurse_approve'|'nurse_reject'" dis/src/core/orchestrator.ts` — expect ≥ `2`.
+- VERIFY-8: `grep -cE "transition\s*\(" dis/src/core/orchestrator.ts` — expect ≥ `5` (pipeline + approve + reject all routed).
+- VERIFY-9: `grep -cE "CS-1" dis/tests/unit/orchestrator.test.ts` — expect ≥ `1` (pipeline-path CS-1 guard test present).
+- VERIFY-10: `test -f dis/handoffs/DIS-021b.md && echo EXISTS` — expect `EXISTS`.
+
+**Status:** Ready — **Gate 6a clinical sign-off required before merge (CS-1).**
+
+---
+
+### DIS-050a — DatalabChandraAdapter hotfix: wire-contract + webhook path
+
+- **Tags:** `adapter`
+- **Epic:** C
+- **Depends on:** DIS-050, DIS-002e (ADR-004 binds the webhook direction)
+- **TDD ref:** §9.2
+- **CS ref:** none directly (CS-2 raw-response preservation remains — no change)
+- **Files allowed:**
+  - dis/src/adapters/ocr/datalab-chandra.ts
+  - dis/src/ports/ocr.ts
+  - dis/tests/unit/adapters/datalab-chandra.test.ts
+  - dis/tests/fixtures/datalab/convert-response.json
+  - dis/handoffs/DIS-050a.md
+- **Out of scope:** any core / HTTP / other-adapter file; the webhook receiver endpoint (Epic D DIS-097 owns that).
+
+**Description:**
+Fix the 5 wire-contract bugs documented in
+`10_handoff/document_ocr_flow.md §13.2` and wire the webhook path
+decided in ADR-004.
+
+1. **Fix `output_format`** — send as a single comma-separated value
+   (`form.append('output_format', input.outputFormats.join(','))`),
+   not multiple `append` calls.
+2. **Remove `langs` field** — not part of the live API (§13.2.2).
+   Keep `hints.languageCodes` on the port; adapter stops sending it
+   to Datalab; add a comment citing the verification date.
+3. **Add `skipCache` constructor option** — when true, send
+   `skip_cache=true`. Default false.
+4. **Raise `DEFAULT_MAX_TOTAL_WAIT_MS` to 300 000** (5 min), expose
+   as env-configurable via constructor option `maxTotalWaitMs` (seam
+   already exists) — update the default only.
+5. **Map HTTP 429** (and `Retry-After` header) to a new typed error
+   `OcrProviderRateLimitedError` with `code='RATE_LIMITED'` and
+   `retryAfterSec: number`. Adapter does not retry internally — caller
+   (orchestrator / queue) retries per `error_model.md §Retry policy`.
+6. **Wire `webhook_url`** — if constructor option `webhookUrl` is
+   provided, include it in the submit form; the adapter still polls
+   as fallback because the webhook receiver endpoint is Epic-D scope.
+   Emit a log indicating webhook mode.
+
+Gate 2 test-first: update the existing 7 tests; add new tests for
+each of the 6 changes (13 total). Fixtures may grow if new response
+shapes (429 with Retry-After header) are needed.
+
+**VERIFY:**
+
+- VERIFY-1: `cd dis && npx vitest run tests/unit/adapters/datalab-chandra.test.ts 2>&1 | tail -5` — paste; expect ≥ 13 tests pass.
+- VERIFY-2: `grep -cE "output_format.*join\s*\(\s*['\"]," dis/src/adapters/ocr/datalab-chandra.ts` — expect ≥ `1` (comma-join present).
+- VERIFY-3: `grep -c "langs" dis/src/adapters/ocr/datalab-chandra.ts` — expect `0` (field removed).
+- VERIFY-4: `grep -c "skipCache\|skip_cache" dis/src/adapters/ocr/datalab-chandra.ts` — expect ≥ `2`.
+- VERIFY-5: `grep -c "300_000\|300000\|5 \* 60 \* 1000" dis/src/adapters/ocr/datalab-chandra.ts` — expect ≥ `1`.
+- VERIFY-6: `grep -c "OcrProviderRateLimitedError" dis/src/adapters/ocr/datalab-chandra.ts` — expect ≥ `2`.
+- VERIFY-7: `grep -c "webhook_url\|webhookUrl" dis/src/adapters/ocr/datalab-chandra.ts` — expect ≥ `2`.
+- VERIFY-8: `grep -c "RATE_LIMITED" dis/src/adapters/ocr/datalab-chandra.ts` — expect ≥ `1`.
+- VERIFY-9: `test -f dis/handoffs/DIS-050a.md && echo EXISTS` — expect `EXISTS`.
+
+**Status:** Ready
+
+---
+
 ## Ticket template
 
 Every new ticket follows this structure. See `_ticket_template.md`.
