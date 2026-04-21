@@ -4299,6 +4299,49 @@ resolve because the subtree structure is preserved.
 
 ---
 
+### DIS-021c — Fix DIS-021b regressions properly: restore full typecheck surface + drift-controls self-test cwd + vitest config
+
+- **Tags:** `core`, `infra`
+- **Epic:** B (regression-clean on DIS-021b)
+- **Depends on:** DIS-021b
+- **TDD ref:** §1 (architectural style — no quiet skips of code from typecheck); §14 (observability — self-test remains green)
+- **CS ref:** none directly. The ticket must NOT alter any CS-1 surface introduced by DIS-021b; scope is strictly regression-cleanup.
+- **Files allowed:**
+  - dis/tsconfig.json (restore full typecheck; remove DIS-021b's exclude list)
+  - dis/vitest.config.ts (new — scope vitest to `tests/**/*.test.ts` only, excluding scripts/\*\* and other non-test files)
+  - dis/scripts/check-pr-citations.mjs (make DOCS path cwd-independent via `fileURLToPath(import.meta.url)`)
+  - dis/scripts/check-files-touched.mjs (same cwd-independence fix)
+  - dis/handoffs/DIS-021c.md
+- **Out of scope:** orchestrator / state-machine / adapter / port-contract edits; any edit to test content; any backlog edit.
+
+**Description:**
+DIS-021b resolved the DIS-001 `tsconfig.json` `rootDir`/`include` incompatibility with an excessive `exclude` list that silently drops most of the code tree (`src/adapters/**`, `src/http/**`, `src/ports/index.ts`, `tests/unit/adapters/**`, `tests/unit/audit-log.test.ts`, `tests/integration/health.test.ts`) from `tsc --noEmit`. This lets the command pass but hides real type errors in the excluded surface. Further, DIS-021b's tsconfig change widened vitest's test-discovery glob such that `dis/scripts/__tests__/drift-controls.test.mjs` — a pure-Node smoke harness that invokes `process.exit(1)` on failure by design — is now picked up by vitest, and when run from `dis/` cwd it fails because `check-pr-citations.mjs` resolves `DOCS` relative to cwd (expected repo root; gets `dis/dis/document_ingestion_service` when invoked from `dis/`, which doesn't exist).
+
+Fix all three properly:
+
+1. **Restore full typecheck surface.** In `dis/tsconfig.json`, remove the `rootDir` option (the original DIS-001 defect) but DO NOT exclude source or test directories. TypeScript will infer the common root from `include`. Every `.ts` file under `src/**` and `tests/**` must typecheck. If any file fails, fix it — do NOT exclude it.
+2. **Lock vitest test discovery to the canonical test globs.** Add `dis/vitest.config.ts` with `test.include: ['tests/**/*.test.ts']` (explicit) and `test.exclude` ignoring `node_modules`, `dist`, `scripts/**`. The pure-Node drift-controls harness remains runnable directly via `node dis/scripts/__tests__/drift-controls.test.mjs` but is not discovered by vitest.
+3. **Make the drift-prevention CI scripts cwd-independent.** In `dis/scripts/check-pr-citations.mjs` and `dis/scripts/check-files-touched.mjs`, compute the `DOCS` constant relative to the script's own location using `fileURLToPath(import.meta.url)` + `join(dirname, '../../document_ingestion_service')` (or equivalent). This guarantees the scripts work whether invoked from repo root, from `dis/`, or from any worktree.
+
+Gate 2 test-first workflow is light here because the regression **is** the failing test (vitest suite shows the failure). The fix makes the existing test pass without modifying the test.
+
+**VERIFY:**
+
+- VERIFY-1: `cd dis && npx tsc --noEmit` — expect exit 0 with **no `exclude` list in tsconfig.json** except `node_modules` + `dist`. Every source + test file typechecks.
+- VERIFY-2: `grep -c '"exclude"' dis/tsconfig.json` — expect `1` (present but containing only node_modules + dist, not source files).
+- VERIFY-3: `grep -cE '"src/adapters|"src/http|"src/ports/index|"tests/unit/adapters|"tests/unit/audit-log|"tests/integration/health' dis/tsconfig.json` — expect `0` (none of DIS-021b's aggressive excludes remain).
+- VERIFY-4: `cd dis && npx vitest run 2>&1 | tail -5` — expect all test files pass; `drift-controls.test.mjs` is NOT in the discovered set.
+- VERIFY-5: `node dis/scripts/__tests__/drift-controls.test.mjs` — expect `5/5 tests passed.` (direct invocation still works).
+- VERIFY-6: `node dis/scripts/check-pr-citations.mjs --body "Implements TDD §4 and CS-1"` — expect exit 0 (repo-root cwd).
+- VERIFY-7: `cd dis && node scripts/check-pr-citations.mjs --body "Implements TDD §4 and CS-1"` — expect exit 0 (dis cwd; regression fix).
+- VERIFY-8: `cd dis/scripts && node check-pr-citations.mjs --body "Implements TDD §4 and CS-1"` — expect exit 0 (scripts cwd; maximal cwd-independence).
+- VERIFY-9: `node dis/scripts/fitness.mjs` — expect 0 violations (unchanged).
+- VERIFY-10: `test -f dis/handoffs/DIS-021c.md && echo EXISTS`
+
+**Status:** Ready
+
+---
+
 ### DIS-050a — DatalabChandraAdapter hotfix: wire-contract + webhook path
 
 - **Tags:** `adapter`
