@@ -97,10 +97,7 @@ interface StoragePort {
     maxSizeBytes: number;
     contentType: string;
   }): Promise<{ url: string; fields?: Record<string, string> }>;
-  getSignedDownloadUrl(
-    key: string,
-    expiresSec: number,
-  ): Promise<{ url: string }>;
+  getSignedDownloadUrl(key: string, expiresSec: number): Promise<{ url: string }>;
   deleteObject(key: string): Promise<void>;
 }
 ```
@@ -119,10 +116,7 @@ interface QueuePort {
     payload: Record<string, unknown>,
     opts?: { delaySec?: number },
   ): Promise<{ messageId: string }>;
-  startConsumer(
-    topic: string,
-    handler: (payload: unknown) => Promise<void>,
-  ): Promise<void>;
+  startConsumer(topic: string, handler: (payload: unknown) => Promise<void>): Promise<void>;
 }
 ```
 

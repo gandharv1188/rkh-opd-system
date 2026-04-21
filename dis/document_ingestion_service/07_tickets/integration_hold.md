@@ -138,7 +138,7 @@ alongside the ticket body in `backlog.md` per `verify_format.md` §9.
 ### DIS-209 — Delete legacy `process-document` Edge Function [HELD]
 
 - **Tags:** `integration`, `clinical-safety` (CS-9)
-- **Files allowed:** `supabase/functions/process-document/**` (deletion only); `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/legacy-retired.md`
+- **Files allowed:** `supabase/functions/process-document/**` (deletion only); `dis/document_ingestion_service/10_handoff/legacy-retired.md`
 - **Execution gate:** INTEGRATION APPROVED required per review_gates.md §6b.
 
 **Description:** Retires the legacy `process-document` Edge Function after a quiet period (per rollout plan); records the retirement.

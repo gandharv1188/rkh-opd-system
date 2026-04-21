@@ -11,7 +11,7 @@
 
 ## 1. What was built
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md`
+- `dis/document_ingestion_service/07_tickets/_ticket_template.md`
   — Full rewrite into Verify-Driven format. Preserves all existing
   frontmatter fields (Tags, Epic, Depends on, Blocks, TDD ref, CS ref,
   User-story ref, Estimated effort, Status). Adds `files_allowed:`
@@ -20,7 +20,7 @@
   example. Retains Out-of-scope, Test plan, Notes/gotchas, Review
   gates. Review-gates checklist extended with 4 new rows (VERIFY ≥3,
   shell-only, handoff paste, files_allowed match).
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/README.md`
+- `dis/document_ingestion_service/07_tickets/README.md`
   — New `## Verify-Driven Ticketing` section appended at the bottom
   (2 paragraphs): format explanation + composition with TDD /
   handoffs / drift-prevention. Links to
@@ -72,8 +72,8 @@ block discourages ad-hoc prose between steps.
 
 ## 6. Files touched
 
-- Modified: `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md`
-- Modified: `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/README.md`
+- Modified: `dis/document_ingestion_service/07_tickets/_ticket_template.md`
+- Modified: `dis/document_ingestion_service/07_tickets/README.md`
 - Added: `dis/handoffs/DOC-VERIFY-TEMPLATE.md`
 
 ## 7. External dependencies introduced
@@ -89,11 +89,11 @@ below.
 
 ```
 cd <repo-root>
-test -f radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md && echo EXISTS
-grep -c "VERIFY-"        radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md
-grep -c "files_allowed"  radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md
-grep -c "## Verify-Driven Ticketing" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/README.md
-grep -c "verify_format.md" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/README.md
+test -f dis/document_ingestion_service/07_tickets/_ticket_template.md && echo EXISTS
+grep -c "VERIFY-"        dis/document_ingestion_service/07_tickets/_ticket_template.md
+grep -c "files_allowed"  dis/document_ingestion_service/07_tickets/_ticket_template.md
+grep -c "## Verify-Driven Ticketing" dis/document_ingestion_service/07_tickets/README.md
+grep -c "verify_format.md" dis/document_ingestion_service/07_tickets/README.md
 ```
 
 ## 10. Non-obvious gotchas
@@ -118,7 +118,7 @@ Complete, ready for review.
 **When** `test -f <path> && echo EXISTS`.
 **Then** output is `EXISTS`.
 
-- Command: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md && echo EXISTS`
+- Command: `test -f dis/document_ingestion_service/07_tickets/_ticket_template.md && echo EXISTS`
 - Expected output: `EXISTS`
 - Actual output:
 
@@ -134,7 +134,7 @@ EXISTS
 
 ### VERIFY-2: template contains ≥1 `VERIFY-` marker
 
-- Command: `grep -c "VERIFY-" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md`
+- Command: `grep -c "VERIFY-" dis/document_ingestion_service/07_tickets/_ticket_template.md`
 - Expected output: integer ≥ 1
 - Actual output:
 
@@ -150,7 +150,7 @@ EXISTS
 
 ### VERIFY-3: template contains ≥2 `files_allowed` mentions
 
-- Command: `grep -c "files_allowed" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/_ticket_template.md`
+- Command: `grep -c "files_allowed" dis/document_ingestion_service/07_tickets/_ticket_template.md`
 - Expected output: integer ≥ 2
 - Actual output:
 
@@ -166,7 +166,7 @@ EXISTS
 
 ### VERIFY-4: README contains exactly one `## Verify-Driven Ticketing` heading
 
-- Command: `grep -c "## Verify-Driven Ticketing" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/README.md`
+- Command: `grep -c "## Verify-Driven Ticketing" dis/document_ingestion_service/07_tickets/README.md`
 - Expected output: `1`
 - Actual output:
 
@@ -182,7 +182,7 @@ EXISTS
 
 ### VERIFY-5: README contains ≥1 link to `verify_format.md`
 
-- Command: `grep -c "verify_format.md" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/README.md`
+- Command: `grep -c "verify_format.md" dis/document_ingestion_service/07_tickets/README.md`
 - Expected output: integer ≥ 1
 - Actual output:
 

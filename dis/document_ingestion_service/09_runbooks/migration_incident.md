@@ -191,7 +191,7 @@ Before unflipping the kill switch:
 
 ```bash
 # a. Schema matches expected
-pg_dump --schema-only "$DATABASE_URL" | diff - radhakishan_system/docs/feature_plans/document_ingestion_service/03_data/expected_schema.sql
+pg_dump --schema-only "$DATABASE_URL" | diff - dis/document_ingestion_service/03_data/expected_schema.sql
 
 # b. CS-3 invariant holds (every DIS-sourced clinical row has an extraction FK)
 psql "$DATABASE_URL" -c "select count(*) from lab_results where source='ai_extracted' and ocr_extraction_id is null;"  # must be 0

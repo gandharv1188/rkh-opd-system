@@ -7,8 +7,8 @@
  * enforces it at the type level by exposing only `write`/`writeMany` —
  * mutating methods are deliberately absent from the `AuditLogger` class.
  *
- * @see radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/tdd.md §14
- * @see radhakishan_system/docs/feature_plans/document_ingestion_service/03_data/data_model.md (ocr_audit_log)
+ * @see dis/document_ingestion_service/02_architecture/tdd.md §14
+ * @see dis/document_ingestion_service/03_data/data_model.md (ocr_audit_log)
  */
 
 import type { DatabasePort } from '../ports/database.js';

@@ -3026,14 +3026,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-146
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/ocr-outage.md
+  - dis/document_ingestion_service/09_runbooks/ocr-outage.md
 
 **Description:** Step-by-step runbook for responding to an OCR provider outage; rehearsed in a tabletop exercise.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/ocr-outage.md` — expect file exists.
-- VERIFY-2: `grep -c "^## Step" radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/ocr-outage.md` — expect ≥ 5 steps.
+- VERIFY-1: `ls dis/document_ingestion_service/09_runbooks/ocr-outage.md` — expect file exists.
+- VERIFY-2: `grep -c "^## Step" dis/document_ingestion_service/09_runbooks/ocr-outage.md` — expect ≥ 5 steps.
 
 **Status:** Ready
 
@@ -3043,14 +3043,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-148
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/stuck-job.md
+  - dis/document_ingestion_service/09_runbooks/stuck-job.md
 
 **Description:** Diagnose + recover a job stuck in `processing` past the SLA.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/stuck-job.md` — expect file exists.
-- VERIFY-2: `grep -c "^## Step" radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/stuck-job.md` — expect ≥ 5.
+- VERIFY-1: `ls dis/document_ingestion_service/09_runbooks/stuck-job.md` — expect file exists.
+- VERIFY-2: `grep -c "^## Step" dis/document_ingestion_service/09_runbooks/stuck-job.md` — expect ≥ 5.
 
 **Status:** Ready
 
@@ -3060,14 +3060,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-149
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/cost-spike.md
+  - dis/document_ingestion_service/09_runbooks/cost-spike.md
 
 **Description:** How to investigate and cap runaway AI spend.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/cost-spike.md` — expect file exists.
-- VERIFY-2: `grep -c "^## Step" radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/cost-spike.md` — expect ≥ 5.
+- VERIFY-1: `ls dis/document_ingestion_service/09_runbooks/cost-spike.md` — expect file exists.
+- VERIFY-2: `grep -c "^## Step" dis/document_ingestion_service/09_runbooks/cost-spike.md` — expect ≥ 5.
 
 **Status:** Ready
 
@@ -3077,14 +3077,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-051
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/schema-drift.md
+  - dis/document_ingestion_service/09_runbooks/schema-drift.md
 
 **Description:** What to do when a Claude model update breaks the v1 schema.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/schema-drift.md` — expect file exists.
-- VERIFY-2: `grep -c "^## Step" radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/schema-drift.md` — expect ≥ 5.
+- VERIFY-1: `ls dis/document_ingestion_service/09_runbooks/schema-drift.md` — expect file exists.
+- VERIFY-2: `grep -c "^## Step" dis/document_ingestion_service/09_runbooks/schema-drift.md` — expect ≥ 5.
 
 **Status:** Ready
 
@@ -3095,14 +3095,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Depends on:** DIS-122
 - **CS ref:** CS-4
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/duplicate-storm.md
+  - dis/document_ingestion_service/09_runbooks/duplicate-storm.md
 
 **Description:** How to triage when many operators upload the same file.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/duplicate-storm.md` — expect file exists.
-- VERIFY-2: `grep -c "^## Step" radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/duplicate-storm.md` — expect ≥ 5.
+- VERIFY-1: `ls dis/document_ingestion_service/09_runbooks/duplicate-storm.md` — expect file exists.
+- VERIFY-2: `grep -c "^## Step" dis/document_ingestion_service/09_runbooks/duplicate-storm.md` — expect ≥ 5.
 
 **Status:** Ready
 
@@ -3112,14 +3112,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-148
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/dashboard.md
+  - dis/document_ingestion_service/10_handoff/dashboard.md
 
 **Description:** Markdown description of the admin dashboard (exact Grafana JSON is out of scope for POC).
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/dashboard.md` — expect file exists.
-- VERIFY-2: `grep -c "^### " radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/dashboard.md` — expect ≥ 6 panel entries.
+- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/dashboard.md` — expect file exists.
+- VERIFY-2: `grep -c "^### " dis/document_ingestion_service/10_handoff/dashboard.md` — expect ≥ 6 panel entries.
 
 **Status:** Ready
 
@@ -3316,14 +3316,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-145
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/security-review.md
+  - dis/document_ingestion_service/10_handoff/security-review.md
 
 **Description:** Checklist covering RLS, secrets, TLS, SSRF, XSS on verification UI.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/security-review.md` — expect file exists.
-- VERIFY-2: `grep -c "^- \\[ \\]" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/security-review.md` — expect ≥ 15 checkbox items.
+- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/security-review.md` — expect file exists.
+- VERIFY-2: `grep -c "^- \\[ \\]" dis/document_ingestion_service/10_handoff/security-review.md` — expect ≥ 15 checkbox items.
 
 **Status:** Ready
 
@@ -3333,14 +3333,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-151, DIS-152
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/clinical-safety-dry-run.md
+  - dis/document_ingestion_service/10_handoff/clinical-safety-dry-run.md
 
 **Description:** Written report assembling the audit, red-team, and chaos results for clinician sign-off.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/clinical-safety-dry-run.md` — expect file exists.
-- VERIFY-2: `grep -c "^## CS-" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/clinical-safety-dry-run.md` — expect ≥ 12 (one per CS rule).
+- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/clinical-safety-dry-run.md` — expect file exists.
+- VERIFY-2: `grep -c "^## CS-" dis/document_ingestion_service/10_handoff/clinical-safety-dry-run.md` — expect ≥ 12 (one per CS rule).
 
 **Status:** Ready
 
@@ -3403,14 +3403,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-146..DIS-150
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/observability.md
+  - dis/document_ingestion_service/09_runbooks/observability.md
 
 **Description:** One page tying logs, traces, metrics, alerts together with links.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/observability.md` — expect file exists.
-- VERIFY-2: `grep -cE "## (Logs|Traces|Metrics|Alerts)" radhakishan_system/docs/feature_plans/document_ingestion_service/09_runbooks/observability.md` — expect ≥ 4.
+- VERIFY-1: `ls dis/document_ingestion_service/09_runbooks/observability.md` — expect file exists.
+- VERIFY-2: `grep -cE "## (Logs|Traces|Metrics|Alerts)" dis/document_ingestion_service/09_runbooks/observability.md` — expect ≥ 4.
 
 **Status:** Ready
 
@@ -3420,14 +3420,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-145..DIS-174
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/epic-f-signoff.md
+  - dis/document_ingestion_service/10_handoff/epic-f-signoff.md
 
 **Description:** Final checklist marking each F ticket as done with its Verify report path.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/epic-f-signoff.md` — expect file exists.
-- VERIFY-2: `grep -c "DIS-" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/epic-f-signoff.md` — expect ≥ 30 references.
+- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/epic-f-signoff.md` — expect file exists.
+- VERIFY-2: `grep -c "DIS-" dis/document_ingestion_service/10_handoff/epic-f-signoff.md` — expect ≥ 30 references.
 
 **Status:** Ready
 
@@ -3642,7 +3642,7 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **CS ref:** CS-9
 - **Files allowed:**
   - supabase/functions/process-document/\*\* (deletion only)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/legacy-retired.md
+  - dis/document_ingestion_service/10_handoff/legacy-retired.md
 - **Out of scope:** re-introduction / partial retention — approval is for full retirement only.
 - **Execution gate:** INTEGRATION APPROVED required per review_gates.md §6b.
 
@@ -3652,7 +3652,7 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 
 - VERIFY-1: [STAGING ONLY] `ls supabase/functions/process-document/` — expect `No such file or directory` after the change is merged (staging mirror).
 - VERIFY-2: [STAGING ONLY] `curl -i $SUPABASE_STAGING_URL/functions/v1/process-document` — expect 404.
-- VERIFY-3: [STAGING ONLY] `ls radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/legacy-retired.md` — expect file exists with retirement date + final traffic snapshot.
+- VERIFY-3: [STAGING ONLY] `ls dis/document_ingestion_service/10_handoff/legacy-retired.md` — expect file exists with retirement date + final traffic snapshot.
 
 **Status:** HELD
 
@@ -3806,14 +3806,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** H
 - **Depends on:** DIS-226
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/portability.md
+  - dis/document_ingestion_service/02_architecture/portability.md
 
 **Description:** Appends the dry-run metrics (duration, lines changed, adapters added) to the portability doc.
 
 **VERIFY:**
 
-- VERIFY-1: `grep -c "^## Dry-run results" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/portability.md` — expect ≥ 1.
-- VERIFY-2: `grep -E "\\| DIS-22[0-6] \\|" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/portability.md` — expect results table rows for DIS-220..DIS-226.
+- VERIFY-1: `grep -c "^## Dry-run results" dis/document_ingestion_service/02_architecture/portability.md` — expect ≥ 1.
+- VERIFY-2: `grep -E "\\| DIS-22[0-6] \\|" dis/document_ingestion_service/02_architecture/portability.md` — expect results table rows for DIS-220..DIS-226.
 
 **Status:** Ready
 
@@ -3950,15 +3950,15 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** H
 - **Depends on:** DIS-220..DIS-234
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/epic-h-closeout.md
+  - dis/document_ingestion_service/10_handoff/epic-h-closeout.md
 
 **Description:** Records the final port-duration numbers, adapter count, and lessons learned; links to the portability.md dry-run section.
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect file exists.
-- VERIFY-2: `grep -c "DIS-2[23]" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect ≥ 15 ticket references.
-- VERIFY-3: `grep -n "portability.md" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect link to portability doc.
+- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect file exists.
+- VERIFY-2: `grep -c "DIS-2[23]" dis/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect ≥ 15 ticket references.
+- VERIFY-3: `grep -n "portability.md" dis/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect link to portability doc.
 
 **Status:** Ready
 
@@ -3984,7 +3984,7 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **TDD ref:** none (meta)
 - **CS ref:** none
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
+  - dis/document_ingestion_service/07_tickets/backlog.md
   - dis/handoffs/DIS-002c.md
 - **Out of scope:** any file edit outside `backlog.md` + this handoff; any implementation work; any ticket retrofit beyond registration.
 
@@ -3993,13 +3993,13 @@ Register the five follow-up tickets (DIS-001b, DIS-002d, DIS-002e, DIS-021b, DIS
 
 **VERIFY:**
 
-- VERIFY-1: `grep -c "^### DIS-001b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
-- VERIFY-2: `grep -c "^### DIS-002c " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
-- VERIFY-3: `grep -c "^### DIS-002d " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
-- VERIFY-4: `grep -c "^### DIS-002e " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
-- VERIFY-5: `grep -c "^### DIS-021b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
-- VERIFY-6: `grep -c "^### DIS-050a " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect `1`
-- VERIFY-7: `grep -c "\*\*Files allowed:\*\*" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — expect ≥ `194` (188 pre-existing + 6 new = 194 minimum; `**Files allowed:**` is the human-readable label used in every ticket body, not the YAML `files_allowed:` key that only appears in `_ticket_template.md`).
+- VERIFY-1: `grep -c "^### DIS-001b " dis/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-2: `grep -c "^### DIS-002c " dis/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-3: `grep -c "^### DIS-002d " dis/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-4: `grep -c "^### DIS-002e " dis/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-5: `grep -c "^### DIS-021b " dis/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-6: `grep -c "^### DIS-050a " dis/document_ingestion_service/07_tickets/backlog.md` — expect `1`
+- VERIFY-7: `grep -c "\*\*Files allowed:\*\*" dis/document_ingestion_service/07_tickets/backlog.md` — expect ≥ `194` (188 pre-existing + 6 new = 194 minimum; `**Files allowed:**` is the human-readable label used in every ticket body, not the YAML `files_allowed:` key that only appears in `_ticket_template.md`).
 - VERIFY-8: `test -f dis/handoffs/DIS-002c.md && echo EXISTS` — expect `EXISTS`
 
 **Status:** Ready
@@ -4014,12 +4014,12 @@ Register the five follow-up tickets (DIS-001b, DIS-002d, DIS-002e, DIS-021b, DIS
 - **TDD ref:** none (meta)
 - **CS ref:** none
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md
+  - dis/document_ingestion_service/02_architecture/adrs/README.md
+  - dis/document_ingestion_service/07_tickets/clarifications/README.md
+  - dis/document_ingestion_service/07_tickets/done.md
+  - dis/document_ingestion_service/07_tickets/in_progress.md
+  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
+  - dis/document_ingestion_service/10_handoff/document_ocr_flow.md
   - radhakishan_system/docs/document_ocr_flow.md
   - dis/handoffs/DIS-002d.md
 - **Out of scope:** any ADR body (that is DIS-002e); any code edit; any backlog edit.
@@ -4038,12 +4038,12 @@ Backfill `07_tickets/done.md` with the 15 Wave-1–3 merged tickets per
 
 **VERIFY:**
 
-- VERIFY-1: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS` — expect `EXISTS`
-- VERIFY-2: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS` — expect `EXISTS`
-- VERIFY-3: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-1: `test -f dis/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `test -f dis/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-3: `test -f dis/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS` — expect `EXISTS`
 - VERIFY-4: `test -e radhakishan_system/docs/document_ocr_flow.md || echo MOVED` — expect `MOVED`
-- VERIFY-5: `grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` — expect ≥ `15`
-- VERIFY-6: `grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` — expect ≥ `1`
+- VERIFY-5: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md` — expect ≥ `15`
+- VERIFY-6: `grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` — expect ≥ `1`
 - VERIFY-7: `test -f dis/handoffs/DIS-002d.md && echo EXISTS` — expect `EXISTS`
 
 **Status:** Ready
@@ -4058,15 +4058,15 @@ Backfill `07_tickets/done.md` with the 15 Wave-1–3 merged tickets per
 - **TDD ref:** §1 (hexagonal), §9 (OCR), §10 (structuring), §17 (portability)
 - **CS ref:** none directly (ADR-003 touches CS-9 kill-switch semantics; ADR-004 touches CS-2 raw-response audit via webhook path)
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-001-hexagonal-ports-and-adapters.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-005-hono-over-fastify.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-006-postgres-driver-over-pg-or-drizzle.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-007-claude-haiku-default-sonnet-escalation.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/06_rollout/kill_switch.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-001-hexagonal-ports-and-adapters.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-005-hono-over-fastify.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-006-postgres-driver-over-pg-or-drizzle.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-007-claude-haiku-default-sonnet-escalation.md
+  - dis/document_ingestion_service/02_architecture/adrs/README.md
+  - dis/document_ingestion_service/06_rollout/kill_switch.md
   - dis/handoffs/DIS-002e.md
 - **Out of scope:** any code, schema, or backlog edit; any ADR beyond ADR-001..007 (future ADRs open new tickets).
 
@@ -4088,14 +4088,14 @@ Update README index table with all 7 rows. Amend
 
 **VERIFY:**
 
-- VERIFY-1: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l` — expect `7`
-- VERIFY-2: `grep -lE "^## (Context|Decision|Consequences|Alternatives)" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l` — expect `7`
-- VERIFY-3: `grep -c "^## Status" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md` — expect ≥ `1`
-- VERIFY-4: `grep -c "503" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md` — expect ≥ `3`
-- VERIFY-5: `grep -c "webhook_url" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md` — expect ≥ `2`
-- VERIFY-6: `grep -c "1000 docs/day" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md` — expect ≥ `1`
-- VERIFY-7: `grep -c "ADR-00" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md` — expect ≥ `7`
-- VERIFY-8: `grep -ci "307" radhakishan_system/docs/feature_plans/document_ingestion_service/06_rollout/kill_switch.md` — expect `0` (reconciled to 503)
+- VERIFY-1: `ls dis/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l` — expect `7`
+- VERIFY-2: `grep -lE "^## (Context|Decision|Consequences|Alternatives)" dis/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l` — expect `7`
+- VERIFY-3: `grep -c "^## Status" dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md` — expect ≥ `1`
+- VERIFY-4: `grep -c "503" dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md` — expect ≥ `3`
+- VERIFY-5: `grep -c "webhook_url" dis/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md` — expect ≥ `2`
+- VERIFY-6: `grep -c "1000 docs/day" dis/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md` — expect ≥ `1`
+- VERIFY-7: `grep -c "ADR-00" dis/document_ingestion_service/02_architecture/adrs/README.md` — expect ≥ `7`
+- VERIFY-8: `grep -ci "307" dis/document_ingestion_service/06_rollout/kill_switch.md` — expect `0` (reconciled to 503)
 - VERIFY-9: `test -f dis/handoffs/DIS-002e.md && echo EXISTS` — expect `EXISTS`
 
 **Status:** Ready
@@ -4222,14 +4222,14 @@ then implement; see it green.
 - **TDD ref:** none (meta)
 - **CS ref:** none
 - **Files allowed:**
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md (append DIS-002f entry only)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md (append Wave-A rows)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md (refresh snapshot)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md (new)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md (untracked → tracked)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md (untracked → tracked)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md (untracked → tracked)
-  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md (untracked → tracked)
+  - dis/document_ingestion_service/07_tickets/backlog.md (append DIS-002f entry only)
+  - dis/document_ingestion_service/07_tickets/done.md (append Wave-A rows)
+  - dis/document_ingestion_service/07_tickets/in_progress.md (refresh snapshot)
+  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md (new)
+  - dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md (untracked → tracked)
+  - dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md (untracked → tracked)
+  - dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md (untracked → tracked)
+  - dis/document_ingestion_service/10_handoff/Prompt_2.md (untracked → tracked)
   - dis/handoffs/DIS-002f.md
 - **Out of scope:** any code; any ADR / runbook / spec edit; any Wave-B work.
 
@@ -4238,12 +4238,12 @@ End-of-Wave-A session handover. Writes a feature-level session handover at `10_h
 
 **VERIFY:**
 
-- VERIFY-1: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS` — expect `EXISTS`
-- VERIFY-2: `grep -c "^## §" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `6`
-- VERIFY-3: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `4`
-- VERIFY-4: `grep -cE "DIS-021b|DIS-050a" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `2`
-- VERIFY-5: `grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` — expect ≥ `20` (16 pre-existing + 5 Wave-A incl. DIS-002f)
-- VERIFY-6: 4 session-mgmt docs tracked — `git ls-files radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md | wc -l` — expect `4`
+- VERIFY-1: `test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `6`
+- VERIFY-3: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `4`
+- VERIFY-4: `grep -cE "DIS-021b|DIS-050a" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `2`
+- VERIFY-5: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md` — expect ≥ `20` (16 pre-existing + 5 Wave-A incl. DIS-002f)
+- VERIFY-6: 4 session-mgmt docs tracked — `git ls-files dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md dis/document_ingestion_service/10_handoff/Prompt_2.md | wc -l` — expect `4`
 - VERIFY-7: `test -f dis/handoffs/DIS-002f.md && echo EXISTS` — expect `EXISTS`
 
 **Status:** Ready
@@ -4258,18 +4258,18 @@ End-of-Wave-A session handover. Writes a feature-level session handover at `10_h
 - **TDD ref:** none (meta)
 - **CS ref:** none
 - **Files allowed:** every path under the old location, the moved paths under the new location, the 3 CI files that hardcode the path, and backlog/done/in-progress. Explicit list:
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/**` (move source)
+  - `dis/document_ingestion_service/**` (move source)
   - `dis/document_ingestion_service/**` (move target — **same folder name**, only the parent changes)
   - `dis/scripts/check-pr-citations.mjs` (update DOCS constant)
   - `dis/scripts/check-files-touched.mjs` (update DOCS + TICKET_SOURCES)
   - `.github/workflows/dis-ci.yml` (update paths filter)
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` + `done.md` + `in_progress.md` (mention the new path in the new Wave-A entries)
+  - `dis/document_ingestion_service/07_tickets/backlog.md` + `done.md` + `in_progress.md` (mention the new path in the new Wave-A entries)
   - `dis/handoffs/DIS-002g.md`
 - **Out of scope:** any content edit of the moved docs beyond path references; any ADR-body edit; any code outside the 3 CI scripts; any Wave-B work; no folder rename (per user direction — keep `document_ingestion_service` as the leaf name, only the parent changes from `radhakishan_system/docs/feature_plans/` to `dis/`).
 
 **Description:**
 Mass `git mv` of the entire plan folder from
-`radhakishan_system/docs/feature_plans/document_ingestion_service/`
+`dis/document_ingestion_service/`
 to `dis/document_ingestion_service/`. The leaf folder name stays
 `document_ingestion_service` (per user direction — do not rename,
 only correct the path). Co-locates the plan with the code it
@@ -4283,11 +4283,11 @@ resolve because the subtree structure is preserved.
 **VERIFY:**
 
 - VERIFY-1: `test -d dis/document_ingestion_service && echo EXISTS` — expect `EXISTS`
-- VERIFY-2: `test -e radhakishan_system/docs/feature_plans/document_ingestion_service || echo GONE` — expect `GONE`
+- VERIFY-2: `test -e dis/document_ingestion_service || echo GONE` — expect `GONE`
 - VERIFY-3: `test -e radhakishan_system/docs/feature_plans || echo GONE` — expect `GONE` (the old parent folder is empty after the move — `git mv` removes it)
 - VERIFY-4: `find dis/document_ingestion_service -type f -name "*.md" | wc -l` — expect ≥ `50`
 - VERIFY-5: `test -d dis/document_ingestion_service/02_architecture/adrs && test -d dis/document_ingestion_service/07_tickets/clarifications && echo BOTH` — expect `BOTH`
-- VERIFY-6: `grep -r "radhakishan_system/docs/feature_plans/document_ingestion_service" dis/scripts .github/workflows | wc -l` — expect `0`
+- VERIFY-6: `grep -r "dis/document_ingestion_service" dis/scripts .github/workflows | wc -l` — expect `0`
 - VERIFY-7: `node dis/scripts/check-pr-citations.mjs --body "Implements TDD §4 and CS-1"` — expect exit 0 with `all 2 citation(s) resolved.`
 - VERIFY-8: `node dis/scripts/fitness.mjs; echo EXIT=$?` — expect `EXIT=1` with exactly 5 violations (fitness scans only `dis/src/**` so the move does not affect it)
 - VERIFY-9: `node dis/scripts/__tests__/drift-controls.test.mjs` — expect `5/5 tests passed.`

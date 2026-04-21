@@ -22,14 +22,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SignedUrlRequest"
+              $ref: '#/components/schemas/SignedUrlRequest'
       responses:
-        "200":
+        '200':
           description: Signed URL issued
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SignedUrlResponse"
+                $ref: '#/components/schemas/SignedUrlResponse'
 
   /ingest:
     post:
@@ -45,16 +45,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/IngestRequest"
+              $ref: '#/components/schemas/IngestRequest'
       responses:
-        "201":
+        '201':
           description: Accepted — extraction created
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/IngestResponse" }
-        "409":
+              schema: { $ref: '#/components/schemas/IngestResponse' }
+        '409':
           description: Duplicate idempotency key
-        "415":
+        '415':
           description: Unsupported media type
 
   /extractions:
@@ -89,11 +89,11 @@ paths:
           name: cursor
           schema: { type: string }
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/ExtractionList" }
+              schema: { $ref: '#/components/schemas/ExtractionList' }
 
   /extractions/{id}:
     get:
@@ -105,12 +105,12 @@ paths:
           required: true
           schema: { type: string, format: uuid }
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/Extraction" }
-        "404":
+              schema: { $ref: '#/components/schemas/Extraction' }
+        '404':
           description: Not found
 
   /extractions/{id}/approve:
@@ -130,14 +130,14 @@ paths:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/ApproveRequest" }
+            schema: { $ref: '#/components/schemas/ApproveRequest' }
       responses:
-        "200":
+        '200':
           description: Verified and promoted
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/PromotionSummary" }
-        "409":
+              schema: { $ref: '#/components/schemas/PromotionSummary' }
+        '409':
           description: Version conflict or invalid state transition
 
   /extractions/{id}/reject:
@@ -157,11 +157,11 @@ paths:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/RejectRequest" }
+            schema: { $ref: '#/components/schemas/RejectRequest' }
       responses:
-        "200":
+        '200':
           description: Rejected
-        "409":
+        '409':
           description: Cannot reject from current state
 
   /extractions/{id}/retry:
@@ -174,18 +174,18 @@ paths:
           required: true
           schema: { type: string, format: uuid }
       responses:
-        "201":
+        '201':
           description: New extraction created
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/IngestResponse" }
+              schema: { $ref: '#/components/schemas/IngestResponse' }
 
   /admin/metrics:
     get:
       summary: Service-role metrics
       operationId: getMetrics
       responses:
-        "200":
+        '200':
           description: OK
 
   /internal/process-job:
@@ -195,7 +195,7 @@ paths:
       security:
         - workerAuth: []
       responses:
-        "204":
+        '204':
           description: Processed
 
 components:
@@ -210,8 +210,7 @@ components:
   schemas:
     SignedUrlRequest:
       type: object
-      required:
-        [filename, content_type, size_bytes, patient_id, visit_id, category]
+      required: [filename, content_type, size_bytes, patient_id, visit_id, category]
       properties:
         filename: { type: string }
         content_type: { type: string }
@@ -227,8 +226,7 @@ components:
         storage_key: { type: string }
     IngestRequest:
       type: object
-      required:
-        [storage_key, patient_id, visit_id, category, filename, content_type]
+      required: [storage_key, patient_id, visit_id, category, filename, content_type]
       properties:
         storage_key: { type: string }
         patient_id: { type: string }
@@ -292,5 +290,5 @@ components:
       properties:
         items:
           type: array
-          items: { $ref: "#/components/schemas/Extraction" }
+          items: { $ref: '#/components/schemas/Extraction' }
         next_cursor: { type: string, nullable: true }

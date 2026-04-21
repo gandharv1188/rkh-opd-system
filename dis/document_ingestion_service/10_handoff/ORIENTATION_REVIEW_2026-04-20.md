@@ -2,7 +2,7 @@
 
 > Written by a fresh orchestrator session after a deep read of the
 > `dis/` codebase (Waves 1-3 merged) and all 45 plan documents under
-> `radhakishan_system/docs/feature_plans/document_ingestion_service/`.
+> `dis/document_ingestion_service/`.
 >
 > Purpose: give the next wave a single artefact that names what is
 > binding, what is thin, and what must be reconciled before Wave 4

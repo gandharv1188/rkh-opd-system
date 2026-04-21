@@ -24,10 +24,10 @@ The orchestrator links it into `07_tickets/done.md` at merge time.
 
 ## §2. Two levels of handoff
 
-| Level             | Who writes it            | When                                    | Where it lives                                                                                   |
-| ----------------- | ------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| **Ticket-level**  | Every worker agent       | End of each ticket, before final commit | `dis/handoffs/DIS-###.md` on the ticket's branch                                                 |
-| **Feature-level** | Orchestrator (Architect) | When DIS v1 is merged                   | `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/FEATURE_HANDOFF.md` |
+| Level             | Who writes it            | When                                    | Where it lives                                                 |
+| ----------------- | ------------------------ | --------------------------------------- | -------------------------------------------------------------- |
+| **Ticket-level**  | Every worker agent       | End of each ticket, before final commit | `dis/handoffs/DIS-###.md` on the ticket's branch               |
+| **Feature-level** | Orchestrator (Architect) | When DIS v1 is merged                   | `dis/document_ingestion_service/10_handoff/FEATURE_HANDOFF.md` |
 
 (Epic-level handoffs are optional — only required when an epic spans
 multiple agent waves.)
@@ -149,7 +149,7 @@ One line. "Complete, ready for review" OR "Partial — see §5" OR
 ## §4. Feature-level handoff template
 
 Orchestrator writes this at the end of DIS v1. Stored at:
-`radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/FEATURE_HANDOFF.md`
+`dis/document_ingestion_service/10_handoff/FEATURE_HANDOFF.md`
 
 ```markdown
 # DIS v1 — Feature Handoff
@@ -258,7 +258,7 @@ step between the task body and the mandatory final commit steps:
 
 ======== SESSION HANDOFF ========
 Before your final commit, create dis/handoffs/DIS-###.md using the
-template in radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/session_handoff.md §3.
+template in dis/document_ingestion_service/08_team/session_handoff.md §3.
 Include the handoff in the final `git add -A` / `git commit`.
 Omitting the handoff = TASK FAILURE.
 

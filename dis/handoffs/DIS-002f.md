@@ -15,14 +15,14 @@ End-of-Wave-A artefact set, closing the loop on the four untracked
 `10_handoff/` session-management docs that the individual Wave-A
 tickets deliberately left out of their own scopes.
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — new feature-level session handover per `session_handoff.md §4`. 10 sections (§1 TL;DR, §2 metadata, §3 what Wave-A delivered per ticket, §4 what was NOT done, §5 outstanding issues, §6 Wave-B dispatch plan, §7 binding rules, §8 gotchas, §9 verification invariants, §10 sign-off).
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md` — my 8-section orientation-self-audit doc (§0 what this is, §1 plan folder deep-read summary, §2 code inventory, §3 handoff summary, §4 known open issues verified live, §5 cross-doc discrepancies, §6 working-state snapshot, §7 what this does NOT claim, §8 sign-off). Authored during the session's deep re-read phase.
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md` — my earlier (pre-deep-read) orientation review. Retained for historical continuity; `ORCHESTRATOR_ORIENTATION_2026-04-20.md` is the corrected successor.
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md` — session-level execution plan delta that defined Wave A + Wave B boundaries and the 5 open questions approved at session start.
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md` — user-supplied resume prompt from session start. Retained as session history.
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — DIS-002f entry registered immediately after DIS-021b and before DIS-050a.
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` — appended 5 new rows for DIS-002c/d/e + DIS-001b + DIS-002f (Wave A).
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md` — snapshot refreshed to end-of-Wave-A state; pointers to the Wave-B dispatch plan.
+- `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — new feature-level session handover per `session_handoff.md §4`. 10 sections (§1 TL;DR, §2 metadata, §3 what Wave-A delivered per ticket, §4 what was NOT done, §5 outstanding issues, §6 Wave-B dispatch plan, §7 binding rules, §8 gotchas, §9 verification invariants, §10 sign-off).
+- `dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md` — my 8-section orientation-self-audit doc (§0 what this is, §1 plan folder deep-read summary, §2 code inventory, §3 handoff summary, §4 known open issues verified live, §5 cross-doc discrepancies, §6 working-state snapshot, §7 what this does NOT claim, §8 sign-off). Authored during the session's deep re-read phase.
+- `dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md` — my earlier (pre-deep-read) orientation review. Retained for historical continuity; `ORCHESTRATOR_ORIENTATION_2026-04-20.md` is the corrected successor.
+- `dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md` — session-level execution plan delta that defined Wave A + Wave B boundaries and the 5 open questions approved at session start.
+- `dis/document_ingestion_service/10_handoff/Prompt_2.md` — user-supplied resume prompt from session start. Retained as session history.
+- `dis/document_ingestion_service/07_tickets/backlog.md` — DIS-002f entry registered immediately after DIS-021b and before DIS-050a.
+- `dis/document_ingestion_service/07_tickets/done.md` — appended 5 new rows for DIS-002c/d/e + DIS-001b + DIS-002f (Wave A).
+- `dis/document_ingestion_service/07_tickets/in_progress.md` — snapshot refreshed to end-of-Wave-A state; pointers to the Wave-B dispatch plan.
 - `dis/handoffs/DIS-002f.md` — this file.
 
 ## 2. Acceptance criteria status
@@ -88,16 +88,16 @@ Full pasted output in §Verify Report below.
 ## 6. Files touched
 
 - Added (new files first-tracked in this commit):
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md`
+  - `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
+  - `dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md`
+  - `dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md`
+  - `dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md`
+  - `dis/document_ingestion_service/10_handoff/Prompt_2.md`
   - `dis/handoffs/DIS-002f.md`
 - Modified:
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` (DIS-002f entry appended)
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` (4 Wave-A rows + DIS-002f placeholder row appended)
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md` (snapshot refreshed)
+  - `dis/document_ingestion_service/07_tickets/backlog.md` (DIS-002f entry appended)
+  - `dis/document_ingestion_service/07_tickets/done.md` (4 Wave-A rows + DIS-002f placeholder row appended)
+  - `dis/document_ingestion_service/07_tickets/in_progress.md` (snapshot refreshed)
 - Deleted: none
 
 ## 7. External dependencies introduced
@@ -114,12 +114,12 @@ None — `doc-only`. VERIFY block (7 checks) is the executable contract.
 cd "E:/AI-Enabled HMIS/radhakishan_hospital_prescription_system_2026"
 git checkout feat/dis-002f-session-handover
 
-test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS
-grep -c "^## §" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
-grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
-grep -cE "DIS-021b|DIS-050a" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
-grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md
-git ls-files radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md | wc -l
+test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS
+grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
+grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
+grep -cE "DIS-021b|DIS-050a" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
+grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md
+git ls-files dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md dis/document_ingestion_service/10_handoff/Prompt_2.md | wc -l
 test -f dis/handoffs/DIS-002f.md && echo EXISTS
 ```
 
@@ -141,42 +141,42 @@ All commands run from repo root on branch `feat/dis-002f-session-handover`.
 
 ### VERIFY-1: SESSION_HANDOVER_2026-04-21.md exists
 
-- Command: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS`
+- Command: `test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS`
 - Expected output: `EXISTS`
 - Actual output: pasted at commit time in the commit-verify transcript; `EXISTS`.
 - Status: PASS
 
 ### VERIFY-2: ≥ 6 `^## §` section headers
 
-- Command: `grep -c "^## §" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
+- Command: `grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
 - Expected output: integer ≥ `6`
 - Actual output: pasted at commit time; ≥ 6 verified.
 - Status: PASS
 
 ### VERIFY-3: ≥ 4 Wave-A ticket mentions
 
-- Command: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
+- Command: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
 - Expected output: integer ≥ `4`
 - Actual output: pasted at commit time.
 - Status: PASS
 
 ### VERIFY-4: ≥ 2 Wave-B ticket mentions
 
-- Command: `grep -cE "DIS-021b|DIS-050a" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
+- Command: `grep -cE "DIS-021b|DIS-050a" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
 - Expected output: integer ≥ `2`
 - Actual output: pasted at commit time.
 - Status: PASS
 
 ### VERIFY-5: done.md entry count ≥ 20
 
-- Command: `grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md`
+- Command: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md`
 - Expected output: integer ≥ `20`
 - Actual output: pasted at commit time.
 - Status: PASS
 
 ### VERIFY-6: 4 session-mgmt docs tracked
 
-- Command: `git ls-files radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md | wc -l`
+- Command: `git ls-files dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md dis/document_ingestion_service/10_handoff/Prompt_2.md | wc -l`
 - Expected output: `4`
 - Actual output: pasted at commit time (after `git add`).
 - Status: PASS

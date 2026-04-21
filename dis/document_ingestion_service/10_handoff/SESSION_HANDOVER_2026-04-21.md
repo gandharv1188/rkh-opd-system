@@ -350,7 +350,7 @@ git log --oneline --graph feat/dis-plan | head -20
 ls dis/handoffs/DIS-002c.md dis/handoffs/DIS-002d.md dis/handoffs/DIS-002e.md dis/handoffs/DIS-001b.md dis/handoffs/DIS-002f.md
 
 # 4. done.md has the Wave-A entries
-grep -cE "^### DIS-(002c|002d|002e|001b|002f)" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md
+grep -cE "^### DIS-(002c|002d|002e|001b|002f)" dis/document_ingestion_service/07_tickets/done.md
 # expect 5
 
 # 5. Forbidden-tokens check on production tree

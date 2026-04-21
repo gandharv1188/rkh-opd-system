@@ -93,17 +93,17 @@ All 9 VERIFY PASS. Actual output pasted in §Verify Report below.
 ## 6. Files touched
 
 - Added:
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-001-hexagonal-ports-and-adapters.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-005-hono-over-fastify.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-006-postgres-driver-over-pg-or-drizzle.md`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-007-claude-haiku-default-sonnet-escalation.md`
+  - `dis/document_ingestion_service/02_architecture/adrs/ADR-001-hexagonal-ports-and-adapters.md`
+  - `dis/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md`
+  - `dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md`
+  - `dis/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md`
+  - `dis/document_ingestion_service/02_architecture/adrs/ADR-005-hono-over-fastify.md`
+  - `dis/document_ingestion_service/02_architecture/adrs/ADR-006-postgres-driver-over-pg-or-drizzle.md`
+  - `dis/document_ingestion_service/02_architecture/adrs/ADR-007-claude-haiku-default-sonnet-escalation.md`
   - `dis/handoffs/DIS-002e.md` (this file)
 - Modified:
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md` (index table populated)
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/06_rollout/kill_switch.md` (§1 step 1 rewritten, ADR-003 cross-reference added)
+  - `dis/document_ingestion_service/02_architecture/adrs/README.md` (index table populated)
+  - `dis/document_ingestion_service/06_rollout/kill_switch.md` (§1 step 1 rewritten, ADR-003 cross-reference added)
 - Deleted: none
 
 ## 7. External dependencies introduced
@@ -122,16 +122,16 @@ cd "E:/AI-Enabled HMIS/radhakishan_hospital_prescription_system_2026"
 git checkout feat/dis-002e-adr-pack
 
 # V1..V8 — content assertions
-ls radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l
-for f in radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-00*.md; do \
+ls dis/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l
+for f in dis/document_ingestion_service/02_architecture/adrs/ADR-00*.md; do \
   grep -cE "^## (Context|Decision|Consequences|Alternatives)" "$f"; \
 done
-grep -c "^- \*\*Status:\*\*" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md
-grep -c "503" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md
-grep -c "webhook_url" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md
-grep -c "1000 docs/day" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md
-grep -c "ADR-00" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md
-grep -ci "307" radhakishan_system/docs/feature_plans/document_ingestion_service/06_rollout/kill_switch.md
+grep -c "^- \*\*Status:\*\*" dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md
+grep -c "503" dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md
+grep -c "webhook_url" dis/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md
+grep -c "1000 docs/day" dis/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md
+grep -c "ADR-00" dis/document_ingestion_service/02_architecture/adrs/README.md
+grep -ci "307" dis/document_ingestion_service/06_rollout/kill_switch.md
 
 # V9 — handoff
 test -f dis/handoffs/DIS-002e.md && echo EXISTS
@@ -160,7 +160,7 @@ All commands run from the repo root on branch `feat/dis-002e-adr-pack`.
 **When** `ls ADR-00*.md | wc -l`.
 **Then** output is `7`.
 
-- Command: `ls radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l`
+- Command: `ls dis/document_ingestion_service/02_architecture/adrs/ADR-00*.md | wc -l`
 - Expected output: `7`
 - Actual output:
 
@@ -184,7 +184,7 @@ All commands run from the repo root on branch `feat/dis-002e-adr-pack`.
 
 ### VERIFY-3: ADR-003 has a Status line
 
-- Command: `grep -c "^- \*\*Status:\*\*" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md`
+- Command: `grep -c "^- \*\*Status:\*\*" dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md`
 - Expected output: integer ≥ `1`
 - Actual output:
 
@@ -196,7 +196,7 @@ All commands run from the repo root on branch `feat/dis-002e-adr-pack`.
 
 ### VERIFY-4: ADR-003 mentions "503"
 
-- Command: `grep -c "503" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md`
+- Command: `grep -c "503" dis/document_ingestion_service/02_architecture/adrs/ADR-003-kill-switch-returns-503.md`
 - Expected output: integer ≥ `3`
 - Actual output:
 
@@ -208,7 +208,7 @@ All commands run from the repo root on branch `feat/dis-002e-adr-pack`.
 
 ### VERIFY-5: ADR-004 mentions `webhook_url`
 
-- Command: `grep -c "webhook_url" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md`
+- Command: `grep -c "webhook_url" dis/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md`
 - Expected output: integer ≥ `2`
 - Actual output:
 
@@ -220,7 +220,7 @@ All commands run from the repo root on branch `feat/dis-002e-adr-pack`.
 
 ### VERIFY-6: ADR-002 mentions "1000 docs/day"
 
-- Command: `grep -c "1000 docs/day" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md`
+- Command: `grep -c "1000 docs/day" dis/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md`
 - Expected output: integer ≥ `1`
 - Actual output:
 
@@ -232,7 +232,7 @@ All commands run from the repo root on branch `feat/dis-002e-adr-pack`.
 
 ### VERIFY-7: README index has ≥ 7 `ADR-00` rows
 
-- Command: `grep -c "ADR-00" radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md`
+- Command: `grep -c "ADR-00" dis/document_ingestion_service/02_architecture/adrs/README.md`
 - Expected output: integer ≥ `7`
 - Actual output:
 
@@ -244,7 +244,7 @@ All commands run from the repo root on branch `feat/dis-002e-adr-pack`.
 
 ### VERIFY-8: `kill_switch.md` zero "307" mentions
 
-- Command: `grep -ci "307" radhakishan_system/docs/feature_plans/document_ingestion_service/06_rollout/kill_switch.md`
+- Command: `grep -ci "307" dis/document_ingestion_service/06_rollout/kill_switch.md`
 - Expected output: `0`
 - Actual output:
 

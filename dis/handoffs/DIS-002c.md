@@ -11,7 +11,7 @@
 
 ## 1. What was built
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — appended a new `## Session-1 follow-ups (Wave A + Wave B, drafted 2026-04-21)` section immediately before the `## Ticket template` section. Contains 6 Verify-Driven ticket entries:
+- `dis/document_ingestion_service/07_tickets/backlog.md` — appended a new `## Session-1 follow-ups (Wave A + Wave B, drafted 2026-04-21)` section immediately before the `## Ticket template` section. Contains 6 Verify-Driven ticket entries:
   - **DIS-002c** (this ticket — the meta-entry that registers the section)
   - **DIS-002d** — Scaffold hygiene (adrs/ + clarifications/ folders, done.md backfill, document_ocr_flow.md move, SESSION_HANDOVER stale-ref fix)
   - **DIS-002e** — ADR pack (ADR-001..007) including the kill-switch 503 reconciliation (ADR-003) and the Datalab webhook direction (ADR-004)
@@ -83,7 +83,7 @@ Full actual output pasted in §Verify Report below.
 
 ## 6. Files touched
 
-- Modified: `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` (added ~200 lines in the new `## Session-1 follow-ups` section).
+- Modified: `dis/document_ingestion_service/07_tickets/backlog.md` (added ~200 lines in the new `## Session-1 follow-ups` section).
 - Added: `dis/handoffs/DIS-002c.md` (this file).
 - No other files touched. No deletions.
 
@@ -100,13 +100,13 @@ No unit / integration / e2e tests. Doc-only ticket, Gate 2 (test-first) skipped 
 ```
 cd "E:/AI-Enabled HMIS/radhakishan_hospital_prescription_system_2026"
 git checkout feat/dis-002c-backlog-expand
-grep -c "^### DIS-001b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
-grep -c "^### DIS-002c " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
-grep -c "^### DIS-002d " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
-grep -c "^### DIS-002e " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
-grep -c "^### DIS-021b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
-grep -c "^### DIS-050a " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
-grep -c "files_allowed:" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md
+grep -c "^### DIS-001b " dis/document_ingestion_service/07_tickets/backlog.md
+grep -c "^### DIS-002c " dis/document_ingestion_service/07_tickets/backlog.md
+grep -c "^### DIS-002d " dis/document_ingestion_service/07_tickets/backlog.md
+grep -c "^### DIS-002e " dis/document_ingestion_service/07_tickets/backlog.md
+grep -c "^### DIS-021b " dis/document_ingestion_service/07_tickets/backlog.md
+grep -c "^### DIS-050a " dis/document_ingestion_service/07_tickets/backlog.md
+grep -c "files_allowed:" dis/document_ingestion_service/07_tickets/backlog.md
 test -f dis/handoffs/DIS-002c.md && echo EXISTS
 ```
 
@@ -132,7 +132,7 @@ All commands run from the repo root on branch `feat/dis-002c-backlog-expand`.
 **When** `grep -c "^### DIS-001b " backlog.md`.
 **Then** output is `1`.
 
-- Command: `grep -c "^### DIS-001b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "^### DIS-001b " dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected output: `1`
 - Actual output:
 
@@ -144,7 +144,7 @@ All commands run from the repo root on branch `feat/dis-002c-backlog-expand`.
 
 ### VERIFY-2: DIS-002c registered
 
-- Command: `grep -c "^### DIS-002c " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "^### DIS-002c " dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected output: `1`
 - Actual output:
 
@@ -156,7 +156,7 @@ All commands run from the repo root on branch `feat/dis-002c-backlog-expand`.
 
 ### VERIFY-3: DIS-002d registered
 
-- Command: `grep -c "^### DIS-002d " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "^### DIS-002d " dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected output: `1`
 - Actual output:
 
@@ -168,7 +168,7 @@ All commands run from the repo root on branch `feat/dis-002c-backlog-expand`.
 
 ### VERIFY-4: DIS-002e registered
 
-- Command: `grep -c "^### DIS-002e " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "^### DIS-002e " dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected output: `1`
 - Actual output:
 
@@ -180,7 +180,7 @@ All commands run from the repo root on branch `feat/dis-002c-backlog-expand`.
 
 ### VERIFY-5: DIS-021b registered
 
-- Command: `grep -c "^### DIS-021b " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "^### DIS-021b " dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected output: `1`
 - Actual output:
 
@@ -192,7 +192,7 @@ All commands run from the repo root on branch `feat/dis-002c-backlog-expand`.
 
 ### VERIFY-6: DIS-050a registered
 
-- Command: `grep -c "^### DIS-050a " radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "^### DIS-050a " dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected output: `1`
 - Actual output:
 
@@ -206,7 +206,7 @@ All commands run from the repo root on branch `feat/dis-002c-backlog-expand`.
 
 **Note:** VERIFY-7 was corrected mid-execution. The original grep target was `files_allowed:` (YAML-frontmatter form), which only appears in `_ticket_template.md` — not in any of the 188 pre-existing ticket bodies. The human-readable label used throughout the backlog is `**Files allowed:**`. Updated the VERIFY command in `backlog.md` DIS-002c entry accordingly. This self-correction is itself within the `files_allowed:` scope of DIS-002c (only `backlog.md` touched) and is documented in §3 D-4 (new) below.
 
-- Command: `grep -c "\*\*Files allowed:\*\*" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "\*\*Files allowed:\*\*" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected output: integer ≥ `194` (189 pre-existing + 6 new)
 - Actual output:
 

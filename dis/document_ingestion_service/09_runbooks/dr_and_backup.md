@@ -194,7 +194,7 @@ Before redirecting live traffic to a restored DB:
 
 ```bash
 # 1. Schema
-pg_dump --schema-only "$RESTORED_DB_URL" | diff - radhakishan_system/docs/feature_plans/document_ingestion_service/03_data/expected_schema.sql
+pg_dump --schema-only "$RESTORED_DB_URL" | diff - dis/document_ingestion_service/03_data/expected_schema.sql
 
 # 2. Row-count sanity (compare to monitoring dashboard's last-known-good)
 psql "$RESTORED_DB_URL" -c "select 'ocr_extractions' t, count(*) from ocr_extractions union all select 'lab_results', count(*) from lab_results union all select 'vaccinations', count(*) from vaccinations;"

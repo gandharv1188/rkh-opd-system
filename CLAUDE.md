@@ -133,4 +133,4 @@ When editing, maintain the self-contained nature. Edit files directly in `web/`.
 - Track work in `TaskList` (team-scoped); claim via `TaskUpdate(owner=<name>)`.
 - Idle ≠ done. Teammates often commit silently then idle. Confirm via `git log` on their branch and the presence of a handoff file at `dis/handoffs/DIS-###.md`; then mark the task completed yourself.
 - A recurring `CronCreate` job checks teammate health every 15 min. If a branch shows zero commits 30+ min after spawn, send a `SendMessage` poke; if still stuck, `shutdown_request` + re-dispatch.
-- Full protocol: `radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/` — RACI, review_gates, session_handoff, agentic_dev_protocol.
+- Full protocol: `dis/document_ingestion_service/08_team/` — RACI, review_gates, session_handoff, agentic_dev_protocol.

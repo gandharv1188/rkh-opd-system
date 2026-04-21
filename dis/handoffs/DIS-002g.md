@@ -12,7 +12,7 @@
 ## 1. What was built
 
 Mass `git mv` of the entire plan folder from
-`radhakishan_system/docs/feature_plans/document_ingestion_service/`
+`dis/document_ingestion_service/`
 to `dis/document_ingestion_service/`. The **leaf folder name stays
 `document_ingestion_service`** per user direction ("do not rename,
 only correct the path"). Co-locates the plan with the code it
@@ -25,9 +25,9 @@ Numbers:
 - **1 empty-parent cleanup:** `radhakishan_system/docs/feature_plans/`
   became empty after the move and was removed with `rmdir`.
 - **3 CI files updated:**
-  - `dis/scripts/check-pr-citations.mjs:23` — `DOCS` constant changed from `resolve('radhakishan_system/docs/feature_plans/document_ingestion_service')` to `resolve('dis/document_ingestion_service')`.
+  - `dis/scripts/check-pr-citations.mjs:23` — `DOCS` constant changed from `resolve('dis/document_ingestion_service')` to `resolve('dis/document_ingestion_service')`.
   - `dis/scripts/check-files-touched.mjs:23` — `DOCS` constant updated identically (`TICKET_SOURCES` derives from it, so the 4 ticket-file lookups are automatically redirected).
-  - `.github/workflows/dis-ci.yml:8` — the `on.pull_request.paths` trigger filter `"radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/**"` changed to `"dis/document_ingestion_service/07_tickets/**"` so PRs editing the plan continue to trigger DIS CI.
+  - `.github/workflows/dis-ci.yml:8` — the `on.pull_request.paths` trigger filter `"dis/document_ingestion_service/07_tickets/**"` changed to `"dis/document_ingestion_service/07_tickets/**"` so PRs editing the plan continue to trigger DIS CI.
 - **Content unchanged.** Every moved `.md` file's contents are byte-identical to pre-move. Git detects each as a rename (similarity 100%) — this is how git blame history is preserved across the move.
 - **Plan-internal cross-references still resolve.** The plan docs cross-reference each other with relative paths (e.g. `../05_testing/verify_format.md`) that survive a subtree move intact. I did **not** edit any `.md` body.
 
@@ -42,7 +42,7 @@ Mapped to DIS-002g's backlog VERIFY block. All 10 PASS.
 - [x] AC-3: old parent `radhakishan_system/docs/feature_plans` gone → V3 GONE
 - [x] AC-4: ≥ 50 `.md` files in the new location → V4 = 62
 - [x] AC-5: adrs/ + clarifications/ folders both present → V5 BOTH
-- [x] AC-6: 0 stale `radhakishan_system/docs/feature_plans/document_ingestion_service` references in CI → V6 = 0
+- [x] AC-6: 0 stale `dis/document_ingestion_service` references in CI → V6 = 0
 - [x] AC-7: `check-pr-citations.mjs` resolves TDD §4 + CS-1 against the new DOCS path → V7 PASS with `all 2 citation(s) resolved.`
 - [x] AC-8: `fitness.mjs` unchanged — exactly 5 pre-existing violations still reported (validates that fitness scans `dis/src/**`, not the plan folder, so the move is orthogonal) → V8 EXIT=1, 5 violations
 - [x] AC-9: `drift-controls.test.mjs` → V9 5/5 PASS
@@ -63,7 +63,7 @@ Full output pasted in §Verify Report.
 
 **Context:** Original backlog entry proposed `dis/document_ingestion_service_plan/` (renaming the leaf from `document_ingestion_service` to `document_ingestion_service_plan`). User message mid-edit: "Don't rename, if that is an issue just correct the path."
 **Decision:** Keep the leaf folder name `document_ingestion_service`. Only the parent changes.
-**Reason:** User direction is primary (per CLAUDE.md + coding_standards §1 instruction-priority). Also reduces the blast radius — 66 path references vs. 66 path references **plus** 45 internal cross-refs that use the folder name in relative paths (e.g. `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/README.md` would have needed a rename-plus-content-edit pass).
+**Reason:** User direction is primary (per CLAUDE.md + coding_standards §1 instruction-priority). Also reduces the blast radius — 66 path references vs. 66 path references **plus** 45 internal cross-refs that use the folder name in relative paths (e.g. `dis/document_ingestion_service/07_tickets/README.md` would have needed a rename-plus-content-edit pass).
 
 ### D-3: Left `radhakishan_system/data/sample_ocr_pdfs/` and other non-DIS content in `radhakishan_system/`
 
@@ -73,17 +73,17 @@ Full output pasted in §Verify Report.
 
 ### D-4: Did NOT update cross-references in moved docs
 
-**Context:** Any moved doc that referenced its own absolute path (e.g. the prior session handover that I already fixed in DIS-002d to point at `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md`) now technically has a stale reference.
+**Context:** Any moved doc that referenced its own absolute path (e.g. the prior session handover that I already fixed in DIS-002d to point at `dis/document_ingestion_service/10_handoff/document_ocr_flow.md`) now technically has a stale reference.
 **Options considered:** (a) leave all `.md` bodies unchanged, (b) pass through and update every absolute-path reference inside each of 62 `.md` files.
 **Decision:** Option (a). Out of scope. The rule I set at the top of this handoff ("Leaves every content unchanged") holds.
-**Reason:** If I edit doc bodies here, the `files_allowed` scope discipline says I must list every edited file, and the VERIFY block would need per-file assertions. The cleaner path is: a future tiny follow-up ticket DIS-002h (or roll into DIS-002f's next session update) greps for `radhakishan_system/docs/feature_plans/document_ingestion_service` in `.md` files and fixes each. Listing that as follow-up §5.
+**Reason:** If I edit doc bodies here, the `files_allowed` scope discipline says I must list every edited file, and the VERIFY block would need per-file assertions. The cleaner path is: a future tiny follow-up ticket DIS-002h (or roll into DIS-002f's next session update) greps for `dis/document_ingestion_service` in `.md` files and fixes each. Listing that as follow-up §5.
 **Revisit if:** the stale cross-refs cause immediate reviewer confusion; at which point, elevate DIS-002h to next-ticket priority.
 
 ## 4. What was deliberately NOT done
 
 - **No `.md` body edits.** Only path constants in CI + the backlog entry for DIS-002g itself. Cross-references inside the moved docs are intentionally untouched (see §3 D-4). Listed as DIS-002h follow-up in §5.
 - **No content relocated beyond `document_ingestion_service/`.** `radhakishan_system/data/sample_ocr_pdfs/` stays where it is — not a DIS artefact.
-- **No CLAUDE.md edit.** CLAUDE.md at the repo root references `radhakishan_system/docs/feature_plans/document_ingestion_service/…` in its agentic team management section. That is user-authored project memory and not in DIS-002g's `files_allowed`. Flagged as follow-up in §5.
+- **No CLAUDE.md edit.** CLAUDE.md at the repo root references `dis/document_ingestion_service/…` in its agentic team management section. That is user-authored project memory and not in DIS-002g's `files_allowed`. Flagged as follow-up in §5.
 - **No `.gitignore` change.** No generated files under the moved subtree need ignoring.
 - **No force-push, no history rewrite.** Pure forward-moving commits.
 - **No `npm install` / test / build run beyond the VERIFY commands.**
@@ -92,9 +92,9 @@ Full output pasted in §Verify Report.
 ## 5. Follow-ups / known gaps
 
 - **DIS-002h (new suggested ticket, doc-only)** — update absolute-path cross-references inside moved docs and in CLAUDE.md. Scope:
-  1. `grep -rln "radhakishan_system/docs/feature_plans/document_ingestion_service" dis/document_ingestion_service` → fix each to drop the `radhakishan_system/docs/feature_plans/` prefix.
-  2. `grep -n "radhakishan_system/docs/feature_plans/document_ingestion_service" CLAUDE.md` → fix.
-  3. `grep -rln "radhakishan_system/docs/feature_plans/document_ingestion_service" dis/handoffs` → fix (including my handoffs written earlier this session which still reference the old paths).
+  1. `grep -rln "dis/document_ingestion_service" dis/document_ingestion_service` → fix each to drop the `radhakishan_system/docs/feature_plans/` prefix.
+  2. `grep -n "dis/document_ingestion_service" CLAUDE.md` → fix.
+  3. `grep -rln "dis/document_ingestion_service" dis/handoffs` → fix (including my handoffs written earlier this session which still reference the old paths).
      Low urgency — the old paths don't break the build (they just point to files that no longer exist at those paths); cosmetic + correctness issue for future readers. Should land before the next PR refresh.
 - **Update `SESSION_HANDOVER_2026-04-21.md` and `ORCHESTRATOR_ORIENTATION_2026-04-20.md`** — they cite the old path extensively. Fold into DIS-002h.
 - **Integration hold still absolute.** Epic G untouched.
@@ -102,7 +102,7 @@ Full output pasted in §Verify Report.
 
 ## 6. Files touched
 
-- Renamed (66 files, git detects as renames preserving blame history): every file under `radhakishan_system/docs/feature_plans/document_ingestion_service/` → `dis/document_ingestion_service/` with identical subtree structure.
+- Renamed (66 files, git detects as renames preserving blame history): every file under `dis/document_ingestion_service/` → `dis/document_ingestion_service/` with identical subtree structure.
 - Modified (4 files):
   - `dis/document_ingestion_service/07_tickets/backlog.md` — DIS-002g entry appended (before DIS-050a). Edit was staged pre-move so git carries it through the rename as a rename-with-modifications (1 file, 47+ lines).
   - `dis/scripts/check-pr-citations.mjs` — `DOCS` constant path updated.
@@ -131,11 +131,11 @@ cd "E:/AI-Enabled HMIS/radhakishan_hospital_prescription_system_2026"
 git checkout feat/dis-002g-plan-relocate
 
 test -d dis/document_ingestion_service && echo EXISTS
-test -e radhakishan_system/docs/feature_plans/document_ingestion_service || echo GONE
+test -e dis/document_ingestion_service || echo GONE
 test -e radhakishan_system/docs/feature_plans || echo GONE
 find dis/document_ingestion_service -type f -name "*.md" | wc -l
 test -d dis/document_ingestion_service/02_architecture/adrs && test -d dis/document_ingestion_service/07_tickets/clarifications && echo BOTH
-grep -r "radhakishan_system/docs/feature_plans/document_ingestion_service" dis/scripts .github/workflows | wc -l
+grep -r "dis/document_ingestion_service" dis/scripts .github/workflows | wc -l
 node dis/scripts/check-pr-citations.mjs --body "Implements TDD §4 and CS-1"
 node dis/scripts/fitness.mjs; echo EXIT=$?
 node dis/scripts/__tests__/drift-controls.test.mjs
@@ -176,7 +176,7 @@ EXISTS
 
 ### VERIFY-2: old path gone
 
-- Command: `test -e radhakishan_system/docs/feature_plans/document_ingestion_service || echo GONE`
+- Command: `test -e dis/document_ingestion_service || echo GONE`
 - Expected: `GONE`
 - Actual:
 
@@ -224,7 +224,7 @@ BOTH
 
 ### VERIFY-6: zero stale path references in CI
 
-- Command: `grep -r "radhakishan_system/docs/feature_plans/document_ingestion_service" dis/scripts .github/workflows | wc -l`
+- Command: `grep -r "dis/document_ingestion_service" dis/scripts .github/workflows | wc -l`
 - Expected: `0`
 - Actual:
 
