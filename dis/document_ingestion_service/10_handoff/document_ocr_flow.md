@@ -826,7 +826,7 @@ None of these are CS-tagged surfaces, but they compound drift.
 ```ts
 // datalab-chandra.ts:148-150 — CURRENT (wrong)
 for (const fmt of input.outputFormats) {
-  form.append("output_format", fmt);
+  form.append('output_format', fmt);
 }
 ```
 
@@ -842,7 +842,7 @@ DIS-051/DIS-058.
 **Fix:**
 
 ```ts
-form.append("output_format", input.outputFormats.join(","));
+form.append('output_format', input.outputFormats.join(','));
 ```
 
 **Urgency:** Low today (only breaks when DIS-051/DIS-058 start
@@ -854,7 +854,7 @@ DIS-097 (worker endpoint) will exercise the multi-format path.
 ```ts
 // datalab-chandra.ts:152-154 — CURRENT (wrong)
 if (input.hints?.languageCodes?.length) {
-  form.append("langs", input.hints.languageCodes.join(","));
+  form.append('langs', input.hints.languageCodes.join(','));
 }
 ```
 

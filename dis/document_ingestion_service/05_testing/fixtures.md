@@ -167,15 +167,12 @@ Test helper:
 
 ```ts
 // dis/tests/helpers/golden.ts
-export async function assertGolden(
-  id: string,
-  actual: ClinicalExtraction,
-): Promise<void> {
+export async function assertGolden(id: string, actual: ClinicalExtraction): Promise<void> {
   const expected = await readGolden(id); // reads expected/structured.json
   const normalised = normalise(actual); // trim, lowercase raw names, round confidence
   expect(normalised).toStrictEqualWithTolerance(expected, {
-    numericTolerance: { "labs.*.confidence": 0.05 },
-    ignorePaths: ["provider_version"], // varies day to day
+    numericTolerance: { 'labs.*.confidence': 0.05 },
+    ignorePaths: ['provider_version'], // varies day to day
   });
 }
 ```

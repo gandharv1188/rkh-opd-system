@@ -12,7 +12,7 @@
 
 ## 1. What was built
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/drift_prevention.md` — full drift-prevention doc covering 4 drift types, 11 controls (5 Phase-1 + 6 Phase-2), rollout plan, failure-mode library, and honest limitations.
+- `dis/document_ingestion_service/02_architecture/drift_prevention.md` — full drift-prevention doc covering 4 drift types, 11 controls (5 Phase-1 + 6 Phase-2), rollout plan, failure-mode library, and honest limitations.
 - `dis/handoffs/DRIFT-DOC-WRITER.md` — this file.
 
 ## 2. Acceptance criteria status
@@ -58,7 +58,7 @@
 
 ## 6. Files touched
 
-- Added: `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/drift_prevention.md`
+- Added: `dis/document_ingestion_service/02_architecture/drift_prevention.md`
 - Added: `dis/handoffs/DRIFT-DOC-WRITER.md`
 - Modified: none
 - Deleted: none
@@ -76,7 +76,7 @@ None (doc-only ticket; Gate 2 skipped per review_gates.md exception).
 One command per required structural section. Each should return `1`.
 
 ```
-cd .claude/worktrees/drift-doc/radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture
+cd .claude/worktrees/drift-doc/dis/document_ingestion_service/02_architecture
 
 grep -c "^## §1\. What we mean by drift" drift_prevention.md              # expect 1
 grep -c "^## §2\. Control matrix" drift_prevention.md                     # expect 1

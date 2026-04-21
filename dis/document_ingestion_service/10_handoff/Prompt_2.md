@@ -6,7 +6,7 @@ I'm resuming work on the Document Ingestion Service (DIS) feature build for
 
 1. Read these three files first, in order:
    - CLAUDE.md (project overview + Agentic Team Management section)
-   - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SE
+   - dis/document_ingestion_service/10_handoff/SE
      SSION_HANDOVER_2026-04-20.md (full handover from last session)
    - C:\Users\gandh\.claude\projects\E--AI-Enabled-HMIS-radhakishan-hospital-prescr
      iption-system-2026\memory\MEMORY.md
@@ -35,7 +35,7 @@ Status: OPEN, awaiting review + Wave 4+ work before merge to main.
 PR currently contains:
 
 - Complete DIS plan (40+ docs in
-  radhakishan_system/docs/feature_plans/document_ingestion_service/)
+  dis/document_ingestion_service/)
 - Wave 1 foundation (DIS-001, 002, 003, 004)
 - Wave 2 core business logic (DIS-020, 021, 022, 023, 024)
 - Wave 3 POC adapters (DIS-050, 051, 053, 054, 057, 058-stub)

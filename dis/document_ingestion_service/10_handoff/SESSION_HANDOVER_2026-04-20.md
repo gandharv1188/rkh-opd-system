@@ -31,15 +31,15 @@
 
 ## §1. Session metadata
 
-| Field                     | Value                                                                                                                                                                                             |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Session ID (UUID)         | `783e7b47-9182-4acd-bfc2-371cb44fe402`                                                                                                                                                            |
-| Raw transcript (JSONL)    | `radhakishan_system/docs/feature_plans/document_ingestion_service/11_session_transcripts/2026-04-20_dis-build-session.jsonl` (~4.5 MB, 2912 lines, continuous — no compaction events in the file) |
-| Orchestrator model        | Claude Opus 4.7 (1M context)                                                                                                                                                                      |
-| Branch of record          | `feat/dis-plan` (pushed to `origin`)                                                                                                                                                              |
-| PR                        | [#1 — docs(dis): plan Document Ingestion Service (DIS)](https://github.com/gandharv1188/rkh-opd-system/pull/1)                                                                                    |
-| Team                      | `dis-squad` (TeamCreate used mid-session; first-half teammates were named subagents, second-half were real teammates)                                                                             |
-| Context usage at handover | ~58% at `/context` check; climbed during handover drafting                                                                                                                                        |
+| Field                     | Value                                                                                                                                                           |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Session ID (UUID)         | `783e7b47-9182-4acd-bfc2-371cb44fe402`                                                                                                                          |
+| Raw transcript (JSONL)    | `dis/document_ingestion_service/11_session_transcripts/2026-04-20_dis-build-session.jsonl` (~4.5 MB, 2912 lines, continuous — no compaction events in the file) |
+| Orchestrator model        | Claude Opus 4.7 (1M context)                                                                                                                                    |
+| Branch of record          | `feat/dis-plan` (pushed to `origin`)                                                                                                                            |
+| PR                        | [#1 — docs(dis): plan Document Ingestion Service (DIS)](https://github.com/gandharv1188/rkh-opd-system/pull/1)                                                  |
+| Team                      | `dis-squad` (TeamCreate used mid-session; first-half teammates were named subagents, second-half were real teammates)                                           |
+| Context usage at handover | ~58% at `/context` check; climbed during handover drafting                                                                                                      |
 
 ---
 
@@ -70,7 +70,7 @@
   done, blocked)
 
 Plus the Chandra vs. Claude Vision comparison + pricing appendix in
-`radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md`
+`dis/document_ingestion_service/10_handoff/document_ocr_flow.md`
 (moved into the handoff folder on 2026-04-20; session 2 findings
 appended as §13 in that file), the sample OCR PDFs
 in `radhakishan_system/data/sample_ocr_pdfs/`, the Levetiracetam dose
@@ -307,7 +307,7 @@ switch (instant revert to legacy) documented in `06_rollout/kill_switch.md`.
 ```bash
 # 0. Orient
 cd "E:/AI-Enabled HMIS/radhakishan_hospital_prescription_system_2026"
-cat radhakishan_system/docs/feature_plans/document_ingestion_service/README.md
+cat dis/document_ingestion_service/README.md
 
 # 1. Git state
 git fetch
@@ -318,12 +318,12 @@ git worktree list        # should be just the main worktree
 gh pr view 1 --json title,state,url
 
 # 2. Read in order
-cat radhakishan_system/docs/feature_plans/document_ingestion_service/00_overview/north_star.md
-cat radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md
-cat radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md   # this file
-cat radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/drift_prevention.md
-cat radhakishan_system/docs/feature_plans/document_ingestion_service/05_testing/verify_format.md
-cat radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/review_gates.md
+cat dis/document_ingestion_service/00_overview/north_star.md
+cat dis/document_ingestion_service/08_team/agentic_dev_protocol.md
+cat dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md   # this file
+cat dis/document_ingestion_service/02_architecture/drift_prevention.md
+cat dis/document_ingestion_service/05_testing/verify_format.md
+cat dis/document_ingestion_service/08_team/review_gates.md
 
 # 3. Install + test (first thing to verify DIS builds clean)
 cd dis

@@ -19,7 +19,7 @@
 - `dis/scripts/__tests__/fixtures/...` — synthetic trees for self-tests.
 - `dis/scripts/README.md` — documents the 5 scripts + self-test.
 - `.github/workflows/dis-ci.yml` — added 5 jobs: `citations`, `files-touched`, `fitness`, `forbidden-tokens`, `drift-controls-selftest`. All required (non-advisory).
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/review_gates.md` — Gate 5 amended with Control 10 (20%/100% sampling paragraph).
+- `dis/document_ingestion_service/08_team/review_gates.md` — Gate 5 amended with Control 10 (20%/100% sampling paragraph).
 
 ## 2. Acceptance status
 
@@ -119,7 +119,7 @@
   - `dis/scripts/port-validator.mjs` (rewritten as wrapper)
   - `dis/scripts/README.md`
   - `.github/workflows/dis-ci.yml`
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/review_gates.md`
+  - `dis/document_ingestion_service/08_team/review_gates.md`
 - Deleted: none.
 
 ## 7. External dependencies introduced
@@ -240,7 +240,7 @@ Expected ≥1 ✓
 ### V10 — `20%` in review_gates.md
 
 ```
-$ grep -c "20%" radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/review_gates.md
+$ grep -c "20%" dis/document_ingestion_service/08_team/review_gates.md
 1
 ```
 

@@ -116,20 +116,17 @@ Files:
 Pseudocode (`check-pr-citations.mjs`):
 
 ```js
-import fs from "node:fs/promises";
-const body = process.env.PR_BODY ?? "";
-const tddPath =
-  "radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/tdd.md";
-const tdd = await fs.readFile(tddPath, "utf8");
-const citations = [
-  ...body.matchAll(/implements TDD §([0-9]+(?:\.[0-9]+)*)/g),
-].map((m) => m[1]);
+import fs from 'node:fs/promises';
+const body = process.env.PR_BODY ?? '';
+const tddPath = 'dis/document_ingestion_service/02_architecture/tdd.md';
+const tdd = await fs.readFile(tddPath, 'utf8');
+const citations = [...body.matchAll(/implements TDD §([0-9]+(?:\.[0-9]+)*)/g)].map((m) => m[1]);
 if (!citations.length) {
-  console.error("No TDD citation in PR body");
+  console.error('No TDD citation in PR body');
   process.exit(1);
 }
 for (const s of citations) {
-  const anchor = new RegExp(`^## §${s.replace(".", "\\.")}\\.`, "m");
+  const anchor = new RegExp(`^## §${s.replace('.', '\\.')}\\.`, 'm');
   if (!anchor.test(tdd)) {
     console.error(`TDD §${s} not found`);
     process.exit(1);
@@ -181,23 +178,19 @@ Files:
 Pseudocode:
 
 ````js
-import fs from "node:fs/promises";
-import yaml from "yaml";
-import { runGit } from "./_git.mjs"; // wraps execFile('git', [...])
+import fs from 'node:fs/promises';
+import yaml from 'yaml';
+import { runGit } from './_git.mjs'; // wraps execFile('git', [...])
 const ticketId = process.env.BRANCH.match(/feat\/dis-(\d+)/)[1];
-const backlog = await fs.readFile(".../07_tickets/backlog.md", "utf8");
-const block = backlog.match(
-  new RegExp(`### DIS-${ticketId}[\\s\\S]*?(?=\\n### DIS-|$)`),
-)[0];
+const backlog = await fs.readFile('.../07_tickets/backlog.md', 'utf8');
+const block = backlog.match(new RegExp(`### DIS-${ticketId}[\\s\\S]*?(?=\\n### DIS-|$)`))[0];
 const fm = yaml.parse(block.match(/```yaml([\s\S]*?)```/)[1]);
-const changed = (
-  await runGit(["diff", "--name-only", "origin/feat/dis-plan...HEAD"])
-)
-  .split("\n")
+const changed = (await runGit(['diff', '--name-only', 'origin/feat/dis-plan...HEAD']))
+  .split('\n')
   .filter(Boolean);
 const extras = changed.filter((f) => !fm.files_allowed.includes(f));
 if (extras.length) {
-  console.error("Out-of-scope files:", extras);
+  console.error('Out-of-scope files:', extras);
   process.exit(1);
 }
 ````
@@ -244,15 +237,13 @@ script walks the tree and applies them.
 Pseudocode (`dis/scripts/fitness.mjs`):
 
 ```js
-import fs from "node:fs/promises";
-import { globby } from "globby";
-const rules = JSON.parse(
-  await fs.readFile("dis/scripts/fitness-rules.json", "utf8"),
-);
-const files = await globby(["dis/src/**/*.{ts,tsx}"]);
+import fs from 'node:fs/promises';
+import { globby } from 'globby';
+const rules = JSON.parse(await fs.readFile('dis/scripts/fitness-rules.json', 'utf8'));
+const files = await globby(['dis/src/**/*.{ts,tsx}']);
 const violations = [];
 for (const f of files) {
-  const src = await fs.readFile(f, "utf8");
+  const src = await fs.readFile(f, 'utf8');
   for (const r of rules) {
     if (!new RegExp(r.appliesTo).test(f)) continue;
     for (const forbid of r.forbidden) {
@@ -263,7 +254,7 @@ for (const f of files) {
   }
 }
 if (violations.length) {
-  console.error(violations.join("\n"));
+  console.error(violations.join('\n'));
   process.exit(1);
 }
 ```
@@ -304,30 +295,30 @@ ticket reference are rejected.
 Pseudocode:
 
 ```js
-import { globby } from "globby";
-import fs from "node:fs/promises";
+import { globby } from 'globby';
+import fs from 'node:fs/promises';
 const FORBIDDEN = [
-  "TODO",
-  "FIXME",
-  "XXX",
-  "HACK",
-  "console\\.log",
-  "debugger",
-  "\\.only\\(",
-  "\\.skip\\(",
-  "xdescribe",
-  "xit\\(",
+  'TODO',
+  'FIXME',
+  'XXX',
+  'HACK',
+  'console\\.log',
+  'debugger',
+  '\\.only\\(',
+  '\\.skip\\(',
+  'xdescribe',
+  'xit\\(',
 ];
 const files = await globby([
-  "dis/src/**/*.{ts,tsx,js,mjs}",
-  "!dis/src/**/*.test.*",
-  "!dis/src/**/__tests__/**",
+  'dis/src/**/*.{ts,tsx,js,mjs}',
+  '!dis/src/**/*.test.*',
+  '!dis/src/**/__tests__/**',
 ]);
 const hits = [];
 for (const f of files) {
-  const src = await fs.readFile(f, "utf8");
+  const src = await fs.readFile(f, 'utf8');
   // Normalize CRLF on Windows so $-anchored patterns don't miss matches.
-  const lines = src.replace(/\r\n/g, "\n").split("\n");
+  const lines = src.replace(/\r\n/g, '\n').split('\n');
   lines.forEach((line, i) => {
     for (const pat of FORBIDDEN) {
       if (new RegExp(pat).test(line) && !/lint-allow:.*DIS-\d+/.test(line)) {
@@ -337,7 +328,7 @@ for (const f of files) {
   });
 }
 if (hits.length) {
-  console.error(hits.join("\n"));
+  console.error(hits.join('\n'));
   process.exit(1);
 }
 ```

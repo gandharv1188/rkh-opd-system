@@ -163,13 +163,13 @@ interface OcrPort {
 
 type OcrInput = {
   pages: Buffer[]; // JPEGs, one per page
-  mediaType: "image/jpeg" | "application/pdf";
-  outputFormats: ("markdown" | "json" | "html")[];
+  mediaType: 'image/jpeg' | 'application/pdf';
+  outputFormats: ('markdown' | 'json' | 'html')[];
   hints?: { languageCodes?: string[]; documentCategory?: string };
 };
 
 type OcrResult = {
-  provider: "datalab" | "claude-vision" | "onprem-chandra";
+  provider: 'datalab' | 'claude-vision' | 'onprem-chandra';
   providerVersion: string;
   rawResponse: unknown; // stored verbatim
   markdown?: string;
@@ -184,19 +184,19 @@ type OcrResult = {
 type Block = {
   id: string;
   blockType:
-    | "text"
-    | "section-header"
-    | "caption"
-    | "table"
-    | "form"
-    | "list-group"
-    | "image"
-    | "figure"
-    | "equation-block"
-    | "code-block"
-    | "page-header"
-    | "page-footer"
-    | "complex-block";
+    | 'text'
+    | 'section-header'
+    | 'caption'
+    | 'table'
+    | 'form'
+    | 'list-group'
+    | 'image'
+    | 'figure'
+    | 'equation-block'
+    | 'code-block'
+    | 'page-header'
+    | 'page-footer'
+    | 'complex-block';
   bbox: { page: number; x: number; y: number; w: number; h: number };
   content: string;
   confidence?: number; // 0..1 where available
@@ -235,13 +235,13 @@ type StructuringInput = {
   documentCategory: string;
   patientContext?: {
     age_years?: number;
-    sex?: "M" | "F";
+    sex?: 'M' | 'F';
     allergies?: string[];
   };
 };
 
 type StructuringResult = {
-  provider: "claude-haiku" | "claude-sonnet" | "claude-opus" | "onprem";
+  provider: 'claude-haiku' | 'claude-sonnet' | 'claude-opus' | 'onprem';
   providerVersion: string;
   rawResponse: unknown;
   structured: ClinicalExtraction; // the JSON schema in §11

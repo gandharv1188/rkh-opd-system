@@ -77,7 +77,7 @@ rollback doesn't restore the schema to the previous state byte-for-byte
 **POC (Supabase):**
 
 ```
-dbmate -d radhakishan_system/docs/feature_plans/document_ingestion_service/03_data/migrations up
+dbmate -d dis/document_ingestion_service/03_data/migrations up
 ```
 
 **Prod (AWS):**

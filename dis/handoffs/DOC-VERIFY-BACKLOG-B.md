@@ -7,7 +7,7 @@ Worktree: `.claude/worktrees/verify-backlog-b`.
 ## Scope delivered
 
 Rewrote Epics C, D, E, F, G, H (DIS-050..DIS-235) in
-`radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+`dis/document_ingestion_service/07_tickets/backlog.md`
 to the Verify-Driven format, and rewrote each held ticket one-liner in
 `integration_hold.md` preserving the `[HELD]` marker and policy text.
 
@@ -28,35 +28,35 @@ per `verify_format.md` §9, and each Epic G ticket carries
 
 ### V1: ticket count in new scope
 
-- Command: `grep -cE "^### DIS-(05|06|07|08|09|11|12|13|14|15|16|17|20|21|22|23)" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -cE "^### DIS-(05|06|07|08|09|11|12|13|14|15|16|17|20|21|22|23)" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: `>= 50`
 - Actual: `137`
 - Status: PASS
 
 ### V2: Files-allowed coverage across full backlog
 
-- Command: `grep -c "Files allowed:" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "Files allowed:" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: `>= 90` (this scope ≥ 50, plus Epic A/B teammate ≥ ~40)
 - Actual: `147`
 - Status: PASS
 
 ### V3: HELD markers (Epic G)
 
-- Command: `grep -c "\[HELD\]" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "\[HELD\]" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: `>= 10`
 - Actual: `10`
 - Status: PASS
 
 ### V4: Integration hold ticket count
 
-- Command: `grep -c "### DIS-" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/integration_hold.md`
+- Command: `grep -c "### DIS-" dis/document_ingestion_service/07_tickets/integration_hold.md`
 - Expected: `>= 10`
 - Actual: `10`
 - Status: PASS
 
 ### V5: INTEGRATION APPROVED references in integration_hold.md
 
-- Command: `grep -c "INTEGRATION APPROVED" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/integration_hold.md`
+- Command: `grep -c "INTEGRATION APPROVED" dis/document_ingestion_service/07_tickets/integration_hold.md`
 - Expected: `>= 1`
 - Actual: `12`
 - Status: PASS

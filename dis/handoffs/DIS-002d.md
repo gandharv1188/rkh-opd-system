@@ -16,12 +16,12 @@ assume exist, moved the Chandra reference doc to its correct home, fixed
 one stale path reference, and backfilled the ticket board per
 `session_handoff.md §8`.
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md` — ADR folder scaffold. 79 lines. Documents the filename convention `ADR-NNN-<kebab-case-title>.md`, the mandatory `Context / Decision / Consequences / Alternatives` shape per `coding_standards.md §15`, supersession discipline (never edit past ADRs — supersede), the index table to be appended as ADRs land, and gate integration (Controls 9, 6d, 5 all reference this folder). Content material originated from the rewound bypass commit `96e7006` (authored 2026-04-20) and was carried through the Wave-A stash.
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md` — CLAR-NNN folder scaffold. 52 lines. Documents the filename convention, required sections (opener/date/blocks/status + ambiguity/options/impact/resolution), index table, negative-guidance ("what a clarification is NOT").
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md` — moved from `radhakishan_system/docs/document_ocr_flow.md` (its prior home). Co-locates with `SESSION_HANDOVER_2026-04-20.md`, `ORIENTATION_REVIEW_2026-04-20.md`, and the Session-2 §13 live-verification findings that append to this same file. Git detects the move as a rename (70% similarity).
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` — §2 stale-path reference updated. Was: `radhakishan_system/docs/document_ocr_flow.md`. Now: `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md` plus a note that §13 session-2 findings were appended on 2026-04-20. 4-line edit.
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` — fully rewritten. Was a 19-line placeholder. Now 237 lines with 16 entries across Waves 1–3 (15 tickets + DIS-002c from 2026-04-21 Wave A). Each entry carries: merge date + author, branch name, commit SHA(s), handoff path, CS coverage, follow-up tickets opened, and the one-line verdict from the handoff `§11 Verdict`. Section order: Wave 1 Epic A (DIS-001..004) → Wave 2 Epic B (DIS-020..024) → Wave-2 meta (DRIFT-PHASE-1) → Wave 3 Epic C (DIS-050/051/053/054/057/058) → Wave-meta docs (DOC-AGENTIC-PROTOCOL, DOC-VERIFY-TEMPLATE, DOC-VERIFY-BACKLOG-A/B, DRIFT-DOC-WRITER) → Session 2026-04-21 (DIS-002c).
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md` — refreshed placeholder. Declares "no tickets in progress at feat/dis-plan HEAD = c11e7fc" with a note on where DIS-002d/e transition markers will land.
+- `dis/document_ingestion_service/02_architecture/adrs/README.md` — ADR folder scaffold. 79 lines. Documents the filename convention `ADR-NNN-<kebab-case-title>.md`, the mandatory `Context / Decision / Consequences / Alternatives` shape per `coding_standards.md §15`, supersession discipline (never edit past ADRs — supersede), the index table to be appended as ADRs land, and gate integration (Controls 9, 6d, 5 all reference this folder). Content material originated from the rewound bypass commit `96e7006` (authored 2026-04-20) and was carried through the Wave-A stash.
+- `dis/document_ingestion_service/07_tickets/clarifications/README.md` — CLAR-NNN folder scaffold. 52 lines. Documents the filename convention, required sections (opener/date/blocks/status + ambiguity/options/impact/resolution), index table, negative-guidance ("what a clarification is NOT").
+- `dis/document_ingestion_service/10_handoff/document_ocr_flow.md` — moved from `radhakishan_system/docs/document_ocr_flow.md` (its prior home). Co-locates with `SESSION_HANDOVER_2026-04-20.md`, `ORIENTATION_REVIEW_2026-04-20.md`, and the Session-2 §13 live-verification findings that append to this same file. Git detects the move as a rename (70% similarity).
+- `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` — §2 stale-path reference updated. Was: `radhakishan_system/docs/document_ocr_flow.md`. Now: `dis/document_ingestion_service/10_handoff/document_ocr_flow.md` plus a note that §13 session-2 findings were appended on 2026-04-20. 4-line edit.
+- `dis/document_ingestion_service/07_tickets/done.md` — fully rewritten. Was a 19-line placeholder. Now 237 lines with 16 entries across Waves 1–3 (15 tickets + DIS-002c from 2026-04-21 Wave A). Each entry carries: merge date + author, branch name, commit SHA(s), handoff path, CS coverage, follow-up tickets opened, and the one-line verdict from the handoff `§11 Verdict`. Section order: Wave 1 Epic A (DIS-001..004) → Wave 2 Epic B (DIS-020..024) → Wave-2 meta (DRIFT-PHASE-1) → Wave 3 Epic C (DIS-050/051/053/054/057/058) → Wave-meta docs (DOC-AGENTIC-PROTOCOL, DOC-VERIFY-TEMPLATE, DOC-VERIFY-BACKLOG-A/B, DRIFT-DOC-WRITER) → Session 2026-04-21 (DIS-002c).
+- `dis/document_ingestion_service/07_tickets/in_progress.md` — refreshed placeholder. Declares "no tickets in progress at feat/dis-plan HEAD = c11e7fc" with a note on where DIS-002d/e transition markers will land.
 - `dis/handoffs/DIS-002d.md` — this file.
 
 ## 2. Acceptance criteria status
@@ -99,15 +99,15 @@ Full actual output pasted in §Verify Report below.
 ## 6. Files touched
 
 - Added:
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md` (79 lines)
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md` (52 lines)
+  - `dis/document_ingestion_service/02_architecture/adrs/README.md` (79 lines)
+  - `dis/document_ingestion_service/07_tickets/clarifications/README.md` (52 lines)
   - `dis/handoffs/DIS-002d.md` (this file)
 - Renamed (git detects as move + content-preserving rename):
-  - `radhakishan_system/docs/document_ocr_flow.md` → `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md`
+  - `radhakishan_system/docs/document_ocr_flow.md` → `dis/document_ingestion_service/10_handoff/document_ocr_flow.md`
 - Modified:
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` (§2 path ref, 4-line edit)
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` (19-line placeholder → 237-line ledger with 16 entries)
-  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md` (placeholder format preserved + snapshot note added)
+  - `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` (§2 path ref, 4-line edit)
+  - `dis/document_ingestion_service/07_tickets/done.md` (19-line placeholder → 237-line ledger with 16 entries)
+  - `dis/document_ingestion_service/07_tickets/in_progress.md` (placeholder format preserved + snapshot note added)
 - Deleted: none (the document_ocr_flow.md old-path deletion is half of a rename, not a standalone delete)
 
 ## 7. External dependencies introduced
@@ -128,14 +128,14 @@ cd "E:/AI-Enabled HMIS/radhakishan_hospital_prescription_system_2026"
 git checkout feat/dis-002d-scaffold-hygiene
 
 # V1..V4 — infrastructure
-test -f radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS
-test -f radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS
-test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS
+test -f dis/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS
+test -f dis/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS
+test -f dis/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS
 test -e radhakishan_system/docs/document_ocr_flow.md || echo MOVED
 
 # V5..V6 — content
-grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md
-grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
+grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md
+grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
 
 # V7 — handoff
 test -f dis/handoffs/DIS-002d.md && echo EXISTS
@@ -164,7 +164,7 @@ All commands run from the repo root on branch `feat/dis-002d-scaffold-hygiene` a
 **When** `test -f` on the path.
 **Then** `EXISTS`.
 
-- Command: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS`
+- Command: `test -f dis/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS`
 - Expected output: `EXISTS`
 - Actual output:
 
@@ -176,7 +176,7 @@ EXISTS
 
 ### VERIFY-2: `clarifications/README.md` exists
 
-- Command: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS`
+- Command: `test -f dis/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS`
 - Expected output: `EXISTS`
 - Actual output:
 
@@ -188,7 +188,7 @@ EXISTS
 
 ### VERIFY-3: `document_ocr_flow.md` at its new `10_handoff/` home
 
-- Command: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS`
+- Command: `test -f dis/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS`
 - Expected output: `EXISTS`
 - Actual output:
 
@@ -212,7 +212,7 @@ MOVED
 
 ### VERIFY-5: `done.md` has ≥15 DIS-0 entries
 
-- Command: `grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md`
+- Command: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md`
 - Expected output: integer ≥ `15`
 - Actual output:
 
@@ -224,7 +224,7 @@ MOVED
 
 ### VERIFY-6: `SESSION_HANDOVER_2026-04-20.md` cites the new path
 
-- Command: `grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md`
+- Command: `grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md`
 - Expected output: integer ≥ `1`
 - Actual output:
 

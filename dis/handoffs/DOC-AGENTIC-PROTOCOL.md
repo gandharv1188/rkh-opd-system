@@ -11,7 +11,7 @@
 
 ## 1. What was built
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md` — 493-line end-to-end agentic product development protocol covering Phases 0–9 plus Cross-cutting (X.1–X.7), with per-row Y/P/N status calibrated against committed DIS artefacts.
+- `dis/document_ingestion_service/08_team/agentic_dev_protocol.md` — 493-line end-to-end agentic product development protocol covering Phases 0–9 plus Cross-cutting (X.1–X.7), with per-row Y/P/N status calibrated against committed DIS artefacts.
 - `dis/handoffs/DOC-AGENTIC-PROTOCOL.md` — this handoff.
 
 ## 2. Acceptance criteria status
@@ -52,7 +52,7 @@ All 7 VERIFY checks pass. Actual command output follows in §6 Verify Report.
 
 ## 5. Follow-ups
 
-- Consider creating an ADR folder (`radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adr/`) with `0001-ports-and-adapters.md` as the first entry — flips 3.9 from **N** toward **P**.
+- Consider creating an ADR folder (`dis/document_ingestion_service/02_architecture/adr/`) with `0001-ports-and-adapters.md` as the first entry — flips 3.9 from **N** toward **P**.
 - Re-score the Status column at the end of each wave; target is monotonic rightward motion (N → P → Y). Add this to the wave-retro template if/when one is written (9.1).
 - The "What's missing most urgently" list can seed a planning epic ("Hygiene E") once Wave 3 completes — it is already prioritised by leverage.
 
@@ -61,25 +61,25 @@ All 7 VERIFY checks pass. Actual command output follows in §6 Verify Report.
 Commands run in the worktree root:
 
 ```
-$ test -f radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md && echo EXISTS
+$ test -f dis/document_ingestion_service/08_team/agentic_dev_protocol.md && echo EXISTS
 EXISTS
 
-$ grep -cE "^## Phase [0-9]+" radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md
+$ grep -cE "^## Phase [0-9]+" dis/document_ingestion_service/08_team/agentic_dev_protocol.md
 10
 
-$ grep -cE "^\| [0-9]+\.[0-9]+ \|" radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md
+$ grep -cE "^\| [0-9]+\.[0-9]+ \|" dis/document_ingestion_service/08_team/agentic_dev_protocol.md
 70
 
-$ grep -cE "^\| X\.[0-9]+ \|" radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md
+$ grep -cE "^\| X\.[0-9]+ \|" dis/document_ingestion_service/08_team/agentic_dev_protocol.md
 7
 
-$ grep -c "## Summary matrix" radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md
+$ grep -c "## Summary matrix" dis/document_ingestion_service/08_team/agentic_dev_protocol.md
 1
 
-$ grep -c "## What's missing most urgently" radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md
+$ grep -c "## What's missing most urgently" dis/document_ingestion_service/08_team/agentic_dev_protocol.md
 1
 
-$ wc -l radhakishan_system/docs/feature_plans/document_ingestion_service/08_team/agentic_dev_protocol.md
+$ wc -l dis/document_ingestion_service/08_team/agentic_dev_protocol.md
 493
 ```
 

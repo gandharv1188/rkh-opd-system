@@ -11,7 +11,7 @@
 
 ## 1. What was built
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — Epic A + Epic B sections rewritten to Verify-Driven format. Each ticket now carries: Tags, Epic, Depends on, TDD ref, CS ref, Files allowed, Out of scope, Description, VERIFY block (4-6 real shell commands with expected output), Status.
+- `dis/document_ingestion_service/07_tickets/backlog.md` — Epic A + Epic B sections rewritten to Verify-Driven format. Each ticket now carries: Tags, Epic, Depends on, TDD ref, CS ref, Files allowed, Out of scope, Description, VERIFY block (4-6 real shell commands with expected output), Status.
 - DIS-001..004 preserved as fully-specified and augmented with `Files allowed` + VERIFY block.
 - DIS-005..015 and DIS-024..045 expanded from one-line placeholders into complete ticket specs.
 - Epic C onwards (DIS-050+) untouched — owned by `doc-verify-backlog-b`.
@@ -48,7 +48,7 @@
 
 ## 4. Files changed
 
-- `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` — Epic A + B rewritten (~1,050 lines added, ~130 removed; net growth reflects format expansion).
+- `dis/document_ingestion_service/07_tickets/backlog.md` — Epic A + B rewritten (~1,050 lines added, ~130 removed; net growth reflects format expansion).
 
 ## 5. Follow-ups / notes for next agent
 
@@ -60,7 +60,7 @@
 
 ### AC-1: Ticket count in Epic A+B scope
 
-- Command: `grep -cE "^### DIS-0[0-4][0-9]" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -cE "^### DIS-0[0-4][0-9]" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: `≥ 40`
 - Actual:
 
@@ -72,7 +72,7 @@
 
 ### AC-2: VERIFY block per ticket
 
-- Command: `grep -cE "^\*\*VERIFY:\*\*" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -cE "^\*\*VERIFY:\*\*" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: `≥ 40`
 - Actual:
 
@@ -84,7 +84,7 @@
 
 ### AC-3: VERIFY-N steps (≥3 per ticket)
 
-- Command: `grep -cE "^- VERIFY-[0-9]+:" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -cE "^- VERIFY-[0-9]+:" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: `≥ 120`
 - Actual:
 
@@ -96,7 +96,7 @@
 
 ### AC-4: Files allowed on every ticket
 
-- Command: `grep -c "Files allowed:" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "Files allowed:" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: `≥ 40`
 - Actual:
 
@@ -108,7 +108,7 @@
 
 ### AC-5: Epic C tickets sanity-check
 
-- Command: `grep -c "### DIS-05" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`
+- Command: `grep -c "### DIS-05" dis/document_ingestion_service/07_tickets/backlog.md`
 - Expected: any non-zero (Epic C still present, owned by other teammate)
 - Actual:
 

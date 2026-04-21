@@ -6,11 +6,11 @@ a single unreviewed OCR-derived row ever reaching the doctor's decision
 surface. See the feature plan for full context, architecture, API, testing
 strategy, and rollout.
 
-- Feature plan root: [`../radhakishan_system/docs/feature_plans/document_ingestion_service/`](../radhakishan_system/docs/feature_plans/document_ingestion_service/)
-- North star: [`../radhakishan_system/docs/feature_plans/document_ingestion_service/00_overview/north_star.md`](../radhakishan_system/docs/feature_plans/document_ingestion_service/00_overview/north_star.md)
-- Architecture (ports & adapters): [`../radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adapters.md`](../radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/adapters.md)
-- Coding standards: [`../radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/coding_standards.md`](../radhakishan_system/docs/feature_plans/document_ingestion_service/02_architecture/coding_standards.md)
-- Ticket backlog: [`../radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md`](../radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md)
+- Feature plan root: [`../dis/document_ingestion_service/`](../dis/document_ingestion_service/)
+- North star: [`../dis/document_ingestion_service/00_overview/north_star.md`](../dis/document_ingestion_service/00_overview/north_star.md)
+- Architecture (ports & adapters): [`../dis/document_ingestion_service/02_architecture/adapters.md`](../dis/document_ingestion_service/02_architecture/adapters.md)
+- Coding standards: [`../dis/document_ingestion_service/02_architecture/coding_standards.md`](../dis/document_ingestion_service/02_architecture/coding_standards.md)
+- Ticket backlog: [`../dis/document_ingestion_service/07_tickets/backlog.md`](../dis/document_ingestion_service/07_tickets/backlog.md)
 
 ## Scripts
 
