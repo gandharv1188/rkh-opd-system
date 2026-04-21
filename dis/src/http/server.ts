@@ -1,7 +1,7 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
-import { correlationId } from './middleware/correlation-id.ts';
-import { registerHealthRoute } from './routes/health.ts';
+import { correlationId } from './middleware/correlation-id.js';
+import { registerHealthRoute } from './routes/health.js';
 
 /**
  * Hono context variable map.
