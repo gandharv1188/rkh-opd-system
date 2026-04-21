@@ -5,10 +5,11 @@
 
 ## Currently in progress
 
-_No tickets in progress at `feat/dis-plan` HEAD = c11e7fc (Session
-2026-04-21 Wave A, between DIS-002d execution and DIS-002e start).
-DIS-002d handoff is written at commit time; this file will be
-refreshed with DIS-002e before that teammate / architect run begins._
+_No tickets in progress at `feat/dis-plan` HEAD (end of session
+2026-04-21, Wave A complete through DIS-002f). Next dispatch is
+Wave B (DIS-021b + DIS-050a) — see
+`10_handoff/SESSION_HANDOVER_2026-04-21.md §6` for the dispatch
+plan under the v3 windows-parallel-agents protocol._
 
 ## Format
 

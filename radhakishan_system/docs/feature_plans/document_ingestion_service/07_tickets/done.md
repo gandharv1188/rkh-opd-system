@@ -302,3 +302,58 @@ reconstructed from `dis/handoffs/*.md`, `SESSION_HANDOVER_2026-04-20.md
   DIS-021b, DIS-050a — all registered in the same PR).
 - Verdict: Complete, ready for review. 8/8 VERIFY PASS (VERIFY-7
   self-corrected mid-execution per handoff §3 D-4).
+
+### DIS-002d — Scaffold hygiene
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002d-scaffold-hygiene (retained locally)
+- Commit: b6855f5; merge commit 4fe738b
+- Handoff: dis/handoffs/DIS-002d.md
+- CS coverage: none (`doc-only`, `process`)
+- Follow-up tickets opened: DIS-002e (populates the adrs/ folder
+  this ticket scaffolded); DIS-002f (owns the 4 untracked
+  `10_handoff/` session artefacts left out of this scope).
+- Verdict: Complete, ready for review. 7/7 VERIFY PASS.
+
+### DIS-002e — ADR pack (ADR-001..007) + kill_switch.md reconciliation
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002e-adr-pack (retained locally)
+- Commit: 6a279da; merge commit fdde485
+- Handoff: dis/handoffs/DIS-002e.md
+- CS coverage: ADR-003 indirectly touches CS-9 (kill-switch
+  semantics); ADR-004 preserves CS-2 under the webhook path.
+- Follow-up tickets opened: DIS-100 implements ADR-003 (Epic D);
+  DIS-050a + DIS-097-extended implement ADR-004 (adapter +
+  receiver endpoint); future ADR-002-self-host-switchover at
+  1000 docs/day threshold; future Sonnet-escalation ticket.
+- Verdict: Complete, ready for review. 9/9 VERIFY PASS (incl.
+  V8: zero "307" in kill_switch.md — reconciliation complete).
+
+### DIS-001b — Merge DEPS_REQUIRED into package.json + fix .ts→.js in src/http/
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-001b-deps-merge (retained locally)
+- Commit: 403b012; merge commit 21a7458
+- Handoff: dis/handoffs/DIS-001b.md
+- CS coverage: none directly (enables DIS-021b which carries CS-1)
+- Follow-up tickets opened: DIS-021b gains scope for
+  (a) tsconfig.json rootDir/include fix (DIS-001 defect surfaced
+  by V7), (b) one-line .ts→.js fix in
+  dis/tests/integration/health.test.ts:2. `sharp ^0.33.0` still
+  deferred to DIS-058b.
+- Verdict: Complete — 7 clean PASS + 1 PASS-with-caveat. V7 tsc
+  errors are TS6059 rootDir (masking the predicted DIS-020/021
+  mismatch); root cause is DIS-001 tsconfig defect folded into
+  DIS-021b.
+
+### DIS-002f — Wave-A session handover + commit 4 untracked session-mgmt docs
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002f-session-handover (retained locally)
+- Commit: (filled at commit time); merge commit: (filled at merge)
+- Handoff: dis/handoffs/DIS-002f.md
+- CS coverage: none (`doc-only`, `process`)
+- Follow-up tickets opened: Wave B — DIS-021b + DIS-050a under v3
+  windows-parallel-agents protocol.
+- Verdict: (filled at commit time after 7/7 VERIFY PASS).
