@@ -4214,6 +4214,42 @@ then implement; see it green.
 
 ---
 
+### DIS-002f — Wave-A session handover + commit 4 untracked session-management docs
+
+- **Tags:** `doc-only`, `process`
+- **Epic:** A (meta / process)
+- **Depends on:** DIS-002c, DIS-002d, DIS-002e, DIS-001b
+- **TDD ref:** none (meta)
+- **CS ref:** none
+- **Files allowed:**
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md (append DIS-002f entry only)
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md (append Wave-A rows)
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/in_progress.md (refresh snapshot)
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md (new)
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md (untracked → tracked)
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md (untracked → tracked)
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md (untracked → tracked)
+  - radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md (untracked → tracked)
+  - dis/handoffs/DIS-002f.md
+- **Out of scope:** any code; any ADR / runbook / spec edit; any Wave-B work.
+
+**Description:**
+End-of-Wave-A session handover. Writes a feature-level session handover at `10_handoff/SESSION_HANDOVER_2026-04-21.md` per `session_handoff.md §4`, summarising what Wave A delivered (DIS-002c, 002d, 002e, 001b) and what remains for Wave B (DIS-021b, 050a). Commits 4 session-management artefacts that accumulated during the session but were left untracked per scope discipline. Backfills `done.md` with the 5 new Wave-A ticket entries.
+
+**VERIFY:**
+
+- VERIFY-1: `test -f radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `grep -c "^## §" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `6`
+- VERIFY-3: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `4`
+- VERIFY-4: `grep -cE "DIS-021b|DIS-050a" radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `2`
+- VERIFY-5: `grep -c "^### DIS-0" radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/done.md` — expect ≥ `20` (16 pre-existing + 5 Wave-A incl. DIS-002f)
+- VERIFY-6: 4 session-mgmt docs tracked — `git ls-files radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/Prompt_2.md | wc -l` — expect `4`
+- VERIFY-7: `test -f dis/handoffs/DIS-002f.md && echo EXISTS` — expect `EXISTS`
+
+**Status:** Ready
+
+---
+
 ### DIS-050a — DatalabChandraAdapter hotfix: wire-contract + webhook path
 
 - **Tags:** `adapter`
