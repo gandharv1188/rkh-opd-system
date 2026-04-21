@@ -10,6 +10,8 @@
  * @see clinical_safety.md CS-2 (raw provider response must be preserved
  *      byte-for-byte for every extraction so a later pipeline run on the same
  *      document is reproducible).
+ * @see 10_handoff/document_ocr_flow.md §13 (DIS-050a wire-contract fixes).
+ * @see adrs/ADR-004-datalab-webhooks-over-polling.md (webhook wiring).
  */
 
 import type {
@@ -26,7 +28,10 @@ const PROVIDER: OcrProvider = 'datalab';
 const SUBMIT_URL = 'https://www.datalab.to/api/v1/convert';
 const API_KEY_NAME = 'DATALAB_API_KEY';
 
-const DEFAULT_MAX_TOTAL_WAIT_MS = 120_000;
+// DIS-050a fix 4: accurate-mode Chandra on multi-page discharge summaries can
+// legitimately exceed 120s; raise budget to 5 minutes. Override per-instance
+// via `maxTotalWaitMs` if a caller needs a tighter budget.
+const DEFAULT_MAX_TOTAL_WAIT_MS = 300_000;
 const BACKOFF_BASE_MS = 1000;
 const BACKOFF_CAP_MS = 10_000;
 
@@ -69,6 +74,25 @@ export class OcrProviderTimeoutError extends Error {
   }
 }
 
+/**
+ * Error thrown when the Datalab API returns HTTP 429. `retryAfterSec` is
+ * parsed from the `Retry-After` response header (default 1 if missing or
+ * unparseable). The adapter does NOT retry internally — the caller is
+ * responsible for retry per error_model.md §Retry policy.
+ */
+export class OcrProviderRateLimitedError extends Error {
+  public readonly code = 'RATE_LIMITED' as const;
+  public readonly provider: OcrProvider;
+  public readonly retryAfterSec: number;
+
+  constructor(message: string, opts: { provider: OcrProvider; retryAfterSec: number }) {
+    super(message);
+    this.name = 'OcrProviderRateLimitedError';
+    this.provider = opts.provider;
+    this.retryAfterSec = opts.retryAfterSec;
+  }
+}
+
 type SleepFn = (ms: number) => Promise<void>;
 type NowFn = () => number;
 
@@ -79,6 +103,20 @@ export interface DatalabChandraAdapterOptions {
   readonly now?: NowFn;
   readonly maxTotalWaitMs?: number;
   readonly submitUrl?: string;
+  /**
+   * When true, the adapter sends `skip_cache=true` on submit so Datalab
+   * returns a fresh response rather than a cached one. Useful for the CS-2
+   * fresh-response audit on retries. Default: false.
+   */
+  readonly skipCache?: boolean;
+  /**
+   * When provided, forwarded as `webhook_url` on submit per
+   * ADR-004. The adapter still polls as a fallback because the webhook
+   * receiver endpoint ships under Epic-D (DIS-097-extended). When active,
+   * a debug line is emitted so operators can correlate provider-side
+   * webhook-mode behavior against the adapter's polling trace.
+   */
+  readonly webhookUrl?: string;
 }
 
 interface SubmitResponse {
@@ -101,6 +139,8 @@ export class DatalabChandraAdapter implements OcrPort {
   private readonly now: NowFn;
   private readonly maxTotalWaitMs: number;
   private readonly submitUrl: string;
+  private readonly skipCache: boolean;
+  private readonly webhookUrl: string | undefined;
 
   constructor(opts: DatalabChandraAdapterOptions) {
     this.secretsPort = opts.secretsPort;
@@ -109,6 +149,8 @@ export class DatalabChandraAdapter implements OcrPort {
     this.now = opts.now ?? Date.now;
     this.maxTotalWaitMs = opts.maxTotalWaitMs ?? DEFAULT_MAX_TOTAL_WAIT_MS;
     this.submitUrl = opts.submitUrl ?? SUBMIT_URL;
+    this.skipCache = opts.skipCache ?? false;
+    this.webhookUrl = opts.webhookUrl;
   }
 
   async extract(input: OcrInput): Promise<OcrResult> {
@@ -116,12 +158,22 @@ export class DatalabChandraAdapter implements OcrPort {
     const startedAt = this.now();
 
     const form = this.buildForm(input);
+    if (this.webhookUrl) {
+      // POC-level debug signal; real pino wiring is deferred to DIS-008.
+      // eslint-disable-next-line no-console
+      console.error(
+        `[datalab] webhook mode active (webhook_url configured); adapter still polls as fallback per ADR-004`,
+      );
+    }
     const submitResp = await this.fetchImpl(this.submitUrl, {
       method: 'POST',
       headers: { 'X-Api-Key': apiKey },
       body: form,
     });
 
+    if (submitResp.status === 429) {
+      throw this.rateLimitedFrom(submitResp, 'submit');
+    }
     if (!submitResp.ok) {
       const body = await this.safeJson(submitResp);
       throw new OcrProviderError(`Datalab submit failed with HTTP ${submitResp.status}`, {
@@ -145,12 +197,21 @@ export class DatalabChandraAdapter implements OcrPort {
       const blob = new Blob([new Uint8Array(buf)], { type: input.mediaType });
       form.append('file', blob, `page-${idx + 1}.${ext}`);
     });
-    for (const fmt of input.outputFormats) {
-      form.append('output_format', fmt);
-    }
+    // DIS-050a fix 1: live Datalab /api/v1/convert expects a single
+    // `output_format` field, comma-separated — not multiple appends.
+    form.append('output_format', input.outputFormats.join(','));
     form.append('mode', 'accurate');
-    if (input.hints?.languageCodes?.length) {
-      form.append('langs', input.hints.languageCodes.join(','));
+    // NOTE (2026-04-21 DIS-050a): Datalab /api/v1/convert has no
+    // language-hint field (verified against live docs on 2026-04-20;
+    // see dis/document_ingestion_service/10_handoff/document_ocr_flow.md §13.2.2).
+    // hints.languageCodes stays on the OcrPort contract because
+    // other OCR providers (e.g. on-prem Chandra) may support it,
+    // but this adapter does not forward it.
+    if (this.skipCache) {
+      form.append('skip_cache', 'true');
+    }
+    if (this.webhookUrl) {
+      form.append('webhook_url', this.webhookUrl);
     }
     return form;
   }
@@ -184,6 +245,9 @@ export class DatalabChandraAdapter implements OcrPort {
         method: 'GET',
         headers: { 'X-Api-Key': apiKey },
       });
+      if (resp.status === 429) {
+        throw this.rateLimitedFrom(resp, 'poll');
+      }
       if (!resp.ok) {
         const body = await this.safeJson(resp);
         throw new OcrProviderError(`Datalab poll failed with HTTP ${resp.status}`, {
@@ -201,6 +265,19 @@ export class DatalabChandraAdapter implements OcrPort {
         });
       }
     }
+  }
+
+  private rateLimitedFrom(resp: Response, stage: 'submit' | 'poll'): OcrProviderRateLimitedError {
+    const header =
+      typeof (resp.headers as unknown as { get?: (k: string) => string | null })?.get === 'function'
+        ? resp.headers.get('Retry-After')
+        : null;
+    const parsed = header !== null && header !== undefined ? parseInt(header, 10) : NaN;
+    const retryAfterSec = Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+    return new OcrProviderRateLimitedError(
+      `Datalab ${stage} rate-limited (HTTP 429); retry after ${retryAfterSec}s`,
+      { provider: PROVIDER, retryAfterSec },
+    );
   }
 
   private toResult(raw: SubmitResponse, latencyMs: number): OcrResult {
