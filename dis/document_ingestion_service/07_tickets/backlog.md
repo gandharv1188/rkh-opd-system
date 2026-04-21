@@ -4392,6 +4392,36 @@ After DIS-021d lands, `dis/tsconfig.json` `exclude` list MUST contain ONLY `node
 
 ---
 
+### DIS-002j — Wave-B session-handover + done.md backfill (Wave-B closeout)
+
+- **Tags:** `doc-only`, `process`
+- **Epic:** A (meta / process)
+- **Depends on:** DIS-050a, DIS-021b, DIS-021c, DIS-021d (all Wave-B tickets merged)
+- **TDD ref:** none (meta)
+- **CS ref:** none
+- **Files allowed:**
+  - dis/document_ingestion_service/07_tickets/backlog.md (append DIS-002j entry only)
+  - dis/document_ingestion_service/07_tickets/done.md (append Wave-B rows)
+  - dis/document_ingestion_service/07_tickets/in_progress.md (refresh snapshot)
+  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md (new)
+  - dis/handoffs/DIS-002j.md
+- **Out of scope:** any code; any ADR / runbook / spec edit; any Wave-C work.
+
+**Description:**
+End-of-Wave-B session handover mirroring DIS-002f's pattern for Wave A. Writes `10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md` per `session_handoff.md §4` covering DIS-050a (merged at ba5f944), DIS-021b (merged at 4e23cb2 with CS-1 sign-off), DIS-021c (merged at aef10b7 — regression-cleanup scope-split), DIS-021d (merged at f8cbc34 with CS-1-indirect sign-off — closes DIS-021b DatabasePort completion gap). Backfills `done.md` with these 4 rows plus DIS-002j itself. Stale Wave-A branch cleanup (item 2) already done pre-ticket.
+
+**VERIFY:**
+
+- VERIFY-1: `test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md` — expect ≥ `6`
+- VERIFY-3: `grep -cE "DIS-050a|DIS-021b|DIS-021c|DIS-021d" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md` — expect ≥ `4`
+- VERIFY-4: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md` — expect ≥ `25` (21 pre + 4 Wave-B + 1 DIS-002j = 26 expected)
+- VERIFY-5: `test -f dis/handoffs/DIS-002j.md && echo EXISTS` — expect `EXISTS`
+
+**Status:** Ready
+
+---
+
 ### DIS-050a — DatalabChandraAdapter hotfix: wire-contract + webhook path
 
 - **Tags:** `adapter`

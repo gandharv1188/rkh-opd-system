@@ -350,10 +350,138 @@ reconstructed from `dis/handoffs/*.md`, `SESSION_HANDOVER_2026-04-20.md
 ### DIS-002f — Wave-A session handover + commit 4 untracked session-mgmt docs
 
 - Merged: 2026-04-21 by orchestrator into feat/dis-plan
-- Branch: feat/dis-002f-session-handover (retained locally)
-- Commit: (filled at commit time); merge commit: (filled at merge)
+- Branch: feat/dis-002f-session-handover (deleted post-Wave-A)
+- Commit: 2b38211; merge commit c36cf07
 - Handoff: dis/handoffs/DIS-002f.md
 - CS coverage: none (`doc-only`, `process`)
 - Follow-up tickets opened: Wave B — DIS-021b + DIS-050a under v3
   windows-parallel-agents protocol.
-- Verdict: (filled at commit time after 7/7 VERIFY PASS).
+- Verdict: Complete. 7/7 VERIFY PASS.
+
+### DIS-002g — Relocate plan folder into `dis/document_ingestion_service/`
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002g-plan-relocate (deleted post-Wave-A)
+- Commit: 3ccb9da; merge commit ca33d7d
+- Handoff: dis/handoffs/DIS-002g.md
+- CS coverage: none (`doc-only`, `process`)
+- Follow-up tickets opened: DIS-002h (apply Prettier drift + fix
+  stale absolute-path refs across 25 files).
+- Verdict: Complete. 10/10 VERIFY PASS. 66 files renamed with
+  git blame preserved; 3 CI files updated to new path;
+  `radhakishan_system/docs/feature_plans/` empty-parent removed.
+
+### DIS-002h — Apply Prettier drift + rewrite stale plan-paths
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002h-stale-paths (deleted post-Wave-A)
+- Commit: 3268a1e; merge commit 082600f
+- Handoff: dis/handoffs/DIS-002h.md
+- CS coverage: none (`doc-only`, `process`)
+- Follow-up tickets opened: none at merge.
+- Verdict: Complete. 5/5 VERIFY PASS. sed-pass across 25 files
+  - 6 Prettier reformats applied; JSONL transcript preserved
+    intact as immutable historical record.
+
+### DIS-002i — Widen DIS-021b files_allowed for DIS-001b-surfaced bugs
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002i-widen-021b (deleted post-Wave-A)
+- Commit: 6fb846c; merge commit 2b7b100
+- Handoff: dis/handoffs/DIS-002i.md
+- CS coverage: none (`doc-only`, `process`)
+- Follow-up tickets opened: none (Wave-B dispatch preparation
+  complete).
+- Verdict: Complete. 3/3 VERIFY PASS. Pre-Wave-B housekeeping —
+  added tsconfig.json + health.test.ts to DIS-021b files_allowed.
+
+---
+
+## Session 2026-04-21 — Wave B
+
+### DIS-050a — DatalabChandraAdapter hotfix: wire-contract + webhook path
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-050a (deleted post-merge)
+- Commits: 1b1d486 (Gate 2 test-first), 239639f (impl); merge commit ba5f944
+- Handoff: dis/handoffs/DIS-050a.md
+- CS coverage: none (CS-2 raw-response byte-identical preservation
+  unchanged — wire-contract fixes don't affect `rawResponse`)
+- Follow-up tickets opened: DIS-097-extended in Epic D will
+  implement the webhook receiver endpoint ADR-004 designates.
+- Verdict: Complete. 13/13 unit tests passing. 6 wire-contract
+  bugs fixed + webhook_url wiring per ADR-004. Teammate
+  dev-050a-datalab-hotfix delivered with Gate 2 discipline
+  (test-first + impl as separate commits).
+
+### DIS-021b — Reconcile state-machine ↔ orchestrator + extract named DatabasePort methods (CS-1)
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan **after
+  CLINICAL APPROVED sign-off** (Gate 6a satisfied).
+- Branch: feat/dis-021b (deleted post-merge)
+- Commit: 7331260; merge commit 4e23cb2
+- Handoff: dis/handoffs/DIS-021b.md
+- CS coverage: **CS-1 (no bypass of verification)** — pipeline
+  transitions now route through `transition()` so invalid
+  transitions throw `InvalidStateTransitionError` on the happy
+  path too, not just approve/reject.
+- Follow-up tickets opened: DIS-021c (regression-cleanup); DIS-021d
+  (close DatabasePort completion gap — 17 TS errors surfaced when
+  DIS-021b's aggressive tsconfig excludes were unwound).
+- Verdict: Complete with known scope-completion gap. 10/10 VERIFY
+  PASS at merge time; gap surfaced post-merge via full-suite
+  sanity and resolved in DIS-021c + DIS-021d.
+
+### DIS-021c — Lock vitest discovery + cwd-independent DOCS (Fix 1 deferred to DIS-021d)
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-021c (deleted post-merge)
+- Commit: ddfb95f; merge commit aef10b7
+- Handoff: dis/handoffs/DIS-021c.md
+- CS coverage: none
+- Follow-up tickets opened: DIS-021d (Fix 1 — restore full
+  typecheck surface by propagating DatabasePort contract to
+  adapter + fake + audit-log test-fixture instead of excluding
+  them).
+- Verdict: Complete — 2-of-3 fixes landed. Teammate
+  dev-021c-regression-fix demonstrated exemplary scope
+  discipline by STOP-and-reporting when Fix 1 revealed 17 TS
+  errors in files outside DIS-021c's files_allowed. Orchestrator
+  approved Option B (split into DIS-021d). 7/7 re-scoped
+  VERIFY PASS.
+
+### DIS-021d — Restore full typecheck surface (CS-1 indirect)
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan **after
+  CLINICAL APPROVED sign-off** (Gate 6a for CS-1 indirect
+  satisfied).
+- Branch: feat/dis-021d (deleted post-merge)
+- Commits: 0f67d83 (Gate 2 failing-test: tsconfig reset shows
+  17 errors); aa3f363 (impl); merge commit f8cbc34
+- Handoff: dis/handoffs/DIS-021d.md
+- CS coverage: **CS-1 indirect** — DatabasePort is the sole
+  persistence path for orchestrator state transitions; adapter
+  contract alignment guarantees verified writes reach clinical
+  tables.
+- Follow-up tickets opened: none at merge. All 17 TS errors
+  cleared; tsconfig exclude list now minimal
+  (`["node_modules", "dist"]`).
+- Verdict: Complete. 10/10 VERIFY PASS. Full typecheck surface
+  restored; 4 named DatabasePort methods implemented on the
+  real Supabase Postgres adapter + fake adapter + audit-log
+  test-fixture FakeDatabase. Vitest 12 files / 124 tests
+  unchanged. fitness 0 violations unchanged. Teammate
+  dev-021d-typecheck-restore delivered with Gate 2 test-first
+  discipline.
+
+### DIS-002j — Wave-B session-handover + done.md backfill
+
+- Merged: 2026-04-21 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002j-waveb-closeout (retained through commit)
+- Commit: (filled at commit time); merge commit: (filled at merge)
+- Handoff: dis/handoffs/DIS-002j.md
+- CS coverage: none (`doc-only`, `process`)
+- Follow-up tickets opened: Wave C — **HELD on user direction**
+  ("hold off before Wave C"). Next dispatch awaits explicit
+  user go-ahead.
+- Verdict: (filled at commit time after 5/5 VERIFY PASS).
