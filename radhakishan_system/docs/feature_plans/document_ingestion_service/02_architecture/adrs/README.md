@@ -49,12 +49,18 @@ be able to tell a rejected option from an unconsidered one.
 
 ## Index
 
-When `ADR-001` lands, list it here with a one-line hook. Append new
-rows in order; do not edit past rows except to mark them superseded.
+Append new rows in order; do not edit past rows except to mark them
+superseded.
 
-| ID  | Title         | Status | Supersedes | Superseded by |
-| --- | ------------- | ------ | ---------- | ------------- |
-| —   | (no ADRs yet) | —      | —          | —             |
+| ID      | Title                                                            | Status   | Supersedes | Superseded by |
+| ------- | ---------------------------------------------------------------- | -------- | ---------- | ------------- |
+| ADR-001 | Hexagonal Ports & Adapters architecture                          | Accepted | —          | —             |
+| ADR-002 | Datalab hosted Chandra at POC; self-host at 1000 docs/day        | Accepted | —          | —             |
+| ADR-003 | Kill switch returns HTTP 503 UNAVAILABLE (not 307 proxy)         | Accepted | —          | —             |
+| ADR-004 | Datalab webhooks over polling for OCR completion                 | Accepted | —          | —             |
+| ADR-005 | Hono as the HTTP framework                                       | Accepted | —          | —             |
+| ADR-006 | `postgres` (porsager) as the Postgres driver                     | Accepted | —          | —             |
+| ADR-007 | Claude Haiku default structuring LLM; Sonnet reserved escalation | Accepted | —          | —             |
 
 ## Gate integration
 

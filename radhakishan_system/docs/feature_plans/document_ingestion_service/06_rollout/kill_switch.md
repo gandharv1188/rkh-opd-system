@@ -15,9 +15,14 @@
 When `DIS_KILL_SWITCH=true`:
 
 1. Edge Function `dis-ingest` reads the flag as the first instruction
-   and returns an HTTP-307 proxy to the legacy `process-document`
-   handler with the original request body unchanged. The browser sees
-   the legacy response. No DIS extraction row is created.
+   and returns **HTTP 503 `UNAVAILABLE`** with a `Retry-After` header
+   and the canonical error envelope from `04_api/error_model.md`
+   (code `UNAVAILABLE`, `retryable: true`). No DIS extraction row is
+   created. The browser / caller is responsible for falling back to
+   the legacy `process-document` flow — DIS does not itself proxy.
+   See `02_architecture/adrs/ADR-003-kill-switch-returns-503.md` for
+   the decision record that reconciled this with
+   `rollout_plan.md` + `feature_flags.md` + backlog DIS-100.
 2. `dis-verify` (approve/reject) continues to operate on already-
    created extractions. This is intentional: nurses can still verify
    or reject anything already in the queue.
