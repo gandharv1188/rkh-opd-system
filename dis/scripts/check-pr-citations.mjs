@@ -18,9 +18,13 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const DOCS = resolve('dis/document_ingestion_service');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+// scripts live at <repo>/dis/scripts/; docs live at <repo>/dis/document_ingestion_service/
+const DOCS = resolve(__dirname, '..', 'document_ingestion_service');
 const SOURCES = {
   tdd: `${DOCS}/02_architecture/tdd.md`,
   cs: `${DOCS}/01_product/clinical_safety.md`,
