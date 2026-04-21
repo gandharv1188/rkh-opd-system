@@ -4342,6 +4342,56 @@ Gate 2 test-first workflow is light here because the regression **is** the faili
 
 ---
 
+### DIS-021d — Restore full typecheck surface: DatabasePort contract propagation + .js extensions + Node-24 Buffer/BodyInit + Hono AppVariables
+
+- **Tags:** `core`, `adapter`, `infra`, `clinical-safety` (CS-1 indirect — DatabasePort contract alignment affects orchestrator↔adapter integrity)
+- **Epic:** B (DIS-021b completion-gap closeout)
+- **Depends on:** DIS-021b, DIS-021c
+- **TDD ref:** §1 (architectural style), §4 (state machine wiring), §6 (optimistic lock — touches DatabasePort surface), §14 (observability — typecheck is part of it)
+- **CS ref:** CS-1 (indirect — the DatabasePort methods are the only path by which orchestrator persists state transitions; if adapters don't implement them correctly the happy path bypasses verification). Gate 6a clinical sign-off required before merge.
+- **Files allowed:**
+  - dis/tsconfig.json (target: remove all source/test excludes; keep only node_modules + dist)
+  - dis/src/ports/index.ts (add `.js` extensions to 7 re-exports per NodeNext)
+  - dis/src/ports/database.ts (cross-check DatabasePort contract — should already be correct post DIS-021b)
+  - dis/src/adapters/database/supabase-postgres.ts (implement 4 new DatabasePort methods)
+  - dis/src/adapters/database/**fakes**/supabase-postgres.ts (implement the 4 methods in the fake)
+  - dis/src/adapters/storage/supabase-storage.ts (Buffer → Uint8Array at fetch boundary, or narrow cast)
+  - dis/src/adapters/storage/**fakes**/supabase-storage.ts (same)
+  - dis/src/http/server.ts (Hono AppVariables generics fix)
+  - dis/tests/unit/audit-log.test.ts (FakeDatabase update + inline test-DB update)
+  - dis/handoffs/DIS-021d.md
+- **Out of scope:** any behavioural change to the orchestrator or state machine or promotion or confidence policy; no new tests (update existing to compile); no adapter interface change beyond implementing the 4 new DatabasePort methods (the contract is already set by DIS-021b in `dis/src/ports/database.ts`).
+
+**Description:**
+Close the completion gap DIS-021b left on the `DatabasePort` contract: the orchestrator got the new named methods (`findExtractionById`, `findExtractionByIdempotencyKey`, `updateExtractionStatus`, `insertExtraction`) but the adapter and fake adapter and audit-log test-fixture FakeDatabase never caught up. DIS-021b masked this by excluding those files from typecheck. DIS-021d restores full typecheck surface by **implementing the missing contract, not excluding the files**.
+
+Additional companion fixes from the DIS-021c handoff inventory:
+
+- 7 NodeNext `.js` extensions in `src/ports/index.ts` re-exports (pure mechanical).
+- Node-24 `@types/node` narrowed `BodyInit` to exclude `Buffer<ArrayBufferLike>` in `supabase-storage.ts` fetch calls — convert to `Uint8Array` or add narrow cast.
+- `src/http/server.ts` Hono `AppVariables` context generics.
+
+After DIS-021d lands, `dis/tsconfig.json` `exclude` list MUST contain ONLY `node_modules` + `dist`. No source-file or test-file exclusions.
+
+**Gate 2 test-first:** running `npx tsc --noEmit` against the target tsconfig is the failing-test analogue. Commit it first with the exclude removal + expect red (17 errors). Then apply fixes incrementally and land when tsc exits 0.
+
+**VERIFY:**
+
+- VERIFY-1: `cd dis && npx tsc --noEmit` — exit 0 (all 17 errors resolved)
+- VERIFY-2: `grep -c '"exclude"' dis/tsconfig.json` — expect `1`
+- VERIFY-3: `grep -cE '"src/adapters|"src/http|"src/ports/index|"tests/unit/adapters|"tests/unit/audit-log|"tests/integration/health' dis/tsconfig.json` — expect `0`
+- VERIFY-4: `cd dis && npx vitest run 2>&1 | tail -5` — all 12 test files pass, 124 tests (same count as DIS-021c post-merge)
+- VERIFY-5: `grep -c "findExtractionById\|findExtractionByIdempotencyKey\|updateExtractionStatus\|insertExtraction" dis/src/adapters/database/supabase-postgres.ts` — expect ≥ `4`
+- VERIFY-6: `grep -c "findExtractionById\|findExtractionByIdempotencyKey\|updateExtractionStatus\|insertExtraction" dis/src/adapters/database/__fakes__/supabase-postgres.ts` — expect ≥ `4`
+- VERIFY-7: `grep -cE "^export.*from '\\./" dis/src/ports/index.ts` — expect 8 (8 re-exports all with explicit relative path); and `grep -cE "from '\\./[a-z-]+'" dis/src/ports/index.ts` (no-extension imports) — expect `0`
+- VERIFY-8: `node dis/scripts/fitness.mjs` — 0 violations, unchanged
+- VERIFY-9: `node dis/scripts/__tests__/drift-controls.test.mjs` — 5/5 pass, unchanged
+- VERIFY-10: `test -f dis/handoffs/DIS-021d.md && echo EXISTS`
+
+**Status:** Ready — **Gate 6a clinical sign-off required before merge (CS-1 indirect).**
+
+---
+
 ### DIS-050a — DatalabChandraAdapter hotfix: wire-contract + webhook path
 
 - **Tags:** `adapter`
