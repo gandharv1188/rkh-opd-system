@@ -5,7 +5,7 @@ on:
     paths:
       - "dis/**"
       - ".github/workflows/dis-ci.yml"
-      - "radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/**"
+      - "dis/document_ingestion_service/07_tickets/**"
   push:
     branches:
       - "feat/dis-*"

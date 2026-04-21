@@ -4250,6 +4250,53 @@ End-of-Wave-A session handover. Writes a feature-level session handover at `10_h
 
 ---
 
+### DIS-002g — Relocate plan folder into `dis/document_ingestion_service/` (no rename)
+
+- **Tags:** `doc-only`, `process`
+- **Epic:** A (meta / process)
+- **Depends on:** DIS-002f (so the session-1 follow-up artefacts are all tracked before the mass move)
+- **TDD ref:** none (meta)
+- **CS ref:** none
+- **Files allowed:** every path under the old location, the moved paths under the new location, the 3 CI files that hardcode the path, and backlog/done/in-progress. Explicit list:
+  - `radhakishan_system/docs/feature_plans/document_ingestion_service/**` (move source)
+  - `dis/document_ingestion_service/**` (move target — **same folder name**, only the parent changes)
+  - `dis/scripts/check-pr-citations.mjs` (update DOCS constant)
+  - `dis/scripts/check-files-touched.mjs` (update DOCS + TICKET_SOURCES)
+  - `.github/workflows/dis-ci.yml` (update paths filter)
+  - `radhakishan_system/docs/feature_plans/document_ingestion_service/07_tickets/backlog.md` + `done.md` + `in_progress.md` (mention the new path in the new Wave-A entries)
+  - `dis/handoffs/DIS-002g.md`
+- **Out of scope:** any content edit of the moved docs beyond path references; any ADR-body edit; any code outside the 3 CI scripts; any Wave-B work; no folder rename (per user direction — keep `document_ingestion_service` as the leaf name, only the parent changes from `radhakishan_system/docs/feature_plans/` to `dis/`).
+
+**Description:**
+Mass `git mv` of the entire plan folder from
+`radhakishan_system/docs/feature_plans/document_ingestion_service/`
+to `dis/document_ingestion_service/`. The leaf folder name stays
+`document_ingestion_service` (per user direction — do not rename,
+only correct the path). Co-locates the plan with the code it
+governs. Updates the 3 CI scripts that hardcode the old path
+(`check-pr-citations.mjs` `DOCS`; `check-files-touched.mjs`
+`DOCS` + `TICKET_SOURCES`; `.github/workflows/dis-ci.yml` paths
+filter). Leaves every **content** unchanged. Internal
+cross-references inside the plan docs (all relative) continue to
+resolve because the subtree structure is preserved.
+
+**VERIFY:**
+
+- VERIFY-1: `test -d dis/document_ingestion_service && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `test -e radhakishan_system/docs/feature_plans/document_ingestion_service || echo GONE` — expect `GONE`
+- VERIFY-3: `test -e radhakishan_system/docs/feature_plans || echo GONE` — expect `GONE` (the old parent folder is empty after the move — `git mv` removes it)
+- VERIFY-4: `find dis/document_ingestion_service -type f -name "*.md" | wc -l` — expect ≥ `50`
+- VERIFY-5: `test -d dis/document_ingestion_service/02_architecture/adrs && test -d dis/document_ingestion_service/07_tickets/clarifications && echo BOTH` — expect `BOTH`
+- VERIFY-6: `grep -r "radhakishan_system/docs/feature_plans/document_ingestion_service" dis/scripts .github/workflows | wc -l` — expect `0`
+- VERIFY-7: `node dis/scripts/check-pr-citations.mjs --body "Implements TDD §4 and CS-1"` — expect exit 0 with `all 2 citation(s) resolved.`
+- VERIFY-8: `node dis/scripts/fitness.mjs; echo EXIT=$?` — expect `EXIT=1` with exactly 5 violations (fitness scans only `dis/src/**` so the move does not affect it)
+- VERIFY-9: `node dis/scripts/__tests__/drift-controls.test.mjs` — expect `5/5 tests passed.`
+- VERIFY-10: `test -f dis/handoffs/DIS-002g.md && echo EXISTS` — expect `EXISTS`
+
+**Status:** Ready
+
+---
+
 ### DIS-050a — DatalabChandraAdapter hotfix: wire-contract + webhook path
 
 - **Tags:** `adapter`

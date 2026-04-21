@@ -20,7 +20,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
-const DOCS = resolve('radhakishan_system/docs/feature_plans/document_ingestion_service');
+const DOCS = resolve('dis/document_ingestion_service');
 const TICKET_SOURCES = [
   `${DOCS}/07_tickets/backlog.md`,
   `${DOCS}/07_tickets/integration_hold.md`,
