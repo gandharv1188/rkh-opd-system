@@ -86,8 +86,8 @@ of `feat/dis-002j-waveb-closeout`; no teammate worktree).
 
 Filled in post-merge.
 
-- Commit SHA: _TBD_
-- Merge SHA (into `feat/dis-plan`): _TBD_
+- Commit SHA: `ac39b91`
+- Merge SHA (into `feat/dis-plan`): `11e9c1a`
 
 ## 11. Sign-off
 

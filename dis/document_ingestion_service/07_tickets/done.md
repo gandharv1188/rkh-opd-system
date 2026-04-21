@@ -478,10 +478,10 @@ reconstructed from `dis/handoffs/*.md`, `SESSION_HANDOVER_2026-04-20.md
 
 - Merged: 2026-04-21 by orchestrator into feat/dis-plan
 - Branch: feat/dis-002j-waveb-closeout (retained through commit)
-- Commit: (filled at commit time); merge commit: (filled at merge)
+- Commit: ac39b91; merge commit: 11e9c1a
 - Handoff: dis/handoffs/DIS-002j.md
 - CS coverage: none (`doc-only`, `process`)
 - Follow-up tickets opened: Wave C — **HELD on user direction**
   ("hold off before Wave C"). Next dispatch awaits explicit
   user go-ahead.
-- Verdict: (filled at commit time after 5/5 VERIFY PASS).
+- Verdict: WORKTREE RESPECTED; 5/5 VERIFY PASS.
