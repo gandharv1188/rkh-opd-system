@@ -70,7 +70,12 @@ export class SupabaseStorageAdapter implements StoragePort {
         headers[`x-metadata-${k.toLowerCase()}`] = v;
       }
     }
-    const response = await this.fetchImpl(url, { method: 'POST', headers, body: input.body });
+    const body = new Uint8Array(
+      input.body.buffer,
+      input.body.byteOffset,
+      input.body.byteLength,
+    ) as unknown as BodyInit;
+    const response = await this.fetchImpl(url, { method: 'POST', headers, body });
     await ensureOk(response, input.key);
     const etag = stripQuotes(response.headers.get('etag') ?? '');
     return { kind: 'put', etag };

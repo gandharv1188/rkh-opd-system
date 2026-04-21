@@ -21,7 +21,8 @@
  * @see coding_standards.md §6
  */
 
-import type { DatabasePort } from '../../ports/database.js';
+import type { DatabasePort, ExtractionRow, InsertExtractionInput } from '../../ports/database.js';
+import type { State } from '../../core/state-machine.js';
 
 /**
  * Minimal structural type for the `postgres` client we depend on. We define
@@ -136,6 +137,57 @@ export class SupabasePostgresAdapter implements DatabasePort {
         wrapError(err, `setSessionVars(${key})`);
       }
     }
+  }
+
+  async findExtractionById(id: string): Promise<ExtractionRow | null> {
+    const rows = await this.runQuery<ExtractionRow>(
+      this.sql,
+      'SELECT id, patient_id, status, version, idempotency_key, payload_hash, parent_extraction_id FROM extractions WHERE id = $1',
+      [id],
+    );
+    return rows[0] ?? null;
+  }
+
+  async findExtractionByIdempotencyKey(key: string): Promise<ExtractionRow | null> {
+    const rows = await this.runQuery<ExtractionRow>(
+      this.sql,
+      'SELECT id, patient_id, status, version, idempotency_key, payload_hash, parent_extraction_id FROM extractions WHERE idempotency_key = $1',
+      [key],
+    );
+    return rows[0] ?? null;
+  }
+
+  async updateExtractionStatus(
+    id: string,
+    expectedVersion: number,
+    newStatus: State,
+  ): Promise<ExtractionRow | null> {
+    const rows = await this.runQuery<ExtractionRow>(
+      this.sql,
+      'UPDATE extractions SET status = $1, version = version + 1 WHERE id = $2 AND version = $3 RETURNING id, patient_id, status, version, idempotency_key, payload_hash, parent_extraction_id',
+      [newStatus, id, expectedVersion],
+    );
+    return rows[0] ?? null;
+  }
+
+  async insertExtraction(input: InsertExtractionInput): Promise<ExtractionRow> {
+    const rows = await this.runQuery<ExtractionRow>(
+      this.sql,
+      'INSERT INTO extractions (id, patient_id, status, version, idempotency_key, payload_hash, parent_extraction_id) VALUES ($1, $2, $3, 1, $4, $5, $6) RETURNING id, patient_id, status, version, idempotency_key, payload_hash, parent_extraction_id',
+      [
+        input.id,
+        input.patientId,
+        input.status,
+        input.idempotencyKey,
+        input.payloadHash,
+        input.parentExtractionId,
+      ],
+    );
+    const row = rows[0];
+    if (!row) {
+      throw new DatabaseError('DATABASE_INSERT_NO_ROW', 'insertExtraction returned no row');
+    }
+    return row;
   }
 
   private async runQuery<T>(

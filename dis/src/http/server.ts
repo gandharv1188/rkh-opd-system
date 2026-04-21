@@ -23,7 +23,7 @@ export type App = Hono<{ Variables: AppVariables }>;
 export function createServer(): App {
   const app = new Hono<{ Variables: AppVariables }>();
   app.use('*', correlationId());
-  registerHealthRoute(app);
+  registerHealthRoute(app as unknown as Hono);
   return app;
 }
 

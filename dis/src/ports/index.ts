@@ -20,7 +20,7 @@ export type {
   Block,
   BlockType,
   BlockBoundingBox,
-} from './ocr';
+} from './ocr.js';
 
 export type {
   StructuringPort,
@@ -30,7 +30,7 @@ export type {
   StructuringPatientContext,
   StructuringTokenUsage,
   ClinicalExtractionShape,
-} from './structuring';
+} from './structuring.js';
 
 export type {
   StoragePort,
@@ -41,15 +41,21 @@ export type {
   SignedUploadUrlResult,
   SignedDownloadUrlResult,
   ObjectMetadata,
-} from './storage';
+} from './storage.js';
 
-export type { DatabasePort } from './database';
+export type { DatabasePort } from './database.js';
 
-export type { QueuePort, QueuePayload, QueueHandler, EnqueueOptions, EnqueueResult } from './queue';
+export type {
+  QueuePort,
+  QueuePayload,
+  QueueHandler,
+  EnqueueOptions,
+  EnqueueResult,
+} from './queue.js';
 
-export type { SecretsPort } from './secrets';
+export type { SecretsPort } from './secrets.js';
 
-export type { FileRouterPort, FileRouterInput, RoutingDecision } from './file-router';
+export type { FileRouterPort, FileRouterInput, RoutingDecision } from './file-router.js';
 
 export type {
   PreprocessorPort,
@@ -57,4 +63,4 @@ export type {
   PreprocessorMediaType,
   PreprocessedDocument,
   PreprocessorDropCounts,
-} from './preprocessor';
+} from './preprocessor.js';

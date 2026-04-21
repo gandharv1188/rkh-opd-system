@@ -1,5 +1,9 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import type { DatabasePort } from '../../src/ports/database.js';
+import type {
+  DatabasePort,
+  ExtractionRow,
+  InsertExtractionInput,
+} from '../../src/ports/database.js';
 import { AuditLogger, AuditLogImmutableError, type AuditEvent } from '../../src/core/audit-log.js';
 
 interface InsertedRow {
@@ -29,12 +33,34 @@ class FakeDatabase implements DatabasePort {
       queryOne: async <U>(_sql: string, _params: readonly unknown[]): Promise<U | null> => null,
       transaction: async <U>(inner: (t: DatabasePort) => Promise<U>): Promise<U> => inner(tx),
       setSessionVars: async () => {},
+      findExtractionById: async (): Promise<ExtractionRow | null> => null,
+      findExtractionByIdempotencyKey: async (): Promise<ExtractionRow | null> => null,
+      updateExtractionStatus: async (): Promise<ExtractionRow | null> => null,
+      insertExtraction: async (_input: InsertExtractionInput): Promise<ExtractionRow> => {
+        throw new Error('insertExtraction not used by audit-log tests');
+      },
     };
     return work(tx);
   }
 
   async setSessionVars(_vars: Readonly<Record<string, string>>): Promise<void> {
     /* noop */
+  }
+
+  async findExtractionById(_id: string): Promise<ExtractionRow | null> {
+    return null;
+  }
+
+  async findExtractionByIdempotencyKey(_key: string): Promise<ExtractionRow | null> {
+    return null;
+  }
+
+  async updateExtractionStatus(): Promise<ExtractionRow | null> {
+    return null;
+  }
+
+  async insertExtraction(_input: InsertExtractionInput): Promise<ExtractionRow> {
+    throw new Error('insertExtraction not used by audit-log tests');
   }
 }
 

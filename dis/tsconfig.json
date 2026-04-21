@@ -13,14 +13,5 @@
     "outDir": "dist"
   },
   "include": ["src/**/*.ts", "tests/**/*.ts"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/adapters/**",
-    "src/http/**",
-    "src/ports/index.ts",
-    "tests/unit/adapters/**",
-    "tests/unit/audit-log.test.ts",
-    "tests/integration/health.test.ts"
-  ]
+  "exclude": ["node_modules", "dist"]
 }
