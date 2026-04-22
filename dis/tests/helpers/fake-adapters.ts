@@ -16,6 +16,9 @@
 
 import type {
   DatabasePort,
+  DocumentTextExtractorPort,
+  ExtractionInput,
+  ExtractionResult,
   FileRouterInput,
   FileRouterPort,
   GetObjectResult,
@@ -310,6 +313,40 @@ export class FakeFileRouterAdapter implements FileRouterPort {
       this.script[input.filename],
       `FakeFileRouterAdapter: no script entry for ${input.filename}`,
     );
+  }
+}
+
+// --------------------------------------------------------------------------
+// Document text extractor (ADR-008)
+// --------------------------------------------------------------------------
+
+export type DocumentTextExtractorScript = Record<string, Scripted<ExtractionResult>>;
+
+/**
+ * Script-driven fake for {@link DocumentTextExtractorPort}.
+ *
+ * Key resolution order:
+ *   1. `input.hints?.scriptKey` if it is a string — preferred, explicit.
+ *   2. `input.mediaType` — fallback for tests that only care about MIME.
+ */
+export class FakeDocumentTextExtractorAdapter implements DocumentTextExtractorPort {
+  readonly calls: Array<{ key: string; input: ExtractionInput }> = [];
+
+  constructor(private readonly script: DocumentTextExtractorScript) {}
+
+  async routeAndExtract(input: ExtractionInput): Promise<ExtractionResult> {
+    const key = this.keyOf(input);
+    this.calls.push({ key, input });
+    return resolve(
+      this.script[key],
+      `FakeDocumentTextExtractorAdapter: no script entry for ${key}`,
+    );
+  }
+
+  private keyOf(input: ExtractionInput): string {
+    const hint = input.hints?.['scriptKey'];
+    if (typeof hint === 'string') return hint;
+    return input.mediaType;
   }
 }
 

@@ -9,6 +9,7 @@ import { describe, it, expect } from 'vitest';
 
 import {
   FakeDatabaseAdapter,
+  FakeDocumentTextExtractorAdapter,
   FakeFileRouterAdapter,
   FakeOcrAdapter,
   FakePreprocessorAdapter,
@@ -19,6 +20,8 @@ import {
 } from '../helpers/index.js';
 import type {
   DatabasePort,
+  DocumentTextExtractorPort,
+  ExtractionResult,
   FileRouterPort,
   OcrPort,
   OcrResult,
@@ -236,6 +239,56 @@ describe('FakeFileRouterAdapter', () => {
       contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     });
     expect(out2.kind).toBe('office_word');
+  });
+});
+
+describe('FakeDocumentTextExtractorAdapter', () => {
+  const extractionResult: ExtractionResult = {
+    route: 'native_text',
+    markdown: '# extracted',
+    pageCount: 2,
+    rawResponse: { pages: ['p1', 'p2'] },
+    latencyMs: 7,
+  };
+
+  it('implements DocumentTextExtractorPort and returns scripted success', async () => {
+    const port: DocumentTextExtractorPort = new FakeDocumentTextExtractorAdapter({
+      'native.pdf': { success: extractionResult },
+    });
+    const out = await port.routeAndExtract({
+      bytes: new Uint8Array([1, 2, 3]),
+      mediaType: 'application/pdf',
+      hints: { scriptKey: 'native.pdf' },
+    });
+    expect(out.route).toBe('native_text');
+    expect(out.markdown).toBe('# extracted');
+    expect(out.rawResponse).toEqual({ pages: ['p1', 'p2'] });
+  });
+
+  it('throws scripted error codes', async () => {
+    const port = new FakeDocumentTextExtractorAdapter({
+      'bad.docx': { error: 'PARSE_FAILED' },
+    });
+    await expect(
+      port.routeAndExtract({
+        bytes: new Uint8Array(),
+        mediaType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        hints: { scriptKey: 'bad.docx' },
+      }),
+    ).rejects.toThrow('PARSE_FAILED');
+  });
+
+  it('records every call on .calls', async () => {
+    const port = new FakeDocumentTextExtractorAdapter({
+      'a': { success: extractionResult },
+    });
+    await port.routeAndExtract({
+      bytes: new Uint8Array([9]),
+      mediaType: 'application/pdf',
+      hints: { scriptKey: 'a' },
+    });
+    expect(port.calls.length).toBe(1);
+    expect(port.calls[0]?.key).toBe('a');
   });
 });
 
