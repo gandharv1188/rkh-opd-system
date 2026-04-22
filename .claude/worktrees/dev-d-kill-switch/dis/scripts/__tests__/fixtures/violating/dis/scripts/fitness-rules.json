@@ -1,0 +1,16 @@
+[
+  {
+    "name": "core_no_adapter_imports",
+    "description": "test rule",
+    "glob": "dis/src/core/**/*.ts",
+    "forbidden_pattern": "from ['\"].*\\/adapters\\/",
+    "message": "core must not import adapters"
+  },
+  {
+    "name": "core_no_fetch",
+    "description": "test rule",
+    "glob": "dis/src/core/**/*.ts",
+    "forbidden_pattern": "\\bfetch\\s*\\(",
+    "message": "core must not use fetch"
+  }
+]

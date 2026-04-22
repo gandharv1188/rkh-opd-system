@@ -1,0 +1,75 @@
+{
+  "icd10": "",
+  "diagnosis_name": "",
+  "category": "Respiratory | GI | Neonatal | Infectious | ENT | Dermatology | Urology | General | Emergency",
+  "severity": "any | mild | moderate | severe",
+
+  "first_line_drugs": [
+    {
+      "drug": "GENERIC DRUG NAME (e.g., Paracetamol)",
+      "notes": "Dose in mg/kg/dose or mg/kg/day, frequency, route, duration (e.g., 15 mg/kg/dose q6h PO, max 60 mg/kg/day)",
+      "is_new_2024_2025": false
+    }
+  ],
+
+  "second_line_drugs": [
+    {
+      "drug": "GENERIC DRUG NAME",
+      "notes": "Dose, frequency, route, when to use (e.g., if first-line fails after 48-72 hours)",
+      "is_new_2024_2025": false
+    }
+  ],
+
+  "investigations": [
+    {
+      "name": "Investigation name (e.g., CBC, Chest X-ray, CRP)",
+      "indication": "When to order (e.g., Persistent fever >3 days, suspected bacterial infection)",
+      "urgency": "stat | urgent | routine"
+    }
+  ],
+
+  "counselling": [
+    "Point 1: Key message for parents in simple language",
+    "Point 2: Feeding / hydration advice",
+    "Point 3: Medication compliance advice",
+    "Point 4: Environmental / lifestyle advice",
+    "Point 5: Follow-up instructions"
+  ],
+
+  "warning_signs": [
+    "Fast breathing / chest indrawing",
+    "Bluish lips or tongue",
+    "Convulsions / fits",
+    "Excessive sleepiness / unresponsive",
+    "Diagnosis-specific warning sign 1 (e.g., Persistent vomiting)",
+    "Diagnosis-specific warning sign 2 (e.g., Unable to drink)"
+  ],
+
+  "referral_criteria": "When to refer to specialist (e.g., Refer to pediatric pulmonologist if no improvement in 48-72 hours)",
+  "hospitalisation_criteria": "When to admit (e.g., SpO2 <92%, unable to feed, toxic appearance, age <2 months)",
+
+  "notes": "Brief clinical notes (e.g., Viral illness, self-limiting 5-7 days, no routine antibiotics)",
+  "source": "Guideline references (e.g., IAP 2024, WHO 2023, GINA 2024, AAP 2023)",
+  "duration_days_default": 5,
+  "active": true,
+  "guideline_changes": "Any recent 2024-2025 guideline updates (or null if none)",
+  "snomed_code": null,
+
+  "expected_course": "Timeline of illness (e.g., Fever: 2-3 days. Cough: 5-7 days. Full recovery: 7-10 days.)",
+  "key_clinical_points": [
+    "Clinical pearl 1 (e.g., Lactulose = cornerstone of treatment)",
+    "Clinical pearl 2 (e.g., Avoid unnecessary antibiotics)",
+    "Clinical pearl 3 (e.g., Monitor hydration closely)"
+  ],
+  "severity_assessment": {
+    "mild": "Description of mild presentation (e.g., Occasional cough, no distress)",
+    "moderate": "Description of moderate (e.g., Tachypnea, mild retractions)",
+    "severe": "Description of severe (e.g., Marked distress, hypoxia, poor feeding)"
+  },
+  "monitoring_parameters": [
+    { "parameter": "Temperature", "frequency": "4-hourly" },
+    { "parameter": "Pulse and BP", "frequency": "4-hourly" },
+    { "parameter": "Strict I/O", "frequency": "Continuous" },
+    { "parameter": "Weight", "frequency": "Daily" }
+  ]
+}

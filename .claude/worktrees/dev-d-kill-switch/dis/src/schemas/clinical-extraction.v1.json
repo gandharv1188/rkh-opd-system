@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "clinical-extraction.v1.json",
+  "title": "ClinicalExtraction v1",
+  "description": "Validated extraction shape produced by StructuringPort adapters. See TDD §11.",
+  "type": "object",
+  "required": ["document_type", "summary", "labs", "medications", "diagnoses", "vaccinations"],
+  "additionalProperties": true,
+  "properties": {
+    "document_type": { "type": "string" },
+    "summary": { "type": ["string", "null"] },
+    "document_date": { "type": ["string", "null"] },
+    "lab_name": { "type": ["string", "null"] },
+    "labs": { "type": "array", "items": { "type": "object" } },
+    "medications": { "type": "array", "items": { "type": "object" } },
+    "diagnoses": { "type": "array", "items": { "type": "object" } },
+    "vaccinations": { "type": "array", "items": { "type": "object" } },
+    "clinical_notes": { "type": ["string", "null"] }
+  }
+}

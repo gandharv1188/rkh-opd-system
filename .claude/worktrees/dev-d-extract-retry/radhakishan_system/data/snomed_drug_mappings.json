@@ -1,0 +1,2604 @@
+[
+  {
+    "generic_name": "Abacavir/Lamivudine",
+    "snomed_code": "424931004",
+    "snomed_display": "Abacavir and lamivudine"
+  },
+  {
+    "generic_name": "Abatacept",
+    "snomed_code": "421777009",
+    "snomed_display": "Abatacept"
+  },
+  {
+    "generic_name": "Acetazolamide",
+    "snomed_code": "372709008",
+    "snomed_display": "Acetazolamide"
+  },
+  {
+    "generic_name": "Acetic acid 2% otic solution",
+    "snomed_code": "387219003",
+    "snomed_display": "Acetic acid"
+  },
+  {
+    "generic_name": "Actinomycin D + Vincristine (EE-4A)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Acyclovir",
+    "snomed_code": "372729009",
+    "snomed_display": "Aciclovir"
+  },
+  {
+    "generic_name": "Adalimumab",
+    "snomed_code": "407317001",
+    "snomed_display": "Adalimumab"
+  },
+  {
+    "generic_name": "Adapalene 0.1% gel",
+    "snomed_code": "386934002",
+    "snomed_display": "Adapalene"
+  },
+  {
+    "generic_name": "Adenosine",
+    "snomed_code": "35431001",
+    "snomed_display": "Adenosine"
+  },
+  {
+    "generic_name": "Albendazole",
+    "snomed_code": "387558006",
+    "snomed_display": "Albendazole"
+  },
+  {
+    "generic_name": "Albumin + Furosemide",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Albumin 5%",
+    "snomed_code": "52454007",
+    "snomed_display": "Albumin"
+  },
+  {
+    "generic_name": "Allopurinol",
+    "snomed_code": "387135004",
+    "snomed_display": "Allopurinol"
+  },
+  {
+    "generic_name": "Almotriptan",
+    "snomed_code": "363571003",
+    "snomed_display": "Almotriptan"
+  },
+  {
+    "generic_name": "Alpha-lipoic acid",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Alternating acetaminophen/ibuprofen",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Amikacin",
+    "snomed_code": "387266001",
+    "snomed_display": "Amikacin"
+  },
+  {
+    "generic_name": "Aminophylline",
+    "snomed_code": "373508004",
+    "snomed_display": "Aminophylline"
+  },
+  {
+    "generic_name": "Amiodarone",
+    "snomed_code": "372821002",
+    "snomed_display": "Amiodarone"
+  },
+  {
+    "generic_name": "Amitriptyline",
+    "snomed_code": "372726002",
+    "snomed_display": "Amitriptyline"
+  },
+  {
+    "generic_name": "Amlodipine",
+    "snomed_code": "386864001",
+    "snomed_display": "Amlodipine"
+  },
+  {
+    "generic_name": "Amoxicillin",
+    "snomed_code": "27658006",
+    "snomed_display": "Amoxicillin"
+  },
+  {
+    "generic_name": "Amoxicillin-Clavulanate",
+    "snomed_code": "398786001",
+    "snomed_display": "Amoxicillin and clavulanate"
+  },
+  {
+    "generic_name": "Amphotericin B",
+    "snomed_code": "372699002",
+    "snomed_display": "Amphotericin B"
+  },
+  {
+    "generic_name": "Ampicillin",
+    "snomed_code": "387170002",
+    "snomed_display": "Ampicillin"
+  },
+  {
+    "generic_name": "Ampicillin + Gentamicin",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Ampicillin-sulbactam",
+    "snomed_code": "398787005",
+    "snomed_display": "Ampicillin and sulbactam"
+  },
+  {
+    "generic_name": "Anakinra",
+    "snomed_code": "385549000",
+    "snomed_display": "Anakinra"
+  },
+  {
+    "generic_name": "Anhydrous lanolin",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Apremilast",
+    "snomed_code": "703127006",
+    "snomed_display": "Apremilast"
+  },
+  {
+    "generic_name": "Arimoclomol (NPC)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Aripiprazole",
+    "snomed_code": "406784005",
+    "snomed_display": "Aripiprazole"
+  },
+  {
+    "generic_name": "Artemether-lumefantrine",
+    "snomed_code": "429625007",
+    "snomed_display": "Artemether and lumefantrine"
+  },
+  {
+    "generic_name": "Artesunate",
+    "snomed_code": "420707006",
+    "snomed_display": "Artesunate"
+  },
+  {
+    "generic_name": "Artesunate-amodiaquine",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Artesunate-Pyronaridine",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Artificial tears (preservative-free)",
+    "snomed_code": "71562009",
+    "snomed_display": "Artificial tears"
+  },
+  {
+    "generic_name": "Aspirin",
+    "snomed_code": "387458008",
+    "snomed_display": "Aspirin"
+  },
+  {
+    "generic_name": "Ataluren",
+    "snomed_code": "714106002",
+    "snomed_display": "Ataluren"
+  },
+  {
+    "generic_name": "Atenolol",
+    "snomed_code": "387506000",
+    "snomed_display": "Atenolol"
+  },
+  {
+    "generic_name": "Atomoxetine",
+    "snomed_code": "407032004",
+    "snomed_display": "Atomoxetine"
+  },
+  {
+    "generic_name": "Atropine",
+    "snomed_code": "372832002",
+    "snomed_display": "Atropine"
+  },
+  {
+    "generic_name": "Atropine 0.05% eye drops",
+    "snomed_code": "372832002",
+    "snomed_display": "Atropine"
+  },
+  {
+    "generic_name": "Atropine 1% eye drops (penalization)",
+    "snomed_code": "372832002",
+    "snomed_display": "Atropine"
+  },
+  {
+    "generic_name": "Atropine sulfate",
+    "snomed_code": "372832002",
+    "snomed_display": "Atropine"
+  },
+  {
+    "generic_name": "Azathioprine",
+    "snomed_code": "372574004",
+    "snomed_display": "Azathioprine"
+  },
+  {
+    "generic_name": "Azelaic acid 15-20% cream",
+    "snomed_code": "386936000",
+    "snomed_display": "Azelaic acid"
+  },
+  {
+    "generic_name": "Azithromycin",
+    "snomed_code": "396065005",
+    "snomed_display": "Azithromycin"
+  },
+  {
+    "generic_name": "Azithromycin 1% ophthalmic",
+    "snomed_code": "396065005",
+    "snomed_display": "Azithromycin"
+  },
+  {
+    "generic_name": "Azithromycin oral",
+    "snomed_code": "396065005",
+    "snomed_display": "Azithromycin"
+  },
+  {
+    "generic_name": "Azithromycin prophylaxis",
+    "snomed_code": "396065005",
+    "snomed_display": "Azithromycin"
+  },
+  {
+    "generic_name": "Bacitracin ointment",
+    "snomed_code": "372809001",
+    "snomed_display": "Bacitracin"
+  },
+  {
+    "generic_name": "Baclofen",
+    "snomed_code": "387342009",
+    "snomed_display": "Baclofen"
+  },
+  {
+    "generic_name": "Baloxavir marboxil",
+    "snomed_code": "770649000",
+    "snomed_display": "Baloxavir marboxil"
+  },
+  {
+    "generic_name": "Baloxavir marboxil (if influenza)",
+    "snomed_code": "770649000",
+    "snomed_display": "Baloxavir marboxil"
+  },
+  {
+    "generic_name": "Baricitinib",
+    "snomed_code": "735230002",
+    "snomed_display": "Baricitinib"
+  },
+  {
+    "generic_name": "Belimumab",
+    "snomed_code": "710287009",
+    "snomed_display": "Belimumab"
+  },
+  {
+    "generic_name": "Benzathine penicillin G",
+    "snomed_code": "372838003",
+    "snomed_display": "Benzathine benzylpenicillin"
+  },
+  {
+    "generic_name": "Benzoyl peroxide 2.5-5%",
+    "snomed_code": "387150002",
+    "snomed_display": "Benzoyl peroxide"
+  },
+  {
+    "generic_name": "Benztropine",
+    "snomed_code": "372876005",
+    "snomed_display": "Benztropine"
+  },
+  {
+    "generic_name": "Betaine (trimethylglycine)",
+    "snomed_code": "387321003",
+    "snomed_display": "Betaine"
+  },
+  {
+    "generic_name": "Betamethasone 0.05%",
+    "snomed_code": "116571008",
+    "snomed_display": "Betamethasone"
+  },
+  {
+    "generic_name": "Betamethasone dipropionate 0.05%",
+    "snomed_code": "116571008",
+    "snomed_display": "Betamethasone"
+  },
+  {
+    "generic_name": "Bevacizumab",
+    "snomed_code": "409406007",
+    "snomed_display": "Bevacizumab"
+  },
+  {
+    "generic_name": "Bismuth subsalicylate",
+    "snomed_code": "387404002",
+    "snomed_display": "Bismuth subsalicylate"
+  },
+  {
+    "generic_name": "Bosentan",
+    "snomed_code": "385559004",
+    "snomed_display": "Bosentan"
+  },
+  {
+    "generic_name": "Botulinum toxin A",
+    "snomed_code": "404909007",
+    "snomed_display": "Botulinum toxin type A"
+  },
+  {
+    "generic_name": "Botulinum toxin A injection",
+    "snomed_code": "404909007",
+    "snomed_display": "Botulinum toxin type A"
+  },
+  {
+    "generic_name": "Botulinum toxin injection",
+    "snomed_code": "404909007",
+    "snomed_display": "Botulinum toxin type A"
+  },
+  {
+    "generic_name": "Brentuximab vedotin",
+    "snomed_code": "703660000",
+    "snomed_display": "Brentuximab vedotin"
+  },
+  {
+    "generic_name": "Brentuximab vedotin (single)",
+    "snomed_code": "703660000",
+    "snomed_display": "Brentuximab vedotin"
+  },
+  {
+    "generic_name": "Brentuximab vedotin + AVEPC",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Budesonide",
+    "snomed_code": "395726003",
+    "snomed_display": "Budesonide"
+  },
+  {
+    "generic_name": "Budesonide (oral viscous)",
+    "snomed_code": "395726003",
+    "snomed_display": "Budesonide"
+  },
+  {
+    "generic_name": "Budesonide nebulized",
+    "snomed_code": "395726003",
+    "snomed_display": "Budesonide"
+  },
+  {
+    "generic_name": "Budesonide-Formoterol",
+    "snomed_code": "421747003",
+    "snomed_display": "Budesonide and formoterol"
+  },
+  {
+    "generic_name": "Caffeine citrate",
+    "snomed_code": "395738003",
+    "snomed_display": "Caffeine citrate"
+  },
+  {
+    "generic_name": "Calcipotriene 0.005% cream",
+    "snomed_code": "395766003",
+    "snomed_display": "Calcipotriol"
+  },
+  {
+    "generic_name": "Calcitriol",
+    "snomed_code": "259333003",
+    "snomed_display": "Calcitriol"
+  },
+  {
+    "generic_name": "Calcium carbonate",
+    "snomed_code": "387375002",
+    "snomed_display": "Calcium carbonate"
+  },
+  {
+    "generic_name": "Calcium gluconate (neonatal)",
+    "snomed_code": "387334004",
+    "snomed_display": "Calcium gluconate"
+  },
+  {
+    "generic_name": "Calcium Gluconate 10%",
+    "snomed_code": "387334004",
+    "snomed_display": "Calcium gluconate"
+  },
+  {
+    "generic_name": "Canakinumab",
+    "snomed_code": "698090000",
+    "snomed_display": "Canakinumab"
+  },
+  {
+    "generic_name": "Captopril",
+    "snomed_code": "387160004",
+    "snomed_display": "Captopril"
+  },
+  {
+    "generic_name": "Carbamazepine",
+    "snomed_code": "387222003",
+    "snomed_display": "Carbamazepine"
+  },
+  {
+    "generic_name": "Carbamide peroxide 6.5%",
+    "snomed_code": "387155007",
+    "snomed_display": "Carbamide peroxide"
+  },
+  {
+    "generic_name": "Carvedilol",
+    "snomed_code": "386870007",
+    "snomed_display": "Carvedilol"
+  },
+  {
+    "generic_name": "Casgevy (exagamglogene autotemcel)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Cefazolin",
+    "snomed_code": "372833007",
+    "snomed_display": "Cefazolin"
+  },
+  {
+    "generic_name": "Cefdinir",
+    "snomed_code": "396062003",
+    "snomed_display": "Cefdinir"
+  },
+  {
+    "generic_name": "Cefepime",
+    "snomed_code": "396063008",
+    "snomed_display": "Cefepime"
+  },
+  {
+    "generic_name": "Cefixime",
+    "snomed_code": "387536009",
+    "snomed_display": "Cefixime"
+  },
+  {
+    "generic_name": "Cefotaxime",
+    "snomed_code": "372778004",
+    "snomed_display": "Cefotaxime"
+  },
+  {
+    "generic_name": "Ceftriaxone",
+    "snomed_code": "372670001",
+    "snomed_display": "Ceftriaxone"
+  },
+  { "generic_name": "Cenobamate", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Cephalexin",
+    "snomed_code": "372736005",
+    "snomed_display": "Cefalexin"
+  },
+  {
+    "generic_name": "Cetirizine",
+    "snomed_code": "372523007",
+    "snomed_display": "Cetirizine"
+  },
+  {
+    "generic_name": "Chloramphenicol",
+    "snomed_code": "372777009",
+    "snomed_display": "Chloramphenicol"
+  },
+  {
+    "generic_name": "Chlorhexidine gluconate 0.12%",
+    "snomed_code": "373568007",
+    "snomed_display": "Chlorhexidine"
+  },
+  {
+    "generic_name": "Chloroquine",
+    "snomed_code": "373468005",
+    "snomed_display": "Chloroquine"
+  },
+  {
+    "generic_name": "Cholecalciferol",
+    "snomed_code": "18414002",
+    "snomed_display": "Colecalciferol"
+  },
+  {
+    "generic_name": "Cholestyramine",
+    "snomed_code": "387408004",
+    "snomed_display": "Colestyramine"
+  },
+  {
+    "generic_name": "Ciclopirox 1% cream/shampoo",
+    "snomed_code": "372843009",
+    "snomed_display": "Ciclopirox"
+  },
+  {
+    "generic_name": "Ciclopirox 8% nail lacquer",
+    "snomed_code": "372843009",
+    "snomed_display": "Ciclopirox"
+  },
+  {
+    "generic_name": "Cidofovir",
+    "snomed_code": "372900003",
+    "snomed_display": "Cidofovir"
+  },
+  {
+    "generic_name": "Ciprofloxacin",
+    "snomed_code": "372840008",
+    "snomed_display": "Ciprofloxacin"
+  },
+  {
+    "generic_name": "Ciprofloxacin otic preparations",
+    "snomed_code": "372840008",
+    "snomed_display": "Ciprofloxacin"
+  },
+  {
+    "generic_name": "Cisatracurium",
+    "snomed_code": "373480005",
+    "snomed_display": "Cisatracurium"
+  },
+  {
+    "generic_name": "Clarithromycin",
+    "snomed_code": "372841007",
+    "snomed_display": "Clarithromycin"
+  },
+  {
+    "generic_name": "Clindamycin",
+    "snomed_code": "372786004",
+    "snomed_display": "Clindamycin"
+  },
+  {
+    "generic_name": "Clindamycin 1% + Benzoyl peroxide 5% gel",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Clindamycin 1% lotion",
+    "snomed_code": "372786004",
+    "snomed_display": "Clindamycin"
+  },
+  {
+    "generic_name": "Clobetasol propionate 0.05%",
+    "snomed_code": "395745006",
+    "snomed_display": "Clobetasol"
+  },
+  {
+    "generic_name": "Clonazepam",
+    "snomed_code": "387383007",
+    "snomed_display": "Clonazepam"
+  },
+  {
+    "generic_name": "Clonidine",
+    "snomed_code": "372805007",
+    "snomed_display": "Clonidine"
+  },
+  {
+    "generic_name": "Clotrimazole 1% cream",
+    "snomed_code": "387325003",
+    "snomed_display": "Clotrimazole"
+  },
+  {
+    "generic_name": "Clotrimazole troches",
+    "snomed_code": "387325003",
+    "snomed_display": "Clotrimazole"
+  },
+  {
+    "generic_name": "Coenzyme Q10",
+    "snomed_code": "83797003",
+    "snomed_display": "Ubidecarenone"
+  },
+  {
+    "generic_name": "Colchicine",
+    "snomed_code": "387413002",
+    "snomed_display": "Colchicine"
+  },
+  {
+    "generic_name": "Colloid (Dextran 40)",
+    "snomed_code": "387572001",
+    "snomed_display": "Dextran 40"
+  },
+  {
+    "generic_name": "Copper supplementation",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "CPX-351 (liposomal Ara-C/dauno)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Crinecerfont",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Crotalidae Polyvalent Immune Fab (CroFab)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Crotamiton 10% cream",
+    "snomed_code": "387345006",
+    "snomed_display": "Crotamiton"
+  },
+  {
+    "generic_name": "Cyanocobalamin",
+    "snomed_code": "419382002",
+    "snomed_display": "Cyanocobalamin"
+  },
+  {
+    "generic_name": "Cyanocobalamin (IM)",
+    "snomed_code": "419382002",
+    "snomed_display": "Cyanocobalamin"
+  },
+  {
+    "generic_name": "Cyclopentolate 1% ophthalmic",
+    "snomed_code": "372765004",
+    "snomed_display": "Cyclopentolate"
+  },
+  {
+    "generic_name": "Cyclophosphamide",
+    "snomed_code": "372817009",
+    "snomed_display": "Cyclophosphamide"
+  },
+  {
+    "generic_name": "Cyclosporine",
+    "snomed_code": "372737001",
+    "snomed_display": "Ciclosporin"
+  },
+  {
+    "generic_name": "Cyproheptadine",
+    "snomed_code": "372568003",
+    "snomed_display": "Cyproheptadine"
+  },
+  {
+    "generic_name": "Dantrolene",
+    "snomed_code": "372819007",
+    "snomed_display": "Dantrolene"
+  },
+  {
+    "generic_name": "Darbepoetin",
+    "snomed_code": "385564003",
+    "snomed_display": "Darbepoetin alfa"
+  },
+  {
+    "generic_name": "Deferasirox",
+    "snomed_code": "419985007",
+    "snomed_display": "Deferasirox"
+  },
+  {
+    "generic_name": "Deferiprone",
+    "snomed_code": "396041001",
+    "snomed_display": "Deferiprone"
+  },
+  {
+    "generic_name": "Deferoxamine",
+    "snomed_code": "372813003",
+    "snomed_display": "Deferoxamine"
+  },
+  {
+    "generic_name": "Deflazacort",
+    "snomed_code": "396011002",
+    "snomed_display": "Deflazacort"
+  },
+  {
+    "generic_name": "Denosumab",
+    "snomed_code": "703118005",
+    "snomed_display": "Denosumab"
+  },
+  {
+    "generic_name": "Desloratadine",
+    "snomed_code": "396015006",
+    "snomed_display": "Desloratadine"
+  },
+  {
+    "generic_name": "Desmopressin",
+    "snomed_code": "372748005",
+    "snomed_display": "Desmopressin"
+  },
+  {
+    "generic_name": "Dexamethasone",
+    "snomed_code": "372584003",
+    "snomed_display": "Dexamethasone"
+  },
+  {
+    "generic_name": "Dextromethorphan",
+    "snomed_code": "387117000",
+    "snomed_display": "Dextromethorphan"
+  },
+  {
+    "generic_name": "Dextrose 10%",
+    "snomed_code": "67079006",
+    "snomed_display": "Glucose"
+  },
+  {
+    "generic_name": "Dextrose gel 40%",
+    "snomed_code": "67079006",
+    "snomed_display": "Glucose"
+  },
+  {
+    "generic_name": "Dextrose infusion",
+    "snomed_code": "67079006",
+    "snomed_display": "Glucose"
+  },
+  {
+    "generic_name": "DHA-piperaquine",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Diazepam",
+    "snomed_code": "387264003",
+    "snomed_display": "Diazepam"
+  },
+  {
+    "generic_name": "Diazoxide",
+    "snomed_code": "372803000",
+    "snomed_display": "Diazoxide"
+  },
+  {
+    "generic_name": "Diclofenac",
+    "snomed_code": "372756006",
+    "snomed_display": "Diclofenac"
+  },
+  {
+    "generic_name": "Digoxin",
+    "snomed_code": "372849006",
+    "snomed_display": "Digoxin"
+  },
+  {
+    "generic_name": "Diltiazem (topical)",
+    "snomed_code": "372793000",
+    "snomed_display": "Diltiazem"
+  },
+  {
+    "generic_name": "Dimenhydrinate",
+    "snomed_code": "387469006",
+    "snomed_display": "Dimenhydrinate"
+  },
+  {
+    "generic_name": "Dimethicone 4% lotion",
+    "snomed_code": "396062008",
+    "snomed_display": "Dimeticone"
+  },
+  {
+    "generic_name": "Diphenhydramine",
+    "snomed_code": "372682005",
+    "snomed_display": "Diphenhydramine"
+  },
+  {
+    "generic_name": "Diphtheria antitoxin (DAT)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Dobutamine",
+    "snomed_code": "387145002",
+    "snomed_display": "Dobutamine"
+  },
+  {
+    "generic_name": "Docusate sodium 1% drops",
+    "snomed_code": "387484005",
+    "snomed_display": "Docusate sodium"
+  },
+  {
+    "generic_name": "Dolutegravir (DTG)",
+    "snomed_code": "713464000",
+    "snomed_display": "Dolutegravir"
+  },
+  {
+    "generic_name": "Dopamine",
+    "snomed_code": "372610005",
+    "snomed_display": "Dopamine"
+  },
+  {
+    "generic_name": "Dornase alfa",
+    "snomed_code": "386886009",
+    "snomed_display": "Dornase alfa"
+  },
+  {
+    "generic_name": "Doxapram",
+    "snomed_code": "372597007",
+    "snomed_display": "Doxapram"
+  },
+  {
+    "generic_name": "Doxorubicin",
+    "snomed_code": "372817000",
+    "snomed_display": "Doxorubicin"
+  },
+  {
+    "generic_name": "Doxycycline",
+    "snomed_code": "372478003",
+    "snomed_display": "Doxycycline"
+  },
+  {
+    "generic_name": "Duloxetine",
+    "snomed_code": "407032004",
+    "snomed_display": "Duloxetine"
+  },
+  {
+    "generic_name": "Dupilumab",
+    "snomed_code": "733481003",
+    "snomed_display": "Dupilumab"
+  },
+  {
+    "generic_name": "Eculizumab",
+    "snomed_code": "427429004",
+    "snomed_display": "Eculizumab"
+  },
+  {
+    "generic_name": "Efavirenz",
+    "snomed_code": "387320009",
+    "snomed_display": "Efavirenz"
+  },
+  {
+    "generic_name": "Elexacaftor/tezacaftor/ivacaftor",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Eltrombopag",
+    "snomed_code": "432005001",
+    "snomed_display": "Eltrombopag"
+  },
+  { "generic_name": "Emapalumab", "snomed_code": null, "snomed_display": null },
+  { "generic_name": "Emicizumab", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Enalapril",
+    "snomed_code": "372658000",
+    "snomed_display": "Enalapril"
+  },
+  {
+    "generic_name": "Entecavir",
+    "snomed_code": "416644003",
+    "snomed_display": "Entecavir"
+  },
+  {
+    "generic_name": "Epinephrine",
+    "snomed_code": "387362001",
+    "snomed_display": "Epinephrine"
+  },
+  {
+    "generic_name": "Epinephrine nasal spray (Neffy)",
+    "snomed_code": "387362001",
+    "snomed_display": "Epinephrine"
+  },
+  {
+    "generic_name": "EPO (erythropoietin)",
+    "snomed_code": "396035002",
+    "snomed_display": "Epoetin alfa"
+  },
+  {
+    "generic_name": "Epoprostenol",
+    "snomed_code": "372512002",
+    "snomed_display": "Epoprostenol"
+  },
+  {
+    "generic_name": "Equine RIG (ERIG)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Ergocalciferol (Vitamin D2)",
+    "snomed_code": "37237003",
+    "snomed_display": "Ergocalciferol"
+  },
+  {
+    "generic_name": "Ertapenem",
+    "snomed_code": "396064002",
+    "snomed_display": "Ertapenem"
+  },
+  {
+    "generic_name": "Erythromycin",
+    "snomed_code": "372694001",
+    "snomed_display": "Erythromycin"
+  },
+  {
+    "generic_name": "Erythropoietin",
+    "snomed_code": "396035002",
+    "snomed_display": "Epoetin alfa"
+  },
+  {
+    "generic_name": "Escitalopram",
+    "snomed_code": "400447003",
+    "snomed_display": "Escitalopram"
+  },
+  {
+    "generic_name": "Esmolol",
+    "snomed_code": "372843004",
+    "snomed_display": "Esmolol"
+  },
+  {
+    "generic_name": "Esomeprazole",
+    "snomed_code": "396047003",
+    "snomed_display": "Esomeprazole"
+  },
+  {
+    "generic_name": "Estradiol",
+    "snomed_code": "126172005",
+    "snomed_display": "Estradiol"
+  },
+  {
+    "generic_name": "Estradiol (transdermal)",
+    "snomed_code": "126172005",
+    "snomed_display": "Estradiol"
+  },
+  {
+    "generic_name": "Etanercept",
+    "snomed_code": "387005008",
+    "snomed_display": "Etanercept"
+  },
+  { "generic_name": "Eteplirsen", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Ethambutol",
+    "snomed_code": "387129004",
+    "snomed_display": "Ethambutol"
+  },
+  {
+    "generic_name": "Ethionamide",
+    "snomed_code": "387274004",
+    "snomed_display": "Ethionamide"
+  },
+  {
+    "generic_name": "Ethosuximide",
+    "snomed_code": "387244005",
+    "snomed_display": "Ethosuximide"
+  },
+  {
+    "generic_name": "Etoposide",
+    "snomed_code": "387316009",
+    "snomed_display": "Etoposide"
+  },
+  {
+    "generic_name": "Extended half-life FIX (rIX-FP)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Factor IX",
+    "snomed_code": "386961001",
+    "snomed_display": "Coagulation factor IX"
+  },
+  {
+    "generic_name": "Factor VIII",
+    "snomed_code": "386960000",
+    "snomed_display": "Coagulation factor VIII"
+  },
+  {
+    "generic_name": "Famciclovir",
+    "snomed_code": "387557001",
+    "snomed_display": "Famciclovir"
+  },
+  {
+    "generic_name": "Famotidine",
+    "snomed_code": "372522002",
+    "snomed_display": "Famotidine"
+  },
+  {
+    "generic_name": "Fentanyl",
+    "snomed_code": "373492002",
+    "snomed_display": "Fentanyl"
+  },
+  {
+    "generic_name": "Ferrous fumarate",
+    "snomed_code": "387260007",
+    "snomed_display": "Ferrous fumarate"
+  },
+  {
+    "generic_name": "Ferrous sulfate",
+    "snomed_code": "387402000",
+    "snomed_display": "Ferrous sulfate"
+  },
+  {
+    "generic_name": "Fexofenadine",
+    "snomed_code": "372522006",
+    "snomed_display": "Fexofenadine"
+  },
+  { "generic_name": "Fitusiran", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Flecainide",
+    "snomed_code": "372751001",
+    "snomed_display": "Flecainide"
+  },
+  {
+    "generic_name": "Fluconazole",
+    "snomed_code": "387174006",
+    "snomed_display": "Fluconazole"
+  },
+  {
+    "generic_name": "Fludrocortisone",
+    "snomed_code": "372525000",
+    "snomed_display": "Fludrocortisone"
+  },
+  {
+    "generic_name": "Flumazenil",
+    "snomed_code": "387575001",
+    "snomed_display": "Flumazenil"
+  },
+  {
+    "generic_name": "Fluocinonide",
+    "snomed_code": "372816005",
+    "snomed_display": "Fluocinonide"
+  },
+  {
+    "generic_name": "Fluoxetine",
+    "snomed_code": "372767007",
+    "snomed_display": "Fluoxetine"
+  },
+  {
+    "generic_name": "Fluphenazine",
+    "snomed_code": "372737001",
+    "snomed_display": "Fluphenazine"
+  },
+  {
+    "generic_name": "Fluticasone (swallowed)",
+    "snomed_code": "396064007",
+    "snomed_display": "Fluticasone"
+  },
+  {
+    "generic_name": "Fluticasone propionate nasal spray",
+    "snomed_code": "396064007",
+    "snomed_display": "Fluticasone"
+  },
+  {
+    "generic_name": "Fluvoxamine",
+    "snomed_code": "372905008",
+    "snomed_display": "Fluvoxamine"
+  },
+  {
+    "generic_name": "Folic acid",
+    "snomed_code": "63718003",
+    "snomed_display": "Folic acid"
+  },
+  {
+    "generic_name": "Folic acid (parenteral)",
+    "snomed_code": "63718003",
+    "snomed_display": "Folic acid"
+  },
+  {
+    "generic_name": "Folic acid high-dose",
+    "snomed_code": "63718003",
+    "snomed_display": "Folic acid"
+  },
+  {
+    "generic_name": "Folinic Acid (Leucovorin)",
+    "snomed_code": "396065001",
+    "snomed_display": "Folinic acid"
+  },
+  {
+    "generic_name": "Fomepizole",
+    "snomed_code": "386897001",
+    "snomed_display": "Fomepizole"
+  },
+  {
+    "generic_name": "Fortified tobramycin 1.4% + cefazolin 5%",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Foscarnet",
+    "snomed_code": "372901004",
+    "snomed_display": "Foscarnet"
+  },
+  {
+    "generic_name": "Fosphenytoin",
+    "snomed_code": "396050006",
+    "snomed_display": "Fosphenytoin"
+  },
+  {
+    "generic_name": "Furosemide",
+    "snomed_code": "387475002",
+    "snomed_display": "Furosemide"
+  },
+  {
+    "generic_name": "G-CSF (Filgrastim)",
+    "snomed_code": "386948006",
+    "snomed_display": "Filgrastim"
+  },
+  {
+    "generic_name": "Gabapentin",
+    "snomed_code": "386845007",
+    "snomed_display": "Gabapentin"
+  },
+  {
+    "generic_name": "Galsulfase (MPS VI)",
+    "snomed_code": "421747002",
+    "snomed_display": "Galsulfase"
+  },
+  {
+    "generic_name": "Ganciclovir",
+    "snomed_code": "372847008",
+    "snomed_display": "Ganciclovir"
+  },
+  {
+    "generic_name": "Gatifloxacin 0.5% ophthalmic",
+    "snomed_code": "396016007",
+    "snomed_display": "Gatifloxacin"
+  },
+  {
+    "generic_name": "Gemtuzumab ozogamicin",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Gentamicin",
+    "snomed_code": "387321007",
+    "snomed_display": "Gentamicin"
+  },
+  {
+    "generic_name": "GH therapy (PWS)",
+    "snomed_code": "395745001",
+    "snomed_display": "Somatropin"
+  },
+  {
+    "generic_name": "Glecaprevir/pibrentasvir (Mavyret)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Glucagon",
+    "snomed_code": "372536007",
+    "snomed_display": "Glucagon"
+  },
+  {
+    "generic_name": "Glycerin suppositories",
+    "snomed_code": "387267009",
+    "snomed_display": "Glycerol"
+  },
+  {
+    "generic_name": "Glycopyrrolate",
+    "snomed_code": "372721001",
+    "snomed_display": "Glycopyrronium bromide"
+  },
+  {
+    "generic_name": "GnRH (Buserelin)",
+    "snomed_code": "395761008",
+    "snomed_display": "Buserelin"
+  },
+  {
+    "generic_name": "Griseofulvin microsize oral",
+    "snomed_code": "372748000",
+    "snomed_display": "Griseofulvin"
+  },
+  {
+    "generic_name": "Growth hormone therapy",
+    "snomed_code": "395745001",
+    "snomed_display": "Somatropin"
+  },
+  {
+    "generic_name": "Guanfacine",
+    "snomed_code": "372518002",
+    "snomed_display": "Guanfacine"
+  },
+  {
+    "generic_name": "Guanfacine ER",
+    "snomed_code": "372518002",
+    "snomed_display": "Guanfacine"
+  },
+  {
+    "generic_name": "Histrelin implant",
+    "snomed_code": "395953004",
+    "snomed_display": "Histrelin"
+  },
+  {
+    "generic_name": "HRIG (Human Rabies Ig)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  { "generic_name": "Human TIG", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Hyaluronidase-facilitated SCIG",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Hydrochlorothiazide",
+    "snomed_code": "387525002",
+    "snomed_display": "Hydrochlorothiazide"
+  },
+  {
+    "generic_name": "Hydrocortisone",
+    "snomed_code": "396458002",
+    "snomed_display": "Hydrocortisone"
+  },
+  {
+    "generic_name": "Hydrocortisone 0.5-1% cream",
+    "snomed_code": "396458002",
+    "snomed_display": "Hydrocortisone"
+  },
+  {
+    "generic_name": "Hydrocortisone 1% cream",
+    "snomed_code": "396458002",
+    "snomed_display": "Hydrocortisone"
+  },
+  {
+    "generic_name": "Hydrocortisone 2.5% cream",
+    "snomed_code": "396458002",
+    "snomed_display": "Hydrocortisone"
+  },
+  {
+    "generic_name": "Hydrogen peroxide 1.5% rinse",
+    "snomed_code": "387171003",
+    "snomed_display": "Hydrogen peroxide"
+  },
+  {
+    "generic_name": "Hydroquinone 2-4% cream",
+    "snomed_code": "387135009",
+    "snomed_display": "Hydroquinone"
+  },
+  {
+    "generic_name": "Hydroxocobalamin (IM)",
+    "snomed_code": "409257009",
+    "snomed_display": "Hydroxocobalamin"
+  },
+  {
+    "generic_name": "Hydroxychloroquine",
+    "snomed_code": "373540008",
+    "snomed_display": "Hydroxychloroquine"
+  },
+  {
+    "generic_name": "Hydroxyurea",
+    "snomed_code": "387314007",
+    "snomed_display": "Hydroxycarbamide"
+  },
+  {
+    "generic_name": "Hydroxyzine",
+    "snomed_code": "372856003",
+    "snomed_display": "Hydroxyzine"
+  },
+  {
+    "generic_name": "Ibuprofen",
+    "snomed_code": "387207008",
+    "snomed_display": "Ibuprofen"
+  },
+  {
+    "generic_name": "Idursulfase",
+    "snomed_code": "424396006",
+    "snomed_display": "Idursulfase"
+  },
+  {
+    "generic_name": "Ifosfamide + Doxorubicin",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Ifosfamide + Etoposide",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Imiglucerase",
+    "snomed_code": "386960005",
+    "snomed_display": "Imiglucerase"
+  },
+  {
+    "generic_name": "Imipramine",
+    "snomed_code": "372718001",
+    "snomed_display": "Imipramine"
+  },
+  {
+    "generic_name": "Indomethacin",
+    "snomed_code": "372518007",
+    "snomed_display": "Indometacin"
+  },
+  {
+    "generic_name": "Infliximab",
+    "snomed_code": "386891004",
+    "snomed_display": "Infliximab"
+  },
+  {
+    "generic_name": "Inotuzumab ozogamicin",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Insulin (Regular)",
+    "snomed_code": "412222001",
+    "snomed_display": "Insulin regular"
+  },
+  {
+    "generic_name": "Insulin Aspart",
+    "snomed_code": "325072002",
+    "snomed_display": "Insulin aspart"
+  },
+  {
+    "generic_name": "Insulin Glargine",
+    "snomed_code": "411529005",
+    "snomed_display": "Insulin glargine"
+  },
+  {
+    "generic_name": "Intranasal Fluticasone",
+    "snomed_code": "396064007",
+    "snomed_display": "Fluticasone"
+  },
+  {
+    "generic_name": "Intrapleural urokinase",
+    "snomed_code": "387324004",
+    "snomed_display": "Urokinase"
+  },
+  {
+    "generic_name": "Intrathecal baclofen",
+    "snomed_code": "387342009",
+    "snomed_display": "Baclofen"
+  },
+  {
+    "generic_name": "Intrathecal cytarabine",
+    "snomed_code": "387420009",
+    "snomed_display": "Cytarabine"
+  },
+  {
+    "generic_name": "Iodoquinol",
+    "snomed_code": "387456002",
+    "snomed_display": "Iodoquinol"
+  },
+  {
+    "generic_name": "Ipratropium bromide",
+    "snomed_code": "372518007",
+    "snomed_display": "Ipratropium bromide"
+  },
+  {
+    "generic_name": "Iron polymaltose (Fe3+)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Isoniazid (H)",
+    "snomed_code": "387248007",
+    "snomed_display": "Isoniazid"
+  },
+  {
+    "generic_name": "Isotretinoin",
+    "snomed_code": "372839006",
+    "snomed_display": "Isotretinoin"
+  },
+  {
+    "generic_name": "Itraconazole oral",
+    "snomed_code": "387532003",
+    "snomed_display": "Itraconazole"
+  },
+  {
+    "generic_name": "IV Artesunate",
+    "snomed_code": "420707006",
+    "snomed_display": "Artesunate"
+  },
+  {
+    "generic_name": "IV Hydrocortisone",
+    "snomed_code": "396458002",
+    "snomed_display": "Hydrocortisone"
+  },
+  {
+    "generic_name": "IV iron (ferric carboxymaltose)",
+    "snomed_code": "708822004",
+    "snomed_display": "Ferric carboxymaltose"
+  },
+  {
+    "generic_name": "IV methylprednisolone",
+    "snomed_code": "372795007",
+    "snomed_display": "Methylprednisolone"
+  },
+  {
+    "generic_name": "IV pamidronate",
+    "snomed_code": "396028001",
+    "snomed_display": "Pamidronic acid"
+  },
+  {
+    "generic_name": "IV zoledronic acid",
+    "snomed_code": "395926009",
+    "snomed_display": "Zoledronic acid"
+  },
+  {
+    "generic_name": "Ivacaftor (Kalydeco)",
+    "snomed_code": "703128001",
+    "snomed_display": "Ivacaftor"
+  },
+  {
+    "generic_name": "Ivermectin",
+    "snomed_code": "387559003",
+    "snomed_display": "Ivermectin"
+  },
+  {
+    "generic_name": "Ivermectin 0.5% lotion",
+    "snomed_code": "387559003",
+    "snomed_display": "Ivermectin"
+  },
+  {
+    "generic_name": "IVIG",
+    "snomed_code": "116571001",
+    "snomed_display": "Normal immunoglobulin human"
+  },
+  {
+    "generic_name": "Ketamine",
+    "snomed_code": "373464007",
+    "snomed_display": "Ketamine"
+  },
+  {
+    "generic_name": "Ketoconazole 2% cream",
+    "snomed_code": "372835000",
+    "snomed_display": "Ketoconazole"
+  },
+  {
+    "generic_name": "Ketoconazole 2% shampoo",
+    "snomed_code": "372835000",
+    "snomed_display": "Ketoconazole"
+  },
+  {
+    "generic_name": "Ketorolac",
+    "snomed_code": "372501008",
+    "snomed_display": "Ketorolac"
+  },
+  {
+    "generic_name": "Ketotifen 0.025% ophthalmic (OTC)",
+    "snomed_code": "372642003",
+    "snomed_display": "Ketotifen"
+  },
+  {
+    "generic_name": "L-Carnitine",
+    "snomed_code": "372613007",
+    "snomed_display": "Levocarnitine"
+  },
+  {
+    "generic_name": "Lactated Ringer",
+    "snomed_code": "387289005",
+    "snomed_display": "Lactated Ringer's solution"
+  },
+  {
+    "generic_name": "Lactobacillus rhamnosus GG",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Lactulose",
+    "snomed_code": "273945008",
+    "snomed_display": "Lactulose"
+  },
+  {
+    "generic_name": "Lamotrigine",
+    "snomed_code": "387562000",
+    "snomed_display": "Lamotrigine"
+  },
+  {
+    "generic_name": "Lansoprazole",
+    "snomed_code": "386888005",
+    "snomed_display": "Lansoprazole"
+  },
+  {
+    "generic_name": "Ledipasvir/sofosbuvir (Harvoni)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Letrozole",
+    "snomed_code": "386911004",
+    "snomed_display": "Letrozole"
+  },
+  {
+    "generic_name": "Leucovorin (folinic acid)",
+    "snomed_code": "396065001",
+    "snomed_display": "Folinic acid"
+  },
+  {
+    "generic_name": "Leuprolide acetate",
+    "snomed_code": "397198001",
+    "snomed_display": "Leuprorelin"
+  },
+  {
+    "generic_name": "Levetiracetam",
+    "snomed_code": "387000003",
+    "snomed_display": "Levetiracetam"
+  },
+  {
+    "generic_name": "Levodopa/carbidopa",
+    "snomed_code": "398730001",
+    "snomed_display": "Levodopa and carbidopa"
+  },
+  {
+    "generic_name": "Levofloxacin",
+    "snomed_code": "387480006",
+    "snomed_display": "Levofloxacin"
+  },
+  {
+    "generic_name": "Levothyroxine",
+    "snomed_code": "387309009",
+    "snomed_display": "Levothyroxine"
+  },
+  {
+    "generic_name": "Lidocaine (viscous)",
+    "snomed_code": "387480002",
+    "snomed_display": "Lidocaine"
+  },
+  {
+    "generic_name": "Lidocaine 1%",
+    "snomed_code": "387480002",
+    "snomed_display": "Lidocaine"
+  },
+  {
+    "generic_name": "Linezolid",
+    "snomed_code": "387056004",
+    "snomed_display": "Linezolid"
+  },
+  {
+    "generic_name": "Lipid Emulsion 20%",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Liraglutide (Saxenda)",
+    "snomed_code": "444828003",
+    "snomed_display": "Liraglutide"
+  },
+  {
+    "generic_name": "Lisinopril",
+    "snomed_code": "386873009",
+    "snomed_display": "Lisinopril"
+  },
+  {
+    "generic_name": "Lithium",
+    "snomed_code": "387458003",
+    "snomed_display": "Lithium"
+  },
+  {
+    "generic_name": "Loperamide",
+    "snomed_code": "387040009",
+    "snomed_display": "Loperamide"
+  },
+  {
+    "generic_name": "Lopinavir/Ritonavir",
+    "snomed_code": "398786006",
+    "snomed_display": "Lopinavir and ritonavir"
+  },
+  {
+    "generic_name": "Loratadine",
+    "snomed_code": "386884007",
+    "snomed_display": "Loratadine"
+  },
+  {
+    "generic_name": "Lorazepam",
+    "snomed_code": "387106007",
+    "snomed_display": "Lorazepam"
+  },
+  {
+    "generic_name": "Losartan",
+    "snomed_code": "373567002",
+    "snomed_display": "Losartan"
+  },
+  {
+    "generic_name": "Lyfgenia (lovotibeglogene autotemcel)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Macitentan",
+    "snomed_code": "713395006",
+    "snomed_display": "Macitentan"
+  },
+  {
+    "generic_name": "Mafenide Acetate",
+    "snomed_code": "387287009",
+    "snomed_display": "Mafenide"
+  },
+  {
+    "generic_name": "Magnesium sulfate",
+    "snomed_code": "387340003",
+    "snomed_display": "Magnesium sulfate"
+  },
+  {
+    "generic_name": "Mannitol",
+    "snomed_code": "387168006",
+    "snomed_display": "Mannitol"
+  },
+  {
+    "generic_name": "Marstacimab",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  { "generic_name": "Mavacamten", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Mebendazole",
+    "snomed_code": "387311006",
+    "snomed_display": "Mebendazole"
+  },
+  {
+    "generic_name": "Melatonin",
+    "snomed_code": "41199001",
+    "snomed_display": "Melatonin"
+  },
+  {
+    "generic_name": "Meropenem",
+    "snomed_code": "387540000",
+    "snomed_display": "Meropenem"
+  },
+  {
+    "generic_name": "Metformin",
+    "snomed_code": "372567000",
+    "snomed_display": "Metformin"
+  },
+  {
+    "generic_name": "Methadone",
+    "snomed_code": "387286000",
+    "snomed_display": "Methadone"
+  },
+  {
+    "generic_name": "Methimazole",
+    "snomed_code": "387335003",
+    "snomed_display": "Thiamazole"
+  },
+  {
+    "generic_name": "Methotrexate",
+    "snomed_code": "387381009",
+    "snomed_display": "Methotrexate"
+  },
+  {
+    "generic_name": "Methylcobalamin",
+    "snomed_code": "409258004",
+    "snomed_display": "Mecobalamin"
+  },
+  {
+    "generic_name": "Methylphenidate",
+    "snomed_code": "373337007",
+    "snomed_display": "Methylphenidate"
+  },
+  {
+    "generic_name": "Methylprednisolone",
+    "snomed_code": "372795007",
+    "snomed_display": "Methylprednisolone"
+  },
+  {
+    "generic_name": "Metoclopramide",
+    "snomed_code": "372776000",
+    "snomed_display": "Metoclopramide"
+  },
+  {
+    "generic_name": "Metronidazole",
+    "snomed_code": "372602008",
+    "snomed_display": "Metronidazole"
+  },
+  {
+    "generic_name": "Micafungin",
+    "snomed_code": "420786001",
+    "snomed_display": "Micafungin"
+  },
+  {
+    "generic_name": "Miconazole",
+    "snomed_code": "372738006",
+    "snomed_display": "Miconazole"
+  },
+  {
+    "generic_name": "Midazolam",
+    "snomed_code": "373476007",
+    "snomed_display": "Midazolam"
+  },
+  {
+    "generic_name": "Miglustat",
+    "snomed_code": "385555005",
+    "snomed_display": "Miglustat"
+  },
+  {
+    "generic_name": "Milrinone",
+    "snomed_code": "372773008",
+    "snomed_display": "Milrinone"
+  },
+  {
+    "generic_name": "Mirabegron",
+    "snomed_code": "703130004",
+    "snomed_display": "Mirabegron"
+  },
+  {
+    "generic_name": "Mometasone",
+    "snomed_code": "395990009",
+    "snomed_display": "Mometasone"
+  },
+  {
+    "generic_name": "Montelukast",
+    "snomed_code": "373529000",
+    "snomed_display": "Montelukast"
+  },
+  {
+    "generic_name": "Morphine",
+    "snomed_code": "373529005",
+    "snomed_display": "Morphine"
+  },
+  {
+    "generic_name": "Moxifloxacin (ophthalmic)",
+    "snomed_code": "412439003",
+    "snomed_display": "Moxifloxacin"
+  },
+  {
+    "generic_name": "Mupirocin",
+    "snomed_code": "387397004",
+    "snomed_display": "Mupirocin"
+  },
+  {
+    "generic_name": "Mycophenolate mofetil",
+    "snomed_code": "386912006",
+    "snomed_display": "Mycophenolate mofetil"
+  },
+  {
+    "generic_name": "N-Acetylcysteine (NAC)",
+    "snomed_code": "387440002",
+    "snomed_display": "Acetylcysteine"
+  },
+  {
+    "generic_name": "Nafcillin",
+    "snomed_code": "372814009",
+    "snomed_display": "Nafcillin"
+  },
+  {
+    "generic_name": "Naloxone",
+    "snomed_code": "372890007",
+    "snomed_display": "Naloxone"
+  },
+  {
+    "generic_name": "Naproxen",
+    "snomed_code": "372588000",
+    "snomed_display": "Naproxen"
+  },
+  {
+    "generic_name": "Nasal saline drops/spray",
+    "snomed_code": "387390002",
+    "snomed_display": "Sodium chloride"
+  },
+  {
+    "generic_name": "Natamycin",
+    "snomed_code": "373461004",
+    "snomed_display": "Natamycin"
+  },
+  {
+    "generic_name": "Nebulized epinephrine",
+    "snomed_code": "387362001",
+    "snomed_display": "Epinephrine"
+  },
+  {
+    "generic_name": "Nebulized hypertonic saline",
+    "snomed_code": "387390002",
+    "snomed_display": "Sodium chloride"
+  },
+  {
+    "generic_name": "Nelarabine",
+    "snomed_code": "421252002",
+    "snomed_display": "Nelarabine"
+  },
+  {
+    "generic_name": "Neomycin/Polymyxin B/Hydrocortisone otic",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Nifedipine",
+    "snomed_code": "372494001",
+    "snomed_display": "Nifedipine"
+  },
+  {
+    "generic_name": "Nirmatrelvir/Ritonavir",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  { "generic_name": "Nirsevimab", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Nitazoxanide",
+    "snomed_code": "407058001",
+    "snomed_display": "Nitazoxanide"
+  },
+  {
+    "generic_name": "Nitrofurantoin",
+    "snomed_code": "372695000",
+    "snomed_display": "Nitrofurantoin"
+  },
+  {
+    "generic_name": "Nivolumab",
+    "snomed_code": "704256006",
+    "snomed_display": "Nivolumab"
+  },
+  {
+    "generic_name": "Norepinephrine",
+    "snomed_code": "387439001",
+    "snomed_display": "Norepinephrine"
+  },
+  {
+    "generic_name": "Normal Saline (0.9% Sodium Chloride)",
+    "snomed_code": "387390002",
+    "snomed_display": "Sodium chloride"
+  },
+  {
+    "generic_name": "Nystatin",
+    "snomed_code": "387048002",
+    "snomed_display": "Nystatin"
+  },
+  { "generic_name": "Obidoxime", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Octreotide",
+    "snomed_code": "372757002",
+    "snomed_display": "Octreotide"
+  },
+  {
+    "generic_name": "Ofloxacin 0.3% otic",
+    "snomed_code": "387551000",
+    "snomed_display": "Ofloxacin"
+  },
+  {
+    "generic_name": "Olopatadine",
+    "snomed_code": "372550002",
+    "snomed_display": "Olopatadine"
+  },
+  {
+    "generic_name": "Omalizumab",
+    "snomed_code": "406443008",
+    "snomed_display": "Omalizumab"
+  },
+  {
+    "generic_name": "Omaveloxolone",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Omeprazole",
+    "snomed_code": "387137007",
+    "snomed_display": "Omeprazole"
+  },
+  {
+    "generic_name": "Ondansetron",
+    "snomed_code": "372487007",
+    "snomed_display": "Ondansetron"
+  },
+  {
+    "generic_name": "Oral Vitamin K (Phytomenadione)",
+    "snomed_code": "372834001",
+    "snomed_display": "Phytomenadione"
+  },
+  {
+    "generic_name": "Orlistat",
+    "snomed_code": "387005003",
+    "snomed_display": "Orlistat"
+  },
+  {
+    "generic_name": "Oseltamivir",
+    "snomed_code": "386142008",
+    "snomed_display": "Oseltamivir"
+  },
+  {
+    "generic_name": "Oxandrolone",
+    "snomed_code": "126118006",
+    "snomed_display": "Oxandrolone"
+  },
+  {
+    "generic_name": "Oxcarbazepine",
+    "snomed_code": "387025007",
+    "snomed_display": "Oxcarbazepine"
+  },
+  {
+    "generic_name": "Oxybutynin",
+    "snomed_code": "372717006",
+    "snomed_display": "Oxybutynin"
+  },
+  {
+    "generic_name": "Oxymetazoline",
+    "snomed_code": "387158003",
+    "snomed_display": "Oxymetazoline"
+  },
+  {
+    "generic_name": "Palivizumab",
+    "snomed_code": "386895008",
+    "snomed_display": "Palivizumab"
+  },
+  {
+    "generic_name": "Pancreatic enzyme replacement (Pancrelipase)",
+    "snomed_code": "387284002",
+    "snomed_display": "Pancrelipase"
+  },
+  {
+    "generic_name": "Pancreatic enzymes (Pancrelipase) for CF",
+    "snomed_code": "387284002",
+    "snomed_display": "Pancrelipase"
+  },
+  {
+    "generic_name": "Paracetamol",
+    "snomed_code": "387517004",
+    "snomed_display": "Paracetamol"
+  },
+  {
+    "generic_name": "Paromomycin",
+    "snomed_code": "387477007",
+    "snomed_display": "Paromomycin"
+  },
+  {
+    "generic_name": "Paromomycin (luminal agent)",
+    "snomed_code": "387477007",
+    "snomed_display": "Paromomycin"
+  },
+  { "generic_name": "Patiromer", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "PEG 3350 (Polyethylene Glycol)",
+    "snomed_code": "8030004",
+    "snomed_display": "Polyethylene glycol"
+  },
+  {
+    "generic_name": "Pegfilgrastim",
+    "snomed_code": "385544005",
+    "snomed_display": "Pegfilgrastim"
+  },
+  { "generic_name": "Pegvaliase", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Penicillin G (Benzylpenicillin)",
+    "snomed_code": "372826001",
+    "snomed_display": "Benzylpenicillin"
+  },
+  {
+    "generic_name": "Penicillin G procaine",
+    "snomed_code": "372837008",
+    "snomed_display": "Procaine benzylpenicillin"
+  },
+  {
+    "generic_name": "Penicillin V",
+    "snomed_code": "372833002",
+    "snomed_display": "Phenoxymethylpenicillin"
+  },
+  {
+    "generic_name": "Penicillin V (prophylaxis)",
+    "snomed_code": "372833002",
+    "snomed_display": "Phenoxymethylpenicillin"
+  },
+  {
+    "generic_name": "Pentobarbital",
+    "snomed_code": "387492009",
+    "snomed_display": "Pentobarbital"
+  },
+  {
+    "generic_name": "Peppermint oil (enteric-coated)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Peramivir",
+    "snomed_code": "443731004",
+    "snomed_display": "Peramivir"
+  },
+  {
+    "generic_name": "Permethrin 1% lotion",
+    "snomed_code": "410458008",
+    "snomed_display": "Permethrin"
+  },
+  {
+    "generic_name": "Permethrin 5% cream",
+    "snomed_code": "410458008",
+    "snomed_display": "Permethrin"
+  },
+  {
+    "generic_name": "Petrolatum barrier ointment",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Petroleum jelly (Vaseline)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Phenobarbital",
+    "snomed_code": "373505001",
+    "snomed_display": "Phenobarbital"
+  },
+  {
+    "generic_name": "Phentermine/topiramate",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Phenytoin",
+    "snomed_code": "387220001",
+    "snomed_display": "Phenytoin"
+  },
+  {
+    "generic_name": "Phytonadione",
+    "snomed_code": "372834001",
+    "snomed_display": "Phytomenadione"
+  },
+  {
+    "generic_name": "Phytonadione (Vitamin K1)",
+    "snomed_code": "372834001",
+    "snomed_display": "Phytomenadione"
+  },
+  {
+    "generic_name": "Pimecrolimus 1% cream",
+    "snomed_code": "385580005",
+    "snomed_display": "Pimecrolimus"
+  },
+  {
+    "generic_name": "Piperacillin-tazobactam",
+    "snomed_code": "395880000",
+    "snomed_display": "Piperacillin and tazobactam"
+  },
+  {
+    "generic_name": "Pivmecillinam",
+    "snomed_code": "372805002",
+    "snomed_display": "Pivmecillinam"
+  },
+  {
+    "generic_name": "Polyethylene Glycol 3350 (MiraLAX)",
+    "snomed_code": "8030004",
+    "snomed_display": "Polyethylene glycol"
+  },
+  {
+    "generic_name": "Polymyxin B-Trimethoprim drops",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Potassium citrate",
+    "snomed_code": "387441003",
+    "snomed_display": "Potassium citrate"
+  },
+  {
+    "generic_name": "Potassium iodide",
+    "snomed_code": "387389009",
+    "snomed_display": "Potassium iodide"
+  },
+  {
+    "generic_name": "Potassium phosphate",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Pralidoxime (2-PAM)",
+    "snomed_code": "372794006",
+    "snomed_display": "Pralidoxime"
+  },
+  {
+    "generic_name": "Pravastatin",
+    "snomed_code": "372912004",
+    "snomed_display": "Pravastatin"
+  },
+  {
+    "generic_name": "Praziquantel",
+    "snomed_code": "387463008",
+    "snomed_display": "Praziquantel"
+  },
+  {
+    "generic_name": "Precipitated sulfur 5-10%",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Prednis(ol)one",
+    "snomed_code": "116601002",
+    "snomed_display": "Prednisolone"
+  },
+  {
+    "generic_name": "Prednisolone",
+    "snomed_code": "116601002",
+    "snomed_display": "Prednisolone"
+  },
+  {
+    "generic_name": "Prednisone",
+    "snomed_code": "372756006",
+    "snomed_display": "Prednisone"
+  },
+  {
+    "generic_name": "Primaquine (radical cure)",
+    "snomed_code": "387491002",
+    "snomed_display": "Primaquine"
+  },
+  {
+    "generic_name": "Probiotics (LGG)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Probiotics (prevention)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Probiotics (S. boulardii)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Promethazine",
+    "snomed_code": "372887008",
+    "snomed_display": "Promethazine"
+  },
+  {
+    "generic_name": "Proparacaine",
+    "snomed_code": "387165004",
+    "snomed_display": "Proparacaine"
+  },
+  {
+    "generic_name": "Propranolol",
+    "snomed_code": "372772003",
+    "snomed_display": "Propranolol"
+  },
+  {
+    "generic_name": "Prostaglandin E1",
+    "snomed_code": "372512008",
+    "snomed_display": "Alprostadil"
+  },
+  {
+    "generic_name": "Proton Pump Inhibitor",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Pyrantel pamoate",
+    "snomed_code": "387254003",
+    "snomed_display": "Pyrantel"
+  },
+  {
+    "generic_name": "Pyrazinamide (Z)",
+    "snomed_code": "387076005",
+    "snomed_display": "Pyrazinamide"
+  },
+  {
+    "generic_name": "Pyridostigmine",
+    "snomed_code": "372895001",
+    "snomed_display": "Pyridostigmine"
+  },
+  {
+    "generic_name": "Pyridoxine (B6)",
+    "snomed_code": "430469009",
+    "snomed_display": "Pyridoxine"
+  },
+  {
+    "generic_name": "Pyridoxine (vitamin B6)",
+    "snomed_code": "430469009",
+    "snomed_display": "Pyridoxine"
+  },
+  {
+    "generic_name": "Pyrimethamine",
+    "snomed_code": "373769001",
+    "snomed_display": "Pyrimethamine"
+  },
+  {
+    "generic_name": "Quinine",
+    "snomed_code": "373497008",
+    "snomed_display": "Quinine"
+  },
+  {
+    "generic_name": "Racecadotril",
+    "snomed_code": "409266002",
+    "snomed_display": "Racecadotril"
+  },
+  {
+    "generic_name": "Radioactive iodine (I-131)",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Raltegravir",
+    "snomed_code": "429707008",
+    "snomed_display": "Raltegravir"
+  },
+  {
+    "generic_name": "Ranitidine/Famotidine",
+    "snomed_code": "372755005",
+    "snomed_display": "Ranitidine"
+  },
+  {
+    "generic_name": "Rasburicase",
+    "snomed_code": "395801002",
+    "snomed_display": "Rasburicase"
+  },
+  {
+    "generic_name": "Recombinant Factor VIIa",
+    "snomed_code": "386962008",
+    "snomed_display": "Coagulation factor VIIa"
+  },
+  {
+    "generic_name": "Regular insulin IV infusion",
+    "snomed_code": "412222001",
+    "snomed_display": "Insulin regular"
+  },
+  {
+    "generic_name": "Remdesivir",
+    "snomed_code": "870518005",
+    "snomed_display": "Remdesivir"
+  },
+  {
+    "generic_name": "Retinol (Vitamin A)",
+    "snomed_code": "82622003",
+    "snomed_display": "Vitamin A"
+  },
+  {
+    "generic_name": "Ribavirin",
+    "snomed_code": "387188005",
+    "snomed_display": "Ribavirin"
+  },
+  {
+    "generic_name": "Riboflavin (Vitamin B2)",
+    "snomed_code": "13235001",
+    "snomed_display": "Riboflavin"
+  },
+  {
+    "generic_name": "Rifampicin",
+    "snomed_code": "387159006",
+    "snomed_display": "Rifampicin"
+  },
+  {
+    "generic_name": "Rilonacept",
+    "snomed_code": "432096003",
+    "snomed_display": "Rilonacept"
+  },
+  {
+    "generic_name": "Riluzole",
+    "snomed_code": "386844006",
+    "snomed_display": "Riluzole"
+  },
+  {
+    "generic_name": "Risedronate",
+    "snomed_code": "395926004",
+    "snomed_display": "Risedronate"
+  },
+  {
+    "generic_name": "Risperidone",
+    "snomed_code": "386840002",
+    "snomed_display": "Risperidone"
+  },
+  {
+    "generic_name": "Rituximab",
+    "snomed_code": "386919002",
+    "snomed_display": "Rituximab"
+  },
+  {
+    "generic_name": "Rizatriptan",
+    "snomed_code": "387010007",
+    "snomed_display": "Rizatriptan"
+  },
+  {
+    "generic_name": "Romiplostim",
+    "snomed_code": "432005006",
+    "snomed_display": "Romiplostim"
+  },
+  {
+    "generic_name": "Ruxolitinib cream 1.5%",
+    "snomed_code": "703127001",
+    "snomed_display": "Ruxolitinib"
+  },
+  {
+    "generic_name": "Saccharomyces boulardii",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Sacubitril-Valsartan",
+    "snomed_code": "716073004",
+    "snomed_display": "Sacubitril and valsartan"
+  },
+  {
+    "generic_name": "Salbutamol (Albuterol)",
+    "snomed_code": "372897005",
+    "snomed_display": "Salbutamol"
+  },
+  {
+    "generic_name": "Sapropterin (BH4)",
+    "snomed_code": "432003004",
+    "snomed_display": "Sapropterin"
+  },
+  {
+    "generic_name": "Sarecycline",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Selenium sulfide 2.5%",
+    "snomed_code": "387070004",
+    "snomed_display": "Selenium sulfide"
+  },
+  { "generic_name": "Selexipag", "snomed_code": null, "snomed_display": null },
+  {
+    "generic_name": "Semaglutide",
+    "snomed_code": "764354004",
+    "snomed_display": "Semaglutide"
+  },
+  {
+    "generic_name": "Senna (Sennosides)",
+    "snomed_code": "373507009",
+    "snomed_display": "Sennosides"
+  },
+  {
+    "generic_name": "Sertraline",
+    "snomed_code": "372840003",
+    "snomed_display": "Sertraline"
+  },
+  {
+    "generic_name": "Sevelamer",
+    "snomed_code": "395868008",
+    "snomed_display": "Sevelamer"
+  },
+  {
+    "generic_name": "Sildenafil",
+    "snomed_code": "372572000",
+    "snomed_display": "Sildenafil"
+  },
+  {
+    "generic_name": "Silver Sulfadiazine 1%",
+    "snomed_code": "387358003",
+    "snomed_display": "Silver sulfadiazine"
+  },
+  {
+    "generic_name": "Sirolimus",
+    "snomed_code": "387014003",
+    "snomed_display": "Sirolimus"
+  },
+  {
+    "generic_name": "Sodium Bicarbonate",
+    "snomed_code": "387319002",
+    "snomed_display": "Sodium bicarbonate"
+  },
+  {
+    "generic_name": "Sodium bicarbonate ear drops 5%",
+    "snomed_code": "387319002",
+    "snomed_display": "Sodium bicarbonate"
+  },
+  {
+    "generic_name": "Sodium Polystyrene Sulfonate",
+    "snomed_code": "387399001",
+    "snomed_display": "Sodium polystyrene sulfonate"
+  },
+  {
+    "generic_name": "Sofosbuvir/Velpatasvir",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Somatropin",
+    "snomed_code": "395745001",
+    "snomed_display": "Somatropin"
+  },
+  {
+    "generic_name": "Sotalol",
+    "snomed_code": "372911006",
+    "snomed_display": "Sotalol"
+  },
+  {
+    "generic_name": "Spinosad 0.9% topical",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Spironolactone",
+    "snomed_code": "387078006",
+    "snomed_display": "Spironolactone"
+  },
+  {
+    "generic_name": "Sucralfate",
+    "snomed_code": "387469006",
+    "snomed_display": "Sucralfate"
+  },
+  {
+    "generic_name": "Sulfadiazine",
+    "snomed_code": "74523009",
+    "snomed_display": "Sulfadiazine"
+  },
+  {
+    "generic_name": "Sulfasalazine",
+    "snomed_code": "387248002",
+    "snomed_display": "Sulfasalazine"
+  },
+  {
+    "generic_name": "Sumatriptan",
+    "snomed_code": "395892000",
+    "snomed_display": "Sumatriptan"
+  },
+  {
+    "generic_name": "Surfactant (Poractant alfa)",
+    "snomed_code": "395828006",
+    "snomed_display": "Poractant alfa"
+  },
+  {
+    "generic_name": "Tacrolimus",
+    "snomed_code": "386975001",
+    "snomed_display": "Tacrolimus"
+  },
+  {
+    "generic_name": "Tafenoquine",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Tamsulosin",
+    "snomed_code": "372809002",
+    "snomed_display": "Tamsulosin"
+  },
+  {
+    "generic_name": "Temozolomide",
+    "snomed_code": "387009002",
+    "snomed_display": "Temozolomide"
+  },
+  {
+    "generic_name": "Tenofovir DF/Emtricitabine",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Tenofovir disoproxil",
+    "snomed_code": "422091007",
+    "snomed_display": "Tenofovir disoproxil"
+  },
+  {
+    "generic_name": "Terbinafine",
+    "snomed_code": "373450007",
+    "snomed_display": "Terbinafine"
+  },
+  {
+    "generic_name": "Terbutaline",
+    "snomed_code": "372810007",
+    "snomed_display": "Terbutaline"
+  },
+  {
+    "generic_name": "Testosterone",
+    "snomed_code": "43688007",
+    "snomed_display": "Testosterone"
+  },
+  {
+    "generic_name": "Tetrabenazine",
+    "snomed_code": "387523003",
+    "snomed_display": "Tetrabenazine"
+  },
+  {
+    "generic_name": "Thiamine",
+    "snomed_code": "259659006",
+    "snomed_display": "Thiamine"
+  },
+  {
+    "generic_name": "Tinidazole",
+    "snomed_code": "387533008",
+    "snomed_display": "Tinidazole"
+  },
+  {
+    "generic_name": "Tizanidine",
+    "snomed_code": "373440006",
+    "snomed_display": "Tizanidine"
+  },
+  {
+    "generic_name": "TMP-SMX (Cotrimoxazole)",
+    "snomed_code": "398731002",
+    "snomed_display": "Sulfamethoxazole and trimethoprim"
+  },
+  {
+    "generic_name": "Tocilizumab",
+    "snomed_code": "444648007",
+    "snomed_display": "Tocilizumab"
+  },
+  {
+    "generic_name": "Tofacitinib",
+    "snomed_code": "703823007",
+    "snomed_display": "Tofacitinib"
+  },
+  {
+    "generic_name": "Tolterodine",
+    "snomed_code": "372570008",
+    "snomed_display": "Tolterodine"
+  },
+  {
+    "generic_name": "Tolvaptan",
+    "snomed_code": "443530009",
+    "snomed_display": "Tolvaptan"
+  },
+  {
+    "generic_name": "Topiramate",
+    "snomed_code": "386854005",
+    "snomed_display": "Topiramate"
+  },
+  {
+    "generic_name": "Tranexamic Acid",
+    "snomed_code": "386960002",
+    "snomed_display": "Tranexamic acid"
+  },
+  {
+    "generic_name": "Trazodone",
+    "snomed_code": "372829006",
+    "snomed_display": "Trazodone"
+  },
+  {
+    "generic_name": "Treprostinil",
+    "snomed_code": "385562002",
+    "snomed_display": "Treprostinil"
+  },
+  {
+    "generic_name": "Triamcinolone",
+    "snomed_code": "372893003",
+    "snomed_display": "Triamcinolone"
+  },
+  {
+    "generic_name": "Trihexyphenidyl",
+    "snomed_code": "372879008",
+    "snomed_display": "Trihexyphenidyl"
+  },
+  {
+    "generic_name": "Triptorelin",
+    "snomed_code": "395914004",
+    "snomed_display": "Triptorelin"
+  },
+  {
+    "generic_name": "Tris-Hydroxymethyl Aminomethane",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Ursodeoxycholic acid",
+    "snomed_code": "387085005",
+    "snomed_display": "Ursodeoxycholic acid"
+  },
+  {
+    "generic_name": "Ustekinumab",
+    "snomed_code": "443465002",
+    "snomed_display": "Ustekinumab"
+  },
+  {
+    "generic_name": "Valacyclovir",
+    "snomed_code": "387080000",
+    "snomed_display": "Valaciclovir"
+  },
+  {
+    "generic_name": "Valbenazine",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Valganciclovir",
+    "snomed_code": "386897006",
+    "snomed_display": "Valganciclovir"
+  },
+  {
+    "generic_name": "Valproate",
+    "snomed_code": "387080000",
+    "snomed_display": "Valproic acid"
+  },
+  {
+    "generic_name": "Vancomycin",
+    "snomed_code": "372735009",
+    "snomed_display": "Vancomycin"
+  },
+  {
+    "generic_name": "Velaglucerase alfa",
+    "snomed_code": "703395001",
+    "snomed_display": "Velaglucerase alfa"
+  },
+  {
+    "generic_name": "Vitamin A",
+    "snomed_code": "82622003",
+    "snomed_display": "Vitamin A"
+  },
+  {
+    "generic_name": "Vitamin C",
+    "snomed_code": "387270009",
+    "snomed_display": "Ascorbic acid"
+  },
+  {
+    "generic_name": "Vitamin E",
+    "snomed_code": "37237002",
+    "snomed_display": "Vitamin E"
+  },
+  {
+    "generic_name": "Voclosporin",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Voriconazole",
+    "snomed_code": "385469007",
+    "snomed_display": "Voriconazole"
+  },
+  {
+    "generic_name": "Warfarin",
+    "snomed_code": "372756001",
+    "snomed_display": "Warfarin"
+  },
+  {
+    "generic_name": "Zanamivir",
+    "snomed_code": "387564004",
+    "snomed_display": "Zanamivir"
+  },
+  {
+    "generic_name": "Zinc oxide ointment",
+    "snomed_code": "387329000",
+    "snomed_display": "Zinc oxide"
+  },
+  {
+    "generic_name": "Zinc pyrithione 1% shampoo",
+    "snomed_code": null,
+    "snomed_display": null
+  },
+  {
+    "generic_name": "Zinc sulfate",
+    "snomed_code": "86739005",
+    "snomed_display": "Zinc sulfate"
+  }
+]

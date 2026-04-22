@@ -1,0 +1,3124 @@
+[
+  {
+    "id": "268a427b-d820-423c-93c4-ea4d9ba0c6a0",
+    "icd10": "A01",
+    "diagnosis_name": "Typhoid and paratyphoid fevers",
+    "snomed_code": "4834000",
+    "snomed_display": "Typhoid fever"
+  },
+  {
+    "id": "69423dfc-66fe-4ce4-b594-757831cec968",
+    "icd10": "A03",
+    "diagnosis_name": "Shigellosis",
+    "snomed_code": "36188001",
+    "snomed_display": "Shigellosis"
+  },
+  {
+    "id": "038aba84-32a9-438a-8892-e3753dc39ef8",
+    "icd10": "A04",
+    "diagnosis_name": "Other bacterial intestinal infections",
+    "snomed_code": "42338000",
+    "snomed_display": "Bacterial intestinal infection"
+  },
+  {
+    "id": "98830f6f-8075-4e54-bd3e-b68a52346d84",
+    "icd10": "A06",
+    "diagnosis_name": "Amoebiasis",
+    "snomed_code": "32488009",
+    "snomed_display": "Amoebiasis"
+  },
+  {
+    "id": "d05e974e-d188-4a1f-9eb3-074db2fdf2c7",
+    "icd10": "A07",
+    "diagnosis_name": "Other protozoal intestinal diseases",
+    "snomed_code": "51526001",
+    "snomed_display": "Protozoal intestinal disease"
+  },
+  {
+    "id": "b4888828-91af-4e5a-a7b7-9cfc19063ca7",
+    "icd10": "A08.4",
+    "diagnosis_name": "Viral intestinal infection, unspecified",
+    "snomed_code": "64532007",
+    "snomed_display": "Viral intestinal infection"
+  },
+  {
+    "id": "a9e3b667-eef4-4772-9695-e5dd712b72b9",
+    "icd10": "A09",
+    "diagnosis_name": "Gastroenteritis and dehydration",
+    "snomed_code": "25374005",
+    "snomed_display": "Gastroenteritis"
+  },
+  {
+    "id": "9d3e9fa8-89e4-4b69-968d-635964259f89",
+    "icd10": "A09",
+    "diagnosis_name": "Infectious gastroenteritis and colitis, unspecified",
+    "snomed_code": "25374005",
+    "snomed_display": "Gastroenteritis"
+  },
+  {
+    "id": "be31a0b1-4ec4-439d-b9f6-fdcebfcafed3",
+    "icd10": "A15",
+    "diagnosis_name": "Respiratory tuberculosis, bacteriologically and histologically confirmed",
+    "snomed_code": "154283005",
+    "snomed_display": "Pulmonary tuberculosis"
+  },
+  {
+    "id": "221ac739-f4ac-4478-90b1-8044a3f3744e",
+    "icd10": "A16",
+    "diagnosis_name": "Respiratory tuberculosis, not confirmed bacteriologically or histologically",
+    "snomed_code": "154283005",
+    "snomed_display": "Pulmonary tuberculosis"
+  },
+  {
+    "id": "db28c2ae-e6cf-4d64-b123-f817ae23d6ef",
+    "icd10": "A17",
+    "diagnosis_name": "Tuberculosis of nervous system",
+    "snomed_code": "56335008",
+    "snomed_display": "Tuberculosis of nervous system"
+  },
+  {
+    "id": "f5007230-9bcc-49f4-a618-3b36f52e6572",
+    "icd10": "A18",
+    "diagnosis_name": "Tuberculosis of other organs",
+    "snomed_code": "399059003",
+    "snomed_display": "Tuberculosis of other organs"
+  },
+  {
+    "id": "dbb7af61-46d6-4754-8223-a100665207cd",
+    "icd10": "A19",
+    "diagnosis_name": "Miliary tuberculosis",
+    "snomed_code": "30850004",
+    "snomed_display": "Miliary tuberculosis"
+  },
+  {
+    "id": "fc1de05f-d4d8-4acf-add7-0312d792f78c",
+    "icd10": "A27",
+    "diagnosis_name": "Leptospirosis",
+    "snomed_code": "77377001",
+    "snomed_display": "Leptospirosis"
+  },
+  {
+    "id": "a40719e8-d8b9-4e5e-ba56-8d32bd00ff86",
+    "icd10": "A33",
+    "diagnosis_name": "Neonatal tetanus",
+    "snomed_code": "84005002",
+    "snomed_display": "Neonatal tetanus"
+  },
+  {
+    "id": "57699284-b042-4ee0-aa63-48cac62082ea",
+    "icd10": "A36",
+    "diagnosis_name": "Diphtheria",
+    "snomed_code": "397428000",
+    "snomed_display": "Diphtheria"
+  },
+  {
+    "id": "e5a6e162-ae60-45ce-bfc0-83baff402ff0",
+    "icd10": "A37",
+    "diagnosis_name": "Whooping cough",
+    "snomed_code": "27836007",
+    "snomed_display": "Pertussis"
+  },
+  {
+    "id": "3dbf0212-051e-4313-9f36-7618ea051106",
+    "icd10": "A38",
+    "diagnosis_name": "Scarlet fever",
+    "snomed_code": "30242009",
+    "snomed_display": "Scarlet fever"
+  },
+  {
+    "id": "fdbba5bf-c9d3-477a-ab33-ea4b6387577f",
+    "icd10": "A39",
+    "diagnosis_name": "Meningococcal infection",
+    "snomed_code": "4089001",
+    "snomed_display": "Meningococcal infection"
+  },
+  {
+    "id": "9c5b0e66-406a-41a7-967a-4b58f351bf15",
+    "icd10": "A40",
+    "diagnosis_name": "Streptococcal sepsis",
+    "snomed_code": "448417001",
+    "snomed_display": "Streptococcal sepsis"
+  },
+  {
+    "id": "eebbdf64-d491-414c-80e9-9a9334814925",
+    "icd10": "A41",
+    "diagnosis_name": "Other bacterial sepsis",
+    "snomed_code": "10001005",
+    "snomed_display": "Bacterial sepsis"
+  },
+  {
+    "id": "40082126-b6f3-48b6-a313-a99d9fdc26a2",
+    "icd10": "A41.9",
+    "diagnosis_name": "Sepsis, unspecified organism",
+    "snomed_code": "91302008",
+    "snomed_display": "Sepsis"
+  },
+  {
+    "id": "f4fdd4fd-cede-43dd-8b3c-f38d7ec85ae5",
+    "icd10": "A49.9",
+    "diagnosis_name": "Bacterial infection of unspecified site",
+    "snomed_code": "87628006",
+    "snomed_display": "Bacterial infectious disease"
+  },
+  {
+    "id": "4ae2d91a-36ad-4ef4-b362-d6a33f4e597d",
+    "icd10": "A75.3",
+    "diagnosis_name": "Scrub typhus",
+    "snomed_code": "75702008",
+    "snomed_display": "Scrub typhus"
+  },
+  {
+    "id": "62923e1b-41e5-4c4d-ac77-eab028d43991",
+    "icd10": "A82",
+    "diagnosis_name": "Rabies",
+    "snomed_code": "14168008",
+    "snomed_display": "Rabies"
+  },
+  {
+    "id": "24198f00-5f08-4868-8a4c-f97c66e0fc50",
+    "icd10": "A87",
+    "diagnosis_name": "Viral meningitis",
+    "snomed_code": "58170007",
+    "snomed_display": "Viral meningitis"
+  },
+  {
+    "id": "11b4d338-f015-4396-82ce-b1c3ecf19fb6",
+    "icd10": "A90",
+    "diagnosis_name": "Dengue fever",
+    "snomed_code": "38362002",
+    "snomed_display": "Dengue fever"
+  },
+  {
+    "id": "e942d7fc-fe7f-440c-b114-9c506e04b6fd",
+    "icd10": "A91",
+    "diagnosis_name": "Dengue hemorrhagic fever",
+    "snomed_code": "20927009",
+    "snomed_display": "Dengue hemorrhagic fever"
+  },
+  {
+    "id": "2b5101ab-9589-4cd4-be6c-0daef80875dc",
+    "icd10": "A92.0",
+    "diagnosis_name": "Chikungunya virus disease",
+    "snomed_code": "111864006",
+    "snomed_display": "Chikungunya fever"
+  },
+  {
+    "id": "0a2923ad-b88d-422a-8b0c-cb0340123637",
+    "icd10": "B00",
+    "diagnosis_name": "Herpesviral [herpes simplex] infections",
+    "snomed_code": "88594005",
+    "snomed_display": "Herpes simplex infection"
+  },
+  {
+    "id": "1775425e-1dbc-4a3e-913f-9b4be441632d",
+    "icd10": "B01",
+    "diagnosis_name": "Varicella [chickenpox]",
+    "snomed_code": "38907003",
+    "snomed_display": "Varicella"
+  },
+  {
+    "id": "a82ab91d-0195-4154-88be-3ab93b66dc85",
+    "icd10": "B02",
+    "diagnosis_name": "Herpes zoster",
+    "snomed_code": "4740000",
+    "snomed_display": "Herpes zoster"
+  },
+  {
+    "id": "379ceb69-64c1-4496-be53-f47655687b12",
+    "icd10": "B05",
+    "diagnosis_name": "Measles",
+    "snomed_code": "14189004",
+    "snomed_display": "Measles"
+  },
+  {
+    "id": "1e953eaf-45dd-4c97-b8f0-342c2f7e0ce2",
+    "icd10": "B06",
+    "diagnosis_name": "Rubella",
+    "snomed_code": "36653000",
+    "snomed_display": "Rubella"
+  },
+  {
+    "id": "3f00fbd3-f7c9-4dde-b26b-083964190d34",
+    "icd10": "B08.2",
+    "diagnosis_name": "Roseola infantum",
+    "snomed_code": "240523007",
+    "snomed_display": "Exanthem subitum"
+  },
+  {
+    "id": "7b3bc17a-afff-49d6-9ceb-2a0592c8026c",
+    "icd10": "B08.4",
+    "diagnosis_name": "Hand, foot and mouth disease",
+    "snomed_code": "266104004",
+    "snomed_display": "Hand, foot and mouth disease"
+  },
+  {
+    "id": "046dc733-cc49-4252-a786-74b77209dee6",
+    "icd10": "B15",
+    "diagnosis_name": "Acute hepatitis A",
+    "snomed_code": "40468003",
+    "snomed_display": "Viral hepatitis A"
+  },
+  {
+    "id": "71c2b432-3711-43ca-8c92-c04cc3f381a3",
+    "icd10": "B16",
+    "diagnosis_name": "Acute hepatitis B",
+    "snomed_code": "66071002",
+    "snomed_display": "Viral hepatitis B"
+  },
+  {
+    "id": "7a745c02-6d16-4e53-90de-ad79c24681b6",
+    "icd10": "B17.1",
+    "diagnosis_name": "Acute hepatitis C",
+    "snomed_code": "50711007",
+    "snomed_display": "Viral hepatitis C"
+  },
+  {
+    "id": "a11a5c2b-fb11-4d1d-9f89-36bf801573b0",
+    "icd10": "B20",
+    "diagnosis_name": "Human immunodeficiency virus [HIV] disease",
+    "snomed_code": "86406008",
+    "snomed_display": "Human immunodeficiency virus infection"
+  },
+  {
+    "id": "5541b5b5-ad65-4269-9a91-067ae4d687eb",
+    "icd10": "B25",
+    "diagnosis_name": "Cytomegaloviral disease",
+    "snomed_code": "28944009",
+    "snomed_display": "Cytomegalovirus infection"
+  },
+  {
+    "id": "40dc02bb-6e74-4659-b4bb-e22885996fa6",
+    "icd10": "B26",
+    "diagnosis_name": "Mumps",
+    "snomed_code": "36989005",
+    "snomed_display": "Mumps"
+  },
+  {
+    "id": "9e076989-5853-4725-8adf-941ebca8377d",
+    "icd10": "B27",
+    "diagnosis_name": "Infectious mononucleosis",
+    "snomed_code": "271558008",
+    "snomed_display": "Infectious mononucleosis"
+  },
+  {
+    "id": "f9c6fb2c-6fa3-4858-b87d-1379b9015fdf",
+    "icd10": "B35",
+    "diagnosis_name": "Dermatophytosis",
+    "snomed_code": "47382004",
+    "snomed_display": "Dermatophytosis"
+  },
+  {
+    "id": "f3db5fe6-4bac-4fc4-9c9c-400f825d9241",
+    "icd10": "B36",
+    "diagnosis_name": "Other superficial mycoses",
+    "snomed_code": "3218000",
+    "snomed_display": "Mycosis"
+  },
+  {
+    "id": "843ffcdf-bec3-4383-b504-748b8500071c",
+    "icd10": "B37",
+    "diagnosis_name": "Candidiasis",
+    "snomed_code": "78048006",
+    "snomed_display": "Candidiasis"
+  },
+  {
+    "id": "2c3ff31b-9675-464d-94d9-0ff148642f6c",
+    "icd10": "B37.2",
+    "diagnosis_name": "Candidiasis of skin and nail",
+    "snomed_code": "426433000",
+    "snomed_display": "Candidiasis of skin"
+  },
+  {
+    "id": "4e38426c-090c-4af2-8d27-227953c7ca79",
+    "icd10": "B50",
+    "diagnosis_name": "Plasmodium falciparum malaria",
+    "snomed_code": "61462000",
+    "snomed_display": "Malaria"
+  },
+  {
+    "id": "1cc40bb1-3af4-4aae-9751-685deb1f6018",
+    "icd10": "B50.9",
+    "diagnosis_name": "Malaria (P. falciparum)",
+    "snomed_code": "61462000",
+    "snomed_display": "Malaria"
+  },
+  {
+    "id": "5fcce29b-7be8-4cb4-9837-6fe9083bfe2d",
+    "icd10": "B51",
+    "diagnosis_name": "Plasmodium vivax malaria",
+    "snomed_code": "41333006",
+    "snomed_display": "Plasmodium vivax malaria"
+  },
+  {
+    "id": "486c79c6-e519-42d6-bd5d-9c0a5f31d750",
+    "icd10": "B54",
+    "diagnosis_name": "Malaria, unspecified",
+    "snomed_code": "61462000",
+    "snomed_display": "Malaria"
+  },
+  {
+    "id": "02a9e019-beae-4af1-bcd1-59ee702d4bf9",
+    "icd10": "B76",
+    "diagnosis_name": "Hookworm diseases",
+    "snomed_code": "84619001",
+    "snomed_display": "Hookworm disease"
+  },
+  {
+    "id": "ce9b8368-366a-4f2a-bcfc-64adaf92f293",
+    "icd10": "B77",
+    "diagnosis_name": "Ascariasis",
+    "snomed_code": "2435008",
+    "snomed_display": "Ascariasis"
+  },
+  {
+    "id": "88eb3b43-5bfe-4e24-9b72-ceac09d15459",
+    "icd10": "B80",
+    "diagnosis_name": "Enterobiasis",
+    "snomed_code": "266147009",
+    "snomed_display": "Enterobiasis"
+  },
+  {
+    "id": "f620eb6d-e9df-4602-a918-caebf66aeea2",
+    "icd10": "B81",
+    "diagnosis_name": "Other intestinal helminthiases",
+    "snomed_code": "27601005",
+    "snomed_display": "Helminthiasis"
+  },
+  {
+    "id": "77e3c03a-cd1b-4244-805b-098326e325c6",
+    "icd10": "B82.9",
+    "diagnosis_name": "Intestinal parasitism, unspecified",
+    "snomed_code": "105629000",
+    "snomed_display": "Intestinal parasitic disease"
+  },
+  {
+    "id": "a6b46351-fd85-4888-849f-dfdf2a659a91",
+    "icd10": "B85",
+    "diagnosis_name": "Pediculosis and phthiriasis",
+    "snomed_code": "81000006",
+    "snomed_display": "Pediculosis"
+  },
+  {
+    "id": "d9b9cb67-06ed-4622-9c03-5376de615793",
+    "icd10": "B86",
+    "diagnosis_name": "Scabies",
+    "snomed_code": "128869009",
+    "snomed_display": "Scabies"
+  },
+  {
+    "id": "1b2270b8-f603-4caa-b92e-d0adb9f8949c",
+    "icd10": "C41",
+    "diagnosis_name": "Malignant neoplasm of bone and articular cartilage",
+    "snomed_code": "93725002",
+    "snomed_display": "Malignant neoplasm of bone"
+  },
+  {
+    "id": "2104a24e-0b64-4f44-8617-5ec4996ab74c",
+    "icd10": "C49",
+    "diagnosis_name": "Malignant neoplasm of connective and soft tissue",
+    "snomed_code": "399981008",
+    "snomed_display": "Malignant neoplasm of connective tissue"
+  },
+  {
+    "id": "74ac6fc1-beb5-43f5-8280-dee03410d320",
+    "icd10": "C64",
+    "diagnosis_name": "Malignant neoplasm of kidney, except renal pelvis",
+    "snomed_code": "93849006",
+    "snomed_display": "Malignant neoplasm of kidney"
+  },
+  {
+    "id": "d7bbbd1c-059e-4bb2-a18c-21de0132c0ab",
+    "icd10": "C71",
+    "diagnosis_name": "Malignant neoplasm of brain",
+    "snomed_code": "428061005",
+    "snomed_display": "Malignant neoplasm of brain"
+  },
+  {
+    "id": "c9d9341d-79b0-44a6-8103-f21874ac739c",
+    "icd10": "C81",
+    "diagnosis_name": "Hodgkin lymphoma",
+    "snomed_code": "118599009",
+    "snomed_display": "Hodgkin lymphoma"
+  },
+  {
+    "id": "16d426c9-e86e-44f2-978f-68051b1671aa",
+    "icd10": "C85",
+    "diagnosis_name": "Non-Hodgkin lymphoma",
+    "snomed_code": "118601006",
+    "snomed_display": "Non-Hodgkin lymphoma"
+  },
+  {
+    "id": "9d6787e5-432e-440e-9606-661112af8e6e",
+    "icd10": "C91.0",
+    "diagnosis_name": "Acute lymphoblastic leukemia",
+    "snomed_code": "91857003",
+    "snomed_display": "Acute lymphoblastic leukemia"
+  },
+  {
+    "id": "08c802e8-8a9b-48ab-bd45-0303fe4bbd9c",
+    "icd10": "C92.0",
+    "diagnosis_name": "Acute myeloid leukemia",
+    "snomed_code": "91861009",
+    "snomed_display": "Acute myeloid leukemia"
+  },
+  {
+    "id": "f5e71af4-daf7-4d17-8a35-f028d17f4644",
+    "icd10": "D50",
+    "diagnosis_name": "Iron deficiency anemia",
+    "snomed_code": "87522002",
+    "snomed_display": "Iron deficiency anemia"
+  },
+  {
+    "id": "46ed0787-c8a5-4487-a78f-448f754ac21c",
+    "icd10": "D51",
+    "diagnosis_name": "Vitamin B12 deficiency anemia",
+    "snomed_code": "190606006",
+    "snomed_display": "Vitamin B12 deficiency anemia"
+  },
+  {
+    "id": "8516aa92-8d1f-4414-b3c8-ae8f56d671d5",
+    "icd10": "D52",
+    "diagnosis_name": "Folate deficiency anemia",
+    "snomed_code": "413348000",
+    "snomed_display": "Folate deficiency anemia"
+  },
+  {
+    "id": "4808fef1-c163-4cb6-94ff-e467c09a58c8",
+    "icd10": "D53",
+    "diagnosis_name": "Other nutritional anemia",
+    "snomed_code": "267521007",
+    "snomed_display": "Nutritional anemia"
+  },
+  {
+    "id": "948bdf28-ef1b-4edf-9b13-78183f4c1eeb",
+    "icd10": "D56",
+    "diagnosis_name": "Thalassemia",
+    "snomed_code": "40108008",
+    "snomed_display": "Thalassemia"
+  },
+  {
+    "id": "7122c474-509d-4b74-bc6d-cb81a9d42aff",
+    "icd10": "D57",
+    "diagnosis_name": "Sickle-cell disorders",
+    "snomed_code": "417357006",
+    "snomed_display": "Sickle cell disease"
+  },
+  {
+    "id": "1a50f844-3763-4f32-8c70-18789f2b75c6",
+    "icd10": "D58",
+    "diagnosis_name": "Hereditary hemolytic anemia",
+    "snomed_code": "61261009",
+    "snomed_display": "Hereditary hemolytic anemia"
+  },
+  {
+    "id": "a025e3e0-7715-4d94-8d3f-5bf604f431b2",
+    "icd10": "D59",
+    "diagnosis_name": "Acquired hemolytic anemia",
+    "snomed_code": "61261009",
+    "snomed_display": "Hemolytic anemia"
+  },
+  {
+    "id": "f401f2c1-896e-48b8-bf59-2b2e7fbdb078",
+    "icd10": "D61",
+    "diagnosis_name": "Aplastic anemia",
+    "snomed_code": "306058006",
+    "snomed_display": "Aplastic anemia"
+  },
+  {
+    "id": "98bcf868-6e64-440b-829f-a3ca6cd4855f",
+    "icd10": "D61.8",
+    "diagnosis_name": "Other pancytopenia",
+    "snomed_code": "127034005",
+    "snomed_display": "Pancytopenia"
+  },
+  {
+    "id": "f0c9e57b-e119-4906-b1dc-ca5596fcb76e",
+    "icd10": "D64",
+    "diagnosis_name": "Other anemias",
+    "snomed_code": "271737000",
+    "snomed_display": "Anemia"
+  },
+  {
+    "id": "4b574f0d-2b76-4110-a111-bb46b93f3a34",
+    "icd10": "D66",
+    "diagnosis_name": "Hemophilia A",
+    "snomed_code": "28293008",
+    "snomed_display": "Hemophilia A"
+  },
+  {
+    "id": "ee2c3bf3-8351-4792-b073-58a22bf1a945",
+    "icd10": "D67",
+    "diagnosis_name": "Hemophilia B",
+    "snomed_code": "1563006",
+    "snomed_display": "Hemophilia B"
+  },
+  {
+    "id": "1ee5452a-9d4d-4e85-aab1-67fb7a59e750",
+    "icd10": "D68",
+    "diagnosis_name": "Other coagulation defects",
+    "snomed_code": "64779008",
+    "snomed_display": "Coagulation disorder"
+  },
+  {
+    "id": "bc508b60-e07f-4875-83d8-66872c0b3c21",
+    "icd10": "D69.0",
+    "diagnosis_name": "Allergic purpura / Henoch-Schonlein purpura",
+    "snomed_code": "191306005",
+    "snomed_display": "Henoch-Schonlein purpura"
+  },
+  {
+    "id": "41be4d18-cd41-4f99-93db-16169dba3f14",
+    "icd10": "D69.6",
+    "diagnosis_name": "Thrombocytopenia, unspecified",
+    "snomed_code": "302215000",
+    "snomed_display": "Thrombocytopenia"
+  },
+  {
+    "id": "29409aed-4ba6-4a8b-ab69-7a5ed515ca32",
+    "icd10": "D70",
+    "diagnosis_name": "Neutropenia",
+    "snomed_code": "165517008",
+    "snomed_display": "Neutropenia"
+  },
+  {
+    "id": "a3f44a42-c403-483c-b9e0-829b7e48043a",
+    "icd10": "D80",
+    "diagnosis_name": "Immunodeficiency with predominantly antibody defects",
+    "snomed_code": "234532001",
+    "snomed_display": "Immunodeficiency with predominantly antibody defects"
+  },
+  {
+    "id": "e38d89e5-59c8-4ca9-87a0-77092f67285e",
+    "icd10": "D81",
+    "diagnosis_name": "Combined immunodeficiencies",
+    "snomed_code": "31323000",
+    "snomed_display": "Severe combined immunodeficiency"
+  },
+  {
+    "id": "d911a90c-b171-4521-878c-32e2e5c858fb",
+    "icd10": "D82",
+    "diagnosis_name": "Immunodeficiency associated with other major defects",
+    "snomed_code": "234645009",
+    "snomed_display": "Immunodeficiency associated with other major defects"
+  },
+  {
+    "id": "ba910cf4-2575-4a4d-8a90-1ae49302e1ef",
+    "icd10": "D83",
+    "diagnosis_name": "Common variable immunodeficiency",
+    "snomed_code": "234416002",
+    "snomed_display": "Common variable immunodeficiency"
+  },
+  {
+    "id": "9f03d102-7b5d-4feb-adcf-7bd1ce65e5a3",
+    "icd10": "D84",
+    "diagnosis_name": "Other immunodeficiencies",
+    "snomed_code": "234532001",
+    "snomed_display": "Immunodeficiency disorder"
+  },
+  {
+    "id": "2ab9b693-23e3-48fe-929a-e3292745a6fd",
+    "icd10": "E03.9",
+    "diagnosis_name": "Hypothyroidism, unspecified",
+    "snomed_code": "40930008",
+    "snomed_display": "Hypothyroidism"
+  },
+  {
+    "id": "dd424a45-afce-4029-9fd2-41e9bed7c407",
+    "icd10": "E05",
+    "diagnosis_name": "Thyrotoxicosis / hyperthyroidism",
+    "snomed_code": "34486009",
+    "snomed_display": "Hyperthyroidism"
+  },
+  {
+    "id": "b855abc9-27b7-4552-87d4-01f7594a165d",
+    "icd10": "E10.1",
+    "diagnosis_name": "Type 1 diabetes mellitus with ketoacidosis",
+    "snomed_code": "421750000",
+    "snomed_display": "Diabetic ketoacidosis"
+  },
+  {
+    "id": "21af915d-3de3-423b-8d21-9932700d6c8f",
+    "icd10": "E10.9",
+    "diagnosis_name": "Type 1 diabetes insulin therapy",
+    "snomed_code": "46635009",
+    "snomed_display": "Type 1 diabetes mellitus"
+  },
+  {
+    "id": "95f22ea7-8158-492a-b163-38467ad6adf5",
+    "icd10": "E16.2",
+    "diagnosis_name": "Hypoglycemia, unspecified",
+    "snomed_code": "302866003",
+    "snomed_display": "Hypoglycemia"
+  },
+  {
+    "id": "77bfc9a1-d5f7-4574-8efd-200085fc8b38",
+    "icd10": "E25.0",
+    "diagnosis_name": "Congenital adrenogenital disorders associated with enzyme deficiency",
+    "snomed_code": "237751000",
+    "snomed_display": "Congenital adrenal hyperplasia"
+  },
+  {
+    "id": "d9002064-2959-4e09-8443-678f0b6f1448",
+    "icd10": "E27.4",
+    "diagnosis_name": "Adrenocortical insufficiency",
+    "snomed_code": "386584007",
+    "snomed_display": "Adrenal insufficiency"
+  },
+  {
+    "id": "185fc4a4-0d41-45db-9218-7ecf00542f64",
+    "icd10": "E30.1",
+    "diagnosis_name": "Precocious puberty",
+    "snomed_code": "400179000",
+    "snomed_display": "Precocious puberty"
+  },
+  {
+    "id": "6f6baec4-4df1-4a6f-b6bf-4dd571e917fb",
+    "icd10": "E30.9",
+    "diagnosis_name": "Disorders of puberty, unspecified",
+    "snomed_code": "400179000",
+    "snomed_display": "Disorder of puberty"
+  },
+  {
+    "id": "01d7454f-b2f0-463d-9107-744d0724457e",
+    "icd10": "E34.3",
+    "diagnosis_name": "Short stature, not elsewhere classified",
+    "snomed_code": "237837007",
+    "snomed_display": "Short stature"
+  },
+  {
+    "id": "835085b7-f0f3-4660-81a4-d08eca20dadc",
+    "icd10": "E43",
+    "diagnosis_name": "Severe protein-energy malnutrition",
+    "snomed_code": "238107002",
+    "snomed_display": "Severe protein-energy malnutrition"
+  },
+  {
+    "id": "d95ee348-7869-42ac-9fb5-f28c0313d688",
+    "icd10": "E44",
+    "diagnosis_name": "Protein-energy malnutrition of moderate and mild degree",
+    "snomed_code": "238106006",
+    "snomed_display": "Moderate protein-energy malnutrition"
+  },
+  {
+    "id": "6ee679c7-a194-461a-af6c-691142ddf6f0",
+    "icd10": "E46",
+    "diagnosis_name": "Unspecified protein-energy malnutrition",
+    "snomed_code": "248325000",
+    "snomed_display": "Malnutrition"
+  },
+  {
+    "id": "d38b27eb-ac39-49f7-928d-724e91809713",
+    "icd10": "E50",
+    "diagnosis_name": "Vitamin A deficiency",
+    "snomed_code": "72000004",
+    "snomed_display": "Vitamin A deficiency"
+  },
+  {
+    "id": "372654e0-4919-4a21-af44-203128dd38d0",
+    "icd10": "E55",
+    "diagnosis_name": "Vitamin D deficiency",
+    "snomed_code": "34713006",
+    "snomed_display": "Vitamin D deficiency"
+  },
+  {
+    "id": "387993b0-f0f4-4f42-af71-2c598acc68b8",
+    "icd10": "E56",
+    "diagnosis_name": "Other vitamin deficiencies",
+    "snomed_code": "85670002",
+    "snomed_display": "Vitamin deficiency"
+  },
+  {
+    "id": "27c36363-341b-4645-aa1d-def0ddfa243d",
+    "icd10": "E66",
+    "diagnosis_name": "Overweight and obesity",
+    "snomed_code": "414916001",
+    "snomed_display": "Obesity"
+  },
+  {
+    "id": "fb848dda-6cfe-4463-aff5-b355450293f0",
+    "icd10": "E70.0",
+    "diagnosis_name": "Phenylketonuria",
+    "snomed_code": "7573000",
+    "snomed_display": "Phenylketonuria"
+  },
+  {
+    "id": "2a283842-7596-4f95-9cc2-5e825f43721b",
+    "icd10": "E71",
+    "diagnosis_name": "Disorders of branched-chain amino-acid metabolism and fatty-acid metabolism",
+    "snomed_code": "363205009",
+    "snomed_display": "Disorder of branched-chain amino acid metabolism"
+  },
+  {
+    "id": "093b07bb-d35f-4603-b128-011d15cc0401",
+    "icd10": "E72",
+    "diagnosis_name": "Other disorders of amino-acid metabolism",
+    "snomed_code": "52767006",
+    "snomed_display": "Disorder of amino acid metabolism"
+  },
+  {
+    "id": "8896c079-1bd2-41ef-97ba-1784c2a21728",
+    "icd10": "E74",
+    "diagnosis_name": "Other disorders of carbohydrate metabolism",
+    "snomed_code": "20957000",
+    "snomed_display": "Disorder of carbohydrate metabolism"
+  },
+  {
+    "id": "445820e8-e72d-41e2-a815-0bf760370596",
+    "icd10": "E75",
+    "diagnosis_name": "Sphingolipidosis and other lipid storage disorders",
+    "snomed_code": "23585005",
+    "snomed_display": "Lipid storage disease"
+  },
+  {
+    "id": "b4dfe051-7680-4344-875d-da940b9db429",
+    "icd10": "E76.0",
+    "diagnosis_name": "Mucopolysaccharidosis",
+    "snomed_code": "82525005",
+    "snomed_display": "Mucopolysaccharidosis"
+  },
+  {
+    "id": "bbfd4ca5-e10c-4c98-ba82-e75ec6a84376",
+    "icd10": "E84",
+    "diagnosis_name": "Cystic fibrosis",
+    "snomed_code": "190905008",
+    "snomed_display": "Cystic fibrosis"
+  },
+  {
+    "id": "91baf60a-218f-400c-b89e-c426ea2e11af",
+    "icd10": "E86",
+    "diagnosis_name": "Dehydration",
+    "snomed_code": "34095006",
+    "snomed_display": "Dehydration"
+  },
+  {
+    "id": "981c3a1e-a5a7-4346-aaa1-15ed5b9c9b50",
+    "icd10": "E87.1",
+    "diagnosis_name": "Hypernatremia and hyponatremia",
+    "snomed_code": "267447008",
+    "snomed_display": "Disorder of sodium metabolism"
+  },
+  {
+    "id": "b01cb12e-21a1-4a07-ab62-b1afa6ed234a",
+    "icd10": "E87.2",
+    "diagnosis_name": "Metabolic acidosis",
+    "snomed_code": "59455009",
+    "snomed_display": "Metabolic acidosis"
+  },
+  {
+    "id": "c558bb38-689a-41a1-b1be-8e1143d849d9",
+    "icd10": "E87.5",
+    "diagnosis_name": "Hyperkalemia",
+    "snomed_code": "14140009",
+    "snomed_display": "Hyperkalemia"
+  },
+  {
+    "id": "fad034a3-1a46-4d87-a0c6-351afff5169e",
+    "icd10": "E88",
+    "diagnosis_name": "Other metabolic disorders",
+    "snomed_code": "75934005",
+    "snomed_display": "Metabolic disease"
+  },
+  {
+    "id": "b2fd6d3c-16e6-4c6b-a2fd-35c047fac411",
+    "icd10": "F51",
+    "diagnosis_name": "Sleep disorders not due to a substance or known physiological condition",
+    "snomed_code": "39898005",
+    "snomed_display": "Sleep disorder"
+  },
+  {
+    "id": "fb37aeb7-c7fd-470d-b0b2-69ee8940f4e1",
+    "icd10": "F70",
+    "diagnosis_name": "Mild intellectual disabilities",
+    "snomed_code": "86765009",
+    "snomed_display": "Mild intellectual disability"
+  },
+  {
+    "id": "ebbdf1d3-da68-4039-85e3-dd1ad519ac9a",
+    "icd10": "F71",
+    "diagnosis_name": "Moderate intellectual disabilities",
+    "snomed_code": "6471006",
+    "snomed_display": "Moderate intellectual disability"
+  },
+  {
+    "id": "0be73b9a-cf0d-4af3-89f2-ebfdbdd7e7ca",
+    "icd10": "F80",
+    "diagnosis_name": "Specific developmental disorders of speech and language",
+    "snomed_code": "62415009",
+    "snomed_display": "Specific developmental disorder of speech and language"
+  },
+  {
+    "id": "11d2c588-8d58-44d1-9f18-381904805b29",
+    "icd10": "F81",
+    "diagnosis_name": "Specific developmental disorders of scholastic skills",
+    "snomed_code": "1855002",
+    "snomed_display": "Developmental learning disorder"
+  },
+  {
+    "id": "0b2ce83c-c37b-4a37-b50c-19982d233c59",
+    "icd10": "F82",
+    "diagnosis_name": "Developmental disorder of motor function",
+    "snomed_code": "43153001",
+    "snomed_display": "Developmental coordination disorder"
+  },
+  {
+    "id": "ced9a8df-f65e-4118-8b55-1abc9f7b0177",
+    "icd10": "F84",
+    "diagnosis_name": "Pervasive developmental disorders / autism spectrum disorders",
+    "snomed_code": "35919005",
+    "snomed_display": "Autism spectrum disorder"
+  },
+  {
+    "id": "e9a990cb-9604-4bee-a52d-74bdf52fc953",
+    "icd10": "F90.9",
+    "diagnosis_name": "ADHD",
+    "snomed_code": "406506008",
+    "snomed_display": "Attention deficit hyperactivity disorder"
+  },
+  {
+    "id": "d6ff3bf4-887d-462d-b9a5-8fb06524d2c5",
+    "icd10": "F91",
+    "diagnosis_name": "Conduct disorders",
+    "snomed_code": "9406002",
+    "snomed_display": "Conduct disorder"
+  },
+  {
+    "id": "cfc74c34-d15e-48cd-9118-c428335a2c08",
+    "icd10": "F93",
+    "diagnosis_name": "Emotional disorders with onset specific to childhood",
+    "snomed_code": "109006",
+    "snomed_display": "Anxiety disorder of childhood"
+  },
+  {
+    "id": "03f46cd2-7c87-4b6d-99d1-1e511bf43434",
+    "icd10": "F94",
+    "diagnosis_name": "Disorders of social functioning with onset specific to childhood and adolescence",
+    "snomed_code": "109006",
+    "snomed_display": "Disorder of social functioning of childhood"
+  },
+  {
+    "id": "d763712d-a52d-46b2-8356-fb0c75ad043f",
+    "icd10": "F95",
+    "diagnosis_name": "Tic disorders",
+    "snomed_code": "44913001",
+    "snomed_display": "Tic disorder"
+  },
+  {
+    "id": "8f220851-eb92-46f4-9c76-4be26718b737",
+    "icd10": "F98.0",
+    "diagnosis_name": "Nonorganic enuresis",
+    "snomed_code": "8009008",
+    "snomed_display": "Nocturnal enuresis"
+  },
+  {
+    "id": "1098721e-1116-43a4-bc96-0887e082492b",
+    "icd10": "F98.1",
+    "diagnosis_name": "Encopresis not due to a substance or known physiological condition",
+    "snomed_code": "302751004",
+    "snomed_display": "Encopresis"
+  },
+  {
+    "id": "72798e9f-7dbb-42a9-b4b0-feca6525ca26",
+    "icd10": "G00",
+    "diagnosis_name": "Bacterial meningitis, not elsewhere classified",
+    "snomed_code": "95883001",
+    "snomed_display": "Bacterial meningitis"
+  },
+  {
+    "id": "4ef67ffd-1d2d-45ac-8f39-da427791b72f",
+    "icd10": "G03",
+    "diagnosis_name": "Meningitis due to other and unspecified causes",
+    "snomed_code": "7180009",
+    "snomed_display": "Meningitis"
+  },
+  {
+    "id": "2bc8d516-75f4-4028-9f82-60beff4a1e15",
+    "icd10": "G04",
+    "diagnosis_name": "Encephalitis, myelitis and encephalomyelitis",
+    "snomed_code": "45170000",
+    "snomed_display": "Encephalitis"
+  },
+  {
+    "id": "abad04e1-0c35-4551-a3d6-539aa9835e24",
+    "icd10": "G06",
+    "diagnosis_name": "Intracranial abscess and granuloma",
+    "snomed_code": "441806004",
+    "snomed_display": "Intracranial abscess"
+  },
+  {
+    "id": "517c5de8-003d-4f8a-a3e7-b94232014ee5",
+    "icd10": "G24",
+    "diagnosis_name": "Dystonia",
+    "snomed_code": "15802004",
+    "snomed_display": "Dystonia"
+  },
+  {
+    "id": "81bae712-6ae5-49f8-ba23-00a6dec48dd3",
+    "icd10": "G25",
+    "diagnosis_name": "Other extrapyramidal and movement disorders",
+    "snomed_code": "267080003",
+    "snomed_display": "Movement disorder"
+  },
+  {
+    "id": "d2c4390e-eb2b-47bf-8742-0714af560142",
+    "icd10": "G40",
+    "diagnosis_name": "Epilepsy",
+    "snomed_code": "84757009",
+    "snomed_display": "Epilepsy"
+  },
+  {
+    "id": "c1f2bea9-007c-44b1-a638-f2cb40e70bb3",
+    "icd10": "G41",
+    "diagnosis_name": "Status epilepticus",
+    "snomed_code": "230456007",
+    "snomed_display": "Status epilepticus"
+  },
+  {
+    "id": "175de3d9-afbb-4fa7-ae3a-a8befef5941b",
+    "icd10": "G43",
+    "diagnosis_name": "Migraine",
+    "snomed_code": "37796009",
+    "snomed_display": "Migraine"
+  },
+  {
+    "id": "6dda4ede-e320-4725-9f37-4f562ee7a381",
+    "icd10": "G47.3",
+    "diagnosis_name": "Obstructive sleep apnea",
+    "snomed_code": "78275009",
+    "snomed_display": "Obstructive sleep apnea syndrome"
+  },
+  {
+    "id": "de5a27b9-2716-4349-9fd4-2947ac2f19dd",
+    "icd10": "G47.9",
+    "diagnosis_name": "Sleep disorder, unspecified",
+    "snomed_code": "39898005",
+    "snomed_display": "Sleep disorder"
+  },
+  {
+    "id": "533a9314-1170-4204-b05f-2f4868bfb6f8",
+    "icd10": "G61.0",
+    "diagnosis_name": "Guillain-Barre syndrome",
+    "snomed_code": "193174005",
+    "snomed_display": "Guillain-Barre syndrome"
+  },
+  {
+    "id": "49258e21-09dd-4e6b-908b-eef67fab30f8",
+    "icd10": "G70",
+    "diagnosis_name": "Myasthenia gravis and other myoneural disorders",
+    "snomed_code": "91637004",
+    "snomed_display": "Myasthenia gravis"
+  },
+  {
+    "id": "146c54b3-0a14-40d1-8dc6-03467d155a07",
+    "icd10": "G71",
+    "diagnosis_name": "Primary disorders of muscles",
+    "snomed_code": "129565002",
+    "snomed_display": "Myopathy"
+  },
+  {
+    "id": "5904499a-b8ed-48f2-b25a-3edaaf47702a",
+    "icd10": "G72",
+    "diagnosis_name": "Myopathy",
+    "snomed_code": "129565002",
+    "snomed_display": "Myopathy"
+  },
+  {
+    "id": "c57226aa-07a6-42b1-a56e-da7432cf6411",
+    "icd10": "G80",
+    "diagnosis_name": "Cerebral palsy",
+    "snomed_code": "128188000",
+    "snomed_display": "Cerebral palsy"
+  },
+  {
+    "id": "5bcc06b4-588b-4c97-97d1-3681c437f85f",
+    "icd10": "G81",
+    "diagnosis_name": "Hemiplegia",
+    "snomed_code": "50582007",
+    "snomed_display": "Hemiplegia"
+  },
+  {
+    "id": "1480f5b3-10e2-420b-bfab-d3f8ed61c30f",
+    "icd10": "G91",
+    "diagnosis_name": "Hydrocephalus",
+    "snomed_code": "55999004",
+    "snomed_display": "Hydrocephalus"
+  },
+  {
+    "id": "ccb9108c-87da-46ce-9e76-1dcad682e33e",
+    "icd10": "G93.1",
+    "diagnosis_name": "Anoxic brain damage, not elsewhere classified",
+    "snomed_code": "419530002",
+    "snomed_display": "Anoxic brain damage"
+  },
+  {
+    "id": "843a1b12-3d89-4e9d-8951-af8fbec4c61a",
+    "icd10": "G93.2",
+    "diagnosis_name": "Benign intracranial hypertension",
+    "snomed_code": "68267002",
+    "snomed_display": "Benign intracranial hypertension"
+  },
+  {
+    "id": "30c29860-3cf9-43c5-a833-0e37767e0573",
+    "icd10": "G93.2",
+    "diagnosis_name": "Raised intracranial pressure syndrome",
+    "snomed_code": "68267002",
+    "snomed_display": "Benign intracranial hypertension"
+  },
+  {
+    "id": "ff3ce074-100d-46a3-b25e-fbe35a46bae3",
+    "icd10": "G93.4",
+    "diagnosis_name": "Encephalopathy, unspecified",
+    "snomed_code": "81308009",
+    "snomed_display": "Encephalopathy"
+  },
+  {
+    "id": "2d358583-cb0f-44d9-ad70-b5fb491ce42f",
+    "icd10": "H04",
+    "diagnosis_name": "Disorders of lacrimal system",
+    "snomed_code": "128462006",
+    "snomed_display": "Disorder of lacrimal system"
+  },
+  {
+    "id": "cf0a170c-6d87-4a0b-9dcd-4a03a8a3233f",
+    "icd10": "H10",
+    "diagnosis_name": "Conjunctivitis",
+    "snomed_code": "9826008",
+    "snomed_display": "Conjunctivitis"
+  },
+  {
+    "id": "0a6ee2d2-248f-4557-9cd9-998d443b7f17",
+    "icd10": "H16",
+    "diagnosis_name": "Keratitis",
+    "snomed_code": "5888003",
+    "snomed_display": "Keratitis"
+  },
+  {
+    "id": "51a027de-9dc1-4efa-bec3-5291ffa4aa63",
+    "icd10": "H50",
+    "diagnosis_name": "Strabismus",
+    "snomed_code": "22066006",
+    "snomed_display": "Strabismus"
+  },
+  {
+    "id": "901efeeb-9294-4a59-a39c-91310bafdb8e",
+    "icd10": "H52",
+    "diagnosis_name": "Disorders of refraction and accommodation",
+    "snomed_code": "39021009",
+    "snomed_display": "Refractive error"
+  },
+  {
+    "id": "6968845c-86c3-4dd4-86d5-1ad18bd665c1",
+    "icd10": "H53",
+    "diagnosis_name": "Visual disturbances",
+    "snomed_code": "63102001",
+    "snomed_display": "Visual disturbance"
+  },
+  {
+    "id": "a4b21875-6a20-428a-8e09-6e9418ff3f75",
+    "icd10": "H54",
+    "diagnosis_name": "Blindness and low vision",
+    "snomed_code": "397540003",
+    "snomed_display": "Visual impairment"
+  },
+  {
+    "id": "aaf53761-1e08-4245-b644-39c6ee3159f9",
+    "icd10": "H60",
+    "diagnosis_name": "Otitis externa",
+    "snomed_code": "3135009",
+    "snomed_display": "Otitis externa"
+  },
+  {
+    "id": "56012286-3c88-466d-93e9-9a5a94cce777",
+    "icd10": "H61.2",
+    "diagnosis_name": "Impacted cerumen",
+    "snomed_code": "68381005",
+    "snomed_display": "Impacted cerumen"
+  },
+  {
+    "id": "56a81a86-d90a-4bd5-9edf-fea50fd7d6f8",
+    "icd10": "H65",
+    "diagnosis_name": "Otitis media, nonsuppurative",
+    "snomed_code": "65363002",
+    "snomed_display": "Otitis media"
+  },
+  {
+    "id": "5b1a381d-0a44-4f6c-ba6a-c89d9c376d3c",
+    "icd10": "H66",
+    "diagnosis_name": "Suppurative and unspecified otitis media",
+    "snomed_code": "65363002",
+    "snomed_display": "Otitis media"
+  },
+  {
+    "id": "7b4b2d9b-100f-42bc-bff5-12ecdbda5389",
+    "icd10": "H66.90",
+    "diagnosis_name": "Acute otitis media",
+    "snomed_code": "3110003",
+    "snomed_display": "Acute otitis media"
+  },
+  {
+    "id": "e1e65368-2732-493a-ae82-313e5e9826c4",
+    "icd10": "H72",
+    "diagnosis_name": "Perforation of tympanic membrane",
+    "snomed_code": "60442001",
+    "snomed_display": "Tympanic membrane perforation"
+  },
+  {
+    "id": "14eef1c5-141a-4a84-9ae7-31ec5c40f9ad",
+    "icd10": "H90",
+    "diagnosis_name": "Conductive and sensorineural hearing loss",
+    "snomed_code": "15188001",
+    "snomed_display": "Hearing loss"
+  },
+  {
+    "id": "bfbd4647-e287-4da4-9d0c-fb8d26033f59",
+    "icd10": "H91",
+    "diagnosis_name": "Hearing loss, unspecified",
+    "snomed_code": "15188001",
+    "snomed_display": "Hearing loss"
+  },
+  {
+    "id": "a3830da8-d2f5-4ca9-9290-fbf9c1ba84ef",
+    "icd10": "I00",
+    "diagnosis_name": "Acute rheumatic fever without mention of heart involvement",
+    "snomed_code": "58718002",
+    "snomed_display": "Acute rheumatic fever"
+  },
+  {
+    "id": "9ed467f1-729a-449d-839c-662221461281",
+    "icd10": "I05",
+    "diagnosis_name": "Rheumatic mitral valve disorders",
+    "snomed_code": "48724000",
+    "snomed_display": "Rheumatic mitral valve disease"
+  },
+  {
+    "id": "54a69909-8246-4ec4-a3c6-15b0597c481b",
+    "icd10": "I10",
+    "diagnosis_name": "Paediatric hypertension",
+    "snomed_code": "38341003",
+    "snomed_display": "Hypertension"
+  },
+  {
+    "id": "164f12e3-e016-4f5b-9ae9-06248b656a48",
+    "icd10": "I27.2",
+    "diagnosis_name": "Pulmonary hypertension",
+    "snomed_code": "70995007",
+    "snomed_display": "Pulmonary hypertension"
+  },
+  {
+    "id": "08763374-8e09-4d22-9609-ed623ac8a947",
+    "icd10": "I30",
+    "diagnosis_name": "Acute pericarditis",
+    "snomed_code": "3238004",
+    "snomed_display": "Pericarditis"
+  },
+  {
+    "id": "9aa563be-2a6a-40fc-9e38-99998832e433",
+    "icd10": "I38",
+    "diagnosis_name": "Endocarditis, valve unspecified",
+    "snomed_code": "56819008",
+    "snomed_display": "Endocarditis"
+  },
+  {
+    "id": "f940c523-992d-4be8-8776-f75e2488bdbc",
+    "icd10": "I40",
+    "diagnosis_name": "Acute myocarditis",
+    "snomed_code": "50920009",
+    "snomed_display": "Myocarditis"
+  },
+  {
+    "id": "dae55fb7-cf95-4394-a53b-ce44008b3fe5",
+    "icd10": "I42",
+    "diagnosis_name": "Cardiomyopathy",
+    "snomed_code": "85898001",
+    "snomed_display": "Cardiomyopathy"
+  },
+  {
+    "id": "4fb46817-2343-4453-8a83-d4a2ca846839",
+    "icd10": "I47",
+    "diagnosis_name": "Paroxysmal tachycardia",
+    "snomed_code": "6456007",
+    "snomed_display": "Supraventricular tachycardia"
+  },
+  {
+    "id": "c7d9d901-a457-4a89-89d9-a46bd1c624d3",
+    "icd10": "I49.9",
+    "diagnosis_name": "Cardiac arrhythmia, unspecified",
+    "snomed_code": "698247007",
+    "snomed_display": "Cardiac arrhythmia"
+  },
+  {
+    "id": "d849da74-3da2-4179-987a-38e63e7186e9",
+    "icd10": "I50",
+    "diagnosis_name": "Heart failure",
+    "snomed_code": "84114007",
+    "snomed_display": "Heart failure"
+  },
+  {
+    "id": "97dff78f-58b0-41e2-a818-5c5f3f7200c4",
+    "icd10": "J00",
+    "diagnosis_name": "Acute nasopharyngitis (common cold)",
+    "snomed_code": "82272006",
+    "snomed_display": "Common cold"
+  },
+  {
+    "id": "8b9d8a97-7fc2-47ae-9d2c-96a49b45c806",
+    "icd10": "J01",
+    "diagnosis_name": "Acute sinusitis",
+    "snomed_code": "15805002",
+    "snomed_display": "Acute sinusitis"
+  },
+  {
+    "id": "abda5bb0-f044-4a64-8abd-51bc9a43e556",
+    "icd10": "J02",
+    "diagnosis_name": "Acute pharyngitis",
+    "snomed_code": "405737000",
+    "snomed_display": "Pharyngitis"
+  },
+  {
+    "id": "b5160c71-d23b-4a60-810c-7cbd327094ca",
+    "icd10": "J02.0",
+    "diagnosis_name": "Streptococcal pharyngitis (GAS)",
+    "snomed_code": "43878008",
+    "snomed_display": "Streptococcal pharyngitis"
+  },
+  {
+    "id": "d71574f4-899d-45dd-bd26-c23c2cae3fc9",
+    "icd10": "J03",
+    "diagnosis_name": "Acute tonsillitis",
+    "snomed_code": "90176007",
+    "snomed_display": "Tonsillitis"
+  },
+  {
+    "id": "d273fec6-88e9-473b-abcc-a7021bf2f725",
+    "icd10": "J04",
+    "diagnosis_name": "Acute laryngitis and tracheitis",
+    "snomed_code": "6969002",
+    "snomed_display": "Acute laryngitis"
+  },
+  {
+    "id": "a217cfe0-532a-4e6d-b0c4-6719d0b18ce8",
+    "icd10": "J05.0",
+    "diagnosis_name": "Croup",
+    "snomed_code": "6142004",
+    "snomed_display": "Croup"
+  },
+  {
+    "id": "9441a2c9-dc4f-46d9-b7bd-064af7824426",
+    "icd10": "J06.9",
+    "diagnosis_name": "Acute upper respiratory infection, unspecified",
+    "snomed_code": "54150009",
+    "snomed_display": "Upper respiratory infection"
+  },
+  {
+    "id": "0ee740fb-a772-4e30-9ae0-857bf1d8ce6b",
+    "icd10": "J10",
+    "diagnosis_name": "Influenza due to identified influenza virus",
+    "snomed_code": "442696006",
+    "snomed_display": "Influenza due to identified influenza virus"
+  },
+  {
+    "id": "01e69b28-52f6-4a6d-92f0-38750611b4fe",
+    "icd10": "J11",
+    "diagnosis_name": "Influenza, virus not identified",
+    "snomed_code": "6142004",
+    "snomed_display": "Influenza"
+  },
+  {
+    "id": "5f265463-5052-4268-b1e8-03c880b7d27b",
+    "icd10": "J12",
+    "diagnosis_name": "Viral pneumonia",
+    "snomed_code": "75570004",
+    "snomed_display": "Viral pneumonia"
+  },
+  {
+    "id": "c7002d6a-fd3a-4448-b79a-5b2242443040",
+    "icd10": "J13",
+    "diagnosis_name": "Pneumococcal pneumonia",
+    "snomed_code": "233607000",
+    "snomed_display": "Pneumococcal pneumonia"
+  },
+  {
+    "id": "a5a7cd1c-d80d-4f02-a4f0-7cffa742f26c",
+    "icd10": "J14",
+    "diagnosis_name": "Pneumonia due to Haemophilus influenzae",
+    "snomed_code": "195878008",
+    "snomed_display": "Pneumonia caused by Haemophilus influenzae"
+  },
+  {
+    "id": "659daecd-f27b-4040-984c-d9cdf47c8379",
+    "icd10": "J15.9",
+    "diagnosis_name": "Bacterial pneumonia, unspecified",
+    "snomed_code": "53084003",
+    "snomed_display": "Bacterial pneumonia"
+  },
+  {
+    "id": "f7f12513-1d88-4d09-b796-794f09b9d47c",
+    "icd10": "J18.9",
+    "diagnosis_name": "Pneumonia (CAP)",
+    "snomed_code": "233604007",
+    "snomed_display": "Pneumonia"
+  },
+  {
+    "id": "d8081835-76d8-4e4f-90be-63f6a4ab862e",
+    "icd10": "J18.9",
+    "diagnosis_name": "Pneumonia, unspecified organism",
+    "snomed_code": "233604007",
+    "snomed_display": "Pneumonia"
+  },
+  {
+    "id": "ff98aa18-a0e9-4df7-b5ea-20b7f60d231b",
+    "icd10": "J20",
+    "diagnosis_name": "Acute bronchitis",
+    "snomed_code": "10509002",
+    "snomed_display": "Acute bronchitis"
+  },
+  {
+    "id": "697ef7c1-b70e-4631-8999-c0bfdec10fe5",
+    "icd10": "J21",
+    "diagnosis_name": "Acute bronchiolitis",
+    "snomed_code": "4120002",
+    "snomed_display": "Bronchiolitis"
+  },
+  {
+    "id": "ce6efad3-90d5-4211-8bfb-1595310be8c6",
+    "icd10": "J21.0",
+    "diagnosis_name": "Acute bronchiolitis due to RSV",
+    "snomed_code": "4120002",
+    "snomed_display": "Bronchiolitis"
+  },
+  {
+    "id": "819f38c7-d510-4cd8-8ec6-f98b8ac81bc1",
+    "icd10": "J21.0",
+    "diagnosis_name": "Bronchiolitis (RSV/viral)",
+    "snomed_code": "4120002",
+    "snomed_display": "Bronchiolitis"
+  },
+  {
+    "id": "8d3445fc-71c4-44fd-a030-a313843316bd",
+    "icd10": "J22",
+    "diagnosis_name": "Acute lower respiratory infection, unspecified",
+    "snomed_code": "50417007",
+    "snomed_display": "Lower respiratory tract infection"
+  },
+  {
+    "id": "45f5f6ea-6c12-4f5d-a850-46cc08a46c3a",
+    "icd10": "J30.9",
+    "diagnosis_name": "Allergic rhinitis",
+    "snomed_code": "61582004",
+    "snomed_display": "Allergic rhinitis"
+  },
+  {
+    "id": "cc157616-8a78-481f-bd90-f91cd366519d",
+    "icd10": "J32",
+    "diagnosis_name": "Chronic sinusitis",
+    "snomed_code": "40055000",
+    "snomed_display": "Chronic sinusitis"
+  },
+  {
+    "id": "c4be61e5-c964-40c1-99d1-64a0e862d87d",
+    "icd10": "J35",
+    "diagnosis_name": "Chronic diseases of tonsils and adenoids",
+    "snomed_code": "441491005",
+    "snomed_display": "Chronic tonsillar disease"
+  },
+  {
+    "id": "1ea9ecfe-7406-4ffe-be61-086c38d5203c",
+    "icd10": "J35.1",
+    "diagnosis_name": "Hypertrophy of tonsils",
+    "snomed_code": "38462009",
+    "snomed_display": "Hypertrophy of tonsils"
+  },
+  {
+    "id": "c5a50dc1-2ad5-4a59-a2ec-de0aee072d1a",
+    "icd10": "J35.2",
+    "diagnosis_name": "Hypertrophy of adenoids",
+    "snomed_code": "38462009",
+    "snomed_display": "Hypertrophy of adenoids"
+  },
+  {
+    "id": "c0a22224-b615-4677-b849-baceeb6a2a53",
+    "icd10": "J45.901",
+    "diagnosis_name": "Asthma - acute exacerbation",
+    "snomed_code": "195967001",
+    "snomed_display": "Asthma"
+  },
+  {
+    "id": "7308281c-f7fd-4834-b39f-d6b2b7c12ac2",
+    "icd10": "J46",
+    "diagnosis_name": "Status asthmaticus",
+    "snomed_code": "31387002",
+    "snomed_display": "Status asthmaticus"
+  },
+  {
+    "id": "785697b8-6059-41b4-9d16-914ed0ba58d3",
+    "icd10": "J80",
+    "diagnosis_name": "Acute respiratory distress syndrome",
+    "snomed_code": "67782005",
+    "snomed_display": "Acute respiratory distress syndrome"
+  },
+  {
+    "id": "0641dd56-1e05-4e61-8137-a36a9d2e8907",
+    "icd10": "J80",
+    "diagnosis_name": "Adult respiratory distress syndrome / ARDS",
+    "snomed_code": "67782005",
+    "snomed_display": "Acute respiratory distress syndrome"
+  },
+  {
+    "id": "c41a3e4e-1514-4ec0-9523-94f3d8f114ea",
+    "icd10": "J85",
+    "diagnosis_name": "Lung abscess and necrosis of lung",
+    "snomed_code": "41381004",
+    "snomed_display": "Lung abscess"
+  },
+  {
+    "id": "f2da8eb6-46e6-4711-a68e-9694bd07c556",
+    "icd10": "J86",
+    "diagnosis_name": "Empyema",
+    "snomed_code": "312682007",
+    "snomed_display": "Empyema"
+  },
+  {
+    "id": "f88c8838-0a3a-420c-ad02-cccc1a49ce09",
+    "icd10": "J90",
+    "diagnosis_name": "Pleural effusion, not elsewhere classified",
+    "snomed_code": "60046008",
+    "snomed_display": "Pleural effusion"
+  },
+  {
+    "id": "6024c37f-7252-411f-8d34-0e94c63e3ed7",
+    "icd10": "J93",
+    "diagnosis_name": "Pneumothorax",
+    "snomed_code": "36118008",
+    "snomed_display": "Pneumothorax"
+  },
+  {
+    "id": "f7a21401-f317-4581-ae4f-168d3a068ab3",
+    "icd10": "J96.0",
+    "diagnosis_name": "Acute respiratory failure",
+    "snomed_code": "65710008",
+    "snomed_display": "Acute respiratory failure"
+  },
+  {
+    "id": "c306c237-8928-4c38-aba4-222d9250da66",
+    "icd10": "J98.0",
+    "diagnosis_name": "Bronchospasm",
+    "snomed_code": "4386001",
+    "snomed_display": "Bronchospasm"
+  },
+  {
+    "id": "b3fcc45f-c741-4491-ab08-9d2e10595808",
+    "icd10": "K02",
+    "diagnosis_name": "Dental caries",
+    "snomed_code": "80967001",
+    "snomed_display": "Dental caries"
+  },
+  {
+    "id": "a0c8dd17-21e5-4e4a-93c3-31dc55cd0998",
+    "icd10": "K04",
+    "diagnosis_name": "Diseases of pulp and periapical tissues",
+    "snomed_code": "109564008",
+    "snomed_display": "Disorder of dental pulp"
+  },
+  {
+    "id": "43b9b501-6c3c-48b2-9def-6f836aa0dca9",
+    "icd10": "K05",
+    "diagnosis_name": "Gingivitis and periodontal diseases",
+    "snomed_code": "66383009",
+    "snomed_display": "Gingivitis"
+  },
+  {
+    "id": "69959c50-ee08-46cb-b02c-aac6f28ee4b5",
+    "icd10": "K12",
+    "diagnosis_name": "Stomatitis and related lesions",
+    "snomed_code": "61170000",
+    "snomed_display": "Stomatitis"
+  },
+  {
+    "id": "837f9e3a-b8ab-49e0-811a-188b8bf789b3",
+    "icd10": "K13",
+    "diagnosis_name": "Other diseases of lip and oral mucosa",
+    "snomed_code": "26284000",
+    "snomed_display": "Disorder of oral mucosa"
+  },
+  {
+    "id": "d9a343f3-f29b-4087-ad60-e56c475be3be",
+    "icd10": "K20",
+    "diagnosis_name": "Esophagitis",
+    "snomed_code": "235595009",
+    "snomed_display": "Esophagitis"
+  },
+  {
+    "id": "bd37e01e-8312-407c-975f-a19abae1ac8c",
+    "icd10": "K21.9",
+    "diagnosis_name": "Gastro-esophageal reflux disease",
+    "snomed_code": "235595009",
+    "snomed_display": "Gastroesophageal reflux disease"
+  },
+  {
+    "id": "3b059b78-d3be-46c0-9a2b-c01cdbca06d3",
+    "icd10": "K27",
+    "diagnosis_name": "Peptic ulcer, site unspecified",
+    "snomed_code": "13200003",
+    "snomed_display": "Peptic ulcer"
+  },
+  {
+    "id": "4611d9aa-f158-40eb-8579-ed1021342e4f",
+    "icd10": "K29",
+    "diagnosis_name": "Gastritis and duodenitis",
+    "snomed_code": "4556007",
+    "snomed_display": "Gastritis"
+  },
+  {
+    "id": "f97ef050-7a0f-4678-a828-d92431592840",
+    "icd10": "K35",
+    "diagnosis_name": "Acute appendicitis",
+    "snomed_code": "85189001",
+    "snomed_display": "Acute appendicitis"
+  },
+  {
+    "id": "8c7e0ddd-299a-4590-a819-d99a819e83fc",
+    "icd10": "K37",
+    "diagnosis_name": "Appendicitis, unspecified",
+    "snomed_code": "74400008",
+    "snomed_display": "Appendicitis"
+  },
+  {
+    "id": "0c8387a0-988c-4051-b5c5-e1bdd6a2345e",
+    "icd10": "K40",
+    "diagnosis_name": "Inguinal hernia",
+    "snomed_code": "396232000",
+    "snomed_display": "Inguinal hernia"
+  },
+  {
+    "id": "3e255a6f-a32f-4628-9fcf-00d93fbe3b1b",
+    "icd10": "K42",
+    "diagnosis_name": "Umbilical hernia",
+    "snomed_code": "396347007",
+    "snomed_display": "Umbilical hernia"
+  },
+  {
+    "id": "93c47736-1ef6-4efb-9616-98a002c7dfe9",
+    "icd10": "K52.9",
+    "diagnosis_name": "Noninfective gastroenteritis and colitis",
+    "snomed_code": "64613007",
+    "snomed_display": "Noninfective gastroenteritis"
+  },
+  {
+    "id": "179b5ad5-dbba-4bd5-8cc3-e308fa2b03d1",
+    "icd10": "K56.1",
+    "diagnosis_name": "Intussusception",
+    "snomed_code": "47410004",
+    "snomed_display": "Intussusception"
+  },
+  {
+    "id": "d15f8cc0-226a-4d88-af5c-78f51e5eacf5",
+    "icd10": "K56.6",
+    "diagnosis_name": "Intestinal obstruction, unspecified",
+    "snomed_code": "81060008",
+    "snomed_display": "Intestinal obstruction"
+  },
+  {
+    "id": "6fc9f7b9-f5da-44fa-be84-2b57b406d373",
+    "icd10": "K59.04",
+    "diagnosis_name": "Functional constipation",
+    "snomed_code": "14760008",
+    "snomed_display": "Constipation"
+  },
+  {
+    "id": "770d5a52-8a23-4521-8c3a-07c9933f204e",
+    "icd10": "K60",
+    "diagnosis_name": "Anal fissure and fistula",
+    "snomed_code": "1285009",
+    "snomed_display": "Anal fissure"
+  },
+  {
+    "id": "0f08dd69-8ce2-4bc7-b725-a3575a9d4f38",
+    "icd10": "K62.3",
+    "diagnosis_name": "Rectal prolapse",
+    "snomed_code": "57773001",
+    "snomed_display": "Rectal prolapse"
+  },
+  {
+    "id": "a2d43f40-0c50-4b21-ad21-24a5e47037e3",
+    "icd10": "K72",
+    "diagnosis_name": "Hepatic failure, not elsewhere classified",
+    "snomed_code": "59927004",
+    "snomed_display": "Hepatic failure"
+  },
+  {
+    "id": "eed60a4c-b430-495d-9618-dc3eb85c3929",
+    "icd10": "K74",
+    "diagnosis_name": "Fibrosis and cirrhosis of liver",
+    "snomed_code": "19943007",
+    "snomed_display": "Cirrhosis of liver"
+  },
+  {
+    "id": "ac19198d-4f17-42dd-8336-0221ffddf5e2",
+    "icd10": "K75",
+    "diagnosis_name": "Other inflammatory liver diseases",
+    "snomed_code": "3723001",
+    "snomed_display": "Hepatitis"
+  },
+  {
+    "id": "acdb053a-36c6-4fe0-af34-9cdfffcdac65",
+    "icd10": "K75.0",
+    "diagnosis_name": "Liver abscess",
+    "snomed_code": "48895003",
+    "snomed_display": "Liver abscess"
+  },
+  {
+    "id": "4245b031-0282-482b-84e5-f71525e7f41b",
+    "icd10": "K76",
+    "diagnosis_name": "Other disorders of liver",
+    "snomed_code": "235856003",
+    "snomed_display": "Disorder of liver"
+  },
+  {
+    "id": "6c70cef4-1b9a-433e-9a9d-c48a8cb912c5",
+    "icd10": "K76.6",
+    "diagnosis_name": "Portal hypertension",
+    "snomed_code": "34742003",
+    "snomed_display": "Portal hypertension"
+  },
+  {
+    "id": "b8500f53-7e49-4bc6-b663-6974c9a8675d",
+    "icd10": "K85",
+    "diagnosis_name": "Acute pancreatitis",
+    "snomed_code": "197456007",
+    "snomed_display": "Acute pancreatitis"
+  },
+  {
+    "id": "6c756547-84e7-4117-98e2-4a64da0cc934",
+    "icd10": "K86",
+    "diagnosis_name": "Other diseases of pancreas",
+    "snomed_code": "3855007",
+    "snomed_display": "Disorder of pancreas"
+  },
+  {
+    "id": "24e37285-bf56-4a65-abf5-f2545e0edffa",
+    "icd10": "K90.0",
+    "diagnosis_name": "Celiac disease",
+    "snomed_code": "396331005",
+    "snomed_display": "Celiac disease"
+  },
+  {
+    "id": "939d6b8d-cd10-4e59-937d-706a39eb654b",
+    "icd10": "K90.9",
+    "diagnosis_name": "Intestinal malabsorption, unspecified",
+    "snomed_code": "32230006",
+    "snomed_display": "Malabsorption syndrome"
+  },
+  {
+    "id": "c83b1e57-5ece-43e1-8251-95e4c001ea8f",
+    "icd10": "K92.2",
+    "diagnosis_name": "Gastrointestinal hemorrhage, unspecified",
+    "snomed_code": "74474003",
+    "snomed_display": "Gastrointestinal hemorrhage"
+  },
+  {
+    "id": "a60e5901-4ab0-47f0-acdd-abdec4fc3841",
+    "icd10": "L01.0",
+    "diagnosis_name": "Impetigo",
+    "snomed_code": "48277006",
+    "snomed_display": "Impetigo"
+  },
+  {
+    "id": "a96d9f1d-778c-4d96-8b37-538425c60eb3",
+    "icd10": "L03",
+    "diagnosis_name": "Cellulitis",
+    "snomed_code": "128045006",
+    "snomed_display": "Cellulitis"
+  },
+  {
+    "id": "46b2e79a-c354-46db-a0e9-46c255fb1d2c",
+    "icd10": "L20.9",
+    "diagnosis_name": "Atopic dermatitis (eczema)",
+    "snomed_code": "200775004",
+    "snomed_display": "Atopic dermatitis"
+  },
+  {
+    "id": "c31276e3-fba4-4d90-a08f-1a75faeed607",
+    "icd10": "L21",
+    "diagnosis_name": "Seborrheic dermatitis",
+    "snomed_code": "86708008",
+    "snomed_display": "Seborrheic dermatitis"
+  },
+  {
+    "id": "b35f6052-f786-41e0-82d6-0a8013d4d097",
+    "icd10": "L22",
+    "diagnosis_name": "Diaper dermatitis",
+    "snomed_code": "91487003",
+    "snomed_display": "Diaper dermatitis"
+  },
+  {
+    "id": "0ab08b62-0eab-4262-8ca6-751b1015af00",
+    "icd10": "L23",
+    "diagnosis_name": "Allergic contact dermatitis",
+    "snomed_code": "40275004",
+    "snomed_display": "Contact dermatitis"
+  },
+  {
+    "id": "4d3ec4ce-ac89-49df-8b20-6a97f3b2339c",
+    "icd10": "L24",
+    "diagnosis_name": "Irritant contact dermatitis",
+    "snomed_code": "40275004",
+    "snomed_display": "Irritant contact dermatitis"
+  },
+  {
+    "id": "4c7ffdce-2cf9-441f-8908-425ee19fef57",
+    "icd10": "L25.9",
+    "diagnosis_name": "Unspecified contact dermatitis",
+    "snomed_code": "40275004",
+    "snomed_display": "Contact dermatitis"
+  },
+  {
+    "id": "1943c2fd-481d-48bc-b2ad-93445e870b57",
+    "icd10": "L27",
+    "diagnosis_name": "Dermatitis due to ingested substances",
+    "snomed_code": "238575004",
+    "snomed_display": "Dermatitis due to ingested substance"
+  },
+  {
+    "id": "27acae73-4d93-44f8-95f9-6d345b83d3e6",
+    "icd10": "L28",
+    "diagnosis_name": "Lichen simplex chronicus and prurigo",
+    "snomed_code": "399041006",
+    "snomed_display": "Lichen simplex chronicus"
+  },
+  {
+    "id": "665f582c-8577-45f6-a4af-371bd25bf2e4",
+    "icd10": "L29",
+    "diagnosis_name": "Pruritus",
+    "snomed_code": "418290006",
+    "snomed_display": "Pruritus"
+  },
+  {
+    "id": "fa1f925b-e1d3-4a94-a0ad-99e0b143fd90",
+    "icd10": "L30",
+    "diagnosis_name": "Other and unspecified dermatitis",
+    "snomed_code": "43116000",
+    "snomed_display": "Eczema"
+  },
+  {
+    "id": "9542cb63-5e88-4ff7-add6-cf365578490c",
+    "icd10": "L40",
+    "diagnosis_name": "Psoriasis",
+    "snomed_code": "9014002",
+    "snomed_display": "Psoriasis"
+  },
+  {
+    "id": "f538114e-6d22-4fa2-ab66-076b54545666",
+    "icd10": "L42",
+    "diagnosis_name": "Pityriasis rosea",
+    "snomed_code": "77252004",
+    "snomed_display": "Pityriasis rosea"
+  },
+  {
+    "id": "450e0494-043b-4e7c-a9ef-5c0223706708",
+    "icd10": "L50",
+    "diagnosis_name": "Urticaria",
+    "snomed_code": "126485001",
+    "snomed_display": "Urticaria"
+  },
+  {
+    "id": "56e8128a-289e-41f9-a57a-ddcd21b3e3ab",
+    "icd10": "L51",
+    "diagnosis_name": "Erythema multiforme",
+    "snomed_code": "36715001",
+    "snomed_display": "Erythema multiforme"
+  },
+  {
+    "id": "527fa48c-c4e8-4103-b0f1-71855f135793",
+    "icd10": "L52",
+    "diagnosis_name": "Erythema nodosum",
+    "snomed_code": "36715001",
+    "snomed_display": "Erythema nodosum"
+  },
+  {
+    "id": "a061f191-8750-41fb-8ec8-84d6cf516fdb",
+    "icd10": "L53",
+    "diagnosis_name": "Other erythematous conditions",
+    "snomed_code": "70819003",
+    "snomed_display": "Erythematous condition"
+  },
+  {
+    "id": "f8c67e77-41a7-4f0e-b836-2cb5d83a24ea",
+    "icd10": "L70",
+    "diagnosis_name": "Acne",
+    "snomed_code": "11381005",
+    "snomed_display": "Acne"
+  },
+  {
+    "id": "5e54f431-adc8-4cd9-ac0e-d944cbdb2c41",
+    "icd10": "L73",
+    "diagnosis_name": "Follicular disorders",
+    "snomed_code": "13600006",
+    "snomed_display": "Folliculitis"
+  },
+  {
+    "id": "d0837900-8646-4efd-b3b4-002ee2f142a6",
+    "icd10": "L74",
+    "diagnosis_name": "Miliaria",
+    "snomed_code": "44913001",
+    "snomed_display": "Miliaria"
+  },
+  {
+    "id": "33a5188a-7731-44db-91df-d228a82f5c6b",
+    "icd10": "L81",
+    "diagnosis_name": "Other disorders of pigmentation",
+    "snomed_code": "23712008",
+    "snomed_display": "Pigmentation disorder"
+  },
+  {
+    "id": "6316e23d-2265-457a-b100-4f2657bf3433",
+    "icd10": "M04.1",
+    "diagnosis_name": "Periodic fever syndromes",
+    "snomed_code": "405786005",
+    "snomed_display": "Periodic fever syndrome"
+  },
+  {
+    "id": "919a67f3-44db-4072-a7b9-f3678f92b61c",
+    "icd10": "M08",
+    "diagnosis_name": "Juvenile arthritis",
+    "snomed_code": "410795001",
+    "snomed_display": "Juvenile idiopathic arthritis"
+  },
+  {
+    "id": "cce453e8-6aae-4287-b4a3-734e46d4f3b0",
+    "icd10": "M13",
+    "diagnosis_name": "Other arthritis",
+    "snomed_code": "3723001",
+    "snomed_display": "Arthritis"
+  },
+  {
+    "id": "1c70f9b5-1a6b-4341-af60-19a38c05430a",
+    "icd10": "M30.3",
+    "diagnosis_name": "Kawasaki disease",
+    "snomed_code": "75053002",
+    "snomed_display": "Kawasaki disease"
+  },
+  {
+    "id": "a815f4b1-2b6c-49cb-91c7-d849178d8093",
+    "icd10": "M32",
+    "diagnosis_name": "Systemic lupus erythematosus",
+    "snomed_code": "55464009",
+    "snomed_display": "Systemic lupus erythematosus"
+  },
+  {
+    "id": "d75ec30b-8abf-427c-a7af-5b9b6c7baf43",
+    "icd10": "M33",
+    "diagnosis_name": "Dermatopolymyositis",
+    "snomed_code": "396230008",
+    "snomed_display": "Dermatomyositis"
+  },
+  {
+    "id": "8985cb9f-b722-4fb7-b2bb-0ce4a1e4fe61",
+    "icd10": "M35",
+    "diagnosis_name": "Other systemic involvement of connective tissue",
+    "snomed_code": "105969002",
+    "snomed_display": "Connective tissue disease"
+  },
+  {
+    "id": "e2fe6bdf-4386-46a7-88dd-264daaf103a1",
+    "icd10": "M60",
+    "diagnosis_name": "Myositis",
+    "snomed_code": "26889001",
+    "snomed_display": "Myositis"
+  },
+  {
+    "id": "cf32ca3d-7657-4b8f-9d60-a342511504dc",
+    "icd10": "M79.1",
+    "diagnosis_name": "Myalgia",
+    "snomed_code": "68962001",
+    "snomed_display": "Myalgia"
+  },
+  {
+    "id": "3fa5147e-4d20-48fc-83a5-e878074ebd63",
+    "icd10": "M86",
+    "diagnosis_name": "Osteomyelitis",
+    "snomed_code": "60168000",
+    "snomed_display": "Osteomyelitis"
+  },
+  {
+    "id": "741267a0-b341-44bf-a7ca-d752c546caa2",
+    "icd10": "N00",
+    "diagnosis_name": "Acute nephritic syndrome",
+    "snomed_code": "36171008",
+    "snomed_display": "Acute glomerulonephritis"
+  },
+  {
+    "id": "003b84dd-8809-499a-93c4-f0451356e7e6",
+    "icd10": "N01",
+    "diagnosis_name": "Rapidly progressive nephritic syndrome",
+    "snomed_code": "36171008",
+    "snomed_display": "Rapidly progressive glomerulonephritis"
+  },
+  {
+    "id": "363be223-c724-4c8b-9680-df87a47b11df",
+    "icd10": "N02",
+    "diagnosis_name": "Recurrent and persistent hematuria",
+    "snomed_code": "34436003",
+    "snomed_display": "Hematuria"
+  },
+  {
+    "id": "28f1a6c9-8952-4d8a-ba5a-4c7354f866d3",
+    "icd10": "N04",
+    "diagnosis_name": "Nephrotic syndrome",
+    "snomed_code": "52254009",
+    "snomed_display": "Nephrotic syndrome"
+  },
+  {
+    "id": "98922584-1b1f-4c76-ab02-25395d18b967",
+    "icd10": "N05",
+    "diagnosis_name": "Unspecified nephritic syndrome",
+    "snomed_code": "36171008",
+    "snomed_display": "Nephritic syndrome"
+  },
+  {
+    "id": "7b5e0c0e-6d86-45c0-8a83-803578110f85",
+    "icd10": "N10",
+    "diagnosis_name": "Acute pyelonephritis",
+    "snomed_code": "36689008",
+    "snomed_display": "Acute pyelonephritis"
+  },
+  {
+    "id": "09aadb5f-0df8-4bea-99a1-3e62d006972d",
+    "icd10": "N12",
+    "diagnosis_name": "Tubulo-interstitial nephritis, not specified as acute or chronic",
+    "snomed_code": "28635002",
+    "snomed_display": "Tubulointerstitial nephritis"
+  },
+  {
+    "id": "5bab864e-5ed6-43bd-8d2a-bc2c414c59f6",
+    "icd10": "N13",
+    "diagnosis_name": "Obstructive and reflux uropathy",
+    "snomed_code": "197760005",
+    "snomed_display": "Obstructive uropathy"
+  },
+  {
+    "id": "9f7657dc-ba38-4fa1-ac7e-e1f28e0482a1",
+    "icd10": "N13.3",
+    "diagnosis_name": "Hydronephrosis",
+    "snomed_code": "43064006",
+    "snomed_display": "Hydronephrosis"
+  },
+  {
+    "id": "cfca01d7-f995-4bc6-9a9d-cb2186ce1e7a",
+    "icd10": "N17",
+    "diagnosis_name": "Acute kidney failure",
+    "snomed_code": "14669001",
+    "snomed_display": "Acute renal failure"
+  },
+  {
+    "id": "86db7768-d154-4a1e-a020-61968ec8f980",
+    "icd10": "N18",
+    "diagnosis_name": "Chronic kidney disease",
+    "snomed_code": "709044004",
+    "snomed_display": "Chronic kidney disease"
+  },
+  {
+    "id": "9cea10a5-ba74-46b2-a64d-8c7112e47794",
+    "icd10": "N19",
+    "diagnosis_name": "Unspecified kidney failure",
+    "snomed_code": "42399005",
+    "snomed_display": "Renal failure"
+  },
+  {
+    "id": "14711478-042b-4a93-8225-39d3b05affda",
+    "icd10": "N20",
+    "diagnosis_name": "Calculus of kidney and ureter",
+    "snomed_code": "95570007",
+    "snomed_display": "Kidney stone"
+  },
+  {
+    "id": "2aa3447b-f42f-4b11-99f6-8beb0bb6ea9c",
+    "icd10": "N31",
+    "diagnosis_name": "Neuromuscular dysfunction of bladder",
+    "snomed_code": "397699006",
+    "snomed_display": "Neurogenic bladder"
+  },
+  {
+    "id": "a1af02e0-4533-4f4a-bd6e-0c035808aa97",
+    "icd10": "N32",
+    "diagnosis_name": "Other disorders of bladder",
+    "snomed_code": "397699006",
+    "snomed_display": "Disorder of bladder"
+  },
+  {
+    "id": "914cc195-8738-4ab0-85ae-a748767a0888",
+    "icd10": "N39.0",
+    "diagnosis_name": "Urinary tract infection (UTI)",
+    "snomed_code": "68566005",
+    "snomed_display": "Urinary tract infection"
+  },
+  {
+    "id": "2079bbbd-e256-453f-839a-353d1e12e00a",
+    "icd10": "N39.0",
+    "diagnosis_name": "Urinary tract infection, site not specified",
+    "snomed_code": "68566005",
+    "snomed_display": "Urinary tract infection"
+  },
+  {
+    "id": "049392fc-f25b-4990-be18-2f304a14bc06",
+    "icd10": "N43",
+    "diagnosis_name": "Hydrocele and spermatocele",
+    "snomed_code": "55434001",
+    "snomed_display": "Hydrocele"
+  },
+  {
+    "id": "f558efd4-eada-49a8-823e-e97a27cac0f1",
+    "icd10": "N44",
+    "diagnosis_name": "Torsion of testis",
+    "snomed_code": "81996005",
+    "snomed_display": "Torsion of testis"
+  },
+  {
+    "id": "86cfaf8b-2fbf-49c7-a83f-ee8f8cb24b99",
+    "icd10": "N45",
+    "diagnosis_name": "Orchitis and epididymitis",
+    "snomed_code": "274718005",
+    "snomed_display": "Orchitis"
+  },
+  {
+    "id": "e359e162-5c13-4511-8abc-927db3cfc45a",
+    "icd10": "N47",
+    "diagnosis_name": "Phimosis",
+    "snomed_code": "449826002",
+    "snomed_display": "Phimosis"
+  },
+  {
+    "id": "269943eb-b00b-467e-b1dd-2922cb34c612",
+    "icd10": "N48.2",
+    "diagnosis_name": "Other inflammatory disorders of penis",
+    "snomed_code": "64665001",
+    "snomed_display": "Inflammatory disorder of penis"
+  },
+  {
+    "id": "68e2933d-ce84-4b40-9839-d518e6b8ae5f",
+    "icd10": "P05.1",
+    "diagnosis_name": "Small for gestational age",
+    "snomed_code": "276610007",
+    "snomed_display": "Small for gestational age"
+  },
+  {
+    "id": "0c41aeca-db29-4e71-bd2e-88325c3004c5",
+    "icd10": "P05.9",
+    "diagnosis_name": "Intrauterine growth restriction",
+    "snomed_code": "22033007",
+    "snomed_display": "Fetal growth restriction"
+  },
+  {
+    "id": "8680ab56-1b0b-41ce-894d-8476fa69e24f",
+    "icd10": "P07",
+    "diagnosis_name": "Prematurity",
+    "snomed_code": "395507008",
+    "snomed_display": "Premature infant"
+  },
+  {
+    "id": "357917c6-6a6a-4558-a246-9ad93f25fa9e",
+    "icd10": "P07.0",
+    "diagnosis_name": "Very low birth weight",
+    "snomed_code": "276610007",
+    "snomed_display": "Very low birth weight infant"
+  },
+  {
+    "id": "ce899ed2-7379-44a4-97a7-7ca7577b58c7",
+    "icd10": "P07.1",
+    "diagnosis_name": "Low birth weight",
+    "snomed_code": "276610007",
+    "snomed_display": "Low birth weight infant"
+  },
+  {
+    "id": "01dcd3bb-8139-4a41-a41a-29a225beef67",
+    "icd10": "P07.2",
+    "diagnosis_name": "Extreme prematurity",
+    "snomed_code": "395507008",
+    "snomed_display": "Extremely premature infant"
+  },
+  {
+    "id": "58ea000a-6104-47d7-85a7-0199d61a8a7f",
+    "icd10": "P08",
+    "diagnosis_name": "Post-term newborn",
+    "snomed_code": "433141007",
+    "snomed_display": "Post-term infant"
+  },
+  {
+    "id": "0ad56b67-7ccd-4af2-ada1-68cb459307fb",
+    "icd10": "P08.1",
+    "diagnosis_name": "Large for gestational age",
+    "snomed_code": "118185001",
+    "snomed_display": "Large for gestational age"
+  },
+  {
+    "id": "193c9b03-ff6b-4c38-80cc-7af0fecbf889",
+    "icd10": "P12.0",
+    "diagnosis_name": "Cephalohematoma due to birth injury",
+    "snomed_code": "206283007",
+    "snomed_display": "Cephalohematoma"
+  },
+  {
+    "id": "6c52a0f9-375c-4e7b-97bf-2ac8a4f4a3e2",
+    "icd10": "P21.9",
+    "diagnosis_name": "Birth asphyxia, unspecified",
+    "snomed_code": "768962006",
+    "snomed_display": "Birth asphyxia"
+  },
+  {
+    "id": "21d3ec97-e0f5-480f-a869-78b265fd973e",
+    "icd10": "P22.0",
+    "diagnosis_name": "Respiratory distress syndrome of newborn",
+    "snomed_code": "46775006",
+    "snomed_display": "Respiratory distress syndrome in newborn"
+  },
+  {
+    "id": "19990e6a-f346-4dd3-b3fb-e3c1b06dffbe",
+    "icd10": "P22.1",
+    "diagnosis_name": "Transient tachypnea of newborn",
+    "snomed_code": "276517002",
+    "snomed_display": "Transient tachypnea of newborn"
+  },
+  {
+    "id": "eb60b8d9-283a-4bf9-bb3a-c6aa63d18313",
+    "icd10": "P22.9",
+    "diagnosis_name": "Neonatal respiratory distress, unspecified",
+    "snomed_code": "46775006",
+    "snomed_display": "Neonatal respiratory distress"
+  },
+  {
+    "id": "a3174b09-0007-49e2-9aeb-c47e716ea554",
+    "icd10": "P23",
+    "diagnosis_name": "Congenital pneumonia",
+    "snomed_code": "78895009",
+    "snomed_display": "Congenital pneumonia"
+  },
+  {
+    "id": "b83b7e9e-19ee-44b3-9af6-76849f0a3401",
+    "icd10": "P24.0",
+    "diagnosis_name": "Meconium aspiration syndrome",
+    "snomed_code": "56272000",
+    "snomed_display": "Meconium aspiration syndrome"
+  },
+  {
+    "id": "a5b457ba-0940-48c6-89ff-7d31ef930c49",
+    "icd10": "P25",
+    "diagnosis_name": "Neonatal pneumothorax",
+    "snomed_code": "36118008",
+    "snomed_display": "Neonatal pneumothorax"
+  },
+  {
+    "id": "bfaf8ee0-9c8d-47ea-a679-690687df4dec",
+    "icd10": "P26",
+    "diagnosis_name": "Pulmonary hemorrhage originating in perinatal period",
+    "snomed_code": "276524003",
+    "snomed_display": "Pulmonary hemorrhage of newborn"
+  },
+  {
+    "id": "eb2c4da1-5c75-4096-82bc-ba7644ee9460",
+    "icd10": "P28.4",
+    "diagnosis_name": "Neonatal apnea",
+    "snomed_code": "371107009",
+    "snomed_display": "Apnea of newborn"
+  },
+  {
+    "id": "ec181283-c308-4f6f-a648-299480f05b45",
+    "icd10": "P29.3",
+    "diagnosis_name": "Persistent pulmonary hypertension of newborn",
+    "snomed_code": "276513009",
+    "snomed_display": "Persistent pulmonary hypertension of newborn"
+  },
+  {
+    "id": "d7a5a651-6d28-47f9-bc24-cd19e2062a07",
+    "icd10": "P35.0",
+    "diagnosis_name": "Congenital rubella syndrome",
+    "snomed_code": "1857005",
+    "snomed_display": "Congenital rubella syndrome"
+  },
+  {
+    "id": "87c7eafd-d6d5-4084-bc69-f037b40b05b5",
+    "icd10": "P35.1",
+    "diagnosis_name": "Congenital cytomegalovirus infection",
+    "snomed_code": "416089002",
+    "snomed_display": "Congenital cytomegalovirus infection"
+  },
+  {
+    "id": "bef5eac2-576d-431a-8d69-3f06f33d12f3",
+    "icd10": "P36.9",
+    "diagnosis_name": "Neonatal sepsis",
+    "snomed_code": "206293005",
+    "snomed_display": "Neonatal sepsis"
+  },
+  {
+    "id": "4fa9603b-2129-4440-a678-218b641c42c9",
+    "icd10": "P36.9",
+    "diagnosis_name": "Neonatal septic shock",
+    "snomed_code": "206293005",
+    "snomed_display": "Neonatal sepsis"
+  },
+  {
+    "id": "a6c58a5c-76dd-4be7-9383-2799ca91dc59",
+    "icd10": "P37.1",
+    "diagnosis_name": "Congenital toxoplasmosis",
+    "snomed_code": "73893000",
+    "snomed_display": "Congenital toxoplasmosis"
+  },
+  {
+    "id": "c5175e60-3d0c-4670-b5e4-bb6856fba3ef",
+    "icd10": "P37.9",
+    "diagnosis_name": "Neonatal meningitis",
+    "snomed_code": "206307000",
+    "snomed_display": "Neonatal meningitis"
+  },
+  {
+    "id": "cf7e8389-ee63-4a8d-adf4-bdfbf55eb4ff",
+    "icd10": "P38",
+    "diagnosis_name": "Omphalitis of newborn",
+    "snomed_code": "206299006",
+    "snomed_display": "Omphalitis of newborn"
+  },
+  {
+    "id": "dad4ae42-0581-44a3-9ec9-dffb71fc177e",
+    "icd10": "P39.1",
+    "diagnosis_name": "Neonatal conjunctivitis",
+    "snomed_code": "206313009",
+    "snomed_display": "Neonatal conjunctivitis"
+  },
+  {
+    "id": "8995fda0-c497-41d1-9307-9a9433d41cd5",
+    "icd10": "P52",
+    "diagnosis_name": "Intracranial nontraumatic hemorrhage of fetus and newborn",
+    "snomed_code": "276647007",
+    "snomed_display": "Intracranial hemorrhage of newborn"
+  },
+  {
+    "id": "8a4d0094-37dd-44d0-9baa-390ae7225157",
+    "icd10": "P53",
+    "diagnosis_name": "Hemorrhagic disease of newborn",
+    "snomed_code": "387712008",
+    "snomed_display": "Hemorrhagic disease of newborn"
+  },
+  {
+    "id": "2706e2e6-04ca-4b8e-99ea-ed1bf065bb8e",
+    "icd10": "P55",
+    "diagnosis_name": "Hemolytic disease of newborn",
+    "snomed_code": "387700004",
+    "snomed_display": "Hemolytic disease of newborn"
+  },
+  {
+    "id": "4139dd7d-1896-4a96-847b-743e18326c69",
+    "icd10": "P59.9",
+    "diagnosis_name": "Neonatal jaundice, unspecified",
+    "snomed_code": "387712008",
+    "snomed_display": "Neonatal jaundice"
+  },
+  {
+    "id": "60f64569-af9e-44ce-ab7e-29f4a82c56e4",
+    "icd10": "P61",
+    "diagnosis_name": "Neonatal anemia",
+    "snomed_code": "276543001",
+    "snomed_display": "Neonatal anemia"
+  },
+  {
+    "id": "469d2843-5861-444a-bc40-93681b6766bd",
+    "icd10": "P61.0",
+    "diagnosis_name": "Transient neonatal thrombocytopenia",
+    "snomed_code": "276549002",
+    "snomed_display": "Neonatal thrombocytopenia"
+  },
+  {
+    "id": "82cfd4ee-0fda-43c9-9cca-dc5aeda4af6c",
+    "icd10": "P61.1",
+    "diagnosis_name": "Neonatal polycythemia",
+    "snomed_code": "276551003",
+    "snomed_display": "Neonatal polycythemia"
+  },
+  {
+    "id": "a277868d-f633-4173-8232-c12c3e35b1a9",
+    "icd10": "P70.4",
+    "diagnosis_name": "Neonatal hypoglycemia",
+    "snomed_code": "206453001",
+    "snomed_display": "Neonatal hypoglycemia"
+  },
+  {
+    "id": "44d8635b-598b-447a-906c-24c02ee89aa5",
+    "icd10": "P71",
+    "diagnosis_name": "Transitory neonatal disorders of calcium and magnesium metabolism",
+    "snomed_code": "276546005",
+    "snomed_display": "Neonatal hypocalcemia"
+  },
+  {
+    "id": "10d413f7-6caf-4f8f-8506-d4fd856aa0f5",
+    "icd10": "P74.1",
+    "diagnosis_name": "Neonatal dehydration",
+    "snomed_code": "206541002",
+    "snomed_display": "Neonatal dehydration"
+  },
+  {
+    "id": "4014f3ad-b484-45aa-923d-c96042afc52d",
+    "icd10": "P76.9",
+    "diagnosis_name": "Intestinal obstruction of newborn",
+    "snomed_code": "206525008",
+    "snomed_display": "Intestinal obstruction of newborn"
+  },
+  {
+    "id": "58ac77c1-a156-4a61-9d56-cc4043b0b005",
+    "icd10": "P77",
+    "diagnosis_name": "Necrotizing enterocolitis of newborn",
+    "snomed_code": "206525008",
+    "snomed_display": "Necrotizing enterocolitis of newborn"
+  },
+  {
+    "id": "5c410829-5126-4483-8511-9a0a4796b6de",
+    "icd10": "P81",
+    "diagnosis_name": "Disturbance of temperature regulation of newborn",
+    "snomed_code": "276545009",
+    "snomed_display": "Neonatal temperature regulation disorder"
+  },
+  {
+    "id": "71599f8e-7c88-4702-8e48-63fb10818cfd",
+    "icd10": "P90",
+    "diagnosis_name": "Neonatal convulsions",
+    "snomed_code": "91175000",
+    "snomed_display": "Neonatal seizure"
+  },
+  {
+    "id": "4212a317-a886-4d86-b29c-b01549d5b01e",
+    "icd10": "P91.6",
+    "diagnosis_name": "Hypoxic ischemic encephalopathy",
+    "snomed_code": "206596003",
+    "snomed_display": "Hypoxic ischemic encephalopathy of newborn"
+  },
+  {
+    "id": "4a2bd2cf-86fa-437d-a831-60a98e339213",
+    "icd10": "P92.9",
+    "diagnosis_name": "Feeding problems of newborn",
+    "snomed_code": "78164000",
+    "snomed_display": "Feeding problem in newborn"
+  },
+  {
+    "id": "cd423eb8-f024-4086-b3cd-46ad2525455a",
+    "icd10": "P96.1",
+    "diagnosis_name": "Neonatal withdrawal symptoms from maternal drug use",
+    "snomed_code": "206599005",
+    "snomed_display": "Neonatal drug withdrawal syndrome"
+  },
+  {
+    "id": "3a493999-e439-48e9-a6e7-76a6ab8abc5f",
+    "icd10": "P96.8",
+    "diagnosis_name": "Shock following birth",
+    "snomed_code": "276527005",
+    "snomed_display": "Neonatal shock"
+  },
+  {
+    "id": "7ed714de-45e5-4bc7-81ba-08c5c2dfab6f",
+    "icd10": "Q02",
+    "diagnosis_name": "Microcephaly",
+    "snomed_code": "1829003",
+    "snomed_display": "Microcephaly"
+  },
+  {
+    "id": "bfc46c40-57c3-4dfe-bf00-176963a22e0f",
+    "icd10": "Q03",
+    "diagnosis_name": "Congenital hydrocephalus",
+    "snomed_code": "73219003",
+    "snomed_display": "Congenital hydrocephalus"
+  },
+  {
+    "id": "a3d7de2f-dd4e-46d1-a6a5-f2364b29e655",
+    "icd10": "Q04",
+    "diagnosis_name": "Other congenital malformations of brain",
+    "snomed_code": "89369001",
+    "snomed_display": "Congenital malformation of brain"
+  },
+  {
+    "id": "51327394-2b0e-4c0a-9069-38545b77b7b5",
+    "icd10": "Q20.3",
+    "diagnosis_name": "Transposition of great vessels",
+    "snomed_code": "399216004",
+    "snomed_display": "Transposition of great vessels"
+  },
+  {
+    "id": "618d69b9-564e-427a-83cd-b1330de1e699",
+    "icd10": "Q21.0",
+    "diagnosis_name": "Ventricular septal defect",
+    "snomed_code": "30288003",
+    "snomed_display": "Ventricular septal defect"
+  },
+  {
+    "id": "fbbfedb5-eb46-4005-bd3e-ed3ba3746c16",
+    "icd10": "Q21.1",
+    "diagnosis_name": "Atrial septal defect",
+    "snomed_code": "70142008",
+    "snomed_display": "Atrial septal defect"
+  },
+  {
+    "id": "60504aff-8f3a-4889-aad1-6bf0b28bfa97",
+    "icd10": "Q21.3",
+    "diagnosis_name": "Tetralogy of Fallot",
+    "snomed_code": "86299006",
+    "snomed_display": "Tetralogy of Fallot"
+  },
+  {
+    "id": "870988f4-ab9c-4207-9af8-94eadede956a",
+    "icd10": "Q22.1",
+    "diagnosis_name": "Pulmonary valve stenosis",
+    "snomed_code": "56786000",
+    "snomed_display": "Pulmonic valve stenosis"
+  },
+  {
+    "id": "e47f674d-4138-4ae8-984c-400b3665da2a",
+    "icd10": "Q23.9",
+    "diagnosis_name": "Anomalies of aortic valve",
+    "snomed_code": "253426002",
+    "snomed_display": "Congenital aortic valve disorder"
+  },
+  {
+    "id": "601963e7-c760-4636-88f5-458a2c6c209c",
+    "icd10": "Q24.9",
+    "diagnosis_name": "Congenital malformation of cardiac chambers and connections, unspecified",
+    "snomed_code": "13213009",
+    "snomed_display": "Congenital heart disease"
+  },
+  {
+    "id": "5e550c32-1834-4f87-a548-714a47f30918",
+    "icd10": "Q25.0",
+    "diagnosis_name": "Patent ductus arteriosus",
+    "snomed_code": "83330001",
+    "snomed_display": "Patent ductus arteriosus"
+  },
+  {
+    "id": "72fef87c-ac0c-4cae-888a-68f420a37c39",
+    "icd10": "Q25.1",
+    "diagnosis_name": "Coarctation of aorta",
+    "snomed_code": "7305005",
+    "snomed_display": "Coarctation of aorta"
+  },
+  {
+    "id": "9a1bcee4-c039-4ea7-b1bf-cf8080039ae5",
+    "icd10": "Q26",
+    "diagnosis_name": "Congenital malformations of great veins",
+    "snomed_code": "13213009",
+    "snomed_display": "Congenital malformation of great veins"
+  },
+  {
+    "id": "573653ed-98fb-46ca-be22-69b4ed38d4d6",
+    "icd10": "Q26.2",
+    "diagnosis_name": "Total anomalous pulmonary venous connection",
+    "snomed_code": "204456009",
+    "snomed_display": "Total anomalous pulmonary venous connection"
+  },
+  {
+    "id": "dfa19a4f-a7d8-496f-bcf7-652b81da01c3",
+    "icd10": "Q30.0",
+    "diagnosis_name": "Choanal atresia",
+    "snomed_code": "367486001",
+    "snomed_display": "Choanal atresia"
+  },
+  {
+    "id": "b063fba5-4429-4cf4-b14f-9d1c18164860",
+    "icd10": "Q35",
+    "diagnosis_name": "Cleft palate",
+    "snomed_code": "87979003",
+    "snomed_display": "Cleft palate"
+  },
+  {
+    "id": "e5a3d67d-6f9b-400f-8e7a-eb57e32b18c3",
+    "icd10": "Q36",
+    "diagnosis_name": "Cleft lip",
+    "snomed_code": "80281008",
+    "snomed_display": "Cleft lip"
+  },
+  {
+    "id": "460e0c6d-76f2-40eb-8d5e-b988415d41b3",
+    "icd10": "Q37",
+    "diagnosis_name": "Cleft palate with cleft lip",
+    "snomed_code": "66948001",
+    "snomed_display": "Cleft palate with cleft lip"
+  },
+  {
+    "id": "9ae95d5d-3d3d-49c1-9e68-205bdcd781b3",
+    "icd10": "Q39.0",
+    "diagnosis_name": "Esophageal atresia without fistula",
+    "snomed_code": "26059007",
+    "snomed_display": "Esophageal atresia"
+  },
+  {
+    "id": "eaea643a-654a-4cdb-9dff-141f54880def",
+    "icd10": "Q39.1",
+    "diagnosis_name": "Tracheoesophageal fistula",
+    "snomed_code": "95440006",
+    "snomed_display": "Tracheoesophageal fistula"
+  },
+  {
+    "id": "a1a9a2a0-1398-41ce-8e2f-b2aec666bb3a",
+    "icd10": "Q40.0",
+    "diagnosis_name": "Congenital pyloric stenosis",
+    "snomed_code": "204669006",
+    "snomed_display": "Congenital pyloric stenosis"
+  },
+  {
+    "id": "37f3f51f-3990-492d-b5d9-acc7becdfedb",
+    "icd10": "Q41.0",
+    "diagnosis_name": "Duodenal atresia",
+    "snomed_code": "88032004",
+    "snomed_display": "Duodenal atresia"
+  },
+  {
+    "id": "639954a7-4f1c-4edf-b453-8478edfa1598",
+    "icd10": "Q41.1",
+    "diagnosis_name": "Jejunal atresia",
+    "snomed_code": "39498001",
+    "snomed_display": "Jejunal atresia"
+  },
+  {
+    "id": "f343a7a3-c891-4454-b830-a2fa455a0493",
+    "icd10": "Q41.2",
+    "diagnosis_name": "Ileal atresia",
+    "snomed_code": "396361005",
+    "snomed_display": "Ileal atresia"
+  },
+  {
+    "id": "02d618c9-417a-48f2-8778-bd2369629732",
+    "icd10": "Q42.2",
+    "diagnosis_name": "Congenital absence, atresia and stenosis of anus with fistula",
+    "snomed_code": "204731002",
+    "snomed_display": "Imperforate anus"
+  },
+  {
+    "id": "31045ffc-78e0-45b6-8975-77b70f044662",
+    "icd10": "Q43.1",
+    "diagnosis_name": "Hirschsprung disease",
+    "snomed_code": "367494004",
+    "snomed_display": "Hirschsprung disease"
+  },
+  {
+    "id": "c3594bdb-3dec-46b9-ada9-0335c594caa1",
+    "icd10": "Q53",
+    "diagnosis_name": "Undescended testicle",
+    "snomed_code": "204878001",
+    "snomed_display": "Undescended testis"
+  },
+  {
+    "id": "275a056b-b87a-4a15-92f0-391307a99084",
+    "icd10": "Q54",
+    "diagnosis_name": "Hypospadias",
+    "snomed_code": "416010008",
+    "snomed_display": "Hypospadias"
+  },
+  {
+    "id": "9d203e7f-0689-434d-ad38-86c15ae3f86e",
+    "icd10": "Q60",
+    "diagnosis_name": "Renal agenesis and other reduction defects of kidney",
+    "snomed_code": "7163005",
+    "snomed_display": "Renal agenesis"
+  },
+  {
+    "id": "8551e4df-9c02-48d1-b9cc-8c8211d6931f",
+    "icd10": "Q61",
+    "diagnosis_name": "Cystic kidney disease",
+    "snomed_code": "429087006",
+    "snomed_display": "Cystic kidney disease"
+  },
+  {
+    "id": "ca7114d1-5ed9-451d-b10d-3ebfbf0b9b89",
+    "icd10": "Q62",
+    "diagnosis_name": "Congenital obstructive defects of renal pelvis and congenital malformations of ureter",
+    "snomed_code": "95564005",
+    "snomed_display": "Congenital ureteral obstruction"
+  },
+  {
+    "id": "664efbb8-21de-4945-abb7-026a76e6cd5b",
+    "icd10": "Q64.2",
+    "diagnosis_name": "Posterior urethral valves",
+    "snomed_code": "253858006",
+    "snomed_display": "Posterior urethral valve"
+  },
+  {
+    "id": "e51460dd-1584-4e40-80a1-7eff830a9364",
+    "icd10": "Q65",
+    "diagnosis_name": "Congenital deformities of hip",
+    "snomed_code": "415683001",
+    "snomed_display": "Developmental dysplasia of hip"
+  },
+  {
+    "id": "0cc669cf-796a-4a12-bb47-b362fcfcb0ed",
+    "icd10": "Q66",
+    "diagnosis_name": "Congenital deformities of feet",
+    "snomed_code": "397932003",
+    "snomed_display": "Congenital foot deformity"
+  },
+  {
+    "id": "a95c12a6-9408-4efe-a1f0-06b462a64331",
+    "icd10": "Q67",
+    "diagnosis_name": "Congenital musculoskeletal deformities of skull, face, spine and chest",
+    "snomed_code": "66904006",
+    "snomed_display": "Congenital musculoskeletal deformity"
+  },
+  {
+    "id": "d1423a9d-6a9e-43ba-a271-2e8daa26f682",
+    "icd10": "Q69",
+    "diagnosis_name": "Polydactyly",
+    "snomed_code": "367506006",
+    "snomed_display": "Polydactyly"
+  },
+  {
+    "id": "07069c9b-229f-4ebc-a4ee-bb72544c8531",
+    "icd10": "Q70",
+    "diagnosis_name": "Syndactyly",
+    "snomed_code": "373413006",
+    "snomed_display": "Syndactyly"
+  },
+  {
+    "id": "03b162c0-cf48-4e82-89bb-f7a2bb743569",
+    "icd10": "Q71",
+    "diagnosis_name": "Reduction defects of upper limb",
+    "snomed_code": "302297009",
+    "snomed_display": "Upper limb reduction defect"
+  },
+  {
+    "id": "7173c524-be76-4734-8963-8cfc5cf9ea9b",
+    "icd10": "Q72",
+    "diagnosis_name": "Reduction defects of lower limb",
+    "snomed_code": "302298004",
+    "snomed_display": "Lower limb reduction defect"
+  },
+  {
+    "id": "88c37013-5b68-4f67-b483-f213f73d4074",
+    "icd10": "Q75",
+    "diagnosis_name": "Congenital malformations of skull and face bones",
+    "snomed_code": "27341007",
+    "snomed_display": "Craniosynostosis"
+  },
+  {
+    "id": "24167120-3611-43de-a3e4-1e785a375052",
+    "icd10": "Q78.0",
+    "diagnosis_name": "Osteogenesis imperfecta",
+    "snomed_code": "78314001",
+    "snomed_display": "Osteogenesis imperfecta"
+  },
+  {
+    "id": "7d60536d-e94f-4b6c-a577-f07048595db9",
+    "icd10": "Q79.0",
+    "diagnosis_name": "Congenital diaphragmatic hernia",
+    "snomed_code": "17190001",
+    "snomed_display": "Congenital diaphragmatic hernia"
+  },
+  {
+    "id": "7bc4382a-09e0-4ee2-86c0-6541de6fa4c1",
+    "icd10": "Q79.2",
+    "diagnosis_name": "Omphalocele",
+    "snomed_code": "18735004",
+    "snomed_display": "Omphalocele"
+  },
+  {
+    "id": "78534a1e-5377-4919-8333-cb0a2ba2d0cf",
+    "icd10": "Q79.3",
+    "diagnosis_name": "Gastroschisis",
+    "snomed_code": "72951007",
+    "snomed_display": "Gastroschisis"
+  },
+  {
+    "id": "1702613b-4a20-49b4-a29e-11d9c359aba1",
+    "icd10": "Q84",
+    "diagnosis_name": "Congenital malformations of skin appendages",
+    "snomed_code": "31024001",
+    "snomed_display": "Congenital skin disorder"
+  },
+  {
+    "id": "4dbd87ef-2fd2-4570-a33f-ebaeec12647a",
+    "icd10": "Q87",
+    "diagnosis_name": "Other congenital malformation syndromes affecting multiple systems",
+    "snomed_code": "66091009",
+    "snomed_display": "Congenital malformation syndrome"
+  },
+  {
+    "id": "36421e84-dfce-4372-9ba7-3183bee7e041",
+    "icd10": "Q90",
+    "diagnosis_name": "Down syndrome",
+    "snomed_code": "41040004",
+    "snomed_display": "Down syndrome"
+  },
+  {
+    "id": "20d2ad9c-d289-46e6-97a5-776dcbbd6316",
+    "icd10": "Q91",
+    "diagnosis_name": "Edwards syndrome and Patau syndrome",
+    "snomed_code": "51500006",
+    "snomed_display": "Edwards syndrome"
+  },
+  {
+    "id": "e9f58640-678c-4aa1-b9f1-ca2bab17cd88",
+    "icd10": "Q92",
+    "diagnosis_name": "Other trisomies and partial trisomies of autosomes",
+    "snomed_code": "52451004",
+    "snomed_display": "Trisomy"
+  },
+  {
+    "id": "c059912d-3045-4377-bc00-a17f38a93f63",
+    "icd10": "Q96",
+    "diagnosis_name": "Turner syndrome",
+    "snomed_code": "38804009",
+    "snomed_display": "Turner syndrome"
+  },
+  {
+    "id": "6b3c97ed-7c29-40d3-91a2-4e59736d3c32",
+    "icd10": "Q97",
+    "diagnosis_name": "Other sex chromosome abnormalities, female phenotype, not elsewhere classified",
+    "snomed_code": "38804009",
+    "snomed_display": "Sex chromosome abnormality"
+  },
+  {
+    "id": "694c0478-6032-425b-adff-20830038b54c",
+    "icd10": "Q98",
+    "diagnosis_name": "Klinefelter syndrome and other male chromosome abnormalities",
+    "snomed_code": "405769009",
+    "snomed_display": "Klinefelter syndrome"
+  },
+  {
+    "id": "667ea70e-a8fc-429f-a4cd-0d78076bf6b2",
+    "icd10": "Q99",
+    "diagnosis_name": "Other chromosome abnormalities, not elsewhere classified",
+    "snomed_code": "409709004",
+    "snomed_display": "Chromosomal abnormality"
+  },
+  {
+    "id": "1008862a-29a9-48e8-bbf5-cf7b1554a0e8",
+    "icd10": "R04.0",
+    "diagnosis_name": "Epistaxis",
+    "snomed_code": "12441001",
+    "snomed_display": "Epistaxis"
+  },
+  {
+    "id": "76739e5b-daa3-4f8b-87d6-378675997174",
+    "icd10": "R06.2",
+    "diagnosis_name": "Wheezing",
+    "snomed_code": "56018004",
+    "snomed_display": "Wheezing"
+  },
+  {
+    "id": "c44d3882-0a93-4f45-9618-43718280316e",
+    "icd10": "R09.2",
+    "diagnosis_name": "Respiratory arrest",
+    "snomed_code": "87317003",
+    "snomed_display": "Respiratory arrest"
+  },
+  {
+    "id": "5429caab-3335-4aaf-b95b-3e5d8afb8ecc",
+    "icd10": "R10.9",
+    "diagnosis_name": "Abdominal pain",
+    "snomed_code": "21522001",
+    "snomed_display": "Abdominal pain"
+  },
+  {
+    "id": "c9445bd0-c162-482b-9735-e9f42ce848cf",
+    "icd10": "R11",
+    "diagnosis_name": "Vomiting",
+    "snomed_code": "422400008",
+    "snomed_display": "Vomiting"
+  },
+  {
+    "id": "0e899d75-d478-4208-bd6a-d53db645ef0a",
+    "icd10": "R16.2",
+    "diagnosis_name": "Hepatosplenomegaly",
+    "snomed_code": "36760000",
+    "snomed_display": "Hepatosplenomegaly"
+  },
+  {
+    "id": "4a1f9acc-106f-4a83-9dae-da71ed545bd1",
+    "icd10": "R19.7",
+    "diagnosis_name": "Diarrhea, unspecified",
+    "snomed_code": "62315008",
+    "snomed_display": "Diarrhea"
+  },
+  {
+    "id": "deb86781-c5b7-451b-9693-2daaf05a89cc",
+    "icd10": "R27.0",
+    "diagnosis_name": "Ataxia",
+    "snomed_code": "20262006",
+    "snomed_display": "Ataxia"
+  },
+  {
+    "id": "ecf08621-39a0-4fbe-aefe-81c5f9ec6b7b",
+    "icd10": "R31",
+    "diagnosis_name": "Hematuria, unspecified",
+    "snomed_code": "34436003",
+    "snomed_display": "Hematuria"
+  },
+  {
+    "id": "5be3c726-b42d-49e9-afc5-429b3eaaee2e",
+    "icd10": "R40.2",
+    "diagnosis_name": "Coma",
+    "snomed_code": "371632003",
+    "snomed_display": "Coma"
+  },
+  {
+    "id": "debf3c22-7e63-4829-ba95-f621a60b3bf8",
+    "icd10": "R41.82",
+    "diagnosis_name": "Altered mental status, unspecified",
+    "snomed_code": "419284004",
+    "snomed_display": "Altered mental status"
+  },
+  {
+    "id": "e503b41a-6158-4ca3-982c-14c49390c1b8",
+    "icd10": "R50.9",
+    "diagnosis_name": "Fever and mild to moderate pain",
+    "snomed_code": "386661006",
+    "snomed_display": "Fever"
+  },
+  {
+    "id": "8c488a81-1568-4706-8f03-02c1b85384c5",
+    "icd10": "R50.9",
+    "diagnosis_name": "Fever, unspecified",
+    "snomed_code": "386661006",
+    "snomed_display": "Fever"
+  },
+  {
+    "id": "5a69a572-a96f-4efc-b73d-f1ca728d518b",
+    "icd10": "R51",
+    "diagnosis_name": "Headache",
+    "snomed_code": "25064002",
+    "snomed_display": "Headache"
+  },
+  {
+    "id": "45ca762f-37cc-4e28-9ee9-5112762b07cb",
+    "icd10": "R56.00",
+    "diagnosis_name": "Febrile seizures",
+    "snomed_code": "41497008",
+    "snomed_display": "Febrile seizure"
+  },
+  {
+    "id": "bbbbd6a8-54d6-486c-a10e-72d428509033",
+    "icd10": "R57.0",
+    "diagnosis_name": "Cardiogenic shock",
+    "snomed_code": "89138009",
+    "snomed_display": "Cardiogenic shock"
+  },
+  {
+    "id": "a6972fc6-35e8-4d15-bb38-e8197bd2d409",
+    "icd10": "R57.1",
+    "diagnosis_name": "Hypovolemic shock",
+    "snomed_code": "39419009",
+    "snomed_display": "Hypovolemic shock"
+  },
+  {
+    "id": "d5b71b9b-6056-45be-95ca-670edd49638e",
+    "icd10": "R57.2",
+    "diagnosis_name": "Septic shock",
+    "snomed_code": "76571007",
+    "snomed_display": "Septic shock"
+  },
+  {
+    "id": "67b3dcc8-05fe-43bb-bb24-767c69e1a19d",
+    "icd10": "R59",
+    "diagnosis_name": "Enlarged lymph nodes",
+    "snomed_code": "30746006",
+    "snomed_display": "Lymphadenopathy"
+  },
+  {
+    "id": "c1f80b80-03d8-405b-a75d-6c24f3495ec6",
+    "icd10": "R62.0",
+    "diagnosis_name": "Delayed milestone in childhood",
+    "snomed_code": "248290002",
+    "snomed_display": "Delayed milestone"
+  },
+  {
+    "id": "54b4e2df-d966-43c2-9918-48e479445597",
+    "icd10": "R62.0",
+    "diagnosis_name": "Delayed milestones in childhood",
+    "snomed_code": "248290002",
+    "snomed_display": "Delayed milestone"
+  },
+  {
+    "id": "0a7f50c6-cc19-445f-995e-22811d1c9c01",
+    "icd10": "R62.51",
+    "diagnosis_name": "Failure to thrive in child",
+    "snomed_code": "36440009",
+    "snomed_display": "Failure to thrive"
+  },
+  {
+    "id": "73250142-bf09-453d-87a1-410ecb89cc3e",
+    "icd10": "R63.3",
+    "diagnosis_name": "Feeding difficulties",
+    "snomed_code": "78164000",
+    "snomed_display": "Feeding difficulty"
+  },
+  {
+    "id": "49e9058b-4ac5-409d-afa4-13746370d63d",
+    "icd10": "R63.4",
+    "diagnosis_name": "Abnormal weight loss",
+    "snomed_code": "267024001",
+    "snomed_display": "Abnormal weight loss"
+  },
+  {
+    "id": "d95a3829-2c54-4afa-96d1-dca1a69e7699",
+    "icd10": "R65.1",
+    "diagnosis_name": "Systemic inflammatory response syndrome of infectious origin with organ failure",
+    "snomed_code": "238150007",
+    "snomed_display": "Systemic inflammatory response syndrome"
+  },
+  {
+    "id": "325a0d00-a06b-4546-933f-a2372c448cee",
+    "icd10": "R80",
+    "diagnosis_name": "Proteinuria, unspecified",
+    "snomed_code": "29738008",
+    "snomed_display": "Proteinuria"
+  },
+  {
+    "id": "d66c5a3b-8ab5-406d-a720-434de857c1e7",
+    "icd10": "S06",
+    "diagnosis_name": "Intracranial injury",
+    "snomed_code": "127295002",
+    "snomed_display": "Traumatic brain injury"
+  },
+  {
+    "id": "50229faa-712d-4c45-aa9c-69b6997085bf",
+    "icd10": "T07",
+    "diagnosis_name": "Multiple injuries, unspecified",
+    "snomed_code": "397996002",
+    "snomed_display": "Multiple trauma"
+  },
+  {
+    "id": "7825eacf-5c8b-4170-8daa-e10eb68ef387",
+    "icd10": "T14.1",
+    "diagnosis_name": "Open wound of unspecified body region",
+    "snomed_code": "283680004",
+    "snomed_display": "Open wound"
+  },
+  {
+    "id": "3188994c-7bb5-48e0-82b6-2e989edd55dd",
+    "icd10": "T15",
+    "diagnosis_name": "Foreign body in eye and adnexa",
+    "snomed_code": "767007",
+    "snomed_display": "Foreign body in eye"
+  },
+  {
+    "id": "c963e320-4cdc-4318-b16f-b2fc287196f0",
+    "icd10": "T16",
+    "diagnosis_name": "Foreign body in ear",
+    "snomed_code": "301932007",
+    "snomed_display": "Foreign body in ear"
+  },
+  {
+    "id": "14947806-3639-4dd1-82cb-92d75e95189f",
+    "icd10": "T17",
+    "diagnosis_name": "Foreign body in respiratory tract",
+    "snomed_code": "56198003",
+    "snomed_display": "Foreign body in respiratory tract"
+  },
+  {
+    "id": "dd9fe8d6-d03b-477a-b39a-fecb5f39b918",
+    "icd10": "T18",
+    "diagnosis_name": "Foreign body in alimentary tract",
+    "snomed_code": "34713006",
+    "snomed_display": "Foreign body in alimentary tract"
+  },
+  {
+    "id": "143e2924-23f5-46af-8506-17e418e50839",
+    "icd10": "T30",
+    "diagnosis_name": "Burn and corrosion, unspecified body region",
+    "snomed_code": "48333001",
+    "snomed_display": "Burn"
+  },
+  {
+    "id": "fc56f873-8d62-44b3-836a-fa918a836744",
+    "icd10": "T31",
+    "diagnosis_name": "Burns classified according to extent of body surface involved",
+    "snomed_code": "48333001",
+    "snomed_display": "Burn injury"
+  },
+  {
+    "id": "9c74be86-8d85-4f3a-9de7-02f71176af14",
+    "icd10": "T39",
+    "diagnosis_name": "Poisoning by nonopioid analgesics, antipyretics and antirheumatics",
+    "snomed_code": "75478009",
+    "snomed_display": "Poisoning by analgesic"
+  },
+  {
+    "id": "819b6e8e-4d79-4cb0-baa1-06e9d67106a7",
+    "icd10": "T42",
+    "diagnosis_name": "Poisoning by antiepileptic, sedative-hypnotic and antiparkinsonism drugs",
+    "snomed_code": "72431002",
+    "snomed_display": "Poisoning by anticonvulsant"
+  },
+  {
+    "id": "4241d7a9-7ed7-4b5c-a3f3-0c4a8968ce8c",
+    "icd10": "T50",
+    "diagnosis_name": "Poisoning by diuretics and other unspecified drugs, medicaments and biological substances",
+    "snomed_code": "75478009",
+    "snomed_display": "Poisoning by drug"
+  },
+  {
+    "id": "7550e2b9-a569-4a6c-9385-a9d38081e583",
+    "icd10": "T51",
+    "diagnosis_name": "Toxic effect of alcohol",
+    "snomed_code": "23037004",
+    "snomed_display": "Toxic effect of alcohol"
+  },
+  {
+    "id": "7c1e6245-273e-4d43-996c-5653e6c8ad32",
+    "icd10": "T54",
+    "diagnosis_name": "Toxic effect of corrosive substances",
+    "snomed_code": "269704000",
+    "snomed_display": "Toxic effect of corrosive substance"
+  },
+  {
+    "id": "bfb8f71f-9db4-43ce-b5fa-52a712dd7541",
+    "icd10": "T60",
+    "diagnosis_name": "Toxic effect of pesticides",
+    "snomed_code": "212593006",
+    "snomed_display": "Toxic effect of pesticide"
+  },
+  {
+    "id": "face32d8-a937-4dd4-bddf-bab04004388e",
+    "icd10": "T63",
+    "diagnosis_name": "Toxic effect of venom of contact with venomous animals",
+    "snomed_code": "75702006",
+    "snomed_display": "Envenomation"
+  },
+  {
+    "id": "e5beed9e-0eb8-4a1c-b1da-20d59640a78e",
+    "icd10": "T71",
+    "diagnosis_name": "Asphyxiation",
+    "snomed_code": "66466001",
+    "snomed_display": "Asphyxia"
+  },
+  {
+    "id": "2e0d0e1e-f557-4104-88de-1d9339f82185",
+    "icd10": "T74",
+    "diagnosis_name": "Child abuse syndromes",
+    "snomed_code": "397940009",
+    "snomed_display": "Child abuse"
+  },
+  {
+    "id": "615b5ee4-63e8-46c3-8281-a0e8ba559045",
+    "icd10": "T75.4",
+    "diagnosis_name": "Effects of electric current",
+    "snomed_code": "242784006",
+    "snomed_display": "Electric shock"
+  },
+  {
+    "id": "28323576-4d76-4dfb-ae3b-ca9b85a53ef0",
+    "icd10": "T78.2",
+    "diagnosis_name": "Anaphylactic shock, unspecified",
+    "snomed_code": "39579001",
+    "snomed_display": "Anaphylaxis"
+  },
+  {
+    "id": "f976083e-5d1c-498c-bac8-eb88d49dc332",
+    "icd10": "T78.2",
+    "diagnosis_name": "Anaphylaxis",
+    "snomed_code": "39579001",
+    "snomed_display": "Anaphylaxis"
+  },
+  {
+    "id": "b5ed90e0-c983-4ba3-84ea-845fb657c8b0",
+    "icd10": "T78.4",
+    "diagnosis_name": "Allergy, unspecified",
+    "snomed_code": "419076005",
+    "snomed_display": "Allergic reaction"
+  },
+  {
+    "id": "5d3c9030-aea8-42ea-8e15-8447132b38a0",
+    "icd10": "U07.1",
+    "diagnosis_name": "COVID-19, virus identified",
+    "snomed_code": "840539006",
+    "snomed_display": "COVID-19"
+  }
+]

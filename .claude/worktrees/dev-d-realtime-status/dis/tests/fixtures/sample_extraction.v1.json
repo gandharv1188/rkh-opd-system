@@ -1,0 +1,43 @@
+{
+  "document_type": "discharge_summary",
+  "summary": "Synthetic 4-year-old with acute otitis media, discharged on amoxicillin. Fixture — not real patient data.",
+  "document_date": "2025-11-04",
+  "lab_name": "Synthetic Memorial Lab",
+  "labs": [
+    {
+      "test_name": "Hemoglobin",
+      "loinc_code": "718-7",
+      "value": 11.8,
+      "unit": "g/dL",
+      "reference_low": 11.5,
+      "reference_high": 13.5,
+      "flag": "normal"
+    }
+  ],
+  "medications": [
+    {
+      "generic_name": "Amoxicillin",
+      "strength": "250 mg/5 mL",
+      "dose": "5 mL",
+      "route": "PO",
+      "frequency": "TDS",
+      "duration_days": 5
+    }
+  ],
+  "diagnoses": [
+    {
+      "icd10_code": "H66.90",
+      "description": "Acute otitis media, unspecified ear",
+      "certainty": "confirmed"
+    }
+  ],
+  "vaccinations": [
+    {
+      "vaccine": "MMR",
+      "dose_number": 1,
+      "administered_date": "2022-05-17",
+      "lot_number": "SYN-MMR-001"
+    }
+  ],
+  "clinical_notes": "Synthetic fixture. Do not use as training or clinical data."
+}

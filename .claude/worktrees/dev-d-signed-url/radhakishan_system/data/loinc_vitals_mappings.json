@@ -1,0 +1,66 @@
+[
+  {
+    "vital_name": "Body Weight",
+    "column": "weight_kg",
+    "loinc_code": "29463-7",
+    "loinc_display": "Body weight",
+    "unit": "kg",
+    "fhir_category": "vital-signs"
+  },
+  {
+    "vital_name": "Body Height",
+    "column": "height_cm",
+    "loinc_code": "8302-2",
+    "loinc_display": "Body height",
+    "unit": "cm",
+    "fhir_category": "vital-signs"
+  },
+  {
+    "vital_name": "Head Circumference",
+    "column": "hc_cm",
+    "loinc_code": "9843-4",
+    "loinc_display": "Head Occipital-frontal circumference by Tape measure",
+    "unit": "cm",
+    "fhir_category": "vital-signs"
+  },
+  {
+    "vital_name": "MUAC",
+    "column": "muac_cm",
+    "loinc_code": "56072-2",
+    "loinc_display": "Circumference Mid upper arm - left",
+    "unit": "cm",
+    "fhir_category": "vital-signs"
+  },
+  {
+    "vital_name": "Body Temperature",
+    "column": "temp_f",
+    "loinc_code": "8310-5",
+    "loinc_display": "Body temperature",
+    "unit": "[degF]",
+    "fhir_category": "vital-signs"
+  },
+  {
+    "vital_name": "Heart Rate",
+    "column": "hr_per_min",
+    "loinc_code": "8867-4",
+    "loinc_display": "Heart rate",
+    "unit": "/min",
+    "fhir_category": "vital-signs"
+  },
+  {
+    "vital_name": "Respiratory Rate",
+    "column": "rr_per_min",
+    "loinc_code": "9279-1",
+    "loinc_display": "Respiratory rate",
+    "unit": "/min",
+    "fhir_category": "vital-signs"
+  },
+  {
+    "vital_name": "Oxygen Saturation",
+    "column": "spo2_pct",
+    "loinc_code": "2708-6",
+    "loinc_display": "Oxygen saturation in Arterial blood",
+    "unit": "%",
+    "fhir_category": "vital-signs"
+  }
+]

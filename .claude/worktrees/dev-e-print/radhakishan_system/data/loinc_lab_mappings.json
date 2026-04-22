@@ -1,0 +1,275 @@
+[
+  {
+    "test_name": "Hemoglobin",
+    "category": "Hematology",
+    "loinc_code": "718-7",
+    "loinc_display": "Hemoglobin [Mass/volume] in Blood",
+    "unit": "g/dL"
+  },
+  {
+    "test_name": "TLC (WBC)",
+    "category": "Hematology",
+    "loinc_code": "6690-2",
+    "loinc_display": "Leukocytes [#/volume] in Blood by Automated count",
+    "unit": "cells/cumm"
+  },
+  {
+    "test_name": "Platelet Count",
+    "category": "Hematology",
+    "loinc_code": "777-3",
+    "loinc_display": "Platelets [#/volume] in Blood by Automated count",
+    "unit": "lakh/cumm"
+  },
+  {
+    "test_name": "Reticulocyte Count",
+    "category": "Hematology",
+    "loinc_code": "4679-7",
+    "loinc_display": "Reticulocytes/100 erythrocytes in Blood",
+    "unit": "%"
+  },
+  {
+    "test_name": "ESR",
+    "category": "Hematology",
+    "loinc_code": "4537-7",
+    "loinc_display": "Erythrocyte sedimentation rate by Westergren method",
+    "unit": "mm/hr"
+  },
+  {
+    "test_name": "Peripheral Smear",
+    "category": "Hematology",
+    "loinc_code": "34994-4",
+    "loinc_display": "Blood smear morphology panel in Blood",
+    "unit": null
+  },
+  {
+    "test_name": "S. Ferritin",
+    "category": "Biochemistry",
+    "loinc_code": "2276-4",
+    "loinc_display": "Ferritin [Mass/volume] in Serum",
+    "unit": "ng/mL"
+  },
+  {
+    "test_name": "S. Iron",
+    "category": "Biochemistry",
+    "loinc_code": "2498-4",
+    "loinc_display": "Iron [Mass/volume] in Serum or Plasma",
+    "unit": "mcg/dL"
+  },
+  {
+    "test_name": "TIBC",
+    "category": "Biochemistry",
+    "loinc_code": "2500-7",
+    "loinc_display": "Iron binding capacity [Mass/volume] in Serum or Plasma",
+    "unit": "mcg/dL"
+  },
+  {
+    "test_name": "Bilirubin (Total)",
+    "category": "Biochemistry",
+    "loinc_code": "1975-2",
+    "loinc_display": "Bilirubin.total [Mass/volume] in Serum or Plasma",
+    "unit": "mg/dL"
+  },
+  {
+    "test_name": "Bilirubin (Direct)",
+    "category": "Biochemistry",
+    "loinc_code": "1968-7",
+    "loinc_display": "Bilirubin.direct [Mass/volume] in Serum or Plasma",
+    "unit": "mg/dL"
+  },
+  {
+    "test_name": "SGPT/ALT",
+    "category": "Biochemistry",
+    "loinc_code": "1742-6",
+    "loinc_display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+    "unit": "U/L"
+  },
+  {
+    "test_name": "SGOT/AST",
+    "category": "Biochemistry",
+    "loinc_code": "1920-8",
+    "loinc_display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+    "unit": "U/L"
+  },
+  {
+    "test_name": "Blood Urea",
+    "category": "Biochemistry",
+    "loinc_code": "3094-0",
+    "loinc_display": "Urea nitrogen [Mass/volume] in Serum or Plasma",
+    "unit": "mg/dL"
+  },
+  {
+    "test_name": "S. Creatinine",
+    "category": "Biochemistry",
+    "loinc_code": "2160-0",
+    "loinc_display": "Creatinine [Mass/volume] in Serum or Plasma",
+    "unit": "mg/dL"
+  },
+  {
+    "test_name": "CRP",
+    "category": "Biochemistry",
+    "loinc_code": "1988-5",
+    "loinc_display": "C reactive protein [Mass/volume] in Serum or Plasma",
+    "unit": "mg/L"
+  },
+  {
+    "test_name": "Blood Sugar (F)",
+    "category": "Biochemistry",
+    "loinc_code": "1558-6",
+    "loinc_display": "Fasting glucose [Mass/volume] in Serum or Plasma",
+    "unit": "mg/dL"
+  },
+  {
+    "test_name": "Blood Sugar (R)",
+    "category": "Biochemistry",
+    "loinc_code": "2345-7",
+    "loinc_display": "Glucose [Mass/volume] in Serum or Plasma",
+    "unit": "mg/dL"
+  },
+  {
+    "test_name": "S. Calcium",
+    "category": "Biochemistry",
+    "loinc_code": "17861-6",
+    "loinc_display": "Calcium [Mass/volume] in Serum or Plasma",
+    "unit": "mg/dL"
+  },
+  {
+    "test_name": "S. Albumin",
+    "category": "Biochemistry",
+    "loinc_code": "1751-7",
+    "loinc_display": "Albumin [Mass/volume] in Serum or Plasma",
+    "unit": "g/dL"
+  },
+  {
+    "test_name": "Vit D (25-OH)",
+    "category": "Biochemistry",
+    "loinc_code": "1989-3",
+    "loinc_display": "25-Hydroxyvitamin D3 [Mass/volume] in Serum or Plasma",
+    "unit": "ng/mL"
+  },
+  {
+    "test_name": "TSH",
+    "category": "Biochemistry",
+    "loinc_code": "3016-3",
+    "loinc_display": "Thyrotropin [Units/volume] in Serum or Plasma",
+    "unit": "mIU/L"
+  },
+  {
+    "test_name": "Free T4",
+    "category": "Biochemistry",
+    "loinc_code": "3024-7",
+    "loinc_display": "Thyroxine (T4) free [Mass/volume] in Serum or Plasma",
+    "unit": "ng/dL"
+  },
+  {
+    "test_name": "S. Electrolytes (Na)",
+    "category": "Biochemistry",
+    "loinc_code": "2951-2",
+    "loinc_display": "Sodium [Moles/volume] in Serum or Plasma",
+    "unit": "mEq/L"
+  },
+  {
+    "test_name": "S. Electrolytes (K)",
+    "category": "Biochemistry",
+    "loinc_code": "2823-3",
+    "loinc_display": "Potassium [Moles/volume] in Serum or Plasma",
+    "unit": "mEq/L"
+  },
+  {
+    "test_name": "Blood Culture",
+    "category": "Microbiology",
+    "loinc_code": "600-7",
+    "loinc_display": "Bacteria identified in Blood by Culture",
+    "unit": null
+  },
+  {
+    "test_name": "Urine Culture",
+    "category": "Microbiology",
+    "loinc_code": "630-4",
+    "loinc_display": "Bacteria identified in Urine by Culture",
+    "unit": null
+  },
+  {
+    "test_name": "Urine Routine",
+    "category": "Microbiology",
+    "loinc_code": "24356-8",
+    "loinc_display": "Urinalysis complete panel in Urine",
+    "unit": null
+  },
+  {
+    "test_name": "Stool Routine",
+    "category": "Microbiology",
+    "loinc_code": "56875-8",
+    "loinc_display": "Stool examination panel",
+    "unit": null
+  },
+  {
+    "test_name": "Widal Test",
+    "category": "Microbiology",
+    "loinc_code": "5765-4",
+    "loinc_display": "Salmonella sp Ab [Titer] in Serum by Agglutination",
+    "unit": null
+  },
+  {
+    "test_name": "Dengue NS1",
+    "category": "Microbiology",
+    "loinc_code": "75377-2",
+    "loinc_display": "Dengue virus NS1 Ag [Presence] in Serum by Immunoassay",
+    "unit": null
+  },
+  {
+    "test_name": "Malaria Antigen",
+    "category": "Microbiology",
+    "loinc_code": "51587-0",
+    "loinc_display": "Plasmodium sp Ag [Presence] in Blood by Rapid immunoassay",
+    "unit": null
+  },
+  {
+    "test_name": "Rapid Strep Test",
+    "category": "Microbiology",
+    "loinc_code": "78012-2",
+    "loinc_display": "Streptococcus pyogenes Ag [Presence] in Throat by Rapid immunoassay",
+    "unit": null
+  },
+  {
+    "test_name": "Mantoux/TB Gold",
+    "category": "Microbiology",
+    "loinc_code": "71774-4",
+    "loinc_display": "Mycobacterium tuberculosis stimulated gamma interferon [Presence] in Blood",
+    "unit": null
+  },
+  {
+    "test_name": "X-Ray Chest",
+    "category": "Imaging",
+    "loinc_code": "36643-5",
+    "loinc_display": "XR Chest 2 Views",
+    "unit": null
+  },
+  {
+    "test_name": "USG Abdomen",
+    "category": "Imaging",
+    "loinc_code": "24531-6",
+    "loinc_display": "US Abdomen",
+    "unit": null
+  },
+  {
+    "test_name": "USG KUB",
+    "category": "Imaging",
+    "loinc_code": "24957-3",
+    "loinc_display": "US Kidney and Urinary bladder",
+    "unit": null
+  },
+  {
+    "test_name": "CT Scan",
+    "category": "Imaging",
+    "loinc_code": "30799-1",
+    "loinc_display": "CT Head WO contrast",
+    "unit": null
+  },
+  {
+    "test_name": "ECHO",
+    "category": "Imaging",
+    "loinc_code": "34552-0",
+    "loinc_display": "US Heart 2D",
+    "unit": null
+  }
+]

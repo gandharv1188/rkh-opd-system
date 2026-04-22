@@ -1,0 +1,10 @@
+{
+  "queue.title": "एक्सट्रैक्शन कतार",
+  "queue.filter.status": "स्थिति",
+  "queue.filter.all": "सभी",
+  "verify.title": "एक्सट्रैक्शन सत्यापित करें",
+  "verify.approve": "स्वीकार करें",
+  "verify.reject": "अस्वीकार करें",
+  "common.loading": "लोड हो रहा है…",
+  "common.error": "कुछ गलत हो गया"
+}

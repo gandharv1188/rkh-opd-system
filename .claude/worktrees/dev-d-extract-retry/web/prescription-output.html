@@ -1,0 +1,1074 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap"
+/>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  :root {
+    --blue: #1e3a6b;
+    --blue-lt: #e8edf8;
+    --blue-mid: #2d5aa0;
+    --green: #1a5c35;
+    --green-lt: #e8f4ed;
+    --red: #8b1a1a;
+    --red-lt: #fdf0f0;
+    --amber: #7a4a00;
+    --amber-lt: #fef8e8;
+    --ink: #1a1a14;
+    --ink2: #3d3d30;
+    --ink3: #7a7a60;
+    --paper: #fffef9;
+    --paper2: #f8f7f1;
+    --paper3: #eeeadb;
+    --border: rgba(26, 26, 20, 0.1);
+    --border2: rgba(26, 26, 20, 0.18);
+    --r: 6px;
+    --r2: 10px;
+  }
+  body {
+    font-family: system-ui, sans-serif;
+    background: var(--paper2);
+    color: var(--ink);
+    font-size: 13px;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+
+  /* ===== NO-PRINT TOOLBAR ===== */
+  .toolbar {
+    background: var(--blue);
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toolbar h2 {
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Georgia, serif;
+    white-space: nowrap;
+  }
+  .toolbar input[type="text"] {
+    flex: 1;
+    min-width: 180px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: var(--r);
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    outline: none;
+  }
+  .toolbar input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .toolbar input[type="text"]:focus {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  .toolbar select {
+    flex: 1;
+    min-width: 220px;
+    max-width: 420px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: var(--r);
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    cursor: pointer;
+  }
+  .toolbar select option {
+    background: #1e3a6b;
+    color: #fff;
+  }
+  .toolbar button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: var(--r);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-print {
+    background: #fff;
+    color: var(--blue);
+  }
+  .btn-print:hover {
+    background: #e8edf8;
+  }
+  .btn-refresh {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+  .btn-refresh:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  .conn-status {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.8;
+  }
+  .conn-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f0ad4e;
+    display: inline-block;
+  }
+
+  /* ===== PRESCRIPTION RENDER AREA ===== */
+  .rx-area {
+    max-width: 210mm;
+    margin: 16px auto;
+    background: #fff;
+    padding: 8mm;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    min-height: 297mm;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--ink3);
+    font-size: 14px;
+  }
+  .empty-state .icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.3;
+  }
+
+  /* ===== A4 PRESCRIPTION STYLES (matching printRx — comfortable spacing) ===== */
+  .rx-area .hdr {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 2px solid #1e3a6b;
+    margin-bottom: 10px;
+  }
+  .rx-area .hdr-l {
+    font-size: 11px;
+    line-height: 1.6;
+    width: 30%;
+    flex-shrink: 0;
+  }
+  .rx-area .hdr-c {
+    text-align: center;
+    flex: 1;
+  }
+  .rx-area .hdr-c h1 {
+    font-size: 18px;
+    color: #1e3a6b;
+    margin-bottom: 2px;
+    font-family: Georgia, serif;
+  }
+  .rx-area .hdr-hi {
+    font-size: 12px;
+    color: #666;
+    font-family: "Noto Sans Devanagari", system-ui, sans-serif;
+  }
+  .rx-area .hdr-sub {
+    font-size: 10px;
+    color: #888;
+  }
+  .rx-area .nabh-badge {
+    display: inline-block;
+    border: 1px solid #1e3a6b;
+    border-radius: 99px;
+    padding: 1px 8px;
+    font-size: 8px;
+    color: #1e3a6b;
+    margin-top: 3px;
+    letter-spacing: 0.05em;
+  }
+  .rx-area .hdr-r {
+    text-align: right;
+    font-size: 10px;
+    line-height: 1.6;
+    width: 30%;
+    flex-shrink: 0;
+  }
+  .rx-area .info-strip {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 6px;
+    font-size: 11px;
+    color: #555;
+  }
+  .rx-area .info-lbl {
+    font-size: 8px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 4px;
+  }
+  .rx-area .meta {
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 8px;
+  }
+  .rx-area .meta-item {
+    flex: 1;
+  }
+  .rx-area .meta-lbl {
+    display: block;
+    font-size: 8px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .rx-area .meta-val {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .rx-area .sec {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #eee;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .rx-area .sec-title {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 3px;
+  }
+  .rx-area .sec-title.blue {
+    color: #1e3a6b;
+    border-color: rgba(30, 58, 107, 0.2);
+  }
+  .rx-area .sec-title.red {
+    color: #8b1a1a;
+    border-color: rgba(139, 26, 26, 0.2);
+  }
+  .rx-area .dx {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .rx-area .icd {
+    font-size: 9px;
+    color: #888;
+    font-weight: 400;
+  }
+  .rx-area .med {
+    margin-bottom: 10px;
+    padding: 6px 8px 6px 10px;
+    border-left: 3px solid #1e3a6b;
+    background: rgba(30, 58, 107, 0.03);
+    break-inside: avoid;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .rx-area .med-text {
+    flex: 1;
+  }
+  .rx-area .dose-sidebar {
+    flex-shrink: 0;
+    width: 90px;
+    text-align: center;
+    font-size: 9px;
+    color: #1e3a6b;
+    border-left: 1px dashed rgba(30, 58, 107, 0.15);
+    padding-left: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+  .rx-area .dose-sidebar svg {
+    width: 15px;
+    height: 15px;
+    stroke: #1e3a6b;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: middle;
+  }
+  .rx-area .ds-times {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+  .rx-area .ds-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 7px;
+    color: #888;
+  }
+  .rx-area .ds-time svg {
+    width: 16px;
+    height: 16px;
+  }
+  .rx-area .ds-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .rx-area .ds-dim {
+    font-weight: 400;
+    font-size: 8px;
+    color: #888;
+  }
+  .rx-area .dose-pill {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #1e3a6b;
+    display: inline-block;
+  }
+  .rx-area .dose-pill-half {
+    background: linear-gradient(90deg, #1e3a6b 50%, transparent 50%);
+    border: 1px solid #1e3a6b;
+  }
+  .rx-area .dose-pill-quarter {
+    background: conic-gradient(#1e3a6b 25%, transparent 25%);
+    border: 1px solid #1e3a6b;
+  }
+  .rx-area .med-r1 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e3a6b;
+  }
+  .rx-area .med-r2 {
+    font-size: 12px;
+    color: #1e3a6b;
+    margin-top: 2px;
+  }
+  .rx-area .med-r3 {
+    font-family: "Noto Sans Devanagari", system-ui, sans-serif;
+    font-size: 12px;
+    color: #555;
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .rx-area .med-flag {
+    font-size: 10px;
+    color: #8b1a1a;
+    margin-top: 2px;
+  }
+  .rx-area .inv {
+    color: #8b1a1a;
+    margin-bottom: 3px;
+    padding: 3px 6px;
+    background: rgba(139, 26, 26, 0.03);
+    border-radius: 3px;
+  }
+  .rx-area .urg {
+    font-size: 9px;
+    background: #fde8e8;
+    color: #8b1a1a;
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+  .rx-area .emerg {
+    background: #fdf8f0;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  .rx-area .emerg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 16px;
+    font-size: 11px;
+  }
+  .rx-area .emerg-grid strong {
+    font-family: "Noto Sans Devanagari", system-ui, sans-serif;
+  }
+  .rx-area .emerg-grid span {
+    color: #666;
+  }
+  .rx-area .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 2px solid #1e3a6b;
+    font-size: 10px;
+    gap: 12px;
+  }
+  .rx-area .footer-doc {
+    line-height: 1.6;
+    flex: 1;
+  }
+  .rx-area .footer-doc em {
+    color: #999;
+    font-size: 9px;
+  }
+  .rx-area .footer-qr {
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .rx-area .footer-safety {
+    text-align: right;
+    color: #1a6b3a;
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .rx-area .dose-strip-prn svg {
+    fill: #b8860b;
+    stroke: #b8860b;
+  }
+  .rx-area .dose-meta svg {
+    width: 12px;
+    height: 12px;
+    stroke: #666;
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  /* ===== PRINT STYLES ===== */
+  @media print {
+    .toolbar {
+      display: none !important;
+    }
+    body {
+      background: #fff;
+    }
+    .rx-area {
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+      max-width: none;
+      min-height: auto;
+    }
+    @page {
+      size: A4;
+      margin: 12mm 10mm;
+    }
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .toast.on {
+    opacity: 1;
+  }
+</style>
+
+<!-- TOOLBAR (no-print) -->
+<div class="toolbar">
+  <h2>Prescription Output &mdash; Print Station</h2>
+  <span class="conn-status"
+    ><span class="conn-dot" id="conn-dot"></span
+    ><span id="conn-label">Connecting...</span></span
+  >
+  <input
+    type="text"
+    id="search-input"
+    placeholder="Search by patient name, UHID, or Rx ID..."
+    oninput="filterRxList()"
+  />
+  <select id="rx-select" onchange="onRxSelect()">
+    <option value="">-- Select a prescription --</option>
+  </select>
+  <button class="btn-print" onclick="window.print()">&#x1F5A8; Print</button>
+  <button class="btn-refresh" onclick="loadTodayRx()">&#x21BB; Refresh</button>
+</div>
+
+<!-- PRESCRIPTION RENDER AREA -->
+<div class="rx-area" id="rx-area">
+  <div class="empty-state">
+    <div class="icon">&#x1F4C4;</div>
+    <div>Select a prescription from the dropdown to preview and print.</div>
+    <div style="margin-top: 8px; font-size: 12px; color: #999">
+      Today's approved prescriptions load automatically.
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ===== CONFIG ===== */
+  const SB = "https://ecywxuqhnlkjtdshpcbc.supabase.co";
+  const KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjeXd4dXFobmxranRkc2hwY2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MzQ2NTcsImV4cCI6MjA4OTIxMDY1N30.oo-x5L87FzJoprHIK8iFmHRa7AlIZlpDLg5Q1taY1Dg";
+  let allRxRows = [];
+  let currentRxData = null;
+
+  /* ===== SUPABASE QUERY HELPER ===== */
+  function q(t, p = "", m = "GET", b = null) {
+    const o = {
+      method: m,
+      headers: {
+        apikey: KEY,
+        Authorization: "Bearer " + KEY,
+        "Content-Type": "application/json",
+        Prefer:
+          m === "POST"
+            ? "return=representation"
+            : m === "PATCH"
+              ? "return=minimal"
+              : "",
+      },
+    };
+    if (b) o.body = JSON.stringify(b);
+    return fetch(SB + "/rest/v1/" + t + p, o);
+  }
+
+  /* ===== XSS SAFETY ===== */
+  function esc(s) {
+    if (s == null) return "";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+  function fmtTemp(v) {
+    if (!v) return "";
+    const s = String(v).trim();
+    const num = s.replace(/[^0-9.]/g, "");
+    if (/[Cc]|celsius/i.test(s)) return num + "°C";
+    return num + "°F";
+  }
+
+  /* ===== EMERGENCY WARNING SIGNS (age-appropriate) ===== */
+  const EMERGENCY_BASE = [
+    { hi: "तेज सांस / सीने में धंसाव", en: "Fast breathing / chest indrawing" },
+    { hi: "होंठ या जीभ का नीला पड़ना", en: "Bluish lips or tongue" },
+    { hi: "बार-बार उल्टी आना", en: "Repeated vomiting" },
+    { hi: "दौरा पड़ना / अकड़न", en: "Convulsions / fits" },
+    { hi: "दवा से भी बुखार न उतरना", en: "Fever not responding to medicine" },
+    {
+      hi: "अत्यधिक नींद / प्रतिक्रिया न करना",
+      en: "Excessive sleepiness / unresponsive",
+    },
+  ];
+  const EMERGENCY_INFANT = [
+    {
+      hi: "दूध न पीना / स्तनपान से इनकार",
+      en: "Refusal to breastfeed / poor feeding",
+    },
+    {
+      hi: "6 घंटे से पेशाब न आना / गीला न होना",
+      en: "No wet diaper for 6+ hours",
+    },
+    { hi: "पेट फूलना / सख्त पेट", en: "Abdominal distension" },
+    { hi: "शरीर का ठंडा / पीला पड़ना", en: "Cold / pale / mottled skin" },
+  ];
+  const EMERGENCY_CHILD = [
+    { hi: "खाना-पीना बंद करना", en: "Refusal to eat or drink" },
+    { hi: "6 घंटे से पेशाब न आना", en: "No urine for 6+ hours" },
+    { hi: "तेज पेट दर्द", en: "Severe abdominal pain" },
+    {
+      hi: "चकत्ते / दाने जो दबाने पर न मिटें",
+      en: "Rash that doesn't blanch on pressure",
+    },
+  ];
+  function parseAgeMonths(ageStr) {
+    if (!ageStr) return null;
+    const s = ageStr.toLowerCase();
+    const yrMatch = s.match(/(\d+)\s*(?:yr|year)/);
+    const moMatch = s.match(/(\d+)\s*(?:mo|month)/);
+    const dayMatch = s.match(/(\d+)\s*(?:d|day)/);
+    let months = 0;
+    if (yrMatch) months += parseInt(yrMatch[1]) * 12;
+    if (moMatch) months += parseInt(moMatch[1]);
+    if (dayMatch && !yrMatch && !moMatch) months = 0;
+    return months || (dayMatch ? 0 : null);
+  }
+  function getEmergencySigns(ageMonths) {
+    if (ageMonths != null && ageMonths < 12)
+      return [...EMERGENCY_BASE, ...EMERGENCY_INFANT];
+    return [...EMERGENCY_BASE, ...EMERGENCY_CHILD];
+  }
+
+  /* ===== DOSING PICTOGRAM ICONS (inline SVG) ===== */
+  const DOSE_SVG = {
+    morning: `<svg viewBox="0 0 24 24"><path d="M12 2v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M20 12h2"/><path d="M19.07 4.93l-1.41 1.41"/><path d="M2 12h2"/><path d="M12 8a4 4 0 0 1 4 4"/><path d="M12 8a4 4 0 0 0-4 4"/><line x1="2" y1="16" x2="22" y2="16"/></svg>`,
+    afternoon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>`,
+    evening: `<svg viewBox="0 0 24 24"><path d="M12 10a4 4 0 0 1 4 4"/><path d="M12 10a4 4 0 0 0-4 4"/><line x1="2" y1="14" x2="22" y2="14"/><path d="M12 10v8"/><path d="M4.93 3.93l1.41 1.41"/><path d="M19.07 3.93l-1.41 1.41"/><path d="M12 2v2"/></svg>`,
+    bedtime: `<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/><path d="M19 3l.5 1.5L21 5l-1.5.5L19 7l-.5-1.5L17 5l1.5-.5z"/></svg>`,
+    prn: `<svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 10 10-12h-9l1-10z" fill="#b8860b" stroke="#b8860b"/></svg>`,
+    spoon: `<svg viewBox="0 0 24 24"><path d="M15 3C15 5.21 13.21 7 11 7H8C5.79 7 4 5.21 4 3"/><path d="M4 3h11"/><path d="M8 7v14"/><path d="M6 21h5"/></svg>`,
+    drop: `<svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+    food: `<svg viewBox="0 0 24 24"><path d="M3 11h18"/><path d="M5 11a7 7 0 0 1 14 0"/><path d="M7 17h10"/><path d="M9 21h6"/></svg>`,
+  };
+
+  const TIME_LABELS = {
+    morning: "सुबह",
+    afternoon: "दोपहर",
+    evening: "शाम",
+    bedtime: "रात",
+  };
+
+  /* ===== PICTOGRAM RENDERING ===== */
+  function renderPictogram(m) {
+    const p = m.pictogram;
+    if (!p) return "";
+    let h = '<div class="dose-sidebar">';
+    if (p.prn) {
+      h += `<div class="ds-row">${DOSE_SVG.prn}<span>ज़रूरत पर</span></div>`;
+      h += `<div class="ds-row">${renderDoseIcon(p)} ${esc(p.dose_display || "")}</div>`;
+      if (p.max_per_day)
+        h += `<div class="ds-row ds-dim">\u2264${p.max_per_day}\u00d7/\u0926\u093f\u0928</div>`;
+    } else {
+      h += `<div class="ds-times">`;
+      (p.times || []).forEach((t) => {
+        h += `<div class="ds-time">${DOSE_SVG[t] || ""}<span>${TIME_LABELS[t] || ""}</span></div>`;
+      });
+      h += `</div>`;
+      h += `<div class="ds-row">${renderDoseIcon(p)} ${esc(p.dose_display || "")}</div>`;
+      if (p.duration_days)
+        h += `<div class="ds-row ds-dim">${p.duration_days} दिन</div>`;
+      if (p.with_food) h += `<div class="ds-row ds-dim">भोजन के बाद</div>`;
+      if (p.special === "empty_stomach")
+        h += `<div class="ds-row ds-dim">खाली पेट</div>`;
+    }
+    h += "</div>";
+    return h;
+  }
+
+  function renderDoseIcon(p) {
+    if (p.form === "syrup") return DOSE_SVG.spoon;
+    if (p.form === "drops") {
+      return `<span style="display:inline-block;width:14px;height:14px;vertical-align:middle">${DOSE_SVG.drop}</span>`;
+    }
+    if (p.form === "tablet" || p.form === "capsule") {
+      let pills = "";
+      const qty = p.dose_qty || 1;
+      for (let i = 0; i < Math.floor(qty); i++)
+        pills += '<span class="dose-pill"></span>';
+      if (p.dose_fraction === "half")
+        pills += '<span class="dose-pill dose-pill-half"></span>';
+      if (p.dose_fraction === "quarter")
+        pills += '<span class="dose-pill dose-pill-quarter"></span>';
+      return pills || '<span class="dose-pill"></span>';
+    }
+    if (p.form === "inhaler")
+      return `<span style="font-size:10px">${p.dose_display || ""}</span>`;
+    return `<span style="font-size:10px">${esc(p.dose_display || "")}</span>`;
+  }
+
+  /* ===== BUILD PRESCRIPTION HTML (identical to printRx) ===== */
+  async function buildRxHtml(r, rxId, uhid) {
+    const rxDate =
+      r._rx_date ||
+      new Date().toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+    const rxTime =
+      r._rx_time ||
+      new Date().toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+    let h = "";
+    // Header — doctor left, hospital center, emergency right
+    h += `<div class="hdr">
+      <div class="hdr-l"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh)<br>HMC Reg. HN 21452 \u00b7 PMC 23168<br>Pediatrics &amp; Neonatology</div>
+      <div class="hdr-c"><h1>Radhakishan Hospital</h1><div class="hdr-hi">\u0930\u093e\u0927\u093e\u0915\u093f\u0936\u0928 \u0939\u0938\u094d\u092a\u0924\u093e\u0932</div><div class="hdr-sub">Jyoti Nagar, Kurukshetra, Haryana</div><span class="nabh-badge">NABH Accredited</span></div>
+      <div class="hdr-r">Emergency:<br>01744-251441<br>01744-270516<br>7206029516</div>
+    </div>`;
+    // Info strip
+    h += `<div class="info-strip">
+      <div><span class="info-lbl">Date</span> ${esc(rxDate)}, ${esc(rxTime)}</div>
+      <div><span class="info-lbl">Rx ID</span> ${esc(rxId || "")}</div>
+      <div><span class="info-lbl">UHID</span> <strong>${esc(uhid || "")}</strong></div>
+      ${r.patient?.abha_number ? '<div><span style="color:#2980b9;font-size:10px;font-weight:600">ABDM \u2713</span></div>' : ""}
+    </div>`;
+    // Patient meta
+    h += `<div class="meta">
+      <div class="meta-item"><span class="meta-lbl">Patient</span><span class="meta-val">${esc(r.patient?.name || "")}</span></div>
+      <div class="meta-item"><span class="meta-lbl">Age \u00b7 Sex \u00b7 Weight</span><span class="meta-val">${esc(r.patient?.age || "")} \u00b7 ${esc(r.patient?.sex || "")} \u00b7 ${r.patient?.weight_kg ? esc(r.patient.weight_kg) + " kg" : ""}</span></div>
+      <div class="meta-item"><span class="meta-lbl">Guardian</span><span class="meta-val">${esc(r.patient?.guardian || "")}</span></div>
+    </div>`;
+    // Chief complaints
+    if (r.chief_complaints)
+      h += `<div class="sec"><div class="sec-title">Chief Complaints</div><div>${esc(r.chief_complaints)}</div></div>`;
+    // History
+    if (r.clinical_history)
+      h += `<div class="sec"><div class="sec-title">History</div><div>${esc(r.clinical_history)}</div></div>`;
+    // Vitals
+    const pVitals = r.vitals || {};
+    const pVItems = [];
+    if (pVitals.temp_f) pVItems.push("Temp: " + esc(fmtTemp(pVitals.temp_f)));
+    if (pVitals.hr_per_min)
+      pVItems.push("HR: " + esc(pVitals.hr_per_min) + "/min");
+    if (pVitals.rr_per_min)
+      pVItems.push("RR: " + esc(pVitals.rr_per_min) + "/min");
+    if (pVitals.spo2_pct)
+      pVItems.push("SpO\u2082: " + esc(pVitals.spo2_pct) + "%");
+    if (pVitals.bp_systolic && pVitals.bp_diastolic)
+      pVItems.push(
+        "BP: " +
+          esc(pVitals.bp_systolic) +
+          "/" +
+          esc(pVitals.bp_diastolic) +
+          " mmHg",
+      );
+    if (pVitals.map_mmhg) pVItems.push("MAP: " + esc(pVitals.map_mmhg));
+    if (r.patient?.weight_kg)
+      pVItems.push("Wt: " + esc(r.patient.weight_kg) + " kg");
+    if (r.patient?.height_cm)
+      pVItems.push("Ht: " + esc(r.patient.height_cm) + " cm");
+    if (pVItems.length) {
+      h += `<div class="sec"><div class="sec-title">Vitals</div><div>${pVItems.join(" &nbsp;\u00b7&nbsp; ")}</div></div>`;
+    }
+    // Examination
+    if (r.examination)
+      h += `<div class="sec"><div class="sec-title">Examination</div><div>${esc(r.examination)}</div></div>`;
+    // Provisional Diagnosis
+    h += `<div class="sec"><div class="sec-title">Provisional Diagnosis</div>${(r.diagnosis || []).map((d) => `<div class="dx">${esc(d.name)} <span class="icd">${esc(d.icd10 || "")}</span></div>`).join("")}</div>`;
+    // Medicines
+    if (r.medicines?.length) {
+      h += `<div class="sec"><div class="sec-title blue">\u211E Medicines</div>`;
+      r.medicines.forEach((m) => {
+        h += `<div class="med"><div class="med-text"><div class="med-r1">${esc(m.number)}. ${esc(m.row1_en || "")}</div><div class="med-r2">${esc(m.row2_en || "")}</div><div class="med-r3">${esc(m.row3_hi || "")}</div>${m.flag ? `<div class="med-flag">\u26a0 ${esc(m.flag)}</div>` : ""}</div>${renderPictogram(m)}</div>`;
+      });
+      h += `</div>`;
+    }
+    // Non-Pharmacological
+    if (r.non_pharmacological?.length) {
+      h += `<div class="sec"><div class="sec-title blue">Non-Pharmacological Advice</div>${r.non_pharmacological.map((np) => `<div style="margin-bottom:4px"><strong>${esc(np.instruction)}</strong>${np.instruction_hi ? "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;font-size:11px;color:#333\">" + esc(np.instruction_hi) + "</span>" : ""}</div>`).join("")}</div>`;
+    }
+    // IV Fluids
+    if (r.iv_fluids?.length) {
+      h += `<div class="sec"><div class="sec-title">IV Fluids</div>${r.iv_fluids.map((f) => (typeof f === "string" ? `<div>${esc(f)}</div>` : `<div>${esc(f.fluid || "")}${f.volume_ml ? " \u2014 " + esc(f.volume_ml) + " ml" : ""}${f.rate_ml_hr ? " @ " + esc(f.rate_ml_hr) + " ml/hr" : ""}${f.additives ? " + " + esc(f.additives) : ""}</div>`)).join("")}</div>`;
+    }
+    // Investigations
+    if (r.investigations?.length) {
+      h += `<div class="sec"><div class="sec-title red">Investigations</div>${r.investigations.map((i) => `<div class="inv"><strong>${esc(i.name)}</strong> \u2014 ${esc(i.indication)}${i.urgency === "same-day" ? ' <span class="urg">Same day</span>' : ""}</div>`).join("")}</div>`;
+    }
+    // Growth
+    if (r.growth?.comment) {
+      h += `<div class="sec"><div class="sec-title">Growth Assessment \u2014 ${esc(r.growth.chart || "WHO 2006")}</div><div>${esc(r.growth.comment)}</div></div>`;
+    }
+    // Vaccination
+    if (
+      r.vaccinations &&
+      (r.vaccinations.due?.length ||
+        r.vaccinations.overdue?.length ||
+        r.vaccinations.notes)
+    ) {
+      h += `<div class="sec"><div class="sec-title">Vaccination${r.vaccinations.schedule_used ? " \u2014 " + esc(r.vaccinations.schedule_used) : ""}</div>`;
+      (r.vaccinations.due || []).forEach((v) => {
+        h += `<div>\u2713 ${esc(v)} \u2014 <strong>Due</strong></div>`;
+      });
+      (r.vaccinations.overdue || []).forEach((v) => {
+        h += `<div style="color:#8b1a1a">\u26a0 ${esc(v)} \u2014 <strong>Overdue</strong></div>`;
+      });
+      if (r.vaccinations.next_due)
+        h += `<div style="margin-top:4px">Next due: <strong>${esc(r.vaccinations.next_due)}</strong></div>`;
+      if (r.vaccinations.notes)
+        h += `<div style="font-size:11px;color:#666;margin-top:4px">${esc(r.vaccinations.notes)}</div>`;
+      h += `</div>`;
+    }
+    // Neonatal
+    if (r.neonatal) {
+      const n = r.neonatal;
+      h += `<div class="sec"><div class="sec-title">Neonatal Details</div><div>`;
+      if (n.ga) h += `GA: ${esc(n.ga)} &nbsp; `;
+      if (n.pna) h += `PNA: ${esc(n.pna)} &nbsp; `;
+      if (n.bw) h += `Birth wt: ${esc(n.bw)} &nbsp; `;
+      if (n.corrected) h += `Corrected age: ${esc(n.corrected)} &nbsp; `;
+      h += `</div>`;
+      if (n.notes) h += `<div style="margin-top:4px">${esc(n.notes)}</div>`;
+      h += `</div>`;
+    }
+    // Developmental
+    if (r.developmental?.findings) {
+      h += `<div class="sec"><div class="sec-title">Developmental Screening${r.developmental.tool_used ? " \u2014 " + esc(r.developmental.tool_used) : ""}</div><div>${esc(r.developmental.findings)}</div>`;
+      if (r.developmental.red_flags?.length)
+        h += `<div style="color:#8b1a1a;margin-top:4px"><strong>Red flags:</strong> ${r.developmental.red_flags.map((f) => esc(f)).join(", ")}</div>`;
+      h += `</div>`;
+    }
+    // Diet
+    if (r.diet) {
+      h += `<div class="sec"><div class="sec-title">Diet & Nutrition</div><div>${esc(r.diet)}</div></div>`;
+    }
+    // Referral
+    if (r.referral && r.referral.trim()) {
+      h += `<div class="sec"><div class="sec-title">Referral</div><div>${esc(r.referral)}</div></div>`;
+    }
+    // Counselling
+    if (r.counselling?.length) {
+      h += `<div class="sec"><div class="sec-title">Counselling</div><ul style="margin:2px 0;padding-left:16px;list-style:none;font-size:11px;line-height:1.7">${r.counselling
+        .map((c) => {
+          const parts = String(c).split(/ — | – /);
+          if (parts.length > 1)
+            return (
+              '<li style="margin-bottom:3px">\u2713 ' +
+              esc(parts[0]) +
+              "<br><span style=\"font-family:'Noto Sans Devanagari',sans-serif;color:#555;font-size:10px\">" +
+              esc(parts.slice(1).join(" ")) +
+              "</span></li>"
+            );
+          return "<li>\u2713 " + esc(c) + "</li>";
+        })
+        .join("")}</ul></div>`;
+    }
+    // Emergency signs — use AI-generated if available, fallback to hardcoded
+    const ageMonths = r.patient?.age ? parseAgeMonths(r.patient.age) : null;
+    const warnSigns = r.warning_signs?.length
+      ? r.warning_signs
+      : getEmergencySigns(ageMonths);
+    h += `<div class="sec emerg"><div class="sec-title red">Emergency Warning Signs \u2014 \u0924\u0941\u0930\u0902\u0924 \u0935\u093e\u092a\u0938 \u0906\u090f\u0902</div><div class="emerg-grid">${warnSigns
+      .map((s) => {
+        const hi = typeof s === "string" ? null : s.hi;
+        const en = typeof s === "string" ? s : s.en;
+        if (!hi && !en) return "";
+        return `<div>${hi ? `<strong>${esc(hi)}</strong><br>` : ""}${en ? `<span>${esc(en)}</span>` : ""}</div>`;
+      })
+      .join("")}</div></div>`;
+    // Follow-up / Admission
+    h += `<div class="sec"><div class="sec-title">Follow-up</div><div>${r.admission_recommended ? '<strong style="color:#8b1a1a">ADMISSION RECOMMENDED</strong> \u2014 ' + esc(r.admission_recommended) : "Return after <strong>" + (r.followup_days || 3) + " days</strong>"}${r.doctor_notes ? " \u2014 " + esc(r.doctor_notes) : ""}</div></div>`;
+    // Footer with QR
+    // QR: verification URL
+    const rxIdForQr = r._rxId || "";
+    const qrHash = await (async (s) => {
+      const d = new TextEncoder().encode(s + "rkh-salt-2026");
+      const h = await crypto.subtle.digest("SHA-256", d);
+      return Array.from(new Uint8Array(h))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("")
+        .slice(0, 6);
+    })(
+      rxIdForQr +
+        (uhid || "") +
+        (r.created_at || new Date().toISOString()).split("T")[0],
+    );
+    const qrParams = new URLSearchParams({
+      rx: rxIdForQr,
+      uhid: uhid || "",
+      hash: qrHash,
+    });
+    if (r.patient?.abha_number) qrParams.set("abha", r.patient.abha_number);
+    const qrUrl =
+      location.origin +
+      location.pathname.replace(/[^/]*$/, "") +
+      "verify.html?" +
+      qrParams.toString();
+    const qrData = encodeURIComponent(qrUrl);
+    h += `<div class="footer">
+      <div class="footer-doc"><strong>Dr. Lokender Goyal</strong><br>MD Pediatrics (PGI Chandigarh) \u00b7 HMC HN 21452 \u00b7 PMC 23168<br>Radhakishan Hospital, Kurukshetra<br>01744-251441 \u00b7 7206029516<br><strong style="color:#1a6b3a">Digitally Signed</strong></div>
+      <div class="footer-safety">Allergy: ${esc(r.safety?.allergy_note || "NKDA")}<br>Interactions: \u2713<br>Max dose: \u2713<br>NABH: \u2713${r.patient?.abha_number ? "<br>ABDM: " + esc(r.patient.abha_number) : ""}</div>
+      <div class="footer-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${qrData}" width="80" height="80" alt="QR"><div style="font-size:7px;color:#999;text-align:center;margin-top:2px">Scan to verify</div></div>
+    </div>`;
+
+    return h;
+  }
+
+  /* ===== CONNECT & LOAD ===== */
+  async function connectAndLoad() {
+    try {
+      document.getElementById("conn-label").textContent = "Connecting...";
+      document.getElementById("conn-dot").style.background = "#f0ad4e";
+      const r = await fetch(SB + "/rest/v1/formulary?select=id&limit=1", {
+        headers: { apikey: KEY, Authorization: "Bearer " + KEY },
+      });
+      if (r.ok) {
+        document.getElementById("conn-dot").style.background = "#1a6b3a";
+        document.getElementById("conn-label").textContent = "Connected";
+        await loadTodayRx();
+      } else {
+        document.getElementById("conn-dot").style.background = "#8b1a1a";
+        document.getElementById("conn-label").textContent = "Connection failed";
+      }
+    } catch (e) {
+      document.getElementById("conn-dot").style.background = "#8b1a1a";
+      document.getElementById("conn-label").textContent = "Error: " + e.message;
+    }
+  }
+
+  async function loadTodayRx() {
+    try {
+      // Load all approved prescriptions from today
+      const todayISO = new Date().toISOString().slice(0, 10);
+      const res = await q(
+        "prescriptions",
+        `?select=id,patient_id,visit_id,generated_json,is_approved,created_at&is_approved=eq.true&created_at=gte.${todayISO}T00:00:00&order=created_at.desc`,
+      );
+      if (!res.ok) {
+        showToast("Failed to load prescriptions");
+        return;
+      }
+      allRxRows = await res.json();
+
+      // Enrich with patient names
+      const patientIds = [
+        ...new Set(allRxRows.map((r) => r.patient_id).filter(Boolean)),
+      ];
+      if (patientIds.length > 0) {
+        const pRes = await q(
+          "patients",
+          `?select=id,name&id=in.(${patientIds.map((id) => `"${id}"`).join(",")})`,
+        );
+        if (pRes.ok) {
+          const patients = await pRes.json();
+          const pMap = {};
+          patients.forEach((p) => (pMap[p.id] = p.name));
+          allRxRows.forEach(
+            (r) => (r._patient_name = pMap[r.patient_id] || ""),
+          );
+        }
+      }
+
+      displayedRxRows = allRxRows;
+      populateDropdown(allRxRows);
+      showToast(`Loaded ${allRxRows.length} prescription(s) for today`);
+    } catch (e) {
+      showToast("Error: " + e.message);
+    }
+  }
+
+  function populateDropdown(rows) {
+    const sel = document.getElementById("rx-select");
+    sel.innerHTML =
+      '<option value="">-- Select a prescription (' +
+      rows.length +
+      " today) --</option>";
+    rows.forEach((r, i) => {
+      const rxJson =
+        typeof r.generated_json === "string"
+          ? JSON.parse(r.generated_json)
+          : r.generated_json;
+      const ptName = r._patient_name || rxJson?.patient?.name || "Unknown";
+      const time = new Date(r.created_at).toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = `${esc(r.id).substring(0, 8)}... | ${ptName} | ${r.patient_id || ""} | ${time}`;
+      sel.appendChild(opt);
+    });
+  }
+
+  let displayedRxRows = [];
+
+  function filterRxList() {
+    const term = document
+      .getElementById("search-input")
+      .value.toLowerCase()
+      .trim();
+    if (!term) {
+      displayedRxRows = allRxRows;
+      populateDropdown(allRxRows);
+      return;
+    }
+    const filtered = allRxRows.filter((r) => {
+      const rxJson =
+        typeof r.generated_json === "string"
+          ? JSON.parse(r.generated_json)
+          : r.generated_json;
+      const ptName = (
+        r._patient_name ||
+        rxJson?.patient?.name ||
+        ""
+      ).toLowerCase();
+      const uhid = (r.patient_id || "").toLowerCase();
+      const rxIdStr = (r.id || "").toLowerCase();
+      return (
+        ptName.includes(term) || uhid.includes(term) || rxIdStr.includes(term)
+      );
+    });
+    displayedRxRows = filtered;
+    populateDropdown(filtered);
+    // Auto-select if only one result
+    if (filtered.length === 1) {
+      document.getElementById("rx-select").value = "0";
+      renderRx(filtered[0]);
+    }
+  }
+
+  function onRxSelect() {
+    const sel = document.getElementById("rx-select");
+    const idx = sel.value;
+    if (idx === "") {
+      document.getElementById("rx-area").innerHTML =
+        `<div class="empty-state"><div class="icon">&#x1F4C4;</div><div>Select a prescription from the dropdown to preview and print.</div></div>`;
+      return;
+    }
+    const row = displayedRxRows[parseInt(idx)];
+    if (row) renderRx(row);
+  }
+
+  async function renderRx(row) {
+    const rxJson =
+      typeof row.generated_json === "string"
+        ? JSON.parse(row.generated_json)
+        : row.generated_json;
+    // Inject date/time from the record
+    const created = new Date(row.created_at);
+    rxJson._rx_date = created.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+    rxJson._rx_time = created.toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    rxJson._rxId = row.id;
+    rxJson.created_at = row.created_at;
+
+    currentRxData = rxJson;
+    const html = await buildRxHtml(rxJson, row.id, row.patient_id);
+    document.getElementById("rx-area").innerHTML = html;
+  }
+
+  /* ===== TOAST ===== */
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("on");
+    setTimeout(() => t.classList.remove("on"), 2500);
+  }
+
+  /* ===== INIT ===== */
+  window.addEventListener("load", () => connectAndLoad());
+
+  // Expose for onclick handlers
+  Object.assign(window, { filterRxList, onRxSelect, loadTodayRx, showToast });
+</script>

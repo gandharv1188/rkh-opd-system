@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radhakishan Hospital — OPD Prescription System</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: #f8f7f1;
+        color: #1a1a14;
+        min-height: 100vh;
+      }
+      .header {
+        background: #1e3a6b;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-family: Georgia, serif;
+      }
+      .header .sub {
+        font-size: 13px;
+        opacity: 0.7;
+        margin-top: 4px;
+      }
+      .header .dev {
+        font-size: 11px;
+        opacity: 0.5;
+        margin-top: 2px;
+      }
+      .nav {
+        max-width: 1140px;
+        margin: 30px auto;
+        padding: 0 16px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .nav-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px 16px;
+        text-decoration: none;
+        color: inherit;
+        aspect-ratio: 1;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s,
+          transform 0.15s;
+      }
+      .nav-card:hover {
+        border-color: #1e3a6b;
+        box-shadow: 0 2px 12px rgba(30, 58, 107, 0.1);
+        transform: translateY(-2px);
+      }
+      .nav-card h2 {
+        font-size: 15px;
+        color: #1e3a6b;
+        margin-bottom: 6px;
+      }
+      .nav-card .role {
+        font-size: 9px;
+        color: #7a7a60;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 6px;
+      }
+      .nav-card p {
+        font-size: 11px;
+        color: #555;
+        line-height: 1.4;
+      }
+      .nav-sep {
+        grid-column: 1 / -1;
+        border: none;
+        border-top: 1px solid #eee;
+        margin: 4px 0;
+      }
+      @media (max-width: 700px) {
+        .nav {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+        .nav-card {
+          aspect-ratio: auto;
+          padding: 16px 12px;
+        }
+      }
+      .footer {
+        text-align: center;
+        padding: 30px;
+        font-size: 11px;
+        color: #999;
+      }
+      .footer a {
+        color: #1e3a6b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Radhakishan Hospital</h1>
+      <div class="sub">Super Pediatric OPD Prescription System</div>
+      <div class="dev">
+        Jyoti Nagar, Kurukshetra, Haryana &middot; NABH Accredited &middot; ABDM
+        Ready
+      </div>
+    </div>
+    <div class="nav">
+      <a class="nav-card" href="registration.html">
+        <div class="role">Reception & Nurse Station</div>
+        <h2>Patient Registration</h2>
+        <p>
+          Register new patients, scan QR for revisits, capture vitals and
+          vaccination history, create OPD visit.
+        </p>
+      </a>
+      <a class="nav-card" href="prescription-pad.html">
+        <div class="role">Doctor OPD</div>
+        <h2>Prescription Pad</h2>
+        <p>
+          Select patient, view nurse-captured data, dictate or type clinical
+          note, generate AI prescription, review and sign off.
+        </p>
+      </a>
+      <a class="nav-card" href="prescription-output.html">
+        <div class="role">Print Station</div>
+        <h2>Prescription Output</h2>
+        <p>
+          View and print the final A4 prescription with hospital letterhead, QR
+          code, and bilingual instructions.
+        </p>
+      </a>
+      <a class="nav-card" href="patient-lookup.html">
+        <div class="role">Doctor</div>
+        <h2>Patient Lookup</h2>
+        <p>
+          Search patient history, view past visits and prescriptions, growth
+          trends, reuse previous prescriptions.
+        </p>
+      </a>
+      <hr class="nav-sep" />
+      <a class="nav-card" href="formulary.html">
+        <div class="role">Admin</div>
+        <h2>Formulary Manager</h2>
+        <p>
+          Add and edit drug monographs — formulations, dosing bands, safety
+          data, interactions.
+        </p>
+      </a>
+      <a class="nav-card" href="formulary-import.html">
+        <div class="role">Admin</div>
+        <h2>Formulary Import</h2>
+        <p>Bulk import drugs from JSON with auto field mapping.</p>
+      </a>
+      <a class="nav-card" href="standard-rx.html">
+        <div class="role">Admin</div>
+        <h2>Standard Prescriptions</h2>
+        <p>
+          Manage ICD-10 keyed diagnosis protocols — first-line drugs,
+          alternatives, investigations.
+        </p>
+      </a>
+    </div>
+    <div class="footer">
+      Dr. Lokender Goyal &middot; Radhakishan Hospital, Kurukshetra<br />
+      <a href="tel:01744251441">01744-251441</a> &middot;
+      <a href="tel:7206029516">7206029516</a>
+    </div>
+  </body>
+</html>

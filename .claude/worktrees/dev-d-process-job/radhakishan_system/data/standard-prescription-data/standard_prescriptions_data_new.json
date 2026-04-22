@@ -1,0 +1,2067 @@
+[
+  {
+    "icd10": "J00",
+    "diagnosis_name": "Common Cold / Acute Rhinopharyngitis",
+    "category": "Respiratory",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Paracetamol",
+        "notes": "10-15 mg/kg/dose PO q6-8h SOS for fever >100F, drops/syrup",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Sodium Chloride Nasal Drops",
+        "notes": "0.65% normal saline, 2-3 drops each nostril 4-6 times/day",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Chlorpheniramine + Phenylephrine",
+        "notes": "Antihistamine-decongestant drops, dose as per weight, TDS, max 5 days. Use cautiously in infants",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Karvol Plus Capsule (Inhalation)",
+        "notes": "Add in warm water or inhalation cloth, 2-3 times/day for congestion relief",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Cough Management (Honey + Warm Fluids)",
+        "notes": "Honey (>1 year only) + warm fluids. Avoid strong cough syrups in infants",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Viral illness, self-limiting 5-7 days. No routine antibiotics. Symptomatic management is mainstay. Honey for cough (>1 year only). Steam/menthol inhalation 2-3 times/day for congestion relief. Antibiotics only if secondary bacterial infection suspected.",
+    "source": "IAP 2024, WHO 2023, ACCP 2017",
+    "guideline_changes": "IAP 2024: Continued emphasis on no routine antibiotics or OTC cough/cold medicines in children; ACCP: Recommends against OTC cough suppressants in pediatric URI; No major guideline changes in 2024-2025 for common cold management",
+    "active": true,
+    "duration_days_default": 5,
+    "counselling": [
+      "This is a viral illness - antibiotics are not needed",
+      "Medicines are only for symptom relief, not to cure the cold",
+      "Continue breastfeeding / ORS / fluids frequently",
+      "Continue feeding with small frequent feeds",
+      "Keep child warm, avoid cold exposure",
+      "Avoid over-medication",
+      "Report immediately if fast breathing or chest retractions",
+      "Report immediately if poor feeding or persistent vomiting",
+      "Report immediately if lethargy or irritability",
+      "Report immediately if fever persists >3 days",
+      "Report immediately if oxygen saturation drops"
+    ],
+    "referral_criteria": "Refer if persistent high fever >3 days, toxic appearance, or suspicion of bacterial complication",
+    "hospitalisation_criteria": "Admit if severe respiratory distress, poor feeding, dehydration, or toxic appearance",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Persistent high fever >3 days or toxic look",
+        "urgency": "routine"
+      },
+      {
+        "name": "CRP",
+        "indication": "Suspicion of bacterial infection",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "82272006",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or refusal to eat",
+      "Persistent vomiting",
+      "Fever not responding to medication for more than 3 days",
+      "Drop in oxygen saturation"
+    ]
+  },
+  {
+    "icd10": "P07.3",
+    "diagnosis_name": "Prematurity Follow-up",
+    "category": "Neonatal",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Multivitamin Drops",
+        "notes": "0.5-1 ml (10 drops) once daily PO, contains Vitamins A, B-complex, C, D. Continue till 1 year of age",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ferrous Ascorbate + Folic Acid",
+        "notes": "2-3 mg/kg/day elemental iron PO once daily, start 2-4 weeks after birth, continue till 6-12 months corrected age",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Cholecalciferol",
+        "notes": "400 IU/day PO once daily, continue at least 1 year",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Calcium Supplement",
+        "notes": "50-75 mg/kg/day elemental calcium PO once daily, for bone mineralization and prevention of osteopenia of prematurity",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "MCT Oil",
+        "notes": "1-5 ml/day divided with feeds PO, for increased caloric intake and weight gain",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Dicyclomine",
+        "notes": "5-6 drops SOS PO, only if symptomatic infantile colic. Avoid routine use",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Preterm Formula / Fortified Feeds",
+        "notes": "Pediasure or preterm formula if poor weight gain, 1/7 scoop per extra feed. Prefer breastfeeding first",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Goals: adequate weight gain (15-20 g/kg/day), prevent nutritional deficiencies (iron, calcium, Vitamin D), monitor neurodevelopment, prevent anemia/rickets/infections. Exclusive breastfeeding till 6 months corrected age, feeds every 2-3 hours. Fortified feeds if poor weight gain. Use CORRECTED age for growth/development, CHRONOLOGICAL age for vaccinations. Catch-up growth expected by 1-2 years.",
+    "source": "IAP 2024 Neonatal Guidelines, WHO 2022 Preterm Care Recommendations, AAP 2023",
+    "guideline_changes": "IAP 2025: New consensus on developmentally supportive follow-up with color-coded risk stratification and validated screening tools; WHO 2022: 11 new recommendations for preterm/LBW care including home visits by trained health workers; AAP 2023: Primary care framework for neurodevelopmental monitoring of preterm infants",
+    "active": true,
+    "duration_days_default": 90,
+    "counselling": [
+      "Continue breastfeeding as first choice, feed every 2-3 hours",
+      "Give all supplements regularly as prescribed - do not skip",
+      "Target weight gain is 15-20 g/kg/day",
+      "Report immediately if poor feeding or poor weight gain",
+      "Report immediately if lethargy or repeated vomiting",
+      "Report immediately if seizures or abnormal movements",
+      "Report immediately if breathing difficulty",
+      "Follow-up every 2 weeks initially, then monthly",
+      "Keep all immunization appointments on schedule (use chronological age)",
+      "Normal development is possible with proper follow-up"
+    ],
+    "referral_criteria": "Refer to neonatologist if poor weight gain despite adequate feeding, developmental delay, suspected ROP (retinopathy of prematurity), or recurrent infections",
+    "hospitalisation_criteria": "Admit if failure to thrive, severe anemia, apnea episodes, suspected sepsis, or respiratory distress",
+    "investigations": [
+      {
+        "name": "Hemoglobin",
+        "indication": "Screen for anemia at 3-4 months",
+        "urgency": "routine"
+      },
+      {
+        "name": "ROP Screening",
+        "indication": "Retinopathy of prematurity screening as per schedule",
+        "urgency": "routine"
+      },
+      {
+        "name": "Hearing screening (OAE/BERA)",
+        "indication": "All preterm infants, once",
+        "urgency": "routine"
+      },
+      {
+        "name": "Weight monitoring",
+        "indication": "Weekly weight check for growth assessment",
+        "urgency": "routine"
+      },
+      {
+        "name": "Length and Head Circumference",
+        "indication": "Monthly anthropometry",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "15750041000119101",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or poor weight gain",
+      "Repeated vomiting",
+      "Seizures or abnormal movements",
+      "Breathing difficulty"
+    ],
+    "snomed_display": "Baby premature 29 weeks"
+  },
+  {
+    "icd10": "J21.9",
+    "diagnosis_name": "Acute Bronchiolitis",
+    "category": "Respiratory",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Oxygen Therapy",
+        "notes": "If SpO2 <92%, nasal prongs/hood/HFNC, target SpO2 92-94%. HFNC 1-2 L/kg/min for moderate-severe distress",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Normal Saline Nebulization",
+        "notes": "3 ml NEB q4-6h, preferred nebulization for bronchiolitis",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Nasal Suction",
+        "notes": "Gentle suction before feeds, improves feeding and breathing",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Salbutamol",
+        "notes": "NEB trial only if strong wheeze or atopy history. Not routine",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Hypertonic Saline 3%",
+        "notes": "3 ml NEB, optional in hospital setting",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Bromhexine",
+        "notes": "Mucolytic, limited evidence, can be used symptomatically",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Viral infection (commonly RSV), self-limiting (peak Day 3-5, recovery 10-14 days). Oxygen therapy if SpO2 <92%, target 92-94%. HFNC for moderate-severe distress (1-2 L/kg/min). Bronchodilators NOT routine. Steroids NOT routinely recommended. Antibiotics NOT indicated unless secondary bacterial infection. Maintain hydration 100-120 ml/kg/day. Continue breastfeeding if possible. NG feeds/IV fluids if feeding difficulty.",
+    "source": "AAP 2014 (reaffirmed 2024), IAP 2024, WHO 2023, AIIMS Protocol",
+    "guideline_changes": "AAP 2014/2024: No routine albuterol, epinephrine, hypertonic saline, or chest physiotherapy in outpatient bronchiolitis; supportive care only (oxygen + hydration); AAP 2024: Nirsevimab recommended for RSV prophylaxis in all infants <8 months entering first RSV season; IAP 2024: Aligned with AAP on no routine nebulization",
+    "active": true,
+    "duration_days_default": 7,
+    "counselling": [
+      "This is a viral illness - antibiotics are not needed",
+      "Illness peaks at Day 3-5 and usually recovers in 10-14 days",
+      "Oxygen is the main treatment - avoid unnecessary medications",
+      "Continue breastfeeding and ensure adequate hydration",
+      "Report immediately if severe chest retractions",
+      "Report immediately if apnea (breathing pauses) episodes",
+      "Report immediately if SpO2 drops below 90%",
+      "Report immediately if poor feeding (<50% of usual)",
+      "Report immediately if lethargy or drowsiness"
+    ],
+    "referral_criteria": "Refer to pediatric pulmonologist if HFNC failure, recurrent wheezing episodes, or atypical course suggesting alternative diagnosis",
+    "hospitalisation_criteria": "Admit if SpO2 <92%, moderate-severe respiratory distress, apnea episodes, feeding difficulty, age <3 months, or dehydration. ICU if HFNC failure, persistent hypoxia, apnea, or exhaustion",
+    "investigations": [
+      {
+        "name": "Pulse oximetry",
+        "indication": "All suspected bronchiolitis - assess oxygenation",
+        "urgency": "stat"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "Severe or prolonged fever",
+        "urgency": "routine"
+      },
+      {
+        "name": "CRP",
+        "indication": "Severe or prolonged fever to rule out bacterial co-infection",
+        "urgency": "routine"
+      },
+      {
+        "name": "Chest X-ray",
+        "indication": "Only if atypical course or suspected complication",
+        "urgency": "urgent"
+      },
+      {
+        "name": "ABG",
+        "indication": "Severe distress or ICU admission",
+        "urgency": "stat"
+      }
+    ],
+    "snomed_code": "4120002",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Apnea or breathing pauses",
+      "Drop in oxygen saturation below 90%",
+      "Poor feeding or taking less than half of usual feeds",
+      "Severe chest retractions"
+    ]
+  },
+  {
+    "icd10": "J45",
+    "diagnosis_name": "Asthma Acute Episode (OPD Oral)",
+    "category": "Respiratory",
+    "severity": "moderate",
+    "first_line_drugs": [
+      {
+        "drug": "Levosalbutamol",
+        "notes": "NEB: <10 kg 0.63 mg, >=10 kg 1.25 mg, every 20 min x3 doses (acute), then q6-8h. Syrup: 0.1-0.2 mg/kg/dose TDS PO",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Prednisolone",
+        "notes": "1-2 mg/kg/day PO for 3-5 days, for moderate-severe episodes. Reduces airway inflammation and prevents worsening",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Fexofenadine",
+        "notes": "Age-appropriate dose PO BD, if allergic component present",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ambroxol + Guaiphenesin",
+        "notes": "Mucolytic/expectorant, 2.5 ml TDS PO, use selectively - not mandatory in all cases",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Nebulization is first-line. Steroids reduce relapse. Transition to inhaler therapy (MDI + Spacer) for long-term: Salbutamol inhaler as reliever, Budesonide/Fluticasone as controller. Inhaler > Syrup for long-term management. Avoid triggers (dust, smoke, cold). Avoid overuse of cough syrups. Antibiotics not required unless infection suspected.",
+    "source": "GINA 2024/2025, IAP Asthma Guidelines 2024",
+    "guideline_changes": "GINA 2025: New diagnostic criteria for asthma in children <5 years (3 required: recurrent wheezing, no alternative cause, response to asthma meds); GINA 2024: Updated stepwise approach emphasizing early ICS; IAP 2024: Inhaler therapy preferred over oral medications for long-term control",
+    "active": true,
+    "duration_days_default": 5,
+    "counselling": [
+      "Nebulization is the most important treatment - use as directed",
+      "Complete the full course of oral steroid (3-5 days), do not stop early",
+      "Avoid triggers: dust, smoke, cold exposure, strong smells",
+      "Steam inhalation and adequate hydration help recovery",
+      "Transition to inhaler therapy (MDI + Spacer) for long-term control",
+      "Report immediately if severe breathing difficulty or chest retractions",
+      "Report immediately if unable to speak or feed",
+      "Report immediately if SpO2 drops below 92%",
+      "Report immediately if no response to nebulization",
+      "Follow up after 3-5 days for reassessment and long-term plan"
+    ],
+    "referral_criteria": "Refer to pediatric pulmonologist if no improvement in 48 hours, recurrent severe episodes (>3/year), need for step-up beyond Step 2 GINA, or suspected alternative diagnosis",
+    "hospitalisation_criteria": "Admit if severe respiratory distress, SpO2 <92%, no response to initial nebulization, inability to feed, or toxic appearance",
+    "investigations": [
+      {
+        "name": "Pulse oximetry",
+        "indication": "All acute asthma episodes - assess oxygenation",
+        "urgency": "stat"
+      },
+      {
+        "name": "Peak expiratory flow rate",
+        "indication": "Children >5 years to assess severity",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Chest X-ray",
+        "indication": "If suspected complication (pneumothorax, pneumonia) or first episode",
+        "urgency": "urgent"
+      }
+    ],
+    "snomed_code": "195967001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Severe breathing difficulty or unable to speak",
+      "Unable to feed or drink",
+      "Drop in oxygen saturation below 92%",
+      "No response to nebulization or inhaler"
+    ]
+  },
+  {
+    "icd10": "J45",
+    "diagnosis_name": "Asthma Inhaler-Based Management (OPD)",
+    "category": "Respiratory",
+    "severity": "mild",
+    "first_line_drugs": [
+      {
+        "drug": "Salbutamol Inhaler",
+        "notes": "MDI + Spacer + Mask, 100 mcg/puff, 2 puffs QID (5-6 breaths per puff via spacer). Reliever - continue till symptoms controlled, stop 5 days after complete relief",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Budesonide Inhaler",
+        "notes": "100-200 mcg/puff MDI, 1 puff BD (q12h) via spacer. Controller - minimum 3 months, then step-down. Do NOT stop abruptly",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Levosalbutamol",
+        "notes": "NEB: <10 kg 0.63 mg, >=10 kg 1.25 mg, every 20 min x3 doses for acute relief, then q6-8h",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Prednisolone",
+        "notes": "1-2 mg/kg/day PO for 3-5 days, only for moderate episodes",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Fexofenadine",
+        "notes": "Age-appropriate dose PO BD, if allergic component",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Inhaler therapy is the GOLD STANDARD - faster action, fewer side effects than oral drugs. Spacer + Mask mandatory for proper drug delivery in infants and young children. GINA Stepwise: Step 1 SABA PRN, Step 2 low-dose ICS, Step 3 ICS+LABA, Step 4 specialist referral. ICS is preventive (not immediate relief). SABA is rescue drug. Early inhaler use reduces hospital admissions.",
+    "source": "GINA 2024/2025, IAP Asthma Guidelines 2024",
+    "guideline_changes": "GINA 2025: New diagnostic criteria for asthma in children <5 years; expanded role of T2 biomarkers (blood eosinophils, FeNO) in assessment; GINA 2024: MDI+Spacer remains preferred delivery for all ages; Step-down only after 3 months symptom-free on low-dose ICS",
+    "active": true,
+    "duration_days_default": 90,
+    "counselling": [
+      "Inhaler is always better than syrup - faster, safer, fewer side effects",
+      "Use spacer with mask for proper drug delivery",
+      "Inhaler technique: shake, attach spacer, place mask tightly, press 1 puff, allow 5-6 breaths, repeat if needed",
+      "Controller inhaler (Budesonide) must be taken daily for minimum 3 months - do NOT stop suddenly",
+      "Reliever inhaler (Salbutamol) is for rescue use during symptoms only",
+      "Report immediately if severe chest retractions or SpO2 <92%",
+      "Report immediately if no response to inhaler",
+      "Report immediately if feeding difficulty",
+      "Follow up in 3-5 days, then regular follow-up for step-up/step-down assessment"
+    ],
+    "referral_criteria": "Refer to pediatric pulmonologist if requiring Step 3 or above, frequent exacerbations despite ICS, or diagnostic uncertainty",
+    "hospitalisation_criteria": "Admit if severe respiratory distress, SpO2 <92%, no response to inhaler therapy, or inability to feed",
+    "investigations": [
+      {
+        "name": "Pulse oximetry",
+        "indication": "Assess oxygenation during acute exacerbation",
+        "urgency": "stat"
+      },
+      {
+        "name": "Peak expiratory flow rate",
+        "indication": "Children >5 years for severity and treatment response monitoring",
+        "urgency": "routine"
+      },
+      {
+        "name": "Chest X-ray",
+        "indication": "If first episode or suspected complication",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "195967001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Severe chest retractions",
+      "Drop in oxygen saturation below 92%",
+      "No response to inhaler treatment",
+      "Feeding difficulty or unable to eat"
+    ]
+  },
+  {
+    "icd10": "J45.5",
+    "diagnosis_name": "Acute Severe Asthma (Indoor/IPD)",
+    "category": "Emergency",
+    "severity": "severe",
+    "first_line_drugs": [
+      {
+        "drug": "Levosalbutamol",
+        "notes": "NEB: <10 kg 0.63 mg, >=10 kg 1.25-2.5 mg, every 20 min x3 doses (first hour), then q1-2h, taper to q4-6h",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Methylprednisolone",
+        "notes": "1-2 mg/kg/dose IV STAT, then q6-8h. Mandatory early steroid. Reduces airway inflammation and prevents progression",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Oxygen",
+        "notes": "Nasal cannula/mask, 2-6 L/min, target SpO2 >=94%",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Magnesium Sulphate",
+        "notes": "25-50 mg/kg IV in 30-50 ml NS over 20-30 min, for severe cases. Bronchodilator effect, reduces ICU need",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ipratropium Bromide",
+        "notes": "250 mcg NEB q6h, add-on bronchodilator",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Adrenaline (Epinephrine)",
+        "notes": "0.01 mg/kg SC (1:1000), repeat every 15-20 min x2-3 doses. For severe bronchospasm / impending respiratory failure only",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Golden Hour: Oxygen + aggressive nebulization + systemic steroids. Monitoring: SpO2 continuous, RR/HR/work of breathing hourly, ABG if severe. Fluids 100 ml/kg/day, avoid overload. Antibiotics NOT routine - only if fever + infection suspected. Escalation: HFNC if moderate distress, NIV if worsening, mechanical ventilation as last resort. Step-down: transition to MDI+Spacer (Salbutamol reliever + Budesonide controller) and oral steroids before discharge.",
+    "source": "GINA 2024/2025, IAP Guidelines 2024, AIIMS Protocol, NABH HCO 6th Edition",
+    "guideline_changes": "GINA 2025: IV isotonic MgSO4 may be considered in children >=2 years with severe exacerbations; GINA 2024: Early systemic steroids within first hour remain critical; Ipratropium bromide add-on for severe episodes; Emphasis on step-down to MDI+Spacer before discharge with written action plan",
+    "active": true,
+    "duration_days_default": 5,
+    "counselling": [
+      "Child needs indoor admission for intensive monitoring and treatment",
+      "Oxygen and nebulization are the main treatment",
+      "Steroids are essential and will be given early to reduce inflammation",
+      "Report any worsening immediately: increased breathing difficulty, drowsiness, or bluish discoloration",
+      "After discharge, inhaler therapy (Salbutamol + Budesonide) will be started for long-term control",
+      "Learn proper inhaler technique before discharge",
+      "Follow up after 3-5 days of discharge",
+      "Avoid triggers: dust, smoke, cold exposure, strong smells"
+    ],
+    "referral_criteria": "Refer to PICU if SpO2 <90% despite oxygen, silent chest, rising CO2 on ABG, exhaustion/drowsiness, or need for ventilatory support (HFNC/NIV/mechanical ventilation)",
+    "hospitalisation_criteria": "Already indoor protocol. ICU transfer if: SpO2 <90% despite oxygen, silent chest, rising CO2 on ABG, exhaustion or drowsiness, HFNC failure",
+    "investigations": [
+      {
+        "name": "Pulse oximetry",
+        "indication": "Continuous monitoring of oxygenation",
+        "urgency": "stat"
+      },
+      {
+        "name": "ABG",
+        "indication": "Severe distress or ICU-level care",
+        "urgency": "stat"
+      },
+      {
+        "name": "Chest X-ray",
+        "indication": "Rule out pneumothorax, pneumonia, or other complications",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "Baseline and to rule out infection",
+        "urgency": "urgent"
+      },
+      {
+        "name": "CRP",
+        "indication": "If infection suspected",
+        "urgency": "urgent"
+      }
+    ],
+    "snomed_code": "304527002",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Drop in oxygen saturation below 90% despite oxygen",
+      "Silent chest on auscultation",
+      "Exhaustion or increasing drowsiness",
+      "No improvement despite aggressive treatment"
+    ]
+  },
+  {
+    "icd10": "R50.9",
+    "diagnosis_name": "Pyrexia Under Investigation",
+    "category": "Infectious",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Paracetamol",
+        "notes": "10-15 mg/kg/dose PO 6-8 hourly SOS for fever >100°F",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Mefenamic Acid",
+        "notes": "As per weight, TDS PO for 3-5 days, add-on for bodyache/high fever",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Cefpodoxime",
+        "notes": "8-10 mg/kg/day div BD PO for 5-7 days, only if persistent fever >3 days or lab evidence of bacterial infection",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Symptomatic treatment first. Avoid unnecessary antibiotics unless persistent fever >3 days, toxic child, raised CRP/Procalcitonin, or localizing signs. Supportive: adequate fluids (ORS, water, coconut water), light diet, tepid sponging, rest.",
+    "source": "IAP Fever Guidelines, AIIMS Febrile Child Protocol, NICE Fever in Under 5s",
+    "guideline_changes": "IAP 2024: Procalcitonin recommended as key biomarker to differentiate bacterial vs viral fever; emphasis on avoiding empirical antibiotics in first 72 hours unless toxic appearance or positive cultures; AIIMS Protocol: Structured fever workup with CBC, CRP, urine R/M, blood culture for fever >3 days; NICE 2024: Age-stratified approach - infants <3 months with fever require urgent evaluation and empiric antibiotics",
+    "active": true,
+    "duration_days_default": 5,
+    "counselling": [
+      "Give paracetamol only when fever is above 100°F, do not give routinely",
+      "Offer frequent fluids - ORS, water, coconut water - to prevent dehydration",
+      "Use tepid sponging with lukewarm water for high fever, do not use cold water",
+      "If fever persists beyond 2-3 days, bring child for review with reports",
+      "Watch for warning signs: rash, bleeding, vomiting, altered sensorium, breathing difficulty - come to hospital immediately"
+    ],
+    "referral_criteria": "Refer if fever persists >5 days without identifiable focus, suspected enteric fever or tropical infection requiring specialist evaluation, or immunocompromised child",
+    "hospitalisation_criteria": "Admit if toxic appearance, severe dehydration, altered sensorium, bleeding manifestations, persistent high-grade fever with hemodynamic instability, or age <3 months with fever",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Infection pattern and severity assessment",
+        "urgency": "stat"
+      },
+      {
+        "name": "CRP",
+        "indication": "Assess degree of inflammation",
+        "urgency": "stat"
+      },
+      {
+        "name": "Procalcitonin",
+        "indication": "Differentiate bacterial from viral infection",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Urine routine and microscopy",
+        "indication": "Rule out urinary tract infection",
+        "urgency": "stat"
+      },
+      {
+        "name": "Blood culture",
+        "indication": "Severe or prolonged fever to identify organism",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Malaria antigen / Dengue NS1 + IgM",
+        "indication": "If endemic area or clinical suspicion",
+        "urgency": "stat"
+      }
+    ],
+    "snomed_code": "386661006",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent fever for more than 3 days",
+      "Vomiting or signs of dehydration",
+      "Rash or any bleeding from skin or gums",
+      "Altered sensorium or confusion"
+    ]
+  },
+  {
+    "icd10": "J03.9",
+    "diagnosis_name": "Follicular Tonsillitis",
+    "category": "ENT",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Cefpodoxime",
+        "notes": "8-10 mg/kg/day div BD PO for 5-7 days",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Paracetamol",
+        "notes": "10-15 mg/kg/dose PO 6-8 hourly SOS for fever/pain",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ibuprofen",
+        "notes": "5-10 mg/kg/dose PO 6-8 hourly SOS, for fever and throat pain",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Warm Saline Gargles",
+        "notes": "If child >5 years, adequate hydration, soft diet (khichdi, soups). Avoid cold items",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Linezolid",
+        "notes": "10 mg/kg/dose BD PO for 7-10 days, reserve drug for severe/non-responding/resistant cases only",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Start antibiotic if high-grade fever with follicles or toxic child. Supportive: warm saline gargles (if child >5 years), adequate hydration, soft diet. Avoid cold items.",
+    "source": "IAP Guidelines, IDSA Pharyngitis Guidelines 2012/2024 update, AHA Rheumatic Fever Prevention",
+    "guideline_changes": "IDSA 2024: Continued emphasis on rapid antigen detection test (RADT) or culture before starting antibiotics for pharyngitis; Centor/McIsaac scoring to guide testing; Penicillin V or amoxicillin remain first-line for confirmed GAS; IAP 2024: Antibiotic stewardship - avoid empirical antibiotics for viral tonsillitis; reserve cephalosporins for penicillin-allergic patients",
+    "active": true,
+    "duration_days_default": 7,
+    "counselling": [
+      "Complete full course of antibiotic even if child feels better in 2-3 days",
+      "Give warm fluids and soft diet (khichdi, soups) to ease swallowing",
+      "Warm saline gargles help if child is older than 5 years",
+      "Paracetamol/ibuprofen will control fever and throat pain",
+      "Return if fever persists beyond 3 days, difficulty swallowing saliva, neck swelling, or breathing difficulty"
+    ],
+    "referral_criteria": "Refer to ENT if recurrent tonsillitis (>7 episodes/year or >5/year for 2 years), suspected peritonsillar abscess, or airway compromise",
+    "hospitalisation_criteria": "Admit if unable to swallow, severe dehydration, peritonsillar abscess, toxic appearance, or breathing difficulty",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Assess infection severity",
+        "urgency": "routine"
+      },
+      {
+        "name": "CRP",
+        "indication": "Assess degree of inflammation",
+        "urgency": "routine"
+      },
+      {
+        "name": "Procalcitonin",
+        "indication": "Severe bacterial infection suspicion",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Throat swab culture",
+        "indication": "Recurrent cases to identify organism",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "17741008",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent fever for more than 3 days",
+      "Difficulty swallowing saliva or drooling",
+      "Swelling in the neck region",
+      "Recurrent vomiting"
+    ]
+  },
+  {
+    "icd10": "J30.9",
+    "diagnosis_name": "Allergic Rhinitis",
+    "category": "ENT",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Fluticasone Nasal Spray",
+        "notes": "1 puff each nostril BD, continue at least 4-6 weeks, regular use not SOS",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Fexofenadine",
+        "notes": "6-12 yrs: 60-120 mg OD PO; >12 yrs: 120-180 mg OD PO, for 7-14 days or longer",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Normal Saline Nasal Drops",
+        "notes": "2-3 drops each nostril 2-3 times/day, clears allergens and improves drug delivery",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Azelastine + Fluticasone Nasal Spray",
+        "notes": "1 puff each nostril BD, for moderate-severe or persistent rhinitis, faster symptom relief",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "ARIA classification: Intermittent (<4 days/week) vs Persistent (>4 days/week); Mild vs Moderate-Severe. Intranasal steroid is gold standard. Allergen avoidance is essential: dust, smoke, perfumes, cold exposure, pets, house dust mites.",
+    "source": "ARIA-EAACI Guidelines 2024-2025, IAP Allergy Protocol, GINA",
+    "guideline_changes": "ARIA-EAACI 2024-2025: Combined intranasal antihistamine + corticosteroid (INAH+INCS) recommended over monotherapy for moderate-severe AR; INCS preferred over INAH alone; digital shared decision-making algorithms introduced; pediatric considerations updated for preschool and school-age children; emphasis on step-up/step-down approach based on symptom control",
+    "active": true,
+    "duration_days_default": 14,
+    "counselling": [
+      "Use nasal spray regularly every day, not just when symptoms are bad",
+      "Avoid dust, smoke, perfumes, and cold exposure - these are common triggers",
+      "Saline nasal drops before steroid spray improve drug delivery",
+      "Improvement takes 3-5 days, full control in 2-3 weeks - do not stop early",
+      "Keep home dust-free, use cotton bedding, and avoid pets if allergic"
+    ],
+    "referral_criteria": "Refer to allergist/ENT if poor response to 4-6 weeks of treatment, severe persistent symptoms, associated asthma requiring step-up therapy, or need for allergy testing",
+    "hospitalisation_criteria": "Hospitalisation rarely needed. Consider if severe associated asthma exacerbation or complications like sinusitis requiring IV antibiotics",
+    "investigations": [
+      {
+        "name": "CBC with absolute eosinophil count",
+        "indication": "Allergy indicator, elevated eosinophils suggest atopy",
+        "urgency": "routine"
+      },
+      {
+        "name": "Serum IgE levels",
+        "indication": "Confirm atopic tendency",
+        "urgency": "routine"
+      },
+      {
+        "name": "Allergy skin prick test / specific IgE",
+        "indication": "Identify specific triggers in recurrent/severe cases",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "61582004",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Severe nasal blockage causing difficulty breathing",
+      "Disturbed sleep or mouth breathing at night",
+      "Symptoms not improving despite regular medication",
+      "Associated wheezing or breathing difficulty"
+    ]
+  },
+  {
+    "icd10": "L20.9",
+    "diagnosis_name": "Atopic Dermatitis",
+    "category": "Dermatology",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Ceramide-based Emollient Cream",
+        "notes": "Apply liberally 2-3 times daily, long-term use even after improvement, cornerstone of therapy",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Mometasone Furoate 0.1% Cream",
+        "notes": "Apply thin layer once daily for 5-7 days acute flare, then taper to 2 times/week maintenance, avoid prolonged use on face",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Mometasone Furoate 0.1% Lotion",
+        "notes": "Apply once daily at night for scalp/extensive lesions, 1-2 weeks then taper",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Coconut Oil / Aloe Vera Lotion",
+        "notes": "Natural moisturization, coconut oil in summer, aloe vera-based lotion in winter, safe and soothing",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Levocetirizine",
+        "notes": "Age-appropriate dose PO for 5-7 days, for pruritus and sleep disturbance",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Fexofenadine",
+        "notes": "Age-appropriate dose PO for 5-7 days, alternative antihistamine for itching",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Treatment principles: restore skin barrier, reduce inflammation, control itching, prevent relapse. Moisturizer is cornerstone. Steroid for flare only - avoid overuse. Lukewarm water bath, mild soap-free cleanser, apply moisturizer within 3 minutes after bath. Avoid harsh soaps, woolen clothes, dust/allergens.",
+    "source": "AAP Atopic Dermatitis Clinical Report 2025, AAD Guidelines 2024, AAAAI/ACAAI Joint Task Force 2023, NICE",
+    "guideline_changes": "AAP 2025: Updated clinical report on skin-directed management - daily bathing with lukewarm water and gentle cleanser, moisturizer within minutes of bath; proactive intermittent topical anti-inflammatory maintenance to prevent flares; AAD 2024: Updated treatment guidelines with expanded role of topical calcineurin inhibitors and JAK inhibitors for moderate-severe disease; AAAAI 2023: Dupilumab recommended for moderate-severe AD in children >=6 months",
+    "active": true,
+    "duration_days_default": 14,
+    "counselling": [
+      "Apply moisturizer generously 2-3 times daily - this is the most important treatment",
+      "Apply moisturizer within 3 minutes of bathing to lock in moisture",
+      "Use steroid cream only during flare-ups as directed, do not use continuously",
+      "Use lukewarm water for bath and mild soap-free cleanser only",
+      "Avoid woolen clothes, harsh soaps, dust, and suspected food allergens",
+      "This is a chronic condition with relapses - regular skin care prevents flare-ups"
+    ],
+    "referral_criteria": "Refer to dermatologist if no improvement with topical steroids after 2 weeks, severe widespread disease, suspected secondary infection requiring systemic treatment, or need for immunomodulators (tacrolimus/pimecrolimus)",
+    "hospitalisation_criteria": "Admit if erythroderma, severe secondary bacterial infection (oozing, fever), eczema herpeticum, or severe disease not responding to outpatient management",
+    "investigations": [
+      {
+        "name": "CBC with absolute eosinophil count",
+        "indication": "Allergy workup, elevated eosinophils suggest atopy",
+        "urgency": "routine"
+      },
+      {
+        "name": "Serum IgE levels",
+        "indication": "Confirm atopic tendency",
+        "urgency": "routine"
+      },
+      {
+        "name": "Allergy testing (skin prick / specific IgE)",
+        "indication": "Identify triggers in severe/recurrent cases",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "24079001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Oozing or pus from skin lesions suggesting infection",
+      "Severe redness or swelling of affected skin",
+      "Fever developing with skin lesions",
+      "No response to treatment after one week"
+    ]
+  },
+  {
+    "icd10": "K60.0",
+    "diagnosis_name": "Anal Fissure",
+    "category": "GI",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Lactulose",
+        "notes": "1-2 ml/kg/day PO div BD, after meals or at bedtime, first-line stool softener",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Lignocaine 2% Gel",
+        "notes": "Apply locally before passing stool, 2-3 times/day for pain relief",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Liquid Paraffin + Milk of Magnesia",
+        "notes": "5-10 ml PO at bedtime for 5-7 days, stool bulking and smooth passage",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Sitz Bath (Potassium Permanganate)",
+        "notes": "Warm water with light pink KMnO4 solution, 10-15 minutes 2-3 times/day, promotes healing and reduces pain",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Glycerin Suppository",
+        "notes": "SOS for acute constipation, short-term use only",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ispaghula Husk",
+        "notes": "1 teaspoon (3-5 g) in 1 glass water at bedtime OD for 5-7 days, fiber supplement for stool consistency",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Treatment principles: soften stool, relieve pain, heal fissure, prevent recurrence. Sitz bath with warm water + potassium permanganate (light pink solution) for 10-15 min 2-3 times/day is essential. High fiber diet: papaya, banana, vegetables. Adequate water intake. Avoid junk food and excess milk.",
+    "source": "IAP Pediatric Surgery Guidelines, ASCRS Anal Fissure Guidelines 2023, ESPGHAN Constipation Guidelines",
+    "guideline_changes": "ASCRS 2023: Topical calcium channel blockers (diltiazem) recommended as first-line pharmacotherapy for chronic fissures with better side-effect profile than GTN; conservative management (stool softeners, fiber, sitz baths) remains first-choice for acute fissures in children; IAP Pediatric Surgery 2024: PEG-based laxatives preferred over lactulose for chronic constipation-associated fissures",
+    "active": true,
+    "duration_days_default": 7,
+    "counselling": [
+      "Give lactulose regularly to keep stool soft - this is the most important treatment",
+      "Sitz bath in warm water for 10-15 minutes 2-3 times daily helps healing",
+      "Apply lignocaine gel before passing stool to reduce pain",
+      "Increase fiber in diet - papaya, banana, green vegetables, adequate water",
+      "Avoid junk food and excess milk which worsen constipation",
+      "Return if persistent bleeding, severe pain not relieved, or no improvement in 5-7 days"
+    ],
+    "referral_criteria": "Refer to pediatric surgeon if chronic fissure not healing after 4-6 weeks of conservative treatment, recurrent fissures, or suspected underlying condition (Crohn disease, anorectal anomaly)",
+    "hospitalisation_criteria": "Admit if significant rectal bleeding, suspected perianal abscess, or need for examination under anesthesia",
+    "investigations": [
+      {
+        "name": "Stool routine and microscopy",
+        "indication": "Rule out occult blood, parasites, or infection if recurrent",
+        "urgency": "routine"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "Assess for anemia if significant or recurrent bleeding",
+        "urgency": "routine"
+      },
+      {
+        "name": "Stool occult blood test",
+        "indication": "Confirm GI bleeding if history of blood in stool",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "30037006",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent or increasing bleeding during stools",
+      "Severe pain not relieved by medication",
+      "No improvement in symptoms after 5 to 7 days"
+    ]
+  },
+  {
+    "icd10": "A03.9",
+    "diagnosis_name": "Bacillary Dysentery",
+    "category": "GI",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Oral Rehydration Salts",
+        "notes": "10-20 ml/kg after each loose stool, frequent small sips, life-saving",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Cefixime",
+        "notes": "8-10 mg/kg/day div BD PO for 5-7 days",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Zinc",
+        "notes": "<6 months: 10 mg/day; >=6 months: 20 mg/day PO for 14 days, reduces severity and recurrence",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Metronidazole",
+        "notes": "10 mg/kg/dose TDS PO for 5 days, for suspected amoebic or mixed infection",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Saccharomyces boulardii",
+        "notes": "Once or twice daily PO for 5 days, probiotic to restore gut flora and reduce diarrhea duration",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Dicyclomine + Simethicone",
+        "notes": "Age/weight appropriate dose TDS PO, short-term, for abdominal pain/cramps",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Colistin",
+        "notes": "Consider for persistent diarrhea or resistant infection, not routine first-line",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "ORS + Zinc = cornerstone of therapy. Continue normal feeding. Antibiotic indicated for bloody dysentery. Preferred diet: curd, buttermilk, khichdi, rice, banana, coconut water. Avoid junk food and sugary drinks.",
+    "source": "IAP Diarrhea Guidelines, WHO Diarrheal Disease Management, CDC Shigella Treatment Guidelines 2024, IDSA Infectious Diarrhea Guidelines",
+    "guideline_changes": "WHO 2024: Rising antimicrobial resistance in Shigella globally - azithromycin resistance increased significantly; CDC 2023: Alert on extensively drug-resistant (XDR) Shigella strains; ceftriaxone or azithromycin recommended where ciprofloxacin resistance is high; stool culture and sensitivity recommended for non-responding cases; IAP 2024: ORS + Zinc remains cornerstone; cefixime preferred empiric oral antibiotic for pediatric bloody dysentery in India",
+    "active": true,
+    "duration_days_default": 5,
+    "counselling": [
+      "ORS is the most important treatment - give after every loose stool",
+      "Continue normal feeding, do not stop food - give curd, khichdi, rice, banana",
+      "Give zinc syrup daily for 14 days even after diarrhea stops",
+      "Complete full course of antibiotic as prescribed",
+      "Wash hands before feeding and after toilet to prevent spread",
+      "Come immediately if blood in stool increases, persistent vomiting, no urine, child becomes lethargic or severely dehydrated"
+    ],
+    "referral_criteria": "Refer if no improvement in 48 hours on antibiotics, suspected hemolytic uremic syndrome, recurrent dysentery, or suspected resistant organism",
+    "hospitalisation_criteria": "Admit if severe dehydration, unable to drink or retain ORS, bloody stool with hemodynamic instability, persistent vomiting, lethargy/altered sensorium, or age <2 months",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Assess infection severity",
+        "urgency": "stat"
+      },
+      {
+        "name": "CRP",
+        "indication": "Assess degree of inflammation",
+        "urgency": "routine"
+      },
+      {
+        "name": "Stool routine and microscopy",
+        "indication": "Identify blood, pus cells, organisms",
+        "urgency": "stat"
+      },
+      {
+        "name": "Stool culture and sensitivity",
+        "indication": "Severe or non-responding cases to identify organism",
+        "urgency": "urgent"
+      }
+    ],
+    "snomed_code": "36188001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Increasing blood in stools",
+      "Persistent vomiting or unable to drink",
+      "No urine output for more than 6 hours",
+      "Signs of severe dehydration such as sunken eyes or dry mouth"
+    ]
+  },
+  {
+    "icd10": "K52.9",
+    "diagnosis_name": "Acute Gastroenteritis (OPD)",
+    "category": "GI",
+    "severity": "mild",
+    "first_line_drugs": [
+      {
+        "drug": "ORS",
+        "notes": "10-20 ml/kg after each loose stool, small frequent sips PO",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Zinc",
+        "notes": "<6 months: 10 mg/day, >=6 months: 20 mg/day PO x 14 days",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ondansetron",
+        "notes": "0.15 mg/kg/dose BD-TDS PO, short duration 2-3 days, if vomiting",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Saccharomyces boulardii",
+        "notes": "OD-BD PO x 5 days, probiotic to restore gut flora",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Dicyclomine + Simethicone",
+        "notes": "Age-appropriate dose TDS PO, short-term, only if significant abdominal pain",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Cefixime",
+        "notes": "8-10 mg/kg/day div BD PO x 5 days, only if dysentery/high fever/toxic child",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Metronidazole",
+        "notes": "10 mg/kg/dose TDS PO x 5 days, only if suspected protozoal/mixed infection",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "ORS + Zinc = gold standard. Continue feeding. Avoid unnecessary antibiotics. Antibiotics only for dysentery, high fever, or toxic child. Assess dehydration status at each visit.",
+    "source": "IAP 2024, WHO Diarrhoea Management Guidelines",
+    "guideline_changes": "WHO 2024: conditional recommendation for reduced zinc dose (5 mg/day) in children up to 10 yr to lower vomiting risk while preserving efficacy; probiotics not recommended due to low-certainty evidence; ondansetron endorsed for single-dose anti-emetic use in ED/OPD before ORS.",
+    "active": true,
+    "duration_days_default": 5,
+    "counselling": [
+      "Give ORS after every loose stool - it is life-saving and prevents dehydration",
+      "Continue breastfeeding and normal diet - do not stop food",
+      "Give Zinc for full 14 days even if diarrhoea stops",
+      "Preferred foods: curd, buttermilk, khichdi, rice, banana, coconut water",
+      "Avoid junk food, carbonated drinks, and outside food",
+      "If child has persistent vomiting, no urine, lethargy, blood in stool, or severe dehydration - come to hospital immediately"
+    ],
+    "referral_criteria": "Refer to pediatric gastroenterologist if persistent diarrhoea >14 days, recurrent episodes, suspected malabsorption, or failure to thrive",
+    "hospitalisation_criteria": "Admit if severe dehydration, persistent vomiting with inability to take ORS, lethargy/altered sensorium, blood in stool with toxic appearance, age <2 months, or failed OPD rehydration",
+    "investigations": [
+      {
+        "name": "Stool routine and microscopy",
+        "indication": "Dysentery or persistent diarrhoea",
+        "urgency": "routine"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "Suspected bacterial infection or toxic child",
+        "urgency": "routine"
+      },
+      {
+        "name": "Serum electrolytes",
+        "indication": "Moderate-severe dehydration or prolonged vomiting",
+        "urgency": "urgent"
+      }
+    ],
+    "snomed_code": "20759009",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Blood in stool increasing",
+      "Persistent vomiting or unable to drink",
+      "No urine output for more than 6 hours",
+      "Signs of severe dehydration such as sunken eyes or dry mouth"
+    ],
+    "snomed_display": "Dietetic jejunitis"
+  },
+  {
+    "icd10": "K29.0",
+    "diagnosis_name": "Acute Gastritis",
+    "category": "GI",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Ondansetron",
+        "notes": "0.1-0.15 mg/kg/dose BD-TDS PO, short duration 2-3 days, for vomiting control",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Omeprazole",
+        "notes": "1 mg/kg/day OD PO before meals x 7-10 days, first-line acid suppression",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "ORS",
+        "notes": "Small frequent sips PO, especially if vomiting or mild diarrhoea",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Pantoprazole",
+        "notes": "1 mg/kg/day OD PO before meals x 7-10 days, alternative PPI",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Saccharomyces boulardii",
+        "notes": "OD PO x 3-5 days, optional probiotic for gut recovery",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Dicyclomine",
+        "notes": "Age-appropriate dose TDS PO, short-term, only if significant abdominal pain",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Ranitidine",
+        "notes": "2-4 mg/kg/dose BD PO x 7-10 days, if PPI not available/tolerated",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Ondansetron for vomiting control. PPI (Omeprazole) is first-line acid suppression, preferred over H2 blockers. Maintain hydration. Avoid unnecessary antibiotics. Small frequent meals.",
+    "source": "IAP 2024, Pediatric GI Guidelines",
+    "guideline_changes": "ESPGHAN/NASPGHAN 2024: updated H. pylori guidelines with bismuth-based quadruple therapy for resistant strains; PPIs remain first-line acid suppression in children; PPI deprescription emphasized after 4-8 wk courses; ACG 2024 highlights rising clarithromycin resistance.",
+    "active": true,
+    "duration_days_default": 7,
+    "counselling": [
+      "Give small frequent meals instead of large meals",
+      "Preferred foods: curd, buttermilk, khichdi, rice, banana, coconut water",
+      "Avoid spicy food, fried food, and junk food",
+      "Keep child well hydrated with ORS and fluids",
+      "If persistent vomiting, blood in vomit, severe abdominal pain, or dehydration - come to hospital immediately"
+    ],
+    "referral_criteria": "Refer to pediatric gastroenterologist if persistent vomiting >5 days despite treatment, recurrent episodes, suspected H. pylori, or upper GI bleeding",
+    "hospitalisation_criteria": "Admit if persistent vomiting with dehydration, hematemesis, severe abdominal pain with guarding, or inability to tolerate oral intake",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Suspected infection or persistent symptoms",
+        "urgency": "routine"
+      },
+      {
+        "name": "CRP",
+        "indication": "Assess inflammation severity",
+        "urgency": "routine"
+      },
+      {
+        "name": "Stool routine and microscopy",
+        "indication": "Associated loose stools or suspected infection",
+        "urgency": "routine"
+      },
+      {
+        "name": "Liver function test",
+        "indication": "Persistent vomiting to rule out hepatic cause",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "25458004",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent vomiting or blood in vomit",
+      "Severe abdominal pain not relieved by medication",
+      "Signs of dehydration such as dry mouth or no urine"
+    ]
+  },
+  {
+    "icd10": "A01.0",
+    "diagnosis_name": "Enteric Fever (Indoor)",
+    "category": "Infectious",
+    "severity": "moderate",
+    "first_line_drugs": [
+      {
+        "drug": "Ceftriaxone",
+        "notes": "50-75 mg/kg/day IV OD or BD, dilute in 100 ml NS over 30-60 min, x 7-10 days",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Paracetamol",
+        "notes": "10-15 mg/kg/dose IV 6 hourly for fever control",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ondansetron",
+        "notes": "0.1-0.15 mg/kg/dose IV 8 hourly for vomiting",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "IV Fluids (DNS / Normal Saline)",
+        "notes": "Maintenance rate per Holliday-Segar formula (~60-80 ml/hr adjust clinically), maintain hydration and correct electrolytes",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Azithromycin",
+        "notes": "10 mg/kg/day IV over 1-2 hours x 5-7 days, add-on for moderate-severe/resistant cases",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Cefixime",
+        "notes": "8 mg/kg/day div BD PO, step-down oral antibiotic after afebrile 48-72 hours, complete 10-14 days total",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Indoor protocol. Ceftriaxone is first-line IV drug. IV fluids (DNS/NS) as per Holliday-Segar maintenance. Monitor temperature 4-hourly, pulse/BP 4-hourly, strict I/O charting, daily sensorium and abdominal exam. Step-down to oral antibiotics when afebrile 48-72 hrs. Complete 10-14 days total therapy. Watch for intestinal perforation, GI bleeding, encephalopathy, shock.",
+    "source": "IAP 2024, WHO Typhoid Guidelines, AIIMS Protocol",
+    "guideline_changes": "WHO/CDC 2024: azithromycin elevated as co-first-line with ceftriaxone due to rising XDR S. Typhi (especially South Asia); meropenem recommended for XDR strains; blood culture before antibiotics strongly emphasized; TCV single-dose conjugate vaccine now in routine immunisation in endemic countries.",
+    "active": true,
+    "duration_days_default": 10,
+    "counselling": [
+      "Typhoid requires a full course of antibiotics - do not stop early even if fever resolves",
+      "Expected hospital stay is 3-5 days until fever-free",
+      "Give soft easily digestible diet: khichdi, curd, buttermilk, banana, coconut water",
+      "Avoid spicy and oily food during recovery",
+      "Complete the full course of oral antibiotics after discharge",
+      "Follow-up blood tests may be needed to confirm cure"
+    ],
+    "referral_criteria": "Refer to pediatric infectious disease specialist if no defervescence after 5 days of appropriate antibiotics, suspected MDR typhoid, or complications (perforation, encephalopathy, myocarditis)",
+    "hospitalisation_criteria": "Admit all moderate-severe enteric fever. Also admit if: persistent high fever, toxic appearance, vomiting with inability to take oral antibiotics, suspected complications, age <2 years, or immunocompromised child",
+    "investigations": [
+      {
+        "name": "Blood culture",
+        "indication": "Gold standard for diagnosis, before starting antibiotics",
+        "urgency": "stat"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "Leukopenia pattern suggestive of typhoid",
+        "urgency": "stat"
+      },
+      {
+        "name": "CRP or Procalcitonin",
+        "indication": "Assess infection severity",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Widal test / Typhidot IgM",
+        "indication": "Supportive serological evidence",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Liver function test",
+        "indication": "Hepatic involvement assessment",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Serum electrolytes",
+        "indication": "Monitor with IV fluid therapy",
+        "urgency": "urgent"
+      }
+    ],
+    "snomed_code": "4834000",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Abdominal distension or severe abdominal pain",
+      "Signs of GI bleeding such as blood in stool or black stools",
+      "Altered sensorium or confusion",
+      "Persistent high fever despite treatment for more than 5 days"
+    ]
+  },
+  {
+    "icd10": "J05.0",
+    "diagnosis_name": "Viral Croup Syndrome",
+    "category": "Respiratory",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Dexamethasone",
+        "notes": "0.15-0.6 mg/kg single dose PO/IM/IV, max 16 mg; gold standard, reduces airway edema",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Epinephrine (nebulisation)",
+        "notes": "0.5 ml/kg of 1:1000 solution (max 5 ml) nebulised, repeat after 20-30 min if needed; for moderate-severe cases with stridor at rest",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Oxygen Therapy",
+        "notes": "If SpO2 < 92%, via nasal prongs or mask",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Levosalbutamol + Ambroxol",
+        "notes": "Age/weight appropriate dose nebulised or PO, optional bronchial/cough support, not primary treatment for croup",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Fexofenadine",
+        "notes": "Age-appropriate dose PO, only if allergic component present",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [],
+    "notes": "Dexamethasone single dose is the single most effective treatment. Adrenaline nebulisation for emergency relief in moderate-severe cases - observe 2-4 hours after dose for recurrence. Keep child calm (crying worsens stridor). Humidified air, adequate fluids. Avoid unnecessary antibiotics. Severity: Mild = barking cough no stridor at rest; Moderate = stridor at rest with mild retractions; Severe = marked distress with hypoxia.",
+    "source": "IAP 2024, AAP Croup Guidelines, WHO",
+    "guideline_changes": "2024 cohort data: single-dose dexamethasone (0.6 mg/kg) remains gold standard; repeat dosing in hospitalised children showed longer LOS without benefit on 30-day ED return; 0.15 mg/kg may suffice for mild croup; nebulised epinephrine observation period confirmed at 2-4 hr.",
+    "active": true,
+    "duration_days_default": 3,
+    "counselling": [
+      "Croup causes a barking cough and noisy breathing - keep child calm as crying worsens symptoms",
+      "Use humidified air or steam in the room",
+      "Give adequate fluids and small frequent meals",
+      "Improvement expected within 24 hours after steroid dose",
+      "Full recovery usually in 3-5 days",
+      "If stridor persists at rest, child has severe breathing difficulty, SpO2 drops, or child becomes lethargic - come to hospital immediately"
+    ],
+    "referral_criteria": "Refer to pediatric pulmonologist or ENT if recurrent croup (>2 episodes), atypical presentation, suspected foreign body, or subglottic stenosis",
+    "hospitalisation_criteria": "Admit if stridor at rest persists after dexamethasone and adrenaline, severe retractions, SpO2 <92%, lethargy/exhaustion, poor oral intake, or need for repeated adrenaline nebulisation",
+    "investigations": [
+      {
+        "name": "Pulse oximetry",
+        "indication": "All cases to assess oxygenation",
+        "urgency": "stat"
+      },
+      {
+        "name": "Neck X-ray AP view",
+        "indication": "Steeple sign if diagnosis uncertain or atypical",
+        "urgency": "urgent"
+      }
+    ],
+    "snomed_code": "71186008",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Stridor at rest that does not improve",
+      "Severe chest retractions",
+      "SpO2 dropping below 92 percent",
+      "Poor oral intake or refusal to drink"
+    ]
+  },
+  {
+    "icd10": "H66.9",
+    "diagnosis_name": "Acute Otitis Media",
+    "category": "ENT",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Paracetamol",
+        "notes": "10-15 mg/kg/dose 6-8 hourly PO SOS, pain relief is first priority",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ibuprofen",
+        "notes": "5-10 mg/kg/dose 6-8 hourly PO SOS, for pain and fever",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Amoxicillin-Clavulanate",
+        "notes": "40-45 mg/kg/day (amoxicillin component) div BD PO x 5-7 days, drug of choice",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Phenylephrine + Chlorpheniramine",
+        "notes": "Age-appropriate dose TDS PO, short duration, nasal decongestant to improve Eustachian tube function",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Cefpodoxime",
+        "notes": "8-10 mg/kg/day div BD PO x 5-7 days, use if penicillin allergy or poor response",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ear Drops (Oto-AC / Otoban)",
+        "notes": "2-3 drops TDS in affected ear, only if external ear involvement or discharge; avoid if tympanic membrane perforation",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Pain control is the priority. Amox-Clav is first-line antibiotic. Avoid dual antibiotic therapy (Amox-Clav + Cefpodoxime simultaneously not recommended). Ear drops only if external ear involvement or discharge (avoid if TM perforation unless appropriate drops). Non-pharmacological: warm compress over ear, adequate hydration, keep ear dry.",
+    "source": "IAP 2024, AAP AOM Guidelines",
+    "guideline_changes": "AAP 2024 reaffirms watchful waiting for mild unilateral AOM in children >=2 yr; high-dose amoxicillin (80-90 mg/kg/day) remains first-line; amoxicillin-clavulanate for treatment failure or beta-lactamase producers; Italian intersociety 2024 consensus aligns with AAP on shortened 5-day courses for uncomplicated AOM in children >=2 yr.",
+    "active": true,
+    "duration_days_default": 7,
+    "counselling": [
+      "Ear pain usually improves in 24-48 hours with treatment",
+      "Complete the full course of antibiotics even if pain resolves",
+      "Apply warm compress over the affected ear for pain relief",
+      "Keep the ear dry - avoid water entering the ear during bathing",
+      "If pain persists beyond 48 hours, high fever continues, ear discharge appears, or swelling behind the ear develops - return to hospital immediately",
+      "Follow up in 2-3 days to assess response to treatment"
+    ],
+    "referral_criteria": "Refer to ENT specialist if no improvement after 48-72 hours on antibiotics, recurrent AOM (>3 episodes in 6 months or >4 in 1 year), suspected mastoiditis, hearing difficulty, or chronic ear discharge",
+    "hospitalisation_criteria": "Admit if suspected mastoiditis (post-auricular swelling/tenderness), intracranial complications (meningitis, brain abscess), toxic appearance, age <2 months with fever, or failed outpatient therapy with systemic signs",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Severe infection or toxic child",
+        "urgency": "routine"
+      },
+      {
+        "name": "CRP",
+        "indication": "Severe infection to assess inflammation",
+        "urgency": "routine"
+      },
+      {
+        "name": "Ear swab culture and sensitivity",
+        "indication": "Recurrent or persistent ear discharge",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "3110003",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent ear pain beyond 48 hours despite treatment",
+      "High fever not responding to medication",
+      "Ear discharge or pus from the ear",
+      "Swelling behind the ear suggesting mastoiditis"
+    ]
+  },
+  {
+    "icd10": "B17.9",
+    "diagnosis_name": "Acute Viral Hepatitis",
+    "category": "Infectious",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Ursodeoxycholic acid",
+        "notes": "10-15 mg/kg/day div BD PO, hepatoprotective/cholestasis support",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Liver Support Syrup (Dynabile / Livoluk)",
+        "notes": "3-5 ml BD PO, age-appropriate dose, appetite improvement and hepatoprotective support",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Lactulose",
+        "notes": "1-2 ml/kg/day PO, adjust to maintain 2 soft stools/day, prevents encephalopathy",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "N-Acetylcysteine",
+        "notes": "IV infusion per paracetamol-poisoning protocol dosing, for severe hepatitis/rising liver enzymes in admitted cases",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Hydration (ORS / IV fluids)",
+        "notes": "ORS and oral fluids; IV fluids if vomiting prevents oral intake",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Vitamin K (Phytonadione)",
+        "notes": "5-10 mg IM/IV x 3 days, if INR prolonged/coagulation deranged",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Mostly supportive treatment. No routine antivirals needed for HAV/HEV. Diet + hydration = main treatment. High carbohydrate, low fat diet with frequent small meals. Monitor INR carefully. ORS/fluids orally; IV fluids if vomiting. NAC infusion in all admitted cases with severe hepatitis. Recovery in 2-4 weeks, full normalization in 4-6 weeks.",
+    "source": "IAP 2024, WHO Hepatitis Guidelines, AIIMS Protocol",
+    "guideline_changes": "INASL/AASLD 2024: IV NAC recommended in all non-acetaminophen acute liver failure (150 mg/kg loading then 50+100 mg/kg maintenance); early NAC initiation critical for better outcomes; no routine antivirals for HAV/HEV; EASL 2025 updated chronic HBV guidelines but acute management remains supportive.",
+    "active": true,
+    "duration_days_default": 14,
+    "counselling": [
+      "Hepatitis is a liver infection - mostly recovers on its own with rest and diet",
+      "Give high carbohydrate, low fat diet: khichdi, banana, coconut water, curd, buttermilk",
+      "Give small frequent meals instead of large meals",
+      "Avoid fatty and fried food completely during recovery",
+      "Keep child well hydrated with ORS and fluids",
+      "Repeat liver function tests after 5-7 days as advised",
+      "If persistent vomiting, altered consciousness, bleeding tendency, increasing jaundice, or dark urine worsens - come to hospital immediately"
+    ],
+    "referral_criteria": "Refer to pediatric hepatologist if INR >1.5, signs of hepatic encephalopathy, fulminant hepatic failure, no improvement after 2 weeks, or suspected chronic hepatitis (HBV/HCV)",
+    "hospitalisation_criteria": "Admit if persistent vomiting with dehydration, altered sensorium, bleeding tendency (INR >1.5), increasing jaundice with rising bilirubin, suspected fulminant hepatic failure, or age <1 year",
+    "investigations": [
+      {
+        "name": "Liver function test (SGOT, SGPT, Bilirubin)",
+        "indication": "Assess severity and monitor recovery",
+        "urgency": "stat"
+      },
+      {
+        "name": "PT/INR",
+        "indication": "Prognosis and coagulation status",
+        "urgency": "stat"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "Baseline assessment",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Hepatitis A IgM / Hepatitis E IgM",
+        "indication": "Determine viral etiology",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Serum electrolytes",
+        "indication": "Monitoring with IV fluids or persistent vomiting",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Serum ammonia",
+        "indication": "If altered sensorium - rule out encephalopathy",
+        "urgency": "stat"
+      }
+    ],
+    "snomed_code": "722865001",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Persistent vomiting or inability to eat",
+      "Altered sensorium or excessive drowsiness",
+      "Bleeding tendency such as nose bleed or blood in vomit",
+      "Increasing jaundice or dark urine"
+    ],
+    "snomed_display": "Subacute hepatic failure caused by hepatitis virus"
+  },
+  {
+    "icd10": "K52.9",
+    "diagnosis_name": "Acute Gastroenteritis (Indoor Protocol)",
+    "category": "GI",
+    "severity": "severe",
+    "first_line_drugs": [
+      {
+        "drug": "Normal Saline",
+        "notes": "20 ml/kg IV bolus over 30-60 min for initial rehydration; maintenance per Holliday-Segar formula",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ondansetron",
+        "notes": "0.1-0.15 mg/kg/dose IV q8h for vomiting",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Paracetamol",
+        "notes": "10-15 mg/kg/dose IV q6h for fever",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Saccharomyces Boulardii",
+        "notes": "1 sachet BD PO, reduces duration of diarrhea",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "ORS",
+        "notes": "Start early when tolerated, small frequent sips",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Zinc",
+        "notes": "20 mg OD PO for 14 days (<6 months: 10 mg OD), start with oral transition",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Ceftriaxone",
+        "notes": "50-75 mg/kg/day IV OD/BD, only if dysentery/sepsis/toxic child",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Amikacin",
+        "notes": "15 mg/kg/day IV OD, add-on if severe sepsis suspected",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Metronidazole",
+        "notes": "7.5-10 mg/kg/dose IV TDS, only if amoebic dysentery suspected",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "IV fluids are the cornerstone. Maintenance fluid per Holliday-Segar: 100 ml/kg first 10 kg + 50 ml/kg next 10 kg. Avoid routine triple antibiotics unless clearly indicated. Early transition to ORS. Continue feeding as early as possible (curd, khichdi, banana, coconut water).",
+    "source": "IAP 2024 Diarrhea Guidelines, WHO Diarrheal Disease Management, NASPGHAN 2024 AGE Clinical Pathway",
+    "guideline_changes": "NASPGHAN 2024 AGE update: Lactobacillus not routinely recommended (two large RCTs showed no benefit); ondansetron preferred antiemetic for children >=6 months; early oral rehydration emphasized over IV where possible; Saccharomyces boulardii retains moderate evidence for reducing diarrhea duration.",
+    "active": true,
+    "duration_days_default": 5,
+    "counselling": [
+      "Continue breastfeeding and complementary foods during illness",
+      "Give ORS sip by sip after every loose stool",
+      "Continue zinc for full 14 days even after diarrhea stops",
+      "Offer curd, khichdi, banana, coconut water as tolerated",
+      "Return immediately if child becomes lethargic, stops urinating, or has blood in stool"
+    ],
+    "referral_criteria": "Refer to pediatric gastroenterologist if persistent diarrhea >14 days, recurrent severe episodes, suspected malabsorption, or failure to thrive",
+    "hospitalisation_criteria": "Admit if severe dehydration, unable to tolerate oral fluids, persistent vomiting, toxic appearance, age <2 months, decreased urine output, or electrolyte imbalance",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Assess for infection and dehydration",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Serum electrolytes",
+        "indication": "If severe dehydration or prolonged diarrhea",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Stool routine and microscopy",
+        "indication": "Identify bacterial/parasitic cause",
+        "urgency": "urgent"
+      },
+      {
+        "name": "Renal function tests",
+        "indication": "Rule out acute kidney injury in severe dehydration",
+        "urgency": "urgent"
+      }
+    ],
+    "snomed_code": "20759009",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Signs of severe dehydration such as sunken eyes or no tears",
+      "Electrolyte imbalance symptoms such as muscle cramps or weakness",
+      "No urine output for more than 6 hours",
+      "Signs of shock such as cold hands or weak pulse"
+    ],
+    "snomed_display": "Dietetic jejunitis"
+  },
+  {
+    "icd10": "R04.0",
+    "diagnosis_name": "Epistaxis",
+    "category": "ENT",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Liquid Paraffin nasal drops",
+        "notes": "2-3 drops in each nostril 2-3 times daily, keeps mucosa moist",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Normal Saline nasal drops",
+        "notes": "2-3 drops each nostril TDS for mucosal hydration",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ascorbic Acid",
+        "notes": "Age-appropriate dose OD PO for 2-4 weeks, improves capillary strength",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "First-Aid Management (non-pharmacological)",
+        "notes": "Sit child upright, tilt head slightly forward, pinch soft part of nose for 10 minutes, apply cold compress",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Mupirocin ointment",
+        "notes": "Apply inside anterior nares BD for 5 days, if crusting/infection present",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Fusidic Acid ointment",
+        "notes": "Apply inside anterior nares BD for 5 days, alternative to mupirocin if crusting/infection",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Most cases are benign anterior bleeds from Kiesselbach plexus due to nose picking or dry mucosa. Moisturization is the cornerstone. Teach first aid: sit upright, tilt head forward, pinch soft nose for 10 min, cold compress. Keep nails short. Avoid nose picking, forceful blowing, dry air.",
+    "source": "AAO-HNS Clinical Practice Guideline: Nosebleed (2020, AAP-endorsed), IAP ENT Guidelines",
+    "guideline_changes": "AAO-HNS 2020 CPG (AAP-endorsed): sustained pressure for minimum 5 minutes on lower third of nose; topical tranexamic acid now recommended as superior to other agents for stopping bleeding in first 10 minutes; oxymetazoline preferred topical vasoconstrictor. No major 2024-2025 pediatric-specific updates.",
+    "active": true,
+    "duration_days_default": 14,
+    "counselling": [
+      "Apply nasal oil drops regularly to keep the nose moist",
+      "Teach first aid: sit upright, tilt head forward, pinch soft part of nose for 10 minutes",
+      "Keep child's nails short to prevent nose picking",
+      "Avoid forceful nose blowing and dry air exposure",
+      "Return if bleeding lasts >15-20 minutes, is recurrent, or bleeding from other sites"
+    ],
+    "referral_criteria": "Refer to ENT specialist if recurrent frequent episodes (>1/week), bleeding from posterior nose, suspected bleeding disorder, or epistaxis not controlled by local measures",
+    "hospitalisation_criteria": "Admit if active uncontrollable bleeding >20 minutes despite compression, hemodynamic instability, significant blood loss with pallor/weakness, or suspected posterior epistaxis requiring nasal packing",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Recurrent or severe epistaxis to check platelets and anemia",
+        "urgency": "routine"
+      },
+      {
+        "name": "PT/INR",
+        "indication": "Recurrent epistaxis to rule out coagulation disorder",
+        "urgency": "routine"
+      },
+      {
+        "name": "Bleeding time / Clotting time",
+        "indication": "Suspected bleeding disorder",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": null,
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Bleeding lasting more than 15 to 20 minutes despite pressure",
+      "Recurrent frequent nosebleed episodes",
+      "Bleeding from other sites such as gums or skin bruises",
+      "Pallor or weakness suggesting significant blood loss"
+    ],
+    "snomed_display": null
+  },
+  {
+    "icd10": "N39.44",
+    "diagnosis_name": "Enuresis (Nocturnal Bedwetting)",
+    "category": "Urology",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Reassurance (non-pharmacological)",
+        "notes": "Explain to parents: common condition, improves with age, not child's fault; mandatory first step",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Behavioral Therapy (non-pharmacological)",
+        "notes": "Fluid management (avoid excess after 6-7 PM), timed voiding before bed, bladder training (hold urine for increasing intervals), positive reinforcement with bladder diary",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Enuresis Alarm (non-pharmacological)",
+        "notes": "Most effective long-term therapy, use for 3-4 months if available",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Desmopressin",
+        "notes": "0.2 mg (200 mcg) PO at bedtime, can increase to 0.4 mg if needed; duration 4-12 weeks then taper; restrict fluids after dose",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Imipramine",
+        "notes": "0.9-1.5 mg/kg/dose PO at bedtime (max 50 mg for <12y, 75 mg for >=12y); use only if desmopressin fails; monitor for cardiac side effects; avoid in overdose-risk families",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Oxybutynin",
+        "notes": "0.2-0.3 mg/kg/dose BD-TDS PO (max 5 mg TDS); useful when overactive bladder component present; may combine with desmopressin for refractory cases",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Tolterodine",
+        "notes": "1-2 mg PO at bedtime; alternative anticholinergic if oxybutynin not tolerated; fewer side effects than oxybutynin",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Behavioral therapy is first-line: fluid restriction after 6-7 PM, timed voiding before bed, wake child once at night, bladder training with increasing daytime holding intervals, positive reinforcement with reward calendar. Enuresis alarm is the most effective long-term therapy (use 3-4 months). Medication only if moderate-severe or significant social impact. Monitor for hyponatremia on desmopressin. Never punish the child.",
+    "source": "ICCS 2020 Standardization Document, IAP Enuresis Protocol, J Pediatr Urol 2024",
+    "guideline_changes": "ICCS 2020 updated standardization: active therapy from age 6 years; enuresis alarm remains most effective long-term treatment (3-4 months); combination desmopressin + imipramine shown more effective than desmopressin + oxybutynin for refractory cases (2024 study). No major 2024-2025 ICCS guideline revision.",
+    "active": true,
+    "duration_days_default": 56,
+    "counselling": [
+      "Bedwetting is common and not the child's fault - never punish",
+      "Restrict fluids after 6-7 PM, encourage more fluids during daytime",
+      "Child should pass urine before bedtime every night",
+      "Reward dry nights with a star chart - positive reinforcement works",
+      "Most children outgrow bedwetting naturally; improvement expected in 4-8 weeks",
+      "If on desmopressin, restrict fluids after taking the dose to avoid low sodium"
+    ],
+    "referral_criteria": "Refer to pediatric nephrologist/urologist if daytime incontinence, weak urinary stream, recurrent UTI, secondary enuresis with red flags, or no response to 3 months of treatment",
+    "hospitalisation_criteria": "Hospitalisation not typically required for primary enuresis. Admit only if severe hyponatremia on desmopressin or if secondary enuresis requires workup for underlying neurological/renal cause",
+    "investigations": [
+      {
+        "name": "Urine routine and microscopy",
+        "indication": "Rule out UTI in all cases",
+        "urgency": "routine"
+      },
+      {
+        "name": "Ultrasound KUB",
+        "indication": "Suspected structural abnormality or secondary enuresis",
+        "urgency": "routine"
+      },
+      {
+        "name": "Blood sugar",
+        "indication": "Rule out diabetes if polyuria or secondary enuresis",
+        "urgency": "routine"
+      },
+      {
+        "name": "Serum electrolytes",
+        "indication": "Monitor if on desmopressin therapy",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "236660009",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Daytime incontinence in addition to bedwetting",
+      "Weak urine stream or straining to urinate",
+      "Recurrent urinary tract infections",
+      "Secondary enuresis after being dry for more than 6 months"
+    ],
+    "snomed_display": "Giggle incontinence of urine"
+  },
+  {
+    "icd10": "Z00.1",
+    "diagnosis_name": "Normal Baby (Routine Follow-up)",
+    "category": "General",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Multivitamin Drops",
+        "notes": "0.5-1 ml (10 drops) OD PO, up to 1 year of age",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Ferrous Ascorbate + Folic Acid",
+        "notes": "1-2 mg/kg/day elemental iron OD PO, start from 6 weeks-3 months depending on birth weight, continue up to 1 year",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Cholecalciferol (Vitamin D3)",
+        "notes": "400 IU OD PO for at least 1 year, essential for bone development",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Calcium supplement",
+        "notes": "2-2.5 ml OD PO if indicated (rapid growth phase, prematurity, low intake)",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Dicyclomine",
+        "notes": "5-7 drops TDS PO only if symptomatic colic, short duration only",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Preventive pediatric care protocol. Ensure exclusive breastfeeding till 6 months, feed every 2-3 hours, proper burping. Monthly growth monitoring (weight, length, head circumference) on WHO charts. Follow National Immunization Schedule. Monitor developmental milestones (social smile, head control, activity). Adequate sunlight exposure. Avoid overcrowding.",
+    "source": "IAP Preventive Pediatric Care 2024, WHO Infant Care Guidelines, NNF (National Neonatology Forum) India",
+    "guideline_changes": "IAP 2024: Vitamin D 400 IU/day universally recommended from birth; iron supplementation from 6 weeks for LBW/preterm, 6 months for term; emphasis on developmental milestone screening at every well-baby visit using validated tools. WHO 2024 growth standards reaffirmed.",
+    "active": true,
+    "duration_days_default": 30,
+    "counselling": [
+      "Exclusive breastfeeding for first 6 months is the best nutrition",
+      "Feed baby every 2-3 hours and burp properly after each feed",
+      "Give Vitamin D drops daily - essential for strong bones",
+      "Give iron drops daily to prevent anemia",
+      "Bring child for monthly weight check and vaccination as per schedule",
+      "Report if poor feeding, excessive crying, fever, vomiting, or delayed milestones"
+    ],
+    "referral_criteria": "Refer to pediatric specialist if failure to thrive, weight faltering across 2 centile lines, delayed milestones, congenital anomaly suspected, or recurrent infections",
+    "hospitalisation_criteria": "Admit if acute illness with danger signs (poor feeding, lethargy, fever in neonate, respiratory distress, severe dehydration), or severe failure to thrive requiring nutritional rehabilitation",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Screen for anemia at 6 months and 12 months",
+        "urgency": "routine"
+      },
+      {
+        "name": "Serum Vitamin D",
+        "indication": "If clinical signs of rickets or risk factors",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "424056003",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or refusal to feed",
+      "Excessive crying that is inconsolable",
+      "Fever in a newborn or young infant",
+      "Delayed developmental milestones"
+    ],
+    "snomed_display": "Difficulty performing normal routines due to substance use"
+  },
+  {
+    "icd10": "R10.83",
+    "diagnosis_name": "Abdominal Colic / Infantile Colic",
+    "category": "GI",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Reassurance (non-pharmacological)",
+        "notes": "Explain to parents: common condition, self-limiting (peaks at 6-8 weeks), resolves by 3-4 months",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Simethicone",
+        "notes": "0.3 ml (as per preparation) TDS PO after feeds, preferred for gas relief and safety",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Feeding Support (non-pharmacological)",
+        "notes": "Proper latching technique, burping after every feed, avoid overfeeding",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Supplements (Multivitamin Drops + Vitamin D3 400 IU + Iron if indicated)",
+        "notes": "As per standard practice; Multivitamin drops + Vitamin D3 400 IU daily + Iron supplementation if indicated",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Dicyclomine",
+        "notes": "5-7 drops TDS PO (morning, evening, night), short duration only, avoid routine long-term use",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Amlexanox Gel / Zytee",
+        "notes": "Apply 2-3 times/day for oral/gum care, only if associated irritability",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Reassurance is the most important intervention. Infantile colic is self-limiting, peaks at 6-8 weeks, resolves by 3-4 months. Non-pharmacological measures: gentle abdominal massage, warm compress, carrying/rocking, white noise. Ensure proper latching, burping after every feed, avoid overfeeding. Breastfeeding mothers should avoid excess tea/coffee, spicy food, gas-forming foods. Simethicone preferred over dicyclomine for safety.",
+    "source": "Rome IV Criteria (2016), IAP Infant Care Guidelines, ESPGHAN Probiotic Working Group",
+    "guideline_changes": "Rome IV criteria (2016) remain current standard; Lactobacillus reuteri DSM 17938 supported by recent meta-analyses as effective probiotic for breastfed colicky infants; no new 2024-2025 Rome criteria revision. Reassurance and parental support remain cornerstone.",
+    "active": true,
+    "duration_days_default": 14,
+    "counselling": [
+      "Colic is very common and not dangerous - it will resolve by 3-4 months",
+      "Gentle tummy massage and warm compress provide relief",
+      "Ensure proper breastfeeding technique with burping after every feed",
+      "Avoid overfeeding the baby",
+      "Breastfeeding mothers should avoid excess tea, coffee, spicy and gas-forming foods",
+      "Return if baby has poor feeding, vomiting, fever, blood in stool, or poor weight gain"
+    ],
+    "referral_criteria": "Refer to pediatric gastroenterologist if colic persists beyond 4 months, failure to thrive, blood in stool, persistent vomiting, or suspected cow's milk protein allergy",
+    "hospitalisation_criteria": "Hospitalisation rarely needed for colic. Admit only if poor feeding with dehydration, failure to thrive, suspected intestinal obstruction, or intussusception",
+    "investigations": [
+      {
+        "name": "Urine routine and microscopy",
+        "indication": "Rule out UTI as cause of excessive crying",
+        "urgency": "routine"
+      },
+      {
+        "name": "Stool occult blood",
+        "indication": "Suspected cow milk protein allergy if blood-streaked stools",
+        "urgency": "routine"
+      },
+      {
+        "name": "Complete blood count",
+        "indication": "If fever present or prolonged crying beyond 4 months to rule out infection",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "139306005",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor feeding or refusal to feed",
+      "Vomiting especially if bilious or forceful",
+      "Blood in stool",
+      "Failure to gain weight adequately"
+    ],
+    "snomed_display": "Abdominal colic"
+  },
+  {
+    "icd10": "K21.0",
+    "diagnosis_name": "Gastroesophageal Reflux (GER/GERD)",
+    "category": "GI",
+    "severity": "any",
+    "first_line_drugs": [
+      {
+        "drug": "Positional Therapy (non-pharmacological)",
+        "notes": "Keep baby head elevated ~30 degrees, hold upright 15-20 min after feeds, avoid immediate lying after feeding; first-line treatment",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Feeding Modification (non-pharmacological)",
+        "notes": "Small frequent feeds, avoid overfeeding, proper burping after feeds; reduces reflux episodes",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Lansoprazole",
+        "notes": "1-2 mg/kg/day OD PO for 2-4 weeks trial, only if symptomatic GERD; not for simple GER",
+        "is_new_2024_2025": false
+      },
+      {
+        "drug": "Thickened Feeds (non-pharmacological)",
+        "notes": "Thickened formula or rice cereal if bottle-fed; reduces regurgitation",
+        "is_new_2024_2025": false
+      }
+    ],
+    "second_line_drugs": [
+      {
+        "drug": "Domperidone",
+        "notes": "0.2-0.3 mg/kg/dose TDS PO, short course, use cautiously in select cases",
+        "is_new_2024_2025": false
+      }
+    ],
+    "notes": "Most infant GER is physiological and self-limiting, resolving by 12-18 months. Non-pharmacological measures are first-line: keep head elevated 30 degrees, hold upright 15-20 min after feeds, small frequent feeds, proper burping, avoid overfeeding. Thickened feeds (rice cereal) for bottle-fed infants reduce regurgitation. PPI only for symptomatic GERD with poor weight gain or complications. Do not medicate normal thriving babies with mild regurgitation.",
+    "source": "ESPGHAN/NASPGHAN 2018 Pediatric GERD Clinical Practice Guidelines, IAP GI Protocol",
+    "guideline_changes": "NASPGHAN/ESPGHAN 2018 GERD CPG (most recent): 4-8 weeks PPI trial for typical GERD symptoms only after dietary modifications fail in infants; avoid acid suppression for extraesophageal symptoms (cough, wheezing); no new 2024-2025 GERD guideline revision published.",
+    "active": true,
+    "duration_days_default": 21,
+    "counselling": [
+      "Keep baby's head elevated after feeds and hold upright for 15-20 minutes",
+      "Give small frequent feeds and avoid overfeeding",
+      "Burp baby properly after every feed",
+      "Most babies outgrow reflux by 12-18 months - this is usually normal",
+      "Do not lay baby flat immediately after feeding",
+      "Return if baby has poor weight gain, persistent vomiting, blood in vomit, or choking episodes"
+    ],
+    "referral_criteria": "Refer to pediatric gastroenterologist if poor weight gain despite treatment, persistent vomiting beyond 18 months, hematemesis, suspected aspiration, recurrent pneumonia, or Sandifer syndrome",
+    "hospitalisation_criteria": "Admit if severe GERD with failure to thrive, aspiration pneumonia, apparent life-threatening event (ALTE/BRUE), hematemesis, or severe dehydration from persistent vomiting",
+    "investigations": [
+      {
+        "name": "Complete blood count",
+        "indication": "Check for anemia if chronic GERD",
+        "urgency": "routine"
+      },
+      {
+        "name": "Ultrasound abdomen",
+        "indication": "Rule out pyloric stenosis or structural causes in persistent vomiting",
+        "urgency": "routine"
+      },
+      {
+        "name": "Liver function tests",
+        "indication": "If persistent vomiting to rule out hepatobiliary causes",
+        "urgency": "routine"
+      }
+    ],
+    "snomed_code": "235595009",
+    "warning_signs": [
+      "Fast breathing or chest indrawing",
+      "Bluish discoloration of lips or tongue",
+      "Convulsions or fits",
+      "Excessive sleepiness or unresponsive",
+      "Poor weight gain or failure to thrive",
+      "Persistent vomiting or blood in vomit",
+      "Apnea or choking episodes",
+      "Severe irritability or refusal to feed"
+    ]
+  }
+]
