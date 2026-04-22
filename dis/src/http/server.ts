@@ -1,6 +1,18 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { correlationId } from './middleware/correlation-id.js';
+import {
+  errorHandler,
+  type ErrorHandlerDeps,
+} from './middleware/error-handler.js';
+import {
+  killSwitch,
+  type KillSwitchDeps,
+} from './middleware/kill-switch.js';
+import {
+  rateLimit,
+  type RateLimitConfig,
+} from './middleware/rate-limit.js';
 import { registerHealthRoute } from './routes/health.js';
 
 /**
@@ -13,17 +25,36 @@ export interface AppVariables {
 
 export type App = Hono<{ Variables: AppVariables }>;
 
+export interface CreateServerOptions {
+  /** Kill-switch config (DIS-100, CS-9). Omit to disable. */
+  readonly killSwitch?: KillSwitchDeps;
+  /** Per-operator rate-limit config (DIS-102). Omit to disable. */
+  readonly rateLimit?: RateLimitConfig;
+  /** Global error-handler deps (DIS-101). Defaults to no logger. */
+  readonly errorHandler?: ErrorHandlerDeps;
+}
+
 /**
  * Builds a fresh Hono app with all middleware + routes registered.
+ *
+ * Middleware order:
+ *   1. correlation-id  — tag every request (DIS-008).
+ *   2. kill-switch     — 503 on writes when active (DIS-100, CS-9, opt-in).
+ *   3. rate-limit      — 429 on per-operator burst (DIS-102, opt-in).
+ *   4. routes          — handlers run after the guards.
+ *   5. error-handler   — onError maps thrown errors to envelope (DIS-101).
  *
  * No singletons, no module-level state: every call returns a new instance,
  * which keeps tests isolated and lets us spin up ephemeral servers on
  * random ports.
  */
-export function createServer(): App {
+export function createServer(options: CreateServerOptions = {}): App {
   const app = new Hono<{ Variables: AppVariables }>();
   app.use('*', correlationId());
+  if (options.killSwitch) app.use('*', killSwitch(options.killSwitch));
+  if (options.rateLimit) app.use('*', rateLimit(options.rateLimit));
   registerHealthRoute(app as unknown as Hono);
+  app.onError(errorHandler(options.errorHandler ?? {}));
   return app;
 }
 
