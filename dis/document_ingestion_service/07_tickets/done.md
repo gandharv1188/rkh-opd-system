@@ -1043,3 +1043,42 @@ All 8 forward migrations have matching `.rollback.sql` pairs. Shared roundtrip t
 - **CRITICAL:** No migration applied to any database — authoring only. Application to staging is Wave 7's job. M-006 specifically touches existing `lab_results` and `vaccinations` tables and would require clinical sign-off before LIVE application per Epic G.
 - **Orientation F1 status: FULLY CLOSED.** `dis/src/wiring/supabase.ts` (DIS-079) + `dis/migrations/M-001..M-008` + roundtrip test all present. Service can now boot end-to-end against a staging Postgres.
 - **Open follow-ups (unchanged from prior):** DIS-025a, DIS-002l, DIS-002m, DIS-007-followup, DIS-058a-platforms-followup, DIS-058b-followup, DIS-058c-followup, DIS-079-followup-d (DATABASE_URL), DIS-079-followup-wire-siblings, DIS-058z + DIS-059/060/061/059o (ADR-008 deferred to Wave 3b).
+
+---
+
+## Session 2026-04-22 — Wave 3b (ADR-008 DocumentTextExtractorPort, 5 tickets)
+
+### Dispatch shape
+
+- **Step 1 (solo, sequential):** `dev-c-dte-port` authored `DocumentTextExtractorPort` + fake (DIS-058z) — prerequisite for the rest.
+- **Step 2 (parallel wave of 3):** `dev-c-native-pdf-text`, `dev-c-office-word`, `dev-c-office-sheet` ran in parallel worktrees for DIS-059/060/061. Zero file overlap by design.
+- **Step 3 (solo, sequential):** `dev-c-ocr-bridge` implemented DIS-059o (bridge) after the port + 3 extractors landed.
+
+All 5 teammates were squad members of `dis-squad` (per CLAUDE.md §Agentic Team Management). Fresh teammate per wave, no cross-wave reuse.
+
+### Tickets merged (all 2026-04-22)
+
+| Ticket | Purpose | Forward commit | Merge commit | Handoff |
+|--------|---------|----------------|--------------|---------|
+| DIS-058z | `DocumentTextExtractorPort` + `ExtractionInput`/`ExtractionResult`/`ExtractionRoute` + `FakeDocumentTextExtractorAdapter` | 9e92a83 | 94494f7 | dis/handoffs/DIS-058z.md |
+| DIS-059 | `NativePdfTextAdapter` — wraps `core/native-pdf.ts` (DIS-033) with `route: 'native_text'` | 07efd61 | 94151b1 | dis/handoffs/DIS-059.md |
+| DIS-060 | `OfficeWordAdapter` — mammoth delegation with `route: 'office_word'` (mocked fixture) | 455f19a | de22c0f | dis/handoffs/DIS-060.md |
+| DIS-061 | `OfficeSheetAdapter` — xlsx-based with per-sheet markdown tables, CSV+XLSX fixtures, `route: 'office_sheet'` | fffcde6 | ce389e5 | dis/handoffs/DIS-061.md |
+| DIS-059o | `OcrBridgeAdapter` — sole adapter bridging `DocumentTextExtractorPort` → `OcrPort` with provider detail mapping + CS-2 pass-through of `rawResponse` | ca4e23c | 0e23344 | dis/handoffs/DIS-059o.md |
+
+### Wave-3b closeout summary
+
+- **Invariants on `feat/dis-plan` at close (commit 0e23344):**
+  - fitness: 0 violations, **81 files** (+5 adapter + 1 port src files vs Wave 4's 76)
+  - tsc --noEmit: exit 0
+  - vitest: **57 test files** passing (+4 from Wave 4's 53: 1 fake-adapters extension + 4 new adapter suites)
+- **ADR-008 fully realized.** The file-router's dispatch target is now a dedicated port (`DocumentTextExtractorPort`) with four adapters covering the four decision-tree branches (native_text, office_word, office_sheet, ocr_image-via-bridge). `OcrPort` contract unchanged. Wave 5 (Epic D HTTP endpoints) is unblocked.
+- **Observed gotchas / playbook candidates:**
+  1. `git worktree remove --force` on Windows frequently hits "Filename too long" — the worktree registration is removed but the directory lingers. Session re-awakenings into a dead directory were detected correctly by teammates (v3 re-anchor held).
+  2. `dis/node_modules/.bin/` disappears after parallel teammate runs (likely npm's symlink writer tripping on worktree junctions). Repaired by `cd dis && npm install` — idempotent, lockfile untouched. Orchestrator post-wave check should `ls dis/node_modules/.bin/tsc` as a canary.
+  3. `task-list` auto-dispatch will poke idle teammates with empty `owner` even after completion. Either always re-set `owner` on completion or accept that well-trained teammates will refuse (v3 protocol held in both observed cases).
+- **Open follow-ups (carried forward unchanged):** DIS-025a, DIS-002l, DIS-002m, DIS-007-followup, DIS-058a-platforms-followup, DIS-058b-followup, DIS-058c-followup, DIS-079-followup-d, DIS-079-followup-wire-siblings.
+- **New follow-ups registered:**
+  - **DIS-060-followup** — integration test with a real `.docx` fixture (current test uses mocked mammoth; acceptable per brief's option-c fallback).
+  - **adapters.md + tdd.md §7 text amendments** — per ADR-008 §Follow-up tickets; small edits adding the `DocumentTextExtractorPort` row to the port inventory and one sentence about router-then-extractor dispatch.
+- **Wave 5 (HTTP endpoints, Epic D) is now ready to dispatch when user gives go-ahead.** Priority 2 per SESSION_HANDOVER_2026-04-22 §6.
