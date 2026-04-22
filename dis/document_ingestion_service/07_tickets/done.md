@@ -1010,3 +1010,36 @@ Four fresh teammates planned (3-ticket cap per #27). One (`dev-c-office-parsers`
 - **Open follow-ups registered (not in backlog yet but tracked in handoffs):** DIS-058a-platforms-followup, DIS-058b-followup (full Hough deskew), DIS-058c-followup (homography warp), DIS-079-followup-d (DATABASE_URL), DIS-079-followup-wire-siblings.
 - **Deferred to Wave 3b (via ADR-008):** DIS-058z (new port), DIS-059 (native-PDF, rewritten), DIS-060 (OfficeWord, rewritten), DIS-061 (OfficeSheet, rewritten), DIS-059o (OCR bridge, new).
 - **Orientation F1 status: FIRST HALF CLOSED** — `dis/src/wiring/` populated. Second half (`dis/migrations/` empty) blocks Wave 4.
+
+---
+
+## Session 2026-04-22 — Wave 4 (Migrations M-001..M-008, 1 teammate)
+
+### Dispatch shape
+
+Single teammate `dev-d-migrations` on branch `feat/dev-d-migrations`. 8 sequential SQL migrations authored as one batch. Shared roundtrip test in place of per-migration tests (permitted in brief).
+
+### Migrations merged (all 2026-04-22, merge commit 3f698bf)
+
+| M # | Table / Purpose | Forward commit | Handoff |
+|-----|-----------------|----------------|---------|
+| M-001 | `ocr_extractions` + `idempotency_keys` + indexes | d1e2427 | dis/handoffs/M-001.md |
+| M-002 | `ocr_audit_log` with BEFORE UPDATE/DELETE triggers (CS-3) | 5fa7442 | dis/handoffs/M-002.md |
+| M-003 | `dis_confidence_policy` with disabled-default seed (CS-7) | 57f23db | dis/handoffs/M-003.md |
+| M-004 | `dis_jobs` (POC-only Postgres queue) | 5bec2c9 | dis/handoffs/M-004.md |
+| M-005 | `dis_cost_ledger` append-only with FK `ON DELETE SET NULL` | 4f51a19 | dis/handoffs/M-005.md |
+| M-006 | Additive FK + `verification_status` on `lab_results` + `vaccinations` | 3834ea4 | dis/handoffs/M-006.md |
+| M-007 | Partial unique dedupe indexes (CS-11) | b00bb60 | dis/handoffs/M-007.md |
+| M-008 | RLS policies (portable `current_setting('app.user_id')` pattern) | ef4404f | dis/handoffs/M-008.md |
+
+All 8 forward migrations have matching `.rollback.sql` pairs. Shared roundtrip test at `dis/tests/integration/migrations.test.ts` (commit 51d7fa9) asserts each forward/rollback pair parses correctly and inverts matching DDL keywords. dbmate wrapper at `dis/scripts/migrate.sh`; env template at `dis/dbmate.env.example`.
+
+### Wave-4 closeout summary
+
+- **Invariants on `feat/dis-plan` at close (commit 3f698bf):**
+  - fitness: 0 violations, 76 files
+  - tsc --noEmit: exit 0
+  - vitest: **53 test files / 380 tests** (+27 from Wave-3a's 353)
+- **CRITICAL:** No migration applied to any database — authoring only. Application to staging is Wave 7's job. M-006 specifically touches existing `lab_results` and `vaccinations` tables and would require clinical sign-off before LIVE application per Epic G.
+- **Orientation F1 status: FULLY CLOSED.** `dis/src/wiring/supabase.ts` (DIS-079) + `dis/migrations/M-001..M-008` + roundtrip test all present. Service can now boot end-to-end against a staging Postgres.
+- **Open follow-ups (unchanged from prior):** DIS-025a, DIS-002l, DIS-002m, DIS-007-followup, DIS-058a-platforms-followup, DIS-058b-followup, DIS-058c-followup, DIS-079-followup-d (DATABASE_URL), DIS-079-followup-wire-siblings, DIS-058z + DIS-059/060/061/059o (ADR-008 deferred to Wave 3b).
