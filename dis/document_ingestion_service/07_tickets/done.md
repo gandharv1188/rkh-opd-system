@@ -1082,3 +1082,74 @@ All 5 teammates were squad members of `dis-squad` (per CLAUDE.md §Agentic Team 
   - **DIS-060-followup** — integration test with a real `.docx` fixture (current test uses mocked mammoth; acceptable per brief's option-c fallback).
   - **adapters.md + tdd.md §7 text amendments** — per ADR-008 §Follow-up tickets; small edits adding the `DocumentTextExtractorPort` row to the port inventory and one sentence about router-then-extractor dispatch.
 - **Wave 5 (HTTP endpoints, Epic D) is now ready to dispatch when user gives go-ahead.** Priority 2 per SESSION_HANDOVER_2026-04-22 §6.
+
+---
+
+## Session 2026-04-22 — Wave 5 (Epic D HTTP endpoints, 21 tickets)
+
+Dispatched as three sub-waves with orchestrator-led wiring between each.
+
+### Sub-wave 5a — middleware foundation (3 parallel teammates)
+
+| Ticket | Purpose | Forward commit | Merge commit |
+|--------|---------|----------------|--------------|
+| DIS-100 | Kill-switch middleware (CS-9 batched sign-off) | d70b222 | — |
+| DIS-101 | Global error-handler middleware (maps VersionConflictError/ExtractionNotFoundError/OrchestratorError to envelope) | fe7065b | — |
+| DIS-102 | Per-operator token-bucket rate limiter (injectable clock) | 886575e | — |
+
+Orchestrator commit `dbbaa40` wired all three into `createServer()` with opt-in via CreateServerOptions. Middleware order: correlation-id → kill-switch → rate-limit → routes → onError(error-handler).
+
+### Sub-wave 5b — route endpoints (10 tickets, 2 batches of 5 parallel)
+
+**Batch 1:** DIS-090/091/092/093/094 — core CRUD.
+**Batch 2:** DIS-095/096/097/098/099 — list, signed-url, internal worker, realtime, admin-metrics-v5.
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-090 | POST /ingest — thin wrapper over orchestrator.ingest() | 9554e33 |
+| DIS-091 | GET /extractions/:id | 6668af9 |
+| DIS-092 | POST /extractions/:id/approve (CS-1, CS-10 batched sign-off) | ffc8833 |
+| DIS-093 | POST /extractions/:id/reject | 9ef179b |
+| DIS-094 | POST /extractions/:id/retry (201 + parent_extraction_id) | a5dc1f8 |
+| DIS-095 | GET /extractions (cursor-paginated queue listing) | 4e2f610 |
+| DIS-096 | POST /uploads/signed-url (junction-fix required) | 2f56a3e |
+| DIS-097 | POST /internal/process-job (constant-time worker token) | 79168e9 |
+| DIS-098 | StatusChannel publisher (in-process; Supabase Realtime adapter = follow-up) | 9fdf1dd |
+| DIS-099 | Wave-5-convention admin-metrics test | edc495d |
+
+Orchestrator commits `bfe1d4e` + `011372e` wired all 10 routes into `createServer()` via the new `CreateServerOptions.routes` opt-in map.
+
+### Sub-wave 5c — E2E integration tests (8 parallel teammates)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-103 | E2E happy path (ingest→process→verify→approve→promoted) | d1540c8 |
+| DIS-104 | E2E retry recovery (original preserved) | e803872 |
+| DIS-105 | E2E reject path (no promotion side-effect) | 14c2cc0 |
+| DIS-106 | E2E idempotency replay (5× same key → 1 row) | 34b7d21 |
+| DIS-107 | E2E version conflict (concurrent approve → 409) | 091f8cc |
+| DIS-108 | E2E kill-switch flip (CS-9 batched sign-off) | 499be79 |
+| DIS-109 | E2E realtime channel roundtrip (in-process) | af538fe |
+| DIS-110 | E2E rate-limit + Retry-After (clock-injected) | 1ec9f0c |
+
+### Wave-5 closeout summary
+
+- **Invariants on `feat/dis-plan` at close (commit 4d956fa):**
+  - fitness: 0 violations, **93 files**
+  - tsc --noEmit: exit 0
+  - vitest: **78 test files passing** (+21 from Wave 3b's 57: 10 routes + 3 middleware + 8 E2E)
+- **Epic D HTTP surface is complete.** 10 routes registered via opt-in deps; all 3 middlewares wired. End-to-end flows exercised through fake adapters.
+- **CS-tagged additions awaiting batched Gate 6a:** **CS-9 (DIS-100, DIS-108)** join the previously-pending CS-1 (DIS-034), CS-7 (DIS-036), CS-10+11 (DIS-037), CS-3 (DIS-038), CS-1+10 (DIS-092). One consolidated CLINICAL APPROVED before Epic G covers all of them (per user directive 2026-04-22).
+- **Observed gotchas / playbook updates (new):**
+  1. **`dis/node_modules` breakage recurs after teammate cleanup.** `npm ci` (full reinstall) proved more reliable than `npm install`. Every sub-wave post-merge repair used this sequence.
+  2. **node_modules junction in each worktree** lets parallel teammates run `npx` without needing their own install. Documented in Wave 5c briefs as a mandatory first action; worked reliably.
+  3. **`task-list` auto-dispatch poking released teammates with unrelated tickets** happened repeatedly. Mitigation: immediately `SendMessage` shutdown_request to every merged-ticket teammate before dispatching the next sub-wave. Without this, auto-dispatch sprays released teammates with freshly-queued wave tickets.
+  4. **Route-signature inconsistency across parallel teammates** — some chose typed `Hono<{Variables: AppVariables}>`, others plain `Hono`. Server.ts wiring uses per-route casts; follow-up DIS-090-followup to normalize.
+  5. **StoragePort API mismatch in brief** — `getSignedUploadUrl` (not `createSignedUploadUrl`); `expiresSec` (not `expiresInSeconds`); result is `{kind, url, fields?}` (no key/expiresAt). Teammate correctly adjusted; documented as brief staleness.
+- **New follow-ups registered:**
+  - **DIS-090-followup** — normalize all route signatures to typed `Hono<{Variables: AppVariables}>`.
+  - **DIS-091-followup** — extend DatabasePort to expose raw_ocr_markdown/raw_ocr_blocks/structured/verified_structured/confidence_summary for the Extended ExtractionRow used by GET.
+  - **DIS-092-followup** — orchestrator.approve() returns a promotion summary (inserted/skipped counts); current route emits placeholder zeros.
+  - **DIS-096a/b/c** — wire signed-url into composition root; filename sanitisation + content-type allowlist; cap ttl_seconds server-side.
+  - **DIS-098-followup** — Supabase Realtime adapter at `src/adapters/realtime/` implementing the StatusChannel port.
+- **Epic D is fully unblocked.** Next: Wave 6 (Epic E verification UI) or Wave 7 (Epic F observability + staging migrations) or Wave 8 stop (orientation refresh + Gate 6a batch sign-off authoring). Per user directive 2026-04-22: "Gate 6a for all these will be implemented before wave 8" — the CS-tagged merges in this wave carry in-line notes pending that batched approval.
