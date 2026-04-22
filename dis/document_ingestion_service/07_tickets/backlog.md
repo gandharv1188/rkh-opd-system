@@ -4673,6 +4673,132 @@ VERIFY-6: Fitness + tsc + vitest invariants still green (doc-only must not
 
 ---
 
+### DOC-PLAYBOOK — Agentic AI development playbook (backfilled retroactive ticket)
+
+- **Tags:** `doc-only`, `process`, `playbook`
+- **Epic:** (meta — cross-cutting process artifact)
+- **Depends on:** orientation package (merged 2026-04-22)
+- **Blocks:** none
+- **TDD ref:** none (process doc)
+- **Clinical-safety ref:** none
+- **User-story ref:** none
+- **Estimated effort:** M (realized)
+
+**Description:**
+
+Retroactive VDT registration for the agentic-dev playbook that was
+dispatched by direct teammate brief on 2026-04-22 before a backlog
+entry existed — this ticket backfills the record per task-list
+item #28 so the work is auditable in the same format as every other
+merged ticket.
+
+The playbook captures every optimization, protocol, and convention
+exercised during the DIS build (`.claude/skills/windows-parallel-agents`
+v3 protocol, Verify-Driven Ticketing, 7 review gates, Conventional
+Commits with ticket scope, session handoff template, SendMessage
+mid-flight correction, drift prevention, orientation package refresh
+protocol, cron health checks, task-list conventions, anti-patterns,
+delegate-vs-do-it-yourself heuristic, adapt-to-new-project guide)
+and additionally describes 10 unexercised practices worth adopting
+(mutation testing, property-based testing, prompt eval harness,
+golden-file fixtures, CI gate enforcement, migration round-trip CI,
+MCP servers, Agent SDK direct API, Claude Code hooks, Worktree
+hooks). PART A and PART B are clearly demarcated.
+
+Audience: future orchestrator (another Claude Opus session) + human
+tech lead. Descriptive voice, not prescriptive. Every PART A claim
+cites a source file path or session handover.
+
+**Files allowed (exhaustive):**
+
+```yaml
+files_allowed:
+  - agentic-dev-playbook/README.md
+  - agentic-dev-playbook/templates/.gitkeep
+```
+
+**VERIFY (numbered, machine-checkable):**
+
+```
+VERIFY-1: Playbook file exists at top-level path
+  Command:  test -f agentic-dev-playbook/README.md && echo EXISTS
+  Expect:   EXISTS
+  Pass if:  exit 0
+
+VERIFY-2: PART A / PART B demarcation present
+  Command:  grep -cE "^# PART [AB] —" agentic-dev-playbook/README.md
+  Expect:   2
+  Pass if:  exactly 2 H1 PART headers present
+
+VERIFY-3: PART A exercised-section count
+  Command:  grep -cE "^## §A1[0-4]|^## §A[1-9]\." agentic-dev-playbook/README.md
+  Expect:   integer ≥ 14
+  Pass if:  all 14 PART A sections present
+
+VERIFY-4: PART B unexercised-section count
+  Command:  grep -cE "^## §B[0-9]+\." agentic-dev-playbook/README.md
+  Expect:   integer ≥ 10
+  Pass if:  all 10 PART B sections present
+
+VERIFY-5: Source citations present in PART A (grep for a representative set)
+  Command:  grep -cE "SESSION_HANDOVER_2026|windows-parallel-agents|drift_prevention|session_handoff|agentic_dev_protocol" agentic-dev-playbook/README.md
+  Expect:   integer ≥ 20
+  Pass if:  PART A is source-anchored, not speculative
+
+VERIFY-6: PART B includes "Not exercised" warning header
+  Command:  grep -c "Not exercised in this project" agentic-dev-playbook/README.md
+  Expect:   integer ≥ 1
+  Pass if:  demarcation note present per spec
+
+VERIFY-7: Length is substantive
+  Command:  wc -l < agentic-dev-playbook/README.md
+  Expect:   integer 1200..3500
+  Pass if:  within descriptive target band
+
+VERIFY-8: templates/ scaffold directory exists (reserved for future extraction)
+  Command:  test -d agentic-dev-playbook/templates && echo EXISTS
+  Expect:   EXISTS
+  Pass if:  exit 0
+```
+
+**Out of scope:**
+
+- Prescriptive implementation guides for PART B items (PART B is
+  descriptive-only; we have not battle-tested those patterns here).
+- Extraction of per-teammate prompt templates into
+  `agentic-dev-playbook/templates/*.md` — the scaffold dir is
+  reserved for a follow-up ticket.
+
+**Test plan:**
+
+- Unit: n/a (doc-only)
+- Integration: n/a
+- Gate invariants: unaffected (fitness 0 / tsc 0 / vitest pass
+  unchanged from wave merges around commit 2d17bc9)
+
+**Notes / gotchas:**
+
+- Dispatched via direct brief, not a pre-registered ticket
+  (recorded in task #28 as a backfill). This ticket is retroactive
+  auditability — same shape as every other ticket so the backlog
+  stays scannable.
+- Gate 2 test-first SKIPPED per _ticket_template.md §doc-only
+  exception.
+- Orchestrator Gate 5 review caught 2 wrong orientation filenames
+  in §A9 and committed a correction (commit f7a609d) before merge.
+
+**Review gates applicable:**
+
+- [x] Gate 1 Pre-start (dispatch brief served as brief-equivalent)
+- [ ] Gate 2 Test-first — **SKIPPED** (doc-only)
+- [x] Gate 4 Automated checks (VERIFY-1..8 pass on `feat/dis-plan` HEAD)
+- [x] Gate 5 Orchestrator review (scribe commit + correction commit)
+- [x] Gate 7 DoD (merge commit 2d17bc9; done.md entry will land with Wave-2a closeout)
+
+**Status:** Done (merged 2026-04-22, branch feat/playbook-scribe deleted, commits 662cc13 scribe + f7a609d orchestrator-review + 2d17bc9 merge)
+
+---
+
 ## Ticket template
 
 Every new ticket follows this structure. See `_ticket_template.md`.
