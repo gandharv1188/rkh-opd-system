@@ -7,7 +7,9 @@ test.describe('Accessibility baseline', () => {
     await expect(page.getByTestId('sidebar')).toBeVisible();
     await expect(page.getByTestId('main-content')).toBeVisible();
 
-    const snapshot = await page.accessibility.snapshot();
+    // Accessibility tree snapshot via CDP (page.accessibility was removed in newer Playwright).
+    const client = await page.context().newCDPSession(page);
+    const snapshot = await client.send('Accessibility.getFullAXTree');
     expect(snapshot).toBeTruthy();
   });
 
