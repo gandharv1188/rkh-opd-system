@@ -11,3 +11,14 @@ export class VersionConflictError extends Error {
     );
   }
 }
+
+export class NativePdfUnavailableError extends Error {
+  public override readonly name = 'NativePdfUnavailableError';
+  constructor(
+    message: string,
+    public readonly pageCount: number,
+    public readonly totalChars: number,
+  ) {
+    super(message);
+  }
+}
