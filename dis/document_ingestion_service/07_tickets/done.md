@@ -485,3 +485,69 @@ reconstructed from `dis/handoffs/*.md`, `SESSION_HANDOVER_2026-04-20.md
   ("hold off before Wave C"). Next dispatch awaits explicit
   user go-ahead.
 - Verdict: WORKTREE RESPECTED; 5/5 VERIFY PASS.
+
+---
+
+## Session 2026-04-22 — Orientation + Wave 0 housekeeping
+
+### Orientation package (6 reports + README + refresh protocol)
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branches: feat/review-overview, feat/review-architecture,
+  feat/review-data-api-test, feat/review-ops,
+  feat/review-tickets-handoffs, feat/review-code-audit (all deleted
+  post-merge)
+- Commits: f883def (overview), 243c7d9 (architecture), 8a16e22
+  (data-api-testing), ebfa6fb (rollout-team-runbooks), d8f68ba
+  (tickets-handoffs), 4c81a44 (code-audit), c693765 (README +
+  _meta). Merge commits: 4614f59, d9fef77, a1e77cc, 3b8bf8b,
+  8e13a63, e923d98.
+- Handoff: not per-ticket — the 6 reports themselves + README are
+  the durable artifact under `dis/handoffs/orientation/`.
+- CS coverage: none (doc-only)
+- Follow-up tickets opened: DIS-002k (stale 10_handoff/ refs —
+  this wave's F2 finding), plus future DIS-002l and DIS-002m
+  registered by dev-002k-stale-paths handoff §5.
+- Verdict: 6-for-6 WORKTREE RESPECTED verdicts on parallel
+  teammate dispatch. All 6 reports cross-spot-checked against
+  source. 4,474 lines of durable orientation material across
+  01-overview, 02-architecture, 03-data-api-testing,
+  04-rollout-team-runbooks, 05-tickets-handoffs,
+  06-code-reality-audit + README + _meta. Next session reads
+  these 7 files and is oriented; refresh protocol keeps them
+  current via git-log on source_paths rather than teammate
+  re-dispatch.
+
+### DIS-002k — Rewrite 119 stale `10_handoff/` refs to `handoffs/sessions/`
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dis-002k (deleted post-merge)
+- Commits: e8b066f (ticket registration) + 6320179 (mid-flight
+  amendment for shorthand rule + scope exclusion note) + 8e264d9
+  (teammate impl); merge commit: dde68e4
+- Handoff: dis/handoffs/DIS-002k.md
+- CS coverage: none (`doc-only`, `housekeeping`)
+- Follow-up tickets opened:
+  - **DIS-002l** — rewrite `10_handoff/` refs in 8 out-of-scope
+    meta/orientation/session files with historical-vs-live
+    judgment per reference (urgency S, doc-only). Teammate
+    discovered 2 additional files during the rewrite
+    (`orientation/02-architecture.md`,
+    `sessions/SESSION_HANDOVER_2026-04-21.md`) on top of the 6
+    originally enumerated.
+  - **DIS-002m** — fix VERIFY-3 expected string in the DIS-002k
+    ticket (it currently expects a `dis/...10_handoff/` pattern
+    but the JSONL transcript preserves the pre-`dis/` path
+    form `radhakishan_system/docs/feature_plans/document_ingestion_service/10_handoff/`;
+    JSONL itself is untouched and correct) (urgency S,
+    doc-only).
+- Verdict: Complete, ready for review. 6/6 VERIFY PASS on
+  teammate side; Gate 5 re-verification by orchestrator PASS
+  (fitness 0, tsc 0, vitest 12/12 files & 124/124 tests
+  unchanged). 15 files rewritten + handoff; 113 insertions /
+  113 deletions on the rewrite portion — pure literal
+  substitution. Teammate `dev-002k-stale-paths` demonstrated the
+  DIS-021c scope-discipline pattern twice: once at initial
+  discovery (6 out-of-scope files flagged for DIS-002l) and once
+  when a task-list auto-assignment pulled it toward Epic B
+  (declined, stayed on DIS-002k). Closes orientation finding F2.
