@@ -97,8 +97,7 @@ describe('DIS-035 — orchestrator retry after OCR failure', () => {
     // Retry creates a NEW row, fresh at version 1, with parent pointer.
     expect(retried.id).not.toBe(parent.id);
     expect(retried.status).toBe('uploaded');
-    // TODO(DIS-035): tighten once retry/version semantics are wired.
-    expect(retried.version).toBe(99);
+    expect(retried.version).toBe(1);
     expect(retried.parentExtractionId).toBe(parent.id);
 
     // Both rows exist; the original failed row is preserved exactly as it
