@@ -52,8 +52,12 @@ function defaultRetryable(status: number): boolean {
 
 /**
  * Hono `onError` handler that converts thrown errors into the canonical
- * JSON envelope. Binds `error.correlation_id` from the request context so
- * clients can cross-reference logs.
+ * JSON envelope.
+ *
+ * Envelope shape (see 04_api/error_model.md):
+ *   - `error.code` — stable UPPER_SNAKE identifier.
+ *   - `error.correlation_id` — bound from the request context so clients
+ *     can cross-reference logs and traces.
  */
 export function errorEnvelope(): ErrorHandler<{ Variables: AppVariables }> {
   return (err, c) => {
