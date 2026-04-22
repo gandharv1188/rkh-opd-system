@@ -4673,6 +4673,145 @@ VERIFY-6: Fitness + tsc + vitest invariants still green (doc-only must not
 
 ---
 
+### DIS-025a — Promote idempotency SQL to named DatabasePort methods
+
+- **Tags:** `core`, `adapter`, `infra` (touches both port + adapter surfaces)
+- **Epic:** B (completing)
+- **Depends on:** DIS-025 (merged 2026-04-22), DIS-054 (SupabasePostgresAdapter)
+- **Blocks:** none immediately; Epic D orchestrator will consume the named methods
+- **TDD ref:** §5 (idempotency), §6 (DatabasePort), ADR-006
+- **Clinical-safety ref:** none directly
+- **User-story ref:** none
+- **Estimated effort:** S
+
+**Description:**
+
+DIS-025 (`dis/src/core/idempotency-store.ts`) assembled SQL from
+concatenated fragments (`SELECT_VERB = 'select'`) to evade the
+`core_no_sql_literals` fitness rule, per its handoff §4 disclosure.
+That is a cosmetic dodge — the correct architectural fix per ADR-006
+and DRIFT-PHASE-1 §5 FOLLOWUP-A is to add two named methods to
+`DatabasePort` (pattern from DIS-021b which did the same for
+extractions):
+
+- `insertIdempotencyKey(key, payloadHash, createdAt): Promise<void>`
+- `findIdempotencyKey(key): Promise<{payloadHash, createdAt} | null>`
+
+The adapter (`SupabasePostgresAdapter`) + fake (`FakeDatabaseAdapter`
+in tests/helpers/) host the SQL. `idempotency-store.ts` then calls
+only named methods, and the fragment-concatenation workaround reverts
+to straightforward implementation-free core.
+
+**Files allowed (exhaustive):**
+
+```yaml
+files_allowed:
+  - dis/src/ports/database.ts
+  - dis/src/core/idempotency-store.ts
+  - dis/src/adapters/database/supabase-postgres.ts
+  - dis/tests/helpers/fake-adapters.ts
+  - dis/tests/unit/idempotency-store.test.ts
+  - dis/tests/unit/adapters/supabase-postgres.test.ts
+  - dis/handoffs/DIS-025a.md
+```
+
+**Files the ticket may READ but not write:**
+
+- `dis/src/core/errors.ts`
+- `dis/handoffs/DIS-025.md` (context from predecessor)
+- `dis/handoffs/DIS-021b.md` (pattern reference)
+- `dis/document_ingestion_service/02_architecture/adrs/ADR-006-postgres-driver-over-pg-or-drizzle.md`
+- `dis/document_ingestion_service/02_architecture/drift_prevention.md`
+
+**VERIFY (numbered, machine-checkable):**
+
+```
+VERIFY-1: Port has two new named methods
+  Command:  grep -cE "insertIdempotencyKey|findIdempotencyKey" dis/src/ports/database.ts
+  Expect:   integer ≥ 2
+  Pass if:  both signatures declared on the port interface
+
+VERIFY-2: Adapter implements both methods (SQL moved here)
+  Command:  grep -cE "insertIdempotencyKey|findIdempotencyKey" dis/src/adapters/database/supabase-postgres.ts
+  Expect:   integer ≥ 2
+  Pass if:  both impls present
+
+VERIFY-3: Fake adapter implements both (tests compose with fakes)
+  Command:  grep -cE "insertIdempotencyKey|findIdempotencyKey" dis/tests/helpers/fake-adapters.ts
+  Expect:   integer ≥ 2
+  Pass if:  both fake impls present
+
+VERIFY-4: Core no longer contains SQL fragments
+  Command:  grep -cE "SELECT_VERB|INSERT_VERB|IDEM_TABLE" dis/src/core/idempotency-store.ts
+  Expect:   0
+  Pass if:  exit 1 / empty — the workaround-fragments are gone
+
+VERIFY-5: Core no longer contains SQL verbs at all
+  Command:  grep -ciE "\\b(select|insert into|update|delete from)\\b" dis/src/core/idempotency-store.ts
+  Expect:   0
+  Pass if:  core is SQL-free after the promotion
+
+VERIFY-6: Fitness rule now naturally satisfied (not evaded)
+  Command:  node dis/scripts/fitness.mjs
+  Expect:   "0 violations"
+  Pass if:  exit 0
+
+VERIFY-7: Unit tests green after refactor
+  Command:  cd dis && npx vitest run tests/unit/idempotency-store.test.ts tests/unit/adapters/supabase-postgres.test.ts
+  Expect:   "Tests  passed" with both files green
+  Pass if:  vitest exits 0
+
+VERIFY-8: Full tsc clean (no regressions on any caller)
+  Command:  cd dis && npx tsc --noEmit
+  Expect:   exit 0
+  Pass if:  no type errors
+
+VERIFY-9: Handoff present per Gate 7
+  Command:  test -f dis/handoffs/DIS-025a.md && echo EXISTS
+  Expect:   EXISTS
+  Pass if:  exit 0
+```
+
+**Out of scope:**
+
+- The `idempotency_keys` migration itself — lands in Wave 4 (M-001..M-008).
+- Changing the store's public API or return shape.
+- Re-authoring the Supabase Postgres adapter beyond adding the two
+  methods and their tests.
+
+**Test plan:**
+
+- Unit: two new adapter tests using an injected fake SqlClient;
+  idempotency-store tests unchanged (still compose with
+  FakeDatabaseAdapter).
+- Integration: covered when DIS-074 shared DatabasePort contract
+  suite runs across the real adapter + fake.
+
+**Notes / gotchas:**
+
+- DIS-021b is the exact template. Follow its approach: declare on
+  port, implement on adapter using `sql.unsafe(text, params)`, mirror
+  on fake.
+- The fake's `insertIdempotencyKey` must maintain in-memory state so
+  the replay/collision tests that live in idempotency-store.test.ts
+  still pass.
+- Fitness rule `core_no_sql_literals` is defined in
+  `dis/scripts/fitness-rules.json` — do not touch that file.
+
+**Review gates applicable:**
+
+- [ ] Gate 1 Pre-start
+- [ ] Gate 2 Test-first (failing adapter test before impl)
+- [ ] Gate 4 Automated checks (VERIFY-1..9)
+- [ ] Gate 5 Code review
+- [ ] Gate 7 DoD (handoff + done.md)
+- [ ] VERIFY block present with ≥3 steps (9 present)
+- [ ] Every VERIFY step is a shell command
+
+**Status:** Ready
+
+---
+
 ### DOC-PLAYBOOK — Agentic AI development playbook (backfilled retroactive ticket)
 
 - **Tags:** `doc-only`, `process`, `playbook`
