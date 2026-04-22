@@ -173,8 +173,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
-  openapi-lint:
-    name: OpenAPI Lint
+  openapi-validate:
+    name: OpenAPI Validate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -188,7 +188,7 @@ jobs:
 
       - name: Lint OpenAPI spec
         if: hashFiles('dis/openapi.yaml') != ''
-        run: npx --yes @redocly/cli@latest lint dis/openapi.yaml
+        run: bash dis/scripts/validate-openapi.sh
 
   migration-roundtrip:
     name: Migration Round-trip (placeholder)
