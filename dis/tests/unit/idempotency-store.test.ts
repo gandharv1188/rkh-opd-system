@@ -36,7 +36,7 @@ class IdempotencyFakeDb extends FakeDatabaseAdapter {
     if (/from\s+idempotency_keys/i.test(sql)) {
       const [key] = params as [string];
       const row = this.table.get(key);
-      return (row ? [row] : []) as readonly T[];
+      return (row ? [row] : []) as unknown as readonly T[];
     }
     if (/insert\s+into\s+idempotency_keys/i.test(sql)) {
       const [key, payloadHash, createdAt] = params as [string, string, string];
@@ -58,7 +58,9 @@ describe('idempotency store (DIS-025)', () => {
     const { store } = makeStore();
     const result = await store.recordAndResolve('key-1', 'hash-a');
     expect(result.action).toBe('new');
-    expect(result.existing).toBeUndefined();
+    if (result.action !== 'new') {
+      throw new Error('expected new');
+    }
   });
 
   it('returns replay when the same key + same payload hash is seen again', async () => {
@@ -68,9 +70,9 @@ describe('idempotency store (DIS-025)', () => {
 
     const replay = await store.recordAndResolve('key-2', 'hash-a');
     expect(replay.action).toBe('replay');
-    expect(replay.existing).toBeDefined();
-    expect(replay.existing?.payloadHash).toBe('hash-a');
-    expect(typeof replay.existing?.createdAt).toBe('string');
+    if (replay.action !== 'replay') throw new Error('expected replay');
+    expect(replay.existing.payloadHash).toBe('hash-a');
+    expect(typeof replay.existing.createdAt).toBe('string');
   });
 
   it('returns collision when the same key has a different payload hash', async () => {
@@ -79,7 +81,8 @@ describe('idempotency store (DIS-025)', () => {
 
     const collision = await store.recordAndResolve('key-3', 'hash-b');
     expect(collision.action).toBe('collision');
-    expect(collision.existing?.payloadHash).toBe('hash-a');
+    if (collision.action !== 'collision') throw new Error('expected collision');
+    expect(collision.existing.payloadHash).toBe('hash-a');
   });
 
   it('different keys are isolated from each other', async () => {
