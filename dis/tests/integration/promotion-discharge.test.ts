@@ -132,4 +132,24 @@ describe('DIS-037 — promotion ↔ discharge summary (CS-10, CS-11)', () => {
     // DB adapter (DIS-054) will execute the plan in a transaction.
     expect(db.calls).toHaveLength(0);
   });
+
+  it('CS-10 scoping: same 7 readings on a lab_report (non-discharge) are NOT collapsed', () => {
+    // Negative control — guards against the CS-10 rule accidentally
+    // firing on non-discharge document types. A lab_report carrying 7
+    // distinct (date, value) tuples should emit 7 inserts on a fresh DB.
+    const labs = sevenTsbReadings();
+    const extraction: VerifiedExtraction = {
+      ...dischargeExtraction(labs),
+      documentType: 'lab_report',
+    };
+    const plan = buildPromotionPlan(extraction, {
+      labKeys: new Set<string>(),
+      vaxKeys: new Set<string>(),
+    });
+    expect(plan.labInserts).toHaveLength(7);
+    const supersededOnLabReport = plan.skipped.filter(
+      (s) => s.reason === 'discharge_summary_superseded',
+    );
+    expect(supersededOnLabReport).toHaveLength(0);
+  });
 });
