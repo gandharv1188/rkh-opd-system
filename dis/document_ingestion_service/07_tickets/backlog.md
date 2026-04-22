@@ -1399,68 +1399,180 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 
 **Status:** Ready
 
-### DIS-059 — Native-PDF text path adapter
+### DIS-058z — Author `DocumentTextExtractorPort` (unblocks DIS-059/060/061)
 
-- **Tags:** `adapter`
+- **Tags:** `core`, `port`, `infra`
 - **Epic:** C
-- **Depends on:** DIS-033 (pdfjs utility), DIS-057
-- **TDD ref:** §9.2
+- **Depends on:** ADR-008 (2026-04-22)
+- **Blocks:** DIS-059, DIS-060, DIS-061, DIS-059o
+- **TDD ref:** §7
 - **Files allowed:**
-  - dis/src/adapters/ocr/native-pdf-text.ts
-  - dis/tests/adapters/ocr/native-pdf-text.test.ts
-- **Out of scope:** any OCR; this path bypasses OCR entirely.
+  - dis/src/ports/document-text-extractor.ts
+  - dis/src/ports/index.ts  (re-export the new port)
+  - dis/tests/helpers/fake-adapters.ts  (add FakeDocumentTextExtractorAdapter)
+  - dis/tests/helpers/index.ts
+  - dis/tests/unit/fake-adapters.test.ts  (one test asserts the fake honors the port)
+  - dis/handoffs/DIS-058z.md
 
-**Description:** Implements `OcrPort` for native PDFs with a text layer — extracts text directly via `pdfjs-dist`, skips OCR.
+**Description:**
+Author the new `DocumentTextExtractorPort` declared in ADR-008 — the file-router's dispatch target. Interface shape + `ExtractionResult` type per ADR-008 §Decision rule 4 (verbatim).
+
+Unblocks the rewritten DIS-059 (NativePdfText), DIS-060 (OfficeWord), DIS-061 (OfficeSheet), and the new DIS-059o (OcrBridgeAdapter).
+
+No existing adapter touched. No existing port touched. Purely additive.
 
 **VERIFY:**
 
-- VERIFY-1: `cd dis && npx vitest run tests/adapters/ocr/native-pdf-text.test.ts` — expect PASS.
-- VERIFY-2: `cd dis && npx vitest run -t "returns text without calling OCR"` — expect PASS.
-- VERIFY-3: `cd dis && npx tsc --noEmit` — expect empty output.
+```
+VERIFY-1: test -f dis/src/ports/document-text-extractor.ts && echo EXISTS  # expect EXISTS
+VERIFY-2: grep -c "DocumentTextExtractorPort\|ExtractionResult\|ExtractionRoute" dis/src/ports/document-text-extractor.ts  # expect >= 3
+VERIFY-3: grep -c "FakeDocumentTextExtractorAdapter" dis/tests/helpers/fake-adapters.ts  # expect >= 1
+VERIFY-4: cd dis && npx tsc --noEmit  # expect exit 0
+VERIFY-5: cd dis && npx vitest run tests/unit/fake-adapters.test.ts  # expect pass, covers the new fake
+VERIFY-6: node dis/scripts/fitness.mjs  # expect 0 violations
+VERIFY-7: test -f dis/handoffs/DIS-058z.md && echo EXISTS  # expect EXISTS
+```
+
+**Out of scope:**
+- The 4 adapter implementations — owned by DIS-059/060/061/059o (unblocked by this ticket).
+- `adapters.md` inventory text amendment — Wave 3b follow-up ticket or same PR as DIS-059o.
+- `tdd.md §7` text amendment — same.
 
 **Status:** Ready
 
-### DIS-060 — OfficeWordAdapter (mammoth)
+---
+
+### DIS-059 — NativePdfTextAdapter (implements `DocumentTextExtractorPort`, not `OcrPort`) — rewritten per ADR-008
 
 - **Tags:** `adapter`
 - **Epic:** C
-- **Depends on:** DIS-003
-- **TDD ref:** §9.2
+- **Depends on:** DIS-058z (port author), DIS-033 (pdfjs utility), DIS-057 (file router)
+- **Blocks:** none
+- **TDD ref:** §7 (file router routes NATIVE_TEXT → this), §9.2
 - **Files allowed:**
-  - dis/src/adapters/ocr/office-word.ts
-  - dis/tests/adapters/ocr/office-word.test.ts
-  - dis/tests/fixtures/office/\*.docx
+  - dis/src/adapters/document-text-extractor/native-pdf-text.ts
+  - dis/tests/adapters/document-text-extractor/native-pdf-text.test.ts
+  - dis/handoffs/DIS-059.md
 
-**Description:** Converts .docx/.doc to markdown via `mammoth` and returns as `OcrResult` (OCR bypassed).
+**Description:**
+Implements `DocumentTextExtractorPort` with `route: 'native_text'`. Backed by `core/native-pdf.ts` (DIS-033 `extractNativeText`). `rawResponse` = the extracted pages structure. `providerDetails` is **undefined** (native-PDF has no provider).
+
+**Note:** This is a rewrite of the original DIS-059 ticket. The prior assumption ("implements OcrPort") was identified as a category error by teammate `dev-c-office-parsers` during Wave-3a dispatch 2026-04-22. See ADR-008.
 
 **VERIFY:**
 
-- VERIFY-1: `cd dis && npx vitest run tests/adapters/ocr/office-word.test.ts` — expect PASS.
-- VERIFY-2: `cd dis && npx vitest run -t "extracts docx to markdown"` — expect PASS.
-- VERIFY-3: `cd dis && npx tsc --noEmit` — expect empty output.
+```
+VERIFY-1: test -f dis/src/adapters/document-text-extractor/native-pdf-text.ts && echo EXISTS
+VERIFY-2: grep -c "DocumentTextExtractorPort\|route.*native_text" dis/src/adapters/document-text-extractor/native-pdf-text.ts  # expect >= 2
+VERIFY-3: grep -c "OcrPort" dis/src/adapters/document-text-extractor/native-pdf-text.ts  # expect 0 (no OcrPort import)
+VERIFY-4: cd dis && npx vitest run tests/adapters/document-text-extractor/native-pdf-text.test.ts  # expect pass
+VERIFY-5: cd dis && npx tsc --noEmit  # expect exit 0
+VERIFY-6: node dis/scripts/fitness.mjs  # expect 0 violations
+VERIFY-7: test -f dis/handoffs/DIS-059.md && echo EXISTS
+```
 
-**Status:** Ready
+**Out of scope:**
+- Scanned PDFs (route via OcrBridgeAdapter — DIS-059o).
+- Performance tuning for very large PDFs — follow-up ticket.
 
-### DIS-061 — OfficeSheetAdapter (xlsx)
+**Status:** Ready (after DIS-058z lands)
+
+---
+
+### DIS-060 — OfficeWordAdapter (implements `DocumentTextExtractorPort`) — rewritten per ADR-008
 
 - **Tags:** `adapter`
 - **Epic:** C
-- **Depends on:** DIS-003
-- **TDD ref:** §9.2
+- **Depends on:** DIS-058z (port author), DIS-057 (file router)
+- **TDD ref:** §7 (OFFICE_WORD route), §9.2
 - **Files allowed:**
-  - dis/src/adapters/ocr/office-sheet.ts
-  - dis/tests/adapters/ocr/office-sheet.test.ts
-  - dis/tests/fixtures/office/\*.xlsx
+  - dis/src/adapters/document-text-extractor/office-word.ts
+  - dis/tests/adapters/document-text-extractor/office-word.test.ts
+  - dis/tests/fixtures/office/*.docx
+  - dis/handoffs/DIS-060.md
 
-**Description:** Converts .xlsx to markdown tables via `xlsx` and returns as `OcrResult`.
+**Description:**
+Implements `DocumentTextExtractorPort` with `route: 'office_word'`. Uses `mammoth` (installed via Wave-3a chore commit 86714b4). `rawResponse` = full mammoth response.
+
+**Note:** Rewrite per ADR-008.
 
 **VERIFY:**
 
-- VERIFY-1: `cd dis && npx vitest run tests/adapters/ocr/office-sheet.test.ts` — expect PASS.
-- VERIFY-2: `cd dis && npx vitest run -t "renders worksheet as markdown table"` — expect PASS.
-- VERIFY-3: `cd dis && npx tsc --noEmit` — expect empty output.
+```
+VERIFY-1: test -f dis/src/adapters/document-text-extractor/office-word.ts && echo EXISTS
+VERIFY-2: grep -c "route.*office_word\|mammoth" dis/src/adapters/document-text-extractor/office-word.ts  # expect >= 2
+VERIFY-3: grep -c "OcrPort" dis/src/adapters/document-text-extractor/office-word.ts  # expect 0
+VERIFY-4: cd dis && npx vitest run tests/adapters/document-text-extractor/office-word.test.ts  # expect pass
+VERIFY-5: cd dis && npx tsc --noEmit  # expect exit 0
+VERIFY-6: node dis/scripts/fitness.mjs  # expect 0 violations
+VERIFY-7: test -f dis/handoffs/DIS-060.md && echo EXISTS
+```
 
-**Status:** Ready
+**Status:** Ready (after DIS-058z lands)
+
+---
+
+### DIS-061 — OfficeSheetAdapter (implements `DocumentTextExtractorPort`) — rewritten per ADR-008
+
+- **Tags:** `adapter`
+- **Epic:** C
+- **Depends on:** DIS-058z (port author), DIS-057 (file router)
+- **TDD ref:** §7 (OFFICE_SHEET route), §9.2
+- **Files allowed:**
+  - dis/src/adapters/document-text-extractor/office-sheet.ts
+  - dis/tests/adapters/document-text-extractor/office-sheet.test.ts
+  - dis/tests/fixtures/office/*.xlsx
+  - dis/tests/fixtures/office/*.csv
+  - dis/handoffs/DIS-061.md
+
+**Description:**
+Implements `DocumentTextExtractorPort` with `route: 'office_sheet'`. Uses `xlsx` (installed via Wave-3a chore commit 86714b4). One markdown table per worksheet. `rawResponse` = workbook JSON. CSV handled as a single-sheet workbook.
+
+**Note:** Rewrite per ADR-008.
+
+**VERIFY:**
+
+```
+VERIFY-1: test -f dis/src/adapters/document-text-extractor/office-sheet.ts && echo EXISTS
+VERIFY-2: grep -c "route.*office_sheet\|xlsx" dis/src/adapters/document-text-extractor/office-sheet.ts  # expect >= 2
+VERIFY-3: grep -c "OcrPort" dis/src/adapters/document-text-extractor/office-sheet.ts  # expect 0
+VERIFY-4: cd dis && npx vitest run tests/adapters/document-text-extractor/office-sheet.test.ts  # expect pass
+VERIFY-5: cd dis && npx tsc --noEmit  # expect exit 0
+VERIFY-6: node dis/scripts/fitness.mjs  # expect 0 violations
+VERIFY-7: test -f dis/handoffs/DIS-061.md && echo EXISTS
+```
+
+**Status:** Ready (after DIS-058z lands)
+
+---
+
+### DIS-059o — OcrBridgeAdapter (delegates DocumentTextExtractorPort → OcrPort)
+
+- **Tags:** `adapter`, `bridge`
+- **Epic:** C
+- **Depends on:** DIS-058z (port author), existing `OcrPort` and any OCR adapter
+- **TDD ref:** §7 (OCR_IMAGE route), §9.2
+- **Files allowed:**
+  - dis/src/adapters/document-text-extractor/ocr-bridge.ts
+  - dis/tests/adapters/document-text-extractor/ocr-bridge.test.ts
+  - dis/handoffs/DIS-059o.md
+
+**Description:**
+The sole adapter that bridges the new port to the legacy `OcrPort`. Constructor takes an `OcrPort` instance; its `routeAndExtract` delegates to `ocr.extract(...)` and maps `OcrResult → ExtractionResult` with `route: 'ocr_image'` and `providerDetails` populated from `OcrResult.provider`, `.providerVersion`, `.tokensUsed`. Preserves `rawResponse` byte-identically (CS-2).
+
+**VERIFY:**
+
+```
+VERIFY-1: test -f dis/src/adapters/document-text-extractor/ocr-bridge.ts && echo EXISTS
+VERIFY-2: grep -c "OcrPort\|route.*ocr_image" dis/src/adapters/document-text-extractor/ocr-bridge.ts  # expect >= 2
+VERIFY-3: grep -c "providerDetails" dis/src/adapters/document-text-extractor/ocr-bridge.ts  # expect >= 1
+VERIFY-4: cd dis && npx vitest run tests/adapters/document-text-extractor/ocr-bridge.test.ts  # expect pass (fake OcrPort injected)
+VERIFY-5: cd dis && npx tsc --noEmit  # expect exit 0
+VERIFY-6: node dis/scripts/fitness.mjs  # expect 0 violations
+VERIFY-7: test -f dis/handoffs/DIS-059o.md && echo EXISTS
+```
+
+**Status:** Ready (after DIS-058z lands)
 
 ### DIS-062 — OnpremChandraAdapter.stub
 
