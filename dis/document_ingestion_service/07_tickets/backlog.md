@@ -4478,6 +4478,178 @@ shapes (429 with Retry-After header) are needed.
 - VERIFY-8: `grep -c "RATE_LIMITED" dis/src/adapters/ocr/datalab-chandra.ts` — expect ≥ `1`.
 - VERIFY-9: `test -f dis/handoffs/DIS-050a.md && echo EXISTS` — expect `EXISTS`.
 
+**Status:** Done (merged ba5f944, Wave B)
+
+---
+
+### DIS-002k — Rewrite stale `10_handoff/` path refs to `handoffs/sessions/`
+
+- **Tags:** `docs`, `doc-only`, `housekeeping`
+- **Epic:** (meta / documentation hygiene — parallel to Wave-C prep)
+- **Depends on:** none (the 2026-04-22 move already landed at commit `69ce4bc`)
+- **Blocks:** future agents reading backlog VERIFY gates containing stale paths
+- **TDD ref:** none (doc-only)
+- **Clinical-safety ref:** none
+- **User-story ref:** none
+- **Estimated effort:** S
+
+**Description:**
+On 2026-04-22 the 8 session-level handoff docs were moved from
+`dis/document_ingestion_service/10_handoff/` into `dis/handoffs/sessions/`
+in a single rename commit (`69ce4bc`). The scope of that move was limited by
+user instruction to the rename itself — 119 textual references to the old
+path across 20 other files were intentionally not updated.
+
+This ticket rewrites every such reference to the new path so future agents
+reading VERIFY gates, ADRs, tickets, and team docs don't chase dead paths.
+One JSONL session transcript at
+`dis/document_ingestion_service/11_session_transcripts/2026-04-20_dis-build-session.jsonl`
+legitimately retains the old path (it's a historical record of what was
+written at the time) and MUST NOT be rewritten.
+
+The orientation report `dis/handoffs/orientation/05-tickets-handoffs.md`
+(finding F2) enumerated the 119 occurrences across 20 files; this ticket's
+VERIFY-1 re-counts and VERIFY-2 asserts zero remaining live refs after.
+
+**Files allowed (exhaustive — 20 files + this ticket's handoff):**
+
+```yaml
+files_allowed:
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-002-datalab-hosted-vs-self-host.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-004-datalab-webhooks-over-polling.md
+  - dis/document_ingestion_service/02_architecture/adrs/ADR-007-claude-haiku-default-sonnet-escalation.md
+  - dis/document_ingestion_service/07_tickets/backlog.md
+  - dis/document_ingestion_service/07_tickets/done.md
+  - dis/document_ingestion_service/07_tickets/integration_hold.md
+  - dis/document_ingestion_service/07_tickets/in_progress.md
+  - dis/document_ingestion_service/08_team/session_handoff.md
+  - dis/handoffs/DIS-001b.md
+  - dis/handoffs/DIS-002d.md
+  - dis/handoffs/DIS-002e.md
+  - dis/handoffs/DIS-002f.md
+  - dis/handoffs/DIS-002g.md
+  - dis/handoffs/DIS-002h.md
+  - dis/handoffs/DIS-002j.md
+  - dis/handoffs/DIS-050a.md
+  - dis/handoffs/DIS-021b.md
+  - dis/handoffs/DIS-021c.md
+  - dis/handoffs/DIS-021d.md
+  - dis/handoffs/DOC-AGENTIC-PROTOCOL.md
+  - dis/handoffs/DOC-VERIFY-BACKLOG-A.md
+  - dis/handoffs/DOC-VERIFY-BACKLOG-B.md
+  - dis/handoffs/DOC-VERIFY-TEMPLATE.md
+  - dis/handoffs/DRIFT-DOC-WRITER.md
+  - dis/handoffs/DRIFT-PHASE-1.md
+  - dis/handoffs/DIS-002k.md
+```
+
+(The teammate MUST first run VERIFY-1 to discover the authoritative live
+set; if the grep finds a file not listed above, the teammate must STOP and
+report per `verify_format.md §2`. Do NOT silently widen scope.)
+
+**Files the ticket may READ but not write:**
+
+- `dis/handoffs/orientation/05-tickets-handoffs.md` (for the enumeration)
+- `dis/document_ingestion_service/11_session_transcripts/*.jsonl` (historical — READ-ONLY, preserves old path intentionally)
+
+**Rewrite rule (apply uniformly):**
+
+```
+old:  dis/document_ingestion_service/10_handoff/
+new:  dis/handoffs/sessions/
+```
+
+Rewrite is a literal path substitution. Do not alter surrounding prose,
+formatting, bullets, VERIFY gate expectations, or line structure beyond the
+path fragment itself. If a line contains both the old path and quoted
+historical context that references its prior location, preserve the quoted
+context verbatim and update only the live reference — flag such cases in
+the §3 Decisions section of the handoff.
+
+**VERIFY (numbered, machine-checkable):**
+
+```
+VERIFY-1: Pre-flight — count current stale refs and list files
+  Command:  grep -rln "dis/document_ingestion_service/10_handoff/" dis/ \
+              --include="*.md" 2>/dev/null | sort
+  Expect:   20 files listed (may be fewer if intervening commits touched any).
+            All listed files MUST appear in files_allowed.
+  Pass if:  Output matches files_allowed (minus DIS-002k.md which gets created
+            after the rewrite) AND count is ≥ 15.
+
+VERIFY-2: Post-rewrite — zero live references remain
+  Command:  grep -rln "dis/document_ingestion_service/10_handoff/" dis/ \
+              --include="*.md" 2>/dev/null
+  Expect:   <empty>
+  Pass if:  exit status 1 (grep found nothing) AND stdout is empty.
+
+VERIFY-3: JSONL transcript preserved (historical record untouched)
+  Command:  grep -c "dis/document_ingestion_service/10_handoff/" \
+              dis/document_ingestion_service/11_session_transcripts/2026-04-20_dis-build-session.jsonl
+  Expect:   integer ≥ 1
+  Pass if:  The .jsonl still contains old-path strings (we deliberately did
+            not rewrite historical records).
+
+VERIFY-4: No files outside files_allowed were modified
+  Command:  git diff --name-only feat/dis-plan..HEAD | sort
+  Expect:   Only files enumerated in files_allowed above (26 max, minus any
+            that had zero stale refs and were untouched).
+  Pass if:  Every modified path appears in files_allowed.
+
+VERIFY-5: Handoff file exists per Gate 7
+  Command:  test -f dis/handoffs/DIS-002k.md && echo EXISTS
+  Expect:   EXISTS
+  Pass if:  exit 0.
+
+VERIFY-6: Fitness + tsc + vitest invariants still green (doc-only must not
+  regress other gates)
+  Command:  cd dis && node scripts/fitness.mjs 2>&1 | tail -3 \
+            && npx tsc --noEmit 2>&1 | tail -3 \
+            && npx vitest run 2>&1 | tail -5
+  Expect:   fitness: 0 violations; tsc exit 0; vitest "Tests  124 passed"
+  Pass if:  all three unchanged from Wave-B baseline.
+```
+
+**Out of scope (new tickets, not silent cuts):**
+
+- Changing any content other than the path string. Line re-wraps, table reflow,
+  or Prettier-induced diffs on the target files = OUT OF SCOPE.
+- Rewriting references inside the .jsonl session transcripts.
+- Updating references in any file not listed in files_allowed.
+- Adding new stale references elsewhere (obviously).
+
+**Test plan:**
+
+- Unit: n/a (doc-only)
+- Integration: n/a
+- Gate invariants: fitness.mjs 0; tsc --noEmit 0; vitest 124/124 — all
+  unchanged from Wave-B baseline.
+
+**Notes / gotchas:**
+
+- Some files may have the old path appearing in frontmatter metadata, YAML
+  blocks, inline-code spans, and prose. All five contexts get the same
+  literal substitution.
+- VERIFY blocks inside `backlog.md` that cite old paths: apply the rewrite.
+  The VERIFY commands in those blocks that literally grep or `test -f`
+  against handoff file paths must NOT be rewritten if they already point at
+  `dis/handoffs/DIS-###.md` (they're already correct) — only rewrite strings
+  that explicitly contain `10_handoff/`.
+- Be especially careful in DIS-002f.md (25 occurrences — most concentrated)
+  and backlog.md (43 occurrences).
+
+**Review gates applicable:**
+
+- [ ] Gate 1 Pre-start
+- [ ] Gate 2 Test-first — **SKIPPED** (doc-only; justified per template §2)
+- [ ] Gate 4 Automated checks (VERIFY-6)
+- [ ] Gate 5 Code review (orchestrator re-runs VERIFY 1–6)
+- [ ] Gate 7 DoD (handoff at dis/handoffs/DIS-002k.md)
+- [ ] VERIFY block present with ≥3 steps (6 present)
+- [ ] Every VERIFY step is a shell command
+- [ ] All VERIFY outputs pasted in the handoff
+- [ ] `files_allowed` list matches actual PR diff
+
 **Status:** Ready
 
 ---
