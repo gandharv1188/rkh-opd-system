@@ -9,6 +9,7 @@ export {
   FakeQueueAdapter,
   FakeSecretsAdapter,
   FakeFileRouterAdapter,
+  FakeDocumentTextExtractorAdapter,
   FakePreprocessorAdapter,
 } from './fake-adapters.js';
 
@@ -21,5 +22,6 @@ export type {
   QueueScript,
   SecretsScript,
   FileRouterScript,
+  DocumentTextExtractorScript,
   PreprocessorScript,
 } from './fake-adapters.js';

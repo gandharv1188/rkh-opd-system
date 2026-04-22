@@ -58,6 +58,13 @@ export type { SecretsPort } from './secrets.js';
 export type { FileRouterPort, FileRouterInput, RoutingDecision } from './file-router.js';
 
 export type {
+  DocumentTextExtractorPort,
+  ExtractionInput,
+  ExtractionResult,
+  ExtractionRoute,
+} from './document-text-extractor.js';
+
+export type {
   PreprocessorPort,
   PreprocessorInput,
   PreprocessorMediaType,
