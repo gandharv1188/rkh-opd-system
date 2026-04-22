@@ -34,6 +34,18 @@ import {
   registerExtractionsRetryRoute,
   type ExtractionsRetryRouteDeps,
 } from './routes/extractions-retry.js';
+import {
+  registerExtractionsListRoute,
+  type ExtractionsListRouteDeps,
+} from './routes/extractions-list.js';
+import {
+  registerUploadsSignedUrlRoute,
+  type SignedUrlRouteDeps,
+} from './routes/uploads-signed-url.js';
+import {
+  registerProcessJobRoute,
+  type ProcessJobRouteDeps,
+} from './routes/process-job.js';
 
 /**
  * Hono context variable map.
@@ -59,6 +71,9 @@ export interface CreateServerOptions {
     readonly extractionsApprove?: ExtractionsApproveRouteDeps;
     readonly extractionsReject?: ExtractionsRejectRouteDeps;
     readonly extractionsRetry?: ExtractionsRetryRouteDeps;
+    readonly extractionsList?: ExtractionsListRouteDeps;
+    readonly uploadsSignedUrl?: SignedUrlRouteDeps;
+    readonly processJob?: ProcessJobRouteDeps;
   };
 }
 
@@ -97,6 +112,11 @@ export function createServer(options: CreateServerOptions = {}): App {
     registerExtractionsRejectRoute(app as unknown as Hono, routes.extractionsReject);
   if (routes.extractionsRetry)
     registerExtractionsRetryRoute(app as unknown as Hono, routes.extractionsRetry);
+  if (routes.extractionsList)
+    registerExtractionsListRoute(app, routes.extractionsList);
+  if (routes.uploadsSignedUrl)
+    registerUploadsSignedUrlRoute(app, routes.uploadsSignedUrl);
+  if (routes.processJob) registerProcessJobRoute(app, routes.processJob);
 
   app.onError(errorHandler(options.errorHandler ?? {}));
   return app;
