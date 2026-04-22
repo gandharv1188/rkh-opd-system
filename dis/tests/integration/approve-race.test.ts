@@ -84,8 +84,7 @@ describe('DIS-040 — approve race / optimistic lock', () => {
     const fulfilled = [resA, resB].filter((r) => r.status === 'fulfilled');
     const rejected = [resA, resB].filter((r) => r.status === 'rejected');
 
-    // TODO(DIS-040): tighten assertion once race is wired.
-    expect(fulfilled).toHaveLength(2);
+    expect(fulfilled).toHaveLength(1);
     expect(rejected).toHaveLength(1);
 
     const rej = rejected[0] as PromiseRejectedResult;
