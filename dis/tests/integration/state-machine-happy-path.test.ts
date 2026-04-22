@@ -126,8 +126,7 @@ describe('DIS-034 — state-machine integration (happy path, CS-1)', () => {
     // CS-1 end-to-end — the final state is reachable only from `verified`
     // or `auto_approved`).
     const finalState: State = transition(approved.status, { kind: 'promoted' });
-    // TODO(DIS-034): wire final assertion once state-machine covers it.
-    expect(finalState).toBe('verified');
+    expect(finalState).toBe('promoted');
 
     // Order-of-status invariant across the whole run.
     const updates = db.calls
