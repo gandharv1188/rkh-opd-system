@@ -110,5 +110,16 @@ describe('DIS-036 — confidence-policy ↔ orchestrator (CS-7 fail-closed)', ()
     // Persisted row remains in ready_for_review — never auto_approved.
     const row = await db.findExtractionById(created.id);
     expect(row?.status).toBe('ready_for_review');
+    expect(row?.status).not.toBe('auto_approved');
+  });
+
+  it('CS-7: every rule passes on threshold yet auto_approved=false when enabled=false', () => {
+    // Isolates the gate: the blocker is the `enabled` flag, not any
+    // per-field threshold. Proves fail-closed is not a rule-result accident.
+    const decision = evaluatePolicy(perfectStructured, disabledPolicy, []);
+    expect(decision.auto_approved).toBe(false);
+    expect(decision.rule_results).toHaveLength(3);
+    expect(decision.rule_results.every((r) => r.passed)).toBe(true);
+    expect(decision.policy_version).toBe(1);
   });
 });
