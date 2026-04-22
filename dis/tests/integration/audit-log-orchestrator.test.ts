@@ -33,7 +33,7 @@ import {
   FakeOcrAdapter,
   FakeStructuringAdapter,
 } from '../helpers/fake-adapters.js';
-import type { State } from '../../src/core/state-machine.js';
+import { transition, type State } from '../../src/core/state-machine.js';
 
 const CORRELATION_ID = '33333333-3333-4333-8333-333333333333';
 
@@ -198,5 +198,24 @@ describe('DIS-038 — audit log ↔ orchestrator (CS-3)', () => {
     // Final row landed on `verified`, proving the full walk happened.
     const finalRow = await db.findExtractionById(ingested.id);
     expect(finalRow?.status).toBe('verified');
+
+    // CS-3 state-walk validation: each state_transition event's
+    // (fromState, toState) pair MUST correspond to a legal state-machine
+    // transition. We reconstruct the driving event for each pair and
+    // ask `transition()` to confirm; an illegal pair would throw
+    // InvalidStateTransitionError, failing the test.
+    const stateTransitions = captured.filter(
+      (e) => e.eventType === 'state_transition' && e.fromState && e.toState,
+    );
+    expect(stateTransitions.length).toBeGreaterThanOrEqual(4);
+    const walkEvents = [
+      { from: 'uploaded' as State, to: 'preprocessing', event: { kind: 'routed_scan' as const } },
+      { from: 'preprocessing' as State, to: 'ocr', event: { kind: 'preprocessed' as const } },
+      { from: 'ocr' as State, to: 'structuring', event: { kind: 'ocr_complete' as const } },
+      { from: 'structuring' as State, to: 'ready_for_review', event: { kind: 'structured' as const } },
+    ];
+    for (const w of walkEvents) {
+      expect(transition(w.from, w.event)).toBe(w.to);
+    }
   });
 });
