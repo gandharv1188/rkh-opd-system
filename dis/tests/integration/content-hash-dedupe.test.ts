@@ -164,4 +164,14 @@ describe('content-hash + storage dedupe integration (DIS-041)', () => {
     // No second putObject on the collision path.
     expect(storage.puts.length).toBe(1);
   });
+
+  it('sha256 accepts Buffer and string inputs equivalently (utf8-encoded)', () => {
+    const text = 'pediatric-opd-note';
+    const fromString = sha256(text);
+    const fromBuffer = sha256(Buffer.from(text, 'utf8'));
+    // Equivalence matters because the HTTP layer may stage bytes as
+    // either a streamed Buffer or a decoded string; content_hash MUST
+    // be identical so dedupe works across both code paths.
+    expect(fromString).toBe(fromBuffer);
+  });
 });
