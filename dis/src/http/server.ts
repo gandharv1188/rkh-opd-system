@@ -14,6 +14,26 @@ import {
   type RateLimitConfig,
 } from './middleware/rate-limit.js';
 import { registerHealthRoute } from './routes/health.js';
+import {
+  registerIngestRoute,
+  type IngestRouteDeps,
+} from './routes/ingest.js';
+import {
+  registerExtractionsGetRoute,
+  type ExtractionsGetRouteDeps,
+} from './routes/extractions-get.js';
+import {
+  registerExtractionsApproveRoute,
+  type ExtractionsApproveRouteDeps,
+} from './routes/extractions-approve.js';
+import {
+  registerExtractionsRejectRoute,
+  type ExtractionsRejectRouteDeps,
+} from './routes/extractions-reject.js';
+import {
+  registerExtractionsRetryRoute,
+  type ExtractionsRetryRouteDeps,
+} from './routes/extractions-retry.js';
 
 /**
  * Hono context variable map.
@@ -32,6 +52,14 @@ export interface CreateServerOptions {
   readonly rateLimit?: RateLimitConfig;
   /** Global error-handler deps (DIS-101). Defaults to no logger. */
   readonly errorHandler?: ErrorHandlerDeps;
+  /** Epic-D route deps. Omit any route to skip its registration. */
+  readonly routes?: {
+    readonly ingest?: IngestRouteDeps;
+    readonly extractionsGet?: ExtractionsGetRouteDeps;
+    readonly extractionsApprove?: ExtractionsApproveRouteDeps;
+    readonly extractionsReject?: ExtractionsRejectRouteDeps;
+    readonly extractionsRetry?: ExtractionsRetryRouteDeps;
+  };
 }
 
 /**
@@ -54,6 +82,22 @@ export function createServer(options: CreateServerOptions = {}): App {
   if (options.killSwitch) app.use('*', killSwitch(options.killSwitch));
   if (options.rateLimit) app.use('*', rateLimit(options.rateLimit));
   registerHealthRoute(app as unknown as Hono);
+
+  const routes = options.routes ?? {};
+  // Route signatures are inconsistent across the Wave-5 parallel teammates:
+  //   typed (`Hono<{Variables: AppVariables}>`): extractions-get, extractions-approve
+  //   blank (`Hono`):                             ingest, extractions-reject, extractions-retry, health
+  // Follow-up ticket DIS-090-followup: normalize all routes to the typed form.
+  // Until then, cast per-route to match each signature.
+  if (routes.ingest) registerIngestRoute(app as unknown as Hono, routes.ingest);
+  if (routes.extractionsGet) registerExtractionsGetRoute(app, routes.extractionsGet);
+  if (routes.extractionsApprove)
+    registerExtractionsApproveRoute(app, routes.extractionsApprove);
+  if (routes.extractionsReject)
+    registerExtractionsRejectRoute(app as unknown as Hono, routes.extractionsReject);
+  if (routes.extractionsRetry)
+    registerExtractionsRetryRoute(app as unknown as Hono, routes.extractionsRetry);
+
   app.onError(errorHandler(options.errorHandler ?? {}));
   return app;
 }
