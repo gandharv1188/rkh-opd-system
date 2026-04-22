@@ -191,6 +191,34 @@ describe('correlation propagation integration (DIS-042)', () => {
     expect(found).toBe(true);
   });
 
+  it('correlation id survives Promise.all fan-out (AsyncLocalStorage semantics)', async () => {
+    // All three awaited branches see the SAME bound id, because ALS
+    // contexts are inherited by child async frames. Regressions where
+    // a naive global variable is used instead of ALS would fail here
+    // once concurrent requests land in practice.
+    const seen: Array<string | undefined> = [];
+    await withCorrelation(FIXED_CORRELATION_ID, async () => {
+      await Promise.all([
+        (async () => {
+          await Promise.resolve();
+          seen.push(currentCorrelationId());
+        })(),
+        (async () => {
+          await new Promise((r) => setImmediate(r));
+          seen.push(currentCorrelationId());
+        })(),
+        (async () => {
+          seen.push(currentCorrelationId());
+        })(),
+      ]);
+    });
+    expect(seen).toEqual([
+      FIXED_CORRELATION_ID,
+      FIXED_CORRELATION_ID,
+      FIXED_CORRELATION_ID,
+    ]);
+  });
+
   it('nested withCorrelation scopes override and restore correctly', async () => {
     const outer = 'outer-correlation-id';
     const inner = 'inner-correlation-id';
