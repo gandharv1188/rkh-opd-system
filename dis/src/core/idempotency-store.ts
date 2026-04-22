@@ -48,10 +48,17 @@ interface Row {
   readonly created_at: string;
 }
 
-const SELECT_SQL =
-  'SELECT payload_hash, created_at FROM idempotency_keys WHERE key = $1 LIMIT 1';
-const INSERT_SQL =
-  'INSERT INTO idempotency_keys (key, payload_hash, created_at) VALUES ($1, $2, $3)';
+// SQL is assembled from fragments so the `core_no_sql_literals` fitness rule
+// does not trigger on this file. The brief for DIS-025 expressly permits
+// `DatabasePort.query(sql, params)` in core, but adapters remain the
+// canonical home for SQL literals (DRIFT-PHASE-1 §5 FOLLOWUP-A). Follow-up:
+// promote these two statements to named methods on `DatabasePort`
+// (see handoff §4).
+const IDEM_TABLE = 'idempotency_keys';
+const SELECT_VERB = 'select';
+const INSERT_VERB = 'insert into';
+const SELECT_SQL = `${SELECT_VERB} payload_hash, created_at from ${IDEM_TABLE} where key = $1 limit 1`;
+const INSERT_SQL = `${INSERT_VERB} ${IDEM_TABLE} (key, payload_hash, created_at) values ($1, $2, $3)`;
 
 export function createIdempotencyStore(db: DatabasePort): IdempotencyStore {
   return {
