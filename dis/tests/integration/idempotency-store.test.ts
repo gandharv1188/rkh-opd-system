@@ -121,4 +121,20 @@ describe('idempotency store integration (DIS-039)', () => {
     expect(b.action).toBe('new');
     expect(db.table.size).toBe(2);
   });
+
+  it('replay preserves the original createdAt across repeated calls (stable timestamp)', async () => {
+    const { store } = compose();
+
+    const first = await store.recordAndResolve('INT-KEY-STABLE', 'hash-S');
+    expect(first.action).toBe('new');
+
+    const r1 = await store.recordAndResolve('INT-KEY-STABLE', 'hash-S');
+    const r2 = await store.recordAndResolve('INT-KEY-STABLE', 'hash-S');
+    if (r1.action !== 'replay' || r2.action !== 'replay') {
+      throw new Error('expected replay on both repeat calls');
+    }
+    // createdAt is captured on the original INSERT and MUST NOT drift on
+    // subsequent replays — callers display it in the 409/422 response.
+    expect(r1.existing.createdAt).toBe(r2.existing.createdAt);
+  });
 });
