@@ -793,9 +793,10 @@ The six reports (per `dis/handoffs/orientation/README.md`):
    user stories, clinical safety.
 2. `02-architecture.md` — TDD, ADRs, adapters, portability, coding
    standards.
-3. `03-data-api.md` — data model, migrations, OpenAPI, error model.
-4. `04-rollout-runbooks.md` — feature flags, kill switch, rollout
-   plan, runbooks.
+3. `03-data-api-testing.md` — data model, migrations, OpenAPI, error
+   model, test strategy, clinical acceptance, fixtures.
+4. `04-rollout-team-runbooks.md` — feature flags, kill switch, rollout
+   plan, RACI, review gates, session handoff protocol, runbooks.
 5. `05-tickets-handoffs.md` — ticket board, epics, done list,
    session handovers.
 6. `06-code-reality-audit.md` — what the code actually is vs. what
