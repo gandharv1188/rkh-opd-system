@@ -76,12 +76,13 @@ describe('wiring/supabase', () => {
     expect(() => createSupabasePorts(src)).toThrow(EnvValidationError);
   });
 
-  it('invokes setPostgresDriverLoader exactly once during wiring', () => {
+  it('invokes the registered driver loader exactly once per wiring', () => {
     createSupabasePorts(baseEnv());
-    expect(loaderCalls).toBe(0); // loader registered, not called yet
-    // The loader is invoked lazily — exercising the adapter via a cheap
-    // no-op query proves the registration took effect exactly once per
-    // call (the adapter caches the client internally).
+    // SupabasePostgresAdapter constructs its SqlClient via the registered
+    // loader on instantiation (see adapter §createDefaultSqlClient). One
+    // adapter → one loader call. Guarantees the wiring is not
+    // double-constructing the DB client.
+    expect(loaderCalls).toBe(1);
   });
 
   it('composeForHttp returns a Hono app that responds to /health', async () => {
