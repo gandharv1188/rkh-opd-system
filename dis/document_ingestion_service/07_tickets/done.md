@@ -551,3 +551,139 @@ reconstructed from `dis/handoffs/*.md`, `SESSION_HANDOVER_2026-04-20.md
   discovery (6 out-of-scope files flagged for DIS-002l) and once
   when a task-list auto-assignment pulled it toward Epic B
   (declined, stayed on DIS-002k). Closes orientation finding F2.
+
+---
+
+## Session 2026-04-22 — Wave 1 (Epic A completion, 10 tickets, 4 teammates)
+
+### Wave-1 dispatch shape
+
+Four persistent teammates spawned via `TeamCreate(dis-squad)` +
+`Agent(team_name, name=...)` per 2026-04-22 context-cap operating rule
+(#27): max 3 tickets per teammate, fresh teammates per wave, no
+cross-wave reuse (Claude Code docs confirm each teammate has an
+independent context window with no mid-session compact; shutdown+respawn
+is the only recovery path).
+
+Pre-install commit `11653bf`: `ajv ^8.18.0`, `zod ^4.3.6`,
+`@redocly/cli ^2.29.0` installed on `feat/dis-plan` before worktree
+creation so teammates never touched `package.json`.
+
+### DIS-005 — Hono routing convention + error-envelope middleware
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-005-008-009-http-stack (deleted post-merge)
+- Commits: 3824948 (test-first) + ead0c7d (impl) + 3357db4 (handoff); merge commit c58ad72 wave merge cluster
+- Handoff: dis/handoffs/DIS-005.md
+- CS coverage: none
+- Follow-up tickets opened: none
+- Verdict: Complete. Gate 2 test-first discipline visible in git log.
+
+### DIS-006 — Ajv JSON-schema validator + clinical_extraction.v1.json
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-006-010-schema-env (deleted post-merge)
+- Commits: 3821175 (test-first) + 2ecd9cf (impl) + d59cc28 (handoff); merge commit c002463
+- Handoff: dis/handoffs/DIS-006.md
+- CS coverage: none
+- Follow-up tickets opened: none
+- Verdict: Complete. Ajv wrapper with schema caching; clinical_extraction.v1 schema authored from TDD §11 shape. Gate 2 test-first visible.
+
+### DIS-007 — Canonical OpenAPI in dis/openapi.yaml + CI validator
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-007-011-015-infra (deleted post-merge)
+- Commits: d65b62d; merge commit c58ad72
+- Handoff: dis/handoffs/DIS-007.md
+- CS coverage: none (`doc-only` + `infra`)
+- Follow-up tickets opened: DIS-007-followup (suggested by handoff §5) — declare 503/UNAVAILABLE response on openapi.yaml per ADR-003 (closes orientation F4). Kept out of scope here per strict files_allowed discipline.
+- Verdict: Complete. Gate 2 SKIPPED per doc-only exception in _ticket_template.md §Review gates.
+
+### DIS-008 — Pino structured logger + correlation-id middleware
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-005-008-009-http-stack (deleted post-merge)
+- Commits: 75f1fe8 (test-first) + 47ac93b (impl) + d748ee2 (handoff); merge commit ec573d6
+- Handoff: dis/handoffs/DIS-008.md
+- CS coverage: none
+- Follow-up tickets opened: none (OTLP exporter deferred to DIS-147 per ticket out-of-scope)
+- Verdict: Complete. Pino-based structured JSON logger bound to Hono request context with correlation-id echo. Gate 2 visible.
+
+### DIS-009 — Metrics stub + GET /admin/metrics
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-005-008-009-http-stack (deleted post-merge)
+- Commits: d2ab24e (test-first) + 754a598 (impl) + b7cdfbd (handoff); merge commit ec573d6
+- Handoff: dis/handoffs/DIS-009.md
+- CS coverage: none
+- Follow-up tickets opened: auth on /admin/metrics deferred per ticket scope.
+- Verdict: Complete. In-memory counters + snapshot, JSON exposition. Prometheus format deferred to DIS-148.
+
+### DIS-010 — Zod env loader with cross-field conditional validation
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-006-010-schema-env (deleted post-merge)
+- Commits: 0f0a22e (test-first) + 9fbee17 (impl) + 5ca0e64 (handoff); merge commit c002463
+- Handoff: dis/handoffs/DIS-010.md
+- CS coverage: none
+- Follow-up tickets opened: none
+- Verdict: Complete. Zod schema validates 13 env vars with cross-field conditionality (DIS_STACK='supabase' requires SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY; DIS_OCR_PROVIDER='datalab' requires DATALAB_API_KEY). Readable errors on bad input.
+
+### DIS-011 — Port validator bash script + CI wiring
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-007-011-015-infra (deleted post-merge)
+- Commits: 5385e4d (test-first) + c3da95d (impl) + 2ffee53 (handoff); merge commit c58ad72
+- Handoff: dis/handoffs/DIS-011.md (handoff §3 documents redundant-but-complementary relationship with existing fitness.mjs `core_no_adapter_imports` rule — shell-level check complements static-analysis; both retained per Wave-B handover §6 guidance).
+- CS coverage: none
+- Follow-up tickets opened: none
+- Verdict: Complete. Bash script flags any import from adapters/ inside core/ or ports/; vitest test invokes the script via child_process and asserts exit 0 on clean tree. CI integration in dis-ci.yml.
+
+### DIS-012 — Fake adapter factory (all 8 ports)
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-012-013-014-test-harness (deleted post-merge)
+- Commits: d47e27c (combined test+impl+handoff — Gate 2 procedural miss flagged below); merge commit 6a1892c
+- Handoff: dis/handoffs/DIS-012.md
+- CS coverage: none
+- Follow-up tickets opened: none
+- Verdict: Complete substantively. Procedural note: teammate dev-012-013-014-test-harness collapsed test + impl + handoff into one commit per ticket for DIS-012/013/014 instead of the three-commit test-first/impl/handoff pattern required by `coding_standards.md §11`. Substance is fine (20 real tests, all invariants green, handoff present) but the Gate-2 discipline of a visibly-failing test commit in `git log --oneline` was not observable. Logged here for orchestrator audit; next wave teammates will receive an explicit reminder on commit topology. Eight fakes all implement their ports; FakeDatabaseAdapter carries the full DIS-021b/d surface including the 4 named extraction methods with optimistic-lock semantics. No src/adapters imports (VERIFY-5 clean).
+
+### DIS-013 — Fixture loader + sample clinical-extraction fixture
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-012-013-014-test-harness (deleted post-merge)
+- Commits: 25f3381 (combined — see DIS-012 procedural note); merge commit 6a1892c
+- Handoff: dis/handoffs/DIS-013.md
+- CS coverage: none
+- Follow-up tickets opened: none
+- Verdict: Complete substantively. `loadFixture<T>(name)` reads from dis/tests/fixtures/*.json with cwd-independent path resolution (via `import.meta.url`). One canonical fixture shipped: sample_extraction.v1.json covering all arrays (labs, medications, diagnoses, vaccinations). Same procedural note as DIS-012.
+
+### DIS-014 — Idempotency-Key middleware (skeleton)
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-012-013-014-test-harness (deleted post-merge)
+- Commits: d455e42 (combined — see DIS-012 procedural note); merge commit 6a1892c
+- Handoff: dis/handoffs/DIS-014.md
+- CS coverage: none
+- Follow-up tickets opened: DIS-025 (persistent idempotency store) already in backlog.
+- Verdict: Complete substantively. Hono middleware factory `createIdempotencyMiddleware(logger?)` with logger-injection option (b) from the task brief — lets DIS-008's pino wire in post-merge without touching call sites. Returns 400 IDEMPOTENCY_KEY_REQUIRED on state-changing methods without the header; GET/HEAD/OPTIONS pass through. Stub IdempotencyResolution shape forward-compatible with DIS-025's persistent store. Same procedural note as DIS-012.
+
+### DIS-015 — CHANGELOG seeded per Keep-a-Changelog
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-007-011-015-infra (deleted post-merge)
+- Commits: 6dc0861; merge commit c58ad72
+- Handoff: dis/handoffs/DIS-015.md
+- CS coverage: none (`doc-only`)
+- Follow-up tickets opened: none
+- Verdict: Complete. Seeded with Keep-a-Changelog 1.1.0 format, `[Unreleased]` section populated with Added/Changed/Fixed/Infrastructure buckets spanning DIS-001..DIS-058 tickets. Gate 2 SKIPPED per doc-only template exception.
+
+### Wave-1 closeout summary
+
+- **Invariants on `feat/dis-plan` after wave merge:**
+  - fitness: 0 violations, 57 files scanned (+10 src files from Wave 0's 47)
+  - tsc --noEmit: exit 0
+  - vitest: 22 files passed / **194 tests passed** (+70 over Wave-B baseline of 124)
+- **Operating rule exercised:** 4 teammates × 2-3 tickets each, fresh dispatch, task-list auto-dispatch nuisance ignored by teammates per their v3 prompt discipline.
+- **Gate 2 follow-up discipline for next wave:** explicit instruction to split `test(DIS-###)` and `feat(DIS-###)` commits (separate `git add` + `git commit` between them). The substance-vs-procedure trade-off in Wave 1 was acceptable but should not be the norm.
