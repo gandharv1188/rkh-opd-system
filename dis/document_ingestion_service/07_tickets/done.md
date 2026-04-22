@@ -1153,3 +1153,86 @@ Orchestrator commits `bfe1d4e` + `011372e` wired all 10 routes into `createServe
   - **DIS-096a/b/c** — wire signed-url into composition root; filename sanitisation + content-type allowlist; cap ttl_seconds server-side.
   - **DIS-098-followup** — Supabase Realtime adapter at `src/adapters/realtime/` implementing the StatusChannel port.
 - **Epic D is fully unblocked.** Next: Wave 6 (Epic E verification UI) or Wave 7 (Epic F observability + staging migrations) or Wave 8 stop (orientation refresh + Gate 6a batch sign-off authoring). Per user directive 2026-04-22: "Gate 6a for all these will be implemented before wave 8" — the CS-tagged merges in this wave carry in-line notes pending that batched approval.
+
+---
+
+## Session 2026-04-22 — Wave 6 (Epic E Verification UI, 26 tickets)
+
+Dispatched as four sub-waves: scaffold (solo), foundation (8 parallel), flows (8 parallel), enhancements+CI (9 parallel).
+
+### Sub-wave 6a — UI scaffold (solo)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-115 | Vite + React + TS scaffold: src/App.tsx, layout/, Playwright smoke test, dis/ui subproject bootstrap | f3b68b9 |
+
+Lighthouse/axe CLI VERIFY deferred to DIS-127; smoke test sufficient for scaffold.
+
+### Sub-wave 6b-1 — UI foundation (8 parallel)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-116 | Queue page — cursor-paginated listing consuming GET /extractions | d9cbced |
+| DIS-118 | PdfViewer — iframe-based POC (pdfjs-dist upgrade = follow-up) | 0b472f9 |
+| DIS-125 | StatusBadge — 8-state colour map | 9afa4d3 |
+| DIS-128 | ErrorBoundary — fallback UI + backend correlation_id logging | a7f4343 |
+| DIS-131 | i18n — en/hi JSON + useTranslation hook | cb968c9 |
+| DIS-134 | Skeleton + QueueSkeleton + VerifySkeleton | 5cd399f |
+| DIS-137 | CSS theme tokens — Royal Blue palette matching HMIS prescription pad | 6e50a3a |
+| DIS-139 | useFlag hook — /admin/flags driven with safe offline defaults | a0180c3 |
+
+### Sub-wave 6b-2 — UI flows (8 parallel, 4 paused + resumed after usage limit)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-117 | Verify page (CS-1 batched) — PDF left / fields right; approve gated on all-fields-viewed | 6ce38a8 |
+| DIS-119 | FieldEditor + ConfidenceBadge (CS-3 batched) — high/medium/low threshold mapping | 5ed9357 |
+| DIS-121 | ApproveFlow + RejectFlow (CS-1 batched) — confirm modal + reason textarea + disable-on-click | 088e10f |
+| DIS-124 | edit-store — localStorage with in-memory fallback; __resetForTests helper | 3416c02 |
+| DIS-129 | ConflictDialog — shown on 409 VersionConflict; reload-and-reach CTA | f60a264 |
+| DIS-130 | useRealtime + SseTransport + FakeTransport (Supabase Realtime adapter = follow-up) | 3f6abf9 |
+| DIS-132 | SessionBanner — 2-min warn window; exported shouldShowWarning for tests | 0eb8ca0 |
+| DIS-136 | SignIn — email/password form, in-memory token (no localStorage for creds) | 505d475 |
+
+Four teammates (DIS-117, 124, 130, 136) paused mid-wave by usage-limit hit; resumed via SendMessage poke after limit lifted. Two had partial writes in their worktree (Verify.tsx + verify.spec.ts; edit-store.ts) that orchestrator confirmed before teammate committed. Two re-started fresh and committed cleanly.
+
+### Sub-wave 6b-3 — UI enhancements + CI (9 parallel)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-120 | BboxOverlay — field-level bounding boxes with focus sync | 748bf77 |
+| DIS-122 | DuplicateBanner (CS-4 batched) — approve blocked until override reason recorded | b1a679c |
+| DIS-123 | DiffView — added/removed/changed markers; classifyDiff pure helper | e38ba7e |
+| DIS-126 | UI E2E scenarios (happy/reject/dup-override) — app-shell smoke with fetch mocking | 53dd3de |
+| DIS-127 | Accessibility audit — CDP a11y tree snapshot (native Playwright, no extra deps) | 5cb2c52 |
+| DIS-133 | useShortcuts hook — Enter/Esc/N/P; matchShortcut pure helper | 0bf669e |
+| DIS-135 | telemetry — start/stopVerifyTimer with postVerifyDuration fire-and-forget | f8e0a2d |
+| DIS-138 | PrintSummary — A4 print layout with inline @page rule | caad2df |
+| DIS-140 | GitHub Actions dis-ui-build.yml — paths-scoped, INTEGRATION_APPROVED-gated deploy | ae3ca5c |
+
+One post-merge fix (3cd784b) replaced `page.accessibility.snapshot()` with CDP-based `Accessibility.getFullAXTree` because the former was removed in newer Playwright — found during the post-wave typecheck.
+
+### Wave-6 closeout summary
+
+- **Invariants on `feat/dis-plan` at close (commit 6405079):**
+  - fitness: 0 violations, 93 production-code files (UI files outside the 7 fitness rules' scope by design)
+  - backend tsc --noEmit: exit 0
+  - backend vitest: 78 test files passing (unchanged from Wave 5 — UI tests live under dis/ui's own runner)
+  - UI typecheck: exit 0
+  - UI build: 143.5 kB gzipped bundle
+- **dis/ui subproject structure:** src/{App,main,layout/,pages/,components/,flows/,state/,hooks/,auth/,i18n/,theme/} + tests/{unit spec, e2e/}. 26 tickets of features.
+- **CS-tagged additions awaiting batched Gate 6a:** **CS-1 (DIS-117 Verify page, DIS-121 Approve/Reject flows)**, **CS-3 (DIS-119 FieldEditor + ConfidenceBadge)**, **CS-4 (DIS-122 DuplicateBanner)**. Join the backend CS-tagged merges from Waves 1-5 in the consolidated sign-off queue.
+- **Observed gotchas / playbook updates:**
+  1. **`dis/ui/node_modules` drifts between sub-waves.** Repaired with `npm install` each cleanup. Worth formalising: post-wave cleanup should include `ls dis/ui/node_modules/@playwright/test` canary alongside the backend `.bin/tsc` check.
+  2. **Silent-commit-then-idle pattern recurred** in Wave 6b-2 and 6b-3 — teammates commit without sending a completion message, orchestrator must check via `git log feat/dis-plan..feat/dev-e-<slug>`.
+  3. **Usage-limit hits mid-wave** are recoverable: paused teammates resume via SendMessage with status of their worktree. Two of four resumed cleanly; two re-ran from scratch since they had nothing on disk.
+  4. **Parallel teammate inconsistency** — some used Hono-typed vs blank Hono in Wave 5; in Wave 6 some chose vitest and others Playwright for component tests, forcing per-ticket runner flexibility in briefs.
+  5. **`page.accessibility.snapshot()` is deprecated** in newer Playwright. Replaced with CDP session's `Accessibility.getFullAXTree`. Follow-up candidate for the playbook.
+- **New follow-ups registered:**
+  - **DIS-117-followup** — wire App.tsx routing so Verify page can be reached at /verify/:id (enables true component-level Playwright tests for Verify, FieldEditor, etc.).
+  - **DIS-118-followup** — upgrade PdfViewer from iframe to pdfjs-dist for bbox-overlay integration.
+  - **DIS-126-followup** — once routing lands, expand E2E tests to real user journeys (not just app-shell smoke).
+  - **DIS-127-followup** — install @axe-core/playwright for full axe rule coverage (current test uses native CDP a11y tree only).
+  - **DIS-130-followup** — Supabase Realtime client adapter implementing the RealtimeTransport port.
+  - **DIS-140-followup** — wire the deploy step to the real staging host once INTEGRATION APPROVED.
+- **Wave 7 (Epic F observability + staging migrations) is ready to dispatch.** User directive 2026-04-22: continue through Wave 7 without pausing at Gate 6a; batched sign-off happens before Wave 8.
