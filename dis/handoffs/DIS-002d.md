@@ -18,8 +18,8 @@ one stale path reference, and backfilled the ticket board per
 
 - `dis/document_ingestion_service/02_architecture/adrs/README.md` — ADR folder scaffold. 79 lines. Documents the filename convention `ADR-NNN-<kebab-case-title>.md`, the mandatory `Context / Decision / Consequences / Alternatives` shape per `coding_standards.md §15`, supersession discipline (never edit past ADRs — supersede), the index table to be appended as ADRs land, and gate integration (Controls 9, 6d, 5 all reference this folder). Content material originated from the rewound bypass commit `96e7006` (authored 2026-04-20) and was carried through the Wave-A stash.
 - `dis/document_ingestion_service/07_tickets/clarifications/README.md` — CLAR-NNN folder scaffold. 52 lines. Documents the filename convention, required sections (opener/date/blocks/status + ambiguity/options/impact/resolution), index table, negative-guidance ("what a clarification is NOT").
-- `dis/document_ingestion_service/10_handoff/document_ocr_flow.md` — moved from `radhakishan_system/docs/document_ocr_flow.md` (its prior home). Co-locates with `SESSION_HANDOVER_2026-04-20.md`, `ORIENTATION_REVIEW_2026-04-20.md`, and the Session-2 §13 live-verification findings that append to this same file. Git detects the move as a rename (70% similarity).
-- `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` — §2 stale-path reference updated. Was: `radhakishan_system/docs/document_ocr_flow.md`. Now: `dis/document_ingestion_service/10_handoff/document_ocr_flow.md` plus a note that §13 session-2 findings were appended on 2026-04-20. 4-line edit.
+- `dis/handoffs/sessions/document_ocr_flow.md` — moved from `radhakishan_system/docs/document_ocr_flow.md` (its prior home). Co-locates with `SESSION_HANDOVER_2026-04-20.md`, `ORIENTATION_REVIEW_2026-04-20.md`, and the Session-2 §13 live-verification findings that append to this same file. Git detects the move as a rename (70% similarity).
+- `dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md` — §2 stale-path reference updated. Was: `radhakishan_system/docs/document_ocr_flow.md`. Now: `dis/handoffs/sessions/document_ocr_flow.md` plus a note that §13 session-2 findings were appended on 2026-04-20. 4-line edit.
 - `dis/document_ingestion_service/07_tickets/done.md` — fully rewritten. Was a 19-line placeholder. Now 237 lines with 16 entries across Waves 1–3 (15 tickets + DIS-002c from 2026-04-21 Wave A). Each entry carries: merge date + author, branch name, commit SHA(s), handoff path, CS coverage, follow-up tickets opened, and the one-line verdict from the handoff `§11 Verdict`. Section order: Wave 1 Epic A (DIS-001..004) → Wave 2 Epic B (DIS-020..024) → Wave-2 meta (DRIFT-PHASE-1) → Wave 3 Epic C (DIS-050/051/053/054/057/058) → Wave-meta docs (DOC-AGENTIC-PROTOCOL, DOC-VERIFY-TEMPLATE, DOC-VERIFY-BACKLOG-A/B, DRIFT-DOC-WRITER) → Session 2026-04-21 (DIS-002c).
 - `dis/document_ingestion_service/07_tickets/in_progress.md` — refreshed placeholder. Declares "no tickets in progress at feat/dis-plan HEAD = c11e7fc" with a note on where DIS-002d/e transition markers will land.
 - `dis/handoffs/DIS-002d.md` — this file.
@@ -30,7 +30,7 @@ Mapped to the VERIFY block declared in DIS-002d's backlog entry.
 
 - [x] AC-1: `adrs/README.md` exists → V1 EXISTS
 - [x] AC-2: `clarifications/README.md` exists → V2 EXISTS
-- [x] AC-3: `document_ocr_flow.md` lives at `10_handoff/...` → V3 EXISTS
+- [x] AC-3: `document_ocr_flow.md` lives at `dis/handoffs/sessions/...` → V3 EXISTS
 - [x] AC-4: `document_ocr_flow.md` is absent from `radhakishan_system/docs/` → V4 MOVED
 - [x] AC-5: `done.md` has ≥15 `### DIS-0` entries → V5 = 16 (15 Wave 1–3 + DIS-002c)
 - [x] AC-6: `SESSION_HANDOVER_2026-04-20.md` cites the new path → V6 = 1
@@ -65,7 +65,7 @@ Full actual output pasted in §Verify Report below.
 
 ### D-4: Four session-management docs (ORCHESTRATOR_ORIENTATION, ORIENTATION_REVIEW, SESSION_PLAN, Prompt_2) left untracked
 
-**Context:** Four untracked files exist in `10_handoff/` that are real work products of this session (the orientation doc I wrote + the earlier orientation review + the session plan + the user's Prompt_2). They are NOT in DIS-002d's `files_allowed`.
+**Context:** Four untracked files exist in `dis/handoffs/sessions/` that are real work products of this session (the orientation doc I wrote + the earlier orientation review + the session plan + the user's Prompt_2). They are NOT in DIS-002d's `files_allowed`.
 **Options considered:** (a) widen DIS-002d `files_allowed` and include them; (b) leave them untracked and commit via a separate session-handover ticket at end of Wave A; (c) gitignore them.
 **Decision:** Option (b). DIS-002d's scope is scaffold hygiene — these files are session-management artefacts that belong with the Wave-A session handover.
 **Reason:** Widening `files_allowed` mid-execution (option a) is the exact drift the protocol is designed to prevent. Leaving them (b) for a dedicated session-handover commit keeps every commit's scope crisp.
@@ -84,7 +84,7 @@ Full actual output pasted in §Verify Report below.
 - **No `package.json` change** — that is DIS-001b scope.
 - **No orchestrator / state-machine / adapter code touched** — those are DIS-021b + DIS-050a (Wave B).
 - **No backlog edit** — explicitly forbidden by DIS-002d `files_allowed` (DIS-002c owns backlog expansion).
-- **Four untracked `10_handoff/` files left untracked** — see D-4.
+- **Four untracked `dis/handoffs/sessions/` files left untracked** — see D-4.
 - **No `npm install` / `tsc` / test execution.**
 - **No teammate dispatched.** No worktree. No cron.
 - **No delete of the old `document_ocr_flow.md`** — `git mv`-equivalent rename was detected by git at stash-pop time (deletion + new-file became a rename in the staged index).
@@ -103,9 +103,9 @@ Full actual output pasted in §Verify Report below.
   - `dis/document_ingestion_service/07_tickets/clarifications/README.md` (52 lines)
   - `dis/handoffs/DIS-002d.md` (this file)
 - Renamed (git detects as move + content-preserving rename):
-  - `radhakishan_system/docs/document_ocr_flow.md` → `dis/document_ingestion_service/10_handoff/document_ocr_flow.md`
+  - `radhakishan_system/docs/document_ocr_flow.md` → `dis/handoffs/sessions/document_ocr_flow.md`
 - Modified:
-  - `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` (§2 path ref, 4-line edit)
+  - `dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md` (§2 path ref, 4-line edit)
   - `dis/document_ingestion_service/07_tickets/done.md` (19-line placeholder → 237-line ledger with 16 entries)
   - `dis/document_ingestion_service/07_tickets/in_progress.md` (placeholder format preserved + snapshot note added)
 - Deleted: none (the document_ocr_flow.md old-path deletion is half of a rename, not a standalone delete)
@@ -130,12 +130,12 @@ git checkout feat/dis-002d-scaffold-hygiene
 # V1..V4 — infrastructure
 test -f dis/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS
 test -f dis/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS
-test -f dis/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS
+test -f dis/handoffs/sessions/document_ocr_flow.md && echo EXISTS
 test -e radhakishan_system/docs/document_ocr_flow.md || echo MOVED
 
 # V5..V6 — content
 grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md
-grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
+grep -c "feature_plans/document_ingestion_service/dis/handoffs/sessions/document_ocr_flow.md" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md
 
 # V7 — handoff
 test -f dis/handoffs/DIS-002d.md && echo EXISTS
@@ -145,7 +145,7 @@ test -f dis/handoffs/DIS-002d.md && echo EXISTS
 
 - **`git mv` equivalence at stash-pop time.** The rewound bypass commit did a non-`git-mv` move (delete + untracked new file). When the stash was popped, git correctly detected 70% content similarity and presented the change as a rename in `git status` — ` D old/path` + ` A new/path`. No action needed; `git add` stages both half-ops as a single rename.
 - **`done.md` V5 count is 16, not 15.** The expected minimum in the backlog entry was ≥15 (the Wave 1–3 tickets). The actual 16 includes DIS-002c from Wave A earlier this session — which merged at commit `c11e7fc` before DIS-002d started. VERIFY passes because `16 ≥ 15`.
-- **Four untracked `10_handoff/` files** (ORCHESTRATOR_ORIENTATION, ORIENTATION_REVIEW, SESSION_PLAN, Prompt_2) are intentionally NOT staged in this commit (see §3 D-4). Do not `git add -A` — use the explicit `git add <path>` pattern the orchestrator used.
+- **Four untracked `dis/handoffs/sessions/` files** (ORCHESTRATOR_ORIENTATION, ORIENTATION_REVIEW, SESSION_PLAN, Prompt_2) are intentionally NOT staged in this commit (see §3 D-4). Do not `git add -A` — use the explicit `git add <path>` pattern the orchestrator used.
 - **`in_progress.md` snapshot note references HEAD = c11e7fc.** That's the `feat/dis-plan` HEAD at DIS-002c merge. The current branch `feat/dis-002d-scaffold-hygiene` sits on top; the snapshot is deliberately the `feat/dis-plan` state to match where the ticket board is authoritative.
 
 ## 11. Verdict
@@ -186,9 +186,9 @@ EXISTS
 
 - Status: PASS
 
-### VERIFY-3: `document_ocr_flow.md` at its new `10_handoff/` home
+### VERIFY-3: `document_ocr_flow.md` at its new `dis/handoffs/sessions/` home
 
-- Command: `test -f dis/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS`
+- Command: `test -f dis/handoffs/sessions/document_ocr_flow.md && echo EXISTS`
 - Expected output: `EXISTS`
 - Actual output:
 
@@ -224,7 +224,7 @@ MOVED
 
 ### VERIFY-6: `SESSION_HANDOVER_2026-04-20.md` cites the new path
 
-- Command: `grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md`
+- Command: `grep -c "feature_plans/document_ingestion_service/dis/handoffs/sessions/document_ocr_flow.md" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md`
 - Expected output: integer ≥ `1`
 - Actual output:
 

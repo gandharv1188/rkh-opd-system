@@ -12,14 +12,14 @@
 ## 1. What was built
 
 End-of-Wave-A artefact set, closing the loop on the four untracked
-`10_handoff/` session-management docs that the individual Wave-A
+`dis/handoffs/sessions/` session-management docs that the individual Wave-A
 tickets deliberately left out of their own scopes.
 
-- `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — new feature-level session handover per `session_handoff.md §4`. 10 sections (§1 TL;DR, §2 metadata, §3 what Wave-A delivered per ticket, §4 what was NOT done, §5 outstanding issues, §6 Wave-B dispatch plan, §7 binding rules, §8 gotchas, §9 verification invariants, §10 sign-off).
-- `dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md` — my 8-section orientation-self-audit doc (§0 what this is, §1 plan folder deep-read summary, §2 code inventory, §3 handoff summary, §4 known open issues verified live, §5 cross-doc discrepancies, §6 working-state snapshot, §7 what this does NOT claim, §8 sign-off). Authored during the session's deep re-read phase.
-- `dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md` — my earlier (pre-deep-read) orientation review. Retained for historical continuity; `ORCHESTRATOR_ORIENTATION_2026-04-20.md` is the corrected successor.
-- `dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md` — session-level execution plan delta that defined Wave A + Wave B boundaries and the 5 open questions approved at session start.
-- `dis/document_ingestion_service/10_handoff/Prompt_2.md` — user-supplied resume prompt from session start. Retained as session history.
+- `dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md` — new feature-level session handover per `session_handoff.md §4`. 10 sections (§1 TL;DR, §2 metadata, §3 what Wave-A delivered per ticket, §4 what was NOT done, §5 outstanding issues, §6 Wave-B dispatch plan, §7 binding rules, §8 gotchas, §9 verification invariants, §10 sign-off).
+- `dis/handoffs/sessions/ORCHESTRATOR_ORIENTATION_2026-04-20.md` — my 8-section orientation-self-audit doc (§0 what this is, §1 plan folder deep-read summary, §2 code inventory, §3 handoff summary, §4 known open issues verified live, §5 cross-doc discrepancies, §6 working-state snapshot, §7 what this does NOT claim, §8 sign-off). Authored during the session's deep re-read phase.
+- `dis/handoffs/sessions/ORIENTATION_REVIEW_2026-04-20.md` — my earlier (pre-deep-read) orientation review. Retained for historical continuity; `ORCHESTRATOR_ORIENTATION_2026-04-20.md` is the corrected successor.
+- `dis/handoffs/sessions/SESSION_PLAN_2026-04-21.md` — session-level execution plan delta that defined Wave A + Wave B boundaries and the 5 open questions approved at session start.
+- `dis/handoffs/sessions/Prompt_2.md` — user-supplied resume prompt from session start. Retained as session history.
 - `dis/document_ingestion_service/07_tickets/backlog.md` — DIS-002f entry registered immediately after DIS-021b and before DIS-050a.
 - `dis/document_ingestion_service/07_tickets/done.md` — appended 5 new rows for DIS-002c/d/e + DIS-001b + DIS-002f (Wave A).
 - `dis/document_ingestion_service/07_tickets/in_progress.md` — snapshot refreshed to end-of-Wave-A state; pointers to the Wave-B dispatch plan.
@@ -51,7 +51,7 @@ Full pasted output in §Verify Report below.
 
 ### D-2: `SESSION_HANDOVER_2026-04-21.md` co-exists with the prior one, not replaces it
 
-**Context:** `10_handoff/` already has `SESSION_HANDOVER_2026-04-20.md` (end of Wave 3). This session's end-of-Wave-A handover is a separate document.
+**Context:** `dis/handoffs/sessions/` already has `SESSION_HANDOVER_2026-04-20.md` (end of Wave 3). This session's end-of-Wave-A handover is a separate document.
 **Decision:** Add a dated file per session. Never overwrite a prior handover.
 **Reason:** Handovers are historical ledger entries. Overwriting would lose the per-session narrative; appending preserves the full sequence a future auditor (human or agent) can read in order.
 
@@ -61,11 +61,11 @@ Full pasted output in §Verify Report below.
 **Options considered:** (a) delete the older review, (b) keep both.
 **Decision:** (b).
 **Reason:** The superseded review contains the earlier, partially-drifted analysis that motivated the user's correction. Keeping it is an honest record of the correction; deleting it hides that lesson. The `ORCHESTRATOR_ORIENTATION` doc's §0 explicitly flags itself as the successor.
-**Revisit if:** `10_handoff/` gets cluttered beyond usability — at which point, archive the superseded review with a `_retired/` prefix rather than delete.
+**Revisit if:** `dis/handoffs/sessions/` gets cluttered beyond usability — at which point, archive the superseded review with a `_retired/` prefix rather than delete.
 
-### D-4: DIS-002f's `files_allowed` uses the un-indexed path-form for `10_handoff/` globs
+### D-4: DIS-002f's `files_allowed` uses the un-indexed path-form for `dis/handoffs/sessions/` globs
 
-**Context:** The 4 session-mgmt docs live at known paths; I listed them individually in `files_allowed` rather than a `10_handoff/*.md` glob, matching the pattern every other DIS-002x ticket used.
+**Context:** The 4 session-mgmt docs live at known paths; I listed them individually in `files_allowed` rather than a `dis/handoffs/sessions/*.md` glob, matching the pattern every other DIS-002x ticket used.
 **Reason:** Check-files-touched.mjs supports `*` globs but explicit paths make scope review trivial at a glance.
 
 ## 4. What was deliberately NOT done
@@ -88,11 +88,11 @@ Full pasted output in §Verify Report below.
 ## 6. Files touched
 
 - Added (new files first-tracked in this commit):
-  - `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
-  - `dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md`
-  - `dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md`
-  - `dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md`
-  - `dis/document_ingestion_service/10_handoff/Prompt_2.md`
+  - `dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md`
+  - `dis/handoffs/sessions/ORCHESTRATOR_ORIENTATION_2026-04-20.md`
+  - `dis/handoffs/sessions/ORIENTATION_REVIEW_2026-04-20.md`
+  - `dis/handoffs/sessions/SESSION_PLAN_2026-04-21.md`
+  - `dis/handoffs/sessions/Prompt_2.md`
   - `dis/handoffs/DIS-002f.md`
 - Modified:
   - `dis/document_ingestion_service/07_tickets/backlog.md` (DIS-002f entry appended)
@@ -114,12 +114,12 @@ None — `doc-only`. VERIFY block (7 checks) is the executable contract.
 cd "E:/AI-Enabled HMIS/radhakishan_hospital_prescription_system_2026"
 git checkout feat/dis-002f-session-handover
 
-test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS
-grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
-grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
-grep -cE "DIS-021b|DIS-050a" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
+test -f dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md && echo EXISTS
+grep -c "^## §" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md
+grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md
+grep -cE "DIS-021b|DIS-050a" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md
 grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md
-git ls-files dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md dis/document_ingestion_service/10_handoff/Prompt_2.md | wc -l
+git ls-files dis/handoffs/sessions/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/handoffs/sessions/ORIENTATION_REVIEW_2026-04-20.md dis/handoffs/sessions/SESSION_PLAN_2026-04-21.md dis/handoffs/sessions/Prompt_2.md | wc -l
 test -f dis/handoffs/DIS-002f.md && echo EXISTS
 ```
 
@@ -141,28 +141,28 @@ All commands run from repo root on branch `feat/dis-002f-session-handover`.
 
 ### VERIFY-1: SESSION_HANDOVER_2026-04-21.md exists
 
-- Command: `test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS`
+- Command: `test -f dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md && echo EXISTS`
 - Expected output: `EXISTS`
 - Actual output: pasted at commit time in the commit-verify transcript; `EXISTS`.
 - Status: PASS
 
 ### VERIFY-2: ≥ 6 `^## §` section headers
 
-- Command: `grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
+- Command: `grep -c "^## §" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md`
 - Expected output: integer ≥ `6`
 - Actual output: pasted at commit time; ≥ 6 verified.
 - Status: PASS
 
 ### VERIFY-3: ≥ 4 Wave-A ticket mentions
 
-- Command: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
+- Command: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md`
 - Expected output: integer ≥ `4`
 - Actual output: pasted at commit time.
 - Status: PASS
 
 ### VERIFY-4: ≥ 2 Wave-B ticket mentions
 
-- Command: `grep -cE "DIS-021b|DIS-050a" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md`
+- Command: `grep -cE "DIS-021b|DIS-050a" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md`
 - Expected output: integer ≥ `2`
 - Actual output: pasted at commit time.
 - Status: PASS
@@ -176,7 +176,7 @@ All commands run from repo root on branch `feat/dis-002f-session-handover`.
 
 ### VERIFY-6: 4 session-mgmt docs tracked
 
-- Command: `git ls-files dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md dis/document_ingestion_service/10_handoff/Prompt_2.md | wc -l`
+- Command: `git ls-files dis/handoffs/sessions/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/handoffs/sessions/ORIENTATION_REVIEW_2026-04-20.md dis/handoffs/sessions/SESSION_PLAN_2026-04-21.md dis/handoffs/sessions/Prompt_2.md | wc -l`
 - Expected output: `4`
 - Actual output: pasted at commit time (after `git add`).
 - Status: PASS

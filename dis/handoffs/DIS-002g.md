@@ -73,7 +73,7 @@ Full output pasted in §Verify Report.
 
 ### D-4: Did NOT update cross-references in moved docs
 
-**Context:** Any moved doc that referenced its own absolute path (e.g. the prior session handover that I already fixed in DIS-002d to point at `dis/document_ingestion_service/10_handoff/document_ocr_flow.md`) now technically has a stale reference.
+**Context:** Any moved doc that referenced its own absolute path (e.g. the prior session handover that I already fixed in DIS-002d to point at `dis/handoffs/sessions/document_ocr_flow.md`) now technically has a stale reference.
 **Options considered:** (a) leave all `.md` bodies unchanged, (b) pass through and update every absolute-path reference inside each of 62 `.md` files.
 **Decision:** Option (a). Out of scope. The rule I set at the top of this handoff ("Leaves every content unchanged") holds.
 **Reason:** If I edit doc bodies here, the `files_allowed` scope discipline says I must list every edited file, and the VERIFY block would need per-file assertions. The cleaner path is: a future tiny follow-up ticket DIS-002h (or roll into DIS-002f's next session update) greps for `dis/document_ingestion_service` in `.md` files and fixes each. Listing that as follow-up §5.

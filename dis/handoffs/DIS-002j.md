@@ -22,7 +22,7 @@ touched. Exclusively updates the ticket ledger + handoff directory.
 | `dis/document_ingestion_service/07_tickets/backlog.md`                           | ✅      | DIS-002j entry appended (only).                                    |
 | `dis/document_ingestion_service/07_tickets/done.md`                              | ✅      | 5 rows appended: DIS-050a, DIS-021b, DIS-021c, DIS-021d, DIS-002j. |
 | `dis/document_ingestion_service/07_tickets/in_progress.md`                       | ✅      | Refreshed to end-of-Wave-B snapshot; notes Wave C is HELD.         |
-| `dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md` | ✅      | New file, 10 sections.                                             |
+| `dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md` | ✅      | New file, 10 sections.                                             |
 | `dis/handoffs/DIS-002j.md`                                                       | ✅      | This file.                                                         |
 
 No out-of-scope files touched.
@@ -42,13 +42,13 @@ N/A — doc-only meta ticket, no CS refs.
 ## 6. VERIFY Report
 
 ```
-V1: test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md && echo EXISTS
+V1: test -f dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md && echo EXISTS
     → EXISTS                                    [PASS, expected EXISTS]
 
-V2: grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md
+V2: grep -c "^## §" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md
     → 10                                        [PASS, expected ≥ 6]
 
-V3: grep -cE "DIS-050a|DIS-021b|DIS-021c|DIS-021d" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md
+V3: grep -cE "DIS-050a|DIS-021b|DIS-021c|DIS-021d" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md
     → 32                                        [PASS, expected ≥ 4]
 
 V4: grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md

@@ -9,7 +9,7 @@ _No tickets in progress at `feat/dis-plan` HEAD (end of session
 2026-04-21, Wave B complete through DIS-002j). Wave C is **HELD**
 per orchestrator direction — do not dispatch until the user
 explicitly releases the hold. See
-`10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md §6` (Wave-C held
+`dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md §6` (Wave-C held
 plan) for the queued scope._
 
 ## Format

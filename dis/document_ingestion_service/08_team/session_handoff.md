@@ -27,7 +27,7 @@ The orchestrator links it into `07_tickets/done.md` at merge time.
 | Level             | Who writes it            | When                                    | Where it lives                                                 |
 | ----------------- | ------------------------ | --------------------------------------- | -------------------------------------------------------------- |
 | **Ticket-level**  | Every worker agent       | End of each ticket, before final commit | `dis/handoffs/DIS-###.md` on the ticket's branch               |
-| **Feature-level** | Orchestrator (Architect) | When DIS v1 is merged                   | `dis/document_ingestion_service/10_handoff/FEATURE_HANDOFF.md` |
+| **Feature-level** | Orchestrator (Architect) | When DIS v1 is merged                   | `dis/handoffs/sessions/FEATURE_HANDOFF.md` |
 
 (Epic-level handoffs are optional — only required when an epic spans
 multiple agent waves.)
@@ -149,7 +149,7 @@ One line. "Complete, ready for review" OR "Partial — see §5" OR
 ## §4. Feature-level handoff template
 
 Orchestrator writes this at the end of DIS v1. Stored at:
-`dis/document_ingestion_service/10_handoff/FEATURE_HANDOFF.md`
+`dis/handoffs/sessions/FEATURE_HANDOFF.md`
 
 ```markdown
 # DIS v1 — Feature Handoff

@@ -173,7 +173,7 @@ reconstructed from `dis/handoffs/*.md`, `SESSION_HANDOVER_2026-04-20.md
 - Handoff: dis/handoffs/DIS-050.md
 - CS coverage: CS-2 (raw provider response preserved byte-identically)
 - Follow-up tickets opened: **DIS-050a (wire-contract hotfix per
-  `10_handoff/document_ocr_flow.md §13` + webhook_url per ADR-004)**,
+  `dis/handoffs/sessions/document_ocr_flow.md §13` + webhook_url per ADR-004)**,
   integration tests with recorded Datalab response.
 - Verdict: 7 unit tests passing; exponential backoff 1→10s with 120s
   total cap; `OcrProviderError` + `OcrProviderTimeoutError`.
@@ -312,7 +312,7 @@ reconstructed from `dis/handoffs/*.md`, `SESSION_HANDOVER_2026-04-20.md
 - CS coverage: none (`doc-only`, `process`)
 - Follow-up tickets opened: DIS-002e (populates the adrs/ folder
   this ticket scaffolded); DIS-002f (owns the 4 untracked
-  `10_handoff/` session artefacts left out of this scope).
+  `dis/handoffs/sessions/` session artefacts left out of this scope).
 - Verdict: Complete, ready for review. 7/7 VERIFY PASS.
 
 ### DIS-002e — ADR pack (ADR-001..007) + kill_switch.md reconciliation
