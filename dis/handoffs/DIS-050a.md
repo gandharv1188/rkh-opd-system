@@ -7,7 +7,7 @@
 - **TDD refs:** §9.2 (Datalab submit/poll flow, timeout budget)
 - **CS refs:** CS-2 (raw provider response preserved byte-identically — unchanged by this hotfix)
 - **ADR refs:** ADR-004 (Datalab webhooks over polling)
-- **Flow doc:** `dis/document_ingestion_service/10_handoff/document_ocr_flow.md §13.2` (5 bugs found on live wire audit)
+- **Flow doc:** `dis/handoffs/sessions/document_ocr_flow.md §13.2` (5 bugs found on live wire audit)
 
 ## 1. What was built
 
@@ -106,7 +106,7 @@ All 9 VERIFY checks pass.
 
 - Implements `tdd.md §9.2`
 - Implements `adrs/ADR-004-datalab-webhooks-over-polling.md`
-- Implements `10_handoff/document_ocr_flow.md §13` (all 5 documented bugs)
+- Implements `dis/handoffs/sessions/document_ocr_flow.md §13` (all 5 documented bugs)
 - Introduces `RATE_LIMITED` per `error_model.md`
 - Session log per `session_handoff.md §3` (11-section template) + Verify Report per `verify_format.md §2`
 - No CS tag — CS-2 byte-identical preservation is unaffected: `rawResponse` still carries the final complete body verbatim regardless of whether delivery is via poll or (future) webhook.

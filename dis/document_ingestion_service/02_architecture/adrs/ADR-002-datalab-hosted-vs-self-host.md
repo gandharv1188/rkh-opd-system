@@ -10,9 +10,9 @@
 The OCR + layout-understanding stage is the only part of the
 pipeline with a meaningful build-vs-buy decision. Source documents:
 
-- `10_handoff/document_ocr_flow.md §12` — Chandra vs Claude Vision
+- `dis/handoffs/sessions/document_ocr_flow.md §12` — Chandra vs Claude Vision
   comparison with benchmarks, pricing, license analysis.
-- `10_handoff/document_ocr_flow.md §13` — Live-verified Datalab
+- `dis/handoffs/sessions/document_ocr_flow.md §13` — Live-verified Datalab
   platform constraints (400 rpm, 5000 concurrent pages, 200 MB
   files, 7000 pages/request, $3 markdown + $4.50 accurate +
   $25 flat plan fee with $25 included credit).

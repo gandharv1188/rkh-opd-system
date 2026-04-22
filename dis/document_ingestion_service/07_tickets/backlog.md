@@ -3112,14 +3112,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-148
 - **Files allowed:**
-  - dis/document_ingestion_service/10_handoff/dashboard.md
+  - dis/handoffs/sessions/dashboard.md
 
 **Description:** Markdown description of the admin dashboard (exact Grafana JSON is out of scope for POC).
 
 **VERIFY:**
 
-- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/dashboard.md` — expect file exists.
-- VERIFY-2: `grep -c "^### " dis/document_ingestion_service/10_handoff/dashboard.md` — expect ≥ 6 panel entries.
+- VERIFY-1: `ls dis/handoffs/sessions/dashboard.md` — expect file exists.
+- VERIFY-2: `grep -c "^### " dis/handoffs/sessions/dashboard.md` — expect ≥ 6 panel entries.
 
 **Status:** Ready
 
@@ -3316,14 +3316,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-145
 - **Files allowed:**
-  - dis/document_ingestion_service/10_handoff/security-review.md
+  - dis/handoffs/sessions/security-review.md
 
 **Description:** Checklist covering RLS, secrets, TLS, SSRF, XSS on verification UI.
 
 **VERIFY:**
 
-- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/security-review.md` — expect file exists.
-- VERIFY-2: `grep -c "^- \\[ \\]" dis/document_ingestion_service/10_handoff/security-review.md` — expect ≥ 15 checkbox items.
+- VERIFY-1: `ls dis/handoffs/sessions/security-review.md` — expect file exists.
+- VERIFY-2: `grep -c "^- \\[ \\]" dis/handoffs/sessions/security-review.md` — expect ≥ 15 checkbox items.
 
 **Status:** Ready
 
@@ -3333,14 +3333,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-151, DIS-152
 - **Files allowed:**
-  - dis/document_ingestion_service/10_handoff/clinical-safety-dry-run.md
+  - dis/handoffs/sessions/clinical-safety-dry-run.md
 
 **Description:** Written report assembling the audit, red-team, and chaos results for clinician sign-off.
 
 **VERIFY:**
 
-- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/clinical-safety-dry-run.md` — expect file exists.
-- VERIFY-2: `grep -c "^## CS-" dis/document_ingestion_service/10_handoff/clinical-safety-dry-run.md` — expect ≥ 12 (one per CS rule).
+- VERIFY-1: `ls dis/handoffs/sessions/clinical-safety-dry-run.md` — expect file exists.
+- VERIFY-2: `grep -c "^## CS-" dis/handoffs/sessions/clinical-safety-dry-run.md` — expect ≥ 12 (one per CS rule).
 
 **Status:** Ready
 
@@ -3420,14 +3420,14 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** F
 - **Depends on:** DIS-145..DIS-174
 - **Files allowed:**
-  - dis/document_ingestion_service/10_handoff/epic-f-signoff.md
+  - dis/handoffs/sessions/epic-f-signoff.md
 
 **Description:** Final checklist marking each F ticket as done with its Verify report path.
 
 **VERIFY:**
 
-- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/epic-f-signoff.md` — expect file exists.
-- VERIFY-2: `grep -c "DIS-" dis/document_ingestion_service/10_handoff/epic-f-signoff.md` — expect ≥ 30 references.
+- VERIFY-1: `ls dis/handoffs/sessions/epic-f-signoff.md` — expect file exists.
+- VERIFY-2: `grep -c "DIS-" dis/handoffs/sessions/epic-f-signoff.md` — expect ≥ 30 references.
 
 **Status:** Ready
 
@@ -3642,7 +3642,7 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **CS ref:** CS-9
 - **Files allowed:**
   - supabase/functions/process-document/\*\* (deletion only)
-  - dis/document_ingestion_service/10_handoff/legacy-retired.md
+  - dis/handoffs/sessions/legacy-retired.md
 - **Out of scope:** re-introduction / partial retention — approval is for full retirement only.
 - **Execution gate:** INTEGRATION APPROVED required per review_gates.md §6b.
 
@@ -3652,7 +3652,7 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 
 - VERIFY-1: [STAGING ONLY] `ls supabase/functions/process-document/` — expect `No such file or directory` after the change is merged (staging mirror).
 - VERIFY-2: [STAGING ONLY] `curl -i $SUPABASE_STAGING_URL/functions/v1/process-document` — expect 404.
-- VERIFY-3: [STAGING ONLY] `ls dis/document_ingestion_service/10_handoff/legacy-retired.md` — expect file exists with retirement date + final traffic snapshot.
+- VERIFY-3: [STAGING ONLY] `ls dis/handoffs/sessions/legacy-retired.md` — expect file exists with retirement date + final traffic snapshot.
 
 **Status:** HELD
 
@@ -3950,15 +3950,15 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 - **Epic:** H
 - **Depends on:** DIS-220..DIS-234
 - **Files allowed:**
-  - dis/document_ingestion_service/10_handoff/epic-h-closeout.md
+  - dis/handoffs/sessions/epic-h-closeout.md
 
 **Description:** Records the final port-duration numbers, adapter count, and lessons learned; links to the portability.md dry-run section.
 
 **VERIFY:**
 
-- VERIFY-1: `ls dis/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect file exists.
-- VERIFY-2: `grep -c "DIS-2[23]" dis/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect ≥ 15 ticket references.
-- VERIFY-3: `grep -n "portability.md" dis/document_ingestion_service/10_handoff/epic-h-closeout.md` — expect link to portability doc.
+- VERIFY-1: `ls dis/handoffs/sessions/epic-h-closeout.md` — expect file exists.
+- VERIFY-2: `grep -c "DIS-2[23]" dis/handoffs/sessions/epic-h-closeout.md` — expect ≥ 15 ticket references.
+- VERIFY-3: `grep -n "portability.md" dis/handoffs/sessions/epic-h-closeout.md` — expect link to portability doc.
 
 **Status:** Ready
 
@@ -3972,8 +3972,8 @@ One orchestrator run with fake adapters supplying page counts + token counts —
 > through proper tickets, (b) the 5 pre-existing `fitness.mjs`
 > violations flagged by DRIFT-PHASE-1 FOLLOWUP-A, (c) the
 > DIS-020/021 coordination scar, and (d) the Datalab adapter
-> wire-contract bugs documented in `10_handoff/document_ocr_flow.md
-§13`. See `10_handoff/SESSION_PLAN_2026-04-21.md` for the
+> wire-contract bugs documented in `dis/handoffs/sessions/document_ocr_flow.md
+§13`. See `dis/handoffs/sessions/SESSION_PLAN_2026-04-21.md` for the
 > session-level wave dispatch.
 
 ### DIS-002c — Append session-1 follow-up tickets to backlog
@@ -4018,8 +4018,8 @@ Register the five follow-up tickets (DIS-001b, DIS-002d, DIS-002e, DIS-021b, DIS
   - dis/document_ingestion_service/07_tickets/clarifications/README.md
   - dis/document_ingestion_service/07_tickets/done.md
   - dis/document_ingestion_service/07_tickets/in_progress.md
-  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
-  - dis/document_ingestion_service/10_handoff/document_ocr_flow.md
+  - dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md
+  - dis/handoffs/sessions/document_ocr_flow.md
   - radhakishan_system/docs/document_ocr_flow.md
   - dis/handoffs/DIS-002d.md
 - **Out of scope:** any ADR body (that is DIS-002e); any code edit; any backlog edit.
@@ -4030,7 +4030,7 @@ Create the two process folders the drift-prevention controls assume exist:
 supersession discipline + gate integration, (b)
 `07_tickets/clarifications/` with a README documenting the CLAR-NNN
 format. Move `document_ocr_flow.md` from `radhakishan_system/docs/`
-into `10_handoff/` (it belongs with the session handovers) and fix
+into `dis/handoffs/sessions/` (it belongs with the session handovers) and fix
 the stale path reference in `SESSION_HANDOVER_2026-04-20.md §2`.
 Backfill `07_tickets/done.md` with the 15 Wave-1–3 merged tickets per
 `session_handoff.md §8`. Ensure `07_tickets/in_progress.md` reads
@@ -4040,10 +4040,10 @@ Backfill `07_tickets/done.md` with the 15 Wave-1–3 merged tickets per
 
 - VERIFY-1: `test -f dis/document_ingestion_service/02_architecture/adrs/README.md && echo EXISTS` — expect `EXISTS`
 - VERIFY-2: `test -f dis/document_ingestion_service/07_tickets/clarifications/README.md && echo EXISTS` — expect `EXISTS`
-- VERIFY-3: `test -f dis/document_ingestion_service/10_handoff/document_ocr_flow.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-3: `test -f dis/handoffs/sessions/document_ocr_flow.md && echo EXISTS` — expect `EXISTS`
 - VERIFY-4: `test -e radhakishan_system/docs/document_ocr_flow.md || echo MOVED` — expect `MOVED`
 - VERIFY-5: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md` — expect ≥ `15`
-- VERIFY-6: `grep -c "feature_plans/document_ingestion_service/10_handoff/document_ocr_flow.md" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md` — expect ≥ `1`
+- VERIFY-6: `grep -c "feature_plans/document_ingestion_service/dis/handoffs/sessions/document_ocr_flow.md" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md` — expect ≥ `1`
 - VERIFY-7: `test -f dis/handoffs/DIS-002d.md && echo EXISTS` — expect `EXISTS`
 
 **Status:** Ready
@@ -4077,7 +4077,7 @@ format mandated by `coding_standards.md §15`:
 - **ADR-001** — Hexagonal Ports & Adapters (captures `tdd.md §1` + 8-port inventory).
 - **ADR-002** — Datalab hosted (Chandra) at POC; self-host threshold at **sustained 1000 docs/day** (per user memory + §13 live-verified limits).
 - **ADR-003** — Kill switch returns **503 UNAVAILABLE**, not 307 proxy. Reconciles `rollout_plan.md` + `feature_flags.md` + DIS-100 with the prose in `kill_switch.md` by amending the latter to say 503.
-- **ADR-004** — Datalab webhooks over polling (per user preference; captures the `webhook_url` field + shared-secret auth documented in `10_handoff/document_ocr_flow.md §13.4`). DIS-050a implements it.
+- **ADR-004** — Datalab webhooks over polling (per user preference; captures the `webhook_url` field + shared-secret auth documented in `dis/handoffs/sessions/document_ocr_flow.md §13.4`). DIS-050a implements it.
 - **ADR-005** — Hono over Fastify (per DIS-004 handoff D-1, §Portability edge-compatible).
 - **ADR-006** — `postgres` driver over `pg` / Drizzle (portability; `supabase-postgres.ts` uses `unsafe(sql, params)` parameterised).
 - **ADR-007** — Claude Haiku default, Sonnet escalation (per `tdd.md §10.2` + DIS-051 prompt-loader).
@@ -4227,25 +4227,25 @@ then implement; see it green.
   - dis/document_ingestion_service/07_tickets/backlog.md (append DIS-002f entry only)
   - dis/document_ingestion_service/07_tickets/done.md (append Wave-A rows)
   - dis/document_ingestion_service/07_tickets/in_progress.md (refresh snapshot)
-  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md (new)
-  - dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md (untracked → tracked)
-  - dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md (untracked → tracked)
-  - dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md (untracked → tracked)
-  - dis/document_ingestion_service/10_handoff/Prompt_2.md (untracked → tracked)
+  - dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md (new)
+  - dis/handoffs/sessions/ORCHESTRATOR_ORIENTATION_2026-04-20.md (untracked → tracked)
+  - dis/handoffs/sessions/ORIENTATION_REVIEW_2026-04-20.md (untracked → tracked)
+  - dis/handoffs/sessions/SESSION_PLAN_2026-04-21.md (untracked → tracked)
+  - dis/handoffs/sessions/Prompt_2.md (untracked → tracked)
   - dis/handoffs/DIS-002f.md
 - **Out of scope:** any code; any ADR / runbook / spec edit; any Wave-B work.
 
 **Description:**
-End-of-Wave-A session handover. Writes a feature-level session handover at `10_handoff/SESSION_HANDOVER_2026-04-21.md` per `session_handoff.md §4`, summarising what Wave A delivered (DIS-002c, 002d, 002e, 001b) and what remains for Wave B (DIS-021b, 050a). Commits 4 session-management artefacts that accumulated during the session but were left untracked per scope discipline. Backfills `done.md` with the 5 new Wave-A ticket entries.
+End-of-Wave-A session handover. Writes a feature-level session handover at `dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md` per `session_handoff.md §4`, summarising what Wave A delivered (DIS-002c, 002d, 002e, 001b) and what remains for Wave B (DIS-021b, 050a). Commits 4 session-management artefacts that accumulated during the session but were left untracked per scope discipline. Backfills `done.md` with the 5 new Wave-A ticket entries.
 
 **VERIFY:**
 
-- VERIFY-1: `test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md && echo EXISTS` — expect `EXISTS`
-- VERIFY-2: `grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `6`
-- VERIFY-3: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `4`
-- VERIFY-4: `grep -cE "DIS-021b|DIS-050a" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `2`
+- VERIFY-1: `test -f dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `grep -c "^## §" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `6`
+- VERIFY-3: `grep -cE "DIS-002c|DIS-002d|DIS-002e|DIS-001b" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `4`
+- VERIFY-4: `grep -cE "DIS-021b|DIS-050a" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md` — expect ≥ `2`
 - VERIFY-5: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md` — expect ≥ `20` (16 pre-existing + 5 Wave-A incl. DIS-002f)
-- VERIFY-6: 4 session-mgmt docs tracked — `git ls-files dis/document_ingestion_service/10_handoff/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md dis/document_ingestion_service/10_handoff/SESSION_PLAN_2026-04-21.md dis/document_ingestion_service/10_handoff/Prompt_2.md | wc -l` — expect `4`
+- VERIFY-6: 4 session-mgmt docs tracked — `git ls-files dis/handoffs/sessions/ORCHESTRATOR_ORIENTATION_2026-04-20.md dis/handoffs/sessions/ORIENTATION_REVIEW_2026-04-20.md dis/handoffs/sessions/SESSION_PLAN_2026-04-21.md dis/handoffs/sessions/Prompt_2.md | wc -l` — expect `4`
 - VERIFY-7: `test -f dis/handoffs/DIS-002f.md && echo EXISTS` — expect `EXISTS`
 
 **Status:** Ready
@@ -4403,18 +4403,18 @@ After DIS-021d lands, `dis/tsconfig.json` `exclude` list MUST contain ONLY `node
   - dis/document_ingestion_service/07_tickets/backlog.md (append DIS-002j entry only)
   - dis/document_ingestion_service/07_tickets/done.md (append Wave-B rows)
   - dis/document_ingestion_service/07_tickets/in_progress.md (refresh snapshot)
-  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md (new)
+  - dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md (new)
   - dis/handoffs/DIS-002j.md
 - **Out of scope:** any code; any ADR / runbook / spec edit; any Wave-C work.
 
 **Description:**
-End-of-Wave-B session handover mirroring DIS-002f's pattern for Wave A. Writes `10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md` per `session_handoff.md §4` covering DIS-050a (merged at ba5f944), DIS-021b (merged at 4e23cb2 with CS-1 sign-off), DIS-021c (merged at aef10b7 — regression-cleanup scope-split), DIS-021d (merged at f8cbc34 with CS-1-indirect sign-off — closes DIS-021b DatabasePort completion gap). Backfills `done.md` with these 4 rows plus DIS-002j itself. Stale Wave-A branch cleanup (item 2) already done pre-ticket.
+End-of-Wave-B session handover mirroring DIS-002f's pattern for Wave A. Writes `dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md` per `session_handoff.md §4` covering DIS-050a (merged at ba5f944), DIS-021b (merged at 4e23cb2 with CS-1 sign-off), DIS-021c (merged at aef10b7 — regression-cleanup scope-split), DIS-021d (merged at f8cbc34 with CS-1-indirect sign-off — closes DIS-021b DatabasePort completion gap). Backfills `done.md` with these 4 rows plus DIS-002j itself. Stale Wave-A branch cleanup (item 2) already done pre-ticket.
 
 **VERIFY:**
 
-- VERIFY-1: `test -f dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md && echo EXISTS` — expect `EXISTS`
-- VERIFY-2: `grep -c "^## §" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md` — expect ≥ `6`
-- VERIFY-3: `grep -cE "DIS-050a|DIS-021b|DIS-021c|DIS-021d" dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21_WaveB.md` — expect ≥ `4`
+- VERIFY-1: `test -f dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md && echo EXISTS` — expect `EXISTS`
+- VERIFY-2: `grep -c "^## §" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md` — expect ≥ `6`
+- VERIFY-3: `grep -cE "DIS-050a|DIS-021b|DIS-021c|DIS-021d" dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21_WaveB.md` — expect ≥ `4`
 - VERIFY-4: `grep -c "^### DIS-0" dis/document_ingestion_service/07_tickets/done.md` — expect ≥ `25` (21 pre + 4 Wave-B + 1 DIS-002j = 26 expected)
 - VERIFY-5: `test -f dis/handoffs/DIS-002j.md && echo EXISTS` — expect `EXISTS`
 
@@ -4439,7 +4439,7 @@ End-of-Wave-B session handover mirroring DIS-002f's pattern for Wave A. Writes `
 
 **Description:**
 Fix the 5 wire-contract bugs documented in
-`10_handoff/document_ocr_flow.md §13.2` and wire the webhook path
+`dis/handoffs/sessions/document_ocr_flow.md §13.2` and wire the webhook path
 decided in ADR-004.
 
 1. **Fix `output_format`** — send as a single comma-separated value
@@ -4482,7 +4482,7 @@ shapes (429 with Retry-After header) are needed.
 
 ---
 
-### DIS-002k — Rewrite stale `10_handoff/` path refs to `handoffs/sessions/`
+### DIS-002k — Rewrite stale `dis/handoffs/sessions/` path refs to `handoffs/sessions/`
 
 - **Tags:** `docs`, `doc-only`, `housekeeping`
 - **Epic:** (meta / documentation hygiene — parallel to Wave-C prep)
@@ -4495,7 +4495,7 @@ shapes (429 with Retry-After header) are needed.
 
 **Description:**
 On 2026-04-22 the 8 session-level handoff docs were moved from
-`dis/document_ingestion_service/10_handoff/` into `dis/handoffs/sessions/`
+`dis/handoffs/sessions/` into `dis/handoffs/sessions/`
 in a single rename commit (`69ce4bc`). The scope of that move was limited by
 user instruction to the rename itself — 119 textual references to the old
 path across 20 other files were intentionally not updated.
@@ -4555,7 +4555,7 @@ report per `verify_format.md §2`. Do NOT silently widen scope.)
 **Rewrite rule (apply uniformly):**
 
 ```
-old:  dis/document_ingestion_service/10_handoff/
+old:  dis/handoffs/sessions/
 new:  dis/handoffs/sessions/
 ```
 
@@ -4570,7 +4570,7 @@ the §3 Decisions section of the handoff.
 
 ```
 VERIFY-1: Pre-flight — count current stale refs and list files
-  Command:  grep -rln "dis/document_ingestion_service/10_handoff/" dis/ \
+  Command:  grep -rln "dis/handoffs/sessions/" dis/ \
               --include="*.md" 2>/dev/null | sort
   Expect:   20 files listed (may be fewer if intervening commits touched any).
             All listed files MUST appear in files_allowed.
@@ -4578,13 +4578,13 @@ VERIFY-1: Pre-flight — count current stale refs and list files
             after the rewrite) AND count is ≥ 15.
 
 VERIFY-2: Post-rewrite — zero live references remain
-  Command:  grep -rln "dis/document_ingestion_service/10_handoff/" dis/ \
+  Command:  grep -rln "dis/handoffs/sessions/" dis/ \
               --include="*.md" 2>/dev/null
   Expect:   <empty>
   Pass if:  exit status 1 (grep found nothing) AND stdout is empty.
 
 VERIFY-3: JSONL transcript preserved (historical record untouched)
-  Command:  grep -c "dis/document_ingestion_service/10_handoff/" \
+  Command:  grep -c "dis/handoffs/sessions/" \
               dis/document_ingestion_service/11_session_transcripts/2026-04-20_dis-build-session.jsonl
   Expect:   integer ≥ 1
   Pass if:  The .jsonl still contains old-path strings (we deliberately did
@@ -4634,7 +4634,7 @@ VERIFY-6: Fitness + tsc + vitest invariants still green (doc-only must not
   The VERIFY commands in those blocks that literally grep or `test -f`
   against handoff file paths must NOT be rewritten if they already point at
   `dis/handoffs/DIS-###.md` (they're already correct) — only rewrite strings
-  that explicitly contain `10_handoff/`.
+  that explicitly contain `dis/handoffs/sessions/`.
 - Be especially careful in DIS-002f.md (25 occurrences — most concentrated)
   and backlog.md (43 occurrences).
 

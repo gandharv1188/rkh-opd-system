@@ -20,7 +20,7 @@ turns free text into the validated
   contract.
 - `06_rollout/feature_flags.md §6` — `DIS_STRUCTURING_PROVIDER`
   flag: enum `haiku | sonnet`, default `haiku`.
-- `10_handoff/document_ocr_flow.md §12.4 + 12.5` — Claude pricing
+- `dis/handoffs/sessions/document_ocr_flow.md §12.4 + 12.5` — Claude pricing
   (Sonnet 4 ~$3 in / $15 out per 1M tokens; Haiku 4.5 roughly 1/5
   the cost).
 - `dis/handoffs/DIS-051.md` — ClaudeHaikuAdapter implementation,

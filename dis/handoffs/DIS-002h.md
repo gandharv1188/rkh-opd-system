@@ -55,11 +55,11 @@ Immutable. Any reader of the 2026-04-20 transcript already knows that folder nam
   - dis/document_ingestion_service/08_team/session_handoff.md
   - dis/document_ingestion_service/09_runbooks/dr_and_backup.md
   - dis/document_ingestion_service/09_runbooks/migration_incident.md
-  - dis/document_ingestion_service/10_handoff/ORIENTATION_REVIEW_2026-04-20.md
-  - dis/document_ingestion_service/10_handoff/Prompt_2.md
-  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-20.md
-  - dis/document_ingestion_service/10_handoff/SESSION_HANDOVER_2026-04-21.md
-  - dis/document_ingestion_service/10_handoff/document_ocr_flow.md (plus its Prettier reformat)
+  - dis/handoffs/sessions/ORIENTATION_REVIEW_2026-04-20.md
+  - dis/handoffs/sessions/Prompt_2.md
+  - dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md
+  - dis/handoffs/sessions/SESSION_HANDOVER_2026-04-21.md
+  - dis/handoffs/sessions/document_ocr_flow.md (plus its Prettier reformat)
   - dis/document_ingestion_service/04_api/openapi.yaml
   - dis/document_ingestion_service/05_testing/fixtures.md
   - dis/document_ingestion_service/02_architecture/portability.md

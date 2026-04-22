@@ -93,7 +93,7 @@ Mapped to DIS-001b's backlog-entry VERIFY block.
 
 - **No edit to `tsconfig.json`.** Its `rootDir`/`include` inconsistency is a DIS-001 defect, not DIS-001b scope. Fixed in DIS-021b.
 - **No edit to `dis/tests/integration/health.test.ts`** (despite the `.ts` import). Out of DIS-001b `files_allowed`; folded into DIS-021b.
-- **No commit of the 4 untracked `10_handoff/` session docs** (ORCHESTRATOR_ORIENTATION, ORIENTATION_REVIEW, SESSION_PLAN, Prompt_2). Session-handover commit owns those.
+- **No commit of the 4 untracked `dis/handoffs/sessions/` session docs** (ORCHESTRATOR_ORIENTATION, ORIENTATION_REVIEW, SESSION_PLAN, Prompt_2). Session-handover commit owns those.
 - **No teammate dispatched, no worktree, no cron.**
 - **No `npm test` run.** Tests would compile-fail on the same tsconfig issue; the test suite run belongs to DIS-021b after the reconciliation.
 - **No `npx eslint .` run.** ESLint is wired but running it cross-checks the same typecheck surface; defer to DIS-021b.
@@ -164,7 +164,7 @@ test -f dis/handoffs/DIS-001b.md && echo EXISTS
 - **Node 24 local vs Node 20 CI.** The orchestrator workstation runs Node 24; `npm install` warns `EBADENGINE` but installs fine. CI uses Node 20 per `.github/workflows/dis-ci.yml`. `package.json.engines` stays on 20.
 - **tsconfig rootDir/include conflict was not introduced by DIS-001b.** The ` .ts`-extension imports in src/http were preventing `tsc` from starting on the src/http module itself; once those were fixed, tsc reached the tests and hit the deeper tsconfig bug. DIS-001b's fix is correct and necessary even though it surfaced a second bug upstream.
 - **VERIFY-7's expected-output phrasing is now stale.** The backlog entry described the expected failure as "DIS-020/021 mismatch errors". Actual dominant errors are `TS6059: rootDir`. Not re-written in the backlog — DIS-001b merges with this §3 D-4 explanation instead. A reviewer re-running V7 should see the rootDir errors, not the DIS-020/021 errors, and should treat both error classes as evidence that DIS-021b is needed.
-- **The 4 untracked `10_handoff/` files** (ORCHESTRATOR_ORIENTATION, ORIENTATION_REVIEW, SESSION_PLAN, Prompt_2) are deliberately not committed here. They belong to the Wave-A session-handover commit.
+- **The 4 untracked `dis/handoffs/sessions/` files** (ORCHESTRATOR_ORIENTATION, ORIENTATION_REVIEW, SESSION_PLAN, Prompt_2) are deliberately not committed here. They belong to the Wave-A session-handover commit.
 
 ## 11. Verdict
 
