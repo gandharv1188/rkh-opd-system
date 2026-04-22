@@ -4552,12 +4552,21 @@ report per `verify_format.md §2`. Do NOT silently widen scope.)
 - `dis/handoffs/orientation/05-tickets-handoffs.md` (for the enumeration)
 - `dis/document_ingestion_service/11_session_transcripts/*.jsonl` (historical — READ-ONLY, preserves old path intentionally)
 
-**Rewrite rule (apply uniformly):**
+**Rewrite rules (apply both, in order — longer-first):**
 
 ```
-old:  dis/document_ingestion_service/10_handoff/
-new:  dis/handoffs/sessions/
+Step 1 (full path):
+  old:  dis/document_ingestion_service/10_handoff/
+  new:  dis/handoffs/sessions/
+
+Step 2 (shorthand — catches refs that omit the dis/document_ingestion_service/ prefix):
+  old:  10_handoff/
+  new:  dis/handoffs/sessions/
 ```
+
+Order matters — if the shorthand substitution runs first, remaining
+full-path refs would partially match and produce the malformed
+`dis/document_ingestion_service/dis/handoffs/sessions/…`.
 
 Rewrite is a literal path substitution. Do not alter surrounding prose,
 formatting, bullets, VERIFY gate expectations, or line structure beyond the
@@ -4565,6 +4574,16 @@ path fragment itself. If a line contains both the old path and quoted
 historical context that references its prior location, preserve the quoted
 context verbatim and update only the live reference — flag such cases in
 the §3 Decisions section of the handoff.
+
+**Scope note (added mid-flight per dev-002k-stale-paths 2026-04-22 STOP-and-report):**
+6 files (`dis/handoffs/orientation/**` except `01-overview-product.md`,
+`02-architecture.md`, `03-data-api-testing.md`, `06-code-reality-audit.md`;
+`dis/handoffs/sessions/Prompt_2.md`;
+`dis/handoffs/sessions/SESSION_HANDOVER_2026-04-20.md`) are intentionally
+OUT of scope for this ticket because their `10_handoff/` references are
+mostly descriptive/historical ("files were moved from X to Y") — blindly
+rewriting them would destroy factual statements. Deferred to DIS-002l
+(to be registered by the teammate's handoff §5 Follow-ups).
 
 **VERIFY (numbered, machine-checkable):**
 
