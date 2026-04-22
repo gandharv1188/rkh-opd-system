@@ -946,3 +946,67 @@ Four fresh teammates, each 3 integration-test tickets. First wave using the new 
   - Wave 2b integration tests (12): DIS-034 through DIS-045.
 - **`feat/dis-plan` state at Epic B close:** commit ccd5f85, 43 test files, 288 tests, fitness 0 / 68 files, tsc 0. Up from Wave-B baseline of 124 tests.
 - **Open follow-ups:** DIS-025a (idempotency SQL → named DatabasePort methods), DIS-002l (stale 10_handoff refs in 8 out-of-scope meta/orientation files), DIS-002m (VERIFY-3 expected-string fix in DIS-002k ticket), DIS-007-followup (openapi.yaml 503/UNAVAILABLE declaration for ADR-003 compliance).
+
+---
+
+## Session 2026-04-22 — Wave 3a (Epic C adapters + composition root, 9 tickets, 3 teammates)
+
+### Wave-3a dispatch shape
+
+Four fresh teammates planned (3-ticket cap per #27). One (`dev-c-office-parsers`) STOP-and-reported a category-error mismatch (DIS-059/060/061 couldn't implement OcrPort without widening its provider union) — correctly held scope. Architect (orchestrator) authored ADR-008 + backlog rewrites introducing `DocumentTextExtractorPort` to unblock those 3 tickets + add DIS-058z (port author) + DIS-059o (OCR bridge). Deferred all 4 to Wave 3b. Net: 3 teammates completed 9 tickets this sub-wave.
+
+### ADR-008 (accepted 2026-04-22) — `DocumentTextExtractorPort` as file-router dispatch target
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan (commit f59ebe5)
+- Artifact: `dis/document_ingestion_service/02_architecture/adrs/ADR-008-document-text-extractor-port.md`
+- Unblocks: DIS-058z (new port), DIS-059/060/061 (rewritten), DIS-059o (new bridge adapter)
+- Verdict: Architect-level decision taken without delegation (per playbook §A13). Teammate STOP-report was exemplary scope discipline.
+
+### DIS-052 — ClaudeVisionAdapter (OCR fallback)
+- Merged: 2026-04-22 | Branch: feat/dev-c-missing-adapters (deleted) | Commits: fe65be3 + 09114fa + 82e8f57 | Handoff: dis/handoffs/DIS-052.md
+- Verdict: Complete. `@anthropic-ai/sdk`-backed OcrPort impl; `AnthropicClientFactory` seam (DIS-051 pattern). CS-2 rawResponse preserved. Selected when DIS_OCR_PROVIDER=claude.
+
+### DIS-055 — SupabaseSecretsAdapter
+- Merged: 2026-04-22 | Branch: feat/dev-c-missing-adapters | Commits: 7c4c23b + a3731a4 + 2e83392 | Handoff: dis/handoffs/DIS-055.md
+- Verdict: Complete. SecretsPort impl with 5-min cache per portability.md §Secrets. `get(name)` — throws when unset. Fallback to process.env when outside Edge Functions.
+
+### DIS-056 — PgCronAdapter
+- Merged: 2026-04-22 | Branch: feat/dev-c-missing-adapters | Commits: 3bd25e0 + f176c39 + caeefda | Handoff: dis/handoffs/DIS-056.md
+- Verdict: Complete. QueuePort over pg_cron + pg_net. `enqueue(topic, payload, opts)` → dis_jobs insert; `startConsumer` is a no-op in POC (pg_cron dispatches). DIS-097 in Epic D wires the webhook consumer endpoint.
+
+### DIS-058a — Preprocessor: container normalization (HEIC/WebP → JPEG)
+- Merged: 2026-04-22 | Branch: feat/dev-c-preprocessor-pipeline (deleted) | Commits: 329acf4 + 85a4555 + 1309b4e | Handoff: dis/handoffs/DIS-058a.md
+- Verdict: Complete. Pure Buffer → Buffer[] transform using sharp. Multi-frame TIFF → JPEG per frame. Handoff §10 flags HEIC decode on Linux container build (Windows prebuilt sharp lacks HEIF encode) — **DIS-058a-platforms-followup** registered.
+
+### DIS-058b — Preprocessor: deskew
+- Merged: 2026-04-22 | Branch: feat/dev-c-preprocessor-pipeline | Commits: c53c64a + 8cc1a76 + 670d563 | Handoff: dis/handoffs/DIS-058b.md
+- Verdict: Complete. Projection-profile skew estimator (simplified per scope; full Hough deferred as **DIS-058b-followup**). ±15° cap, 0.25° dead zone. Pure Buffer → Buffer.
+
+### DIS-058c — Preprocessor: perspective correction
+- Merged: 2026-04-22 | Branch: feat/dev-c-preprocessor-pipeline | Commits: e1ff239 + cb57269 + cbdc65e | Handoff: dis/handoffs/DIS-058c.md
+- Verdict: Complete. Bright-doc-on-dark-frame bbox crop (simplified; true 4-corner homography warp deferred as **DIS-058c-followup**). Strict no-op when no quad detected. All 3 slices honest about simplification per DIS-025 precedent — transparency over cosmetic dodges.
+
+### DIS-071 — Shared OcrPort contract test suite
+- Merged: 2026-04-22 | Branch: feat/dev-c-wiring-contracts (deleted) | Commits: a6681aa + 4809b94 | Handoff: dis/handoffs/DIS-071.md
+- Note: test-only ticket so test/docs topology (no feat commit).
+- Verdict: Complete. `runOcrPortContractSuite(factory)` parameterized harness. Applied against FakeOcrAdapter + DatalabChandraAdapter (injected fake fetch). 8 contract tests.
+
+### DIS-072 — Shared StructuringPort contract test suite
+- Merged: 2026-04-22 | Branch: feat/dev-c-wiring-contracts | Commits: b5f08a9 + 880dde3 | Handoff: dis/handoffs/DIS-072.md
+- Verdict: Complete. `runStructuringPortContractSuite(factory)`. Applied against FakeStructuringAdapter + ClaudeHaikuAdapter. 10 tests covering retry-once-on-schema-invalid (DIS-051 contract).
+
+### DIS-079 — Adapter wiring composition root (POC) — **orientation F1 (first half) CLOSED**
+- Merged: 2026-04-22 | Branch: feat/dev-c-wiring-contracts | Commits: 02e3c53 + 5136073 + 687fa85 | Handoff: dis/handoffs/DIS-079.md (most detailed — orientation-critical)
+- Verdict: Complete. `dis/src/wiring/supabase.ts` populated: `createSupabasePorts()` returns typed Ports bag with 6 baseline adapters (SupabasePostgres, SupabaseStorage, DatalabChandra, ClaudeHaiku, DefaultFileRouter, DefaultPreprocessor) + EnvSecretsAdapter shim. `composeForHttp(ports)`, `bootSupabase()`, `createAwsPorts()` stub also in place. Driver-loader seam via `__setDriverLoaderHookForTests`. Wave-3a siblings' adapters (DIS-052/055/056/058a..c) NOT yet wired by design — will be wired in a follow-up that lands post-merge. Path divergence from backlog's `wiring/poc.ts` spec → actual `wiring/supabase.ts` documented in handoff §3 and acceptable (matches the `supabase.ts | aws.ts` split from portability.md §Three containment boundaries).
+- **Follow-up DIS-079-followup-d:** `createSupabasePorts` currently passes `env.SUPABASE_URL` (REST URL) as the Postgres connection string. Works for test doubles but a live run needs the `postgres://...@db.<ref>.supabase.co:5432/postgres` form. Resolution: DIS-055 or a new DATABASE_URL secret via SecretsPort.
+- **Follow-up DIS-079-followup-wire-siblings:** wire the Wave-3a adapters (claude-vision, supabase-secrets, pg-cron, preprocessor stages) that didn't exist at DIS-079 dispatch into `createSupabasePorts` now that they're on main.
+
+### Wave-3a closeout summary
+
+- **Invariants on `feat/dis-plan` at Wave-3a close (commit 18ecd4d):**
+  - fitness: 0 violations, **76 files scanned** (+8 src files: 3 adapters + 3 preprocessor stages + 2 wiring)
+  - tsc --noEmit: exit 0
+  - vitest: **52 test files / 353 tests** (+65 from Wave-2b's 288)
+- **Tickets merged:** 9 (DIS-052, 055, 056, 058a, 058b, 058c, 071, 072, 079).
+- **Open follow-ups registered (not in backlog yet but tracked in handoffs):** DIS-058a-platforms-followup, DIS-058b-followup (full Hough deskew), DIS-058c-followup (homography warp), DIS-079-followup-d (DATABASE_URL), DIS-079-followup-wire-siblings.
+- **Deferred to Wave 3b (via ADR-008):** DIS-058z (new port), DIS-059 (native-PDF, rewritten), DIS-060 (OfficeWord, rewritten), DIS-061 (OfficeSheet, rewritten), DIS-059o (OCR bridge, new).
+- **Orientation F1 status: FIRST HALF CLOSED** — `dis/src/wiring/` populated. Second half (`dis/migrations/` empty) blocks Wave 4.
