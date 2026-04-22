@@ -813,3 +813,136 @@ per-ticket pattern observably in git log.
   - Operating rule #27 (3-ticket cap, fresh-per-wave, shutdown+respawn recovery) — locked.
   - Operating rule #30 (progress.json checkpoints for Wave-2b onward) — locked.
   - CLAUDE.md §Agentic Team Management extended with both (commit 5301409).
+
+---
+
+## Session 2026-04-22 — Wave 2b (Epic B integration tests, 12 tickets, 4 teammates)
+
+### Wave-2b dispatch shape
+
+Four fresh teammates, each 3 integration-test tickets. First wave using the new `.progress.jsonl` checkpoint discipline (operating rule #30). Commit-topology reminder reinforced: test → feat → docs three-commit per ticket, even for integration tests where "feat" is the red-to-green assertion refinement rather than new source code.
+
+### DIS-034 — State-machine integration test (full happy path, CS-1)
+
+- Merged: 2026-04-22 by orchestrator into feat/dis-plan
+- Branch: feat/dev-b2-state-orch (deleted post-merge)
+- Commits: 1892f04 (test) + f53180b (feat) + 663fa47 (handoff)
+- Handoff: dis/handoffs/DIS-034.md
+- CS coverage: CS-1 (no promote without nurse_approve; negative assertions verify)
+- Notable interpretation: orchestrator exposes no `promote()`; the final verified→promoted hop asserted through pure `transition()` — real promotion in DIS-037. Premature approve + direct-to-promoted transitions both throw InvalidStateTransitionError.
+- Verdict: Complete. 7 new tests in the file.
+
+### DIS-035 — Orchestrator retry path integration test
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-state-orch (deleted post-merge)
+- Commits: 4ada38d + 4f9795e + 28c6c13
+- Handoff: dis/handoffs/DIS-035.md
+- Verdict: Complete. Parent row version 1→2 (fail transition persisted), child row fresh at version 1 with `parent_extraction_id` pointer + `retry:`-prefixed idempotency key.
+
+### DIS-040 — Version-lock integration (approve race)
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-state-orch (deleted post-merge)
+- Commits: 22795d8 + 73db968 + 72b634f
+- Handoff: dis/handoffs/DIS-040.md
+- Verdict: Complete. `Promise.allSettled([approveA, approveB])` with same expectedVersion=2; FakeDatabaseAdapter's compare-and-set deterministically yields 1 fulfilled, 1 rejected with VersionConflictError.
+
+### DIS-036 — Confidence-policy integration (CS-7 fail-closed)
+
+- Merged: 2026-04-22 (CS-7 — batched Gate 6a at Wave 8 per user directive)
+- Branch: feat/dev-b2-policy-audit (deleted post-merge)
+- Commits: 12297c4 + 3358ce7 + 3143798
+- Handoff: dis/handoffs/DIS-036.md
+- CS coverage: CS-7 (fail-closed default: enabled=false forces every extraction through nurse_approve regardless of confidence)
+- Verdict: Complete. Rule-isolation assertion included to prove the gate is the `enabled` flag, not any per-field confidence threshold.
+
+### DIS-037 — Promotion service integration, discharge summary (CS-10 + CS-11)
+
+- Merged: 2026-04-22 (CS-10 + CS-11 — batched Gate 6a at Wave 8)
+- Branch: feat/dev-b2-policy-audit (deleted post-merge)
+- Commits: 8af033a + 18e9124 + 064c513
+- Handoff: dis/handoffs/DIS-037.md
+- CS coverage: CS-10 (discharge summaries: latest-only), CS-11 (duplicate-guard on replay)
+- Verdict: Complete. 7 TSB readings same test+date → 1 insert (CS-10); replay → 0 new inserts (CS-11). Negative control asserts lab_report document_type keeps all 7.
+
+### DIS-038 — Audit log integration (CS-3)
+
+- Merged: 2026-04-22 (CS-3 — batched Gate 6a at Wave 8)
+- Branch: feat/dev-b2-policy-audit (deleted post-merge)
+- Commits: f4251b6 + 16deb27 + f14c757
+- Handoff: dis/handoffs/DIS-038.md
+- CS coverage: CS-3 (every orchestrator state-change emits audit event with {event, actor, subject_id, correlation_id, before, after})
+- Verdict: Complete.
+
+### DIS-039 — Idempotency store integration
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-utils-integration (deleted post-merge)
+- Commits: 6c4329f + b5392f9 + a1dfa17
+- Handoff: dis/handoffs/DIS-039.md
+- Verdict: Complete. All three outcomes (new/replay/collision) + replay-stability check (createdAt stable across repeat replays).
+- Gate-2 topology note: this teammate used test/test/docs (main test → hardening check → handoff) instead of strict test/feat/docs for integration tests with no new impl. Acceptable — maps to Gate-2 as initial-red + green-plus-hardening + docs.
+
+### DIS-041 — Content-hash + storage dedupe integration
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-utils-integration (deleted post-merge)
+- Commits: caa853d + 9ce612e + 3629231
+- Handoff: dis/handoffs/DIS-041.md
+- Verdict: Complete. Two uploads with same bytes → sha256 match → orchestrator resolves to existing extraction_id + FakeStorageAdapter observes only one putObject call.
+
+### DIS-042 — Correlation propagation integration
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-utils-integration (deleted post-merge)
+- Commits: 8a05332 + 757d6c0 + 038de23
+- Handoff: dis/handoffs/DIS-042.md
+- Verdict: Complete. `withCorrelation('abc-123', …)` → audit event carries correlation_id='abc-123' → logger + metrics share the same id through ALS. Promise.all fan-out check included.
+
+### DIS-043 — Error envelope end-to-end
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-errors-schema-cost (deleted post-merge)
+- Commits: f18682b (bundled test + handoff — see procedural note)
+- Handoff: dis/handoffs/DIS-043.md
+- Verdict: Complete substantively (7 tests pass, typecheck clean). Gate-2 topology note: the teammate bundled test + handoff into a single commit per ticket for this branch. Substance correct; same procedural deviation as Wave-1's test-harness teammate. Future-wave reminder: strict test/feat/docs even when feat is a no-op.
+
+### DIS-044 — ClinicalExtraction schema drift
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-errors-schema-cost (deleted post-merge)
+- Commits: a8973cd (bundled — see DIS-043 procedural note)
+- Handoff: dis/handoffs/DIS-044.md
+- Notable interpretation: retry-once lives inside `ClaudeHaikuAdapter` per DIS-051, not the orchestrator — scripted an AnthropicLike client to drive the real adapter. Asserts exactly 2 model calls, stricter re-prompt on second, StructuringSchemaInvalidError(attempts=2) as terminal error. Also pins validateExtraction (DIS-030) as the drift detector, with a recovery-on-retry path.
+- Verdict: Complete substantively; same Gate-2 topology note.
+
+### DIS-045 — Cost calculator aggregate
+
+- Merged: 2026-04-22
+- Branch: feat/dev-b2-errors-schema-cost (deleted post-merge)
+- Commits: 6794b8a (bundled — see DIS-043 procedural note)
+- Handoff: dis/handoffs/DIS-045.md
+- Verdict: Complete. Single ocr_scan orchestrator run with FakeOcrAdapter(pageCount=3, tokensUsed) + FakeStructuringAdapter(tokensUsed). Aggregation via calculateCost() with total == input+output+ocr invariant and hand-computed expected match. Aggregation in-test per brief; DIS-149 owns the ledger writer.
+
+### Wave-2b closeout summary
+
+- **Invariants on `feat/dis-plan` after wave merge (commit ccd5f85):**
+  - fitness: 0 violations, 68 files (test-only wave, no src files added)
+  - tsc --noEmit: exit 0
+  - vitest: 43 test files / **288 tests** (+38 from Wave-2b; +94 over Wave-1's 194)
+- **Tickets merged:** 12 (DIS-034/035/036/037/038/039/040/041/042/043/044/045). 4 carry CS tags (CS-1, CS-3, CS-7, CS-10+11) — Gate 6a batched at Wave 8 per user directive.
+- **Progress.jsonl discipline (rule #30) exercised for the first time.** Signal worked: two teammates had uncommitted work visible via checkpoints when git log still showed nothing. Adopted for all future waves.
+- **Gate 2 topology observations:**
+  - `dev-b2-state-orch`: perfect test/feat/docs × 3 tickets (9 commits).
+  - `dev-b2-policy-audit`: perfect test/feat/docs × 3 (9 commits).
+  - `dev-b2-utils-integration`: test/test/docs × 3 (9 commits). Acceptable for integration tests.
+  - `dev-b2-errors-schema-cost`: bundled test+handoff into 1 commit × 3 tickets (3 commits total). Same procedural drift as Wave-1 test-harness teammate — flagged for Wave-3 reminder.
+
+### Wave-2 (combined Epic B) closeout
+
+- **Epic B fully complete.** 21 tickets across both sub-waves:
+  - Wave 2a utilities (9): DIS-025, DIS-026, DIS-027, DIS-028, DIS-029, DIS-030, DIS-031, DIS-032, DIS-033.
+  - Wave 2b integration tests (12): DIS-034 through DIS-045.
+- **`feat/dis-plan` state at Epic B close:** commit ccd5f85, 43 test files, 288 tests, fitness 0 / 68 files, tsc 0. Up from Wave-B baseline of 124 tests.
+- **Open follow-ups:** DIS-025a (idempotency SQL → named DatabasePort methods), DIS-002l (stale 10_handoff refs in 8 out-of-scope meta/orientation files), DIS-002m (VERIFY-3 expected-string fix in DIS-002k ticket), DIS-007-followup (openapi.yaml 503/UNAVAILABLE declaration for ADR-003 compliance).
