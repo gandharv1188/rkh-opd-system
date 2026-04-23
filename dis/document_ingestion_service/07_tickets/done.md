@@ -1236,3 +1236,91 @@ One post-merge fix (3cd784b) replaced `page.accessibility.snapshot()` with CDP-b
   - **DIS-130-followup** — Supabase Realtime client adapter implementing the RealtimeTransport port.
   - **DIS-140-followup** — wire the deploy step to the real staging host once INTEGRATION APPROVED.
 - **Wave 7 (Epic F observability + staging migrations) is ready to dispatch.** User directive 2026-04-22: continue through Wave 7 without pausing at Gate 6a; batched sign-off happens before Wave 8.
+
+---
+
+## Session 2026-04-22/23 — Wave 7 (Epic F Observability + Safety, 27/31 tickets)
+
+Dispatched as three sub-waves of 9 parallel teammates each. 4 tickets HELD pending user confirmation on staging Supabase project.
+
+### Sub-wave 7a — observability foundation (9 parallel)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-146 | pino logger + PII redaction | cc0cc16 |
+| DIS-147 | OTel tracing scaffold (in-process POC; real OTel = follow-up) | b41cf5d |
+| DIS-148 | 5 canonical metric names wired to DIS-009 Metrics | 3e73952 |
+| DIS-149 | Cost ledger writer | 5056dab |
+| DIS-150 | Queue-depth alert webhook (5-min sustained, cooldown) | f063576 |
+| DIS-160 | GET /health/deep per-component probe | 09e5786 |
+| DIS-161 | PII redactor (CS-8 batched) | fca1a49 |
+| DIS-162 | Audit-log merkle integrity (CS-5 batched) | d979044 |
+| DIS-164 | Trace sampling policy | f63981a |
+
+**Mid-wave crisis: `.claude/worktrees/` was tracked by git** (11,108 files accidentally committed in Wave 6b-3 via DIS-133 handoff commit). Every new worktree checkout on Windows was recreating dead carcass dirs, hitting MAX_PATH failures. Fix: commit `34ce98c` untracks the whole tree + adds `.claude/worktrees/` to `.gitignore`. Dead carcasses nuked via PowerShell. Post-fix, worktree creation works cleanly.
+
+### Sub-wave 7b — clinical + safety + guardrails (9 parallel)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-151 | Clinician weekly audit dry-run (CS-6 batched) | aa82ce2 |
+| DIS-152 | Red-team adversarial fixtures (CS-2+CS-7 batched) | 4d9bec0 |
+| DIS-159 | Operator-latency SLO with p50/p95 computation | 8efedf8 |
+| DIS-165 | Cost budget guardrail (CS-12 batched) | 1787b36 |
+| DIS-166 | Chaos: OCR garbage → failed state (CS-7 batched) | 0aaa48e |
+| DIS-167 | Chaos: DB drop mid-txn → no partial write | 49c80b1 |
+| DIS-170 | Clinical-safety dry-run report (12 CS sections) | 9c36046 |
+| DIS-172 | Cleanup expired idempotency keys (>7 days) | f4d1518 |
+| DIS-173 | Fixture generator CLI | b2f9820 |
+
+### Sub-wave 7c — runbooks + docs (9 parallel)
+
+| Ticket | Purpose | Forward commit |
+|--------|---------|----------------|
+| DIS-153 | Runbook: OCR outage | 86e1556 |
+| DIS-154 | Runbook: Stuck job | e138d10 |
+| DIS-155 | Runbook: Cost spike | 64a7727 |
+| DIS-156 | Runbook: Schema drift | 1dee23a |
+| DIS-157 | Runbook: Duplicate storm (CS-4 batched) | bea906c |
+| DIS-158 | Admin dashboard skeleton (6 panels) | 4bdabb9 |
+| DIS-169 | Security review checklist (15+ items) | 159922d |
+| DIS-174 | Observability docs (Logs/Traces/Metrics/Alerts) | 9215355 |
+| DIS-175 | Epic F wrap-up checklist | 9929b1e |
+
+Merge conflict on `dis/document_ingestion_service/09_runbooks/duplicate-storm.md` between DIS-157 authored by `dev-f-rb-dupstorm` and an older stale version `4df0f7a` from somewhere in history. Resolved by taking the new Wave-7c version.
+
+### HELD — require user confirmation on staging Supabase project
+
+| Ticket | Purpose | Reason held |
+|--------|---------|-------------|
+| DIS-145 | Apply M-001..M-008 to staging Supabase | Needs `DIS_STAGING_REF` + live psql. Real DB migration. |
+| DIS-163 | Backup verify dry-run (`--env=staging`) | Same. |
+| DIS-168 | k6 load test (`k6 run ... --env=staging`) | Same. |
+| DIS-171 | Migration rehearsal (`--env=staging`) | Same. |
+
+These require authenticated live-staging access which the orchestrator does not have. Per user directive: staging Supabase project selection is pending.
+
+### Wave-7 closeout summary
+
+- **Invariants on `feat/dis-plan` at close (commit ~ea9fc after 7c merges):**
+  - fitness: 0 violations, 105 production-code files
+  - backend tsc: exit 0
+  - backend vitest: 96 test files passing (+18 from Wave 6's 78)
+  - UI typecheck: exit 0 (unchanged)
+- **Epic F is 27/31 complete.** Remaining 4 (DIS-145/163/168/171) HELD pending staging project. All others merged with tests and handoffs.
+- **CS-tagged additions awaiting batched Gate 6a (appended to queue):**
+  - **CS-5** (DIS-162 audit-log merkle integrity)
+  - **CS-6** (DIS-151 weekly audit dry-run)
+  - **CS-7** (DIS-152 red-team, DIS-166 chaos OCR)
+  - **CS-8** (DIS-161 PII redactor)
+  - **CS-12** (DIS-165 cost guardrail)
+- **Observed gotchas / playbook updates:**
+  1. `.claude/worktrees/` MUST be in `.gitignore`. Teammates committing with `git add -A` can otherwise sweep the entire worktree pool. Committed 34ce98c to fix permanently.
+  2. `npm install` repair needed 3× during Wave 7 (after 7a merge, 7b merge, 7c merge) — `.bin` symlinks and `@hono/node-server` types kept getting corrupted by parallel worktree operations. Routine post-merge repair.
+  3. Merge conflicts possible when two sessions author the same doc path (the DIS-157 dup-storm collision). Check `git log --all --oneline -- <path>` before authoring.
+  4. `@types/hono__node-server` doesn't exist — fix via full `npm install`, not via adding a @types dep.
+- **New follow-ups registered:**
+  - **DIS-145-followup** — apply M-001..M-008 to staging once user provides `DIS_STAGING_REF` + SERVICE_ROLE_KEY.
+  - **DIS-147-followup** — swap in-process Tracer for real `@opentelemetry/api` once npm install authorized.
+  - **DIS-163-followup / DIS-168-followup / DIS-171-followup** — same as DIS-145.
+- **Epic G (Integration) remains on hold** per `integration_hold.md`. Wave 8 = batched Gate 6a sign-off authoring + session handover.
