@@ -1,0 +1,316 @@
+-- =====================================================================
+-- migration_io_indexes.sql
+-- =====================================================================
+--   Target:  LIVE Supabase project ecywxuqhnlkjtdshpcbc
+--            (NABH-accredited pediatric OPD, in active clinical use).
+--
+--   Purpose: Add trigram + btree indexes to eliminate seq-scan-on-every-
+--            keystroke against formulary, standard_prescriptions,
+--            patients, and loinc_investigations. Closes Fix-4 in
+--            docs/system/09-findings-and-action-plan.md.
+--
+--   Read-this-before-running:
+--     1. THIS FILE IS NOT YET SAFE TO RUN AUTOMATICALLY.
+--        Run one statement at a time, off clinic hours, with a
+--        verification query (see docs/system/10-index-proposal.md §7)
+--        between each.
+--     2. Every CREATE INDEX uses CONCURRENTLY (no AccessExclusive lock,
+--        no blocked writes). pg_trgm extension creation is the only
+--        statement that takes a brief schema lock and must run first.
+--     3. Each statement is independently revertible:
+--          DROP INDEX CONCURRENTLY public.<index_name>;
+--     4. CONCURRENTLY indexes cannot run inside a transaction. Do NOT
+--        wrap the whole file in BEGIN/COMMIT. The Supabase CLI
+--        (`db query --linked -f`) sends statements as a single string;
+--        prefer running each CREATE INDEX in its own invocation.
+--     5. After each index, ANALYZE its table so the planner picks it
+--        up immediately:
+--          ANALYZE public.<table>;
+--
+--   Diagnostic snapshot driving these proposals (2026-04-27, live):
+--     formulary               680 rows   5,869 seq_scan   3,036,726 tup_read
+--     standard_prescriptions  503 rows   3,473 seq_scan   1,637,421 tup_read
+--     patients                570 rows   1,844 seq_scan     230,598 tup_read
+--     loinc_investigations 77,922 rows      93 seq_scan   6,021,399 tup_read
+--   Cache hit ratio is 100% on both heap and index — so the win is in
+--   reduced rows-examined / planner work, which directly reduces total
+--   time and shared_blks_hit (= IO budget).
+--
+--   Order is lowest-risk first: btree on small tables, then pg_trgm
+--   extension, then trigram GIN indexes. The DROP candidates section at
+--   the end is a SEPARATE PHASE — DO NOT RUN as part of the
+--   index-create migration.
+-- =====================================================================
+
+
+-- ---------------------------------------------------------------------
+-- 0. ENABLE pg_trgm EXTENSION
+-- ---------------------------------------------------------------------
+-- REQUIRES SUPERUSER OR EXPLICITLY GRANTED — verify rights before running.
+-- Supabase projects normally allow this from the Studio "Database →
+-- Extensions" UI; the SQL form below works when the calling role has
+-- the CREATE privilege on the database. Live DB confirmed at
+-- 2026-04-27 to NOT have pg_trgm enabled (only pg_stat_statements,
+-- pgcrypto, plpgsql, supabase_vault, uuid-ossp).
+--
+-- Side effect:  takes a brief AccessExclusiveLock on pg_extension /
+--               creates a few catalog rows + GIN ops classes. No
+--               application table is touched.
+-- Reversal:     DROP EXTENSION pg_trgm; (only if no index depends on it)
+--
+-- CREATE EXTENSION IF NOT EXISTS pg_trgm;
+--   ^ uncomment when ready. Confirm with:
+--     SELECT extname FROM pg_extension WHERE extname = 'pg_trgm';
+
+
+-- ---------------------------------------------------------------------
+-- 1. BTREE: standard_prescriptions.icd10 prefix lookup (lowest risk)
+-- ---------------------------------------------------------------------
+-- Serves:
+--   SELECT ... FROM standard_prescriptions
+--    WHERE icd10 ilike $1 AND active = true
+-- (291 calls @ 148ms = 43.3s ; 198 calls @ 220ms = 43.5s ; 92 calls @
+--  3.8s — consistent left-anchored ICD-10 prefix searches such as
+--  "J18%", "A09%", "R50%".)
+--
+-- An idx_stdpx_icd10 exists today as a plain btree on icd10. It is NOT
+-- used by ilike because the column is text (not text_pattern_ops), so
+-- the planner falls back to seq scan even for left-anchored patterns.
+-- text_pattern_ops makes left-anchored LIKE/ILIKE-with-lower index-able.
+--
+-- Note: ILIKE 'J18%' will still seq-scan unless we also add a
+-- functional lower(icd10) index OR rely on the pg_trgm gin index from
+-- statement #4. ICD-10 codes are typically uppercase letters + digits
+-- so the simple btree on lower(icd10) is enough and is the cheapest.
+--
+-- Estimated size: ~16 kB (503 rows × ~20 bytes/key).
+-- Build duration: <1 s.
+-- Risk:           negligible — tiny table, additive index, CONCURRENTLY.
+-- Confidence:     High.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_stdpx_icd10_lower
+--   ON public.standard_prescriptions (lower(icd10) text_pattern_ops);
+
+
+-- ---------------------------------------------------------------------
+-- 2. BTREE: standard_prescriptions.diagnosis_name prefix lookup
+-- ---------------------------------------------------------------------
+-- Serves:
+--   SELECT ... FROM standard_prescriptions
+--    WHERE diagnosis_name ilike $1 AND active = true
+-- (23 calls @ 51ms — and the OR'd "icd10 ilike OR diagnosis_name ilike"
+--  form which dominates total_exec_time on the table.)
+--
+-- An idx_stdpx_name btree exists but is case-sensitive and won't help
+-- ilike. A functional lower() index does.
+--
+-- Estimated size: ~32 kB (503 rows × ~60 bytes/key).
+-- Build duration: <1 s.
+-- Risk:           negligible.
+-- Confidence:     High.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_stdpx_name_lower
+--   ON public.standard_prescriptions (lower(diagnosis_name) text_pattern_ops);
+
+
+-- ---------------------------------------------------------------------
+-- 3. BTREE: formulary.generic_name prefix lookup (covers most calls)
+-- ---------------------------------------------------------------------
+-- Serves the most expensive single query in the database:
+--   SELECT generic_name, dosing_bands, formulations, contraindications,
+--          interactions, ... FROM formulary
+--    WHERE (generic_name ilike $1 OR generic_name ilike $2 OR ...) AND active
+-- (1,598 calls @ 978ms = 1,563s total — and several smaller variants.)
+--
+-- get_formulary in the Edge Function looks drugs up by exact generic
+-- name; the prescription pad's drug-search box does prefix-ilike. Both
+-- patterns are left-anchored. A functional index on lower(generic_name)
+-- with text_pattern_ops handles both.
+--
+-- Existing idx_formulary_name and formulary_generic_name_key are plain
+-- btrees on the raw column — the planner cannot use them for ILIKE.
+--
+-- Estimated size: ~80 kB (680 rows × ~80 bytes/key).
+-- Build duration: <1 s.
+-- Risk:           negligible.
+-- Confidence:     High.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_formulary_generic_name_lower
+--   ON public.formulary (lower(generic_name) text_pattern_ops);
+
+
+-- ---------------------------------------------------------------------
+-- 4. GIN trigram: standard_prescriptions.diagnosis_name fuzzy search
+-- ---------------------------------------------------------------------
+-- Serves substring (non-anchored) ilike on diagnosis_name. The pad
+-- runs "%cold%", "%pneumonia%", "%otitis%" lookups that the
+-- text_pattern_ops btree cannot accelerate.
+--
+-- Requires:  pg_trgm extension (statement 0).
+-- Estimated size: ~80–120 kB (small table, short strings).
+-- Build duration: <1 s.
+-- Risk:      low; trigram GIN adds ~3-5 µs per row insert/update — on
+--            this 503-row reference table, write traffic is ~0.
+-- Confidence: High.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_stdpx_name_trgm
+--   ON public.standard_prescriptions
+--   USING gin (lower(diagnosis_name) gin_trgm_ops);
+
+
+-- ---------------------------------------------------------------------
+-- 5. GIN trigram: formulary.generic_name fuzzy search
+-- ---------------------------------------------------------------------
+-- Covers non-anchored "%amox%", "%cef%", brand-vs-generic guesses, and
+-- the multi-OR ilike form the prescription pad sends when the search
+-- box runs against multiple guess variants.
+--
+-- Estimated size: ~120–180 kB (680 rows × short strings).
+-- Build duration: <1 s.
+-- Risk:           write overhead is real but formulary writes are
+--                 rare (only when an operator runs import_formulary_*).
+-- Confidence:     High.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_formulary_generic_name_trgm
+--   ON public.formulary
+--   USING gin (lower(generic_name) gin_trgm_ops);
+
+
+-- ---------------------------------------------------------------------
+-- 6. GIN trigram: patients.name fuzzy search
+-- ---------------------------------------------------------------------
+-- Serves the multi-column patient lookup:
+--   WHERE (name ilike $1 OR id ilike $2
+--        OR contact_phone ilike $3 OR guardian_name ilike $4)
+--     AND is_active = true
+-- (945 calls / 5.9s — small in seconds today but n_live_tup will grow;
+--  worth fixing now while indexes are tiny.)
+--
+-- Estimated size: ~80 kB (570 rows).
+-- Build duration: <1 s.
+-- Risk:           writes happen on every new patient registration —
+--                 ~10–50/day. Trigram GIN adds <100 µs to that. Acceptable.
+-- Confidence:     High.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_patients_name_trgm
+--   ON public.patients
+--   USING gin (lower(name) gin_trgm_ops);
+
+
+-- ---------------------------------------------------------------------
+-- 7. GIN trigram: patients.guardian_name fuzzy search
+-- ---------------------------------------------------------------------
+-- Same query shape as #6 — guardian_name is OR'd in.
+--
+-- Estimated size: ~80 kB.
+-- Build duration: <1 s.
+-- Risk:           same write overhead as #6.
+-- Confidence:     Medium — guardian_name is nullable; trigram GIN on
+--                 nullable text columns is fine but the planner may
+--                 prefer the multi-column OR with a single-column
+--                 trigram on `name` if guardians don't disambiguate.
+--                 Add this only if measurement after #6 still shows
+--                 seq scans on patients.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_patients_guardian_name_trgm
+--   ON public.patients
+--   USING gin (lower(guardian_name) gin_trgm_ops);
+
+
+-- ---------------------------------------------------------------------
+-- 8. GIN trigram: loinc_investigations.component / long_name
+-- ---------------------------------------------------------------------
+-- Serves:
+--   WHERE component ilike $1 OR long_name ilike $2 OR related_names ilike $3
+--   ORDER BY common_test_rank
+-- (55 calls @ 1188 ms = 65 s. The largest sec/call burner among
+--  application queries.)
+--
+-- An idx_loinc_search GIN tsvector index already exists (12 MB) but is
+-- only useful for the @@ to_tsquery form, not for ilike. The pad uses
+-- ilike. Two trigram GIN indexes on the two most-selective columns
+-- give the planner a path that combines well with the
+-- common_test_rank btree (idx_loinc_rank) for the ORDER BY.
+--
+-- Note: related_names is a long denormalized list; trigram GIN on it
+-- would be large (estimate 5–10 MB). Defer to a follow-up unless the
+-- query proves still slow.
+--
+-- Estimated size: component ~3–5 MB ; long_name ~5–8 MB.
+-- Build duration: 5–30 s on 78k rows — still acceptable; CONCURRENTLY
+-- means no blocking.
+-- Risk:           write overhead irrelevant — loinc_investigations is
+--                 a static reference table loaded once.
+-- Confidence:     Medium-High. Worth measuring before/after with
+--                 EXPLAIN (ANALYZE, BUFFERS) on a representative
+--                 query — see doc 10 §7.
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_loinc_component_trgm
+--   ON public.loinc_investigations
+--   USING gin (lower(component) gin_trgm_ops);
+--
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_loinc_long_name_trgm
+--   ON public.loinc_investigations
+--   USING gin (lower(long_name) gin_trgm_ops);
+
+
+-- =====================================================================
+-- DO NOT RUN AS PART OF INDEX-CREATE MIGRATION
+-- =====================================================================
+-- The indexes below show idx_scan = 0 in pg_stat_user_indexes as of
+-- 2026-04-27. They are wasting write IO on every insert/update without
+-- ever being read. Propose to drop in a SEPARATE phase, after we have
+-- (a) given the new indexes above 7+ days to settle and confirmed they
+-- do not somehow shadow these old ones, and (b) re-checked with
+-- pg_stat_reset() to rule out a stats-reset artefact.
+--
+-- Cumulative reclaim: ~3.6 MB index + ongoing write savings.
+--
+-- /*
+-- -- loinc_investigations.component plain btree (2,976 kB) — superseded
+-- -- by the trigram GIN proposed above.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_loinc_component;
+--
+-- -- formulary.brand_names text[] GIN (272 kB) — never queried via
+-- -- @> array operator; brand-name search is satisfied by trigram on
+-- -- generic_name + JSONB formulations[].indian_brands.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_formulary_brands;
+--
+-- -- formulary.therapeutic_use text[] GIN (224 kB) — therapeutic_use
+-- -- is read by the AI condense path but never WHERE-filtered.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_formulary_use;
+--
+-- -- formulary.snomed_code partial btree (80 kB) — FHIR bundle reads
+-- -- snomed_code as part of full-row SELECTs, not as a WHERE filter.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_formulary_snomed;
+--
+-- -- lab_results.test_name btree (16 kB) — lab lookups are
+-- -- always patient_id-keyed; test_name is filtered in-memory by the pad.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_lab_test;
+--
+-- -- patients.is_active btree (16 kB) — boolean column with low
+-- -- selectivity (most rows true); the planner correctly ignores it.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_patients_active;
+--
+-- -- vaccinations.next_due_date btree (16 kB) — never used; the pad
+-- -- computes "due" client-side from given dose history.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_vax_due;
+--
+-- -- developmental_screenings.patient_id btree (16 kB) — fully
+-- -- shadowed by composite idx_devscreen_date (patient_id, screening_date desc).
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_devscreen_patient;
+--
+-- -- abdm_care_contexts.care_context_ref btree (8 kB) — table empty.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_abdm_cc_ref;
+--
+-- -- abdm_consent_artefacts.consent_id btree (8 kB) — duplicates the
+-- -- UNIQUE constraint index abdm_consent_artefacts_consent_id_key.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_abdm_consent_id;
+--
+-- -- abdm_consent_artefacts.status btree (8 kB) — table empty.
+-- DROP INDEX CONCURRENTLY IF EXISTS public.idx_abdm_consent_status;
+-- */
+
+-- =====================================================================
+-- End of migration_io_indexes.sql
+-- =====================================================================
