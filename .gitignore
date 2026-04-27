@@ -24,3 +24,7 @@ Consolelog.txt
 # Supabase CLI
 supabase/.temp/
 supabase/config.toml
+
+# Diagnostic runtime output
+radhakishan_system/scripts/diagnose_io.out.txt
+radhakishan_system/scripts/_diag/
