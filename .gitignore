@@ -3,6 +3,9 @@
 .env.local
 .env.*.local
 
+# MCP server config (contains access tokens)
+.mcp.json
+
 # OS files
 .DS_Store
 Thumbs.db

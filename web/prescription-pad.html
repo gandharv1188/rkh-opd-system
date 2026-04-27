@@ -3097,95 +3097,27 @@
   /* ===== PATIENT DROPDOWN (today's visits) ===== */
   let todayPatients = [];
   let historyTabs = [];
-  // Real-time push: Supabase Realtime subscription on visits table.
-  // New visits appear in the dropdown without page refresh.
-  // Non-disruptive: silently updates the list in the background,
-  // preserves the currently selected patient and any in-progress work.
-  let realtimeWs = null;
+  // Today's-visits refresh: 60-second poll.
+  // Replaces a previous Supabase Realtime WebSocket that polled the WAL
+  // even when the publication was empty (~95% of the project's IO budget).
+  // Poll preserves the doctor's current selection and any in-progress work.
+  let todayPollTimer = null;
   function subscribeToNewVisits() {
-    if (realtimeWs) return;
-    try {
-      const wsUrl =
-        SB.replace("https://", "wss://") +
-        "/realtime/v1/websocket?apikey=" +
-        KEY +
-        "&vsn=1.0.0";
-      const ws = new WebSocket(wsUrl);
-      let hbTimer = null,
-        ref = 0;
-      ws.onopen = () => {
-        ws.send(
-          JSON.stringify({
-            topic: "realtime:public:visits",
-            event: "phx_join",
-            payload: {
-              config: {
-                broadcast: { self: false },
-                presence: {},
-                postgres_changes: [
-                  { event: "INSERT", schema: "public", table: "visits" },
-                ],
-              },
-            },
-            ref: String(++ref),
-          }),
-        );
-        hbTimer = setInterval(() => {
-          ws.send(
-            JSON.stringify({
-              topic: "phoenix",
-              event: "heartbeat",
-              payload: {},
-              ref: String(++ref),
-            }),
-          );
-        }, 30000);
-        realtimeWs = ws;
-        console.log("Realtime: subscribed to new visits");
-      };
-      ws.onmessage = (evt) => {
-        try {
-          const msg = JSON.parse(evt.data);
-          if (msg.event === "postgres_changes" || msg.event === "INSERT") {
-            const today = new Date().toISOString().split("T")[0];
-            const record = msg.payload?.record || msg.payload?.data?.record;
-            if (record?.visit_date === today || !record) {
-              // Silently refresh list — preserve current selection
-              const currentId = selectedPatient?.id;
-              const prevCount = todayPatients.length;
-              loadTodayPatients().then(() => {
-                if (todayPatients.length > prevCount) {
-                  // Re-select the patient the doctor was working on
-                  if (currentId) {
-                    const idx = todayPatients.findIndex(
-                      (p) => p.id === currentId,
-                    );
-                    if (idx >= 0) {
-                      const inp = document.getElementById("pt-search");
-                      if (inp)
-                        inp.value = todayPatients[idx].name + " — " + currentId;
-                    }
-                  }
-                  console.log(
-                    `Realtime: new visit (${prevCount} → ${todayPatients.length})`,
-                  );
-                }
-              });
-            }
+    if (todayPollTimer) return;
+    todayPollTimer = setInterval(() => {
+      if (!sbConnected) return;
+      const currentId = selectedPatient?.id;
+      const prevCount = todayPatients.length;
+      loadTodayPatients().then(() => {
+        if (todayPatients.length !== prevCount && currentId) {
+          const idx = todayPatients.findIndex((p) => p.id === currentId);
+          if (idx >= 0) {
+            const inp = document.getElementById("pt-search");
+            if (inp) inp.value = todayPatients[idx].name + " — " + currentId;
           }
-        } catch (_) {}
-      };
-      ws.onclose = () => {
-        if (hbTimer) clearInterval(hbTimer);
-        realtimeWs = null;
-        setTimeout(() => {
-          if (sbConnected) subscribeToNewVisits();
-        }, 5000);
-      };
-      ws.onerror = () => ws.close();
-    } catch (e) {
-      console.warn("Realtime failed:", e.message);
-    }
+        }
+      });
+    }, 60000);
   }
   async function loadTodayPatients() {
     if (!sbConnected) return;
@@ -3992,8 +3924,11 @@
       saveTimeout = setTimeout(() => saveNote(), 3000);
     };
     ta.addEventListener("input", _autoSaveInputHandler);
-    // Also save every 30 seconds if there's content
-    autoSaveTimer = setInterval(() => saveNote(), 30000);
+    // Periodic 30-second save disabled (2026-04-28): largest write source on
+    // visits.raw_dictation (~37,786 calls / 6 weeks, 19.7% of all DB writes).
+    // Debounced 3s save above + saveNote() on clearPatient/sign-off cover the
+    // crash-safety case. Cleanup paths still guard with `if (autoSaveTimer)`.
+    // autoSaveTimer = setInterval(() => saveNote(), 30000);
   }
 
   function showSaveStatus(text, color) {
