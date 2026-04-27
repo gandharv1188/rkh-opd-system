@@ -28,3 +28,7 @@ supabase/config.toml
 # Diagnostic runtime output
 radhakishan_system/scripts/diagnose_io.out.txt
 radhakishan_system/scripts/_diag/
+
+# Claude Code agent worktrees and handoffs (must never enter the repo)
+.claude/worktrees/
+.claude/handoffs/
