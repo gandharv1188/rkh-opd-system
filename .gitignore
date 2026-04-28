@@ -27,3 +27,21 @@ Consolelog.txt
 # Supabase CLI
 supabase/.temp/
 supabase/config.toml
+
+# Claude Code internal state (worktrees, scheduled-task lock)
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+
+# Diagnostic / scratch outputs (not source code)
+radhakishan_system/scripts/diagnose_io.out.txt
+radhakishan_system/scripts/_diag/
+*.out.txt
+
+# Working-tree leftovers from feat/dis-plan checkouts on main.
+# DIS service source lives on feat/dis-plan — never on main.
+# Do NOT remove this without first verifying with: git ls-tree feat/dis-plan -- dis/
+dis/
+
+# Scratch screenshots / images at repo root
+/image.png
+/image*.png
