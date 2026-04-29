@@ -1908,7 +1908,7 @@
       <div class="mod-lbl">Include in prescription</div>
       <div class="mod-chips">
         <div
-          class="mod-chip on"
+          class="mod-chip"
           id="chip-stdrx"
           onclick="toggleMod('stdrx')"
           style="border-color: rgba(30, 88, 107, 0.4); font-weight: 600"
@@ -2154,7 +2154,7 @@
     rxData = null,
     visitId = null,
     rxId = null;
-  let activeMods = new Set(["inv", "stdrx", "growth"]),
+  let activeMods = new Set(["inv", "growth"]),
     recog = null,
     isRec = false;
   let formularyCache = {},
@@ -3980,8 +3980,10 @@
     // Reset section chips to defaults (clear patient-specific auto-selections)
     activeMods.clear();
     activeMods.add("inv");
-    activeMods.add("stdrx");
     activeMods.add("growth");
+    activeMods.delete("stdrx");
+    const chipStdRxOnSelect = document.getElementById("chip-stdrx");
+    if (chipStdRxOnSelect) chipStdRxOnSelect.classList.remove("on");
     document.querySelectorAll(".mod-chip").forEach((el) => {
       const k = el.id.replace("chip-", "");
       el.classList.toggle("on", activeMods.has(k));
@@ -4274,6 +4276,10 @@
       autoSaveTimer = null;
     }
     autoSaveVisitId = null;
+    // Std Rx resets OFF when switching patients
+    activeMods.delete('stdrx');
+    const chipStdRx = document.getElementById('chip-stdrx');
+    if (chipStdRx) chipStdRx.classList.remove('on');
     const si = document.getElementById("save-indicator");
     if (si) si.style.display = "none";
     clearHistoryTabs();
@@ -4787,8 +4793,7 @@
   }
   function getSelectedSections() {
     const sectionNames = {
-      stdrx:
-        "USE STANDARD PRESCRIPTION — include ALL first-line drugs from the hospital standard protocol for this diagnosis. Do not omit any protocol drug.",
+      stdrx: "STANDARD PROTOCOL ENABLED: A `<doctor_selected_protocol>` block is included below. Use it for additions per the prompt's STANDARD PROTOCOL USAGE rules.",
       inv: "investigations",
       "vax-nhm":
         "vaccination status (use NHM-UIP government schedule — free vaccines only)",
@@ -4804,6 +4809,41 @@
       neo: "neonatal details",
     };
     return [...activeMods].map((k) => sectionNames[k]).filter(Boolean);
+  }
+
+  function matchProtocolFromNote(noteText) {
+    if (!noteText || typeof stdRxCache !== 'object' || !stdRxCache) return null;
+    const upText = noteText.toUpperCase();
+    // Try ICD-10 match first
+    for (const key in stdRxCache) {
+      const proto = stdRxCache[key];
+      if (proto && proto.icd10 && upText.includes(proto.icd10.toUpperCase())) return proto;
+    }
+    // Try diagnosis_name substring match
+    for (const key in stdRxCache) {
+      const proto = stdRxCache[key];
+      if (proto && proto.diagnosis_name && upText.includes(proto.diagnosis_name.toUpperCase())) return proto;
+    }
+    return null;
+  }
+
+  function buildStdRxBlock(proto) {
+    const safe = (v) => (v == null ? '' : (typeof v === 'string' ? v : JSON.stringify(v)));
+    return [
+      '<doctor_selected_protocol>',
+      `icd10: ${safe(proto.icd10)}`,
+      `diagnosis_name: ${safe(proto.diagnosis_name)}`,
+      `first_line_drugs: ${safe(proto.first_line_drugs)}`,
+      `second_line_drugs: ${safe(proto.second_line_drugs)}`,
+      `investigations: ${safe(proto.investigations)}`,
+      `counselling: ${safe(proto.counselling)}`,
+      `warning_signs: ${safe(proto.warning_signs)}`,
+      `monitoring_parameters: ${safe(proto.monitoring_parameters)}`,
+      `key_clinical_points: ${safe(proto.key_clinical_points)}`,
+      `referral_criteria: ${safe(proto.referral_criteria)}`,
+      `hospitalisation_criteria: ${safe(proto.hospitalisation_criteria)}`,
+      '</doctor_selected_protocol>'
+    ].join('\n');
   }
 
   /* ===== VIEW SWITCHING ===== */
@@ -4865,7 +4905,16 @@
       ? "\n\nCLINICAL SUMMARY (AI-generated — for context only, DO NOT confuse with current clinical note above):\n" +
         visitSummary
       : "";
-    const fullNote = note + sectionsNote + langNote + summaryNote;
+    let stdRxBlockNote = "";
+    if (activeMods.has('stdrx')) {
+      const matched = matchProtocolFromNote(note);
+      if (matched) {
+        stdRxBlockNote = "\n\n" + buildStdRxBlock(matched);
+      } else {
+        stdRxBlockNote = "\n\n<doctor_selected_protocol_unmatched>doctor enabled Std Rx but no protocol matched the diagnosis text — fall back to AI's get_standard_rx tool</doctor_selected_protocol_unmatched>";
+      }
+    }
+    const fullNote = note + sectionsNote + langNote + summaryNote + stdRxBlockNote;
 
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];
@@ -7578,7 +7627,6 @@
     // Re-select default mods
     activeMods.clear();
     activeMods.add("inv");
-    activeMods.add("stdrx");
     activeMods.add("growth");
     document.querySelectorAll(".mod-chip").forEach((el) => {
       const k = el.id.replace("chip-", "");
