@@ -9,6 +9,13 @@
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 
+// ===== HELPERS =====
+
+function maskUhid(uhid?: string | null): string {
+  if (!uhid || uhid.length < 9) return uhid ?? '';
+  return uhid.slice(0, 4) + '****' + uhid.slice(-4);
+}
+
 // ===== CONSTANTS =====
 
 const SUPABASE_URL = "https://ecywxuqhnlkjtdshpcbc.supabase.co";
@@ -305,7 +312,12 @@ async function executeGetFormulary(drugNames: string[]): Promise<string> {
     }
 
     if (!drugs.length)
-      return `No formulary entries found for: ${drugNames.join(", ")}. Use your clinical training knowledge for dosing.`;
+      return JSON.stringify({
+        status: "not_found",
+        drug_query: drugNames.join(", "),
+        tried: ["generic_name_ilike", "brand_names_ilike", "indian_brands_ilike"],
+        instruction_to_model: "DO NOT dose from memory. For each name not found, append an entry to omitted_medicines[] in your output: {name: <name>, reason: 'not_in_formulary'}. Set safety.severity_server = 'high'. The doctor will fill the dose manually."
+      });
     // Condense for AI — strips indian_brands and SNOMED metadata (~83% token savings)
     const condensed = drugs.map(condenseDrugForAI);
     return JSON.stringify(condensed, null, 2);
@@ -362,6 +374,19 @@ async function executeGetStandardRx(
   } catch (e) {
     return `Standard Rx query error: ${e.message}`;
   }
+}
+
+async function fetchIcd10Menu(): Promise<string> {
+  const headers = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
+  const url = `${SUPABASE_URL}/rest/v1/standard_prescriptions?select=icd10,diagnosis_name&active=eq.true&order=icd10`;
+  try {
+    const res = await fetch(url, { headers });
+    if (!res.ok) return '';
+    const rows = await res.json();
+    if (!rows.length) return '';
+    return '\n\n## Available Standard Rx Diagnoses (ICD-10 menu)\n\nWhen calling get_standard_rx, pick the icd10 from this list:\n\n' +
+      rows.map((r: any) => `- ${r.icd10} — ${r.diagnosis_name}`).join('\n');
+  } catch { return ''; }
 }
 
 async function executeGetPreviousRx(
@@ -426,7 +451,10 @@ async function executeTool(
   name: string,
   input: Record<string, any>,
 ): Promise<string> {
-  console.log(`  Tool: ${name}(${JSON.stringify(input)})`);
+  const logInput = input.patient_id
+    ? { ...input, patient_id: maskUhid(input.patient_id) }
+    : input;
+  console.log(`  Tool: ${name}(${JSON.stringify(logInput)})`);
   switch (name) {
     case "get_reference":
       return await executeGetReference(input.name);
@@ -515,8 +543,9 @@ async function toolUseLoop(
           "anthropic-version": "2023-06-01",
         },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
+          model: "claude-sonnet-4-6",
           max_tokens: 8192,
+          temperature: 0,
           system: systemPrompt,
           messages,
           tools,
@@ -632,8 +661,9 @@ async function singleShotFallback(
       "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-sonnet-4-6",
       max_tokens: 8192,
+      temperature: 0,
       system: systemPrompt,
       messages: [{ role: "user", content: userMessage }],
     }),
@@ -666,13 +696,24 @@ function extractJSON(raw: string): any {
     cleaned = cleaned.slice(start, end + 1);
   }
   try {
-    return JSON.parse(cleaned);
+    const parsed = JSON.parse(cleaned);
+    if (parsed && typeof parsed === "object") {
+      parsed.requested_medicines = Array.isArray(parsed.requested_medicines)
+        ? parsed.requested_medicines
+        : [];
+      parsed.omitted_medicines = Array.isArray(parsed.omitted_medicines)
+        ? parsed.omitted_medicines
+        : [];
+    }
+    return parsed;
   } catch (e) {
     console.error("extractJSON parse failed. Raw text:", raw.substring(0, 500));
     return {
       error: "Failed to parse prescription JSON",
       parse_error: e.message,
       raw_preview: raw.substring(0, 200),
+      requested_medicines: [],
+      omitted_medicines: [],
     };
   }
 }
@@ -716,7 +757,8 @@ serve(async (req: Request) => {
         "ref:nabh_compliance",
       ),
     ]);
-    const corePrompt = corePromptRaw + "\n\n" + nabhRef;
+    let corePrompt = corePromptRaw + "\n\n" + nabhRef;
+    corePrompt = corePrompt + await fetchIcd10Menu();
 
     // Build user message — send clinical note + allergies + patient ID only.
     // Formulary and standard Rx data are fetched by Claude via tools as needed.
@@ -757,6 +799,38 @@ serve(async (req: Request) => {
     }
 
     const prescription = extractJSON(rawText);
+
+    // Server-side completeness check: ensure every doctor-requested drug is
+    // either emitted in medicines[] or explicitly listed in omitted_medicines[].
+    const reqMeds: string[] = prescription.requested_medicines ?? [];
+    const emittedMeds: string[] = (prescription.medicines ?? []).map((m: any) => (m.row1_en ?? '').toUpperCase());
+    const omittedMeds: any[] = prescription.omitted_medicines ?? [];
+    const omittedNames = new Set(omittedMeds.map((o: any) => (o.name ?? '').toUpperCase()));
+
+    const stillMissing = reqMeds.filter((req: string) => {
+      const reqU = req.toUpperCase();
+      if (omittedNames.has(reqU)) return false;
+      return !emittedMeds.some((e: string) => e.includes(reqU) || reqU.includes(e.split(' ')[0]));
+    });
+
+    if (stillMissing.length > 0 && meta.mode !== 'fallback-single-shot') {
+      console.log(`Completeness mismatch: missing ${stillMissing.join(', ')}. Retrying once.`);
+      meta.completeness_retry = true;
+      meta.first_attempt_missing = stillMissing;
+      const retryUserMessage = userMessage + `\n\nIMPORTANT: Your previous output omitted these drugs the doctor explicitly requested: ${stillMissing.join(', ')}. Either include each one in medicines[] with full dose calculation, OR add an entry to omitted_medicines[] with a clear reason.`;
+      try {
+        const retry = await toolUseLoop(ANTHROPIC_API_KEY, corePrompt, retryUserMessage);
+        rawText = retry.text;
+        meta.rounds = (meta.rounds || 0) + retry.rounds;
+        meta.input_tokens = (meta.input_tokens || 0) + retry.totalInputTokens;
+        meta.output_tokens = (meta.output_tokens || 0) + retry.totalOutputTokens;
+        const retryPrescription = extractJSON(rawText);
+        Object.assign(prescription, retryPrescription);
+      } catch (retryErr: any) {
+        console.warn("Completeness retry failed:", retryErr.message);
+        meta.completeness_retry_error = retryErr.message;
+      }
+    }
 
     return new Response(JSON.stringify({ prescription, meta }), {
       status: 200,
