@@ -8,6 +8,12 @@
 // Set secret: supabase secrets set ANTHROPIC_API_KEY=sk-ant-xxx --project-ref ecywxuqhnlkjtdshpcbc
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+import {
+  computeDose,
+  parseIngredients,
+  type ComputeDoseParams,
+  type ComputeDoseResult,
+} from "../_shared/dose-engine.ts";
 
 // ===== HELPERS =====
 
@@ -155,6 +161,44 @@ const tools = [
       required: ["patient_id"],
     },
   },
+  {
+    name: "compute_doses",
+    description: "Deterministic dose calculator. CALL THIS for every weight-based, BSA, GFR-adjusted, or fixed-dose medicine BEFORE emitting medicines[]. Pass ALL drugs the doctor wants in ONE call. Returns canonical volume_ml/drops/tablets per drug. Use the returned numbers verbatim in row2_en — do NOT do mental math. The dose engine is web/dose-engine.js (the same code is invoked here). For combo drugs, use the LIMITING ingredient.",
+    input_schema: {
+      type: "object",
+      properties: {
+        patient: {
+          type: "object",
+          properties: {
+            weight_kg: { type: "number", description: "Patient weight in kg" },
+            height_cm: { type: ["number", "null"], description: "Patient height in cm (optional, needed for BSA dosing)" },
+            age_months: { type: ["number", "null"], description: "Chronological age in months" },
+            ga_weeks: { type: ["number", "null"], description: "Gestational age in weeks (preterms only)" }
+          },
+          required: ["weight_kg"]
+        },
+        meds: {
+          type: "array",
+          description: "ALL medicines the doctor wants, batched in one call.",
+          items: {
+            type: "object",
+            properties: {
+              generic_name: { type: "string", description: "Generic name in CAPS, must match formulary" },
+              method: { type: "string", enum: ["weight", "bsa", "fixed", "gfr", "infusion", "age"] },
+              dose_value: { type: "number", description: "mg/kg if method=weight; mg/m² if bsa; total mg if fixed; etc." },
+              is_per_day: { type: "boolean", description: "true if dose_value is per day (will be divided by frequency)" },
+              frequency: { type: "number", description: "Doses per day (1=OD, 2=BD, 3=TDS, 4=QID)" },
+              formulation: { type: "object", description: "Formulation object from get_formulary's response — must include ingredients[] with strength_numerator/strength_denominator", properties: {} },
+              output_unit: { type: "string", description: "Preferred display unit: drops, mL, tablet, capsule, sachet, etc." },
+              dosing_band: { type: "object", description: "Optional. The matching ENTRY from formulary.dosing_bands (the outer object containing `ingredient`, `snomed_code`, `ingredient_doses[]`, `max_single_mg`, `max_daily_mg`). Do NOT pass a single ingredient_doses sub-row — pass the entire dosing_bands element that applies to this medicine's primary indication. The engine will resolve the limiting ingredient internally.", properties: {} }
+            },
+            required: ["generic_name", "method", "dose_value", "frequency", "formulation"]
+          }
+        }
+      },
+      required: ["patient", "meds"]
+    }
+  }
 ];
 
 // ===== TOOL EXECUTION =====
@@ -364,6 +408,25 @@ async function executeGetStandardRx(
       }
     }
 
+    // Strategy 3 (Sprint 2): pg_trgm-style token-OR fuzzy match for diagnosis text.
+    // PostgREST doesn't expose pg_trgm's % operator without an RPC, so we tokenize
+    // the diagnosis name and OR-match each meaningful token via ILIKE; the trigram
+    // index on diagnosis_name still accelerates the substring planner.
+    if (name) {
+      const tokens = name.trim().split(/\s+/).filter((t) => t.length >= 3);
+      if (tokens.length > 0) {
+        const orFilter = tokens
+          .map((t) => `diagnosis_name.ilike.%25${encodeURIComponent(t)}%25`)
+          .join(",");
+        const url4 = `${SUPABASE_URL}/rest/v1/standard_prescriptions?or=(${orFilter})&active=eq.true&select=${select}&limit=5`;
+        const res4 = await fetch(url4, { headers });
+        if (res4.ok) {
+          const protocols4 = await res4.json();
+          if (protocols4.length) return JSON.stringify(protocols4, null, 2);
+        }
+      }
+    }
+
     const searched = [
       icd10 ? `ICD-10: ${icd10}` : "",
       name ? `Name: ${name}` : "",
@@ -447,6 +510,98 @@ async function executeGetPreviousRx(
   }
 }
 
+// S2-MID-1: defensive normaliser. The dose engine's _findIngBand expects the
+// FULL outer dosing_bands[] entry (with `ingredient`/`snomed_code` and an
+// `ingredient_doses[]` array). If Sonnet (mistakenly) passes a single
+// ingredient_doses sub-row instead, wrap it as a synthetic outer band so the
+// engine can still resolve the limiting ingredient and apply max-dose caps.
+function _normalizeDosingBand(band: any): any[] {
+  if (!band || typeof band !== "object") return [];
+  if (
+    Array.isArray(band.ingredient_doses) ||
+    band.ingredient ||
+    band.max_single_mg !== undefined ||
+    band.max_daily_mg !== undefined
+  ) {
+    return [band];
+  }
+  if (
+    band.dose_min_qty !== undefined ||
+    band.max_single_mg !== undefined ||
+    band.is_limiting !== undefined
+  ) {
+    return [
+      {
+        ingredient: band.ingredient || band.name || "",
+        snomed_code: band.snomed_code,
+        ingredient_doses: [band],
+        max_single_mg: band.max_single_mg,
+        max_daily_mg: band.max_daily_mg,
+      },
+    ];
+  }
+  return [];
+}
+
+async function executeComputeDoses(input: any): Promise<string> {
+  try {
+    const patient = input.patient || {};
+    const meds = Array.isArray(input.meds) ? input.meds : [];
+    if (!patient.weight_kg || patient.weight_kg <= 0) {
+      return JSON.stringify({
+        error: "patient.weight_kg required and must be > 0",
+        instruction_to_model: "Cannot compute doses without weight. If weight is missing, surface to omitted_medicines[] with reason='age_contraindication' or ask the doctor."
+      });
+    }
+    const results = meds.map((m: any) => {
+      try {
+        const ingredients = parseIngredients(m.formulation || {});
+        const params: ComputeDoseParams = {
+          method: m.method || "weight",
+          weight: patient.weight_kg,
+          heightCm: patient.height_cm || undefined,
+          sliderValue: m.dose_value,
+          isPerDay: m.is_per_day !== false,
+          frequency: m.frequency || 1,
+          ingredients,
+          form: (m.formulation && m.formulation.form) || "syrup",
+          outputUnit: m.output_unit || "mL",
+          ingredientBands: _normalizeDosingBand(m.dosing_band)
+        };
+        const r = computeDose(params);
+        return {
+          generic_name: m.generic_name,
+          ok: true,
+          volume_display: r.vol,
+          english_dose: r.enD,
+          hindi_dose: r.hiD,
+          calc_string: r.calc,
+          volume_ml: r.volumeMl,
+          volume_units: r.volumeUnits,
+          actual_primary_mg: r.fd,
+          capped: r.capped,
+          warnings: r.warnings,
+          ingredient_doses: r.ingredientDoses
+        };
+      } catch (e: any) {
+        return {
+          generic_name: m.generic_name,
+          ok: false,
+          error: e.message,
+          instruction_to_model: `Engine could not compute ${m.generic_name}. Add to omitted_medicines[] with reason='not_in_formulary' OR 'doctor_specified_dose_unsafe_engine_capped'.`
+        };
+      }
+    });
+    return JSON.stringify({
+      tool: "compute_doses",
+      results,
+      instruction_to_model: "Use volume_display, english_dose, hindi_dose, calc_string verbatim in your medicines[] entries. Do NOT compute dose values yourself. If any result has ok:false, route that drug to omitted_medicines[]."
+    });
+  } catch (e: any) {
+    return JSON.stringify({ error: "compute_doses failed: " + e.message });
+  }
+}
+
 async function executeTool(
   name: string,
   input: Record<string, any>,
@@ -466,6 +621,8 @@ async function executeTool(
       return await executeGetPreviousRx(input.patient_id, input.limit);
     case "get_lab_history":
       return await executeGetLabHistory(input.patient_id, input.test_names);
+    case "compute_doses":
+      return await executeComputeDoses(input);
     default:
       return `Unknown tool: ${name}`;
   }
@@ -521,11 +678,13 @@ async function toolUseLoop(
   totalOutputTokens: number;
   rounds: number;
   durationMs: number;
+  toolsCalled: string[];
 }> {
   const startMs = Date.now();
   const messages: Message[] = [{ role: "user", content: userMessage }];
   let totalInputTokens = 0;
   let totalOutputTokens = 0;
+  const toolsCalledList: string[] = [];
 
   // Timeout: abort entire loop after `timeoutMs` (default 50s, leaving budget
   // for completeness retry within Supabase Edge Function 150s wall).
@@ -582,20 +741,23 @@ async function toolUseLoop(
         console.log(
           `Completed in ${round} round(s). Tokens: ${totalInputTokens} in, ${totalOutputTokens} out.`,
         );
-        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
       }
 
       if (data.stop_reason === "tool_use") {
         const toolBlocks = data.content.filter(
           (b: ContentBlock) => b.type === "tool_use",
         );
+        for (const b of toolBlocks) {
+          if (b.name) toolsCalledList.push(b.name);
+        }
         if (!toolBlocks.length) {
           // No tool calls despite tool_use stop reason — treat as end
           const text = data.content
             .filter((b: ContentBlock) => b.type === "text")
             .map((b: ContentBlock) => b.text || "")
             .join("");
-          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
         }
 
         console.log(`  ${toolBlocks.length} tool call(s) in round ${round}`);
@@ -613,7 +775,7 @@ async function toolUseLoop(
             .filter((b: ContentBlock) => b.type === "text")
             .map((b: ContentBlock) => b.text || "")
             .join("");
-          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
         }
         lastToolCallKey = currentToolCallKey;
 
@@ -635,7 +797,7 @@ async function toolUseLoop(
           .filter((b: ContentBlock) => b.type === "text")
           .map((b: ContentBlock) => b.text || "")
           .join("");
-        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
       }
     }
 
@@ -724,6 +886,72 @@ function extractJSON(raw: string): any {
   }
 }
 
+// ===== COMPLETENESS MATCHERS (Sprint 2 GAP-1/2) =====
+
+// Brand-aware match: handles row1_en formats like
+// "IBUPROFEN+PARACETAMOL SUSPENSION (Combiflam)" when doctor wrote "Combiflam".
+function _normalizeForMatch(s: string): string {
+  return (s || '')
+    .toString()
+    .toUpperCase()
+    .replace(/[^A-Z0-9+\s\-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function _matchesEmittedOrOmitted(
+  req: string,
+  emittedRows: string[],
+  omittedNames: Set<string>,
+): boolean {
+  const reqN = _normalizeForMatch(req);
+  if (!reqN) return false;
+  if (omittedNames.has(reqN)) return true;
+  for (const row of emittedRows) {
+    const rowN = _normalizeForMatch(row);
+    if (!rowN) continue;
+    // 1. exact substring either direction (legacy behaviour, still useful)
+    if (rowN.includes(reqN) || reqN.includes(rowN.split(' ')[0])) return true;
+    // 2. row1_en often has "(Brand)" — check brand tokens inside parens
+    const parenMatches = row.match(/\(([^)]+)\)/g) || [];
+    for (const m of parenMatches) {
+      const brand = _normalizeForMatch(m.replace(/[()]/g, ''));
+      if (!brand) continue;
+      if (brand === reqN || brand.includes(reqN) || reqN.includes(brand)) return true;
+    }
+  }
+  return false;
+}
+
+// Build the omitted-name set normalised the same way matcher uses.
+function _buildOmittedNameSet(omittedMeds: any[]): Set<string> {
+  const set = new Set<string>();
+  for (const o of omittedMeds || []) {
+    const n = _normalizeForMatch(o?.name ?? '');
+    if (n) set.add(n);
+  }
+  return set;
+}
+
+// Run the completeness check. Returns the list of doctor-requested drugs that
+// are neither in medicines[] nor explicitly listed in omitted_medicines[].
+// GAP-2: cardinality-aware — if every reqMed individually matches, treat as
+// PASS even when emittedMeds.length < reqMeds.length (combo collapse).
+function _findStillMissing(prescription: any): string[] {
+  const reqMeds: string[] = prescription?.requested_medicines ?? [];
+  const emittedRows: string[] = (prescription?.medicines ?? []).map(
+    (m: any) => (m?.row1_en ?? '').toString(),
+  );
+  const omittedNames = _buildOmittedNameSet(prescription?.omitted_medicines ?? []);
+  const missing: string[] = [];
+  for (const req of reqMeds) {
+    if (!_matchesEmittedOrOmitted(req, emittedRows, omittedNames)) {
+      missing.push(req);
+    }
+  }
+  return missing;
+}
+
 // ===== MAIN HANDLER =====
 
 serve(async (req: Request) => {
@@ -783,16 +1011,29 @@ serve(async (req: Request) => {
     let rawText: string;
     let meta: any = {};
 
+    // GAP-7: Shared deadline budget — guarantees the whole request stays under
+    // 130s with ~20s headroom against the 150s Edge Function wall. Each
+    // toolUseLoop call computes its remaining budget from this deadline rather
+    // than holding an independent timer.
+    const requestStart = Date.now();
+    const HARD_DEADLINE_MS = requestStart + 130_000;
+    const RESPONSE_HEADROOM_MS = 5_000;
+
+    function remainingBudgetMs(): number {
+      return HARD_DEADLINE_MS - Date.now() - RESPONSE_HEADROOM_MS;
+    }
+
     let firstAttemptDurationMs = 0;
     try {
-      // Primary path: tool-use loop with 50s budget. The Edge Function has a
-      // 150s wall, and we need budget for both the first attempt AND the
-      // optional completeness retry.
+      // Primary path: tool-use loop. Cap first attempt at 50s (gives the model
+      // time but leaves room for the completeness retry within the 130s
+      // shared deadline).
+      const firstBudget = Math.min(50_000, remainingBudgetMs());
       const result = await toolUseLoop(
         ANTHROPIC_API_KEY,
         corePrompt,
         userMessage,
-        50_000,
+        firstBudget,
       );
       rawText = result.text;
       firstAttemptDurationMs = result.durationMs;
@@ -802,6 +1043,8 @@ serve(async (req: Request) => {
         input_tokens: result.totalInputTokens,
         output_tokens: result.totalOutputTokens,
         first_attempt_duration_ms: result.durationMs,
+        first_attempt_budget_ms: firstBudget,
+        tools_called: result.toolsCalled,
       };
     } catch (loopError: any) {
       // Fallback: single-shot with full skill
@@ -810,78 +1053,211 @@ serve(async (req: Request) => {
       meta = { mode: "fallback-single-shot", error: loopError.message };
     }
 
-    const prescription = extractJSON(rawText);
+    let prescription = extractJSON(rawText);
 
-    // Server-side completeness check: ensure every doctor-requested drug is
-    // either emitted in medicines[] or explicitly listed in omitted_medicines[].
-    const reqMeds: string[] = prescription.requested_medicines ?? [];
-    const emittedMeds: string[] = (prescription.medicines ?? []).map((m: any) => (m.row1_en ?? '').toUpperCase());
-    const omittedMeds: any[] = prescription.omitted_medicines ?? [];
-    const omittedNames = new Set(omittedMeds.map((o: any) => (o.name ?? '').toUpperCase()));
-
-    const stillMissing = reqMeds.filter((req: string) => {
-      const reqU = req.toUpperCase();
-      if (omittedNames.has(reqU)) return false;
-      return !emittedMeds.some((e: string) => e.includes(reqU) || reqU.includes(e.split(' ')[0]));
-    });
-
-    // Retry gating:
-    //   - missing > 0
-    //   - not in fallback mode (would re-fail with same single-shot)
-    //   - first attempt finished in < 60s (otherwise no time left in 150s wall)
-    // If first attempt was slow but produced output, accept it and surface
-    // the omission via meta + omitted_medicines so the doctor sees gaps.
-    const RETRY_FIRST_ATTEMPT_BUDGET_MS = 60_000;
-    const canRetry =
-      stillMissing.length > 0 &&
-      meta.mode !== 'fallback-single-shot' &&
-      firstAttemptDurationMs > 0 &&
-      firstAttemptDurationMs < RETRY_FIRST_ATTEMPT_BUDGET_MS;
-
-    if (stillMissing.length > 0) {
-      meta.first_attempt_missing = stillMissing;
+    // GAP-6: extractJSON parse failure must NOT silently fall through to the
+    // completeness check (which would see empty arrays and produce a blank
+    // prescription). Surface the parse error to the frontend immediately.
+    if (prescription && prescription.error) {
+      meta.parse_failed = true;
+      meta.parse_error = prescription.parse_error;
+      meta.raw_preview = prescription.raw_preview;
+      return new Response(
+        JSON.stringify({
+          prescription,
+          meta,
+          error: 'AI output could not be parsed as JSON. See meta.raw_preview.',
+        }),
+        {
+          // 200 keeps the frontend's existing error path (which inspects body)
+          // rather than triggering a generic network error.
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
     }
 
-    if (canRetry) {
-      // Compute remaining wall time, leave 5s headroom for response handling.
-      const remainingMs = Math.max(20_000, 145_000 - firstAttemptDurationMs - 5_000);
-      console.log(`Completeness mismatch: missing ${stillMissing.join(', ')}. Retrying once with ${remainingMs}ms budget.`);
-      meta.completeness_retry = true;
-      meta.completeness_retry_budget_ms = remainingMs;
-      const retryUserMessage = userMessage + `\n\nIMPORTANT: Your previous output omitted these drugs the doctor explicitly requested: ${stillMissing.join(', ')}. Either include each one in medicines[] with full dose calculation, OR add an entry to omitted_medicines[] with a clear reason.`;
-      try {
-        const retry = await toolUseLoop(ANTHROPIC_API_KEY, corePrompt, retryUserMessage, remainingMs);
-        rawText = retry.text;
-        meta.rounds = (meta.rounds || 0) + retry.rounds;
-        meta.input_tokens = (meta.input_tokens || 0) + retry.totalInputTokens;
-        meta.output_tokens = (meta.output_tokens || 0) + retry.totalOutputTokens;
-        meta.retry_duration_ms = retry.durationMs;
-        const retryPrescription = extractJSON(rawText);
-        // Re-apply requested_medicines from first attempt if retry dropped it
-        if ((!retryPrescription.requested_medicines || retryPrescription.requested_medicines.length === 0) && reqMeds.length > 0) {
-          retryPrescription.requested_medicines = reqMeds;
-        }
-        Object.assign(prescription, retryPrescription);
-      } catch (retryErr: any) {
-        console.warn("Completeness retry failed:", retryErr.message);
-        meta.completeness_retry_error = retryErr.message;
+    // Server-side completeness check (GAP-1: brand-aware matcher).
+    let stillMissing = _findStillMissing(prescription);
+
+    // GAP-12: fallback path skips retry — fallback can't recover from the same
+    // single-shot. Synthesize omitted entries + force severity to 'high' so
+    // the doctor cannot miss the gap, then run severity merge below.
+    if (meta.mode === 'fallback-single-shot') {
+      if (stillMissing.length > 0) {
+        meta.fallback_completeness_warning = true;
+        meta.first_attempt_missing = stillMissing;
+        const existingOmittedNames = _buildOmittedNameSet(
+          prescription.omitted_medicines ?? [],
+        );
+        const synthetic = stillMissing
+          .filter((m) => !existingOmittedNames.has(_normalizeForMatch(m)))
+          .map((m) => ({ name: m, reason: 'fallback_mode_omission' }));
+        prescription.omitted_medicines = [
+          ...(prescription.omitted_medicines ?? []),
+          ...synthetic,
+        ];
+        if (!prescription.safety) prescription.safety = {};
+        prescription.safety.severity_server = 'high';
       }
-    } else if (stillMissing.length > 0) {
-      // Skipped retry. Surface omissions so the doctor and audit see them.
-      meta.completeness_retry_skipped = true;
-      meta.completeness_retry_skipped_reason =
-        firstAttemptDurationMs >= RETRY_FIRST_ATTEMPT_BUDGET_MS
-          ? `first_attempt_too_slow_${firstAttemptDurationMs}ms`
-          : (meta.mode === 'fallback-single-shot' ? 'fallback_mode' : 'unknown');
-      // Auto-add stillMissing into omitted_medicines so the front-end shows them
-      const existingOmittedNames = new Set((prescription.omitted_medicines ?? []).map((o: any) => (o.name ?? '').toUpperCase()));
-      const synthetic = stillMissing
-        .filter(m => !existingOmittedNames.has(m.toUpperCase()))
-        .map(m => ({ name: m, reason: 'server_completeness_check_skipped_retry' }));
-      prescription.omitted_medicines = [...(prescription.omitted_medicines ?? []), ...synthetic];
-      // Force severity_server to 'high' so the doctor can't miss it
+    } else {
+      // GAP-7: retry gating uses the shared deadline. Need at least 25s of
+      // remaining budget to attempt a second round; otherwise accept and
+      // surface the gap.
+      const RETRY_MIN_REMAINING_MS = 25_000;
+      const remainingMs = remainingBudgetMs();
+      const canRetry =
+        stillMissing.length > 0 &&
+        firstAttemptDurationMs > 0 &&
+        remainingMs >= RETRY_MIN_REMAINING_MS;
+
+      if (stillMissing.length > 0) {
+        meta.first_attempt_missing = stillMissing;
+      }
+
+      if (canRetry) {
+        console.log(
+          `Completeness mismatch: missing ${stillMissing.join(', ')}. Retrying once with ${remainingMs}ms budget.`,
+        );
+        meta.completeness_retry = true;
+        meta.completeness_retry_budget_ms = remainingMs;
+        const retryUserMessage =
+          userMessage +
+          `\n\nIMPORTANT: Your previous output omitted these drugs the doctor explicitly requested: ${stillMissing.join(', ')}. Either include each one in medicines[] with full dose calculation, OR add an entry to omitted_medicines[] with a clear reason.`;
+        try {
+          const retry = await toolUseLoop(
+            ANTHROPIC_API_KEY,
+            corePrompt,
+            retryUserMessage,
+            remainingMs,
+          );
+          rawText = retry.text;
+          meta.rounds = (meta.rounds || 0) + retry.rounds;
+          meta.input_tokens = (meta.input_tokens || 0) + retry.totalInputTokens;
+          meta.output_tokens = (meta.output_tokens || 0) + retry.totalOutputTokens;
+          meta.retry_duration_ms = retry.durationMs;
+          meta.tools_called = [...(meta.tools_called || []), ...retry.toolsCalled];
+          const retryPrescription = extractJSON(rawText);
+          // GAP-6: if retry parse failed, keep the first-attempt prescription
+          // and surface the retry error in meta — do NOT overwrite with error obj.
+          if (retryPrescription && retryPrescription.error) {
+            meta.retry_parse_failed = true;
+            meta.retry_parse_error = retryPrescription.parse_error;
+          } else {
+            const reqMedsSnapshot: string[] = prescription.requested_medicines ?? [];
+            if (
+              (!retryPrescription.requested_medicines ||
+                retryPrescription.requested_medicines.length === 0) &&
+              reqMedsSnapshot.length > 0
+            ) {
+              retryPrescription.requested_medicines = reqMedsSnapshot;
+            }
+            Object.assign(prescription, retryPrescription);
+          }
+          // Re-evaluate stillMissing after retry merge.
+          stillMissing = _findStillMissing(prescription);
+        } catch (retryErr: any) {
+          console.warn("Completeness retry failed:", retryErr.message);
+          meta.completeness_retry_error = retryErr.message;
+        }
+      }
+
+      if (stillMissing.length > 0) {
+        // Skipped or post-retry residual. Surface so the doctor sees gaps.
+        meta.completeness_retry_skipped = !canRetry;
+        if (!canRetry) {
+          meta.completeness_retry_skipped_reason =
+            remainingMs < RETRY_MIN_REMAINING_MS
+              ? `insufficient_budget_${remainingMs}ms_remaining`
+              : 'unknown';
+        }
+        const existingOmittedNames = _buildOmittedNameSet(
+          prescription.omitted_medicines ?? [],
+        );
+        const reason = canRetry
+          ? 'server_completeness_check_post_retry_residual'
+          : 'server_completeness_check_skipped_retry';
+        const synthetic = stillMissing
+          .filter((m) => !existingOmittedNames.has(_normalizeForMatch(m)))
+          .map((m) => ({ name: m, reason }));
+        prescription.omitted_medicines = [
+          ...(prescription.omitted_medicines ?? []),
+          ...synthetic,
+        ];
+        if (!prescription.safety) prescription.safety = {};
+        prescription.safety.severity_server = 'high';
+      }
+    }
+
+    // Sprint 2: enforce compute_doses tool was called when medicines[] is non-empty.
+    // Prefer the tracked tool list from toolUseLoop; fall back to a calc-string
+    // heuristic when fallback-single-shot left tools_called empty.
+    {
+      const meds = (prescription.medicines ?? []) as any[];
+      const toolsCalled: string[] = (meta as any).tools_called || [];
+      const computeDosesCalled = toolsCalled.includes("compute_doses");
+      const weightMeds = meds.filter(
+        (m: any) => m && m.method && ["weight", "bsa", "gfr", "infusion"].includes(m.method),
+      );
+      let sketchy = false;
+      if (weightMeds.length > 0 && !computeDosesCalled) {
+        const sketchyMeds = weightMeds.filter((m: any) => {
+          const calc = (m.calc || "").toString();
+          return (
+            calc.length === 0 ||
+            (!calc.includes("→") && !calc.includes("mg/dose") && !calc.includes("ml") && !calc.includes("mL"))
+          );
+        });
+        if (sketchyMeds.length > 0) {
+          sketchy = true;
+          if (!prescription.safety) prescription.safety = {};
+          const aiSev = prescription.safety.severity_server ?? prescription.safety.severity_ai ?? 'low';
+          const escalate: Record<string, string> = { low: 'moderate', moderate: 'moderate', high: 'high' };
+          prescription.safety.severity_server = escalate[aiSev] ?? 'moderate';
+          prescription.safety.flags = [
+            ...(prescription.safety.flags ?? []),
+            `compute_doses_likely_skipped — ${sketchyMeds.length}/${weightMeds.length} weight-based medicine(s) lack engine calc trace. Verify dose manually.`,
+          ];
+          (meta as any).compute_doses_enforcement = "warning_added";
+        }
+      }
+    }
+
+    // Sprint 2: three-tier severity. Server-derived severity is computed from
+    // detected issues; AI's severity is in safety.severity_ai (if emitted).
+    // Final = max(server, AI).
+    {
+      function severityRank(s?: string): number {
+        return s === 'high' ? 3 : s === 'moderate' ? 2 : s === 'low' ? 1 : 0;
+      }
+      function severityLabel(r: number): 'high' | 'moderate' | 'low' {
+        return r >= 3 ? 'high' : r >= 2 ? 'moderate' : 'low';
+      }
       if (!prescription.safety) prescription.safety = {};
-      prescription.safety.severity_server = 'high';
+      const safetyBlock = prescription.safety as any;
+
+      let serverSev: 'high' | 'moderate' | 'low' =
+        (safetyBlock.severity_server as any) || 'low';
+      const omittedCount = (prescription.omitted_medicines ?? []).length;
+      if (omittedCount > 0) serverSev = 'high';
+      const allergyText = (safetyBlock.allergy_note ?? '').toString().toUpperCase();
+      if (allergyText.includes('ALLERGY:')) serverSev = 'high';
+      const interactions = safetyBlock.interactions;
+      if (typeof interactions === 'string' && interactions !== 'None found' && interactions.trim() !== '') {
+        if (severityRank(serverSev) < severityRank('moderate')) serverSev = 'moderate';
+      }
+      const maxDose = (safetyBlock.max_dose_check ?? []) as any[];
+      if (maxDose.some((c: any) => c.status === 'FLAGGED')) serverSev = 'high';
+
+      const aiSeverity = (safetyBlock.severity_ai ?? '').toString().toLowerCase();
+      const aiRank = severityRank(aiSeverity);
+      const serverRank = severityRank(serverSev);
+      const finalRank = Math.max(serverRank, aiRank);
+      safetyBlock.severity_server = serverSev;
+      safetyBlock.severity_ai = aiSeverity || 'low';
+      safetyBlock.severity_final = severityLabel(finalRank);
+
+      safetyBlock.overall_status = safetyBlock.severity_final === 'low' ? 'SAFE' : 'REVIEW REQUIRED';
     }
 
     return new Response(JSON.stringify({ prescription, meta }), {
