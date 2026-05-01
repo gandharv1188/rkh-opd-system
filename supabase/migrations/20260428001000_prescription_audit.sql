@@ -53,6 +53,7 @@ CREATE INDEX IF NOT EXISTS idx_prescription_audit_meta_mode
 -- Per-role RLS arrives in Sprint 4 (decision 22 Phase B).
 ALTER TABLE public.prescription_audit ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS prescription_audit_anon_full_access ON public.prescription_audit;
 CREATE POLICY prescription_audit_anon_full_access
   ON public.prescription_audit
   FOR ALL
