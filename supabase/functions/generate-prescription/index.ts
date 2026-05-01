@@ -190,7 +190,7 @@ const tools = [
               frequency: { type: "number", description: "Doses per day (1=OD, 2=BD, 3=TDS, 4=QID)" },
               formulation: { type: "object", description: "Formulation object from get_formulary's response — must include ingredients[] with strength_numerator/strength_denominator", properties: {} },
               output_unit: { type: "string", description: "Preferred display unit: drops, mL, tablet, capsule, sachet, etc." },
-              dosing_band: { type: "object", description: "Optional ingredient_doses entry from formulary's dosing_bands for max-dose checks", properties: {} }
+              dosing_band: { type: "object", description: "Optional. The matching ENTRY from formulary.dosing_bands (the outer object containing `ingredient`, `snomed_code`, `ingredient_doses[]`, `max_single_mg`, `max_daily_mg`). Do NOT pass a single ingredient_doses sub-row — pass the entire dosing_bands element that applies to this medicine's primary indication. The engine will resolve the limiting ingredient internally.", properties: {} }
             },
             required: ["generic_name", "method", "dose_value", "frequency", "formulation"]
           }
@@ -510,6 +510,39 @@ async function executeGetPreviousRx(
   }
 }
 
+// S2-MID-1: defensive normaliser. The dose engine's _findIngBand expects the
+// FULL outer dosing_bands[] entry (with `ingredient`/`snomed_code` and an
+// `ingredient_doses[]` array). If Sonnet (mistakenly) passes a single
+// ingredient_doses sub-row instead, wrap it as a synthetic outer band so the
+// engine can still resolve the limiting ingredient and apply max-dose caps.
+function _normalizeDosingBand(band: any): any[] {
+  if (!band || typeof band !== "object") return [];
+  if (
+    Array.isArray(band.ingredient_doses) ||
+    band.ingredient ||
+    band.max_single_mg !== undefined ||
+    band.max_daily_mg !== undefined
+  ) {
+    return [band];
+  }
+  if (
+    band.dose_min_qty !== undefined ||
+    band.max_single_mg !== undefined ||
+    band.is_limiting !== undefined
+  ) {
+    return [
+      {
+        ingredient: band.ingredient || band.name || "",
+        snomed_code: band.snomed_code,
+        ingredient_doses: [band],
+        max_single_mg: band.max_single_mg,
+        max_daily_mg: band.max_daily_mg,
+      },
+    ];
+  }
+  return [];
+}
+
 async function executeComputeDoses(input: any): Promise<string> {
   try {
     const patient = input.patient || {};
@@ -533,7 +566,7 @@ async function executeComputeDoses(input: any): Promise<string> {
           ingredients,
           form: (m.formulation && m.formulation.form) || "syrup",
           outputUnit: m.output_unit || "mL",
-          ingredientBands: m.dosing_band ? [m.dosing_band] : []
+          ingredientBands: _normalizeDosingBand(m.dosing_band)
         };
         const r = computeDose(params);
         return {
