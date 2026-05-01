@@ -514,19 +514,25 @@ async function toolUseLoop(
   apiKey: string,
   systemPrompt: string,
   userMessage: string,
+  timeoutMs: number = 50_000,
 ): Promise<{
   text: string;
   totalInputTokens: number;
   totalOutputTokens: number;
   rounds: number;
+  durationMs: number;
 }> {
+  const startMs = Date.now();
   const messages: Message[] = [{ role: "user", content: userMessage }];
   let totalInputTokens = 0;
   let totalOutputTokens = 0;
 
-  // Timeout: abort entire loop after 120 seconds
+  // Timeout: abort entire loop after `timeoutMs` (default 50s, leaving budget
+  // for completeness retry within Supabase Edge Function 150s wall).
+  // Sprint 2 fix: was 120s, which caused 150s wall-clock timeouts on large
+  // notes when paired with a single retry. See task #9.
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 120_000);
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   // Track last tool call to detect repeated identical calls
   let lastToolCallKey = "";
@@ -576,7 +582,7 @@ async function toolUseLoop(
         console.log(
           `Completed in ${round} round(s). Tokens: ${totalInputTokens} in, ${totalOutputTokens} out.`,
         );
-        return { text, totalInputTokens, totalOutputTokens, rounds: round };
+        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
       }
 
       if (data.stop_reason === "tool_use") {
@@ -589,7 +595,7 @@ async function toolUseLoop(
             .filter((b: ContentBlock) => b.type === "text")
             .map((b: ContentBlock) => b.text || "")
             .join("");
-          return { text, totalInputTokens, totalOutputTokens, rounds: round };
+          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
         }
 
         console.log(`  ${toolBlocks.length} tool call(s) in round ${round}`);
@@ -607,7 +613,7 @@ async function toolUseLoop(
             .filter((b: ContentBlock) => b.type === "text")
             .map((b: ContentBlock) => b.text || "")
             .join("");
-          return { text, totalInputTokens, totalOutputTokens, rounds: round };
+          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
         }
         lastToolCallKey = currentToolCallKey;
 
@@ -629,7 +635,7 @@ async function toolUseLoop(
           .filter((b: ContentBlock) => b.type === "text")
           .map((b: ContentBlock) => b.text || "")
           .join("");
-        return { text, totalInputTokens, totalOutputTokens, rounds: round };
+        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
       }
     }
 
@@ -777,19 +783,25 @@ serve(async (req: Request) => {
     let rawText: string;
     let meta: any = {};
 
+    let firstAttemptDurationMs = 0;
     try {
-      // Primary path: tool-use loop
+      // Primary path: tool-use loop with 50s budget. The Edge Function has a
+      // 150s wall, and we need budget for both the first attempt AND the
+      // optional completeness retry.
       const result = await toolUseLoop(
         ANTHROPIC_API_KEY,
         corePrompt,
         userMessage,
+        50_000,
       );
       rawText = result.text;
+      firstAttemptDurationMs = result.durationMs;
       meta = {
         mode: "tool-use",
         rounds: result.rounds,
         input_tokens: result.totalInputTokens,
         output_tokens: result.totalOutputTokens,
+        first_attempt_duration_ms: result.durationMs,
       };
     } catch (loopError: any) {
       // Fallback: single-shot with full skill
@@ -813,23 +825,63 @@ serve(async (req: Request) => {
       return !emittedMeds.some((e: string) => e.includes(reqU) || reqU.includes(e.split(' ')[0]));
     });
 
-    if (stillMissing.length > 0 && meta.mode !== 'fallback-single-shot') {
-      console.log(`Completeness mismatch: missing ${stillMissing.join(', ')}. Retrying once.`);
-      meta.completeness_retry = true;
+    // Retry gating:
+    //   - missing > 0
+    //   - not in fallback mode (would re-fail with same single-shot)
+    //   - first attempt finished in < 60s (otherwise no time left in 150s wall)
+    // If first attempt was slow but produced output, accept it and surface
+    // the omission via meta + omitted_medicines so the doctor sees gaps.
+    const RETRY_FIRST_ATTEMPT_BUDGET_MS = 60_000;
+    const canRetry =
+      stillMissing.length > 0 &&
+      meta.mode !== 'fallback-single-shot' &&
+      firstAttemptDurationMs > 0 &&
+      firstAttemptDurationMs < RETRY_FIRST_ATTEMPT_BUDGET_MS;
+
+    if (stillMissing.length > 0) {
       meta.first_attempt_missing = stillMissing;
+    }
+
+    if (canRetry) {
+      // Compute remaining wall time, leave 5s headroom for response handling.
+      const remainingMs = Math.max(20_000, 145_000 - firstAttemptDurationMs - 5_000);
+      console.log(`Completeness mismatch: missing ${stillMissing.join(', ')}. Retrying once with ${remainingMs}ms budget.`);
+      meta.completeness_retry = true;
+      meta.completeness_retry_budget_ms = remainingMs;
       const retryUserMessage = userMessage + `\n\nIMPORTANT: Your previous output omitted these drugs the doctor explicitly requested: ${stillMissing.join(', ')}. Either include each one in medicines[] with full dose calculation, OR add an entry to omitted_medicines[] with a clear reason.`;
       try {
-        const retry = await toolUseLoop(ANTHROPIC_API_KEY, corePrompt, retryUserMessage);
+        const retry = await toolUseLoop(ANTHROPIC_API_KEY, corePrompt, retryUserMessage, remainingMs);
         rawText = retry.text;
         meta.rounds = (meta.rounds || 0) + retry.rounds;
         meta.input_tokens = (meta.input_tokens || 0) + retry.totalInputTokens;
         meta.output_tokens = (meta.output_tokens || 0) + retry.totalOutputTokens;
+        meta.retry_duration_ms = retry.durationMs;
         const retryPrescription = extractJSON(rawText);
+        // Re-apply requested_medicines from first attempt if retry dropped it
+        if ((!retryPrescription.requested_medicines || retryPrescription.requested_medicines.length === 0) && reqMeds.length > 0) {
+          retryPrescription.requested_medicines = reqMeds;
+        }
         Object.assign(prescription, retryPrescription);
       } catch (retryErr: any) {
         console.warn("Completeness retry failed:", retryErr.message);
         meta.completeness_retry_error = retryErr.message;
       }
+    } else if (stillMissing.length > 0) {
+      // Skipped retry. Surface omissions so the doctor and audit see them.
+      meta.completeness_retry_skipped = true;
+      meta.completeness_retry_skipped_reason =
+        firstAttemptDurationMs >= RETRY_FIRST_ATTEMPT_BUDGET_MS
+          ? `first_attempt_too_slow_${firstAttemptDurationMs}ms`
+          : (meta.mode === 'fallback-single-shot' ? 'fallback_mode' : 'unknown');
+      // Auto-add stillMissing into omitted_medicines so the front-end shows them
+      const existingOmittedNames = new Set((prescription.omitted_medicines ?? []).map((o: any) => (o.name ?? '').toUpperCase()));
+      const synthetic = stillMissing
+        .filter(m => !existingOmittedNames.has(m.toUpperCase()))
+        .map(m => ({ name: m, reason: 'server_completeness_check_skipped_retry' }));
+      prescription.omitted_medicines = [...(prescription.omitted_medicines ?? []), ...synthetic];
+      // Force severity_server to 'high' so the doctor can't miss it
+      if (!prescription.safety) prescription.safety = {};
+      prescription.safety.severity_server = 'high';
     }
 
     return new Response(JSON.stringify({ prescription, meta }), {
