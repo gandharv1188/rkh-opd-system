@@ -853,6 +853,72 @@ function extractJSON(raw: string): any {
   }
 }
 
+// ===== COMPLETENESS MATCHERS (Sprint 2 GAP-1/2) =====
+
+// Brand-aware match: handles row1_en formats like
+// "IBUPROFEN+PARACETAMOL SUSPENSION (Combiflam)" when doctor wrote "Combiflam".
+function _normalizeForMatch(s: string): string {
+  return (s || '')
+    .toString()
+    .toUpperCase()
+    .replace(/[^A-Z0-9+\s\-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function _matchesEmittedOrOmitted(
+  req: string,
+  emittedRows: string[],
+  omittedNames: Set<string>,
+): boolean {
+  const reqN = _normalizeForMatch(req);
+  if (!reqN) return false;
+  if (omittedNames.has(reqN)) return true;
+  for (const row of emittedRows) {
+    const rowN = _normalizeForMatch(row);
+    if (!rowN) continue;
+    // 1. exact substring either direction (legacy behaviour, still useful)
+    if (rowN.includes(reqN) || reqN.includes(rowN.split(' ')[0])) return true;
+    // 2. row1_en often has "(Brand)" — check brand tokens inside parens
+    const parenMatches = row.match(/\(([^)]+)\)/g) || [];
+    for (const m of parenMatches) {
+      const brand = _normalizeForMatch(m.replace(/[()]/g, ''));
+      if (!brand) continue;
+      if (brand === reqN || brand.includes(reqN) || reqN.includes(brand)) return true;
+    }
+  }
+  return false;
+}
+
+// Build the omitted-name set normalised the same way matcher uses.
+function _buildOmittedNameSet(omittedMeds: any[]): Set<string> {
+  const set = new Set<string>();
+  for (const o of omittedMeds || []) {
+    const n = _normalizeForMatch(o?.name ?? '');
+    if (n) set.add(n);
+  }
+  return set;
+}
+
+// Run the completeness check. Returns the list of doctor-requested drugs that
+// are neither in medicines[] nor explicitly listed in omitted_medicines[].
+// GAP-2: cardinality-aware — if every reqMed individually matches, treat as
+// PASS even when emittedMeds.length < reqMeds.length (combo collapse).
+function _findStillMissing(prescription: any): string[] {
+  const reqMeds: string[] = prescription?.requested_medicines ?? [];
+  const emittedRows: string[] = (prescription?.medicines ?? []).map(
+    (m: any) => (m?.row1_en ?? '').toString(),
+  );
+  const omittedNames = _buildOmittedNameSet(prescription?.omitted_medicines ?? []);
+  const missing: string[] = [];
+  for (const req of reqMeds) {
+    if (!_matchesEmittedOrOmitted(req, emittedRows, omittedNames)) {
+      missing.push(req);
+    }
+  }
+  return missing;
+}
+
 // ===== MAIN HANDLER =====
 
 serve(async (req: Request) => {
@@ -912,16 +978,29 @@ serve(async (req: Request) => {
     let rawText: string;
     let meta: any = {};
 
+    // GAP-7: Shared deadline budget — guarantees the whole request stays under
+    // 130s with ~20s headroom against the 150s Edge Function wall. Each
+    // toolUseLoop call computes its remaining budget from this deadline rather
+    // than holding an independent timer.
+    const requestStart = Date.now();
+    const HARD_DEADLINE_MS = requestStart + 130_000;
+    const RESPONSE_HEADROOM_MS = 5_000;
+
+    function remainingBudgetMs(): number {
+      return HARD_DEADLINE_MS - Date.now() - RESPONSE_HEADROOM_MS;
+    }
+
     let firstAttemptDurationMs = 0;
     try {
-      // Primary path: tool-use loop with 50s budget. The Edge Function has a
-      // 150s wall, and we need budget for both the first attempt AND the
-      // optional completeness retry.
+      // Primary path: tool-use loop. Cap first attempt at 50s (gives the model
+      // time but leaves room for the completeness retry within the 130s
+      // shared deadline).
+      const firstBudget = Math.min(50_000, remainingBudgetMs());
       const result = await toolUseLoop(
         ANTHROPIC_API_KEY,
         corePrompt,
         userMessage,
-        50_000,
+        firstBudget,
       );
       rawText = result.text;
       firstAttemptDurationMs = result.durationMs;
@@ -931,6 +1010,7 @@ serve(async (req: Request) => {
         input_tokens: result.totalInputTokens,
         output_tokens: result.totalOutputTokens,
         first_attempt_duration_ms: result.durationMs,
+        first_attempt_budget_ms: firstBudget,
         tools_called: result.toolsCalled,
       };
     } catch (loopError: any) {
@@ -940,79 +1020,140 @@ serve(async (req: Request) => {
       meta = { mode: "fallback-single-shot", error: loopError.message };
     }
 
-    const prescription = extractJSON(rawText);
+    let prescription = extractJSON(rawText);
 
-    // Server-side completeness check: ensure every doctor-requested drug is
-    // either emitted in medicines[] or explicitly listed in omitted_medicines[].
-    const reqMeds: string[] = prescription.requested_medicines ?? [];
-    const emittedMeds: string[] = (prescription.medicines ?? []).map((m: any) => (m.row1_en ?? '').toUpperCase());
-    const omittedMeds: any[] = prescription.omitted_medicines ?? [];
-    const omittedNames = new Set(omittedMeds.map((o: any) => (o.name ?? '').toUpperCase()));
-
-    const stillMissing = reqMeds.filter((req: string) => {
-      const reqU = req.toUpperCase();
-      if (omittedNames.has(reqU)) return false;
-      return !emittedMeds.some((e: string) => e.includes(reqU) || reqU.includes(e.split(' ')[0]));
-    });
-
-    // Retry gating:
-    //   - missing > 0
-    //   - not in fallback mode (would re-fail with same single-shot)
-    //   - first attempt finished in < 60s (otherwise no time left in 150s wall)
-    // If first attempt was slow but produced output, accept it and surface
-    // the omission via meta + omitted_medicines so the doctor sees gaps.
-    const RETRY_FIRST_ATTEMPT_BUDGET_MS = 60_000;
-    const canRetry =
-      stillMissing.length > 0 &&
-      meta.mode !== 'fallback-single-shot' &&
-      firstAttemptDurationMs > 0 &&
-      firstAttemptDurationMs < RETRY_FIRST_ATTEMPT_BUDGET_MS;
-
-    if (stillMissing.length > 0) {
-      meta.first_attempt_missing = stillMissing;
+    // GAP-6: extractJSON parse failure must NOT silently fall through to the
+    // completeness check (which would see empty arrays and produce a blank
+    // prescription). Surface the parse error to the frontend immediately.
+    if (prescription && prescription.error) {
+      meta.parse_failed = true;
+      meta.parse_error = prescription.parse_error;
+      meta.raw_preview = prescription.raw_preview;
+      return new Response(
+        JSON.stringify({
+          prescription,
+          meta,
+          error: 'AI output could not be parsed as JSON. See meta.raw_preview.',
+        }),
+        {
+          // 200 keeps the frontend's existing error path (which inspects body)
+          // rather than triggering a generic network error.
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
     }
 
-    if (canRetry) {
-      // Compute remaining wall time, leave 5s headroom for response handling.
-      const remainingMs = Math.max(20_000, 145_000 - firstAttemptDurationMs - 5_000);
-      console.log(`Completeness mismatch: missing ${stillMissing.join(', ')}. Retrying once with ${remainingMs}ms budget.`);
-      meta.completeness_retry = true;
-      meta.completeness_retry_budget_ms = remainingMs;
-      const retryUserMessage = userMessage + `\n\nIMPORTANT: Your previous output omitted these drugs the doctor explicitly requested: ${stillMissing.join(', ')}. Either include each one in medicines[] with full dose calculation, OR add an entry to omitted_medicines[] with a clear reason.`;
-      try {
-        const retry = await toolUseLoop(ANTHROPIC_API_KEY, corePrompt, retryUserMessage, remainingMs);
-        rawText = retry.text;
-        meta.rounds = (meta.rounds || 0) + retry.rounds;
-        meta.input_tokens = (meta.input_tokens || 0) + retry.totalInputTokens;
-        meta.output_tokens = (meta.output_tokens || 0) + retry.totalOutputTokens;
-        meta.retry_duration_ms = retry.durationMs;
-        meta.tools_called = [...(meta.tools_called || []), ...retry.toolsCalled];
-        const retryPrescription = extractJSON(rawText);
-        // Re-apply requested_medicines from first attempt if retry dropped it
-        if ((!retryPrescription.requested_medicines || retryPrescription.requested_medicines.length === 0) && reqMeds.length > 0) {
-          retryPrescription.requested_medicines = reqMeds;
-        }
-        Object.assign(prescription, retryPrescription);
-      } catch (retryErr: any) {
-        console.warn("Completeness retry failed:", retryErr.message);
-        meta.completeness_retry_error = retryErr.message;
+    // Server-side completeness check (GAP-1: brand-aware matcher).
+    let stillMissing = _findStillMissing(prescription);
+
+    // GAP-12: fallback path skips retry — fallback can't recover from the same
+    // single-shot. Synthesize omitted entries + force severity to 'high' so
+    // the doctor cannot miss the gap, then run severity merge below.
+    if (meta.mode === 'fallback-single-shot') {
+      if (stillMissing.length > 0) {
+        meta.fallback_completeness_warning = true;
+        meta.first_attempt_missing = stillMissing;
+        const existingOmittedNames = _buildOmittedNameSet(
+          prescription.omitted_medicines ?? [],
+        );
+        const synthetic = stillMissing
+          .filter((m) => !existingOmittedNames.has(_normalizeForMatch(m)))
+          .map((m) => ({ name: m, reason: 'fallback_mode_omission' }));
+        prescription.omitted_medicines = [
+          ...(prescription.omitted_medicines ?? []),
+          ...synthetic,
+        ];
+        if (!prescription.safety) prescription.safety = {};
+        prescription.safety.severity_server = 'high';
       }
-    } else if (stillMissing.length > 0) {
-      // Skipped retry. Surface omissions so the doctor and audit see them.
-      meta.completeness_retry_skipped = true;
-      meta.completeness_retry_skipped_reason =
-        firstAttemptDurationMs >= RETRY_FIRST_ATTEMPT_BUDGET_MS
-          ? `first_attempt_too_slow_${firstAttemptDurationMs}ms`
-          : (meta.mode === 'fallback-single-shot' ? 'fallback_mode' : 'unknown');
-      // Auto-add stillMissing into omitted_medicines so the front-end shows them
-      const existingOmittedNames = new Set((prescription.omitted_medicines ?? []).map((o: any) => (o.name ?? '').toUpperCase()));
-      const synthetic = stillMissing
-        .filter(m => !existingOmittedNames.has(m.toUpperCase()))
-        .map(m => ({ name: m, reason: 'server_completeness_check_skipped_retry' }));
-      prescription.omitted_medicines = [...(prescription.omitted_medicines ?? []), ...synthetic];
-      // Force severity_server to 'high' so the doctor can't miss it
-      if (!prescription.safety) prescription.safety = {};
-      prescription.safety.severity_server = 'high';
+    } else {
+      // GAP-7: retry gating uses the shared deadline. Need at least 25s of
+      // remaining budget to attempt a second round; otherwise accept and
+      // surface the gap.
+      const RETRY_MIN_REMAINING_MS = 25_000;
+      const remainingMs = remainingBudgetMs();
+      const canRetry =
+        stillMissing.length > 0 &&
+        firstAttemptDurationMs > 0 &&
+        remainingMs >= RETRY_MIN_REMAINING_MS;
+
+      if (stillMissing.length > 0) {
+        meta.first_attempt_missing = stillMissing;
+      }
+
+      if (canRetry) {
+        console.log(
+          `Completeness mismatch: missing ${stillMissing.join(', ')}. Retrying once with ${remainingMs}ms budget.`,
+        );
+        meta.completeness_retry = true;
+        meta.completeness_retry_budget_ms = remainingMs;
+        const retryUserMessage =
+          userMessage +
+          `\n\nIMPORTANT: Your previous output omitted these drugs the doctor explicitly requested: ${stillMissing.join(', ')}. Either include each one in medicines[] with full dose calculation, OR add an entry to omitted_medicines[] with a clear reason.`;
+        try {
+          const retry = await toolUseLoop(
+            ANTHROPIC_API_KEY,
+            corePrompt,
+            retryUserMessage,
+            remainingMs,
+          );
+          rawText = retry.text;
+          meta.rounds = (meta.rounds || 0) + retry.rounds;
+          meta.input_tokens = (meta.input_tokens || 0) + retry.totalInputTokens;
+          meta.output_tokens = (meta.output_tokens || 0) + retry.totalOutputTokens;
+          meta.retry_duration_ms = retry.durationMs;
+          meta.tools_called = [...(meta.tools_called || []), ...retry.toolsCalled];
+          const retryPrescription = extractJSON(rawText);
+          // GAP-6: if retry parse failed, keep the first-attempt prescription
+          // and surface the retry error in meta — do NOT overwrite with error obj.
+          if (retryPrescription && retryPrescription.error) {
+            meta.retry_parse_failed = true;
+            meta.retry_parse_error = retryPrescription.parse_error;
+          } else {
+            const reqMedsSnapshot: string[] = prescription.requested_medicines ?? [];
+            if (
+              (!retryPrescription.requested_medicines ||
+                retryPrescription.requested_medicines.length === 0) &&
+              reqMedsSnapshot.length > 0
+            ) {
+              retryPrescription.requested_medicines = reqMedsSnapshot;
+            }
+            Object.assign(prescription, retryPrescription);
+          }
+          // Re-evaluate stillMissing after retry merge.
+          stillMissing = _findStillMissing(prescription);
+        } catch (retryErr: any) {
+          console.warn("Completeness retry failed:", retryErr.message);
+          meta.completeness_retry_error = retryErr.message;
+        }
+      }
+
+      if (stillMissing.length > 0) {
+        // Skipped or post-retry residual. Surface so the doctor sees gaps.
+        meta.completeness_retry_skipped = !canRetry;
+        if (!canRetry) {
+          meta.completeness_retry_skipped_reason =
+            remainingMs < RETRY_MIN_REMAINING_MS
+              ? `insufficient_budget_${remainingMs}ms_remaining`
+              : 'unknown';
+        }
+        const existingOmittedNames = _buildOmittedNameSet(
+          prescription.omitted_medicines ?? [],
+        );
+        const reason = canRetry
+          ? 'server_completeness_check_post_retry_residual'
+          : 'server_completeness_check_skipped_retry';
+        const synthetic = stillMissing
+          .filter((m) => !existingOmittedNames.has(_normalizeForMatch(m)))
+          .map((m) => ({ name: m, reason }));
+        prescription.omitted_medicines = [
+          ...(prescription.omitted_medicines ?? []),
+          ...synthetic,
+        ];
+        if (!prescription.safety) prescription.safety = {};
+        prescription.safety.severity_server = 'high';
+      }
     }
 
     // Sprint 2: enforce compute_doses tool was called when medicines[] is non-empty.
