@@ -6381,13 +6381,23 @@
         el.style.opacity = "1";
       });
     // Change signoff bar to update mode
+    // S2-FE-3 fix: rebuild the signoff bar with the gate elements (banner + ack) so the
+    // high-severity gate is re-applied on the update-mode Save button. Without this,
+    // a doctor could approve a high-sev Rx → Edit → tweak dose → Save and bypass the gate.
     const signoff = document.querySelector(".signoff");
     if (signoff)
       signoff.innerHTML = `<span style="color:#b8860b;font-weight:600;font-size:13px">Editing — make changes and save</span>
+      <div id="signoff-gate-banner" style="display:none"></div>
+      <label id="signoff-ack-wrapper" style="display:none;align-items:center;gap:6px;font-size:12px;margin-right:10px">
+        <input type="checkbox" id="signoff-ack" />
+        I have reviewed the flags above and confirm prescribing
+      </label>
       <div style="display:flex;gap:8px">
         <button class="sign-btn" id="sign-btn" onclick="signOff()" style="background:#b8860b">Save Updated Prescription</button>
         <button class="back-btn" onclick="cancelUpdate()">Cancel</button>
       </div>`;
+    // Re-apply gate against current rxData so update-mode Save is locked on high severity
+    applySignoffGate(rxData);
   }
 
   function cancelUpdate() {
