@@ -8,6 +8,12 @@
 // Set secret: supabase secrets set ANTHROPIC_API_KEY=sk-ant-xxx --project-ref ecywxuqhnlkjtdshpcbc
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+import {
+  computeDose,
+  parseIngredients,
+  type ComputeDoseParams,
+  type ComputeDoseResult,
+} from "../_shared/dose-engine.ts";
 
 // ===== HELPERS =====
 
@@ -155,6 +161,44 @@ const tools = [
       required: ["patient_id"],
     },
   },
+  {
+    name: "compute_doses",
+    description: "Deterministic dose calculator. CALL THIS for every weight-based, BSA, GFR-adjusted, or fixed-dose medicine BEFORE emitting medicines[]. Pass ALL drugs the doctor wants in ONE call. Returns canonical volume_ml/drops/tablets per drug. Use the returned numbers verbatim in row2_en — do NOT do mental math. The dose engine is web/dose-engine.js (the same code is invoked here). For combo drugs, use the LIMITING ingredient.",
+    input_schema: {
+      type: "object",
+      properties: {
+        patient: {
+          type: "object",
+          properties: {
+            weight_kg: { type: "number", description: "Patient weight in kg" },
+            height_cm: { type: ["number", "null"], description: "Patient height in cm (optional, needed for BSA dosing)" },
+            age_months: { type: ["number", "null"], description: "Chronological age in months" },
+            ga_weeks: { type: ["number", "null"], description: "Gestational age in weeks (preterms only)" }
+          },
+          required: ["weight_kg"]
+        },
+        meds: {
+          type: "array",
+          description: "ALL medicines the doctor wants, batched in one call.",
+          items: {
+            type: "object",
+            properties: {
+              generic_name: { type: "string", description: "Generic name in CAPS, must match formulary" },
+              method: { type: "string", enum: ["weight", "bsa", "fixed", "gfr", "infusion", "age"] },
+              dose_value: { type: "number", description: "mg/kg if method=weight; mg/m² if bsa; total mg if fixed; etc." },
+              is_per_day: { type: "boolean", description: "true if dose_value is per day (will be divided by frequency)" },
+              frequency: { type: "number", description: "Doses per day (1=OD, 2=BD, 3=TDS, 4=QID)" },
+              formulation: { type: "object", description: "Formulation object from get_formulary's response — must include ingredients[] with strength_numerator/strength_denominator", properties: {} },
+              output_unit: { type: "string", description: "Preferred display unit: drops, mL, tablet, capsule, sachet, etc." },
+              dosing_band: { type: "object", description: "Optional ingredient_doses entry from formulary's dosing_bands for max-dose checks", properties: {} }
+            },
+            required: ["generic_name", "method", "dose_value", "frequency", "formulation"]
+          }
+        }
+      },
+      required: ["patient", "meds"]
+    }
+  }
 ];
 
 // ===== TOOL EXECUTION =====
@@ -364,6 +408,25 @@ async function executeGetStandardRx(
       }
     }
 
+    // Strategy 3 (Sprint 2): pg_trgm-style token-OR fuzzy match for diagnosis text.
+    // PostgREST doesn't expose pg_trgm's % operator without an RPC, so we tokenize
+    // the diagnosis name and OR-match each meaningful token via ILIKE; the trigram
+    // index on diagnosis_name still accelerates the substring planner.
+    if (name) {
+      const tokens = name.trim().split(/\s+/).filter((t) => t.length >= 3);
+      if (tokens.length > 0) {
+        const orFilter = tokens
+          .map((t) => `diagnosis_name.ilike.%25${encodeURIComponent(t)}%25`)
+          .join(",");
+        const url4 = `${SUPABASE_URL}/rest/v1/standard_prescriptions?or=(${orFilter})&active=eq.true&select=${select}&limit=5`;
+        const res4 = await fetch(url4, { headers });
+        if (res4.ok) {
+          const protocols4 = await res4.json();
+          if (protocols4.length) return JSON.stringify(protocols4, null, 2);
+        }
+      }
+    }
+
     const searched = [
       icd10 ? `ICD-10: ${icd10}` : "",
       name ? `Name: ${name}` : "",
@@ -447,6 +510,65 @@ async function executeGetPreviousRx(
   }
 }
 
+async function executeComputeDoses(input: any): Promise<string> {
+  try {
+    const patient = input.patient || {};
+    const meds = Array.isArray(input.meds) ? input.meds : [];
+    if (!patient.weight_kg || patient.weight_kg <= 0) {
+      return JSON.stringify({
+        error: "patient.weight_kg required and must be > 0",
+        instruction_to_model: "Cannot compute doses without weight. If weight is missing, surface to omitted_medicines[] with reason='age_contraindication' or ask the doctor."
+      });
+    }
+    const results = meds.map((m: any) => {
+      try {
+        const ingredients = parseIngredients(m.formulation || {});
+        const params: ComputeDoseParams = {
+          method: m.method || "weight",
+          weight: patient.weight_kg,
+          heightCm: patient.height_cm || undefined,
+          sliderValue: m.dose_value,
+          isPerDay: m.is_per_day !== false,
+          frequency: m.frequency || 1,
+          ingredients,
+          form: (m.formulation && m.formulation.form) || "syrup",
+          outputUnit: m.output_unit || "mL",
+          ingredientBands: m.dosing_band ? [m.dosing_band] : []
+        };
+        const r = computeDose(params);
+        return {
+          generic_name: m.generic_name,
+          ok: true,
+          volume_display: r.vol,
+          english_dose: r.enD,
+          hindi_dose: r.hiD,
+          calc_string: r.calc,
+          volume_ml: r.volumeMl,
+          volume_units: r.volumeUnits,
+          actual_primary_mg: r.fd,
+          capped: r.capped,
+          warnings: r.warnings,
+          ingredient_doses: r.ingredientDoses
+        };
+      } catch (e: any) {
+        return {
+          generic_name: m.generic_name,
+          ok: false,
+          error: e.message,
+          instruction_to_model: `Engine could not compute ${m.generic_name}. Add to omitted_medicines[] with reason='not_in_formulary' OR 'doctor_specified_dose_unsafe_engine_capped'.`
+        };
+      }
+    });
+    return JSON.stringify({
+      tool: "compute_doses",
+      results,
+      instruction_to_model: "Use volume_display, english_dose, hindi_dose, calc_string verbatim in your medicines[] entries. Do NOT compute dose values yourself. If any result has ok:false, route that drug to omitted_medicines[]."
+    });
+  } catch (e: any) {
+    return JSON.stringify({ error: "compute_doses failed: " + e.message });
+  }
+}
+
 async function executeTool(
   name: string,
   input: Record<string, any>,
@@ -466,6 +588,8 @@ async function executeTool(
       return await executeGetPreviousRx(input.patient_id, input.limit);
     case "get_lab_history":
       return await executeGetLabHistory(input.patient_id, input.test_names);
+    case "compute_doses":
+      return await executeComputeDoses(input);
     default:
       return `Unknown tool: ${name}`;
   }
@@ -521,11 +645,13 @@ async function toolUseLoop(
   totalOutputTokens: number;
   rounds: number;
   durationMs: number;
+  toolsCalled: string[];
 }> {
   const startMs = Date.now();
   const messages: Message[] = [{ role: "user", content: userMessage }];
   let totalInputTokens = 0;
   let totalOutputTokens = 0;
+  const toolsCalledList: string[] = [];
 
   // Timeout: abort entire loop after `timeoutMs` (default 50s, leaving budget
   // for completeness retry within Supabase Edge Function 150s wall).
@@ -582,20 +708,23 @@ async function toolUseLoop(
         console.log(
           `Completed in ${round} round(s). Tokens: ${totalInputTokens} in, ${totalOutputTokens} out.`,
         );
-        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
       }
 
       if (data.stop_reason === "tool_use") {
         const toolBlocks = data.content.filter(
           (b: ContentBlock) => b.type === "tool_use",
         );
+        for (const b of toolBlocks) {
+          if (b.name) toolsCalledList.push(b.name);
+        }
         if (!toolBlocks.length) {
           // No tool calls despite tool_use stop reason — treat as end
           const text = data.content
             .filter((b: ContentBlock) => b.type === "text")
             .map((b: ContentBlock) => b.text || "")
             .join("");
-          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
         }
 
         console.log(`  ${toolBlocks.length} tool call(s) in round ${round}`);
@@ -613,7 +742,7 @@ async function toolUseLoop(
             .filter((b: ContentBlock) => b.type === "text")
             .map((b: ContentBlock) => b.text || "")
             .join("");
-          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+          return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
         }
         lastToolCallKey = currentToolCallKey;
 
@@ -635,7 +764,7 @@ async function toolUseLoop(
           .filter((b: ContentBlock) => b.type === "text")
           .map((b: ContentBlock) => b.text || "")
           .join("");
-        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs };
+        return { text, totalInputTokens, totalOutputTokens, rounds: round, durationMs: Date.now() - startMs, toolsCalled: toolsCalledList };
       }
     }
 
@@ -802,6 +931,7 @@ serve(async (req: Request) => {
         input_tokens: result.totalInputTokens,
         output_tokens: result.totalOutputTokens,
         first_attempt_duration_ms: result.durationMs,
+        tools_called: result.toolsCalled,
       };
     } catch (loopError: any) {
       // Fallback: single-shot with full skill
@@ -856,6 +986,7 @@ serve(async (req: Request) => {
         meta.input_tokens = (meta.input_tokens || 0) + retry.totalInputTokens;
         meta.output_tokens = (meta.output_tokens || 0) + retry.totalOutputTokens;
         meta.retry_duration_ms = retry.durationMs;
+        meta.tools_called = [...(meta.tools_called || []), ...retry.toolsCalled];
         const retryPrescription = extractJSON(rawText);
         // Re-apply requested_medicines from first attempt if retry dropped it
         if ((!retryPrescription.requested_medicines || retryPrescription.requested_medicines.length === 0) && reqMeds.length > 0) {
@@ -882,6 +1013,77 @@ serve(async (req: Request) => {
       // Force severity_server to 'high' so the doctor can't miss it
       if (!prescription.safety) prescription.safety = {};
       prescription.safety.severity_server = 'high';
+    }
+
+    // Sprint 2: enforce compute_doses tool was called when medicines[] is non-empty.
+    // Prefer the tracked tool list from toolUseLoop; fall back to a calc-string
+    // heuristic when fallback-single-shot left tools_called empty.
+    {
+      const meds = (prescription.medicines ?? []) as any[];
+      const toolsCalled: string[] = (meta as any).tools_called || [];
+      const computeDosesCalled = toolsCalled.includes("compute_doses");
+      const weightMeds = meds.filter(
+        (m: any) => m && m.method && ["weight", "bsa", "gfr", "infusion"].includes(m.method),
+      );
+      let sketchy = false;
+      if (weightMeds.length > 0 && !computeDosesCalled) {
+        const sketchyMeds = weightMeds.filter((m: any) => {
+          const calc = (m.calc || "").toString();
+          return (
+            calc.length === 0 ||
+            (!calc.includes("→") && !calc.includes("mg/dose") && !calc.includes("ml") && !calc.includes("mL"))
+          );
+        });
+        if (sketchyMeds.length > 0) {
+          sketchy = true;
+          if (!prescription.safety) prescription.safety = {};
+          const aiSev = prescription.safety.severity_server ?? prescription.safety.severity_ai ?? 'low';
+          const escalate: Record<string, string> = { low: 'moderate', moderate: 'moderate', high: 'high' };
+          prescription.safety.severity_server = escalate[aiSev] ?? 'moderate';
+          prescription.safety.flags = [
+            ...(prescription.safety.flags ?? []),
+            `compute_doses_likely_skipped — ${sketchyMeds.length}/${weightMeds.length} weight-based medicine(s) lack engine calc trace. Verify dose manually.`,
+          ];
+          (meta as any).compute_doses_enforcement = "warning_added";
+        }
+      }
+    }
+
+    // Sprint 2: three-tier severity. Server-derived severity is computed from
+    // detected issues; AI's severity is in safety.severity_ai (if emitted).
+    // Final = max(server, AI).
+    {
+      function severityRank(s?: string): number {
+        return s === 'high' ? 3 : s === 'moderate' ? 2 : s === 'low' ? 1 : 0;
+      }
+      function severityLabel(r: number): 'high' | 'moderate' | 'low' {
+        return r >= 3 ? 'high' : r >= 2 ? 'moderate' : 'low';
+      }
+      if (!prescription.safety) prescription.safety = {};
+      const safetyBlock = prescription.safety as any;
+
+      let serverSev: 'high' | 'moderate' | 'low' =
+        (safetyBlock.severity_server as any) || 'low';
+      const omittedCount = (prescription.omitted_medicines ?? []).length;
+      if (omittedCount > 0) serverSev = 'high';
+      const allergyText = (safetyBlock.allergy_note ?? '').toString().toUpperCase();
+      if (allergyText.includes('ALLERGY:')) serverSev = 'high';
+      const interactions = safetyBlock.interactions;
+      if (typeof interactions === 'string' && interactions !== 'None found' && interactions.trim() !== '') {
+        if (severityRank(serverSev) < severityRank('moderate')) serverSev = 'moderate';
+      }
+      const maxDose = (safetyBlock.max_dose_check ?? []) as any[];
+      if (maxDose.some((c: any) => c.status === 'FLAGGED')) serverSev = 'high';
+
+      const aiSeverity = (safetyBlock.severity_ai ?? '').toString().toLowerCase();
+      const aiRank = severityRank(aiSeverity);
+      const serverRank = severityRank(serverSev);
+      const finalRank = Math.max(serverRank, aiRank);
+      safetyBlock.severity_server = serverSev;
+      safetyBlock.severity_ai = aiSeverity || 'low';
+      safetyBlock.severity_final = severityLabel(finalRank);
+
+      safetyBlock.overall_status = safetyBlock.severity_final === 'low' ? 'SAFE' : 'REVIEW REQUIRED';
     }
 
     return new Response(JSON.stringify({ prescription, meta }), {
