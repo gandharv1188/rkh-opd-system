@@ -2100,9 +2100,14 @@
 
   <!-- REVIEW VIEW -->
   <div id="view-rx" style="display: none">
+    <div id="signoff-gate-banner" style="display:none"></div>
     <div class="review-wrap" id="review-wrap"></div>
     <div class="signoff">
       <button class="back-btn" onclick="showView('pad')">← Edit note</button>
+      <label id="signoff-ack-wrapper" style="display:none;align-items:center;gap:6px;font-size:12px;margin-right:10px">
+        <input type="checkbox" id="signoff-ack" />
+        I have reviewed the flags above and confirm prescribing
+      </label>
       <button class="sign-btn" id="sign-btn" onclick="signOff()">
         Doctor approved — sign &amp; save
       </button>
@@ -4811,20 +4816,44 @@
     return [...activeMods].map((k) => sectionNames[k]).filter(Boolean);
   }
 
-  function matchProtocolFromNote(noteText) {
-    if (!noteText || typeof stdRxCache !== 'object' || !stdRxCache) return null;
+  // GAP-5: Scored multi-match protocol lookup. Longest-match wins for ICD-10 to avoid prefix collisions
+  // (e.g. "H66" vs "H66.9"). Returns up to 3 protocols ranked by specificity.
+  function matchProtocolsFromNote(noteText) {
+    if (!noteText || typeof stdRxCache !== 'object' || !stdRxCache) return [];
     const upText = noteText.toUpperCase();
-    // Try ICD-10 match first
-    for (const key in stdRxCache) {
-      const proto = stdRxCache[key];
-      if (proto && proto.icd10 && upText.includes(proto.icd10.toUpperCase())) return proto;
-    }
-    // Try diagnosis_name substring match
-    for (const key in stdRxCache) {
-      const proto = stdRxCache[key];
-      if (proto && proto.diagnosis_name && upText.includes(proto.diagnosis_name.toUpperCase())) return proto;
-    }
-    return null;
+    const candidates = [];
+    const seenIds = new Set();
+
+    // Pass 1: ICD-10 matches, ranked by code length (longest = most specific)
+    Object.values(stdRxCache).forEach(proto => {
+      if (!proto || !proto.icd10) return;
+      const code = proto.icd10.toUpperCase();
+      const id = proto.id || code;
+      if (upText.includes(code) && !seenIds.has(id)) {
+        candidates.push({ proto, score: 100 + code.length, source: 'icd10' });
+        seenIds.add(id);
+      }
+    });
+
+    // Pass 2: diagnosis_name substring matches (only if not already matched)
+    Object.values(stdRxCache).forEach(proto => {
+      if (!proto || !proto.diagnosis_name) return;
+      const id = proto.id || proto.icd10 || proto.diagnosis_name;
+      if (seenIds.has(id)) return;
+      const name = proto.diagnosis_name.toUpperCase();
+      if (upText.includes(name)) {
+        candidates.push({ proto, score: 50 + name.length, source: 'name' });
+        seenIds.add(id);
+      }
+    });
+
+    return candidates.sort((a, b) => b.score - a.score).slice(0, 3).map(c => c.proto);
+  }
+
+  // Backward-compat shim — old single-match callers still work
+  function matchProtocolFromNote(noteText) {
+    const arr = matchProtocolsFromNote(noteText);
+    return arr.length ? arr[0] : null;
   }
 
   function buildStdRxBlock(proto) {
@@ -4887,6 +4916,28 @@
       alert("Please write or dictate a clinical note first.");
       return;
     }
+    // Sprint 2 — Edit 1: Missing-weight prompt
+    {
+      const weight = selectedPatient?.visit?.weight_kg;
+      if (!weight || weight <= 0) {
+        const entered = window.prompt(
+          "Patient weight is required for dose calculation.\n\nEnter weight in kilograms (e.g., 12.4):",
+          ""
+        );
+        const w = parseFloat(entered);
+        if (!entered || isNaN(w) || w <= 0 || w > 200) {
+          alert("Cannot generate prescription without a valid weight. Please add weight to the visit first.");
+          return;
+        }
+        try {
+          await q(`visits?id=eq.${selectedPatient.visit.id}`, '', 'PATCH', { weight_kg: w });
+          selectedPatient.visit.weight_kg = w;
+        } catch (e) {
+          console.warn('Could not persist weight to visit:', e?.message);
+          selectedPatient.visit.weight_kg = w;
+        }
+      }
+    }
     // Add selected sections instruction to the note
     const sections = getSelectedSections();
     const sectionsNote = sections.length
@@ -4907,14 +4958,45 @@
       : "";
     let stdRxBlockNote = "";
     if (activeMods.has('stdrx')) {
-      const matched = matchProtocolFromNote(note);
-      if (matched) {
-        stdRxBlockNote = "\n\n" + buildStdRxBlock(matched);
+      // GAP-5: support multiple matched protocols (multi-diagnosis notes) with indexed blocks
+      const matchedAll = matchProtocolsFromNote(note);
+      if (matchedAll.length === 1) {
+        stdRxBlockNote = "\n\n" + buildStdRxBlock(matchedAll[0]);
+      } else if (matchedAll.length > 1) {
+        stdRxBlockNote = "\n\n" + matchedAll.map((p, i) => {
+          const inner = buildStdRxBlock(p)
+            .replace(/^<doctor_selected_protocol>\n/, '')
+            .replace(/<\/doctor_selected_protocol>$/, '');
+          return `<doctor_selected_protocol index="${i + 1}" of="${matchedAll.length}">\n` + inner + `</doctor_selected_protocol>`;
+        }).join("\n\n");
       } else {
         stdRxBlockNote = "\n\n<doctor_selected_protocol_unmatched>doctor enabled Std Rx but no protocol matched the diagnosis text — fall back to AI's get_standard_rx tool</doctor_selected_protocol_unmatched>";
       }
     }
-    const fullNote = note + sectionsNote + langNote + summaryNote + stdRxBlockNote;
+    // Sprint 2 — Edit 2: Pre-compute corrected_age_days + chronological_age_days for preterms
+    function _ageDays(dobStr) {
+      if (!dobStr) return null;
+      const dob = new Date(dobStr);
+      if (isNaN(dob.getTime())) return null;
+      const now = new Date();
+      return Math.floor((now - dob) / 86400000);
+    }
+    const _dob = selectedPatient?.dob || selectedPatient?.date_of_birth;
+    const _ga = selectedPatient?.gestational_age_weeks;
+    const _bw = selectedPatient?.birth_weight_kg;
+    const _chronoDays = _ageDays(_dob);
+    const _isNeonatalContext = activeMods?.has?.('neo') ||
+      (_chronoDays != null && _chronoDays < 90) ||
+      (_ga != null && _ga < 37) ||
+      (_bw != null && _bw < 2.5);
+    let agesNote = '';
+    if (_isNeonatalContext && _chronoDays != null) {
+      const _correctedDays = (_ga != null && _ga < 40)
+        ? Math.max(0, _chronoDays - (40 - _ga) * 7)
+        : _chronoDays;
+      agesNote = `\n\nCHRONOLOGICAL AGE: ${_chronoDays} days\nCORRECTED AGE: ${_correctedDays} days`;
+    }
+    const fullNote = note + sectionsNote + langNote + summaryNote + stdRxBlockNote + agesNote;
 
     // Get patient allergies if selected
     const allergies = selectedPatient?.known_allergies || [];
@@ -5144,6 +5226,9 @@
     if (has(r.safety?.flags))
       h += `<div class="rv-sec">${r.safety.flags.map((f) => `<div class="flag-row"><span style="flex-shrink:0">⚠</span><span>${esc(f)}</span></div>`).join("")}</div>`;
 
+    // Sprint 2 — Edit 5: Formulary-miss / omitted-medicines stubs above the medicines list
+    h += renderOmittedStubs(r.omitted_medicines);
+
     // MEDICINES
     if (has(r.medicines)) {
       h += `<div class="rv-sec"><div class="rv-hdr blue">℞ Medicines — click any line to edit · Adjust dose to recalculate</div>`;
@@ -5157,6 +5242,7 @@
             <div contenteditable="true" spellcheck="false" class="med-r" id="${pid}-r2">${esc(m.row2_en)}</div>
             <div contenteditable="true" spellcheck="false" class="med-r r3" id="${pid}-r3">${esc(m.row3_hi)}</div>
             <div class="med-flag" id="${pid}-flag" style="${m.flag ? "" : "display:none"}">${m.flag ? "⚠ " + esc(m.flag) : ""}</div>
+            ${renderAllergyAlternative(m)}
           </div>
           ${renderPictogram(m)}
           <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0">
@@ -5806,6 +5892,86 @@
       signBtn.innerHTML = "Doctor approved — sign &amp; save";
       signBtn.style.background = "";
     }
+
+    // Sprint 2 — Edit 3: Sign-off gate based on severity
+    applySignoffGate(rxData);
+  }
+
+  // Sprint 2 — Edit 3: high-severity sign-off gate. All dynamic strings esc()'d before innerHTML.
+  function applySignoffGate(rx) {
+    const sev = rx?.safety?.severity_final || rx?.safety?.severity_server || rx?.safety?.severity_ai || (rx?.safety?.overall_status === 'REVIEW REQUIRED' ? 'high' : 'low');
+    const banner = document.getElementById('signoff-gate-banner');
+    const ack = document.getElementById('signoff-ack');
+    const ackWrap = document.getElementById('signoff-ack-wrapper');
+    const signBtn = document.getElementById('sign-btn');
+
+    const issues = [];
+    (rx?.safety?.ai_safety_notes || []).forEach(n => issues.push(String(n)));
+    (rx?.safety?.flags || []).forEach(f => issues.push(String(f)));
+    (rx?.safety?.max_dose_check || []).filter(c => c && c.status === 'FLAGGED').forEach(c => issues.push('Max dose flagged for ' + c.drug + ': ' + c.calculated_dose_mg + 'mg vs allowed ' + c.max_allowed_mg + 'mg'));
+    (rx?.omitted_medicines || []).forEach(o => issues.push('Omitted: ' + o.name + ' — ' + o.reason));
+
+    if (sev === 'high' || sev === 'moderate') {
+      if (banner) {
+        banner.style.display = 'block';
+        banner.style.background = sev === 'high' ? '#fff3f3' : '#fffbe6';
+        banner.style.border = sev === 'high' ? '2px solid #c33' : '2px solid #c89';
+        banner.style.padding = '10px 14px';
+        banner.style.margin = '8px 0';
+        banner.style.borderRadius = '6px';
+        banner.style.fontSize = '13px';
+        const titleColor = sev === 'high' ? '#c33' : '#a86';
+        const titleText = sev === 'high' ? '⚠ REVIEW REQUIRED:' : '⚠ Caution:';
+        // All issue strings are esc()'d before being inserted (XSS-safe).
+        const listHtml = issues.length
+          ? '<ul style="margin:6px 0 0 18px;padding:0">' + issues.map(i => '<li>' + esc(i) + '</li>').join('') + '</ul>'
+          : '<em>No specific issues listed.</em>';
+        banner.innerHTML = '<strong style="color:' + titleColor + '">' + titleText + '</strong><br>' + listHtml;
+      }
+      if (signBtn && sev === 'high') {
+        signBtn.disabled = true;
+        signBtn.dataset.gated = 'true';
+        if (ack && ackWrap) {
+          ackWrap.style.display = 'inline-flex';
+          ack.checked = false;
+          ack.onchange = () => { signBtn.disabled = !ack.checked; };
+        }
+      } else if (signBtn) {
+        signBtn.disabled = false;
+        delete signBtn.dataset.gated;
+        if (ackWrap) ackWrap.style.display = 'none';
+      }
+    } else {
+      if (banner) banner.style.display = 'none';
+      if (ackWrap) ackWrap.style.display = 'none';
+      if (signBtn) {
+        signBtn.disabled = false;
+        delete signBtn.dataset.gated;
+      }
+    }
+  }
+
+  // Sprint 2 — Edit 4: surface AI-suggested allergy-safe alternative inline on the medicine card
+  function renderAllergyAlternative(med) {
+    const flag = (med && med.flag || '').toString();
+    const m = flag.match(/Suggested alternative:\s*([A-Z][A-Z\s\-+]+)/i);
+    if (!m) return '';
+    const alt = m[1].trim();
+    return '<div style="font-size:11px;color:#a40;margin-top:2px">⚠ Suggested alternative: <strong>' + esc(alt) + '</strong> — discuss with doctor before swapping.</div>';
+  }
+
+  // Sprint 2 — Edit 5: red stubs above medicines list for omitted_medicines (formulary miss / completeness skip)
+  function renderOmittedStubs(omitted) {
+    if (!Array.isArray(omitted) || !omitted.length) return '';
+    const items = omitted.map(o => {
+      const reason = (o && o.reason ? String(o.reason) : '').replace(/_/g, ' ');
+      const name = o && o.name ? String(o.name) : 'Unknown drug';
+      return '<div style="border:1px dashed #c33;background:#fff3f3;padding:8px;border-radius:4px;margin:6px 0;font-size:12px">' +
+        '<strong style="color:#c33">' + esc(name) + ' — DOSE TO BE VERIFIED MANUALLY</strong><br>' +
+        '<span style="color:#888">Reason: ' + esc(reason) + '</span>' +
+        '</div>';
+    }).join('');
+    return '<div style="margin:8px 0">' + items + '</div>';
   }
 
   /* ===== DOSE ADJUSTMENT ===== */
