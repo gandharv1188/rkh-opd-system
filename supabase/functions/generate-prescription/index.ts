@@ -671,7 +671,7 @@ async function toolUseLoop(
   apiKey: string,
   systemPrompt: string,
   userMessage: string,
-  timeoutMs: number = 50_000,
+  timeoutMs: number = 90_000,
 ): Promise<{
   text: string;
   totalInputTokens: number;
@@ -1025,10 +1025,11 @@ serve(async (req: Request) => {
 
     let firstAttemptDurationMs = 0;
     try {
-      // Primary path: tool-use loop. Cap first attempt at 50s (gives the model
-      // time but leaves room for the completeness retry within the 130s
-      // shared deadline).
-      const firstBudget = Math.min(50_000, remainingBudgetMs());
+      // Primary path: tool-use loop. 90s budget — Sprint 2 added compute_doses
+      // tool which adds a round-trip; 50s was too tight and pushed many
+      // requests into the unsafe fallback path. 90s leaves 35s for retry
+      // within the 130s shared deadline.
+      const firstBudget = Math.min(90_000, remainingBudgetMs());
       const result = await toolUseLoop(
         ANTHROPIC_API_KEY,
         corePrompt,
@@ -1047,7 +1048,10 @@ serve(async (req: Request) => {
         tools_called: result.toolsCalled,
       };
     } catch (loopError: any) {
-      // Fallback: single-shot with full skill
+      // Fallback: single-shot with full skill. STRUCTURALLY UNSAFE:
+      // compute_doses tool unavailable → AI does mental math → row2_en may
+      // disagree with calc. Severity is forced to 'high' below so the doctor
+      // sees the warning gate and verifies every dose manually before signing.
       console.warn("Tool-use loop failed:", loopError.message);
       rawText = await singleShotFallback(ANTHROPIC_API_KEY, userMessage);
       meta = { mode: "fallback-single-shot", error: loopError.message };
@@ -1080,10 +1084,24 @@ serve(async (req: Request) => {
     // Server-side completeness check (GAP-1: brand-aware matcher).
     let stillMissing = _findStillMissing(prescription);
 
-    // GAP-12: fallback path skips retry — fallback can't recover from the same
-    // single-shot. Synthesize omitted entries + force severity to 'high' so
-    // the doctor cannot miss the gap, then run severity merge below.
+    // GAP-12: fallback path skips retry — fallback can't recover from the
+    // same single-shot. Whether or not drugs are missing, fallback is
+    // structurally unsafe (compute_doses tool unavailable → AI did mental
+    // math → row2_en may disagree with calc). ALWAYS force severity='high'
+    // and surface a manual-verification note so the doctor cannot miss it.
     if (meta.mode === 'fallback-single-shot') {
+      if (!prescription.safety) prescription.safety = {};
+      prescription.safety.severity_server = 'high';
+      const existingNotes = Array.isArray(prescription.safety.ai_safety_notes)
+        ? prescription.safety.ai_safety_notes
+        : [];
+      const fallbackNote =
+        'AI fallback mode: compute_doses tool unavailable. Verify EVERY dose manually against the calc field before signing — row values were not engine-validated.';
+      if (!existingNotes.some((n: any) => typeof n === 'string' && n.includes('AI fallback mode'))) {
+        prescription.safety.ai_safety_notes = [fallbackNote, ...existingNotes];
+      }
+      meta.fallback_safety_escalated = true;
+
       if (stillMissing.length > 0) {
         meta.fallback_completeness_warning = true;
         meta.first_attempt_missing = stillMissing;
@@ -1097,8 +1115,6 @@ serve(async (req: Request) => {
           ...(prescription.omitted_medicines ?? []),
           ...synthetic,
         ];
-        if (!prescription.safety) prescription.safety = {};
-        prescription.safety.severity_server = 'high';
       }
     } else {
       // GAP-7: retry gating uses the shared deadline. Need at least 25s of
