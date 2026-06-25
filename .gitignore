@@ -27,3 +27,12 @@ Consolelog.txt
 # Supabase CLI
 supabase/.temp/
 supabase/config.toml
+
+# Local Claude Code tooling & worktrees (not project files)
+.claude/skills/
+.claude/worktrees/
+
+# Incident-debugging diagnostic artifacts (scratch; console-log.md contains patient PHI — do not track)
+console-log.md
+radhakishan_system/scripts/_diag/
+radhakishan_system/scripts/diagnose_io.out.txt
