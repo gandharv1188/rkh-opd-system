@@ -1,0 +1,24 @@
+{
+  "document_type": "lab_report",
+  "summary": "CBC showing mild anemia.",
+  "document_date": "2026-02-14",
+  "lab_name": "Kurukshetra Diagnostics",
+  "labs": [
+    {
+      "test_name_raw": "Hemoglobin",
+      "test_name_normalized": "hemoglobin",
+      "value_text": "10.2",
+      "value_numeric": 10.2,
+      "unit": "g/dL",
+      "reference_range": "11.5-15.5",
+      "flag": "low",
+      "test_category": "Hematology",
+      "test_date": "2026-02-14",
+      "confidence": 0.95
+    }
+  ],
+  "medications": [],
+  "diagnoses": [],
+  "vaccinations": [],
+  "clinical_notes": null
+}

@@ -27,3 +27,7 @@ Consolelog.txt
 # Supabase CLI
 supabase/.temp/
 supabase/config.toml
+.claude/scheduled_tasks.lock
+
+# Windows-parallel-agents worktree pool — never track.
+.claude/worktrees/

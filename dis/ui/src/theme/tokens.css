@@ -1,0 +1,65 @@
+/* DIS UI theme tokens — DIS-137.
+ * Matches the HMIS prescription pad Royal Blue accent. */
+
+:root {
+  /* Colour — accent family */
+  --royal-blue: #1a237e;
+  --royal-blue-light: #3949ab;
+  --royal-blue-dark: #000051;
+  --dis-accent: var(--royal-blue);
+  --dis-accent-light: var(--royal-blue-light);
+  --dis-accent-dark: var(--royal-blue-dark);
+  --dis-accent-on: #ffffff;
+
+  /* Colour — semantic */
+  --dis-bg: #ffffff;
+  --dis-bg-muted: #f5f5f7;
+  --dis-text: #1a1a1a;
+  --dis-text-muted: #5f6368;
+  --dis-border: #e0e0e0;
+
+  /* Status colours (matches StatusBadge — DIS-125) */
+  --dis-status-pending-bg: #e3f2fd;
+  --dis-status-pending-fg: #0d47a1;
+  --dis-status-ready-bg: #fff3e0;
+  --dis-status-ready-fg: #e65100;
+  --dis-status-promoted-bg: #e8f5e9;
+  --dis-status-promoted-fg: #1b5e20;
+  --dis-status-rejected-bg: #ffebee;
+  --dis-status-rejected-fg: #b71c1c;
+
+  /* Spacing scale (4px base) */
+  --dis-space-1: 0.25rem;
+  --dis-space-2: 0.5rem;
+  --dis-space-3: 0.75rem;
+  --dis-space-4: 1rem;
+  --dis-space-6: 1.5rem;
+  --dis-space-8: 2rem;
+
+  /* Type scale */
+  --dis-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --dis-font-devanagari: 'Noto Sans Devanagari', var(--dis-font-sans);
+  --dis-font-size-xs: 0.75rem;
+  --dis-font-size-sm: 0.875rem;
+  --dis-font-size-md: 1rem;
+  --dis-font-size-lg: 1.25rem;
+  --dis-font-size-xl: 1.5rem;
+
+  /* Elevation */
+  --dis-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --dis-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+
+  /* Radii */
+  --dis-radius-sm: 0.25rem;
+  --dis-radius-md: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dis-bg: #1a1a1a;
+    --dis-bg-muted: #242424;
+    --dis-text: #f5f5f7;
+    --dis-text-muted: #a0a4a8;
+    --dis-border: #3a3a3a;
+  }
+}

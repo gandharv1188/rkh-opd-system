@@ -1,0 +1,125 @@
+# Sequence Diagrams
+
+ASCII diagrams of the main flows. Agents implementing the
+orchestrator must match these exactly — any deviation is an ADR.
+
+## Flow 1: Upload → ready_for_review (scan path)
+
+```
+Browser           DIS /ingest        Storage        Queue     Orchestrator      OCR         Structuring      DB
+  │                   │                 │             │           │              │              │             │
+  │─getSignedUpload──▶│                 │             │           │              │              │             │
+  │◀──{url, key}──────│                 │             │           │              │              │             │
+  │                   │                 │             │           │              │              │             │
+  │─PUT file──────────┼────────────────▶│             │           │              │              │             │
+  │◀──200─────────────┼─────────────────│             │           │              │              │             │
+  │                   │                 │             │           │              │              │             │
+  │─POST /ingest{key}▶│                 │             │           │              │              │             │
+  │                   │─INSERT extraction(status=uploaded)──────────────────────────────────────────────────▶│
+  │                   │─enqueue(route)──┼────────────▶│           │              │              │             │
+  │◀──201 {id}────────│                 │             │           │              │              │             │
+  │                   │                 │             │           │              │              │             │
+  │                   │                 │             │──run job─▶│              │              │             │
+  │                   │                 │             │           │─getObject───▶│              │             │
+  │                   │                 │             │           │◀─bytes───────│              │             │
+  │                   │                 │             │           │─route (scan/native/office)─┐│             │
+  │                   │                 │             │           │◀───────────────────────────┘│             │
+  │                   │                 │             │           │─preprocess──────────────────┐             │
+  │                   │                 │             │           │◀────────────────────────────┘             │
+  │                   │                 │             │           │─UPDATE status=ocr──────────────────────▶│
+  │                   │                 │             │           │─ocr.extract(pages)─────────▶│              │
+  │                   │                 │             │           │                             │(Datalab poll)│
+  │                   │                 │             │           │◀────OcrResult──────────────┘│              │
+  │                   │                 │             │           │─UPDATE status=structuring──────────────▶│
+  │                   │                 │             │           │─structure(markdown)─────────────────────▶│
+  │                   │                 │             │           │◀────StructuringResult───────────────────│
+  │                   │                 │             │           │─policy.evaluate()───────────┐             │
+  │                   │                 │             │           │◀────────────────────────────┘             │
+  │                   │                 │             │           │─UPDATE status=ready_for_review─────────▶│
+  │                   │                 │             │           │─publish realtime event────────────────▶│
+  │◀──realtime────────┼─────────────────┼─────────────┼───────────┼──────────────────────────────────────────│
+  │  "ready_for_review" badge updates                                                                         │
+```
+
+## Flow 2: Nurse approval → promotion to clinical tables
+
+```
+Nurse UI          DIS                Orchestrator     PromotionService       DB
+   │                │                      │                  │               │
+   │─GET /extractions/:id─▶                │                  │               │
+   │                │─SELECT extraction────┼──────────────────┼──────────────▶│
+   │                │◀─row─────────────────┼──────────────────┼───────────────│
+   │◀─payload───────│                      │                  │               │
+   │                │                      │                  │               │
+   │(edits fields)  │                      │                  │               │
+   │                │                      │                  │               │
+   │─POST /approve {version, edits}─▶      │                  │               │
+   │                │─validate version────┐│                  │               │
+   │                │◀────────────────────┘│                  │               │
+   │                │─orchestrator.approve(id, edits)─────────▶                │
+   │                │                      │─SELECT ... FOR UPDATE─────────▶│
+   │                │                      │─write audit rows──────────────▶│
+   │                │                      │─UPDATE status=verified────────▶│
+   │                │                      │─promote.execute(verified)─────▶│
+   │                │                      │                  │─INSERT lab_results (with CS-10/11 guards)─▶│
+   │                │                      │                  │─INSERT vaccinations─────────────────────▶│
+   │                │                      │                  │─PATCH visits.attached_documents─────────▶│
+   │                │                      │─UPDATE status=promoted────────▶│
+   │                │◀─{promoted: {labs:N, vax:M}}─           │               │
+   │◀─200 summary───│                      │                  │               │
+```
+
+## Flow 3: Native PDF fast-path (no OCR)
+
+```
+Browser           DIS /ingest        Storage     Orchestrator    NativeExtractor    Structuring        DB
+  │                   │                 │            │                  │                 │               │
+  │─POST /ingest{key}▶│                 │            │                  │                 │               │
+  │                   │─INSERT(status=uploaded)─────────────────────────────────────────────────────────▶│
+  │                   │─enqueue route───▶│            │                  │                 │               │
+  │◀──201 {id}────────│                 │            │                  │                 │               │
+  │                   │                 │──run job──▶│                  │                 │               │
+  │                   │                 │            │─getObject──────▶│                  │               │
+  │                   │                 │            │◀─bytes──────────│                  │               │
+  │                   │                 │            │─router decides NATIVE_TEXT─────────┐               │
+  │                   │                 │            │◀───────────────────────────────────┘               │
+  │                   │                 │            │─pdfjs.extractText──────────────────▶               │
+  │                   │                 │            │◀─markdownified text────────────────│               │
+  │                   │                 │            │─UPDATE status=structuring──────────────────────▶│
+  │                   │                 │            │─structure(text)──────────────────▶│              │
+  │                   │                 │            │◀─StructuringResult───────────────│              │
+  │                   │                 │            │─UPDATE status=ready_for_review───────────────▶│
+```
+
+## Flow 4: Kill switch activated
+
+```
+Admin              DIS                Legacy Edge Function
+   │                │                        │
+   │─SET DIS_KILL_SWITCH=1─▶                 │
+   │                │                        │
+Browser             │                        │
+   │─POST /ingest──▶│                        │
+   │                │(reads flag, 503 w/ redirect hint OR proxies transparently)
+   │                │─HTTP─────────────────▶│
+   │                │◀─legacy response──────│
+   │◀──legacy response (same shape)─────────│
+```
+
+## Flow 5: Shadow mode (parallel run, no user impact)
+
+```
+Browser           Legacy (current)      DIS (shadow)              DB
+   │                   │                     │                      │
+   │─POST /process-document─▶                │                      │
+   │                   │─Claude Vision─┐     │                      │
+   │                   │◀──────────────┘     │                      │
+   │                   │─writes lab_results─────────────────────────▶│
+   │◀──legacy response─│                     │                      │
+   │                   │─fire-and-forget copy──▶                    │
+   │                                         │─runs full DIS pipeline│
+   │                                         │─writes to ocr_extractions ONLY─▶
+   │                                         │                      │
+                    (shadow writes NEVER touch clinical tables)
+                    (diffs logged for offline analysis)
+```

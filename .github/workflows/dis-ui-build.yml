@@ -1,0 +1,48 @@
+name: DIS UI build
+
+on:
+  push:
+    branches: [main]
+    paths: ['dis/ui/**', '.github/workflows/dis-ui-build.yml']
+  pull_request:
+    branches: [main]
+    paths: ['dis/ui/**', '.github/workflows/dis-ui-build.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dis/ui
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: dis/ui/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dis-ui-dist
+          path: dis/ui/dist
+          retention-days: 30
+
+  deploy-staging:
+    needs: build
+    if: github.ref == 'refs/heads/main' && vars.INTEGRATION_APPROVED == 'true'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dis-ui-dist
+          path: dist
+      - run: |
+          echo "Deployment stub — real staging upload goes here."
+          echo "Guarded by vars.INTEGRATION_APPROVED per §6b."

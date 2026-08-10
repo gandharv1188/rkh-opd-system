@@ -125,3 +125,14 @@ When editing, maintain the self-contained nature. Edit files directly in `web/`.
 - **Schema migrations**: `npx supabase db query --linked -f <file.sql>`
 - **Skill files**: Upload to Supabase Storage `website/skill/` prefix (cached by Edge Function)
 - **Secrets**: `ANTHROPIC_API_KEY` set via `supabase secrets set`. ABDM: `ABDM_CLIENT_ID`, `ABDM_CLIENT_SECRET`, `ABDM_GATEWAY_URL`
+
+## Agentic Team Management (DIS squad)
+
+- Spawn teammates via `Agent` with `team_name` + `name` so they persist and are addressable by `SendMessage`. Names (not UUIDs) are canonical.
+- Use the `windows-parallel-agents` skill for every parallel wave; each teammate gets its own pre-created worktree under `.claude/worktrees/<id>`.
+- Track work in `TaskList` (team-scoped); claim via `TaskUpdate(owner=<name>)`.
+- Idle ≠ done. Teammates often commit silently then idle. Confirm via `git log` on their branch and the presence of a handoff file at `dis/handoffs/DIS-###.md`; then mark the task completed yourself.
+- A recurring `CronCreate` job checks teammate health every 15 min. If a branch shows zero commits 30+ min after spawn, send a `SendMessage` poke; if still stuck, `shutdown_request` + re-dispatch.
+- Full protocol: `dis/document_ingestion_service/08_team/` — RACI, review_gates, session_handoff, agentic_dev_protocol.
+- **Teammate observation.** Claude Code docs confirm no native progress stream from background agents; `git log` lags, `idle_notification` is unreliable mid-turn. Every dispatch brief (Wave 2b onward) instructs the teammate to append JSON-Lines checkpoints to `.claude/worktrees/<id>/.progress.json` after each step (read-ticket / write-test / run-test-fail / write-impl / run-test-pass / write-handoff / commit). Orchestrator reads this file non-invasively for live status. Gitignored — runtime artifact, not committed.
+- **Context cap + recovery.** Max 3 tickets per teammate per session (each has an independent context window, no mid-session compact per Claude Code docs). Fresh teammates per wave — no cross-wave reuse. Recovery = `shutdown_request` + respawn with same name + targeted prompt for unfinished work.
